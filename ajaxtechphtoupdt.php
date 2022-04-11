@@ -84,7 +84,8 @@
 								<option value="Accessories (New)" <?php if ($res['description'] == "Accessories (New)") { echo "SELECTED"; } ?>>Accessories (New)</option>
 								<option value="Machine (After Service)" <?php if ($res['description'] == "Machine (After Service)") { echo "SELECTED"; } ?>>Machine (After Service)</option>
 								</select></td>
-									<td><span class='updated' style="color:blue;" data-id='<?php echo $res["id"]; ?>'>Update</span></td>
+                
+									<td><a href="image/<?php echo $res['file_name']; ?>" download>Download</td>
 									<td><span class='deleted' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
 								</tr>
 								<?php endforeach;?>
@@ -349,7 +350,7 @@ $(document).ready(function(){
 									</select></td>
 									
 									
-									<td><span class='updated'  style="color:blue;" data-id='<?php echo $res["id"]; ?>'>Update</span></td>
+			
 									<td><span class='deleted'  style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
 									</tr>
 									<?php endforeach;?>
