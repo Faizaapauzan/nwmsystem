@@ -1,0 +1,986 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+.sidebar {
+  position: fixed;
+  height: 100%;
+  width: 240px;
+  background: #0a2558;
+  transition: all 0.5s ease;
+}
+
+.sidebar.active {
+  width: 60px;
+}
+
+.sidebar .logo-details {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.sidebar .logo-details i {
+  font-size: 28px;
+  font-weight: 500;
+  color: #fff;
+  min-width: 60px;
+  text-align: center;
+}
+
+.sidebar .logo-details .logo_name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #f5f5f5;
+  margin-left: 0px;
+  white-space: nowrap;
+}
+
+.sidebar .nav-links {
+  margin-top: 16px;
+}
+
+.sidebar .nav-links li {
+  height: 50px;
+  width: 100%;
+  list-style: none;
+}
+
+.sidebar .nav-links li a:hover {
+  background: #081d45;
+}
+
+.sidebar .nav-links li a {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.sidebar .nav-links li a i {
+  min-width: 60px;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+.sidebar .nav-links li a .link_name {
+  color: #f5f5f5;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* Home- section CSS */
+
+.home-section {
+  position: relative;
+  height: 100%;
+  width: calc(100% - 240px);
+  left: 240px;
+  transition: all 0.5s ease;
+}
+
+.sidebar.active ~ .home-section {
+  width: calc(100% - 60px);
+  left: 60px;
+}
+
+.home-section nav {
+  left: 240px;
+  height: 80px;
+  background: #fff;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sidebar.active ~ .home-section {
+  width: calc(100% - 60px);
+  left: 60px;
+}
+
+.home-section nav .sidebar-button i {
+  font-size: -40px;
+  margin-right: 10px;
+}
+
+.home-section nav .sidebar-button .dashboard {
+  font-size: 26px;
+}
+
+.home-section a i {
+  margin-left: 900px;
+}
+
+.home-section nav .notification-button {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar.active ~ .home-section a i {
+  position: relative;
+}
+
+.home-section .home-content {
+  position: relative;
+  padding-top: 50px;
+}
+
+.home-content .overview-boxes {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 0 30px;
+  margin-bottom: 20px;
+}
+
+.home-content .overview-boxes .box {
+  width: calc(100% / 4 - 15px);
+  display: fixed;
+  justify-content: center;
+  padding: 15px 14px;
+  background: #d8d8dfaf;
+  border-radius: 8px;
+  height: 300px;
+  overflow: auto;
+}
+
+.home-content .overview-boxes .listbox {
+  width: calc(100% / 4 - 15px);
+  display: fixed;
+  justify-content: center;
+  padding: 15px 14px;
+  background: #d8d8dfaf;
+  border-radius: 8px;
+  height: 300px;
+  overflow: auto;
+}
+
+.home-content .overview-boxes .box_topic {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 15px;
+  margin-bottom: 20px;
+}
+
+.Job_topic {
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 4%;
+  left: 11%;
+}
+
+.tech3_topic {
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 53%;
+  left: 11%;
+}
+
+.store_topic {
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 4%;
+  left: 37%;
+}
+
+.pending_topic {
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 53%;
+  left: 37%;
+}
+
+.tech1_topic {
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 4%;
+  right: 33%;
+}
+
+.incomplete_topic {
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 53%;
+  right: 34%;
+}
+
+.tech2_topic {
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 4%;
+  right: 9%;
+}
+
+.completed_topic {
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 53%;
+  right: 10%;
+}
+
+.todo,
+#todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.todo,
+a {
+  cursor: move;
+}
+#todo {
+  margin-bottom: 20px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+#todo {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.completed,
+#completed {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.completed,
+a {
+  cursor: move;
+}
+#completed {
+  margin-bottom: 20px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+#completed {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+/* Job Register CSS */
+/* Full-width input fields */
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type="radio"] {
+  width: 10%;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-left: -20px;
+}
+
+.radioBtn {
+  margin-top: 5px;
+  margin-right: 0px;
+  margin-left: 0px;
+  border: 1px solid #ccc;
+  padding: 12px 20px;
+}
+
+.container > h1 {
+  margin-left: 40px;
+  margin-top: 30px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #081d45;
+  color: white;
+  padding: 7px 10px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btnSubmitAndCancel {
+  width: 200px;
+  margin-left: 200px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  margin-left: 200px;
+  margin-top: -10px;
+  margin-bottom: 40px;
+  width: 300px;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.savebtn {
+  margin-top: 40px;
+  margin-left: 200px;
+  margin-bottom: 20px;
+  width: 300px;
+  padding: 10px 18px;
+}
+
+#blank {
+  margin-top: 45px;
+}
+
+.tooltip .a {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: left;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  white-space: normal;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  line-break: auto;
+}
+
+.tooltip.in {
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+}
+.tooltip.right {
+  padding: 0 5px;
+  margin-left: 3px;
+}
+
+.tooltip-inner {
+  max-width: 200px;
+  padding: 3px 8px;
+  color: #fff;
+  background-color: #000;
+  border-radius: 4px;
+}
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+.tooltip.top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+.tooltip.top-left .tooltip-arrow {
+  right: 5px;
+  bottom: 0;
+  margin-bottom: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+.tooltip.top-right .tooltip-arrow {
+  bottom: 0;
+  left: 5px;
+  margin-bottom: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+.tooltip.right .tooltip-arrow {
+  top: 50%;
+  left: 0;
+  margin-top: -5px;
+  border-width: 5px 5px 5px 0;
+  border-right-color: #000;
+}
+.tooltip.left .tooltip-arrow {
+  top: 50%;
+  right: 0;
+  margin-top: -5px;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #000;
+}
+.tooltip.bottom .tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
+.tooltip.bottom-left .tooltip-arrow {
+  top: 0;
+  right: 5px;
+  margin-top: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
+.tooltip.bottom-right .tooltip-arrow {
+  top: 0;
+  left: 5px;
+  margin-top: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 166px;
+  margin-top: 145px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+.regCusJob {
+  float: left;
+  margin-top: 30px;
+  margin-left: 50px;
+  margin-right: 30px;
+  padding: 10px 40px 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f6f6f6;
+}
+
+#addJob {
+  border-radius: 10px;
+  background-color: #fffffff6;
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+/* drop down(select) */
+.dropdownName {
+  position: absolute;
+  float: left;
+  min-width: -50px;
+  height: 0px;
+  margin-top: -40px;
+  margin-left: 360px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 22px;
+}
+
+.dropdownName i {
+  margin-right: 9px;
+}
+
+.dropdownName .select:hover,
+.dropdownName .select:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.dropdownName .add:hover,
+.dropdownName .add:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.dropdownMachine {
+  position: absolute;
+  float: left;
+  min-width: -50px;
+  height: 0px;
+  margin-top: 18px;
+  margin-left: 350px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 22px;
+}
+
+.dropdownMachine i {
+  margin-right: 9px;
+}
+
+.dropdownMachine .select:hover,
+.dropdownMachine .select:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.dropdownMachine .add:hover,
+.dropdownMachine .add:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.addMachine {
+  float: left;
+  margin-top: 20px;
+  margin-left: 52px;
+  margin-right: 30px;
+  padding: 10px 10px 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.addCustomer {
+  float: left;
+  margin-top: 20px;
+  margin-left: 75px;
+  margin-right: 30px;
+  padding: 10px 10px 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/*Staff Register*/
+.staffRegister {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.staffRegister .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.staffRegister .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
+.contentStaffRegister form .staff-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .staff-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.staff-details .input-box input,
+.staff-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.staff-details .input-box input:focus,
+.staff-details .input-box input:valid,
+.staff-details .input-box select:focus,
+.staff-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .staff-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .staff-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+.TechGroup {
+  margin-left: -136px;
+}
+
+/*table*/
+table tbody tr:hover {
+  background: rgba(130, 135, 150, 0.192);
+}
+
+/*Staff*/
+table {
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px rgb(37, 19, 19);
+  background-color: #fff;
+  text-align: left;
+  overflow: hidden;
+  width: 100%;
+  display: fixed;
+  justify-content: center;
+}
+
+thead {
+  box-shadow: 0 5px 10px rgb(186, 189, 183);
+}
+
+.staffList th {
+  padding: 1rem 5.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.staffList td {
+  padding: 0.2rem 5rem;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(15, 0, 0);
+}
+
+.group {
+  text-align: right;
+}
+
+/*Color alternating rows*/
+tr:nth-child(even) {
+  background-color: rgba(221, 219, 219, 0.671);
+}
+
+.staffList {
+  padding-top: 1%;
+}
+
+.staffList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}
+
+.editDeleteBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
+
+.editDeleteBtn {
+  display: flex;
+  margin-left: 85%;
+  margin-bottom: 5px;
+  margin-top: -40px;
+}
+
+#btnEdit {
+  background: #0a410c;
+}
+
+#btnDelete {
+  background: #f44336;
+}
+
+/*All Add register form (in customer list, machine list, accessories list, jobtype list)*/
+.listAddForm {
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 450px;
+}
+
+.listAddForm .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.listAddForm .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
+
+.contentListAddForm form .listAddForm-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
+
+.modal.active .contentListAddForm {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
+
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
+
+.updateBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
+
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
+
+form .listAddForm-details .input-box {
+  margin-bottom: 15px;
+  font-weight: 500;
+  padding: 0 15px 0 15px;
+}
+
+.listAddForm-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.listAddForm-details .input-box input:focus,
+.listAddForm-details .input-box input:valid,
+.listAddForm-details .input-box select:focus,
+.listAddForm-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+.listAddFormbutton input {
+  height: 30px;
+  width: 27%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+
+form .listAddFormbutton input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .listAddFormbutton #cancelbtn {
+  background-color: #f44336;
+}
+
+.listAddFormbutton {
+  margin-left: 157px;
+}
+
+/*Accessories*/
+.photoBox input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.photoBox {
+  margin-left: 12px;
+}

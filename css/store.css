@@ -1,0 +1,663 @@
+@charset "utf-8";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #fff;
+  color: #333;
+}
+
+.container {
+  padding: 1%;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 0 30px;
+  margin-bottom: 20px;
+}
+
+.column {
+  background: #f5f5f5;
+  margin-right: 2%;
+  padding: 1%;
+  border-radius: 3px;
+  width: 32%;
+  float: left;
+  height: auto;
+}
+
+.column:last-of-type {
+  margin-right: 0;
+}
+
+.column-title {
+  font-weight: bold;
+  margin: 5px 0 20px;
+}
+
+.card {
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 250ms;
+}
+
+.card .selected {
+  transform: scale(1.15);
+  z-index: 1;
+}
+
+textarea {
+  border: none;
+  resize: vertical;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+/*Job Info*/
+.TechJobInfo {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.TechJobInfo .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.TechJobInfo .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentTechJobInfo form .tech-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .tech-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.tech-details .input-box input,
+.tech-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.tech-details .input-box input:focus,
+.tech-details .input-box input:valid,
+.tech-details .input-box select:focus,
+.tech-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .tech-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .tech-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .tech-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.techClose {
+  position: absolute;
+  right: 166px;
+  margin-top: 145px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.techClose:hover,
+.techClose:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.modal .techClose {
+  right: 380px;
+  top: -30px;
+  width: 30px;
+  height: 30px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Home- section CSS */
+
+.home-section {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  left: -10px;
+  margin-top: -10px;
+}
+
+.sidebar.active ~ .home-section {
+  width: 100%;
+  left: 60px;
+}
+
+.home-section nav {
+  position: relative;
+  left: 0px;
+  height: 80px;
+  background: #fff;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  font-weight: 500;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.sidebar.active ~ .link_name {
+  visibility: hidden;
+}
+
+.home-section nav .sidebar-button i {
+  font-size: -40px;
+
+  color: #fff;
+}
+
+.home-section nav .sidebar-button {
+  background-color: #1a0845;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 7px 10px;
+}
+
+.home-section nav .sidebar-button:hover {
+  opacity: 0.7;
+}
+
+.home-section nav .sidebar-button .dashboard {
+  font-size: 17px;
+  color: #fff;
+}
+
+.home-section a i {
+  margin-left: 900px;
+}
+
+.home-section nav .notification-button {
+  display: flex;
+  justify-content: end;
+  width: 1%;
+}
+
+.logOut-button {
+  margin-right: -30px;
+}
+
+.sidebar.active ~ .home-section a i {
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+.home-section .home-content {
+  position: relative;
+  padding-top: 50px;
+}
+
+.home-content .overview-boxes {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 0 30px;
+  margin-bottom: 20px;
+}
+
+.home-content .overview-boxes .box {
+  width: 100%;
+  display: fixed;
+  justify-content: center;
+  padding: 15px 14px;
+  background: #d8d8dfaf;
+  border-radius: 8px;
+  height: 300px;
+  overflow: auto;
+}
+
+.home-content .overview-boxes .box_topic {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 15px;
+  margin-bottom: 20px;
+}
+
+body {
+  background: #fff;
+  background-color: #f5f5f5;
+}
+
+.container {
+  padding: 1%;
+}
+
+.column {
+  background: #f5f5f5;
+  margin-right: 2%;
+  padding: 1%;
+  border-radius: 3px;
+  width: 32%;
+  float: left;
+  height: auto;
+}
+
+.column:last-of-type {
+  margin-right: 0;
+}
+
+.column-title {
+  font-weight: bold;
+  margin: 5px 0 20px;
+  background-color: #ffffff;
+  padding: 10px 5px;
+  margin-top: 0px;
+}
+
+#todo {
+  border-top: 5px solid #9bd3d3;
+}
+
+#pending {
+  border-top: 5px solid #548d42c2;
+}
+
+#done {
+  border-top: 5px solid #f37150;
+}
+
+.card {
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 250ms;
+}
+
+.card .selected {
+  transform: scale(1.15);
+  z-index: 1;
+}
+
+textarea {
+  border: none;
+  resize: vertical;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.techClose {
+  position: absolute;
+  right: 166px;
+  margin-top: 135px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.techClose:hover,
+.techClose:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/*Pending*/
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+
+.tabs .TechJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-left: 0px;
+}
+
+.tabs .tabHeading {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  background-color: #fff;
+  font-weight: bold;
+  transition: background ease 0.3s;
+}
+
+.tabs .tab {
+  order: 9;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 1rem;
+  background: #fff;
+  padding: 20px;
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tabs input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabs input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabs .tab,
+  .tabs label {
+    order: initial;
+  }
+
+  .tabs label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #081d45;
+  color: white;
+  padding: 7px 10px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-right: 50px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.updateBtn button {
+  width: 100%;
+  margin: -30px 10px 5px -30px;
+}
+
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
+
+textarea {
+  width: 100%;
+  padding: 7px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: left;
+  border: 1.7px solid rgb(201, 198, 198);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+}
+
+#CustomerGrade {
+  background-color: rgba(169, 169, 169, 0.103);
+  border: 1.7px solid rgb(201, 198, 198);
+  border-bottom-width: 2px;
+}
+
+#toDoStatus {
+  background: rgb(236, 236, 212);
+  color: rgb(133, 141, 22);
+}
+
+#NotReadyStatus {
+  background: rgb(236, 212, 212);
+  color: rgb(124, 19, 19);
+}
+
+#pendingStatus {
+  background: rgb(212, 228, 236);
+  color: rgb(19, 115, 134);
+}
+
+#readyStatus {
+  background: rgb(214, 237, 226);
+  color: rgb(19, 133, 78);
+}
+
+.remove_field {
+  position: absolute;
+  margin-top: 10px;
+  color: #000;
+  font-size: 35px;
+}
+
+.remove_field:hover,
+.remove_field:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/*Accessories*/
+.accessories-input i {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 600px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.accessories-input input,
+.accessories-input select {
+  margin-bottom: 15px;
+  width: calc(100% / 3 - 15px);
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  margin-right: 10px;
+}
+
+form .accessories-input {
+  width: 100%;
+  width: 630px;
+  margin-left: 12px;
+}
+
+form .tech-details .accessories-input {
+  margin-bottom: 15px;
+}
+
+.accessories-input i:hover,
+.accessories-input i:focus {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.JobStatusUpdate {
+  margin-left: 10px;
+  margin-top: 30px;
+}
+
+.JobStatusUpdate select {
+  margin-bottom: 15px;
+  padding: 0 15px 0 15px;
+  height: 25px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  margin-right: 10px;
+}

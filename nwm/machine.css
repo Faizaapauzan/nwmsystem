@@ -1,0 +1,65 @@
+table {
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px rgb(37, 19, 19);
+  background-color: #fff;
+  text-align: left;
+  overflow: hidden;
+  width: 100%;
+  display: fixed;
+  justify-content: center;
+
+
+}
+
+thead {
+  box-shadow: 0 5px 10px rgb(186, 189, 183);
+}
+
+th {
+  padding: 1rem 5.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+td {
+  padding: 0.2rem 5.0rem;
+
+}
+
+/*td:nth-child(5){
+    padding: 0.2rem 9.5rem;
+  }
+  */
+
+
+a {
+  text-decoration: none;
+  color: rgb(15, 0, 0);
+}
+
+
+.amount {
+  text-align: right;
+}
+
+/*Color alternating rows*/
+tr:nth-child(even) {
+  background-color: rgba(221, 219, 219, 0.671);
+}
+
+
+.machineList {
+  padding-top: 1%;
+
+}
+
+.machineList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}

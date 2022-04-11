@@ -1,0 +1,191 @@
+.updatetech form .staff-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+  /* width: 80%; */
+}
+form .staff-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.staff-details .input-box input,
+.staff-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.staff-details .input-box input:focus,
+.staff-details .input-box input:valid,
+.staff-details .input-box select:focus,
+.staff-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+table {
+  border-collapse: collapse;
+  /* box-shadow: 0 5px 10px rgb(37, 19, 19); */
+  background-color: #fff;
+  text-align: left;
+  overflow: hidden;
+  width: 100%;
+  display: fixed;
+  justify-content: center;
+}
+
+thead {
+  box-shadow: 0 5px 10px rgb(186, 189, 183);
+
+  /* padding: 1rem 5.1rem; */
+}
+
+th {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  height: 50px;
+}
+
+td {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.accessoriesList {
+  padding-top: 1%;
+}
+
+.accessoriesList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}
+
+.accessoriesPopup .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.accessoriesPopup .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
+
+.contentAccessoriesPopup form .accessories-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
+
+.modal .contentAccessoriesPopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
+
+.modal.active .contentAccessoriesPopup {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
+
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
+
+.updateBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
+
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
+
+.accessories-descriptions {
+  padding: 0.5rem;
+}
+
+.accessories-descriptions span {
+  color: #2f456e;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.accessoriesUpdateDeleteBtn {
+  display: flex;
+}
+
+.addAccessoriesBtn button {
+  width: 100%;
+  margin: 0 19px 5px 19px;
+  border-radius: 5px;
+}
+
+.addAccessoriesBtn {
+  display: flex;
+  margin-left: 950px;
+}
+
+#display_image {
+  width: 200px;
+  height: 130px;
+  border: 1px solid black;
+  background-position: center;
+  background-size: cover;
+}
+
+.search-panel {
+  height: 30px;
+  width: 50%;
+  border-radius: 5px;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+  position: static;
+}
+
+.loading-overlay {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  position: static;
+}

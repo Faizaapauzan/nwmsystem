@@ -1,0 +1,413 @@
+
+        .jobRegisterContainer {
+            max-width: 70%;
+            width: 1000px;
+            height: 1000px;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            margin: 10px 0px 30px 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .jobRegisterheading {
+            text-align: center;
+            display: flex;
+            margin: -23px -30px 0px -30px;
+            padding: 10px 10px 5px 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+            background-color: rgba(247, 245, 245, 0.548);
+            border-radius: 5px;
+        }
+
+        .jobRegisterContainer input {
+            padding: 10px 60px;
+
+        }
+
+        .jobRegisterContainer h2 {
+            padding-bottom: 10px;
+        }
+
+        .jobRegisterContainer .input-box {
+            padding-top: 10px;
+        }
+
+        .jobRegisterContainer button {
+            color: #fff;
+            width: 24%;
+            margin: 0 5px 5px 8px;
+            background-color: #09275eef;
+
+        }
+
+        .jobRegisterContainer input[type=text],
+        input[type=date] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        #jobInfo1 .btn-box,
+        #jobInfo2 .btn-box,
+        #jobInfo3 .btn-box {
+            text-align: center;
+            margin-top: 30px;
+
+        }
+
+        #jobInfo1 .btn-box button,
+        #jobInfo2 .btn-box button,
+        #jobInfo3 .btn-box button {
+            border-radius: 15px;
+
+        }
+
+        .dropdownCode {
+            position: absolute;
+
+            min-width: -50px;
+            height: 0px;
+            margin-top: -40px;
+            flex-wrap: wrap;
+            font-size: 22px;
+            margin-left: 90%;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdownCode i:hover {
+            color: rgb(53, 118, 202);
+        }
+
+        .jobRegisterContainer #jobInfo1 {
+            padding-top: 20px;
+            position: absolute;
+            width: 91%;
+        }
+
+        #jobInfo2 {
+            padding-top: 20px;
+            left: 1000px;
+            position: absolute;
+            width: 91%;
+
+        }
+
+        #jobInfo3 {
+            padding-top: 20px;
+            left: 1000px;
+            position: absolute;
+            width: 91%;
+
+        }
+
+
+        .step-col {
+            padding: 7px 10px;
+            margin-top: -10px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            color: #333;
+            font-size: 23px;
+            position: relative;
+        }
+
+        #progress {
+            position: absolute;
+            height: 4%;
+            width: 25%;
+            margin: -21px 0px 0px -10px;
+            padding-bottom: 61px;
+            background-color: #CDDCDC;
+            background-image: radial-gradient(at 50% 100%, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%);
+            background-blend-mode: screen, overlay;
+            transition: 1s;
+        }
+
+        #progress::after {
+            content: '';
+            height: 4%;
+            width: 0;
+            border-top: 36px solid transparent;
+            border-bottom: 23px solid transparent;
+            position: absolute;
+            right: -20px;
+            top: 0;
+            border-left: 20px solid #CDDCDC;
+
+        }
+
+        .contentCustomerPopup form .Machine-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
+
+.modal .contentCustomerPopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 520px;
+  height: 580px;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+}
+
+.modal.active .contentCustomerPopup {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
+
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
+
+.addCustomerBtn button {
+  width: 100%;
+  margin: 0 19px 5px 19px;
+  border-radius: 5px;
+}
+
+.addCustomerBtn {
+  display: flex;
+  margin-left: 85%;
+  margin-bottom: 5px;
+  margin-top: -40px;
+}
+
+/*All Add form list (in customer list, machine list, accessories list, jobtype list)*/
+.listAddForm {
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 450px;
+}
+
+.listAddForm .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.listAddForm .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
+
+.contentListAddForm form .listAddForm-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
+
+.modal.active .contentListAddForm {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
+
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
+
+form .listAddForm-details .input-box {
+  margin-bottom: 15px;
+  font-weight: 500;
+  padding: 0 15px 0 15px;
+}
+
+.listAddForm-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.listAddForm-details .input-box input:focus,
+.listAddForm-details .input-box input:valid,
+.listAddForm-details .input-box select:focus,
+.listAddForm-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+.listAddFormbutton input {
+  height: 30px;
+  width: 27%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+
+form .listAddFormbutton input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+
+form .listAddFormbutton #cancelbtn {
+  background-color: #f44336;
+}
+
+.listAddFormbutton {
+  margin-left: 157px;
+}
+
+  #display_image {
+        width: 200px;
+        height: 130px;
+        border: 1px solid black;
+        background-position: center;
+        background-size: cover; 
+
+}
+
+     /*Accessories*/
+  .Accessories i{
+    position: absolute;
+    margin-top: 35px;
+    margin-left: 730px;
+    font-size: 25px;
+    cursor: pointer;
+
+  }
+
+  .Accessories input, .Accessories select{
+    margin-bottom: 15px;
+    width: calc(100% - 100px);
+    width: 150px;
+    padding: 0 12px 0 12px;
+    height: 45px;
+    outline: none;
+    font-size: 13px;
+    border-radius: 5px;
+    padding-left: 25px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    border-color: #081D45;
+  }
+
+  .Accessories input[type=text]{
+    /* width: calc(100% - 100px); */
+    width: 180px;
+    padding: 12px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-right: 10px;
+  }
+
+    .Accessories {
+    width: 100%;
+    /* width: 900px; */
+    margin-left: 12px;
+    margin-bottom: 15px;
+    
+  }
+
+  .Accessories i:hover,
+  .Accessories i:focus {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
+    .addAccessoriesBtn button {
+            width: 100%;
+            margin: 0 19px 5px 19px;
+            border-radius: 5px;
+            
+
+        }
+
+        .addAccessoriesBtn {
+            display: flex;
+            margin-left: 85%;
+            margin-bottom: 5px;
+            margin-top: -40px;
+           
+        }
+
+        .CodeDropdown select{
+    margin-bottom: 10px;
+    width: calc(100% - 100px);
+    width: 820px;
+    padding: 0 12px 0 12px;
+    height: 35px;
+    outline: none;
+    font-size: 13px;
+    border-radius: 5px;
+    padding-left: 25px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    border-color: #081D45;
+  }
+
+
+
+
+
+.technician-time {
+  position: relative;
+  width: flex;
+}
+
+.technician-time-input {
+  width: 100%;
+  border: 1px solid #ccc;
+
+  padding: 10px 100px 10px 20px;
+  line-height: 1;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.technician-time-botton {
+  position: absolute;
+  right: -1px;
+  top: 11px;
+  bottom: 7px;
+  border: 0;
+  background: #081D45;
+  color: #fff;
+  outline: none;
+  margin: 0;
+  padding: 0 10px;
+  z-index: 2;
+}

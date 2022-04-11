@@ -1,0 +1,78 @@
+
+/*Remark*/
+  .input-boxPhoto i{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 600px;
+    font-size: 20px;
+    cursor: pointer;
+
+  }
+
+  .input-boxPhoto input{
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 15px);
+    padding: 0 15px 0 15px;
+    height: 45px;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 25px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    border-color: #081D45;
+    margin-right: 10px;
+    
+  }
+
+  form .input-boxPhoto {
+    width: 100%;
+    margin-left: 12px;
+  }
+
+  form .input-boxPhoto{
+      margin-bottom: 15px;
+    }
+
+  .remove_field {
+    position: absolute;
+    /*margin-left: 50px;*/
+    margin-top: 10px;
+    color: #000;
+    font-size: 35px;
+  }
+  
+  .input-boxPhoto i:hover,
+  .input-boxPhoto i:focus {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
+  .remove_field:hover,
+  .remove_field:focus {
+    color: red;
+    cursor: pointer;
+  }
+  
+.content{
+    border: 1px solid black;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.content span{
+    width: 250px;
+
+}
+
+.content span:hover{
+    cursor: pointer;
+}
+
+  #display_image{
+        width: 150px;
+        height: 120px;
+        border: 1px solid black;
+        background-position: center;
+
+        }

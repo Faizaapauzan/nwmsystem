@@ -1,0 +1,3626 @@
+/*COMPLETED*/
+.completed,
+#completed {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.completedJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.completedJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.completedJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentCompletedJobInfo form .completed-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .completed-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.completed-details .input-box input,
+.completed-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.completed-details .input-box input:focus,
+.completed-details .input-box input:valid,
+.completed-details .input-box select:focus,
+.completed-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .completed-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .completed-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .completed-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabCompleted input[type="radio"] {
+  display: none;
+}
+
+.tabCompleted input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabCompleted input[type="radio"]:checked + label + .tabC {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabCompleted .tabC,
+  .tabCompleted label {
+    order: initial;
+  }
+
+  .tabCompleted label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*STORE*/
+
+.Store,
+#Store {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.StoreJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.StoreJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.StoreJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentStoreJobInfo form .store-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .store-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.store-details .input-box input,
+.store-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.store-details .input-box input:focus,
+.store-details .input-box input:valid,
+.store-details .input-box select:focus,
+.store-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .store-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .store-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .store-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/*TABS STORE*/
+.tabStore {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+
+.tabStore .StoreJobInfoTab {
+  /* max-width: 700px;
+  width: 100%; */
+  background-color: #fff;
+  border-radius: 0px;
+  margin-left: 0px;
+}
+
+.tabStore .tabHeadingStore {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  background-color: #fff;
+  font-weight: bold;
+  transition: background ease 0.3s;
+}
+
+.tabStore .tab {
+  order: 9;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 1rem;
+  background: #fff;
+  padding: 20px;
+}
+
+.tabStore input[type="radio"] {
+  display: none;
+}
+
+.tabStore input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabStore input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabStore .tab,
+  .tabStore label {
+    order: initial;
+  }
+
+  .tabStore label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*BOON*/
+
+.Boon,
+#Boon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.BoonJobInfoTab {
+  max-width: 900px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.BoonJobInfoTab .title {
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+}
+.BoonJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentBoonJobInfo form .boon-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .boon-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.boon-details .input-box input,
+.boon-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.boon-details .input-box input:focus,
+.boon-details .input-box input:valid,
+.boon-details .input-box select:focus,
+.boon-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .boon-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .boon-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .boon-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabBoon input[type="radio"] {
+  display: none;
+}
+
+.tabBoon input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabBoon input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabBoon .tab,
+  .tabBoon label {
+    order: initial;
+  }
+
+  .tabBoon label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*AIZAT*/
+
+.Aizat,
+#Aizat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.AizatJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.AizatJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.AizatJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentAizatJobInfo form .aizat-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .aizat-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.aizat-details .input-box input,
+.aizat-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.aizat-details .input-box input:focus,
+.aizat-details .input-box input:valid,
+.aizat-details .input-box select:focus,
+.aizat-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .aizat-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .aizat-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .aizat-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/*TABS AIZAT*/
+.tabAizat {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+
+.tabAizat .AizatJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-left: 0px;
+}
+
+.tabAizat .tabHeadingAizat {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  background-color: #fff;
+  font-weight: bold;
+  transition: background ease 0.3s;
+}
+
+.tabAizat .tab {
+  order: 9;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 1rem;
+  background: #fff;
+  padding: 20px;
+}
+
+.tabAizat input[type="radio"] {
+  display: none;
+}
+
+.tabAizat input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabAizat input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabAizat .tab,
+  .tabAizat label {
+    order: initial;
+  }
+
+  .tabAizat label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*HAFIZ*/
+
+.Hafiz,
+#Hafiz {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.HafizJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.HafizJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.HafizJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentHafizJobInfo form .hafiz-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .hafiz-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.hafiz-details .input-box input,
+.hafiz-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.hafiz-details .input-box input:focus,
+.hafiz-details .input-box input:valid,
+.hafiz-details .input-box select:focus,
+.hafiz-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .hafiz-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .hafiz-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .hafiz-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabHafiz input[type="radio"] {
+  display: none;
+}
+
+.tabHafiz input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabHafiz input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabHafiz .tab,
+  .tabHafiz label {
+    order: initial;
+  }
+
+  .tabHafiz label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*HAMIR*/
+
+.Hamir,
+#Hamir {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.HamirJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.HamirJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.HamirJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentHamirJobInfo form .hamir-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .hamir-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.hamir-details .input-box input,
+.hamir-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.hamir-details .input-box input:focus,
+.hamir-details .input-box input:valid,
+.hamir-details .input-box select:focus,
+.hamir-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .hamir-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .hamir-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .hamir-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabHamir input[type="radio"] {
+  display: none;
+}
+
+.tabHamir input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabHamir input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabHamir .tab,
+  .tabHamir label {
+    order: initial;
+  }
+
+  .tabHamir label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*HWA*/
+
+.Hwa,
+#Hwa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.HwaJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.HwaJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.HwaJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentHwaJobInfo form .hwa-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .hwa-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.hwa-details .input-box input,
+.hwa-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.hwa-details .input-box input:focus,
+.hwa-details .input-box input:valid,
+.hwa-details .input-box select:focus,
+.hwa-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .hwa-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .hwa-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .hwa-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabHwa input[type="radio"] {
+  display: none;
+}
+
+.tabHwa input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabHwa input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabHwa .tab,
+  .tabHwa label {
+    order: initial;
+  }
+
+  .tabHwa label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*ISK*/
+
+.Isk,
+#Isk {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.IskJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.IskJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.IskJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentIskJobInfo form .isk-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .isk-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .isk-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.isk-details .input-box input,
+.isk-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.isk-details .input-box input:focus,
+.isk-details .input-box input:valid,
+.isk-details .input-box select:focus,
+.isk-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .isk-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .isk-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .isk-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabIsk input[type="radio"] {
+  display: none;
+}
+
+.tabIsk input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabIsk input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabIsk .tab,
+  .tabIsk label {
+    order: initial;
+  }
+
+  .tabIsk label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*JOHN*/
+
+.John,
+#John {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.JohnJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.JohnJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.JohnJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentJohnJobInfo form .john-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .john-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .john-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.john-details .input-box input,
+.john-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.john-details .input-box input:focus,
+.john-details .input-box input:valid,
+.john-details .input-box select:focus,
+.john-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .john-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .john-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .john-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabJohn input[type="radio"] {
+  display: none;
+}
+
+.tabJohn input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabJohn input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabJohn .tab,
+  .tabJohn label {
+    order: initial;
+  }
+
+  .tabJohn label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*JUNJIE*/
+
+.JunJie,
+#JunJie {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.JunJieJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.JunJieJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.JunJieJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentJunJieJobInfo form .junjie-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .junjie-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .junjie-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.junjie-details .input-box input,
+.junjie-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.junjie-details .input-box input:focus,
+.junjie-details .input-box input:valid,
+.junjie-details .input-box select:focus,
+.junjie-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .junjie-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .junjie-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .junjie-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabJunJie input[type="radio"] {
+  display: none;
+}
+
+.tabJunJie input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabJunJie input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabJunJie .tab,
+  .tabJunJie label {
+    order: initial;
+  }
+
+  .tabJunJie label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*RAZWILL*/
+
+.Razwill,
+#Razwill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.RazwillJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.RazwillJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.RazwillJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentRazwillJobInfo form .razwill-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .razwill-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .razwill-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.razwill-details .input-box input,
+.razwill-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.razwill-details .input-box input:focus,
+.razwill-details .input-box input:valid,
+.razwill-details .input-box select:focus,
+.razwill-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .razwill-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .razwill-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .razwill-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabRazwill input[type="radio"] {
+  display: none;
+}
+
+.tabRazwill input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabRazwill input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabRazwill .tab,
+  .tabRazwill label {
+    order: initial;
+  }
+
+  .tabRazwill label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*SAHELE*/
+
+.Sahele,
+#Sahele {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.SaheleJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.SaheleJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.SaheleJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentSaheleJobInfo form .sahele-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .sahele-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .sahele-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.sahele-details .input-box input,
+.sahele-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.sahele-details .input-box input:focus,
+.sahele-details .input-box input:valid,
+.sahele-details .input-box select:focus,
+.sahele-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .sahele-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .sahele-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .sahele-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabSahele input[type="radio"] {
+  display: none;
+}
+
+.tabSahele input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabSahele input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabSahele .tab,
+  .tabSahele label {
+    order: initial;
+  }
+
+  .tabSahele label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*SAZALY*/
+
+.Sazaly,
+#Sazaly {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.SazalyJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.SazalyJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.SazalyJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentSazalyJobInfo form .sazaly-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .sazaly-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .sazaly-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.sazaly-details .input-box input,
+.sazaly-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.sazaly-details .input-box input:focus,
+.sazaly-details .input-box input:valid,
+.sazaly-details .input-box select:focus,
+.sazaly-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .sazaly-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .sazaly-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .sazaly-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabSazaly input[type="radio"] {
+  display: none;
+}
+
+.tabSazaly input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabSazaly input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabSazaly .tab,
+  .tabSazaly label {
+    order: initial;
+  }
+
+  .tabSazaly label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*FAIZAN*/
+
+.Faizan,
+#Faizan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.FaizanJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.FaizanJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.FaizanJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentFaizanJobInfo form .faizan-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .faizan-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .faizan-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.faizan-details .input-box input,
+.faizan-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.faizan-details .input-box input:focus,
+.faizan-details .input-box input:valid,
+.faizan-details .input-box select:focus,
+.faizan-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .faizan-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .faizan-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .faizan-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabFaizan input[type="radio"] {
+  display: none;
+}
+
+.tabFaizan input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabFaizan input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabFaizan .tab,
+  .tabFaizan label {
+    order: initial;
+  }
+
+  .tabFaizan label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*FAUZIN*/
+
+.Fauzin,
+#Fauzin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.FauzinJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.FauzinJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.FauzinJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentFauzinJobInfo form .fauzin-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .fauzin-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .fauzin-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.fauzin-details .input-box input,
+.fauzin-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.fauzin-details .input-box input:focus,
+.fauzin-details .input-box input:valid,
+.fauzin-details .input-box select:focus,
+.fauzin-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .fauzin-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .fauzin-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .fauzin-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabFauzin input[type="radio"] {
+  display: none;
+}
+
+.tabFauzin input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabFauzin input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabFauzin .tab,
+  .tabFauzin label {
+    order: initial;
+  }
+
+  .tabFauzin label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*IZAAN*/
+
+.Izaan,
+#Izaan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.IzaanJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.IzaanJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.IzaanJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentIzaanJobInfo form .izaan-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .izaan-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .izaan-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.izaan-details .input-box input,
+.izaan-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.izaan-details .input-box input:focus,
+.izaan-details .input-box input:valid,
+.izaan-details .input-box select:focus,
+.izaan-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .izaan-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .izaan-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .izaan-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabIzaan input[type="radio"] {
+  display: none;
+}
+
+.tabIzaan input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabIzaan input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabIzaan .tab,
+  .tabIzaan label {
+    order: initial;
+  }
+
+  .tabIzaan label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*SALAM*/
+
+.Salam,
+#Salam {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.SalamJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.SalamJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.SalamJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentSalamJobInfo form .salam-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .salam-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .salam-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.salam-details .input-box input,
+.salam-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.salam-details .input-box input:focus,
+.salam-details .input-box input:valid,
+.salam-details .input-box select:focus,
+.salam-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .salam-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .salam-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .salam-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabSalam input[type="radio"] {
+  display: none;
+}
+
+.tabSalam input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabSalam input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabSalam .tab,
+  .tabSalam label {
+    order: initial;
+  }
+
+  .tabSalam label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*TECK*/
+
+.Teck,
+#Teck {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.TeckJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.TeckJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.TeckJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentTeckJobInfo form .teck-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .teck-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .teck-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.teck-details .input-box input,
+.teck-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.teck-details .input-box input:focus,
+.teck-details .input-box input:valid,
+.teck-details .input-box select:focus,
+.teck-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .teck-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .teck-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .teck-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabTeck input[type="radio"] {
+  display: none;
+}
+
+.tabTeck input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabTeck input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabTeck .tab,
+  .tabTeck label {
+    order: initial;
+  }
+
+  .tabTeck label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*PENDING*/
+
+.Pending,
+#Pending {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.PendingJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.PendingJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.PendingJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentPendingJobInfo form .pending-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .pending-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .pending-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.pending-details .input-box input,
+.pending-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.pending-details .input-box input:focus,
+.pending-details .input-box input:valid,
+.pending-details .input-box select:focus,
+.pending-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .pending-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .pending-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .pending-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabPending input[type="radio"] {
+  display: none;
+}
+
+.tabPending input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabPending input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabPending .tab,
+  .tabPending label {
+    order: initial;
+  }
+
+  .tabPending label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*INCOMPLETE*/
+
+.Incomplete,
+#Incomplete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.IncompleteJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.IncompleteJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.IncompleteJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentIncompleteJobInfo form .incomplete-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .incomplete-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .incomplete-details label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.incomplete-details .input-box input,
+.incomplete-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.incomplete-details .input-box input:focus,
+.incomplete-details .input-box input:valid,
+.incomplete-details .input-box select:focus,
+.incomplete-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .incomplete-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .incomplete-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .incomplete-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabIncomplete input[type="radio"] {
+  display: none;
+}
+
+.tabIncomplete input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabIncomplete input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabIncomplete .tab,
+  .tabIncomplete label {
+    order: initial;
+  }
+
+  .tabIncomplete label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}

@@ -1,0 +1,132 @@
+
+/*Remark*/
+  .input-boxRemark i{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 600px;
+    font-size: 20px;
+    cursor: pointer;
+
+  }
+
+  .input-boxRemark input{
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 15px);
+    padding: 0 15px 0 15px;
+    height: 45px;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 25px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    border-color: #081D45;
+    margin-right: 10px;
+    
+  }
+
+  form .input-boxRemark {
+    width: 100%;
+    margin-left: 12px;
+  }
+
+  form .tech-details .input-boxRemark{
+      margin-bottom: 15px;
+    }
+
+  .remove_field {
+    position: absolute;
+    /*margin-left: 50px;*/
+    margin-top: 10px;
+    color: #000;
+    font-size: 35px;
+  }
+  
+  .input-boxRemark i:hover,
+  .input-boxRemark i:focus {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
+  .remove_field:hover,
+  .remove_field:focus {
+    color: red;
+    cursor: pointer;
+  }
+  
+  /*Accessories*/
+  .input-boxAccessories i{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 590px;
+    font-size: 20px;
+    cursor: pointer;
+
+  }
+
+  .input-boxAccessories input, .input-boxAccessories select{
+    margin-bottom: 15px;
+    width: calc(100% / 4 - 20px);
+    padding: 0 15px 0 15px;
+    height: 45px;
+    outline: none;
+    font-size: 13px;
+    border-radius: 5px;
+    padding-left: 25px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    border-color: #081D45;
+    margin-right: 10px; 
+  }
+
+  form .input-boxAccessories {
+    width: 100%;
+    margin-left: 12px;
+  }
+
+  form .tech-details .input-boxAccessories{
+      margin-bottom: 15px;
+  }
+
+  .input-boxAccessories i:hover,
+  .input-boxAccessories i:focus {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
+  .dropDown i{
+    left: 10px;
+  }
+
+.content{
+    border: 1px solid black;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.content span{
+    width: 250px;
+
+}
+
+.content span:hover{
+    cursor: pointer;
+}
+
+.btn-box input {
+  height: 30px;
+  width:100px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+
+
