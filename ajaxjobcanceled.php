@@ -74,7 +74,7 @@ while ($row = $result->fetch_assoc()) {
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Job Assign : </td><td>" .  $job_assign . "</td>";
+    $response .= "<td>Status Job : </td><td>" .  $job_assign . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";

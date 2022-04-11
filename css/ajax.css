@@ -1,3 +1,21 @@
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #ffffff;
+    background-repeat: no-repeat
+}
+
+.container {
+  padding: 1%;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 0 30px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
 
 /*Remark*/
   .input-boxRemark i{
@@ -130,3 +148,62 @@
 }
 
 
+form .upload-report .input-box {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  width: calc(100% / 2 - -335px);
+  padding: 0 -9px 0 15px;
+}
+form .upload-report label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.upload-report .input-box input,
+.upload-report .input-box select {
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.upload-report .input-box input:focus,
+.upload-report .input-box input:valid,
+.upload-report .input-box select:focus,
+.upload-report .input-box select:valid {
+  border-color: #081d45;
+}
+
+
+form .submit-date .submit-date {
+  margin-bottom: 40px;
+  width: calc(100% / 2 - -344px);
+  padding: 0 -9px 0 15px;
+}
+form .submit-date label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.submit-date .input-box input,
+.submit-date .input-box select {
+  height: 35px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.submit-date .input-box input:focus,
+.submit-date .input-box input:valid,
+.submit-date .input-box select:focus,
+.submit-date .input-box select:valid {
+  border-color: #081d45;
+}

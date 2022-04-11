@@ -759,6 +759,7 @@ form .button #cancelbtn {
   }
   form .staff-details .input-box {
     margin-bottom: 15px;
+
     width: 100%;
   }
   form .category {
@@ -813,7 +814,7 @@ thead {
 }
 
 .staffList td {
-  padding: 0.2rem 1rem;
+  padding: 0.2rem 5rem;
 }
 
 a {

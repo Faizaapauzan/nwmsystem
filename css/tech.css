@@ -66,7 +66,7 @@
 }
 
 .home-section a i {
-  margin-left: 900px;
+  margin-left: 600px;
 }
 
 .home-section nav .notification-button {
@@ -187,7 +187,8 @@ textarea {
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  position: fixed;
+  align-items: center;
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
@@ -766,7 +767,7 @@ input[type="datetime-local"] {
 }
 
 .modal .techClose {
-  right: 167px;
+  right: 380px;
   top: -30px;
   width: 30px;
   height: 30px;

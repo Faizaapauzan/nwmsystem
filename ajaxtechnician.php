@@ -3,6 +3,7 @@ session_start();
 
 ?>
 
+
 <?php
     $connection = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($connection, 'nwmsystem');
@@ -18,70 +19,114 @@ session_start();
             while ($row = mysqli_fetch_array($query_run)) {
                 ?>
 
-    <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-     <div class="input-box">
-            <label for="">Job Priority</label>
-            <input type="text" class="job_priority" name="job_priority" value="<?php echo $row['job_priority']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Job Order Number</label>
-            <input type="text" class="job_order_number" name="job_order_number" value="<?php echo $row['job_order_number']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Job Name</label>
-            <input type="text" class="job_name" name="job_name" value="<?php echo $row['job_name']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Requested date</label>
-            <input type="date" class="requested_date" name="requested_date" value="<?php echo $row['requested_date']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Delivery date</label>
-            <input type="date" class="delivery_date" name="delivery_date" value="<?php echo $row['delivery_date']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Customer Name</label>
-            <input type="text" class="customer_name" name="customer_name" value="<?php echo $row['customer_name']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Customer Grade</label>
-            <input type="text" class="customer_grade" name="customer_grade" value="<?php echo $row['customer_grade']?>" readonly> 
-        </div>
-         <div class="input-box">
-            <label for="">Job Description</label>
-            <textarea name="job_description" class="job_description" rows="3" cols="20" readonly><?php echo $row['job_description']?></textarea>
-        </div>
-       <div class="input-box-address">
-            <label for="">Customer Address</label>
-            <input type="text" class="cust_address1" name="cust_address1" value="<?php echo $row['cust_address1']?>" readonly>
-            <input type="text" class="cust_address2" name="cust_address2" value="<?php echo $row['cust_address2']?>" readonly>
-            <input type="text" class="cust_address3" name="cust_address3" value="<?php echo $row['cust_address3']?>" readonly>
-            <br/><br/>
-        </div>
-        <div class="input-box">
-            <label for="">Customer PIC</label>
-            <input type="text" class="customer_PIC" name="customer_PIC" value="<?php echo $row['customer_PIC']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Contact Number 1</label>
-            <input type="text" class="cust_phone1" name="cust_phone1" value="<?php echo $row['cust_phone1']?>" readonly>
-        </div>
-         <div class="input-box">
-            <label for="">Contact Number 2</label>
-            <input type="text" class="cust_phone2" name="cust_phone2" value="<?php echo $row['cust_phone2']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Machine Name</label>
-            <input type="text" class="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Machine Type</label>
-            <input type="text" class="machine_type" name="machine_type" value="<?php echo $row['machine_type']?>" readonly>
-        </div>
-        <div class="input-box">
-            <label for="">Machine Brand</label>
-            <input type="text" class="machine_brand" name="machine_brand" value="<?php echo $row['machine_brand']?>" readonly> 
-        </div>
+<html lang="en">
+
+<head>
+    <meta name="keywords" content="" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <title>NWM Technician Page</title>
+
+
+	
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="js/testing.js" type="text/javascript"></script>
+
+
+	
+</head>
+
+<body>
+
+
+
+<form class="row g-3">
+  <div class="col-md-6">
+    <label for="jobpriority" class="form-label">Job Priority</label>
+    <input type="text" class="form-control" id="jobpriority" value="<?php echo $row['job_priority']?>" style="background-color: white;" readonly>
+  </div>
+  
+  <div class="col-md-6">
+    <label for="jobordernumber" class="form-label">Job Order Number</label>
+    <input type="text" class="form-control" id="jobordernumber" value="<?php echo $row['job_order_number']?>" style="background-color: white;" readonly>
+  </div>
+  
+  <div class="col-md-6">
+    <label for="jobname" class="form-label">Job Name</label>
+    <input type="text" class="form-control" id="jobname" value="<?php echo $row['job_name']?>" style="background-color: white;" readonly>
+  </div>  
+  
+  <div class="col-md-6">
+    <label for="requesteddate" class="form-label">Requested Date</label>
+    <input type="date" class="form-control" id="requesteddate" value="<?php echo $row['requested_date']?>" style="background-color: white;" readonly>
+  </div>   
+  
+  <div class="col-md-6">
+    <label for="deliverydate" class="form-label">Delivery Date</label>
+    <input type="date" class="form-control" id="deliverydate" value="<?php echo $row['delivery_date']?>" style="background-color: white;" readonly>
+  </div>   
+  
+  <div class="col-md-6">
+    <label for="customername" class="form-label">Customer Name</label>
+    <input type="text" class="form-control" id="customername" value="<?php echo $row['customer_name']?>" style="background-color: white;" readonly>
+  </div> 
+
+  <div class="col-md-6">
+    <label for="customergrade" class="form-label">Customer Grade</label>
+    <input type="text" class="form-control" id="customergrade" value="<?php echo $row['customer_grade']?>" style="background-color: white;" readonly>
+  </div> 
+
+  <div class="col-md-6">
+    <label for="jobdescription" class="form-label">Job Description</label>
+    <input type="text" class="form-control" id="jobdescription" value="<?php echo $row['job_description']?>" style="background-color: white;" readonly>
+  </div> 
+
+  <div class="col-md-6">
+    <label for="customeraddress" class="form-label">Customer Address</label>
+    <input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address1']?>" style="background-color: white;" readonly>
+	<input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address2']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address3']?>" style="background-color: white;" readonly>
+  </div> 
+
+  <div class="col-md-6">
+    <label for="customerpic" class="form-label">Customer PIC</label>
+    <input type="text" class="form-control" id="customerpic" value="<?php echo $row['customer_PIC']?>" style="background-color: white;" readonly>
+  </div> 
+
+  <div class="col-md-6">
+    <label for="contactnumber" class="form-label">Contact Number</label>
+    <input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone1']?>" style="background-color: white;" readonly>
+	<input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone2']?>" style="background-color: white;" readonly>
+  </div>   
+  
+  <div class="col-md-6">
+    <label for="machinename" class="form-label">Machine Name</label>
+    <input type="text" class="form-control" id="machinename" value="<?php echo $row['machine_name']?>" style="background-color: white;" readonly>
+  </div> 
+  
+  <div class="col-md-6">
+    <label for="machinetype" class="form-label">Machine Type</label>
+    <input type="text" class="form-control" id="machinetype" value="<?php echo $row['machine_type']?>" style="background-color: white;" readonly>
+  </div> 
+
+  <div class="col-md-6">
+    <label for="machinebrand" class="form-label">Machine Brand</label>
+    <input type="text" class="form-control" id="machinebrand" value="<?php echo $row['machine_brand']?>" style="background-color: white;" readonly>
+  </div> 
+
+  <div class="col-md-6">
+    <label for="serialnumber" class="form-label">Serial Number</label>
+    <input type="text" class="form-control" id="serialnumber" value="    " style="background-color: white;" readonly>
+  </div>   
+</form>
+  <br>
+  
             
                     <?php
 
@@ -91,5 +136,9 @@ session_start();
      
     <?php
         }
+		
     }
     ?>
+
+	</body>
+</html>

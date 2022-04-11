@@ -15,163 +15,41 @@ session_start();
 
 <!DOCTYPE html>
 <head>
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="tab.css"/>
+
+    <meta name="keywords" content="" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <title>NWM Technician Page</title>
+
+	
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/tab.css"/>
+	<link href="css/ajax.css"rel="stylesheet" />
 
 </head>
-<style>
-
-  
-/*Remark*/
-  .input-boxRemark i{
-    position: absolute;
-    margin-top: 20px;
-    margin-left: 600px;
-    font-size: 20px;
-    cursor: pointer;
-
-  }
-
-  .input-boxRemark input{
-    margin-bottom: 15px;
-    width: calc(100% / 2 - 15px);
-    padding: 0 15px 0 15px;
-    height: 45px;
-    outline: none;
-    font-size: 16px;
-    border-radius: 5px;
-    padding-left: 25px;
-    border: 1px solid #ccc;
-    border-bottom-width: 2px;
-    transition: all 0.3s ease;
-    border-color: #081D45;
-    margin-right: 10px;
-    
-  }
-
-  form .input-boxRemark {
-    width: 100%;
-    margin-left: 12px;
-  }
-
-  form .tech-details .input-boxRemark{
-      margin-bottom: 15px;
-    }
-
-  .remove_field {
-    position: absolute;
-    /*margin-left: 50px;*/
-    margin-top: 10px;
-    color: #000;
-    font-size: 35px;
-  }
-  
-  .input-boxRemark i:hover,
-  .input-boxRemark i:focus {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-
-  .remove_field:hover,
-  .remove_field:focus {
-    color: red;
-    cursor: pointer;
-  }
-  
-  /*Accessories*/
-  .input-boxAccessories i{
-    position: absolute;
-    margin-top: 20px;
-    margin-left: 590px;
-    font-size: 20px;
-    cursor: pointer;
-
-  }
-
-  .input-boxAccessories input, .input-boxAccessories select{
-    margin-bottom: 15px;
-    width: calc(100% / 4 - 20px);
-    padding: 0 15px 0 15px;
-    height: 45px;
-    outline: none;
-    font-size: 13px;
-    border-radius: 5px;
-    padding-left: 25px;
-    border: 1px solid #ccc;
-    border-bottom-width: 2px;
-    transition: all 0.3s ease;
-    border-color: #081D45;
-    margin-right: 10px; 
-  }
-
-  form .input-boxAccessories {
-    width: 100%;
-    margin-left: 12px;
-  }
-
-  form .tech-details .input-boxAccessories{
-      margin-bottom: 15px;
-  }
-
-  .input-boxAccessories i:hover,
-  .input-boxAccessories i:focus {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-
-  .dropDown i{
-    left: 10px;
-  }
-
-.content{
-    border: 1px solid black;
-    padding: 5px;
-    margin-bottom: 5px;
-}
-.content span{
-    width: 250px;
-
-}
-
-.content span:hover{
-    cursor: pointer;
-}
-
-.btn-box input {
-  height: 30px;
-  width:100px;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: #081d45;
-  margin-bottom: 10px;
-}
-
-</style>
 
 <body>
-<!-- <div class="container" style="padding:50px 250px;"> -->
+		     
 		
  <form id="remark_form" method="post">
  <div class="input-boxRemark" id="input_fields_wrap">
     
-     <div id="msg" class="alert"></div>
 <div>
 
 <form class="remark-inline" id="frm-add-remark" action="javascript:void(0)">
 
 
       <?php
-
 include 'dbconnect.php';
 
     if (isset($_POST['jobregister_id'])) {
@@ -209,6 +87,7 @@ include_once("dbconnect.php");
   
 ?>
  
+
 <table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
@@ -216,6 +95,7 @@ include_once("dbconnect.php");
         <th>No</th>
          <th>Remark</th>
          <th>Solution</th>
+		 <th>Action</th>
       </tr>
    </thead>
   
@@ -225,7 +105,7 @@ include_once("dbconnect.php");
         <td></td>
          <td class="editable-col" contenteditable="true" col-index='1' oldVal ="<?php echo $res['remark_desc'];?>"><?php echo $res['remark_desc'];?></td>
          <td class="editable-col" contenteditable="true" col-index='2' oldVal ="<?php echo $res['remark_solution'];?>"><?php echo $res['remark_solution'];?></td>
-         <td><span class='deletes' data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+         <td><span class='deletes' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
       </tr>
 	  <?php endforeach;?>
   
@@ -240,14 +120,12 @@ include_once("dbconnect.php");
 </form>
 
 </div>  
-<div class="btn-box">
 <p class="control"><b id="message"></b></p>
-<input type="button" id="update_remark" name="update_remark" value="Update" />
+<div class="updateBtn">
+<button type="button" id="update_remark" name="update_remark" value="Update" class="btn btn-primary">Update</button>
+
 <!-- <button type="submit" name="update" value="update">Update</button> -->
 </form></div>  
-
-
-<!-- FOR SAVE WITHOUT SUBMIT -->
 
 <script>
     $(document).ready(function () {
@@ -267,9 +145,6 @@ include_once("dbconnect.php");
         });
     });
 </script>
-
-
-<!-- FOR DELETE -->
 
 <script>
   $(document).ready(function(){
@@ -310,8 +185,6 @@ include_once("dbconnect.php");
 
 </script>
 
-<!-- FOR EDIT DATA BASED ON DATA ROW ID -->
-
 <script type="text/javascript">
 $(document).ready(function(){
 	$('td.editable-col').on('focusout', function() {
@@ -346,14 +219,14 @@ $(document).ready(function(){
 
 </script>
 
-<!-- FOR ADD MULTIPLE REMARKS -->
+
 
    <!--Accessories add-->
   <script type="text/javascript">
 
 		$(document).ready(function () {
 
-			var maxField = 10; // Total 100 product fields we add
+			var maxField = 100; // Total 100 product fields we add
 
 			var addButton = $('.add_remark'); // Add more button selector
 

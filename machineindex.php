@@ -2,6 +2,16 @@
 
 include 'dbconnect.php';
 
+//code check customer code
+	
+	$result = mysqli_query($conn,"SELECT count(*) FROM machine_list WHERE machine_code ='" . $_POST["machine_code"] . "'");
+	$row = mysqli_fetch_row($result);
+	$machine_code_count = $row[0];
+	if($machine_code_count>0) echo "<span style='color:red'> Machine code Already Exist </span>";
+	
+	
+
+	else
 
 		//insert into database
 	

@@ -61,10 +61,12 @@
 	// here our table name is college
 
 	$sql = "INSERT INTO job_register (jobregister_id, job_code, job_name, job_order_number, job_description, customer_code,
-     customer_name, customer_grade, job_priority, requested_date, delivery_date, customer_PIC, cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, machine_code, machine_name,
+     customer_name, customer_grade, job_priority, requested_date, delivery_date, customer_PIC,
+	 cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, machine_code, machine_name,
      machine_type, machine_brand, serialnumber, accessories_required, jobregistercreated_by, jobregisterlastmodify_by)
 
-    VALUES ('default', '$job_code', '$job_name', '$job_order_number', '$job_description', '$customer_code', '$customer_name', '$customer_grade', '$job_priority', '$requested_date', '$delivery_date', ' $customer_PIC', '$cust_phone1', '$cust_phone2',
+    VALUES ('default', '$job_code', '$job_name', '$job_order_number', '$job_description', '$customer_code',
+     '$customer_name', '$customer_grade', '$job_priority', '$requested_date', '$delivery_date', ' $customer_PIC', '$cust_phone1', '$cust_phone2',
      '$cust_address1', '$cust_address2', '$cust_address3', '$machine_code', '$machine_name', '$machine_type','$machine_brand', '$serialnumber' , '$accessories_required', '$jobregistercreated_by', '$jobregisterlastmodify_by' )";
 
 

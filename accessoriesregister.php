@@ -42,11 +42,11 @@ include 'dbconnect.php';
 <body>
 
 <div class="sidebar">
-<div class="logo-details">
-<i class='bx bx-window-alt'></i>
-<span class="logo_name">NWM System</span>
-</div>
-</a>
+            <div class="logo-details">
+                <i class='bx bx-window-alt'></i>
+            <span class="logo_name">NWM System</span>
+            </div>
+        </a>
         
         <ul class="nav-links">
                <li>

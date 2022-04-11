@@ -1,4 +1,5 @@
-table {
+
+       table {
   border-collapse: collapse;
   box-shadow: 0 5px 10px rgb(37, 19, 19);
   background-color: #fff;
@@ -7,6 +8,7 @@ table {
   width: 100%;
   display: fixed;
   justify-content: center;
+
 }
 
 thead {
@@ -21,14 +23,21 @@ th {
   letter-spacing: 0.1rem;
   text-align: center;
   height: 50px;
+  
 }
 
 td {
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
   padding-bottom: 10px;
+
 }
+
+/*td:nth-child(5){
+    padding: 0.2rem 9.5rem;
+  }
+  */
 
 a {
   text-decoration: none;
@@ -44,8 +53,10 @@ tr:nth-child(even) {
   background-color: rgba(221, 219, 219, 0.671);
 }
 
+
 .machineList {
   padding-top: 1%;
+
 }
 
 .machineList h1 {
@@ -55,3 +66,133 @@ tr:nth-child(even) {
   font-family: cursive;
   font-weight: 100;
 }
+        .machineList {
+            padding-top: 1%;
+        }
+
+        .machineList h1 {
+            padding-bottom: 10px;
+            padding-left: 1%;
+            font-size: 30px;
+            font-family: cursive;
+            font-weight: 100;
+        }
+
+
+        .MachinePopup .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+
+        }
+
+        .MachinePopup .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71b7e6, #081D45);
+        }
+
+        .contentMachinePopup form .Machine-details {
+
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 25px 20px 2px 20px;
+
+        }
+
+        .modal .contentMachinePopup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            width: 550px;
+            z-index: 2;
+            padding: 20px;
+            box-sizing: boder-box;
+            margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+
+        }
+
+        .modal.active .contentMachinePopup {
+            transition: all 300ms ease-in-out;
+            transform: translate(-50%, -50%) scale;
+        }
+
+        .modal .close {
+            right: 10px;
+            top: -140px;
+            width: 30px;
+            height: 30px;
+
+        }
+
+        .updateBtn button {
+            width: 100%;
+            margin: 0 5px 5px 8px;
+        }
+        
+        .updateBtn {
+            display: flex;
+            margin-left: 76%;
+            margin-bottom: 5px;
+            margin-top: 45px;
+        }
+
+
+        .Machine-descriptions {
+            padding: 0.5rem;
+        }
+
+        .Machine-descriptions span {
+            color: #2f456e;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .MachineUpdateDeleteBtn {
+            display: flex;
+
+        }
+
+        .addMachineBtn button {
+            width: 100%;
+            margin: 0 19px 5px 19px;
+            border-radius: 5px;
+
+        }
+
+        .addMachineBtn {
+            display: flex;
+            margin-left: 85%;
+            margin-bottom: 5px;
+            margin-top: -40px;
+        }
+
+ .search-panel {
+
+            height: 30px;
+            width: 50%;
+            border-radius: 5px;
+            border: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-left: 10px;
+            margin-bottom: 30px;
+            position: static;
+            
+        }
+
+        .loading-overlay{
+            margin-bottom: 10px;
+            margin-left: 10px;
+            position: static;
+         
+        } 

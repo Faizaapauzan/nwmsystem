@@ -1,68 +1,6 @@
-.updatetech form .staff-details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 30px 20px 2px 20px;
-  /* width: 80%; */
-}
-form .staff-details .input-box {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
-  padding: 0 15px 0 15px;
-}
-form .input-box label.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.staff-details .input-box input,
-.staff-details .input-box select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-.staff-details .input-box input:focus,
-.staff-details .input-box input:valid,
-.staff-details .input-box select:focus,
-.staff-details .input-box select:valid {
-  border-color: #081d45;
-}
 
-.input-box-address {
-  margin-bottom: 15px;
-  padding: 0 15px 0 15px;
-}
-.input-box-address {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.input-box-address input,
-.input-box-address select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-.input-box-address input:focus,
-.input-box-address input:valid,
-.input-box-address select:focus,
-.input-box-address select:valid {
-  border-color: #081d45;
-}
-
-table {
+       
+       table {
   border-collapse: collapse;
   box-shadow: 0 5px 10px rgb(37, 19, 19);
   background-color: #fff;
@@ -71,6 +9,7 @@ table {
   width: 100%;
   display: fixed;
   justify-content: center;
+
 }
 
 thead {
@@ -85,262 +24,285 @@ th {
   letter-spacing: 0.1rem;
   text-align: center;
   height: 50px;
+  
 }
 
 td {
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
   padding-bottom: 10px;
-}
-a {
-  text-decoration: none;
-  color: rgb(15, 0, 0);
-}
 
-.customerList {
-  padding-top: 1%;
 }
+        a {
+            text-decoration: none;
+            color: rgb(15, 0, 0);
+        }
 
-.customerList h1 {
-  padding-bottom: 10px;
-  padding-left: 1%;
-  font-size: 30px;
-  font-family: cursive;
-  font-weight: 100;
-}
+        .customerList {
+            padding-top: 1%;
+        }
 
-.customerPopup .title {
-  font-size: 25px;
-  font-weight: 500;
-  position: relative;
-}
+        .customerList h1 {
+            padding-bottom: 10px;
+            padding-left: 1%;
+            font-size: 30px;
+            font-family: cursive;
+            font-weight: 100;
+        }
 
-.customerPopup .title::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 30px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #081d45);
-}
 
-.contentCustomerPopup form .Machine-details {
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 25px 20px 2px 20px;
-}
 
-.modal .contentCustomerPopup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  z-index: 2;
-  padding: 20px;
-  box-sizing: boder-box;
-  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-}
+        .customerPopup .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
 
-.modal.active .contentCustomerPopup {
-  transition: all 300ms ease-in-out;
-  transform: translate(-50%, -50%) scale;
-}
+        }
 
-.modal .close {
-  right: 10px;
-  top: -140px;
-  width: 30px;
-  height: 30px;
-}
+        .customerPopup .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71b7e6, #081D45);
+        }
 
-.updateBtn button {
-  width: 100%;
-  margin: 0 5px 5px 8px;
-}
+        .contentCustomerPopup form .Machine-details {
 
-.updateBtn {
-  display: flex;
-  margin-left: 76%;
-  margin-bottom: 5px;
-  margin-top: 45px;
-}
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 25px 20px 2px 20px;
 
-.viewBtn button {
-  width: 100%;
-  margin: 0 5px 5px 8px;
-}
+        }
 
-.viewBtn {
-  display: flex;
-  margin-left: 76%;
-  margin-bottom: 5px;
-  margin-top: 45px;
-}
+        .modal .contentCustomerPopup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            width: 550px;
+            z-index: 2;
+            padding: 20px;
+            box-sizing: boder-box;
+            margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
 
-.customer-descriptions {
-  padding: 0.5rem;
-}
+        }
 
-.customer-descriptions span {
-  color: #2f456e;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
+        .modal.active .contentCustomerPopup {
+            transition: all 300ms ease-in-out;
+            transform: translate(-50%, -50%) scale;
+        }
 
-.customerUpdateDeleteBtn {
-  display: flex;
-  display: flex;
-  width: 70%;
-  table-layout: fixed;
-  border-collapse: collapse;
-}
+        .modal .close {
+            right: 10px;
+            top: -140px;
+            width: 30px;
+            height: 30px;
 
-.addCustomerBtn button {
-  width: 100%;
-  margin: 0 19px 5px 19px;
-  border-radius: 5px;
-}
+        }
 
-.addCustomerBtn {
-  display: flex;
-  /* margin-left: 85%;
-  margin-bottom: 5px;
-  margin-top: -40px; */
-  margin-left: 950px;
-}
 
-/*All Add form list (in customer list, machine list, accessories list, jobtype list)*/
-.listAddForm {
-  max-width: 600px;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 450px;
-}
+        .updateBtn button {
+            width: 100%;
+            margin: 0 5px 5px 8px;
+        }
 
-.listAddForm .title {
-  font-size: 25px;
-  font-weight: 500;
-  position: relative;
-}
+        .updateBtn {
+            display: flex;
+            margin-left: 76%;
+            margin-bottom: 5px;
+            margin-top: 45px;
+        }
 
-.listAddForm .title::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 30px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #081d45);
-}
+        .viewBtn button {
+            width: 100%;
+            margin: 0 5px 5px 8px;
+        }
 
-.contentListAddForm form .listAddForm-details {
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 25px 20px 2px 20px;
-}
+        .viewBtn {
+            display: flex;
+            margin-left: 76%;
+            margin-bottom: 5px;
+            margin-top: 45px;
+        }
 
-.modal.active .contentListAddForm {
-  transition: all 300ms ease-in-out;
-  transform: translate(-50%, -50%) scale;
-}
 
-.modal .close {
-  right: 10px;
-  top: -140px;
-  width: 30px;
-  height: 30px;
-}
 
-.updateBtn button {
-  width: 100%;
-  margin: 0 5px 5px 8px;
-}
+        .customer-descriptions {
+            padding: 0.5rem;
+        }
 
-.updateBtn {
-  display: flex;
-  margin-left: 76%;
-  margin-bottom: 5px;
-  margin-top: 45px;
-}
+        .customer-descriptions span {
+            color: #2f456e;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
-form .listAddForm-details .input-box {
-  margin-bottom: 15px;
-  font-weight: 500;
-  padding: 0 15px 0 15px;
-}
+        .customerUpdateDeleteBtn {
+            display: flex;
+            display: flex;
+            width: 70%;
+            table-layout: fixed;
+            border-collapse: collapse;
 
-.listAddForm-details .input-box input {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
+        }
 
-.listAddForm-details .input-box input:focus,
-.listAddForm-details .input-box input:valid,
-.listAddForm-details .input-box select:focus,
-.listAddForm-details .input-box select:valid {
-  border-color: #081d45;
-}
+        .addCustomerBtn button {
+            width: 100%;
+            margin: 0 19px 5px 19px;
+            border-radius: 5px;
 
-.listAddFormbutton input {
-  height: 30px;
-  width: 27%;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: #081d45;
-  margin-bottom: 10px;
-}
+        }
 
-form .listAddFormbutton input:hover {
-  /* transform: scale(0.99); */
-  opacity: 0.8;
-}
+        .addCustomerBtn {
+            display: flex;
+            margin-left: 85%;
+            margin-bottom: 5px;
+            margin-top: -40px;
+        }
 
-form .listAddFormbutton #cancelbtn {
-  background-color: #f44336;
-}
+        /*All Add form list (in customer list, machine list, accessories list, jobtype list)*/
+        .listAddForm {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            margin: 30px 300px 30px 450px;
+        }
 
-.listAddFormbutton {
-  margin-left: 157px;
-}
+        .listAddForm .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
 
-.search-panel {
-  height: 30px;
-  width: 50%;
-  border-radius: 5px;
-  border: none;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin-left: 10px;
-  margin-bottom: 30px;
-  position: static;
-}
+        .listAddForm .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71b7e6, #081D45);
+        }
 
-.loading-overlay {
-  margin-bottom: 10px;
-  margin-left: 10px;
-  position: static;
-}
+        .contentListAddForm form .listAddForm-details {
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 25px 20px 2px 20px;
+
+        }
+
+        .modal.active .contentListAddForm {
+            transition: all 300ms ease-in-out;
+            transform: translate(-50%, -50%) scale;
+        }
+
+        .modal .close {
+            right: 10px;
+            top: -140px;
+            width: 30px;
+            height: 30px;
+
+        }
+
+
+        .updateBtn button {
+            width: 100%;
+            margin: 0 5px 5px 8px;
+        }
+
+        .updateBtn {
+            display: flex;
+            margin-left: 76%;
+            margin-bottom: 5px;
+            margin-top: 45px;
+        }
+
+        form .listAddForm-details .input-box {
+            margin-bottom: 15px;
+            font-weight: 500;
+            padding: 0 15px 0 15px;
+        }
+
+        .listAddForm-details .input-box input {
+            height: 45px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .listAddForm-details .input-box input:focus,
+        .listAddForm-details .input-box input:valid,
+        .listAddForm-details .input-box select:focus,
+        .listAddForm-details .input-box select:valid {
+            border-color: #081D45;
+        }
+
+        .listAddFormbutton input {
+            height: 30px;
+            width: 27%;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #081D45;
+            margin-bottom: 10px;
+
+        }
+
+        form .listAddFormbutton input:hover {
+            /* transform: scale(0.99); */
+            opacity: 0.8;
+        }
+
+        form .listAddFormbutton #cancelbtn {
+            background-color: #f44336;
+        }
+
+        .listAddFormbutton {
+            margin-left: 157px;
+
+        }
+
+        
+        .search-panel {
+
+            height: 30px;
+            width: 50%;
+            border-radius: 5px;
+            border: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-left: 10px;
+            margin-bottom: 30px;
+            position: static;
+            
+        }
+
+        .loading-overlay{
+            margin-bottom: 10px;
+            margin-left: 10px;
+            position: static;
+         
+        } 
+

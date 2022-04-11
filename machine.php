@@ -442,7 +442,8 @@ tr:nth-child(even) {
                         <div class="listAddForm-details">
                             <div class="input-box">
                                 <label for="MachineCode" class="details">Machine Code</label>
-                                <input type="text" id="machine_code" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required> 
+                                <input type="text" id="machine_code" name="machine_code" onkeyup="checkMachineCodelAvailability()" value="" class="form-control" placeholder="Enter Machine Code" required> 
+                                <span id="machine_code-availability-status"></span>
                             </div>
                             <div class="input-box">
                                 <label for="MachineCode" class="details">Machine Name</label>

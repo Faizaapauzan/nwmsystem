@@ -1,3 +1,22 @@
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #ffffff;
+    background-repeat: no-repeat
+}
+
+.container {
+  padding: 1%;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 0 30px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+
 
   textarea{
     resize: vertical;
@@ -143,7 +162,7 @@
 
   .input-boxLocation i{
     position: absolute;
-    margin-top: 20px;
+    margin-top: 10px; !important
     margin-left: 250px;
     font-size: 20px;
     cursor: pointer;

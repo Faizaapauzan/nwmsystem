@@ -70,7 +70,7 @@
 .contentTechJobInfo form .tech-details {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   /* margin: 30px 20px 2px 20px; */
 }
 form .tech-details .input-box {

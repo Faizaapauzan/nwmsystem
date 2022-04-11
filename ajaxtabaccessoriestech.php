@@ -15,24 +15,39 @@ session_start();
 
 <!DOCTYPE html>
 <head>
-<meta charset="UTF-8">
-  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="js/popper.js"></script>  
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/tab.css"/>
-<link href="css/ajaxtabtech.css"rel="stylesheet" />
+
+    <meta name="keywords" content="" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <title>NWM Technician Page</title>
+
+	
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="js/popper.js"></script>  
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/tab.css"/>
+	<link href="css/ajaxtabtech.css"rel="stylesheet" />
 </head>
 
 <body>
 
-		
- <form id="techacc_form" method="post">
- <div class="input-boxAccessories" id="input_fields_wrapAccessories">
-     
-     <div id="mesej" class="alerts"></div>
+
+
+
+<!-- Demo header-->
+
+
+<form id="techacc_form" method="post">
+<div class="input-boxAccessories" id="input_fields_wrapAccessories">
 <div>
 
 <form class="form-inline" id="frm-add-data" action="javascript:void(0)">
@@ -75,44 +90,45 @@ include_once("dbconnect.php");
   }
   
 ?>
- 
-<table id="employee_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
-    <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
-   <thead>
-      <tr>
-        <th>No</th>
-         <th>Code</th>
-         <th>Name</th>
-         <th>Quantity</th>
-      </tr>
-   </thead>
-  
-   <tbody id="_editable_table">
-      <?php foreach($queryRecords as $res) :?>
-      <tr data-row-id="<?php echo $res['id'];?>">
-        <td></td>
-        <td><label><a href="#" class="hover" id="<?php echo $res["accessories_id"]; ?>"><?php echo $res["accessories_code"]; ?></a></label></td>
-         <td class="editable-col" contenteditable="true" col-index='1' oldVal ="<?php echo $res['accessories_name'];?>"><?php echo $res['accessories_name'];?></td>
-         <td class="editable-col" contenteditable="true" col-index='2' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
-         <td><span class='delete' data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
-      </tr>
-	  <?php endforeach;?>
-  
-   </tbody>
-    
-</table>
 
-<!-- <button onclick="javascript:void(0);" class="add_button" title="Add field">Add</button> -->
+
+
+                        <!-- Responsive table -->
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Name</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+										<tbody id="_editable_table">
+										<?php foreach($queryRecords as $res) :?>
+										<tr data-row-id="<?php echo $res['id'];?>">
+										<td></td>
+										<td><label><a href="#" class="hover" id="<?php echo $res["accessories_id"]; ?>"><?php echo $res["accessories_code"]; ?></a></label></td>
+										<td class="editable-col" contenteditable="true" col-index='1' oldVal ="<?php echo $res['accessories_name'];?>"><?php echo $res['accessories_name'];?></td>
+										<td class="editable-col" contenteditable="true" col-index='2' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
+										<td><span class='delete' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+										</tr>
+										<?php endforeach;?>
+  
+									</tbody>
+                            </table>
+                        </div>
 <a href="javascript:void(0);" class="add_button" title="Add field" type="button">Click Here to Add Accessories</a>
 	
 </form>
 
 </div>  
-<div class="btn-box">
 <p class="control"><b id="mesej"></b></p>
-<input type="button" id="update_techacc" name="update_techacc" value="Update" />
-<!-- <button type="submit" name="save" value="update">Update</button> -->
-</form></div>   
+<div class="updateBtn">
+<button type="button" id="update_techacc" name="update_techacc" value="Update" class="btn btn-primary">Update</button>
+</div>
+</form> 
 
 <script>
     $(document).ready(function () {
@@ -270,7 +286,7 @@ if (accessories_id != '') {
 
 		$(document).ready(function () {
 
-			var maxField = 10; // Total 100 product fields we add
+			var maxField = 100; // Total 100 product fields we add
 
 			var addButton = $('.add_button'); // Add more button selector
 
@@ -344,4 +360,7 @@ include 'dbconnect.php';
 				x--; //Decrement field counter
 			});
 		});
-</script>
+</script>						
+                    </div>
+</form>
+</body>
