@@ -15,7 +15,7 @@ $baseURL = 'searchTechnician.php';
 $limit = 10; 
  
 // Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM staff_register WHERE (technician_rank = 'Leader' OR technician_rank = 'Assistant Leader')"); 
+$query   = $conn->query("SELECT COUNT(*) as rowNum FROM staff_register WHERE (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')"); 
 $result  = $query->fetch_assoc(); 
 $rowCount= $result['rowNum']; 
  
@@ -30,7 +30,7 @@ $pagConfig = array(
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = 'Leader' OR technician_rank = 'Assistant Leader') ORDER BY staffregister_id ASC LIMIT $limit"); 
+$query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1st Leader' OR technician_rank = '2nd Leader') ORDER BY staffregister_id ASC LIMIT $limit"); 
 ?>
 
 <!DOCTYPE html>

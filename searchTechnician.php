@@ -12,7 +12,7 @@ if(isset($_POST['page'])){
     $limit = 10; 
      
     // Set conditions for search 
-    $whereSQL = "WHERE (technician_rank = 'Leader' OR technician_rank = 'Assistant Leader')"; 
+    $whereSQL = "WHERE (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')"; 
     if(!empty($_POST['keywords'])){ 
         $whereSQL = " WHERE (staff_fullname LIKE '%".$_POST['keywords']."%' OR technician_rank LIKE '%".$_POST['keywords']."%' OR job_ability LIKE '%".$_POST['keywords']."%') "; 
     } 

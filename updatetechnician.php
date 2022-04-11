@@ -32,8 +32,8 @@
                                 </div>
                                 <fieldset>
                                 <div class="input-box"> <label for=""> <h2>Rank</h2> </label></div>
-                                <input type="radio" id="leader" name="technician_rank" value="Leader" <?php if($row['technician_rank'] == "Leader") { echo "checked"; }?>><label for="leader">Leader</label><br>
-                                <input type="radio" id="assistantleader" name="technician_rank" value="Assistant Leader" <?php if($row['technician_rank'] == "Assistant Leader") { echo "checked"; }?>><label for="assistant">Assistant Leader</label><br>  
+                                <input type="radio" id="leader" name="technician_rank" value="1st Leader" <?php if($row['technician_rank'] == "1st Leader") { echo "checked"; }?>><label for="leader">1st Leader</label><br>
+                                <input type="radio" id="assistantleader" name="technician_rank" value="2nd Leader" <?php if($row['technician_rank'] == "2nd Leader") { echo "checked"; }?>><label for="assistant">2nd Leader</label><br>  
                                 </fieldset>
 
                                 <fieldset>
