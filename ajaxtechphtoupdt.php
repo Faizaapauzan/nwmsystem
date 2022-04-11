@@ -10,27 +10,24 @@
 
 <!DOCTYPE html>
 <head>
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/tab.css"/>
+    <meta name="keywords" content="" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <title>NWM Technician Page</title>
+
+	
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link href="css/ajaxtechphtoupdt.css" rel="stylesheet"/>
-
-<style>
-
-  video {
-			width: 280px;
-			height: 160px;
-		}
-
-</style>
 
 </head>
 
-<body>
-<!-- <div class="container" style="padding:50px 250px;"> -->		
+<body>	
 <form action="techphtoupdtindex.php" class="remark-inline" id="frm-add-remark" action="javascript:void(0)" method="post" enctype="multipart/form-data">
 <div class="input-boxPhoto" id="input_fields_wrap">  
 <div id="photomsg" class="alert"></div>
@@ -65,38 +62,40 @@
 
   } ?>
  
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+                        <!-- Responsive table -->
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Photo</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-   <thead>
-      <tr>
-        <th>Photo</th>
-         <th>Description</th>
-         <th></th>
-      </tr>
-   </thead>
-  
-   <tbody>
-      <?php foreach($queryRecords as $res) :?>
-      <tr data-row-id="<?php echo $res['id'];?>">
-         <td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"/></td>
-        <td oldVal ="<?php echo $res['description'];?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 16px;">
-<option value='' <?php if ($res['description'] == '') { echo "SELECTED"; } ?>></option>
-<option value="Machine (Before Service)" <?php if ($res['description'] == "Machine (Before Service)") { echo "SELECTED";} ?>>Machine (Before Service)</option>
-<option value="Accessories (Broken)" <?php if ($res['description'] == "Accessories (Broken)") { echo "SELECTED"; } ?>>Accessories (Broken)</option>
-<option value="Accessories (New)" <?php if ($res['description'] == "Accessories (New)") { echo "SELECTED"; } ?>>Accessories (New)</option>
-<option value="Machine (After Service)" <?php if ($res['description'] == "Machine (After Service)") { echo "SELECTED"; } ?>>Machine (After Service)</option>
-</select></td>
-
-<td><a href="image/<?php echo $res['file_name']; ?>" download>Download</td>
-         <td><span class='deleted' data-id='<?php echo $res["id"]; ?>' style="color:red">Delete</span></td>
-      </tr>
-	  <?php endforeach;?>
-   </tbody>
-</table>
-
-<a href="javascript:void(0);" class="add_photo" title="Add photo" type="button">Click Here to Insert Photo</a>
-
-</div>  
+								<?php foreach($queryRecords as $res) :?>
+								<tr data-row-id="<?php echo $res['id'];?>">
+								<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"/></td>
+								<td oldVal ="<?php echo $res['description'];?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 9px;">
+								<option value='' <?php if ($res['description'] == '') { echo "SELECTED"; } ?>></option>
+								<option value="Machine (Before Service)" <?php if ($res['description'] == "Machine (Before Service)") { echo "SELECTED";} ?>>Machine (Before Service)</option>
+								<option value="Accessories (Broken)" <?php if ($res['description'] == "Accessories (Broken)") { echo "SELECTED"; } ?>>Accessories (Broken)</option>
+								<option value="Accessories (New)" <?php if ($res['description'] == "Accessories (New)") { echo "SELECTED"; } ?>>Accessories (New)</option>
+								<option value="Machine (After Service)" <?php if ($res['description'] == "Machine (After Service)") { echo "SELECTED"; } ?>>Machine (After Service)</option>
+								</select></td>
+									<td><span class='updated' style="color:blue;" data-id='<?php echo $res["id"]; ?>'>Update</span></td>
+									<td><span class='deleted' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+								</tr>
+								<?php endforeach;?>
+ 
+                                </tbody>	
+                            </table>
+                        </div>
+                    </div>
+								<br>
+								<a href="javascript:void(0);" class="add_photo" title="Add photo" type="button">Click Here to Insert Photo</a>
+								<br><br>  
 
 <script>
   $(document).ready(function(){
@@ -282,6 +281,10 @@ $(document).ready(function(){
 </script>
 </form>
 
+
+
+
+
 <!---------------------------------- video ------------------------------------------>
 
 <!-- <div class="container" style="padding:50px 250px;"> -->		
@@ -319,35 +322,43 @@ $(document).ready(function(){
 
   } ?>
  
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
-
-   <thead>
-      <tr>
-        <th>Video</th>
-         <th>Description</th>
-         <th></th>
-      </tr>
-   </thead>
-  
-   <tbody>
-      <?php foreach($queryRecords as $res) :?>
-      <tr data-row-id="<?php echo $res['id'];?>">
-         <td col-index='2'><video src="image/<?=$res['video_url']?>" controls></video></td>
-        <td oldVal ="<?php echo $res['description'];?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 16px;">
-<option value='' <?php if ($res['description'] == '') { echo "SELECTED"; } ?>></option>
-<option value="Machine (Before Service)" <?php if ($res['description'] == "Machine (Before Service)") { echo "SELECTED";} ?>>Machine (Before Service)</option>
-<option value="Accessories (Broken)" <?php if ($res['description'] == "Accessories (Broken)") { echo "SELECTED"; } ?>>Accessories (Broken)</option>
-<option value="Accessories (New)" <?php if ($res['description'] == "Accessories (New)") { echo "SELECTED"; } ?>>Accessories (New)</option>
-<option value="Machine (After Service)" <?php if ($res['description'] == "Machine (After Service)") { echo "SELECTED"; } ?>>Machine (After Service)</option>
-</select></td>
-
-         <td><span class='deleted' data-id='<?php echo $res["id"]; ?>'style="color:red">Delete</span></td>
-      </tr>
-	  <?php endforeach;?>
-   </tbody>
-</table>
-
-<a href="javascript:void(0);" class="add_video" title="Add video" type="button">Click Here to Insert video</a>
+                        <!-- Responsive table -->
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Video</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+									<?php foreach($queryRecords as $res) :?>
+									<tr data-row-id="<?php echo $res['id'];?>">
+									
+									
+									<td col-index='2' >
+									<video width="150" height="120" src="image/<?=$res['video_url']?>" controls></video></td>
+									
+									<td oldVal ="<?php echo $res['description'];?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 9px;">
+									<option value='' <?php if ($res['description'] == '') { echo "SELECTED"; } ?>></option>
+									<option value="Machine (Before Service)" <?php if ($res['description'] == "Machine (Before Service)") { echo "SELECTED";} ?>>Machine (Before Service)</option>
+									<option value="Accessories (Broken)" <?php if ($res['description'] == "Accessories (Broken)") { echo "SELECTED"; } ?>>Accessories (Broken)</option>
+									<option value="Accessories (New)" <?php if ($res['description'] == "Accessories (New)") { echo "SELECTED"; } ?>>Accessories (New)</option>
+									<option value="Machine (After Service)" <?php if ($res['description'] == "Machine (After Service)") { echo "SELECTED"; } ?>>Machine (After Service)</option>
+									</select></td>
+									
+									
+									<td><span class='updated'  style="color:blue;" data-id='<?php echo $res["id"]; ?>'>Update</span></td>
+									<td><span class='deleted'  style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+									</tr>
+									<?php endforeach;?>
+                                </tbody>
+                            </table>
+							<br>
+									<a href="javascript:void(0);" class="add_video" title="Add video" type="button">Click Here to Insert video</a>
+							<br><br>
+						</div>
 
 </div>  
 
@@ -532,7 +543,7 @@ $(document).ready(function(){
 			});
 		});
 </script>
-  </form>
+</<form>
   
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

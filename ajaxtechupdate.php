@@ -108,11 +108,14 @@ session_start();
 
                 <div class="input-boxLocation" id="inputLocationBox">
                 <label for="Location" class="details">Location</label>
-                <div class="add_field_button1"><i class='bx bx-compass' onclick="getLocation()"></i></div>
+                <div class="add_field_button1"></div>
                 <textarea style="width: 290px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
                 <textarea style="width: 290px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
+				
               </div>
-              
+
+			  <button type="button" onclick="getLocation()" class="btn btn-info">Click to Get Location</button>
+            
 
 
             <p class="control"><b id="mesg"></b></p>
