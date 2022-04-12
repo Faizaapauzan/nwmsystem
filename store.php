@@ -31,8 +31,8 @@ if(!isset($_SESSION['username']))
     <title>NWM Storekeeper</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="store.css"rel="stylesheet" />
-    <link href="tab.css"rel="stylesheet" />
+    <link href="css/store.css"rel="stylesheet" />
+    <link href="css/tab.css"rel="stylesheet" />
     <!-- <script src="todostore.js" type="text/javascript" defer></script> -->
 
       <!--Boxicons link -->  
