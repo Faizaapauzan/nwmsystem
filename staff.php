@@ -175,7 +175,7 @@ session_start();
                             <div class="input-box">
                                 <label for="pNumber" class="details">Phone Number</label>
                                 <input type="text" id="staff_phone" name="staff_phone" placeholder="Enter Staff Phone Number" required>
-                                <span style='color:red' id="out"></span>
+            
                             </div>
                             <div class="input-box">
                                 <label for="email" class="details">Email</label>
@@ -184,7 +184,7 @@ session_start();
                             </div>
                             <div class="input-box">
                                 <label for="department" class="details">Department</label>
-                                <input type="text" id="department" name="staff_department" placeholder="Enter department" required>
+                                <input type="text" id="department" name="staff_department" placeholder="Enter department">
                             </div>
                            <div class="input-box">
                                 <label for="position" class="details">Position</label>
@@ -217,9 +217,9 @@ session_start();
              <label for="techGroup" class="details">Technician Group</label>
             <select id="techGroup" name="technician_rank">
                 <option value='' <?php if ($row['technician_rank'] == '') { echo "SELECTED"; } ?>></option>
-                <option value="Leader" <?php if ($row['technician_rank'] == "Leader") { echo "SELECTED"; } ?>>Leader</option>
-                <option value="Assistant Leader" <?php if ($row['technician_rank'] == "Assistant Leader") { echo "SELECTED";} ?>>Assistant Leader</option>
-                <option value="General Worker" <?php if ($row['technician_rank'] == "General Worker") { echo "SELECTED"; } ?>>General Worker</option>
+                <option value="1st Leader" <?php if ($row['technician_rank'] == "1st Leader") { echo "SELECTED"; } ?>>1st Leader</option>
+                <option value="2nd Leader" <?php if ($row['technician_rank'] == "2nd Leader") { echo "SELECTED";} ?>>2nd Leader</option>
+                <option value="Assistant Leader" <?php if ($row['technician_rank'] == "Assistant Leader") { echo "SELECTED"; } ?>>Assistant Leader</option>
             </select>
         </div> 
                             <div class="input-box">
