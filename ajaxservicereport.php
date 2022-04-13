@@ -50,7 +50,6 @@ while ($row = $result->fetch_assoc()) {
     $technician_leaving = $row['technician_leaving'];    
     $serialnumber = $row['serialnumber'];
     $machine_name = $row['machine_name'];
-    $srvcreportdate = $row['srvcreportdate'];
     $jobregistercreated_by = $row['jobregistercreated_by'];
     $jobregistercreated_at = $row['jobregistercreated_at'];
     $jobregisterlastmodify_by = $row['jobregisterlastmodify_by'];
@@ -59,10 +58,6 @@ while ($row = $result->fetch_assoc()) {
 
     $response .= "<tr>";
     $response .= "<td>ID : </td><td>" . $jobregister_id . "</td>";
-    $response .= "</tr>";
-
-    $response .= "<tr>";
-    $response .= "<td>Date : </td><td>" .  $srvcreportdate . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
