@@ -312,13 +312,13 @@ textarea {
         $connection = mysqli_connect("localhost", "root", "");
         $db = mysqli_select_db($connection, 'nwmsystem');
                 
-        if (isset($_POST['jobregister_id'])) {
-            $jobregister_id =$_POST['jobregister_id'];
-            $query = ("SELECT c.* , p.* 
-                    FROM job_register c,technician_remark p 
-                    WHERE c.jobregister_id =  '$jobregister_id'
-                    AND p.jobregister_id =  '$jobregister_id'");
-    
+        if (isset($_POST['servicereport_id'])) {
+            $servicereport_id =$_POST['servicereport_id'];
+            // $query = ("SELECT c.* , p.* 
+            //         FROM job_register c,technician_remark p 
+            //         WHERE c.jobregister_id =  '$jobregister_id'
+            //         AND p.jobregister_id =  '$jobregister_id'");
+            $query = ("SELECT * FROM service_report WHERE servicereport_id='$servicereport_id'");
             $query_run = mysqli_query($connection, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
@@ -331,7 +331,7 @@ textarea {
     <br/>
     <div class="row extra-info pt-3">
     <div class="try1">
-    <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+    
     <p><label>Date :</label> <span><input type="text" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>" class="input"/></span></p>
     <p><label>Customer Name :</label> <span><input style="width: 214px;" type="text" name="customer_name" id="customer_name" value="<?php echo $row['customer_name']?>" class="input" /></span></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
@@ -415,7 +415,8 @@ textarea {
             <br/>
             <br/>
 
-         
+       
+
           
 </body>
 </html>
