@@ -19,7 +19,7 @@ session_start();
     <!-- Custom Style -->
     <!-- <link rel="stylesheet" href="style.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
 
     <title>SERVICE REPORT</title>
 </head>
@@ -377,32 +377,6 @@ textarea {
     <!-- <div class="sign3"><p>Date and Time:</p></div> -->
     </form>
 
-    <br/><br/>
-
-      <?php include_once("dbconnect.php");
-
-  if (isset($_POST['jobregister_id'])) {
-      $jobregister_id =$_POST['jobregister_id'];
-
-      $sql = "SELECT * FROM `technician_photoupdate` WHERE  jobregister_id ='$jobregister_id'";
-      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
-
-  } ?>
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="100%" cellspacing="0">
-
-   <thead>
-   </thead>
-  <br/><br/>
-   <tbody>
-      <?php foreach($queryRecords as $res) :?>
-      <tr data-row-id="<?php echo $res['id'];?>">
-        <td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_photo"/></td>
-        <td><input readonly type="text" style="font-size: 20px; border: none;" class="description" value="<?php echo $res['description']; ?>" /></td>
-
-      </tr>
-	  <?php endforeach;?>
-   </tbody>
-</table>
 
     <?php
         }
@@ -411,11 +385,6 @@ textarea {
 
               <?php
             } ?>
-
-            <br/>
-            <br/>
-
-       
 
           
 </body>

@@ -42,10 +42,10 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC LIMIT 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NWM Machine</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <link href="layout.css" rel="stylesheet" />
-    <!-- <link href="machine.css" rel="stylesheet" /> -->
-    <script src="number.js" type="text/javascript" defer></script>
-    <script src="form-validation.js"></script>
+    <link href="css/layout.css" rel="stylesheet" />
+    <link href="css/machine.css" rel="stylesheet" />
+    <script src="js/number.js" type="text/javascript" defer></script>
+    <script src="js/form-validation.js"></script>
 
     <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
