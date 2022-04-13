@@ -87,8 +87,14 @@
                 
 									<td><a href="image/<?php echo $res['file_name']; ?>" download>Download</td>
 									<td><span class='deleted' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+
+                  
 								</tr>
 								<?php endforeach;?>
+
+                <br><div class="btn-box">
+<button type="submit" name="update" value="update">Update</button>
+</form></div>
  
                                 </tbody>	
                             </table>
@@ -205,7 +211,7 @@ $(document).ready(function(){
 
 		$(document).ready(function () {
 
-			var maxField = 2; // Total 100 product fields we add
+			var maxField = 10; // Total 100 product fields we add
 
 			var addButton = $('.add_photo'); // Add more button selector
 
@@ -254,9 +260,7 @@ $(document).ready(function(){
 <option value="Machine (After Service)" name="description[]">Machine (After Service)</option>
 </select>
 
-<br><div class="btn-box">
-<button type="submit" name="update" value="update">Update</button>
-</form></div>   </div>
+   </div>
 					
 <a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a></div></div>
 
@@ -470,7 +474,7 @@ $(document).ready(function(){
 
 		$(document).ready(function () {
 
-			var maxField = 2; // Total 100 product fields we add
+			var maxField = 10; // Total 100 product fields we add
 
 			var addButton = $('.add_video'); // Add more button selector
 
