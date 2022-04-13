@@ -92,9 +92,7 @@
 								</tr>
 								<?php endforeach;?>
 
-                <br><div class="btn-box">
-<button type="submit" name="update" value="update">Update</button>
-</form></div>
+                
  
                                 </tbody>	
                             </table>
@@ -102,7 +100,11 @@
                     </div>
 								<br>
 								<a href="javascript:void(0);" class="add_photo" title="Add photo" type="button">Click Here to Insert Photo</a>
-								<br><br>  
+								<br><br>
+                
+                <br><div class="btn-box">
+<button type="submit" name="update" value="update">Update</button>
+</form></div>
 
 <script>
   $(document).ready(function(){
