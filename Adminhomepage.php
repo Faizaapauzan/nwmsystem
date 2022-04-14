@@ -1345,13 +1345,13 @@ if(!isset($_SESSION['username']))
                 include 'dbconnect.php';
                                 
                 $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
-                        (job_assign = 'Iskandar' AND job_status = ''
+                        (job_assign = 'Isk' AND job_status = ''
                         OR
-                        job_assign = 'Iskandar' AND job_status = 'Doing'
+                        job_assign = 'Isk' AND job_status = 'Doing'
                         OR
-                        job_assign = 'Iskandar' AND job_status = 'Ready'
+                        job_assign = 'Isk' AND job_status = 'Ready'
                         OR
-                        job_assign = 'Iskandar' AND job_status = 'Incomplete')
+                        job_assign = 'Isk' AND job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
                         while($row = $results->fetch_assoc()) {
@@ -2049,13 +2049,13 @@ if(!isset($_SESSION['username']))
                 <?php
                     include 'dbconnect.php';
                     $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
-                            (job_assign = 'Razwill' AND job_status = ''
+                            (job_assign = 'Will' AND job_status = ''
                             OR
-                            job_assign = 'Razwill' AND job_status = 'Doing'
+                            job_assign = 'Will' AND job_status = 'Doing'
                             OR
-                            job_assign = 'Razwill' AND job_status = 'Ready'
+                            job_assign = 'Will' AND job_status = 'Ready'
                             OR
-                            job_assign = 'Razwill' AND job_status = 'Incomplete')
+                            job_assign = 'Will' AND job_status = 'Incomplete')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
                     while($row = $results->fetch_assoc()) {
