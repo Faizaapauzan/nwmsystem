@@ -546,7 +546,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingBoon5" class="tabHeadingBoon"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-        <form action="boonajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="boon-photos">
 
         </div></form></div>
@@ -558,7 +558,7 @@ if(!isset($_SESSION['username']))
         var jobregister_id = $(this).data('id');
         // AJAX request
         $.ajax({
-        url: 'boonajaxtechphtoupdt.php',
+        url: 'ajaxtechphtoupdt.php',
         type: 'post',
         data: { jobregister_id: jobregister_id },
         success: function (response) {
@@ -790,7 +790,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHafiz5" class="tabHeadingHafiz">Photo</label>
         <div class="tab" id="HafizJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-        <form action="hafizajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="hafiz-photo">
 
         </div></form></div>
@@ -804,7 +804,7 @@ if(!isset($_SESSION['username']))
             // AJAX request
 
             $.ajax({
-            url: 'hafizajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1037,7 +1037,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHamir5" class="tabHeadingHamir">Photo</label>
         <div class="tab" id="HamirJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-        <form action="hamirajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="hamir-photo">
 
         </div></form></div>
@@ -1048,7 +1048,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'hamirajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1275,7 +1275,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHwa5" class="tabHeadingHwa">Photo</label>
         <div class="tab" id="HwaJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-        <form action="hwaajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="hwa-photos">
 
         </div></form></div>
@@ -1286,7 +1286,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'hwaajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1507,7 +1507,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIsk5" class="tabHeadingIsk">Update</label>
         <div class="tab" id="IskJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-        <form action="iskajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="isk-photos">
 
         </div></form></div>
@@ -1518,7 +1518,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'iskajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1742,7 +1742,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJohn5" class="tabHeadingJohn">Photo</label>
         <div class="tab" id=JohnJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-        <form action="johnajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="john-photos">
 
         </div></form></div>
@@ -1754,7 +1754,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'johnajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1978,7 +1978,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJunJie5" class="tabHeadingJunJie">Photo</label>
         <div class="tab" id=JunJieJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-        <form action="junjieajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="junjie-photos">
 
         </div></form></div>
@@ -1990,7 +1990,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'junjieajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2213,7 +2213,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingRazwill5" class="tabHeadingRazwill">Photo</label>
         <div class="tab" id="RazwillJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-        <form action="razwillajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="razwill-photos">
 
         </div></form></div>
@@ -2225,7 +2225,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'razwillajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2448,7 +2448,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSahele5" class="tabHeadingSahele">Photo</label>
         <div class="tab" id="SaheleJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-        <form action="saheleajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="sahele-photos">
 
         </div></form></div>
@@ -2459,7 +2459,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'saheleajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2682,7 +2682,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSazaly5" class="tabHeadingSazaly">Photo</label>
         <div class="tab" id="SazalyJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="sazalyajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="sazaly-photos">
 
         </div></form></div>
@@ -2693,7 +2693,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'sazalyajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2915,7 +2915,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFaizan5" class="tabHeadingFaizan">Photo</label>
         <div class="tab" id="FaizanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="faizanajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="faizan-photos">
 
         </div></form></div>
@@ -2926,7 +2926,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'faizanajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3386,7 +3386,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIzaan5" class="tabHeadingIzaan">Photo</label>
         <div class="tab" id="IzaanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="izaanajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="izaan-photos">
 
         </div></form></div>
@@ -3398,7 +3398,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'izaanajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3622,7 +3622,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSalam5" class="tabHeadingSalam">Photo</label>
         <div class="tab" id="SalamJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="salamajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="salam-photos">
 
         </div></form></div>
@@ -3634,7 +3634,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'salamajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3860,7 +3860,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingTeck5" class="tabHeadingTeck">Photo</label>
         <div class="tab" id="TeckJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="teckajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="teck-photos">
 
         </div></form></div>
@@ -3872,7 +3872,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'teckajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -4094,7 +4094,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingAizat5" class="tabHeadingAizat"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="aizatajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="Aizat-photo-details">
 
         </div></form></div>
@@ -4106,7 +4106,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'aizatajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) { 
