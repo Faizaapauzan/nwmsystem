@@ -29,32 +29,30 @@ if(!isset($_SESSION['username']))
  <meta name="keywords" content="" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NWM Admin</title>
+    <title>NWM Admin Page</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <link href="css/layout.css"rel="stylesheet" />
     <link href="css/admin.css"rel="stylesheet" />
+    <link href="css/adminhomepage.css"rel="stylesheet" />
     <link href="css/adminboard.css"rel="stylesheet" />
     <!-- <link href="tab.css"rel="stylesheet" /> -->
 
-  <!-- Script -->
+    <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script> -->
     
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
+</head>
+
 <style>
-
- /*TABS COMPLETED*/
-.tabCompleted {
+/*TABS AIZAT*/
+.tabAizat {
   display: flex;
   flex-wrap: wrap;
   max-width: 800px;
@@ -65,7 +63,7 @@ if(!isset($_SESSION['username']))
   margin: 30px 300px 30px 300px;
 }
 
-.tabCompleted .completedJobInfoTab {
+.tabAizat .AizatJobInfoTab {
   max-width: 700px;
   width: 100%;
   background-color: #fff;
@@ -73,7 +71,7 @@ if(!isset($_SESSION['username']))
   margin-left: 0px;
 }
 
-.tabCompleted .tabHeadingComplete {
+.tabAizat .tabHeadingAizat {
   order: 1;
   display: flex;
   justify-content: center;
@@ -87,7 +85,7 @@ if(!isset($_SESSION['username']))
   transition: background ease 0.3s;
 }
 
-.tabCompleted .tabC {
+.tabAizat .tab {
   order: 9;
   flex-grow: 1;
   width: 100%;
@@ -96,848 +94,10 @@ if(!isset($_SESSION['username']))
   padding: 1rem;
   background: #fff;
   padding: 20px;
-}
-   
-
-/*TABS INCOMPLETE*/
-.tabIncomplete {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabIncomplete .IncompleteJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabIncomplete .tabHeadingIncomplete {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabIncomplete .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS PENDING*/
-.tabPending {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabPending .PendingJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabPending .tabHeadingPending {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  transition: background ease 0.3s;
-}
-
-.tabPending .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS TECK*/
-.tabTeck {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabTeck .TeckJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabTeck .tabHeadingTeck {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabTeck .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS SALAM*/
-.tabSalam {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabSalam .SalamJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabSalam .tabHeadingSalam {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabSalam .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS IZAAN*/
-.tabIzaan {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabIzaan .IzaanJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabIzaan .tabHeadingIzaan {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabIzaan .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS FAUZIN*/
-.tabFauzin {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabFauzin .FauzinJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabFauzin .tabHeadingFauzin {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  transition: background ease 0.3s;
-}
-
-.tabFauzin .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS FAIZAN*/
-.tabFaizan {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabFaizan .FaizanJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabFaizan .tabHeadingFaizan {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  transition: background ease 0.3s;
-}
-
-.tabFaizan .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-/*TABS sazaly*/
-.tabSazaly {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabSazaly .SazalyJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabSazaly .tabHeadingSazaly {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabSazaly .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS SAHELE*/
-.tabSahele {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabSahele .SaheleJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabSahele .tabHeadingSahele {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabSahele .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-/*TABS RAZWILL*/
-.tabRazwill {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabRazwill .RazwillJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabRazwill .tabHeadingRazwill {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabRazwill .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS JUNJIE*/
-.tabJunJie {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabJunJie .JunJieJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabJunJie .tabHeadingJunJie {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabJunJie .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-/*TABS JOHN*/
-.tabJohn {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabJohn .JohnJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabJohn .tabHeadingJohn {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  transition: background ease 0.3s;
-}
-
-.tabJohn .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS ISK*/
-.tabIsk {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabIsk .IskJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabIsk .tabHeadingIsk {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  transition: background ease 0.3s;
-}
-
-.tabIsk .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-/*TABS HWA*/
-.tabHwa {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabHwa .HwaJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabHwa .tabHeadingHwa {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  transition: background ease 0.3s;
-}
-
-.tabHwa .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-/*TABS HAMIR*/
-.tabHamir {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabHamir .HamirJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabHamir .tabHeadingHamir {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  transition: background ease 0.3s;
-}
-
-.tabHamir .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-/*TABS HAFIZ*/
-.tabHafiz {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabHafiz .HafizJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabHafiz .tabHeadingHafiz {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabHafiz .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-/*TABS BOON*/
-.tabBoon {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabBoon .BoonJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabBoon .tabHeadingBoon {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabBoon .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-.welcome {
-  font-size:30px;
-  font-family: "Garamond";
-  font-variant: small-caps;
-  color: #000099; 
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-#myBtn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  background-color: #081d45;
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px;
-  margin: 4px 2px;
-  height: 50px; 
-  width: 100px; 
-}
-
-#myBtn:hover {
-  background-color: #555;
-}
-  .input-box-address {
-  margin-bottom: 15px;
-  padding: 0 15px 0 15px;
-}
-.input-box-address {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.input-box-address input,
-.input-box-address select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-.input-box-address input:focus,
-.input-box-address input:valid,
-.input-box-address select:focus,
-.input-box-address select:valid {
-  border-color: #081d45;
 }
 
 
 </style>
-</head>
 
  <body>
 
@@ -1084,7 +244,7 @@ if(!isset($_SESSION['username']))
         <?php
         include 'dbconnect.php';
 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, accessories_required, job_status FROM job_register WHERE
+        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, accessories_required, job_status FROM job_register WHERE
                 (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                 OR
                 accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
@@ -1103,8 +263,8 @@ if(!isset($_SESSION['username']))
         <strong align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
-        <li><?php echo $row['customer_grade']?></li>
-        <li><?php echo $row['job_name']?></li>
+        <li><?php echo $row['machine_type']?></li>
+        <li><?php echo $row['job_description']?></li>
         <li><b><?php echo $row['accessories_required']?></b> accessories required</li>
         <li><?php echo $row['job_status']?></li>
         </ul>
@@ -1122,16 +282,22 @@ if(!isset($_SESSION['username']))
         <?php
         include 'dbconnect.php';
                                 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, accessories_required, job_status FROM job_register WHERE
-                (accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
+       $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, accessories_required, job_status FROM job_register WHERE
+                (accessories_required = 'Yes' AND job_status = ''
                 OR
-                job_assign = 'Storekeeper' AND job_status = ''
+                job_assign = 'Nuraein' AND job_status = ''
+                OR
+                job_assign = 'Sau Hwe' AND job_status = ''
                 OR
                 accessories_required = 'Yes' AND job_status = 'Not Ready'
                 OR
-                job_assign = 'Storekeeper' AND job_status = 'Not Ready'
+                job_assign = 'Nuraein' AND job_status = 'Not Ready'
                 OR
-                job_assign = 'Storekeeper' AND job_status = 'Incomplete')
+                job_assign = 'Sau Hwe' AND job_status = 'Not Ready'
+                OR
+                job_assign = 'Nuraein' AND job_status = 'Incomplete'
+                OR
+                job_assign = 'Sau Hwe' AND job_status = 'Incomplete')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
         while($row = $results->fetch_assoc()) {
@@ -1143,8 +309,8 @@ if(!isset($_SESSION['username']))
         <strong align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
-        <li><?php echo $row['customer_grade']?></li>
-        <li><?php echo $row['job_name']?></li>
+        <li><?php echo $row['machine_type']?></li>
+        <li><?php echo $row['job_description']?></li>
         <li><?php echo $row['job_status']?></li>
         </ul>
         </div>
@@ -1268,8 +434,8 @@ if(!isset($_SESSION['username']))
         <?php
         include 'dbconnect.php';
                                 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                (job_assign = 'Boon' AND job_status = '' AND job_cancel = ''
+        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                (job_assign = 'Boon' AND job_status = ''
                 OR
                 job_assign = 'Boon' AND job_status = 'Doing'
                 OR
@@ -1287,8 +453,8 @@ if(!isset($_SESSION['username']))
         <strong align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
-        <li><?php echo $row['customer_grade']?></li>
-        <li><?php echo $row['job_name']?></li>
+        <li><?php echo $row['machine_type']?></li>
+        <li><?php echo $row['job_description']?></li>
         <li><?php echo $row['job_status']?></li>
         </ul>
         </div>
@@ -1396,7 +562,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingBoon6" class="tabHeadingBoon"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="boon-report">
 
         </div></form></div>
@@ -1407,7 +573,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -1454,10 +620,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingBoon" id="tabDoingBoon5">
-        <label for="tabDoingBoon5" class="tabHeadingBoon"> Media </label>
+        <label for="tabDoingBoon5" class="tabHeadingBoon"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="boonajaxtechphtoupdt.php" method="post">
         <div class="boon-photos">
 
         </div></form></div>
@@ -1471,7 +637,7 @@ if(!isset($_SESSION['username']))
         var jobregister_id = $(this).data('id');
         // AJAX request
         $.ajax({
-        url: 'ajaxtechphtoupdt.php',
+        url: 'boonajaxtechphtoupdt.php',
         type: 'post',
         data: { jobregister_id: jobregister_id },
         success: function (response) {
@@ -1496,8 +662,8 @@ if(!isset($_SESSION['username']))
         <?php
         include 'dbconnect.php';
                                 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                (job_assign = 'Hafiz' AND job_status = '' AND job_cancel = ''
+        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                (job_assign = 'Hafiz' AND job_status = ''
                 OR
                 job_assign = 'Hafiz' AND job_status = 'Doing'
                 OR
@@ -1515,8 +681,8 @@ if(!isset($_SESSION['username']))
         <strong align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
-        <li><?php echo $row['customer_grade']?></li>
-        <li><?php echo $row['job_name']?></li>
+        <li><?php echo $row['machine_type']?></li>
+        <li><?php echo $row['job_description']?></li>
         <li><?php echo $row['job_status']?></li>
         </ul>
         </div>
@@ -1632,7 +798,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHafiz6" class="tabHeadingHafiz"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="hafiz-report">
 
         </div></form></div>
@@ -1643,7 +809,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -1693,10 +859,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz5">
-        <label for="tabDoingHafiz5" class="tabHeadingHafiz">Media</label>
+        <label for="tabDoingHafiz5" class="tabHeadingHafiz">Photo</label>
         <div class="tab" id="HafizJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="hafizajaxtechphtoupdt.php" method="post">
         <div class="hafiz-photo">
 
         </div></form></div>
@@ -1712,7 +878,7 @@ if(!isset($_SESSION['username']))
             // AJAX request
 
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'hafizajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1741,9 +907,9 @@ if(!isset($_SESSION['username']))
                     include 'dbconnect.php';
                                 
                     $results = $conn->query("SELECT
-                    jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
+                    jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status
                     FROM job_register WHERE
-                    (job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
+                    (job_assign = 'Hamir' AND job_status = ''
                     OR
                     job_assign = 'Hamir' AND job_status = 'Doing'
                     OR
@@ -1761,8 +927,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -1879,7 +1045,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHamir6" class="tabHeadingHamir"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="hamir-report">
 
         </div></form></div>
@@ -1890,7 +1056,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -1939,10 +1105,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir5">
-        <label for="tabDoingHamir5" class="tabHeadingHamir">Media</label>
+        <label for="tabDoingHamir5" class="tabHeadingHamir">Photo</label>
         <div class="tab" id="HamirJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="hamirajaxtechphtoupdt.php" method="post">
         <div class="hamir-photo">
 
         </div></form></div>
@@ -1956,7 +1122,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'hamirajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1982,8 +1148,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                (job_assign = 'Hwa' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                (job_assign = 'Hwa' AND job_status = ''
                 OR
                 job_assign = 'Hwa' AND job_status = 'Doing'
                 OR
@@ -2001,8 +1167,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -2116,7 +1282,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHwa6" class="tabHeadingHwa"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="hwa-report">
 
         </div></form></div>
@@ -2127,7 +1293,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -2176,10 +1342,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa5">
-        <label for="tabDoingHwa5" class="tabHeadingHwa">Media</label>
+        <label for="tabDoingHwa5" class="tabHeadingHwa">Photo</label>
         <div class="tab" id="HwaJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="hwaajaxtechphtoupdt.php" method="post">
         <div class="hwa-photos">
 
         </div></form></div>
@@ -2193,7 +1359,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'hwaajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2212,19 +1378,19 @@ if(!isset($_SESSION['username']))
             <!-- ISK -->
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic">Isk</div>
+                <div class="box_topic">Iskandar</div>
                             
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_assign = 'Isk' AND job_status = '' AND job_cancel = ''
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                        (job_assign = 'Iskandar' AND job_status = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Doing'
+                        job_assign = 'Iskandar' AND job_status = 'Doing'
                         OR
-                        job_assign = 'Isk' AND job_status = 'Ready'
+                        job_assign = 'Iskandar' AND job_status = 'Ready'
                         OR
-                        job_assign = 'Isk' AND job_status = 'Incomplete')
+                        job_assign = 'Iskandar' AND job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
                         while($row = $results->fetch_assoc()) {
@@ -2236,8 +1402,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -2350,7 +1516,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIsk6" class="tabHeadingIsk"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="isk-report">
 
         </div></form></div>
@@ -2361,7 +1527,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -2410,7 +1576,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIsk5" class="tabHeadingIsk">Update</label>
         <div class="tab" id="IskJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="iskajaxtechphtoupdt.php" method="post">
         <div class="isk-photos">
 
         </div></form></div>
@@ -2424,7 +1590,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'iskajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2449,8 +1615,8 @@ if(!isset($_SESSION['username']))
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_assign = 'John' AND job_status = '' AND job_cancel = ''
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                        (job_assign = 'John' AND job_status = ''
                         OR
                         job_assign = 'John' AND job_status = 'Doing'
                         OR
@@ -2468,8 +1634,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -2583,7 +1749,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJohn6" class="tabHeadingJohn"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="john-report">
 
         </div></form></div>
@@ -2594,7 +1760,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -2641,10 +1807,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn5">
-        <label for="tabDoingJohn5" class="tabHeadingJohn">Media</label>
+        <label for="tabDoingJohn5" class="tabHeadingJohn">Photo</label>
         <div class="tab" id=JohnJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="johnajaxtechphtoupdt.php" method="post">
         <div class="john-photos">
 
         </div></form></div>
@@ -2658,7 +1824,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'johnajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2683,8 +1849,8 @@ if(!isset($_SESSION['username']))
                             
             <?php
                 include 'dbconnect.php';                
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_assign = 'Jun Jie' AND job_status = '' AND job_cancel = ''
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                        (job_assign = 'Jun Jie' AND job_status = ''
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Doing'
                         OR
@@ -2702,8 +1868,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -2816,7 +1982,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJunJie6" class="tabHeadingJunJie"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="junjie-report">
 
         </div></form></div>
@@ -2827,7 +1993,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -2874,10 +2040,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie5">
-        <label for="tabDoingJunJie5" class="tabHeadingJunJie">Media</label>
+        <label for="tabDoingJunJie5" class="tabHeadingJunJie">Photo</label>
         <div class="tab" id=JunJieJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="junjieajaxtechphtoupdt.php" method="post">
         <div class="junjie-photos">
 
         </div></form></div>
@@ -2891,7 +2057,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'junjieajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2914,14 +2080,14 @@ if(!isset($_SESSION['username']))
                             
                 <?php
                     include 'dbconnect.php';
-                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                            (job_assign = 'Will' AND job_status = '' AND job_cancel = ''
+                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                            (job_assign = 'Razwill' AND job_status = ''
                             OR
-                            job_assign = 'Will' AND job_status = 'Doing'
+                            job_assign = 'Razwill' AND job_status = 'Doing'
                             OR
-                            job_assign = 'Will' AND job_status = 'Ready'
+                            job_assign = 'Razwill' AND job_status = 'Ready'
                             OR
-                            job_assign = 'Will' AND job_status = 'Incomplete')
+                            job_assign = 'Razwill' AND job_status = 'Incomplete')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
                     while($row = $results->fetch_assoc()) {
@@ -2933,8 +2099,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -3047,7 +2213,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingRazwill6" class="tabHeadingRazwill"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="razwill-report">
 
         </div></form></div>
@@ -3058,7 +2224,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3105,10 +2271,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill5">
-        <label for="tabDoingRazwill5" class="tabHeadingRazwill">Media</label>
+        <label for="tabDoingRazwill5" class="tabHeadingRazwill">Photo</label>
         <div class="tab" id="RazwillJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="razwillajaxtechphtoupdt.php" method="post">
         <div class="razwill-photos">
 
         </div></form></div>
@@ -3122,7 +2288,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'razwillajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3145,8 +2311,8 @@ if(!isset($_SESSION['username']))
                             
                 <?php
                     include 'dbconnect.php';
-                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                            (job_assign = 'Sahele' AND job_status = '' AND job_cancel = ''
+                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                            (job_assign = 'Sahele' AND job_status = ''
                             OR
                             job_assign = 'Sahele' AND job_status = 'Doing'
                             OR
@@ -3164,8 +2330,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -3278,7 +2444,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSahele6" class="tabHeadingSahele"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="sahele-report">
 
         </div></form></div>
@@ -3289,7 +2455,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3336,10 +2502,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSahele" id="tabDoingSahele5">
-        <label for="tabDoingSahele5" class="tabHeadingSahele">Media</label>
+        <label for="tabDoingSahele5" class="tabHeadingSahele">Photo</label>
         <div class="tab" id="SaheleJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="saheleajaxtechphtoupdt.php" method="post">
         <div class="sahele-photos">
 
         </div></form></div>
@@ -3353,7 +2519,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'saheleajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3378,8 +2544,8 @@ if(!isset($_SESSION['username']))
                             
                 <?php
                  include 'dbconnect.php';
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_assign = 'Sazaly' AND job_status = '' AND job_cancel = ''
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                        (job_assign = 'Sazaly' AND job_status = ''
                         OR
                         job_assign = 'Sazaly' AND job_status = 'Doing'
                          OR
@@ -3397,8 +2563,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -3512,7 +2678,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSazaly6" class="tabHeadingSazaly"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="sazaly-report">
 
         </div></form></div>
@@ -3523,7 +2689,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3570,10 +2736,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly5">
-        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Media</label>
+        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Photo</label>
         <div class="tab" id="SazalyJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="sazalyajaxtechphtoupdt.php" method="post">
         <div class="sazaly-photos">
 
         </div></form></div>
@@ -3587,7 +2753,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'sazalyajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3611,8 +2777,8 @@ if(!isset($_SESSION['username']))
                             
             <?php
             include 'dbconnect.php';
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Faizan' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Faizan' AND job_status = ''
                     OR
                     job_assign = 'Faizan' AND job_status = 'Doing'
                     OR
@@ -3630,8 +2796,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -3744,7 +2910,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFaizan6" class="tabHeadingFaizan"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="faizan-report">
 
         </div></form></div>
@@ -3755,7 +2921,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3802,10 +2968,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan5">
-        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Media</label>
+        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Photo</label>
         <div class="tab" id="FaizanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="faizanajaxtechphtoupdt.php" method="post">
         <div class="faizan-photos">
 
         </div></form></div>
@@ -3819,7 +2985,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'faizanajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3844,8 +3010,8 @@ if(!isset($_SESSION['username']))
                             
             <?php
             include 'dbconnect.php';
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Fauzin' AND job_status = ''
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Doing'
                     OR
@@ -3863,8 +3029,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -3978,7 +3144,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFauzin6" class="tabHeadingFauzin"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="fauzin-report">
 
         </div></form></div>
@@ -3989,7 +3155,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4036,10 +3202,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin5">
-        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Media</label>
+        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Photo</label>
         <div class="tab" id="FauzinJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="fauzinajaxtechphtoupdt.php" method="post">
         <div class="fauzin-photos">
 
         </div></form></div>
@@ -4053,7 +3219,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'fauzinajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -4077,8 +3243,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Izaan' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Izaan' AND job_status = ''
                     OR
                     job_assign = 'Izaan' AND job_status = 'Doing'
                     OR
@@ -4096,8 +3262,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -4211,7 +3377,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIzaan6" class="tabHeadingIzaan"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="izaan-report">
 
         </div></form></div>
@@ -4222,7 +3388,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4269,7 +3435,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan5">
-        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Media</label>
+        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Photo</label>
         <div class="tab" id="IzaanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
         <form action="izaanajaxtechphtoupdt.php" method="post">
@@ -4310,8 +3476,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Salam' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Salam' AND job_status = ''
                     OR
                     job_assign = 'Salam' AND job_status = 'Doing'
                     OR
@@ -4329,8 +3495,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -4444,7 +3610,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSalam6" class="tabHeadingSalam"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="salam-report">
 
         </div></form></div>
@@ -4455,7 +3621,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4502,10 +3668,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam5">
-        <label for="tabDoingSalam5" class="tabHeadingSalam">Media</label>
+        <label for="tabDoingSalam5" class="tabHeadingSalam">Photo</label>
         <div class="tab" id="SalamJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="salamajaxtechphtoupdt.php" method="post">
         <div class="salam-photos">
 
         </div></form></div>
@@ -4519,7 +3685,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'salamajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -4546,8 +3712,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Teck' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Teck' AND job_status = ''
                     OR
                     job_assign = 'Teck' AND job_status = 'Doing'
                     OR
@@ -4565,8 +3731,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -4680,7 +3846,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingTeck6" class="tabHeadingTeck"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="teck-report">
 
         </div></form></div>
@@ -4691,7 +3857,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4738,10 +3904,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingTeck" id="tabDoingTeck5">
-        <label for="tabDoingTeck5" class="tabHeadingTeck">Media</label>
+        <label for="tabDoingTeck5" class="tabHeadingTeck">Photo</label>
         <div class="tab" id="TeckJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="teckajaxtechphtoupdt.php" method="post">
         <div class="teck-photos">
 
         </div></form></div>
@@ -4755,7 +3921,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'teckajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -4780,8 +3946,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Aizat' AND job_status = ''
                     OR
                     job_assign = 'Aizat' AND job_status = 'Doing'
                     OR
@@ -4799,8 +3965,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
 
@@ -4911,7 +4077,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingAizat6" class="tabHeadingAizat"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="aizat-report">
 
         </div></form></div>
@@ -4922,7 +4088,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4969,10 +4135,10 @@ if(!isset($_SESSION['username']))
 
 <!--Double click Photo-->
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat5">
-        <label for="tabDoingAizat5" class="tabHeadingAizat"> Media </label>
+        <label for="tabDoingAizat5" class="tabHeadingAizat"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="aizatajaxtechphtoupdt.php" method="post">
         <div class="Aizat-photo-details">
 
         </div></form></div>
@@ -4986,7 +4152,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'aizatajaxtechphtoupdt.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) { 
@@ -5010,8 +4176,8 @@ if(!isset($_SESSION['username']))
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_status = 'Pending' AND job_cancel = '')
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, job_status FROM job_register WHERE
+                        (job_status = 'Pending')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
                 while($row = $results->fetch_assoc()) {
@@ -5023,8 +4189,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -5138,7 +4304,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingPending6" class="tabHeadingPending"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="pending-report">
 
         </div></form></div>
@@ -5149,7 +4315,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -5196,7 +4362,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingPending" id="tabDoingPending5">
-        <label for="tabDoingPending5" class="tabHeadingPending">Media</label>
+        <label for="tabDoingPending5" class="tabHeadingPending">Photo</label>
         <div class="tab" id="PendingJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -5239,7 +4405,7 @@ if(!isset($_SESSION['username']))
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
                         (job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
@@ -5252,8 +4418,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -5367,7 +4533,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIncomplete6" class="tabHeadingIncomplete"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="incomplete-report">
 
         </div></form></div>
@@ -5378,7 +4544,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -5425,7 +4591,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete5">
-        <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Media</label>
+        <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Photo</label>
         <div class="tab" id="IncompleteJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -5468,7 +4634,7 @@ if(!isset($_SESSION['username']))
                 <?php
                 include 'dbconnect.php';
                             
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
                         (job_status = 'Completed')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
@@ -5481,8 +4647,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -5595,7 +4761,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingCompleted6" class="tabHeadingComplete"> Report </label>
         <div class="tabC">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
+        <form action="ajaxreport.php" method="post">
         <div class="completed-report">
 
         </div></form></div>
@@ -5606,7 +4772,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreportadmin.php',
+            url: 'ajaxreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -5653,7 +4819,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted5">
-        <label for="tabDoingCompleted5" class="tabHeadingComplete">Media</label>
+        <label for="tabDoingCompleted5" class="tabHeadingComplete">Photo</label>
         <div class="tabC" id="completedJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -5762,6 +4928,8 @@ $(document).ready(function() {
             });
         });
     </script>
+
+    
 
 <script>
 let btn = document.querySelector("#btn");

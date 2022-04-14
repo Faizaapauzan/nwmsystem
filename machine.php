@@ -467,7 +467,7 @@ tr:nth-child(even) {
                             </div>
                              <div class="input-box">
                                 <label for="PurchaseDate" class="details">Purchase Date</label>
-                                <input type="date" id="PurchaseDate" name="purchase_date" placeholder="Enter Machine Purchase Date" required>
+                                <input type="date" id="PurchaseDate" name="purchase_date" placeholder="Enter Machine Purchase Date">
                             </div>
                             <div class="input-box">
                                 <label for="MachineDescription" class="details">Machine Description</label>

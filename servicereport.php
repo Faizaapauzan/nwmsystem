@@ -268,15 +268,6 @@ textarea {
     margin-inline-end: 0px;
 }
 
-
-  #display_photo{
-        width: 330px;
-        height: 250px;
-        border: 1px solid black;
-        background-position: center;
-
-        }
-
     </style>
 
 <body>
@@ -303,7 +294,20 @@ textarea {
     <div class="position-relative"><br/><br/>
     <center>
     <div class="SR">Service Report</div>
-    <div class="SRno">Service Report No:<input type="text" name="date" class="serviceno" /></div></center>
+    <div class="text-center">
+    <button onclick="number();" class="btn btn-primary" type="submit" name="srvcreportnumber" id="print-btn">Click</button>
+        <script type="text/javascript">
+            function number()
+                {
+                    $.ajax({url:"servicereportnumber.php", success:function(result)
+                        {
+                            $("#numbreport").val(result);
+                        }
+                    })
+                }
+        </script>
+    </div>
+    <div class="SRno">Service Report No:<input type="text" name="srvcreportnumber" id="numbreport" class="serviceno" /></div></center>
     </div></div>
     <br/><br/>
     </section>
@@ -314,10 +318,6 @@ textarea {
                 
         if (isset($_POST['servicereport_id'])) {
             $servicereport_id =$_POST['servicereport_id'];
-            // $query = ("SELECT c.* , p.* 
-            //         FROM job_register c,technician_remark p 
-            //         WHERE c.jobregister_id =  '$jobregister_id'
-            //         AND p.jobregister_id =  '$jobregister_id'");
             $query = ("SELECT * FROM service_report WHERE servicereport_id='$servicereport_id'");
             $query_run = mysqli_query($connection, $query);
             if ($query_run) {
@@ -376,12 +376,8 @@ textarea {
     </div>
     <!-- <div class="sign3"><p>Date and Time:</p></div> -->
     </form>
-<<<<<<< HEAD
-   
-=======
 
 
->>>>>>> 8bda4e6a56e732e80ecee766e8c6db8a108ec868
     <?php
         }
     }
@@ -389,11 +385,7 @@ textarea {
 
               <?php
             } ?>
-<<<<<<< HEAD
- 
-=======
 
           
->>>>>>> 8bda4e6a56e732e80ecee766e8c6db8a108ec868
 </body>
 </html>
