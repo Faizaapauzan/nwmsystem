@@ -3,6 +3,51 @@ session_start();
 
 ?>
 
+<?php 
+
+include_once 'dbconnect.php';
+
+
+                
+        if (isset($_POST['jobregister_id'])) {
+            $jobregister_id =$_POST['jobregister_id'];
+  
+            $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
+            $query_run = mysqli_query($conn, $query);
+            if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+
+
+//  $date1 = $row['technician_departure'];
+//  $date2   = $row['technician_arrival'];
+
+$DateTime1 = $row['technician_departure'];
+$DateTime2   = $row['technician_arrival'];
+
+         ///////////////////////////////////////////
+if (!function_exists('difftime'))   {
+  function difftime($date1, $date2)  {
+                 $dif=array();
+                 $first = strtotime($date1);
+                 $second = strtotime($date2);
+                 $datediff = abs($first - $second);
+                 $dif['s'] = floor($datediff);
+                 $dif['m'] = floor($datediff/(60) % 60 ); //minute
+                $dif['h'] = floor($datediff/(60*60)); //hour
+                 
+
+           return $dif;
+             }
+         }
+?>
+   <?php
+        }
+    }
+    ?>
+
+              <?php
+            } ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -88,13 +133,14 @@ session_start();
   font-size: 22px;
   text-align: center;
   margin-right: -87px;
-  margin-left: 338px;
+  margin-left: 251px;
   /* display: flex;
   flex-wrap: wrap;
   justify-content: space-between; */
 }
 
 .SRno {
+  /* position:fixed; */
   font-weight: bold;
   font-size: 20px;
   float: left;
@@ -156,23 +202,23 @@ session_start();
 }
 
 .try1 {
-  margin: 2px;
+  margin: 11px;
   font-weight: 600;
   display: inline-block;
-  margin-left: 6px;
+  margin-left: -1px;
 }
 
 .try2 {
   margin: 2px;
   font-weight: 600;
   display: inline-block;
-  margin-left: -5px;
+  margin-left: -18px;
 }
 
 .try3 {
-  margin: 2px;
+  margin: -12px;
   font-weight: 600;
-  margin-left: 15px;
+  margin-left: 49px;
 }
 
 .extra-info p span {
@@ -235,38 +281,6 @@ footer p {
   display: inline-block;
 }
 
-textarea {
-
-    writing-mode: horizontal-tb !important;
-    font-family: Arial;
-    text-rendering: auto;
-    color: -internal-light-dark(black, white);
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    column-count: initial !important;
-    width: 311px;
-    height: 100px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-    margin: 19px;
-    padding: 1px 2px;
-    border-width: 1px;
-    resize: none;
-    margin-inline-start: 0px; 
-    margin-inline-end: 0px;
-}
 
 
   #display_photo{
@@ -302,8 +316,21 @@ textarea {
                   
     <div class="position-relative"><br/><br/>
     <center>
-    <div class="SR">Service Report</div>
-    <div class="SRno">Service Report No:<input type="text" name="date" class="serviceno" /></div></center>
+   <div class="SR">Service Report</div>
+    <div class="text-center">
+    <button onclick="number();" class="btn btn-primary" type="submit" name="srvcreportnumber" id="print-btn">Click</button>
+        <script type="text/javascript">
+            function number()
+                {
+                    $.ajax({url:"servicereportnumber.php", success:function(result)
+                        {
+                            $("#numbreport").val(result);
+                        }
+                    })
+                }
+        </script>
+    </div>
+    <div class="SRno">Service Report No:<input type="text" name="srvcreportnumber" id="numbreport" class="serviceno" /></div></center>
     </div></div>
     <br/><br/>
     </section>
@@ -312,13 +339,13 @@ textarea {
         $connection = mysqli_connect("localhost", "root", "");
         $db = mysqli_select_db($connection, 'nwmsystem');
                 
-        if (isset($_POST['servicereport_id'])) {
-            $servicereport_id =$_POST['servicereport_id'];
+        if (isset($_POST['jobregister_id'])) {
+            $jobregister_id =$_POST['jobregister_id'];
             // $query = ("SELECT c.* , p.* 
             //         FROM job_register c,technician_remark p 
             //         WHERE c.jobregister_id =  '$jobregister_id'
             //         AND p.jobregister_id =  '$jobregister_id'");
-            $query = ("SELECT * FROM service_report WHERE servicereport_id='$servicereport_id'");
+            $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
             $query_run = mysqli_query($connection, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
@@ -333,13 +360,28 @@ textarea {
     <div class="try1">
     
     <p><label>Date :</label> <span><input type="text" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>" class="input"/></span></p>
-    <p><label>Customer Name :</label> <span><input style="width: 214px;" type="text" name="customer_name" id="customer_name" value="<?php echo $row['customer_name']?>" class="input" /></span></p>
+    <p><label style="position:absolute;">Customer Name :</label> <span><textarea style="width: 207px; height: 31px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;"><?php echo $row['customer_name'] ?></textarea></span></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label> <span><input type="text" name="job_name" value="<?php echo $row['job_name'] ?>" class="input" /></span></p>
     <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input" /></span></p>
     <br/>
     <p>Problem Description :-</p>
-    <textarea>
+    <textarea style="   writing-mode: horizontal-tb !important;
+    font-family: Arial;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    display: inline-block;
+    text-align: start;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    column-count: initial !important;
+    width: 311px;
+    height: 100px;
+    border-width: 1px;
+    margin: 19px;
+    padding: 1px 2px;
+    resize: none;">
     <?php foreach($query_run as $res) :?>
     <?php echo $res['remark_desc'];?>&#13;&#10;
     <?php endforeach;?>
@@ -347,14 +389,29 @@ textarea {
     </div>
 
     <div class="try2">
-    <p><label>Travel Time :</label><span><input type="technician_arrival" name="date" class="input" /></span></p>
+    <p><label>Travel Time :</label><span><input type="technician_arrival" name="date" class="input" value="<?php echo difftime($DateTime1,$DateTime2)['h']?>   hours <?php echo difftime($DateTime1,$DateTime2)['m']?>  minutes" /></span></p>
     <p><label>Time At  Site :</label> <span><input type="text" name="technician_arrival" value="<?php echo $row['technician_arrival'] ?>" class="input" /></span></p>
     <p><label>Return Time :</label><span><input type="text" name="technician_leaving" value="<?php echo $row['technician_leaving'] ?>" class="input" /></span></p>
-    <p><label>Machine Name :</label> <span><input style="width: 250px;" type="text" name="machine_name" value="<?php echo $row['machine_name'] ?>" class="input" /></span></p>
+    <p><label style="position:absolute;">Machine Name :</label> <span><textarea style="width: 247px; height: 45px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;"><?php echo $row['machine_name'] ?></textarea></span></p>
     <p><label>Serial Number :</label> <span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input" /></span></p>
     <br/>
     <p>Submitted Items :-</p>
-    <textarea>
+    <textarea style=" writing-mode: horizontal-tb !important;
+    font-family: Arial;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    display: inline-block;
+    text-align: start;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    column-count: initial !important;
+    width: 311px;
+    height: 100px;
+    margin: 19px;
+    padding: 1px 2px;
+    border-width: 1px;
+    resize: none;">
     <?php foreach($query_run as $res) :?>
     <?php echo $res['remark_solution'];?>&#13;&#10;
     <?php endforeach;?>
@@ -362,9 +419,55 @@ textarea {
     <br/></div>
     <br/><br/>
     <div class="try3">
-    <p>Report :-</p><input type="text" name="date" class="report"/>
+    <p>Report :-</p><textarea style=" writing-mode: horizontal-tb !important;
+    font-family: Arial;
+    text-rendering: auto;
+    text-align: start;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    column-count: initial !important;
+    width: 621px;
+    height: 300px;
+    margin: 19px;
+    padding: 1px 2px;
+    border-width: 0px;
+    resize: none;"></textarea>
+
     </div>
+
+ <?php include_once("dbconnect.php");
+
+  if (isset($_POST['jobregister_id'])) {
+      $jobregister_id =$_POST['jobregister_id'];
+
+      $sql = "SELECT * FROM `job_accessories` WHERE  jobregister_id ='$jobregister_id'";
+      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
+
+  } ?>
+
+
+<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" style="margin-top: -41px; margin-bottom: 14px;">
+
+   <thead>
+   </thead>
+  <br/><br/>
+   <tbody>
+      <?php foreach ($queryRecords as $res) :?>
+      <tr data-row-id="<?php echo $res['id']; ?>">
+      <td></td>
+        <td><input readonly type="text" style="font-size: 15px; border: none; width: 380px;" class="accessories_name" value="<?php echo $res['accessories_name']; ?>" /></td>
+        <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
+
+      </tr>
+	  <?php endforeach; ?>
+
+
+   </tbody>
+</table>
     </div></div></div>
+
+
     </section>
     <br/>
 
