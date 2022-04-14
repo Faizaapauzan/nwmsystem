@@ -4,26 +4,14 @@ session_start();
 
 <!DOCTYPE html>
 <head>
-
-    <meta name="keywords" content="" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <title>NWM Technician Page</title>
-	<link href="css/ajaxtechupdate.css"rel="stylesheet" />
+<!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/></script> 
+<link href="css/ajaxtechupdate.css"rel="stylesheet" />
 
 
-	
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	<script src="js/testing.js" type="text/javascript"></script>
 </head>
 
-<body>
 <?php
     $connection = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($connection, 'nwmsystem');
@@ -41,15 +29,13 @@ session_start();
  <form id="techupdate_form" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
-
-
-<label>Departure Time</label>
-<div class="input-group mb-3">
-  <input readonly type="text" class="form-control" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>" aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-primary" onclick="test1()" type="button">Departure</button>
-  </div>
-              <script type="text/javascript">
+     <div class="input-box-departure">
+            <label for="">Departure Time</label>
+               <div class="technician-time">
+            <input type="text" class="technician_departure" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>">
+            <input type="button" value="Departure" onclick="test1()">
+            <!-- <div class="alarm-button"><i class='bx bx-alarm' onclick="test1()"></i></div> -->
+            <script type="text/javascript">
               function test1()
                 {
                   $.ajax({url:"departureTime.php", success:function(result)
@@ -59,18 +45,15 @@ session_start();
                   })
                 }
                 </script>
-</div>
-
-
-
-
-<label>Arrival Time</label>
-<div class="input-group mb-3">
-  <input readonly type="text" class="form-control" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-primary" onclick="test2()" type="button">Arrival</button>
-  </div>
-             <script type="text/javascript">
+                </div>
+              </div>
+        <div class="input-box-arrival">
+            <label for="">Arrival Time</label>
+            <div class="technician-time">
+            <input type="text" class="technician_arrival" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>">
+             <input type="button" value="Arrival" onclick="test2()">
+            <!-- <div class="alarm-button"><i class='bx bx-alarm' onclick="test2()"></i></div> -->
+            <script type="text/javascript">
               function test2()
                 {
                   $.ajax({url:"departureTime.php", success:function(result)
@@ -80,18 +63,16 @@ session_start();
                   })
                 }
                 </script>
-</div>
-
-
-
-
-<label>Leaving Time</label>
-<div class="input-group mb-3">
-  <input readonly type="text" class="form-control" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-primary" onclick="test3()" type="button">Leaving</button>
-  </div>
-              <script type="text/javascript">
+                </div>
+              </div>
+        <div class="input-box-leaving">
+            <label for="">Leaving Time</label>
+            <div class="technician-time">
+            <input type="text" class="technician_leaving" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>">
+             <input type="button" value="Leaving" onclick="test3()">
+             <!-- <div class="alarm-button"><i class='bx bx-alarm' onclick="test3()"></i></div> -->
+            <!-- <button type="button" onclick="test3()" class="technician-time-butang">Leaving</button> -->
+            <script type="text/javascript">
               function test3()
                 {
                   $.ajax({url:"departureTime.php", success:function(result)
@@ -102,25 +83,19 @@ session_start();
                 }
                 
                 </script>
-</div>
-
-
-
+                </div>
+              </div>
                 <div class="input-boxLocation" id="inputLocationBox">
                 <label for="Location" class="details">Location</label>
-                <div class="add_field_button1"></div>
+                <div class="add_field_button1"><i class='bx bx-compass' onclick="getLocation()"></i></div>
                 <textarea style="width: 290px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
                 <textarea style="width: 290px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
-				
               </div>
+              
 
-			  <button type="button" onclick="getLocation()" class="btn btn-info">Click to Get Location</button>
-            
-
-
-            <p class="control"><b id="mesg"></b></p>
             <div class="updateBtn">
-			<button type="button" id="update_tech" name="update_tech" value="Update" class="btn btn-primary">Update</button>
+            <p class="control"><b id="mesg"></b></p>
+            <input type="button" id="update_tech" name="update_tech" value="Update" />
               <!-- <button type="submit" id="submit" name="update" class="btn btn-primary"> Update  </button> -->
             </div>           
 </form>
@@ -179,5 +154,4 @@ session_start();
      
      
 
-
-</body>
+    

@@ -32,7 +32,7 @@ session_start();
             <label for="">Departure Time</label>
                <div class="technician-time">
             <input readonly type="text" class="technician_departure" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>">
-            <input type="button" value="Departure">
+          
             <!-- <div class="alarm-button"><i class='bx bx-alarm' onclick="test1()"></i></div> -->
                 </div>
               </div>
@@ -40,7 +40,7 @@ session_start();
             <label for="">Arrival Time</label>
             <div class="technician-time">
             <input readonly type="text" class="technician_arrival" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>">
-             <input type="button" value="Arrival">
+            
             <!-- <div class="alarm-button"><i class='bx bx-alarm' onclick="test2()"></i></div> -->
                 </div>
               </div>
@@ -48,7 +48,7 @@ session_start();
             <label for="">Leaving Time</label>
             <div class="technician-time">
             <input readonly type="text" class="technician_leaving" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>">
-             <input type="button" value="Leaving">
+            
     
                 </div>
               </div>

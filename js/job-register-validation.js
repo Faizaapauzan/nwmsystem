@@ -31,19 +31,19 @@ function checkcustomer_code_registerlAvailability() {
 
 // check Job order number in database (job)
 
-function job_order_number_registerlAvailability() {
-  $("#loaderIcon").show();
-  jQuery.ajax({
-    url: "jobregisterindex.php",
-    data: "job_order_number=" + $("#job_order_number").val(),
-    type: "POST",
-    success: function (data) {
-      $("#job_order_number_register-availability-status").html(data);
-      $("#loaderIcon").hide();
-    },
-    error: function () {},
-  });
-}
+// function job_order_number_registerlAvailability() {
+//   $("#loaderIcon").show();
+//   jQuery.ajax({
+//     url: "jobregisterindex.php",
+//     data: "job_order_number=" + $("#job_order_number").val(),
+//     type: "POST",
+//     success: function (data) {
+//       $("#job_order_number_register-availability-status").html(data);
+//       $("#loaderIcon").hide();
+//     },
+//     error: function () {},
+//   });
+// }
 
 //check job code in database (job)
 

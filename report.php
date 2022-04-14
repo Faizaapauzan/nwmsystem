@@ -19,7 +19,6 @@ session_start();
     <!-- jQuery UI CSS -->
     <link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
 
-    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/> -->
     <!-- Script -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- jQuery Library -->

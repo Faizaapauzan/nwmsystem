@@ -1,7 +1,17 @@
 <?php session_start(); ?>
 
+<?php
+        include 'dbconnect.php';
+        if (isset($_POST['jobregister_id'])) {
+          $jobregister_id =$_POST['jobregister_id'];
+          $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
+          $query_run = mysqli_query($conn, $query);
+          if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
 
 <!DOCTYPE html>
+
 <html lang=”en”>
 
 <head>
@@ -28,7 +38,7 @@ form .upload-report .input-box {
 form .upload-report label.details {
   display: block;
   font-weight: 500;
-
+  margin-bottom: 5px;
 }
 .upload-report .input-box input,
 .upload-report .input-box select {
@@ -84,56 +94,34 @@ form .submit-date label.details {
 
 <body>
 
-<?php
-//include connection file 
-include_once("dbconnect.php");
+<form method="POST" action="servicereportdate.php">
 
-  if (isset($_POST['jobregister_id'])) {
-      $jobregister_id =$_POST['jobregister_id'];
-
-      $sql = "SELECT * FROM `servicereport` WHERE jobregister_id ='$jobregister_id'";
-      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
-  }
+    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
   
-?>
-
-<?php foreach($queryRecords as $res) :?>
-
-     <form method="POST" action="">
-
-   <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $res['jobregister_id'] ?>">
-<input type="hidden" id="servicereport_id" name="servicereport_id" value="<?php echo $res['servicereport_id'] ?>">
   
     <label for="reportdate" style="margin-left: 20px">Service Report Date:</label>
     <div class="date-form">
     <div class="submit-date" style="padding-left: 20px; padding-right: 25px;">
     <div class="input-box" style="display: flex; align-items: baseline;">
-    <input type="date" id="srvcreportdate" name="srvcreportdate" value="<?php echo $res['srvcreportdate'] ?>">
-    <form id="view_form" method="post">
-    <div class="view-report" style="display: flex; padding-left: 18px; padding-right: 25px;">
-    <button data-id='<?php echo $res['servicereport_id']; ?>' class="userinfo" style="margin-right: 1px; outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;">View</button>
-    </div>
-</form>
-    </div>
-</form>
+    <input type="date" id="srvcreportdate" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>">
+    
+  <div class="input-group-append">
+    <button class="" type="submit" value="Submit" name="submit-date">SUBMIT</button>
 
-	  <?php endforeach;?>
+</form>
+  	<form id="view_form" method="post">
+    <button class="userinfo btn btn-success" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>VIEW</button>
+</form>
+            </div>
 
-<!-- FOR VIEW SERVICE REPORT-->	
-	    <script type='text/javascript'>
+    <script type='text/javascript'>
         $(document).ready(function(){
         $('.userinfo').click(function(){
-        var servicereport_id = $(this).data('id');
+        var jobregister_id = $(this).data('id');
         $.ajax({
             url: 'servicereport.php',
             type: 'post',
-            data: {servicereport_id: servicereport_id},
+            data: {jobregister_id: jobregister_id},
             success: function(data){
             var win = window.open('servicereport.php');
             win.document.write(data);
@@ -143,42 +131,14 @@ include_once("dbconnect.php");
             });
     </script>
 
-    
-<?php
-        include 'dbconnect.php';
-        if (isset($_POST['jobregister_id'])) {
-          $jobregister_id =$_POST['jobregister_id'];
-          $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-          // $query = "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id";
-          $query_run = mysqli_query($conn, $query);
-          if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-    ?>
- 
- <!-- FOR SUBMIT SERVICE REPORT DATE -->
-
- <form method="POST" action="servicereportdate.php">
-
-    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-  
-    <label for="reportdate" style="margin-left: 20px">Service Report Date:</label>
-    <div class="date-form">
-    <div class="submit-date" style="padding-left: 20px; padding-right: 25px;">
-    <div class="input-box" style="display: flex; align-items: baseline;">
-    <input type="date" id="srvcreportdate" name="srvcreportdate">
-    <input type="submit" name="submit-date" value="Submit" style="background-color: #081d45; color: #fff; cursor: pointer;">
-    </div>
-</form>
-
     <?php
     }
   }
 }
 ?>
+</div>
 
-<!-- FOR UPLOAD SERVICE REPORT -->
-
-
+ 
 <form id="uploadreport-form" method="POST" action="uploadservicereport.php" enctype="multipart/form-data">
     
 <?php
@@ -204,18 +164,17 @@ include_once("dbconnect.php");
         }
 ?>
 
-
-
-<label for="reportdate" style="margin-left: 20px">Upload Report :</label>
+<center>
  <div class="update-form">
     <div class="upload-report">
     <div class="input-box" style="display: flex;">
     <input type="file" name="files[]" multiple>
-    <input type="submit" name="update-report" value="Update" style="background-color: #081d45; color: #fff; cursor: pointer;">
-    </div>
-    </form> 
+    <input type="submit" name="update" value="Update" style="background-color: #081d45; color: #fff; cursor: pointer;">
     </div>
 
+    </form> 
+    </div>
+</center>
 </div>
 
 <form id="view_upload" method="">
@@ -231,7 +190,7 @@ $result = mysqli_query($conn, $sql);
 <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
         <center>
-    <table class="table table-striped table-hover" style="width: 700px; align-content: center;">
+    <table class="table table-striped table-hover" style="width: 700px; margin-left: 41px;">
     <thead>
     <tr>
   
@@ -249,7 +208,7 @@ $result = mysqli_query($conn, $sql);
                   
                     <td><?php echo $row['file_name']; ?></td>
                     <td><a href="servicereport/<?php echo $row['file_name']; ?>" download>Download</td>
-                    <td><span class='deletes' data-id='<?php echo $row["servicereport_id"]; ?>'>Delete</span></td>
+                    <td><span class='deletes' data-id='<?php echo $row["id"]; ?>'>Delete</span></td>
                 </tr>
                 <?php } ?>
                 </tbody>
@@ -274,7 +233,7 @@ $result = mysqli_query($conn, $sql);
       $.ajax({
         url: 'servicereportdelete.php',
         type: 'POST',
-        data: { servicereport_id:deletesid },
+        data: { id:deletesid },
         success: function(response){
 
           if(response == 1){
