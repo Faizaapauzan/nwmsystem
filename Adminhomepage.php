@@ -29,23 +29,20 @@ if(!isset($_SESSION['username']))
  <meta name="keywords" content="" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NWM Admin</title>
+    <title>NWM Admin Page</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <link href="css/layout.css"rel="stylesheet" />
     <link href="css/admin.css"rel="stylesheet" />
+    <link href="css/adminhomepage.css"rel="stylesheet" />
     <link href="css/adminboard.css"rel="stylesheet" />
        <link href="css/adminhomepage.css"rel="stylesheet" />
     <!-- <link href="tab.css"rel="stylesheet" /> -->
 
-  <!-- Script -->
+    <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script> -->
     
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -54,7 +51,6 @@ if(!isset($_SESSION['username']))
 
 
 </head>
-
  <body>
 
     <!--Home navigation-->
@@ -200,7 +196,7 @@ if(!isset($_SESSION['username']))
         <?php
         include 'dbconnect.php';
 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, customer_grade, accessories_required, job_status FROM job_register WHERE
+        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, accessories_required, job_status FROM job_register WHERE
                 (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                 OR
                 accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
@@ -219,7 +215,7 @@ if(!isset($_SESSION['username']))
         <strong align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
-        <li><?php echo $row['customer_grade']?></li>
+        <li><?php echo $row['machine_type']?></li>
         <li><?php echo $row['job_description']?></li>
         <li><b><?php echo $row['accessories_required']?></b> accessories required</li>
         <li><?php echo $row['job_status']?></li>
@@ -238,16 +234,22 @@ if(!isset($_SESSION['username']))
         <?php
         include 'dbconnect.php';
                                 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, customer_grade, accessories_required, job_status FROM job_register WHERE
-                (accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
+       $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, accessories_required, job_status FROM job_register WHERE
+                (accessories_required = 'Yes' AND job_status = ''
                 OR
-                job_assign = 'Storekeeper' AND job_status = ''
+                job_assign = 'Nuraein' AND job_status = ''
+                OR
+                job_assign = 'Sau Hwe' AND job_status = ''
                 OR
                 accessories_required = 'Yes' AND job_status = 'Not Ready'
                 OR
-                job_assign = 'Storekeeper' AND job_status = 'Not Ready'
+                job_assign = 'Nuraein' AND job_status = 'Not Ready'
                 OR
-                job_assign = 'Storekeeper' AND job_status = 'Incomplete')
+                job_assign = 'Sau Hwe' AND job_status = 'Not Ready'
+                OR
+                job_assign = 'Nuraein' AND job_status = 'Incomplete'
+                OR
+                job_assign = 'Sau Hwe' AND job_status = 'Incomplete')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
         while($row = $results->fetch_assoc()) {
@@ -259,7 +261,7 @@ if(!isset($_SESSION['username']))
         <strong align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
-        <li><?php echo $row['customer_grade']?></li>
+        <li><?php echo $row['machine_type']?></li>
         <li><?php echo $row['job_description']?></li>
         <li><?php echo $row['job_status']?></li>
         </ul>
@@ -384,8 +386,8 @@ if(!isset($_SESSION['username']))
         <?php
         include 'dbconnect.php';
                                 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, customer_grade, job_status FROM job_register WHERE
-                (job_assign = 'Boon' AND job_status = '' AND job_cancel = ''
+        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                (job_assign = 'Boon' AND job_status = ''
                 OR
                 job_assign = 'Boon' AND job_status = 'Doing'
                 OR
@@ -403,7 +405,7 @@ if(!isset($_SESSION['username']))
         <strong align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
-        <li><?php echo $row['customer_grade']?></li>
+        <li><?php echo $row['machine_type']?></li>
         <li><?php echo $row['job_description']?></li>
         <li><?php echo $row['job_status']?></li>
         </ul>
@@ -541,10 +543,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingBoon" id="tabDoingBoon5">
-        <label for="tabDoingBoon5" class="tabHeadingBoon"> Media </label>
+        <label for="tabDoingBoon5" class="tabHeadingBoon"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="boonajaxtechphtoupdt.php" method="post">
         <div class="boon-photos">
 
         </div></form></div>
@@ -556,7 +558,7 @@ if(!isset($_SESSION['username']))
         var jobregister_id = $(this).data('id');
         // AJAX request
         $.ajax({
-        url: 'ajaxtechphtoupdt.php',
+        url: 'boonajaxtechphtoupdt.php',
         type: 'post',
         data: { jobregister_id: jobregister_id },
         success: function (response) {
@@ -616,8 +618,8 @@ if(!isset($_SESSION['username']))
         <?php
         include 'dbconnect.php';
                                 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, customer_grade, job_status FROM job_register WHERE
-                (job_assign = 'Hafiz' AND job_status = '' AND job_cancel = ''
+        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                (job_assign = 'Hafiz' AND job_status = ''
                 OR
                 job_assign = 'Hafiz' AND job_status = 'Doing'
                 OR
@@ -635,7 +637,7 @@ if(!isset($_SESSION['username']))
         <strong align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
-        <li><?php echo $row['customer_grade']?></li>
+        <li><?php echo $row['machine_type']?></li>
         <li><?php echo $row['job_description']?></li>
         <li><?php echo $row['job_status']?></li>
         </ul>
@@ -785,10 +787,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz5">
-        <label for="tabDoingHafiz5" class="tabHeadingHafiz">Media</label>
+        <label for="tabDoingHafiz5" class="tabHeadingHafiz">Photo</label>
         <div class="tab" id="HafizJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="hafizajaxtechphtoupdt.php" method="post">
         <div class="hafiz-photo">
 
         </div></form></div>
@@ -802,7 +804,7 @@ if(!isset($_SESSION['username']))
             // AJAX request
 
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'hafizajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -865,9 +867,9 @@ if(!isset($_SESSION['username']))
                     include 'dbconnect.php';
                                 
                     $results = $conn->query("SELECT
-                    jobregister_id, job_order_number, job_priority, job_description, customer_name, customer_grade, job_status
+                    jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status
                     FROM job_register WHERE
-                    (job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
+                    (job_assign = 'Hamir' AND job_status = ''
                     OR
                     job_assign = 'Hamir' AND job_status = 'Doing'
                     OR
@@ -885,7 +887,7 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
+                <li><?php echo $row['machine_type']?></li>
                 <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
@@ -1032,10 +1034,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir5">
-        <label for="tabDoingHamir5" class="tabHeadingHamir">Media</label>
+        <label for="tabDoingHamir5" class="tabHeadingHamir">Photo</label>
         <div class="tab" id="HamirJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="hamirajaxtechphtoupdt.php" method="post">
         <div class="hamir-photo">
 
         </div></form></div>
@@ -1046,7 +1048,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'hamirajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1106,8 +1108,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                (job_assign = 'Hwa' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                (job_assign = 'Hwa' AND job_status = ''
                 OR
                 job_assign = 'Hwa' AND job_status = 'Doing'
                 OR
@@ -1125,8 +1127,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -1270,10 +1272,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa5">
-        <label for="tabDoingHwa5" class="tabHeadingHwa">Media</label>
+        <label for="tabDoingHwa5" class="tabHeadingHwa">Photo</label>
         <div class="tab" id="HwaJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="hwaajaxtechphtoupdt.php" method="post">
         <div class="hwa-photos">
 
         </div></form></div>
@@ -1284,7 +1286,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'hwaajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1337,19 +1339,19 @@ if(!isset($_SESSION['username']))
             <!-- ISK -->
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic">Isk</div>
+                <div class="box_topic">Iskandar</div>
                             
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_assign = 'Isk' AND job_status = '' AND job_cancel = ''
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                        (job_assign = 'Iskandar' AND job_status = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Doing'
+                        job_assign = 'Iskandar' AND job_status = 'Doing'
                         OR
-                        job_assign = 'Isk' AND job_status = 'Ready'
+                        job_assign = 'Iskandar' AND job_status = 'Ready'
                         OR
-                        job_assign = 'Isk' AND job_status = 'Incomplete')
+                        job_assign = 'Iskandar' AND job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
                         while($row = $results->fetch_assoc()) {
@@ -1361,8 +1363,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -1505,7 +1507,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIsk5" class="tabHeadingIsk">Update</label>
         <div class="tab" id="IskJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="iskajaxtechphtoupdt.php" method="post">
         <div class="isk-photos">
 
         </div></form></div>
@@ -1516,7 +1518,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'iskajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1575,8 +1577,8 @@ if(!isset($_SESSION['username']))
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_assign = 'John' AND job_status = '' AND job_cancel = ''
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                        (job_assign = 'John' AND job_status = ''
                         OR
                         job_assign = 'John' AND job_status = 'Doing'
                         OR
@@ -1594,8 +1596,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -1737,10 +1739,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn5">
-        <label for="tabDoingJohn5" class="tabHeadingJohn">Media</label>
+        <label for="tabDoingJohn5" class="tabHeadingJohn">Photo</label>
         <div class="tab" id=JohnJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="johnajaxtechphtoupdt.php" method="post">
         <div class="john-photos">
 
         </div></form></div>
@@ -1752,7 +1754,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'johnajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1811,8 +1813,8 @@ if(!isset($_SESSION['username']))
                             
             <?php
                 include 'dbconnect.php';                
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_assign = 'Jun Jie' AND job_status = '' AND job_cancel = ''
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                        (job_assign = 'Jun Jie' AND job_status = ''
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Doing'
                         OR
@@ -1830,8 +1832,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -1973,10 +1975,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie5">
-        <label for="tabDoingJunJie5" class="tabHeadingJunJie">Media</label>
+        <label for="tabDoingJunJie5" class="tabHeadingJunJie">Photo</label>
         <div class="tab" id=JunJieJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="junjieajaxtechphtoupdt.php" method="post">
         <div class="junjie-photos">
 
         </div></form></div>
@@ -1988,7 +1990,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'junjieajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2046,14 +2048,14 @@ if(!isset($_SESSION['username']))
                             
                 <?php
                     include 'dbconnect.php';
-                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                            (job_assign = 'Will' AND job_status = '' AND job_cancel = ''
+                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                            (job_assign = 'Razwill' AND job_status = ''
                             OR
-                            job_assign = 'Will' AND job_status = 'Doing'
+                            job_assign = 'Razwill' AND job_status = 'Doing'
                             OR
-                            job_assign = 'Will' AND job_status = 'Ready'
+                            job_assign = 'Razwill' AND job_status = 'Ready'
                             OR
-                            job_assign = 'Will' AND job_status = 'Incomplete')
+                            job_assign = 'Razwill' AND job_status = 'Incomplete')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
                     while($row = $results->fetch_assoc()) {
@@ -2065,8 +2067,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -2208,10 +2210,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill5">
-        <label for="tabDoingRazwill5" class="tabHeadingRazwill">Media</label>
+        <label for="tabDoingRazwill5" class="tabHeadingRazwill">Photo</label>
         <div class="tab" id="RazwillJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="razwillajaxtechphtoupdt.php" method="post">
         <div class="razwill-photos">
 
         </div></form></div>
@@ -2223,7 +2225,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'razwillajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2281,8 +2283,8 @@ if(!isset($_SESSION['username']))
                             
                 <?php
                     include 'dbconnect.php';
-                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                            (job_assign = 'Sahele' AND job_status = '' AND job_cancel = ''
+                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                            (job_assign = 'Sahele' AND job_status = ''
                             OR
                             job_assign = 'Sahele' AND job_status = 'Doing'
                             OR
@@ -2300,8 +2302,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -2443,10 +2445,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSahele" id="tabDoingSahele5">
-        <label for="tabDoingSahele5" class="tabHeadingSahele">Media</label>
+        <label for="tabDoingSahele5" class="tabHeadingSahele">Photo</label>
         <div class="tab" id="SaheleJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="saheleajaxtechphtoupdt.php" method="post">
         <div class="sahele-photos">
 
         </div></form></div>
@@ -2457,7 +2459,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'saheleajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2515,8 +2517,8 @@ if(!isset($_SESSION['username']))
                             
                 <?php
                  include 'dbconnect.php';
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_assign = 'Sazaly' AND job_status = '' AND job_cancel = ''
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                        (job_assign = 'Sazaly' AND job_status = ''
                         OR
                         job_assign = 'Sazaly' AND job_status = 'Doing'
                          OR
@@ -2534,8 +2536,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -2677,10 +2679,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly5">
-        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Media</label>
+        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Photo</label>
         <div class="tab" id="SazalyJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="sazalyajaxtechphtoupdt.php" method="post">
         <div class="sazaly-photos">
 
         </div></form></div>
@@ -2691,7 +2693,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'sazalyajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2749,8 +2751,8 @@ if(!isset($_SESSION['username']))
                             
             <?php
             include 'dbconnect.php';
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Faizan' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Faizan' AND job_status = ''
                     OR
                     job_assign = 'Faizan' AND job_status = 'Doing'
                     OR
@@ -2768,8 +2770,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -2910,10 +2912,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan5">
-        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Media</label>
+        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Photo</label>
         <div class="tab" id="FaizanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="faizanajaxtechphtoupdt.php" method="post">
         <div class="faizan-photos">
 
         </div></form></div>
@@ -2924,7 +2926,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'faizanajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2983,8 +2985,8 @@ if(!isset($_SESSION['username']))
                             
             <?php
             include 'dbconnect.php';
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Fauzin' AND job_status = ''
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Doing'
                     OR
@@ -3002,8 +3004,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -3146,7 +3148,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin5">
-        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Media</label>
+        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Photo</label>
         <div class="tab" id="FauzinJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3219,8 +3221,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Izaan' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Izaan' AND job_status = ''
                     OR
                     job_assign = 'Izaan' AND job_status = 'Doing'
                     OR
@@ -3238,8 +3240,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -3381,7 +3383,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan5">
-        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Media</label>
+        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Photo</label>
         <div class="tab" id="IzaanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
         <form action="izaanajaxtechphtoupdt.php" method="post">
@@ -3455,8 +3457,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Salam' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Salam' AND job_status = ''
                     OR
                     job_assign = 'Salam' AND job_status = 'Doing'
                     OR
@@ -3474,8 +3476,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -3617,10 +3619,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam5">
-        <label for="tabDoingSalam5" class="tabHeadingSalam">Media</label>
+        <label for="tabDoingSalam5" class="tabHeadingSalam">Photo</label>
         <div class="tab" id="SalamJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="salamajaxtechphtoupdt.php" method="post">
         <div class="salam-photos">
 
         </div></form></div>
@@ -3632,7 +3634,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'salamajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3692,8 +3694,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Teck' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Teck' AND job_status = ''
                     OR
                     job_assign = 'Teck' AND job_status = 'Doing'
                     OR
@@ -3711,8 +3713,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
             </div>
@@ -3855,10 +3857,10 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingTeck" id="tabDoingTeck5">
-        <label for="tabDoingTeck5" class="tabHeadingTeck">Media</label>
+        <label for="tabDoingTeck5" class="tabHeadingTeck">Photo</label>
         <div class="tab" id="TeckJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="teckajaxtechphtoupdt.php" method="post">
         <div class="teck-photos">
 
         </div></form></div>
@@ -3870,7 +3872,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'teckajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3930,8 +3932,8 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                    (job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    (job_assign = 'Aizat' AND job_status = ''
                     OR
                     job_assign = 'Aizat' AND job_status = 'Doing'
                     OR
@@ -3949,8 +3951,8 @@ if(!isset($_SESSION['username']))
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['customer_grade']?></li>
-            <li><?php echo $row['job_name']?></li>
+            <li><?php echo $row['machine_type']?></li>
+            <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
 
@@ -4089,10 +4091,10 @@ if(!isset($_SESSION['username']))
 
 <!--Double click Photo-->
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat5">
-        <label for="tabDoingAizat5" class="tabHeadingAizat"> Media </label>
+        <label for="tabDoingAizat5" class="tabHeadingAizat"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="aizatajaxtechphtoupdt.php" method="post">
         <div class="Aizat-photo-details">
 
         </div></form></div>
@@ -4104,7 +4106,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'aizatajaxtechphtoupdt.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) { 
@@ -4162,8 +4164,8 @@ if(!isset($_SESSION['username']))
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
-                        (job_status = 'Pending' AND job_cancel = '')
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, job_status FROM job_register WHERE
+                        (job_status = 'Pending')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
                 while($row = $results->fetch_assoc()) {
@@ -4175,8 +4177,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -4318,7 +4320,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingPending" id="tabDoingPending5">
-        <label for="tabDoingPending5" class="tabHeadingPending">Media</label>
+        <label for="tabDoingPending5" class="tabHeadingPending">Photo</label>
         <div class="tab" id="PendingJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4391,7 +4393,7 @@ if(!isset($_SESSION['username']))
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
                         (job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
@@ -4404,8 +4406,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -4547,7 +4549,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete5">
-        <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Media</label>
+        <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Photo</label>
         <div class="tab" id="IncompleteJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4621,7 +4623,7 @@ if(!isset($_SESSION['username']))
                 <?php
                 include 'dbconnect.php';
                             
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status FROM job_register WHERE
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
                         (job_status = 'Completed')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
@@ -4634,8 +4636,8 @@ if(!isset($_SESSION['username']))
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
+                <li><?php echo $row['machine_type']?></li>
+                <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
                 </div>
@@ -4776,7 +4778,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted5">
-        <label for="tabDoingCompleted5" class="tabHeadingComplete">Media</label>
+        <label for="tabDoingCompleted5" class="tabHeadingComplete">Photo</label>
         <div class="tabC" id="completedJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4917,6 +4919,8 @@ $(document).ready(function() {
             });
         });
     </script>
+
+    
 
 <script>
 let btn = document.querySelector("#btn");

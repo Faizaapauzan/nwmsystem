@@ -76,7 +76,7 @@
 
 								<?php foreach($queryRecords as $res) :?>
 								<tr data-row-id="<?php echo $res['id'];?>">
-								<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"/></td>
+								<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"><a href="image/<?php echo $res['file_name']; ?>" style="text-align:center;" download>Download</td>
 								<td oldVal ="<?php echo $res['description'];?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 9px;">
 								<option value='' <?php if ($res['description'] == '') { echo "SELECTED"; } ?>></option>
 								<option value="Machine (Before Service)" <?php if ($res['description'] == "Machine (Before Service)") { echo "SELECTED";} ?>>Machine (Before Service)</option>
@@ -84,11 +84,9 @@
 								<option value="Accessories (New)" <?php if ($res['description'] == "Accessories (New)") { echo "SELECTED"; } ?>>Accessories (New)</option>
 								<option value="Machine (After Service)" <?php if ($res['description'] == "Machine (After Service)") { echo "SELECTED"; } ?>>Machine (After Service)</option>
 								</select></td>
-                
-									<td><a href="image/<?php echo $res['file_name']; ?>" download>Download</td>
-									<td><span class='deleted' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
 
-                  
+								<td><span class='deleted' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+
 								</tr>
 								<?php endforeach;?>
 
@@ -99,9 +97,8 @@
                     </div>
 								<br>
 								<a href="javascript:void(0);" class="add_photo" title="Add photo" type="button">Click Here to Insert Photo</a>
-								<br><br>  
-
-                
+								<br><br>
+                              
                 <br><div class="btn-box">
 <button type="submit" name="update" value="update">Update</button>
 </form></div>
@@ -252,7 +249,7 @@ $(document).ready(function(){
  ?>
 
 <div>
-<input type="file" class="tech_photo" oninput="pic.src=window.URL.createObjectURL(this.files[0])" name="files[]" multiple><br>
+<input type="file" class="tech_photo" onchange="pic.src=window.URL.createObjectURL(this.files[0])" name="files[]" multiple><br>
 <img id="pic" width="150px" height="120px"/><br>
 <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 16px;" name='description[]'>
 <option value='' name="description[]"></option>

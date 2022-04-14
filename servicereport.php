@@ -282,15 +282,6 @@ footer p {
 }
 
 
-
-  #display_photo{
-        width: 330px;
-        height: 250px;
-        border: 1px solid black;
-        background-position: center;
-
-        }
-
     </style>
 
 <body>
