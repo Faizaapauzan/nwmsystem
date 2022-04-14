@@ -1396,7 +1396,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingBoon6" class="tabHeadingBoon"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="boon-report">
 
         </div></form></div>
@@ -1407,7 +1407,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -1632,7 +1632,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHafiz6" class="tabHeadingHafiz"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="hafiz-report">
 
         </div></form></div>
@@ -1643,7 +1643,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -1879,7 +1879,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHamir6" class="tabHeadingHamir"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="hamir-report">
 
         </div></form></div>
@@ -1890,7 +1890,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -2116,7 +2116,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHwa6" class="tabHeadingHwa"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="hwa-report">
 
         </div></form></div>
@@ -2127,7 +2127,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -2350,7 +2350,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIsk6" class="tabHeadingIsk"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="isk-report">
 
         </div></form></div>
@@ -2361,7 +2361,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -2583,7 +2583,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJohn6" class="tabHeadingJohn"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="john-report">
 
         </div></form></div>
@@ -2594,7 +2594,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -2816,7 +2816,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJunJie6" class="tabHeadingJunJie"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="junjie-report">
 
         </div></form></div>
@@ -2827,7 +2827,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3047,7 +3047,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingRazwill6" class="tabHeadingRazwill"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="razwill-report">
 
         </div></form></div>
@@ -3058,7 +3058,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3278,7 +3278,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSahele6" class="tabHeadingSahele"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="sahele-report">
 
         </div></form></div>
@@ -3289,7 +3289,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3512,7 +3512,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSazaly6" class="tabHeadingSazaly"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="sazaly-report">
 
         </div></form></div>
@@ -3523,7 +3523,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3744,7 +3744,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFaizan6" class="tabHeadingFaizan"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="faizan-report">
 
         </div></form></div>
@@ -3755,7 +3755,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -3978,7 +3978,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFauzin6" class="tabHeadingFauzin"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="fauzin-report">
 
         </div></form></div>
@@ -3989,7 +3989,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4211,7 +4211,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIzaan6" class="tabHeadingIzaan"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="izaan-report">
 
         </div></form></div>
@@ -4222,7 +4222,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4444,7 +4444,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSalam6" class="tabHeadingSalam"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="salam-report">
 
         </div></form></div>
@@ -4455,7 +4455,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4680,7 +4680,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingTeck6" class="tabHeadingTeck"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="teck-report">
 
         </div></form></div>
@@ -4691,7 +4691,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -4911,7 +4911,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingAizat6" class="tabHeadingAizat"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="aizat-report">
 
         </div></form></div>
@@ -4922,7 +4922,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -5138,7 +5138,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingPending6" class="tabHeadingPending"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="pending-report">
 
         </div></form></div>
@@ -5149,7 +5149,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -5367,7 +5367,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIncomplete6" class="tabHeadingIncomplete"> Report </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="incomplete-report">
 
         </div></form></div>
@@ -5378,7 +5378,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -5595,7 +5595,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingCompleted6" class="tabHeadingComplete"> Report </label>
         <div class="tabC">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
+        <form action="ajaxreportadmin.php" method="post">
         <div class="completed-report">
 
         </div></form></div>
@@ -5606,7 +5606,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxreport.php',
+            url: 'ajaxreportadmin.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {

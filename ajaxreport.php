@@ -50,7 +50,7 @@ include_once("dbconnect.php");
     <input type="hidden" id="servicereport_id" name="servicereport_id" value="<?php echo $res['servicereport_id'] ?>">
  
  
-	<label for="reportdate">Service Report Date:</label>
+	<label for="reportdate">View Report</label>
   <div class="input-group">
   <input type="date" class="form-control" id="srvcreportdate" name="srvcreportdate" value="<?php echo $res['srvcreportdate'] ?>">
   
@@ -66,7 +66,6 @@ include_once("dbconnect.php");
   </div>
 
 	  <?php endforeach;?>
-  
 
 
 <!-- FOR VIEW SERVICE REPORT-->	

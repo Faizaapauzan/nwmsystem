@@ -52,15 +52,18 @@
  <?php }  } } ?>
 
  <!-- for select data from tech photo update database -->
- <?php include_once("dbconnect.php");
 
-  if (isset($_POST['jobregister_id'])) {
-      $jobregister_id =$_POST['jobregister_id'];
+    <?php include_once("dbconnect.php");
 
-      $sql = "SELECT * FROM `technician_photoupdate` WHERE  jobregister_id ='$jobregister_id'";
-      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
+        if (isset($_POST['jobregister_id'])) {
+            $jobregister_id =$_POST['jobregister_id'];
+            $query = ("SELECT * FROM `technician_photoupdate` WHERE  jobregister_id ='$jobregister_id'");
+            $query_run = mysqli_query($conn, $query);
+            if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
 
-  } ?>
+ 
  
                         <!-- Responsive table -->
                         <div class="table-responsive">
@@ -74,7 +77,7 @@
                                 </thead>
                                 <tbody>
 
-								<?php foreach($queryRecords as $res) :?>
+								<?php foreach($query_run as $res) :?>
 								<tr data-row-id="<?php echo $res['id'];?>">
 								<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"/></td>
 								<td oldVal ="<?php echo $res['description'];?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 9px;">
@@ -97,50 +100,39 @@
                             </table>
                         </div>
                     </div>
-								<br>
-								<a href="javascript:void(0);" class="add_photo" title="Add photo" type="button">Click Here to Insert Photo</a>
-								<br><br>
-                
+								
                 <br><div class="btn-box">
+                     <button class="photoinfo btn btn-success" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>Print</button>
+                      <br/><br/>            
+    <?php } } ?>
+    <?php } ?>
+
+<a href="javascript:void(0);" class="add_photo" title="Add photo" type="button">Click Here to Insert Photo</a>                             
+<br>
 <button type="submit" name="update" value="update">Update</button>
 </form></div>
 
-                
-                <br><div class="btn-box">
-<button type="submit" name="update" value="update">Update</button>
-</form></div>
+<!-- FOR PRINT PHOTO REPORT -->
 
-<script>
-  $(document).ready(function(){
- // Delete 
- $('.updated').click(function(){
-   var el = this;
-   // Delete id
-   var updatedid = $(this).data('id');
-   var confirmalert = confirm("Are you sure?");
-   if (confirmalert == true) {
-      // AJAX Request
-      $.ajax({
-        url: 'techphoto_update.php',
-        type: 'POST',
-        data: { id:updatedid },
-        success: function(response){
+	    <script type='text/javascript'>
+        $(document).ready(function(){
+        $('.photoinfo').click(function(){
+        var jobregister_id = $(this).data('id');
+        $.ajax({
+            url: 'printreport.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(data){
+            var win = window.open('printreport.php');
+            win.document.write(data);
+                        }
+                    });
+                });
+            });
+    </script>
 
-          if(response == 1){
-	   
-          }else{
-	    alert('Invalid ID.');
-          }
 
-        }
-      });
-   }
-
- });
-
-});
-
-</script>
+<!-- FOR DELETE PHOTO -->
 
 <script>
   $(document).ready(function(){
@@ -212,7 +204,7 @@ $(document).ready(function(){
 
 </script>
 
-   <!--Accessories add-->
+   <!--PHOTO add-->
   <script type="text/javascript">
 
 		$(document).ready(function () {

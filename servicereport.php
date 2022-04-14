@@ -376,7 +376,12 @@ textarea {
     </div>
     <!-- <div class="sign3"><p>Date and Time:</p></div> -->
     </form>
+<<<<<<< HEAD
    
+=======
+
+
+>>>>>>> 8bda4e6a56e732e80ecee766e8c6db8a108ec868
     <?php
         }
     }
@@ -384,6 +389,11 @@ textarea {
 
               <?php
             } ?>
+<<<<<<< HEAD
  
+=======
+
+          
+>>>>>>> 8bda4e6a56e732e80ecee766e8c6db8a108ec868
 </body>
 </html>

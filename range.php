@@ -56,7 +56,6 @@
             <button class="btn btn-success" id='btnEdit'><a href="servicereport/<?php echo $fetch['file_name']; ?>" download style="color: #ffffff;">Print</button>
             </div>
         </td>
-		
 	</tr>
   
 
@@ -119,7 +118,7 @@
             var jobregister_id = $(this).data('id');                  
             // AJAX request
             $.ajax({
-            url: 'ajaxtechphtoupdt.php',
+            url: 'ajaxphotoreport.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) {
@@ -134,22 +133,5 @@
         </script>
 
      
-        
-<script type='text/javascript'>
-    $(document).ready(function(){
-    $('.userinfo').click(function(){
-    var jobregister_id = $(this).data('id');
-       
-       $.ajax({
-            url: 'servicereportpage.php?id="',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(data){
-            var win = window.open('servicereportpage.php?id="');
-            win.document.write(data);
-                        }
-                    });
-                });
-            });
-            </script>
+ 
 
