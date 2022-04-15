@@ -119,6 +119,13 @@ if(!isset($_SESSION['username']))
                 </a>
             </li>
 
+                <li>
+                <a href="jobcompleted.php">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="link_name">Completed Job</span>
+                </a>
+            </li>
+
             <li>
                 <a href="jobcanceled.php">
                     <i class="fa fa-minus-square"></i>
@@ -150,6 +157,7 @@ if(!isset($_SESSION['username']))
                 <a href="Adminhomepage.php">
                     <span class="dashboard">Home</span>
                 </a>
+   
             </div>
 
             <div class="notification-button">
@@ -4614,236 +4622,7 @@ if(!isset($_SESSION['username']))
 
                 <!-- END OF INCOMPLETE -->
 
-                <!-- COMPLETED -->
-                <div class="overview-boxes" >
-                <div class="box" id="myModal">
-                <div class="left-side">
-                <div class="box_topic">Completed</div>
-                        
-                <?php
-                include 'dbconnect.php';
-                            
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
-                        (job_status = 'Completed')
-                        ORDER BY jobregisterlastmodify_at
-                        DESC LIMIT 50");
-                while($row = $results->fetch_assoc()) {
-                ?>
-                        
-                <div class="completed" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-completed"  ondblclick="document.getElementById('doubleClick-completed').style.display='block'">
-                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
-                <li><?php echo $row['job_priority']?></li>
-                <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['machine_type']?></li>
-                <li><?php echo $row['job_description']?></li>
-                <li><?php echo $row['job_status']?></li>
-                </ul>
-                </div>
-                <?php } ?>
-                </div>
-                </div>
-                </div>
-                </div>
-
-            <!--Double click Completed -->
-    <div id="doubleClick-completed" class="modal">
-    <div class="tabCompleted" >
-
-                <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted" checked="checked">
-                <label for="tabDoingCompleted" class="tabHeadingComplete"> Job Info </label>
-                <div class="tabC" id="completedJobInfoTab">
-                <div class="contentCompletedJobInfo">
-                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-                <form action="ajaxjobcompleted.php" method="post">
-                <div class="completed-details">
-               
-                </div></form></div></div>
-
-                <script type='text/javascript'>
-                    $(document).ready(function() {
-                    $('.completed').click(function() {
-                    var jobregister_id = $(this).data('id');
-                    // AJAX request
-                    $.ajax({
-                    url: 'ajaxjobcompleted.php',
-                    type: 'post',
-                     data: {jobregister_id: jobregister_id},
-                    success: function(response) {
-                
-                    // Add response in Modal body
-                    $('.completed-details').html(response);
-                    // Display Modal
-                    $('#doubleClick-completed').modal('show');
-                  }
-                     });
-                          });
-                            });
-                </script>
-
-        <!--Double click Update-->
-        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted2">
-        <label for="tabDoingCompleted2" class="tabHeadingComplete">Update</label>
-        <div class="tabC" id="completedJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="" method="post">
-        <div class="completed-update">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('.completed').click(function () {
-            var jobregister_id = $(this).data('id');
-
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechupdatecomplete.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.completed-update').html(response);
-            // Display Modal
-            $('#doubleClick-completed').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Remarks-->
-        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted3">
-        <label for="tabDoingCompleted3" class="tabHeadingComplete">Remarks</label>
-        <div class="tabC" id="completedJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="" method="post">
-        <div class="completed-remark">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('.completed').click(function () {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxremarkscomplete.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.completed-remark').html(response);
-            // Display Modal
-            $('#doubleClick-completed').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Accessories -->
-        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted4">
-        <label for="tabDoingCompleted4" class="tabHeadingComplete">Accessories</label>
-        <div class="tabC" id="completedJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="ajaxtabaccessories.php" method="post">
-        <div class="completed-accessories">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('.completed').click(function () {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtabaccessoriescomplete.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.completed-accessories').html(response);
-            // Display Modal
-            $('#doubleClick-completed').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Photo-->
-        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted5">
-        <label for="tabDoingCompleted5" class="tabHeadingComplete">Photo</label>
-        <div class="tabC" id="completedJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="completed-photos">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('.completed').click(function () {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechphtoupdtcomplete.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.completed-photos').html(response);
-            // Display Modal
-            $('#doubleClick-completed').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-                        <!--Double click Report-->
-        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted6">
-        <label for="tabDoingCompleted6" class="tabHeadingComplete"> Report </label>
-        <div class="tabC">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
-        <div class="completed-report">
-
-        </div></form></div>
-
-        
-        <!-- div for doubleclick and tabs -->
-        </div></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.completed').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreportadmin.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.completed-report').html(response);
-            // Display Modal
-            $('#doubleClick-completed').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
-</section>
-
-<!-- END OF COMPLETED -->
+          
         
 <!--Double click Job Info (Job Listing) -->
 <div id="doubleClick-1" class="modal">

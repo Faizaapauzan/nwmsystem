@@ -128,6 +128,13 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
                 </a>
             </li>
 
+                        <li>
+                <a href="jobcompleted.php">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="link_name">Completed Job</span>
+                </a>
+            </li>
+
             <li>
                 <a href="jobcanceled.php">
                     <i class="fa fa-minus-square"></i>

@@ -104,6 +104,13 @@ include 'dbconnect.php';
                 </a>
             </li>
 
+                        <li>
+                <a href="jobcompleted.php">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="link_name">Completed Job</span>
+                </a>
+            </li>
+
             <li>
                 <a href="jobcanceled.php">
                     <i class="fa fa-minus-square"></i>
@@ -178,10 +185,10 @@ include 'dbconnect.php';
                                 <input type="text" id="address1" name="cust_address1" placeholder="Enter Address 1" required>
                             </div>
                              <div class="input-box">
-                                <input type="text" id="address2" name="cust_address2" placeholder="Address 2" required>
+                                <input type="text" id="address2" name="cust_address2" placeholder="Address 2">
                             </div>
                              <div class="input-box">
-                                <input type="text" id="address3" name="cust_address3" placeholder="Address 3" required>
+                                <input type="text" id="address3" name="cust_address3" placeholder="Address 3">
                             </div>
                             <div class="input-box">
                                 <label for="customerGrade" class="details">Customer Grade</label>
@@ -197,7 +204,7 @@ include 'dbconnect.php';
                             </div>
                              <div class="input-box">
                                 <label for="customerPhone" class="details">Phone 2</label>
-                                <input type="text" id="phone1" name="cust_phone1" placeholder="Enter Customer Phone" required>
+                                <input type="text" id="phone1" name="cust_phone1" placeholder="Enter Customer Phone">
                             </div>
                              <input type="hidden" name="customercreated_by" id="customercreatedby" value="<?php echo $_SESSION["username"] ?>" readonly>
                             <input type="hidden" name="customerlasmodify_by" id="customerlasmodifyby" value="<?php echo $_SESSION["username"] ?>" readonly>
@@ -261,7 +268,7 @@ include 'dbconnect.php';
                             </div>
                             <div class="input-box">
                                 <label for="JobDescription" class="details">Job Description</label>
-                                <input type="text" id="JobDescription" name="job_description" placeholder="Enter Job Description" required>
+                                <input type="text" id="JobDescription" name="job_description" placeholder="Enter Job Description">
                             </div>
 
                             <?php if (isset($_SESSION["username"])) ?>
@@ -314,8 +321,8 @@ include 'dbconnect.php';
                         <div class="listAddForm-details">
                             <div class="input-box">
                                 <label for="MachineCode" class="details">Machine Code</label>
-                                <input type="text" id="machineCode" name="machine_code" onkeyup="checkMachineCodelAvailability()" value="" class="form-control" placeholder="Enter Machine Code" required> 
-                                <span id="machine_code-availability-status"></span>
+                                <input type="text" id="machineCode" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required> 
+                               
                             </div>
                             <div class="input-box">
                                 <label for="MachineName" class="details">Machine Name</label>
@@ -339,7 +346,7 @@ include 'dbconnect.php';
                             </div>
                              <div class="input-box">
                                 <label for="PurchaseDate" class="details">Purchase Date</label>
-                                <input type="date" id="PurchaseDate" name="purchase_date" placeholder="Enter Machine Purchase Date" required>
+                                <input type="date" id="PurchaseDate" name="purchase_date" placeholder="Enter Machine Purchase Date">
                             </div>
                             <div class="input-box">
                                 <label for="MachineDescription" class="details">Machine Description</label>

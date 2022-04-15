@@ -1,5 +1,4 @@
-
-       table {
+table {
   border-collapse: collapse;
   box-shadow: 0 5px 10px rgb(37, 19, 19);
   background-color: #fff;
@@ -8,7 +7,6 @@
   width: 100%;
   display: fixed;
   justify-content: center;
-
 }
 
 thead {
@@ -23,15 +21,13 @@ th {
   letter-spacing: 0.1rem;
   text-align: center;
   height: 50px;
-  
 }
 
 td {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
   padding-bottom: 10px;
-
 }
 
 /*td:nth-child(5){
@@ -53,10 +49,8 @@ tr:nth-child(even) {
   background-color: rgba(221, 219, 219, 0.671);
 }
 
-
 .machineList {
   padding-top: 1%;
-
 }
 
 .machineList h1 {
@@ -66,133 +60,365 @@ tr:nth-child(even) {
   font-family: cursive;
   font-weight: 100;
 }
-        .machineList {
-            padding-top: 1%;
-        }
+.machineList {
+  padding-top: 1%;
+}
 
-        .machineList h1 {
-            padding-bottom: 10px;
-            padding-left: 1%;
-            font-size: 30px;
-            font-family: cursive;
-            font-weight: 100;
-        }
+.machineList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}
 
+.MachinePopup .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
 
-        .MachinePopup .title {
-            font-size: 25px;
-            font-weight: 500;
-            position: relative;
+.MachinePopup .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
 
-        }
+.contentMachinePopup form .Machine-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
 
-        .MachinePopup .title::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 3px;
-            width: 30px;
-            border-radius: 5px;
-            background: linear-gradient(135deg, #71b7e6, #081D45);
-        }
+.modal .contentMachinePopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 550px;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
 
-        .contentMachinePopup form .Machine-details {
+.modal.active .contentMachinePopup {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
 
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 25px 20px 2px 20px;
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
 
-        }
+.updateBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
 
-        .modal .contentMachinePopup {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-            width: 550px;
-            z-index: 2;
-            padding: 20px;
-            box-sizing: boder-box;
-            margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
 
-        }
+.Machine-descriptions {
+  padding: 0.5rem;
+}
 
-        .modal.active .contentMachinePopup {
-            transition: all 300ms ease-in-out;
-            transform: translate(-50%, -50%) scale;
-        }
+.Machine-descriptions span {
+  color: #2f456e;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
 
-        .modal .close {
-            right: 10px;
-            top: -140px;
-            width: 30px;
-            height: 30px;
+.MachineUpdateDeleteBtn {
+  display: flex;
+}
 
-        }
+.addMachineBtn button {
+  width: 100%;
+  margin: 0 19px 5px 19px;
+  border-radius: 5px;
+}
 
-        .updateBtn button {
-            width: 100%;
-            margin: 0 5px 5px 8px;
-        }
-        
-        .updateBtn {
-            display: flex;
-            margin-left: 76%;
-            margin-bottom: 5px;
-            margin-top: 45px;
-        }
+.addMachineBtn {
+  display: flex;
+  margin-left: 85%;
+  margin-bottom: 5px;
+  margin-top: -40px;
+}
 
+.search-panel {
+  height: 30px;
+  width: 50%;
+  border-radius: 5px;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+  position: static;
+}
 
-        .Machine-descriptions {
-            padding: 0.5rem;
-        }
+.loading-overlay {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  position: static;
+}
 
-        .Machine-descriptions span {
-            color: #2f456e;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+textarea {
+  width: 100%;
+  padding: 7px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: left;
+  border: 1.7px solid rgb(201, 198, 198);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+}
 
-        .MachineUpdateDeleteBtn {
-            display: flex;
+.modal .contentCustomerPopup {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: auto;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
 
-        }
+.updatetech form .staff-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+  /* width: 80%; */
+}
+form .staff-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.staff-details .input-box input,
+.staff-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.staff-details .input-box input:focus,
+.staff-details .input-box input:valid,
+.staff-details .input-box select:focus,
+.staff-details .input-box select:valid {
+  border-color: #081d45;
+}
 
-        .addMachineBtn button {
-            width: 100%;
-            margin: 0 19px 5px 19px;
-            border-radius: 5px;
+table {
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px rgb(37, 19, 19);
+  background-color: #fff;
+  text-align: left;
+  overflow: hidden;
+  width: 100%;
+  display: fixed;
+  justify-content: center;
+}
 
-        }
+thead {
+  box-shadow: 0 5px 10px rgb(186, 189, 183);
 
-        .addMachineBtn {
-            display: flex;
-            margin-left: 85%;
-            margin-bottom: 5px;
-            margin-top: -40px;
-        }
+  /* padding: 1rem 5.1rem; */
+}
 
- .search-panel {
+th {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  height: 50px;
+}
 
-            height: 30px;
-            width: 50%;
-            border-radius: 5px;
-            border: none;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-left: 10px;
-            margin-bottom: 30px;
-            position: static;
-            
-        }
+td {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
-        .loading-overlay{
-            margin-bottom: 10px;
-            margin-left: 10px;
-            position: static;
-         
-        } 
+/*td:nth-child(5){
+    padding: 0.2rem 9.5rem;
+  }
+  */
+
+a {
+  text-decoration: none;
+  color: rgb(15, 0, 0);
+}
+
+.amount {
+  text-align: right;
+}
+
+/*Color alternating rows*/
+tr:nth-child(even) {
+  background-color: rgba(221, 219, 219, 0.671);
+}
+
+.machineList {
+  padding-top: 1%;
+}
+
+.machineList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}
+.machineList {
+  padding-top: 1%;
+}
+
+.machineList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}
+
+.MachinePopup .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.MachinePopup .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
+
+.contentMachinePopup form .Machine-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
+
+.modal .contentMachinePopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: auto;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
+
+.modal.active .contentMachinePopup {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
+
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
+
+.updateBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
+
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
+
+.Machine-descriptions {
+  padding: 0.5rem;
+}
+
+.Machine-descriptions span {
+  color: #2f456e;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.MachineUpdateDeleteBtn {
+  display: flex;
+}
+
+.addMachineBtn button {
+  width: 150px;
+  margin: 0 19px 5px -13px;
+  border-radius: 5px;
+}
+
+.addMachineBtn {
+  display: flex;
+  margin-left: 950px;
+  /* margin-bottom: 5px;
+            margin-top: -40px; */
+}
+
+.search-panel {
+  height: 30px;
+  width: 50%;
+  border-radius: 5px;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+  position: static;
+}
+
+.loading-overlay {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  position: static;
+}

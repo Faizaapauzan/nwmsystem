@@ -1,136 +1,126 @@
+.jobTypeList th {
+  padding: 1rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  font-size: 12px;
+}
 
-        .jobTypeList th {
-            padding: 1rem 5.1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            font-size: 0.7rem;
-            font-weight: 900;
-            font-size: 12px;
-        }
-
-        .jobTypeList td {
+/* .jobTypeList td {
             padding: 0.2rem 5.0rem;
-        }
+        } */
 
-        .jobTypeList {
-            padding-top: 1%;
-        }
+.jobTypeList {
+  padding-top: 1%;
+}
 
-        .jobTypeList h1 {
-            padding-bottom: 10px;
-            padding-left: 1%;
-            font-size: 30px;
-            font-family: cursive;
-            font-weight: 100;
-        }
+.jobTypeList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}
 
-        .jobTypePopup .title {
-            font-size: 25px;
-            font-weight: 500;
-            position: relative;
+.jobTypePopup .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
 
-        }
+.jobTypePopup .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
 
-        .jobTypePopup .title::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 3px;
-            width: 30px;
-            border-radius: 5px;
-            background: linear-gradient(135deg, #71b7e6, #081D45);
-        }
+.contentjobTypePopup form .jobType-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
 
-        .contentjobTypePopup form .jobType-details {
+.modal .contentjobTypePopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 688px;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
 
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 25px 20px 2px 20px;
+.modal.active .contentjobTypePopup {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
 
-        }
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
 
-        .modal .contentjobTypePopup {
-             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-            width: 450px;
-            z-index: 2;
-            padding: 20px;
-            box-sizing: boder-box;
-            margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
+.updateBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
 
-        }
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
 
-        .modal.active .contentjobTypePopup {
-            transition: all 300ms ease-in-out;
-            transform: translate(-50%, -50%) scale;
-        }
+.jobType-descriptions {
+  padding: 0.5rem;
+}
 
-        .modal .close {
-            right: 10px;
-            top: -140px;
-            width: 30px;
-            height: 30px;
+.jobType-descriptions span {
+  color: #2f456e;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
 
-        }
+.jobTypeUpdateDeleteBtn {
+  display: flex;
+}
 
+.addJobTypeBtn button {
+  width: 100%;
+  margin: 0 19px 5px 19px;
+  border-radius: 5px;
+}
 
-        .updateBtn button {
-            width: 100%;
-            margin: 0 5px 5px 8px;
-        }
+.addJobTypeBtn {
+  display: flex;
+  margin-left: 85%;
+  margin-bottom: 5px;
+  margin-top: -40px;
+}
 
-        .updateBtn {
-            display: flex;
-            margin-left: 76%;
-            margin-bottom: 5px;
-            margin-top: 45px;
-        }
+#auto {
+  counter-reset: rowNumber;
+}
 
+#auto tr > td:first-child {
+  counter-increment: rowNumber;
+}
 
-        .jobType-descriptions {
-            padding: 0.5rem;
-        }
-
-        .jobType-descriptions span {
-            color: #2f456e;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .jobTypeUpdateDeleteBtn {
-            display: flex;
-
-        }
-
-        .addJobTypeBtn button {
-            width: 100%;
-            margin: 0 19px 5px 19px;
-            border-radius: 5px;
-
-        }
-
-        .addJobTypeBtn {
-            display: flex;
-            margin-left: 85%;
-            margin-bottom: 5px;
-            margin-top: -40px;
-        }
-
-        #auto {
-            counter-reset: rowNumber;
-        }
-
-        #auto tr>td:first-child {
-            counter-increment: rowNumber;
-        }
-
-        #auto tr td:first-child::before {
-            content: counter(rowNumber);
-            min-width: 1em;
-            margin-right: 0.5em;
-        }
+#auto tr td:first-child::before {
+  content: counter(rowNumber);
+  min-width: 1em;
+  margin-right: 0.5em;
+}

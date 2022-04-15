@@ -62,86 +62,7 @@ $query = $conn->query("SELECT * FROM customer_list ORDER BY customer_id ASC LIMI
 
 </head>
 
-<style>
 
-.modal .contentCustomerPopup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  z-index: 2;
-  padding: 20px;
-  box-sizing: boder-box;
-  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-}
-
-.updatetech form .staff-details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 30px 20px 2px 20px;
-  /* width: 80%; */
-}
-form .staff-details .input-box {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
-  padding: 0 15px 0 15px;
-}
-form .input-box label.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.staff-details .input-box input,
-.staff-details .input-box select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-.staff-details .input-box input:focus,
-.staff-details .input-box input:valid,
-.staff-details .input-box select:focus,
-.staff-details .input-box select:valid {
-  border-color: #081d45;
-}
-
-.input-box-address {
-  margin-bottom: 15px;
-  padding: 0 15px 0 15px;
-}
-.input-box-address {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.input-box-address input,
-.input-box-address select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-.input-box-address input:focus,
-.input-box-address input:valid,
-.input-box-address select:focus,
-.input-box-address select:valid {
-  border-color: #081d45;
-}
-    </style>
 
 <body>
 
@@ -208,6 +129,14 @@ form .input-box label.details {
                     <span class="link_name">Job Type</span>
                 </a>
             </li>
+
+            <li>
+                <a href="jobcompleted.php">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="link_name">Completed Job</span>
+                </a>
+            </li>
+
 
             <li>
                 <a href="jobcanceled.php">
