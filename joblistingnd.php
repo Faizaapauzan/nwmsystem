@@ -36,7 +36,7 @@ session_start();
     <nav>
         <div class="sidebar-button">
             <i class='bx bx-home'></i>
-            <a href="Aizat.php"><span class="dashboard">HOME</span></a><br>
+            <a href="technician.php"><span class="dashboard">HOME</span></a><br>
         </div>
     </nav>
 	

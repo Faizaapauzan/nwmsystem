@@ -1,23 +1,12 @@
-<!-- <?php
+ <?php
+ session_start();
+ // cek apakah yang mengakses halaman ini sudah login
+ if($_SESSION['staff_position']=="" AND $_SESSION['technician_rank']=="" ){
+  header("location:index.html?pesan=gagal");
+ }
 
-session_start();
+ ?>
 
-if(!isset($_SESSION['username']))
-	{	
-    header("location:loginpage.php");
-	}
-
-    elseif($_SESSION["username"]="IZAAN")
-	{
-
-	}
-
-  else
-	{
-			header("location:loginpage.php");
-	}
-
-?> -->
 
 <!DOCTYPE html>
 
@@ -60,12 +49,13 @@ if(!isset($_SESSION['username']))
 
            <div class="sidebar-button">
             <i class='bx bx-detail'></i>
-            <a href="izaanjoblisting.php">
+            <a href="joblistingst.php">
                   <span class="dashboard">JOB LISTING</span>
               </a>
            </div>
 	
-          <div class="welcome">Welcome <?php echo $_SESSION["username"] ?>!</div>
+          <div class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
+		            <div class="welcome"><?php echo $_SESSION['technician_rank'] ?>!</div>
         </nav>
         
 		
@@ -78,27 +68,24 @@ if(!isset($_SESSION['username']))
   <?php
               
               include 'dbconnect.php';
-
               $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
+              jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+			  customer_grade, job_status
               FROM
               job_register
               WHERE
-              (job_assign = 'Izaan' AND job_status = ''
-               OR
-               job_assign = 'Izaan' AND job_status = 'Doing'
-               OR
-               job_assign = 'Izaan' AND job_status = 'Ready'
-               OR
-               job_assign = 'Izaan' AND job_status = 'Incomplete')
-
+              job_assign ='{$_SESSION['username']}' AND  job_status = ''
+			  OR
+			  job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete'
               ORDER BY jobregisterlastmodify_at
               DESC LIMIT 50");
 
               while($row = $results->fetch_assoc()) {
               
               ?>
+			  
 
+			  
               <div class="cards">
               <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
 			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
@@ -117,97 +104,127 @@ if(!isset($_SESSION['username']))
               <?php } ?>
             
             </div>
-  
-  
-<!--PENDING-->  
-  
-  
-            <div class="column" >
+			
+			
+			<div class="column" >
+              <p class="column-title"id="doing" >Doing</p>
+
+  <?php
+              
+              include 'dbconnect.php';
+              $results = $conn->query("SELECT
+              jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+			  customer_grade, job_status
+              FROM
+              job_register
+              WHERE
+              job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing'
+
+              ORDER BY jobregisterlastmodify_at
+              DESC LIMIT 50");
+
+              while($row = $results->fetch_assoc()) {
+              
+              ?>
+			  
+              <div class="cards">
+              <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
+			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
+                  <ul class="b" id="draged">
+                    <strong align="center"><?php echo $row['job_priority']?></strong>
+                    <li><?php echo $row['job_order_number']?></li>
+                    <li><?php echo $row['job_name']?></li>
+                    <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+                  </ul>
+                    <div class="status"  id="toDoStatus">
+                    <?php echo $row['job_status']?>
+                    </div>
+                </div>
+              </div>
+
+              <?php } ?>
+            </div>
+			
+			
+			<div class="column" >
               <p class="column-title"id="pending" >Pending</p>
 
-             <?php
+  <?php
               
               include 'dbconnect.php';
-
               $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
+              jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+			  customer_grade, job_status
               FROM
               job_register
               WHERE
-              (job_assign = 'Izaan' AND job_status = 'Pending')
+              job_assign ='{$_SESSION['username']}' AND  job_status = 'Pending'
 
               ORDER BY jobregisterlastmodify_at
               DESC LIMIT 50");
-              
-              while($row = $results->fetch_assoc()) {
-                  
-              ?>
 
-              <div class="cards" >
+              while($row = $results->fetch_assoc()) {
+              
+              ?>
+			  
+              <div class="cards">
               <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->
+			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
                   <ul class="b" id="draged">
                     <strong align="center"><?php echo $row['job_priority']?></strong>
                     <li><?php echo $row['job_order_number']?></li>
                     <li><?php echo $row['job_name']?></li>
                     <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
                   </ul>
-                    <div class="status"  id="pendingStatus">
+                    <div class="status"  id="toDoStatus">
                     <?php echo $row['job_status']?>
                     </div>
                 </div>
               </div>
 
               <?php } ?>
-
             </div>
+			
+			<div class="column" >
+              <p class="column-title"id="done" >Completed</p>
 
-
- <!--COMPLETE-->
-
-
-          
-            <div class="column">
-              <p class="column-title" id="done">Complete</p>
-              
-               <?php
+  <?php
               
               include 'dbconnect.php';
               $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
+              jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+			  customer_grade, job_status
               FROM
               job_register
               WHERE
-              (job_assign = 'Izaan' AND job_status = 'Completed')
+              job_assign ='{$_SESSION['username']}' AND  job_status = 'Completed'
+
               ORDER BY jobregisterlastmodify_at
               DESC LIMIT 50");
-              while($row = $results->fetch_assoc()) {
-                
-              ?>
 
-              <div class="cards" >
-              <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->
+              while($row = $results->fetch_assoc()) {
+              
+              ?>
+			  
+              <div class="cards">
+              <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
+			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
                   <ul class="b" id="draged">
                     <strong align="center"><?php echo $row['job_priority']?></strong>
                     <li><?php echo $row['job_order_number']?></li>
                     <li><?php echo $row['job_name']?></li>
                     <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
                   </ul>
-                    <div class="status"  id="completedStatus">
+                    <div class="status"  id="toDoStatus">
                     <?php echo $row['job_status']?>
                     </div>
                 </div>
-				</button>
               </div>
+
               <?php } ?>
-
             </div>
-            </div>
-        </section>
-
-
-
+			
+			
  <!--VIEW BUTTON MODAL AJAX-->
 	
 
@@ -228,22 +245,21 @@ if(!isset($_SESSION['username']))
                             <h6 class="text-muted">Remarks</h6>
 						</div>	
 						
-						<div class="tabs" id="tab04">
-                            <h6 class="text-muted">Accessories</h6>
-						</div>
-						
-						<div class="tabs" id="tab05">
-                            <h6 class="text-muted">Media</h6>
-						</div>
-						
-						<div class="tabs" id="tab06">
-                            <h6 class="text-muted">Job Status</h6>
-						</div>
-
-						 <div class="tabs" id="tab07">
+                        <div class="tabs" id="tab04">
                             <h6 class="text-muted">Report</h6>
 						</div>
 						
+						<div class="tabs" id="tab05">
+                            <h6 class="text-muted">Accessories</h6>
+						</div>
+						
+						<div class="tabs" id="tab06">
+                            <h6 class="text-muted">Media</h6>
+						</div>
+						
+						<div class="tabs" id="tab07">
+                            <h6 class="text-muted">Job Status</h6>
+						</div>
 					
 
 <!--JOB INFO-->
@@ -369,9 +385,47 @@ if(!isset($_SESSION['username']))
                         </fieldset>
 
 
-<!--ACCESSORIES-->
+<!--REPORT-->
 
                         <fieldset id="tab041">
+                            
+
+							    <form action="ajaxreport.php" method="post">
+									<div class="report-details">
+									</div>
+								</form>
+								
+								
+								<script type='text/javascript'>
+
+								$(document).ready(function() {
+								$('.card').click(function() {
+								var jobregister_id = $(this).data('id');
+        
+        // AJAX request
+        
+								$.ajax({
+								url: 'ajaxreport.php',
+								type: 'post',
+								data: {jobregister_id: jobregister_id},
+								success: function(response) {
+                
+        // Add response in Modal body
+								$('.report-details').html(response);
+        // Display Modal
+								$('#myModal').modal('show');
+								}
+							});
+						});
+					});
+				</script>
+                            
+                        </fieldset>
+
+
+<!--ACCESSORIES-->
+
+                        <fieldset id="tab051">
                             
 							
 								<form action="ajaxtabaccessoriestech.php" method="post">
@@ -409,7 +463,7 @@ if(!isset($_SESSION['username']))
 						
 <!--PHOTO-->						
 						
-                        <fieldset id="tab051">
+                        <fieldset id="tab061">
                             
 							
 						        <form action="ajaxtechphtoupdt.php" method="post">
@@ -448,7 +502,7 @@ if(!isset($_SESSION['username']))
 
 <!--JOB STATUS-->
 
-                        <fieldset id="tab061">
+                        <fieldset id="tab071">
                            
 							
 							    <form action="ajaxtechjobstatus.php" method="post">
@@ -479,76 +533,19 @@ if(!isset($_SESSION['username']))
 						});
 					});
 				</script>							
-
-						</fieldset>		
-						
-						<!--REPORT-->
-
-                        <fieldset id="tab071">
-                            
-
-							    <form action="ajaxreport.php" method="post">
-									<div class="report-details">
-									</div>
-								</form>
-								
-								
-								<script type='text/javascript'>
-
-								$(document).ready(function() {
-								$('.card').click(function() {
-								var jobregister_id = $(this).data('id');
-        
-        // AJAX request
-        
-								$.ajax({
-								url: 'ajaxreport.php',
-								type: 'post',
-								data: {jobregister_id: jobregister_id},
-								success: function(response) {
-                
-        // Add response in Modal body
-								$('.report-details').html(response);
-        // Display Modal
-								$('#myModal').modal('show');
-								}
-							});
-						});
-					});
-				</script>
-                            
-                        </fieldset>
-
+							
+							
+							
+						</fieldset>						
 
 		</div>			
         </div>						
 		</div>
-		</div>
-		</div>
-				
-						
-						
-						
+		</div>			
+			
+			
 
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
+			
+			
 </body>
-</html>
