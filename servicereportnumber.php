@@ -17,16 +17,7 @@
     $srvcreportnumber = "S".$y.$m."-".$next_id;
     
     echo $srvcreportnumber;
-
-    if (isset($_POST['$srvcreportnumber'])) {
-
-        $jobregister_id = $_POST['jobregister_id'];
-        $srvcreportnumber = $_POST['srvcreportnumber'];
-
-        $sql = "UPDATE servicereport_number SET srvcreportnumber ='$srvcreportnumber' WHERE jobregister_id='$jobregister_id'";
-        $query_run = mysqli_query($conn, $sql);
-    }
-
+    
 ?>
 
 

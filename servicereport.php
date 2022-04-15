@@ -64,6 +64,7 @@ if (!function_exists('difftime'))   {
     <!-- Custom Style -->
     <!-- <link rel="stylesheet" href="style.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
 
     <title>SERVICE REPORT</title>
@@ -293,7 +294,7 @@ footer p {
     <div class="graphic-path">
 
     <div class="text-center">
-    <button onclick="window.print();" class="btn btn-primary" id="print-btn">Print</button>
+    <button onclick="window.print();" class="btn btn-primary" id="print-btn" style="margin: 10px;">Print</button>
     </div>
 
     <h3 style="display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 0em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;">
@@ -309,8 +310,10 @@ footer p {
     <center>
    <div class="SR">Service Report</div>
     <div class="text-center">
-    <button onclick="number();" class="btn btn-primary" type="submit" name="srvcreportnumber" id="print-btn">Click</button>
-        <script type="text/javascript">
+    </div>
+   
+    <button onclick="number();" class="btn btn-primary" id="print-btn">Click</button>
+    <script type="text/javascript">
             function number()
                 {
                     $.ajax({url:"servicereportnumber.php", success:function(result)
@@ -320,8 +323,41 @@ footer p {
                     })
                 }
         </script>
-    </div>
-    <div class="SRno">Service Report No:<input type="text" name="srvcreportnumber" id="numbreport" class="serviceno" /></div></center>
+    
+    <form action="" method="post">
+    <div><input type="button" onclick="submitForm();" id="print-btn" value="Save" /></div>
+
+        <script type="text/javascript">
+            function submitForm()
+              {
+                var srvcreportnumber = $('input[name=srvcreportnumber]').val();
+
+                if(srvcreportnumber!= '')
+                  {
+                    var formData = {srvcreportnumber: srvcreportnumber};
+                    $('#message').html('<span style="color: red">Processing form. . . please wait. . .</span>');
+                    $.ajax({
+                            url: "servicereportnumberindex.php", 
+                            type: 'POST', 
+                            data: formData, 
+                            success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                        alert('Number submitted successfully');
+                        else
+                        alert('Form not submitted');
+                      }
+                    });
+                  }
+              } 
+        </script>
+   
+    <div class="SRno">Service Report No:<input type="text" name="srvcreportnumber" id="numbreport" value="" class="serviceno" /></div></center>
+    
+    </form>
+
     </div></div>
     <br/><br/>
     </section>
