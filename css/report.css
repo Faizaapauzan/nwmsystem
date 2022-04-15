@@ -1,0 +1,273 @@
+#auto {
+  counter-reset: rowNumber;
+}
+
+#auto tr > td:first-child {
+  counter-increment: rowNumber;
+}
+
+#auto tr td:first-child::before {
+  content: counter(rowNumber);
+  min-width: 1em;
+  margin-right: 0.5em;
+}
+
+.btn-search {
+  padding: 0 15px 0 15px;
+  height: 39px;
+  width: 105px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  background-color: #081d45;
+  color: #fff;
+  margin-left: 10px;
+  margin-right: -29px;
+  cursor: pointer;
+}
+
+.btn-reset {
+  padding: 0 15px 0 15px;
+  height: 39px;
+  width: 105px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  background-color: #081d45;
+  color: #fff;
+  margin-left: -80px;
+  cursor: pointer;
+}
+
+/*VIEW*/
+
+.ViewJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.ViewJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.ViewJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentViewJobInfo form .view-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .view-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.view-details .input-box input,
+.view-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.view-details .input-box input:focus,
+.view-details .input-box input:valid,
+.view-details .input-box select:focus,
+.view-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .view-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .view-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .view-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/*TABS STORE*/
+.tabView {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+
+.tabView .ViewJobInfoTab {
+  /* max-width: 700px;
+  width: 100%; */
+  background-color: #fff;
+  border-radius: 0px;
+  margin-left: 0px;
+}
+
+.tabView .tabHeadingView {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  background-color: #fff;
+  font-weight: bold;
+  transition: background ease 0.3s;
+}
+
+.tabView .tab {
+  order: 9;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 1rem;
+  background: #fff;
+  padding: 20px;
+}
+
+.tabView input[type="radio"] {
+  display: none;
+}
+
+.tabView input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabView input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabView .tab,
+  .tabView label {
+    order: initial;
+  }
+
+  .tabView label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/* The Close Button (x) */
+.techClose {
+  position: absolute;
+  right: 166px;
+  margin-top: 135px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.techClose:hover,
+.techClose:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.jobTypeUpdateDeleteBtn {
+  display: flex;
+}
