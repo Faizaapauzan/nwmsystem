@@ -62,271 +62,7 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC LIMIT 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
     
-    <style>
-
-        
-textarea {
-  width: 100%;
-  padding: 7px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  text-align: left;
-  border: 1.7px solid rgb(201, 198, 198);
-  border-bottom-width: 2px;
-  border-radius: 5px;
-}
-
-
-.modal .contentCustomerPopup {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  width: auto;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  z-index: 2;
-  padding: 20px;
-  box-sizing: boder-box;
-  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-}
-
-.updatetech form .staff-details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 30px 20px 2px 20px;
-  /* width: 80%; */
-}
-form .staff-details .input-box {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
-  padding: 0 15px 0 15px;
-}
-form .input-box label.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.staff-details .input-box input,
-.staff-details .input-box select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-.staff-details .input-box input:focus,
-.staff-details .input-box input:valid,
-.staff-details .input-box select:focus,
-.staff-details .input-box select:valid {
-  border-color: #081d45;
-}
-
-       table {
-  border-collapse: collapse;
-  box-shadow: 0 5px 10px rgb(37, 19, 19);
-  background-color: #fff;
-  text-align: left;
-  overflow: hidden;
-  width: 100%;
-  display: fixed;
-  justify-content: center;
-
-}
-
-thead {
-  box-shadow: 0 5px 10px rgb(186, 189, 183);
-
-  /* padding: 1rem 5.1rem; */
-}
-
-th {
-  font-size: 15px;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  text-align: center;
-  height: 50px;
-  
-}
-
-td {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-  padding-bottom: 10px;
-
-}
-
-/*td:nth-child(5){
-    padding: 0.2rem 9.5rem;
-  }
-  */
-
-a {
-  text-decoration: none;
-  color: rgb(15, 0, 0);
-}
-
-.amount {
-  text-align: right;
-}
-
-/*Color alternating rows*/
-tr:nth-child(even) {
-  background-color: rgba(221, 219, 219, 0.671);
-}
-
-
-.machineList {
-  padding-top: 1%;
-
-}
-
-.machineList h1 {
-  padding-bottom: 10px;
-  padding-left: 1%;
-  font-size: 30px;
-  font-family: cursive;
-  font-weight: 100;
-}
-        .machineList {
-            padding-top: 1%;
-        }
-
-        .machineList h1 {
-            padding-bottom: 10px;
-            padding-left: 1%;
-            font-size: 30px;
-            font-family: cursive;
-            font-weight: 100;
-        }
-
-
-        .MachinePopup .title {
-            font-size: 25px;
-            font-weight: 500;
-            position: relative;
-
-        }
-
-        .MachinePopup .title::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 3px;
-            width: 30px;
-            border-radius: 5px;
-            background: linear-gradient(135deg, #71b7e6, #081D45);
-        }
-
-        .contentMachinePopup form .Machine-details {
-
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 25px 20px 2px 20px;
-
-        }
-
-        .modal .contentMachinePopup {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-            width: auto;
-            z-index: 2;
-            padding: 20px;
-            box-sizing: boder-box;
-            margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-
-        }
-
-        .modal.active .contentMachinePopup {
-            transition: all 300ms ease-in-out;
-            transform: translate(-50%, -50%) scale;
-        }
-
-        .modal .close {
-            right: 10px;
-            top: -140px;
-            width: 30px;
-            height: 30px;
-
-        }
-
-        .updateBtn button {
-            width: 100%;
-            margin: 0 5px 5px 8px;
-        }
-        
-        .updateBtn {
-            display: flex;
-            margin-left: 76%;
-            margin-bottom: 5px;
-            margin-top: 45px;
-        }
-
-
-        .Machine-descriptions {
-            padding: 0.5rem;
-        }
-
-        .Machine-descriptions span {
-            color: #2f456e;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .MachineUpdateDeleteBtn {
-            display: flex;
-
-        }
-
-        .addMachineBtn button {
-            width: 150px;
-            margin: 0 19px 5px -13px;
-            border-radius: 5px;
-
-        }
-
-        .addMachineBtn {
-            display: flex;
-            margin-left: 950px;
-            /* margin-bottom: 5px;
-            margin-top: -40px; */
-        }
-
- .search-panel {
-
-            height: 30px;
-            width: 50%;
-            border-radius: 5px;
-            border: none;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-left: 10px;
-            margin-bottom: 30px;
-            position: static;
-            
-        }
-
-        .loading-overlay{
-            margin-bottom: 10px;
-            margin-left: 10px;
-            position: static;
-         
-        } 
-    </style>
+ 
 
 <body>
 
@@ -394,6 +130,14 @@ tr:nth-child(even) {
                 </a>
             </li>
 
+            
+            <li>
+                <a href="jobcompleted.php">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="link_name">Completed Job</span>
+                </a>
+            </li>
+
             <li>
                 <a href="jobcanceled.php">
                     <i class="fa fa-minus-square"></i>
@@ -442,8 +186,7 @@ tr:nth-child(even) {
                         <div class="listAddForm-details">
                             <div class="input-box">
                                 <label for="MachineCode" class="details">Machine Code</label>
-                                <input type="text" id="machine_code" name="machine_code" onkeyup="checkMachineCodelAvailability()" value="" class="form-control" placeholder="Enter Machine Code" required> 
-                                <span id="machine_code-availability-status"></span>
+                                <input type="text" id="machine_code" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required> 
                             </div>
                             <div class="input-box">
                                 <label for="MachineCode" class="details">Machine Name</label>
@@ -451,7 +194,7 @@ tr:nth-child(even) {
                             </div>
                             <div class="input-box">
                                 <label for="MachineType" class="details">Machine Type</label>
-                                <input type="text" id="MachineType" name="machine_type" placeholder="Enter Machine Type" required>
+                                <input type="text" id="MachineType" name="machine_type" placeholder="Enter Machine Type">
                             </div>
                             <div class="input-box">
                                 <label for="MachineBrand" class="details">Machine Brand</label>
@@ -471,7 +214,7 @@ tr:nth-child(even) {
                             </div>
                             <div class="input-box">
                                 <label for="MachineDescription" class="details">Machine Description</label>
-                                <input type="text" id="MachineDescription" name="machine_description" placeholder="Enter Machine Description" required>
+                                <input type="text" id="MachineDescription" name="machine_description" placeholder="Enter Machine Description">
                             </div>
 
                              <?php if (isset($_SESSION["username"])) ?>

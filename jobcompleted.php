@@ -4,30 +4,19 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-	<meta name="keywords" content="" />
+<html>
+
+<head>
+    <meta name="keywords" content="" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NWM Report</title>
+    <title>NWM Completed Job</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <link href="css/layout.css" rel="stylesheet" />
-    <link href="css/report.css" rel="stylesheet" />
+    <link href="css/jobcompleted.css" rel="stylesheet" />
     <script src="js/form-validation.js"></script>  
-    <!-- Datatable CSS -->
-    <link href='DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
-    <!-- jQuery UI CSS -->
-    <link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
-
     <!-- Script -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- jQuery Library -->
-    <script src="jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="jquery-ui.min.js"></script>
-
-    <!-- Datatable JS -->
-    <script src="DataTables/datatables.min.js"></script>
-
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -38,13 +27,12 @@ session_start();
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-		
-	</head>
+</head>
 
 
-    <body>
+<body>
 
-      <div class="sidebar">
+        <div class="sidebar">
             <div class="logo-details">
                 <i class='bx bx-window-alt'></i>
             <span class="logo_name">NWM System</span>
@@ -108,7 +96,7 @@ session_start();
                 </a>
             </li>
 
-            <li>
+                        <li>
                 <a href="jobcompleted.php">
                     <i class="fa fa-check-square-o"></i>
                     <span class="link_name">Completed Job</span>
@@ -154,58 +142,60 @@ session_start();
                 </a>
             </div>
         </nav>
-	
 
-<div class="jobTypeList">
-            <h1>Service Report</h1>
-	
-		
-		<form class="form-inline" method="POST" action="">
+        <!--Job Type-->
+
+        <div class="jobTypeList">
+            <h1>Completed Job List</h1>
+
+            	<form class="form-inline" method="POST" action="">
             <table>
                 <tr>
                 <td><input type="date" class="form-control" placeholder="START"  name="date1"/></td>
                 <td><input type="date" class="form-control" placeholder="END"  name="date2"/></td>
                 <td><button id="btn_search" name="search" class="btn-search">Search</button></td>
-                <td><button class="btn-reset" onclick="document.location='report.php'">Refresh</button></td>
+                <td><button class="btn-reset" onclick="document.location='jobcompleted.php'">Refresh</button></td>
                 </tr>
             </table>
 		</form>
 
-		    <div class="table-responsive">	
+ <div class="table-responsive">	
 			<table id="auto" class='display dataTable'>
 			<thead class="alert-info">
 					<tr>
-            <th>No</th>
+                        <th>No</th>
 						<th>Job Order Number</th>
 						<th>Customer Name</th>
-						<th>Requested Date</th>
-            <th>Report Date</th>
-            <th>File Name</th>
-           
-						<th>Action</th>
+						<th>Job Assign</th>
+                        <th>Delivery Date</th>
+         				<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php include'range.php'?>	
+					<?php include'completedrange.php'?>	
 				</tbody>
 			</table>
 		</div>	
 	</div>
 
     
-    <script>
-        let btn = document.querySelector("#btn");
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
 
-        sidebarBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-            if (sidebar.classList.contains("active")) {
-                sidebar.classList.replace("bx-menu", "bx-menu-alt-right")
-            } else
-                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-        }
-    </script>
+<script>
+let btn = document.querySelector("#btn");
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function(){
+    sidebar.classList.toggle("active");
+    if(sidebar.classList.contains("active")){
+        sidebar.classList.replace("bx-menu","bx-menu-alt-right")
+    }else
+    sidebarBtn.classList.replace("bx-menu-alt-right","bx-menu");
+}
+</script>   
+
+
+
+
 
 </body>
 </html>

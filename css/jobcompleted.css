@@ -1,0 +1,387 @@
+/*COMPLETED*/
+.completed,
+#completed {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #f7f7f7ab;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
+  border-radius: 12px;
+  padding: 0.7rem 2rem;
+  font-size: 14px;
+  margin: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.completedJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+.completedJobInfoTab .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.completedJobInfoTab .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 90px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
+}
+.contentCompletedJobInfo form .completed-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 20px 2px 20px;
+}
+form .completed-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.completed-details .input-box input,
+.completed-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.completed-details .input-box input:focus,
+.completed-details .input-box input:valid,
+.completed-details .input-box select:focus,
+.completed-details .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+  margin-bottom: 50px;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  opacity: 0.8;
+}
+form .button #cancelbtn {
+  background-color: #f44336;
+}
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .completed-details .input-box {
+    margin-bottom: 15px;
+
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .completed-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .completed-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.tabCompleted input[type="radio"] {
+  display: none;
+}
+
+.tabCompleted input[type="radio"]:checked + label {
+  background: rgba(209, 209, 209, 0.377);
+}
+
+.tabCompleted input[type="radio"]:checked + label + .tabC {
+  display: block;
+}
+
+@media (max-width: 465px) {
+  .tabCompleted .tabC,
+  .tabCompleted label {
+    order: initial;
+  }
+
+  .tabCompleted label {
+    width: 100%;
+    margin-left: 50px;
+  }
+}
+
+/*TABS COMPLETED*/
+.tabCompleted {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin: 30px 300px 30px 300px;
+}
+
+.tabCompleted .completedJobInfoTab {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-left: 0px;
+}
+
+.tabCompleted .tabHeadingComplete {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  transition: background ease 0.3s;
+}
+
+.tabCompleted .tabC {
+  order: 9;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 1rem;
+  background: #fff;
+  padding: 20px;
+}
+
+.jobTypeList th {
+  padding: 1rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+/* .jobTypeList td {
+            padding: 0.2rem 5.0rem;
+        } */
+
+.jobTypeList {
+  padding-top: 1%;
+}
+
+.jobTypeList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}
+
+.jobTypePopup .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.jobTypePopup .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
+
+.contentjobTypePopup form .jobType-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
+
+.modal .contentjobTypePopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 450px;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
+
+.modal.active .contentjobTypePopup {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
+
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
+
+.updateBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
+
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
+
+.jobType-descriptions {
+  padding: 0.5rem;
+}
+
+.jobType-descriptions span {
+  color: #2f456e;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.jobTypeUpdateDeleteBtn {
+  display: flex;
+}
+
+.addJobTypeBtn button {
+  width: 100%;
+  margin: 0 19px 5px 19px;
+  border-radius: 5px;
+}
+
+.addJobTypeBtn {
+  display: flex;
+  margin-left: 85%;
+  margin-bottom: 5px;
+  margin-top: -40px;
+}
+
+#auto {
+  counter-reset: rowNumber;
+}
+
+#auto tr > td:first-child {
+  counter-increment: rowNumber;
+}
+
+#auto tr td:first-child::before {
+  content: counter(rowNumber);
+  min-width: 1em;
+  margin-right: 0.5em;
+}
+
+.techClose {
+  position: absolute;
+  right: 166px;
+  margin-top: 145px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.techClose:hover,
+.techClose:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.modal .techClose {
+  right: 380px;
+  top: -30px;
+  width: 30px;
+  height: 30px;
+}
+
+/* The Close Button (x) */
+.techClose {
+  position: absolute;
+  right: 166px;
+  margin-top: 135px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.techClose:hover,
+.techClose:focus {
+  color: red;
+  cursor: pointer;
+}
