@@ -55,7 +55,6 @@
            </div>
 	
           <div class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
-		            <div class="welcome"><?php echo $_SESSION['technician_rank'] ?>!</div>
         </nav>
         
 		
