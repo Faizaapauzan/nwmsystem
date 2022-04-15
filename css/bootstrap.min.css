@@ -912,20 +912,7 @@ textarea {
   font-size: inherit;
   line-height: inherit;
 }
-a {
-  color: #337ab7;
-  text-decoration: none;
-}
-a:hover,
-a:focus {
-  color: #23527c;
-  text-decoration: underline;
-}
-a:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
+
 figure {
   margin: 0;
 }
@@ -4773,11 +4760,11 @@ a.badge:focus {
   margin-right: auto;
   margin-left: auto;
 }
-a.thumbnail:hover,
+/* a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
   border-color: #337ab7;
-}
+} */
 .thumbnail .caption {
   padding: 9px;
   color: #333;
@@ -5848,7 +5835,7 @@ button.close {
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
 }
-.modal-backdrop {
+/* .modal-backdrop {
   position: absolute;
   top: 0;
   right: 0;
@@ -5862,7 +5849,7 @@ button.close {
 .modal-backdrop.in {
   filter: alpha(opacity=50);
   opacity: 0.5;
-}
+} */
 .modal-header {
   min-height: 16.43px;
   padding: 15px;
