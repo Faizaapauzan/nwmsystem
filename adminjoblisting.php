@@ -266,12 +266,12 @@ $(function(){
             </tr>
         </thead>
         <tbody>
-            <?php 
-            if($query->num_rows > 0){ 
-                while($row = $query->fetch_assoc()){ 
+             <?php 
+            if($query->num_rows > 0){ $i=0; 
+                while($row = $query->fetch_assoc()){ $i++; 
             ?>
                 <tr>
-                    <th scope="row"><?php echo $row["jobregister_id"]; ?></th>
+                    <th scope="row"><?php echo $i; ?></th>
                     <td><?php echo $row["job_order_number"]; ?></td>
                     <td><?php echo $row["job_priority"]; ?></td>
                     <td><?php echo $row["customer_name"]; ?></td>
@@ -280,7 +280,7 @@ $(function(){
                     <td><?php echo $row["job_assign"]; ?></td>
                     <td><?php echo $row["Job_assistant"]; ?></td>
                     <td><div class='adminlistingUpdateBtn'>
-                    <button data-jobregister_id="<?php echo $row['jobregister_id'];?>" class='updateinfo' type='button' id='btnEdit'>Update</button>
+                    <button data-jobregister_id="<?php echo $row['jobregister_id'];?>" class='updateinfo' type='button' id='btnEdit' value='Update'>Update</button>
                     </div>
                     </td>
                     
