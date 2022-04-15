@@ -4,7 +4,7 @@ session_start();
 
 if(!isset($_SESSION['username']))
 	{	
-        header("location:loginpage.php");
+        header("location:index.html");
 	}
 
     elseif($_SESSION['staff_position']== 'Admin')
@@ -16,7 +16,7 @@ if(!isset($_SESSION['username']))
 
   else
 	{
-			header("location:loginpage.php");
+			header("location:index.html");
 	}
 ?>
 
@@ -157,7 +157,9 @@ if(!isset($_SESSION['username']))
                 <a href="Adminhomepage.php">
                     <span class="dashboard">Home</span>
                 </a>
-   
+                 <a href="adminjoblisting.php">
+                    <span class="dashboard">Job Listing</span>
+                </a>
             </div>
 
             <div class="notification-button">
