@@ -30,72 +30,11 @@
 </head>
 <body>
 
- <?php
-//include connection file 
-include_once("dbconnect.php");
-
-  if (isset($_POST['jobregister_id'])) {
-      $jobregister_id =$_POST['jobregister_id'];
-
-      $sql = "SELECT * FROM `servicereport` WHERE jobregister_id ='$jobregister_id'";
-      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
-  }
-  
-?>
- 
-      <?php foreach($queryRecords as $res) :?>
-      
-    <form method="POST" action="">
-    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $res['jobregister_id'] ?>">
-    <input type="hidden" id="servicereport_id" name="servicereport_id" value="<?php echo $res['servicereport_id'] ?>">
- 
- 
-	<label for="reportdate">View Report</label>
-  <div class="input-group">
-  <input type="date" class="form-control" id="srvcreportdate" name="srvcreportdate" value="<?php echo $res['srvcreportdate'] ?>">
-  
-
-  <div class="input-group-append">
-
-  
-  </form>
-
-  	<form id="view_form" method="post">
-    <button class="userinfo btn btn-success" type="button" data-id='<?php echo $res['servicereport_id']; ?>'>VIEW</button>
-</form>
-  </div>
-
-	  <?php endforeach;?>
-
-
-<!-- FOR VIEW SERVICE REPORT-->	
-	    <script type='text/javascript'>
-        $(document).ready(function(){
-        $('.userinfo').click(function(){
-        var servicereport_id = $(this).data('id');
-        $.ajax({
-            url: 'servicereport.php',
-            type: 'post',
-            data: {servicereport_id: servicereport_id},
-            success: function(data){
-            var win = window.open('servicereport.php');
-            win.document.write(data);
-                        }
-                    });
-                });
-            });
-    </script>
-
-
-
-	
-
 <?php
         include 'dbconnect.php';
         if (isset($_POST['jobregister_id'])) {
           $jobregister_id =$_POST['jobregister_id'];
           $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-          // $query = "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id";
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
@@ -109,12 +48,15 @@ include_once("dbconnect.php");
  
 	<label for="reportdate">Service Report Date:</label>
 <div class="input-group">
-  <input type="date" class="form-control" id="srvcreportdate" name="srvcreportdate">
+  <input type="date" class="form-control" id="srvcreportdate" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>">
 
 
   <div class="input-group-append">
     <button class="btn btn-primary" type="submit" value="Submit" name="submit-date">SUBMIT</button>
 
+</form>
+  	<form id="view_form" method="post">
+    <button class="userinfo btn btn-success" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>VIEW</button>
 </form>
             </div>
 
@@ -123,20 +65,44 @@ include_once("dbconnect.php");
   }
 }
 ?>
+   
+
+<!-- FOR VIEW SERVICE REPORT-->	
+	    <script type='text/javascript'>
+        $(document).ready(function(){
+        $('.userinfo').click(function(){
+        var jobregister_id = $(this).data('id');
+        $.ajax({
+            url: 'servicereport.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(data){
+            var win = window.open('servicereport.php');
+            win.document.write(data);
+                        }
+                    });
+                });
+            });
+    </script>
+
+
+
+	
+
+
 
 
 <!-- FOR UPLOAD SERVICE REPORT -->
  
 <form id="uploadreport-form" method="POST" action="uploadservicereport.php" enctype="multipart/form-data">
-    
 <?php
     include 'dbconnect.php';
     
-    if (isset($_POST['servicereport_id'])) {
+    if (isset($_POST['jobregister_id'])) {
         
-        $servicereport_id =$_POST['servicereport_id'];
+        $jobregister_id =$_POST['jobregister_id'];
         
-        $query = "SELECT * FROM servicereport WHERE servicereport_id ='$servicereport_id'";
+        $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
         
         $query_run = mysqli_query($conn, $query);
             if ($query_run) {
@@ -144,7 +110,7 @@ include_once("dbconnect.php");
 ?>
 
 
-        <input type="text" id="servicereport_id" name="servicereport_id" value="<?php echo $row['servicereport_id'] ?>">
+       <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
 <?php
             }

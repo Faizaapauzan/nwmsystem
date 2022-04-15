@@ -4,8 +4,7 @@ $con = mysqli_connect("localhost","root","","nwmsystem");
 
 if (isset($_POST['update-report'])) {
 
-    $servicereport_id = $_POST['servicereport_id'];
-    // $srvcreportdate = $_POST['srvcreportdate'];
+    $jobregister_id = $_POST['jobregister_id'];
     
     $file=$_FILES['files']['name'];
     $file_tmp=$_FILES['files']['tmp_name'];
@@ -34,12 +33,7 @@ if (isset($_POST['update-report'])) {
             }
         }  
     
-            // $query = "INSERT INTO `servicereport`(`jobregister_id`, `file_name`) VALUES ('$jobregister_id','$fileName')";
-
-            $query = "UPDATE servicereport SET file_name ='$fileName' WHERE servicereport_id='$servicereport_id'";
-
-            // $query = "INSERT INTO servicereport SET file_name ='$fileName' WHERE servicereport_id='$servicereport_id'";
-
+            $query = "INSERT INTO `servicereport`(`jobregister_id`, `file_name`) VALUES ('$jobregister_id','$fileName')";
             $query_run = mysqli_query($con, $query);
 
             // mysqli_query($con, $query);

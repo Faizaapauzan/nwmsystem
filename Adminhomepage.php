@@ -35,6 +35,7 @@ if(!isset($_SESSION['username']))
     <link href="css/admin.css"rel="stylesheet" />
     <link href="css/adminhomepage.css"rel="stylesheet" />
     <link href="css/adminboard.css"rel="stylesheet" />
+       <link href="css/adminhomepage.css"rel="stylesheet" />
     <!-- <link href="tab.css"rel="stylesheet" /> -->
 
     <!-- Script -->
@@ -48,57 +49,8 @@ if(!isset($_SESSION['username']))
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
+
 </head>
-
-<style>
-/*TABS AIZAT*/
-.tabAizat {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabAizat .AizatJobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabAizat .tabHeadingAizat {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background ease 0.3s;
-}
-
-.tabAizat .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-
-</style>
-
  <body>
 
     <!--Home navigation-->
@@ -502,7 +454,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingBoon2" class="tabHeadingBoon">Update</label>
         <div class="tab" id="BoonJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="boon-update">
 
         </div></form></div>
@@ -513,7 +465,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -557,35 +509,6 @@ if(!isset($_SESSION['username']))
             });
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingBoon" id="tabDoingBoon6">
-        <label for="tabDoingBoon6" class="tabHeadingBoon"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="boon-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Boon').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.boon-report').html(response);
-            // Display Modal
-            $('#doubleClick-Boon').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
 
         <!--Double click Accessories -->
 
@@ -623,21 +546,19 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingBoon5" class="tabHeadingBoon"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-        <form action="boonajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="boon-photos">
 
         </div></form></div>
         
-        <!-- div for doubleclick and tabs -->
-    </div></div>
-
+    
     <script type='text/javascript'>
         $(document).ready(function () {
         $('.Boon').click(function () {
         var jobregister_id = $(this).data('id');
         // AJAX request
         $.ajax({
-        url: 'boonajaxtechphtoupdt.php',
+        url: 'ajaxtechphtoupdt.php',
         type: 'post',
         data: { jobregister_id: jobregister_id },
         success: function (response) {
@@ -650,6 +571,41 @@ if(!isset($_SESSION['username']))
         });
     });
     </script>
+
+    
+        <!--Double click Report-->
+        <input type="radio" name="tabDoingBoon" id="tabDoingBoon6">
+        <label for="tabDoingBoon6" class="tabHeadingBoon"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="boon-report">
+
+        </div></form></div>
+
+            <!-- div for doubleclick and tabs -->
+    </div></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Boon').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.boon-report').html(response);
+            // Display Modal
+            $('#doubleClick-Boon').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
 
 <!-- END BOON -->
 
@@ -731,7 +687,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHafiz2" class="tabHeadingHafiz">Update</label>
         <div class="tab" id=HafizJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="hafiz-update">
 
         </div></form></div>
@@ -744,7 +700,7 @@ if(!isset($_SESSION['username']))
             // AJAX request
 
              $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -793,35 +749,7 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!-- Double click Report -->
-        <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz6">
-        <label for="tabDoingHafiz6" class="tabHeadingHafiz"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="hafiz-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Hafiz').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.hafiz-report').html(response);
-            // Display Modal
-            $('#doubleClick-Hafiz').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
+ 
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz4">
@@ -862,13 +790,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHafiz5" class="tabHeadingHafiz">Photo</label>
         <div class="tab" id="HafizJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-        <form action="hafizajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="hafiz-photo">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -878,7 +804,7 @@ if(!isset($_SESSION['username']))
             // AJAX request
 
             $.ajax({
-            url: 'hafizajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -892,6 +818,40 @@ if(!isset($_SESSION['username']))
         });
     });
 
+        </script>
+
+               <!-- Double click Report -->
+        <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz6">
+        <label for="tabDoingHafiz6" class="tabHeadingHafiz"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="hafiz-report">
+
+        </div></form></div>
+
+                <!-- div for doubleclick and tabs -->
+    </div></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Hafiz').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.hafiz-report').html(response);
+            // Display Modal
+            $('#doubleClick-Hafiz').modal('show');
+                     }
+                    });
+                });
+            });
         </script>
 
 <!-- END HAFIZ -->
@@ -978,7 +938,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHamir2" class="tabHeadingHamir">Update</label>
         <div class="tab" id="HamirJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="hamir-update">
 
         </div></form></div>
@@ -991,7 +951,7 @@ if(!isset($_SESSION['username']))
             // AJAX request
 
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1039,37 +999,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-
-        <!-- Double click Report -->
-        <input type="radio" name="tabDoingHamir" id="tabDoingHamir6">
-        <label for="tabDoingHamir6" class="tabHeadingHamir"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="hamir-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Hamir').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.hamir-report').html(response);
-            // Display Modal
-            $('#doubleClick-Hamir').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir4">
         <label for="tabDoingHamir4" class="tabHeadingHamir">Accessories</label>
@@ -1108,21 +1037,18 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHamir5" class="tabHeadingHamir">Photo</label>
         <div class="tab" id="HamirJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-        <form action="hamirajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="hamir-photo">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
-
-        <script type='text/javascript'>
+          <script type='text/javascript'>
             $(document).ready(function () {
             $('.Hamir').click(function () {
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'hamirajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1136,6 +1062,40 @@ if(!isset($_SESSION['username']))
              });
 
         </script>
+
+                <!-- Double click Report -->
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir6">
+        <label for="tabDoingHamir6" class="tabHeadingHamir"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="hamir-report">
+
+        </div></form></div>
+
+              <!-- div for doubleclick and tabs -->
+        </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Hamir').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.hamir-report').html(response);
+            // Display Modal
+            $('#doubleClick-Hamir').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
 
         <!-- END OF HAMIR -->
 
@@ -1218,7 +1178,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHwa2" class="tabHeadingHwa">Update</label>
         <div class="tab" id="HwaJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="hwa-update">
 
         </div></form></div>
@@ -1230,7 +1190,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1277,36 +1237,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingHwa" id="tabDoingHwa6">
-        <label for="tabDoingHwa6" class="tabHeadingHwa"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="hwa-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Hwa').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.hwa-report').html(response);
-            // Display Modal
-            $('#doubleClick-Hwa').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa4">
         <label for="tabDoingHwa4" class="tabHeadingHwa">Accessories</label>
@@ -1345,13 +1275,10 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingHwa5" class="tabHeadingHwa">Photo</label>
         <div class="tab" id="HwaJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-        <form action="hwaajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="hwa-photos">
 
         </div></form></div>
-
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -1359,7 +1286,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'hwaajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1373,6 +1300,40 @@ if(!isset($_SESSION['username']))
                 });
         </script>
 
+           <!--Double click Report-->
+        <input type="radio" name="tabDoingHwa" id="tabDoingHwa6">
+        <label for="tabDoingHwa6" class="tabHeadingHwa"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="hwa-report">
+
+        </div></form></div>
+
+        <!-- div for doubleclick and tabs -->
+        </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Hwa').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.hwa-report').html(response);
+            // Display Modal
+            $('#doubleClick-Hwa').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
+
             <!-- END OF HWA -->
 
             <!-- ISK -->
@@ -1384,13 +1345,13 @@ if(!isset($_SESSION['username']))
                 include 'dbconnect.php';
                                 
                 $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
-                        (job_assign = 'Iskandar' AND job_status = ''
+                        (job_assign = 'Isk' AND job_status = ''
                         OR
-                        job_assign = 'Iskandar' AND job_status = 'Doing'
+                        job_assign = 'Isk' AND job_status = 'Doing'
                         OR
-                        job_assign = 'Iskandar' AND job_status = 'Ready'
+                        job_assign = 'Isk' AND job_status = 'Ready'
                         OR
-                        job_assign = 'Iskandar' AND job_status = 'Incomplete')
+                        job_assign = 'Isk' AND job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
                         while($row = $results->fetch_assoc()) {
@@ -1451,7 +1412,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIsk2" class="tabHeadingIsk">Update</label>
         <div class="tab" id="IskJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="isk-update">
 
         </div></form></div>
@@ -1463,7 +1424,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1511,36 +1472,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingIsk" id="tabDoingIsk6">
-        <label for="tabDoingIsk6" class="tabHeadingIsk"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="isk-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Isk').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.isk-report').html(response);
-            // Display Modal
-            $('#doubleClick-Isk').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk4">
         <label for="tabDoingIsk4" class="tabHeadingIsk">Accessories</label>
@@ -1576,13 +1507,10 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIsk5" class="tabHeadingIsk">Update</label>
         <div class="tab" id="IskJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-        <form action="iskajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="isk-photos">
 
         </div></form></div>
-
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -1590,7 +1518,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'iskajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1603,6 +1531,40 @@ if(!isset($_SESSION['username']))
                      });
              });
         </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingIsk" id="tabDoingIsk6">
+        <label for="tabDoingIsk6" class="tabHeadingIsk"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="isk-report">
+
+        </div></form></div>
+
+        <!-- div for doubleclick and tabs -->
+         </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Isk').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.isk-report').html(response);
+            // Display Modal
+            $('#doubleClick-Isk').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
         
                 <!-- END OF ISK -->
 
@@ -1686,7 +1648,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJohn2" class="tabHeadingJohn">Update</label>
         <div class="tab" id=JohnJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="john-update">
 
         </div></form></div>
@@ -1698,7 +1660,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1744,36 +1706,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingJohn" id="tabDoingJohn6">
-        <label for="tabDoingJohn6" class="tabHeadingJohn"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="john-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.John').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.john-report').html(response);
-            // Display Modal
-            $('#doubleClick-John').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn4">
         <label for="tabDoingJohn4" class="tabHeadingJohn">Accessories</label>
@@ -1810,13 +1742,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJohn5" class="tabHeadingJohn">Photo</label>
         <div class="tab" id=JohnJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-        <form action="johnajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="john-photos">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -1824,7 +1754,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'johnajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1836,6 +1766,40 @@ if(!isset($_SESSION['username']))
              });
                 });
                      });
+        </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingJohn" id="tabDoingJohn6">
+        <label for="tabDoingJohn6" class="tabHeadingJohn"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="john-report">
+
+        </div></form></div>
+
+                <!-- div for doubleclick and tabs -->
+    </div></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.John').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.john-report').html(response);
+            // Display Modal
+            $('#doubleClick-John').modal('show');
+                     }
+                    });
+                });
+            });
         </script>
               
                 <!-- END OF JOHN -->
@@ -1919,7 +1883,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJunJie2" class="tabHeadingJunJie">Update</label>
         <div class="tab" id=JunJieJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="junjie-update">
 
         </div></form></div>
@@ -1931,7 +1895,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -1977,35 +1941,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie6">
-        <label for="tabDoingJunJie6" class="tabHeadingJunJie"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="junjie-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.JunJie').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.junjie-report').html(response);
-            // Display Modal
-            $('#doubleClick-JunJie').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie4">
@@ -2043,13 +1978,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingJunJie5" class="tabHeadingJunJie">Photo</label>
         <div class="tab" id=JunJieJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-        <form action="junjieajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="junjie-photos">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -2057,7 +1990,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'junjieajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2070,6 +2003,41 @@ if(!isset($_SESSION['username']))
                 });
                      });
         </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie6">
+        <label for="tabDoingJunJie6" class="tabHeadingJunJie"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="junjie-report">
+
+        </div></form></div>
+
+                <!-- div for doubleclick and tabs -->
+    </div></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.JunJie').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.junjie-report').html(response);
+            // Display Modal
+            $('#doubleClick-JunJie').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
                 <!-- END OF JUNJIE -->
 
                 <!-- RAZWILL -->
@@ -2081,13 +2049,13 @@ if(!isset($_SESSION['username']))
                 <?php
                     include 'dbconnect.php';
                     $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
-                            (job_assign = 'Razwill' AND job_status = ''
+                            (job_assign = 'Will' AND job_status = ''
                             OR
-                            job_assign = 'Razwill' AND job_status = 'Doing'
+                            job_assign = 'Will' AND job_status = 'Doing'
                             OR
-                            job_assign = 'Razwill' AND job_status = 'Ready'
+                            job_assign = 'Will' AND job_status = 'Ready'
                             OR
-                            job_assign = 'Razwill' AND job_status = 'Incomplete')
+                            job_assign = 'Will' AND job_status = 'Incomplete')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
                     while($row = $results->fetch_assoc()) {
@@ -2150,7 +2118,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingRazwill2" class="tabHeadingRazwill">Update</label>
         <div class="tab" id=RazwillJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="razwill-update">
 
         </div></form></div>
@@ -2162,7 +2130,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2208,35 +2176,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill6">
-        <label for="tabDoingRazwill6" class="tabHeadingRazwill"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="razwill-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Razwill').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.razwill-report').html(response);
-            // Display Modal
-            $('#doubleClick-Razwill').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill4">
@@ -2274,13 +2213,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingRazwill5" class="tabHeadingRazwill">Photo</label>
         <div class="tab" id="RazwillJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-        <form action="razwillajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="razwill-photos">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -2288,7 +2225,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'razwillajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2301,6 +2238,41 @@ if(!isset($_SESSION['username']))
                 });
                      });
         </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill6">
+        <label for="tabDoingRazwill6" class="tabHeadingRazwill"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="razwill-report">
+
+        </div></form></div>
+
+        
+        <!-- div for doubleclick and tabs -->
+    </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Razwill').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.razwill-report').html(response);
+            // Display Modal
+            $('#doubleClick-Razwill').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
 
                 <!-- END OF RAZWILL -->
                 <!-- SAHELE -->
@@ -2381,7 +2353,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSahele2" class="tabHeadingSahele">Update</label>
         <div class="tab" id="SaheleJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="sahele-update">
 
         </div></form></div>
@@ -2393,7 +2365,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2439,36 +2411,7 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingSahele" id="tabDoingSahele6">
-        <label for="tabDoingSahele6" class="tabHeadingSahele"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="sahele-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Sahele').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.sahele-report').html(response);
-            // Display Modal
-            $('#doubleClick-Sahele').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
+ 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingSahele" id="tabDoingSahele4">
         <label for="tabDoingSahele4" class="tabHeadingSahele">Accessories</label>
@@ -2505,13 +2448,10 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSahele5" class="tabHeadingSahele">Photo</label>
         <div class="tab" id="SaheleJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-        <form action="saheleajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="sahele-photos">
 
         </div></form></div>
-
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -2519,7 +2459,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'saheleajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2533,6 +2473,39 @@ if(!isset($_SESSION['username']))
                      });
         </script>
 
+               <!--Double click Report-->
+        <input type="radio" name="tabDoingSahele" id="tabDoingSahele6">
+        <label for="tabDoingSahele6" class="tabHeadingSahele"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="sahele-report">
+
+        </div></form></div>
+
+        
+        <!-- div for doubleclick and tabs -->
+    </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Sahele').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.sahele-report').html(response);
+            // Display Modal
+            $('#doubleClick-Sahele').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
 
                 <!-- END OF SAHELE -->
 
@@ -2615,7 +2588,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSazaly2" class="tabHeadingSazaly">Update</label>
         <div class="tab" id="SazalyJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="sazaly-update">
 
         </div></form></div>
@@ -2627,7 +2600,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2673,36 +2646,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly6">
-        <label for="tabDoingSazaly6" class="tabHeadingSazaly"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="sazaly-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Sazaly').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.sazaly-report').html(response);
-            // Display Modal
-            $('#doubleClick-Sazaly').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly4">
         <label for="tabDoingSazaly4" class="tabHeadingSazaly">Accessories</label>
@@ -2739,13 +2682,10 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSazaly5" class="tabHeadingSazaly">Photo</label>
         <div class="tab" id="SazalyJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="sazalyajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="sazaly-photos">
 
         </div></form></div>
-
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -2753,7 +2693,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'sazalyajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2766,6 +2706,40 @@ if(!isset($_SESSION['username']))
                 });
                      });
         </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly6">
+        <label for="tabDoingSazaly6" class="tabHeadingSazaly"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="sazaly-report">
+
+        </div></form></div>
+
+        <!-- div for doubleclick and tabs -->
+         </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Sazaly').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.sazaly-report').html(response);
+            // Display Modal
+            $('#doubleClick-Sazaly').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
                 <!-- END OF SAZALY -->
 
                 <!-- FAIZAN -->
@@ -2847,7 +2821,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFaizan2" class="tabHeadingFaizan">Update</label>
         <div class="tab" id="FaizanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="faizan-update">
 
         </div></form></div>
@@ -2859,7 +2833,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2905,36 +2879,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan6">
-        <label for="tabDoingFaizan6" class="tabHeadingFaizan"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="faizan-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Faizan').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.faizan-report').html(response);
-            // Display Modal
-            $('#doubleClick-Faizan').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan4">
         <label for="tabDoingFaizan4" class="tabHeadingFaizan">Accessories</label>
@@ -2971,13 +2915,10 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFaizan5" class="tabHeadingFaizan">Photo</label>
         <div class="tab" id="FaizanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="faizanajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="faizan-photos">
 
         </div></form></div>
-
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -2985,7 +2926,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'faizanajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -2998,6 +2939,40 @@ if(!isset($_SESSION['username']))
                 });
                      });
         </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan6">
+        <label for="tabDoingFaizan6" class="tabHeadingFaizan"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="faizan-report">
+
+        </div></form></div>
+
+                <!-- div for doubleclick and tabs -->
+    </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Faizan').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.faizan-report').html(response);
+            // Display Modal
+            $('#doubleClick-Faizan').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
 
 
             <!-- END OF FAIZAN -->
@@ -3081,7 +3056,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFauzin2" class="tabHeadingFauzin">Update</label>
         <div class="tab" id="FauzinJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="fauzin-update">
 
         </div></form></div>
@@ -3093,7 +3068,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3139,35 +3114,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin6">
-        <label for="tabDoingFauzin6" class="tabHeadingFauzin"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="fauzin-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Fauzin').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.fauzin-report').html(response);
-            // Display Modal
-            $('#doubleClick-Fauzin').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin4">
@@ -3205,13 +3151,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingFauzin5" class="tabHeadingFauzin">Photo</label>
         <div class="tab" id="FauzinJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="fauzinajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="fauzin-photos">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -3219,7 +3163,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'fauzinajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3232,6 +3176,40 @@ if(!isset($_SESSION['username']))
                 });
                      });
         </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin6">
+        <label for="tabDoingFauzin6" class="tabHeadingFauzin"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="fauzin-report">
+
+        </div></form></div>
+       
+        <!-- div for doubleclick and tabs -->
+    </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Fauzin').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.fauzin-report').html(response);
+            // Display Modal
+            $('#doubleClick-Fauzin').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
 <!-- END OF FAUZIN -->
 
 <!-- IZAAN -->
@@ -3314,7 +3292,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIzaan2" class="tabHeadingIzaan">Update</label>
         <div class="tab" id="IzaanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="izaan-update">
 
         </div></form></div>
@@ -3326,7 +3304,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3372,36 +3350,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan6">
-        <label for="tabDoingIzaan6" class="tabHeadingIzaan"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="izaan-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Izaan').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.izaan-report').html(response);
-            // Display Modal
-            $('#doubleClick-Izaan').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan4">
         <label for="tabDoingIzaan4" class="tabHeadingIzaan">Accessories</label>
@@ -3438,13 +3386,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIzaan5" class="tabHeadingIzaan">Photo</label>
         <div class="tab" id="IzaanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="izaanajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="izaan-photos">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -3452,7 +3398,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'izaanajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3465,6 +3411,41 @@ if(!isset($_SESSION['username']))
                 });
                      });
         </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan6">
+        <label for="tabDoingIzaan6" class="tabHeadingIzaan"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="izaan-report">
+
+        </div></form></div>
+
+        
+        <!-- div for doubleclick and tabs -->
+    </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Izaan').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.izaan-report').html(response);
+            // Display Modal
+            $('#doubleClick-Izaan').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
             <!-- END OF IZAAN -->
 
             <!-- SALAM -->
@@ -3547,7 +3528,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSalam2" class="tabHeadingSalam">Update</label>
         <div class="tab" id="SalamJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="salam-update">
 
         </div></form></div>
@@ -3559,7 +3540,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3605,36 +3586,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingSalam" id="tabDoingSalam6">
-        <label for="tabDoingSalam6" class="tabHeadingSalam"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="salam-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Salam').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.salam-report').html(response);
-            // Display Modal
-            $('#doubleClick-Salam').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam4">
         <label for="tabDoingSalam4" class="tabHeadingSalam">Accessories</label>
@@ -3671,13 +3622,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingSalam5" class="tabHeadingSalam">Photo</label>
         <div class="tab" id="SalamJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="salamajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="salam-photos">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -3685,7 +3634,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'salamajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3699,6 +3648,39 @@ if(!isset($_SESSION['username']))
                      });
         </script>
 
+               <!--Double click Report-->
+        <input type="radio" name="tabDoingSalam" id="tabDoingSalam6">
+        <label for="tabDoingSalam6" class="tabHeadingSalam"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="salam-report">
+
+        </div></form></div>
+
+        <!-- div for doubleclick and tabs -->
+        </div></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Salam').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.salam-report').html(response);
+            // Display Modal
+            $('#doubleClick-Salam').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
 
             <!-- END OF SALAM -->
 
@@ -3783,7 +3765,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingTeck2" class="tabHeadingTeck">Update</label>
         <div class="tab" id="TeckJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="teck-update">
 
         </div></form></div>
@@ -3795,7 +3777,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3841,35 +3823,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-                <!--Double click Report-->
-        <input type="radio" name="tabDoingTeck" id="tabDoingTeck6">
-        <label for="tabDoingTeck6" class="tabHeadingTeck"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="teck-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Teck').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.teck-report').html(response);
-            // Display Modal
-            $('#doubleClick-Teck').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingTeck" id="tabDoingTeck4">
@@ -3907,13 +3860,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingTeck5" class="tabHeadingTeck">Photo</label>
         <div class="tab" id="TeckJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="teckajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="teck-photos">
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -3921,7 +3872,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'teckajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -3934,6 +3885,41 @@ if(!isset($_SESSION['username']))
                 });
                      });
         </script>
+
+                        <!--Double click Report-->
+        <input type="radio" name="tabDoingTeck" id="tabDoingTeck6">
+        <label for="tabDoingTeck6" class="tabHeadingTeck"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="teck-report">
+
+        </div></form></div>
+
+                <!-- div for doubleclick and tabs -->
+    </div></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Teck').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.teck-report').html(response);
+            // Display Modal
+            $('#doubleClick-Teck').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
 
             <!-- END OF TECK -->
 
@@ -4016,7 +4002,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingAizat2" class="tabHeadingAizat">Update</label>
         <div class="tab" id=AizatJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="Aizattechupdate-details">
 
         </div></form></div>
@@ -4027,7 +4013,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request     
             $.ajax({
-            url:'ajaxtechupdate.php',
+            url:'ajaxtechupdateadmin.php',
             type:'post',
             data:{jobregister_id: jobregister_id},
             success: function(response) {
@@ -4072,36 +4058,6 @@ if(!isset($_SESSION['username']))
             });
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingAizat" id="tabDoingAizat6">
-        <label for="tabDoingAizat6" class="tabHeadingAizat"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="aizat-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Aizat').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.aizat-report').html(response);
-            // Display Modal
-            $('#doubleClick-Aizat').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
 <!--Double click Accessories -->
 
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat4">
@@ -4138,13 +4094,11 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingAizat5" class="tabHeadingAizat"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="aizatajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdt.php" method="post">
         <div class="Aizat-photo-details">
 
         </div></form></div>
 
-      <!-- div for doubleclick and tabs -->
-  </div></div>
       
         <script type='text/javascript'>
             $(document).ready(function() {
@@ -4152,7 +4106,7 @@ if(!isset($_SESSION['username']))
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
-            url: 'aizatajaxtechphtoupdt.php',
+            url: 'ajaxtechphtoupdt.php',
             type: 'post',
             data: {jobregister_id: jobregister_id},
             success: function(response) { 
@@ -4164,6 +4118,40 @@ if(!isset($_SESSION['username']))
                     });
                     });
                 });
+        </script>
+
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingAizat" id="tabDoingAizat6">
+        <label for="tabDoingAizat6" class="tabHeadingAizat"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="aizat-report">
+
+        </div></form></div>
+
+        
+      <!-- div for doubleclick and tabs -->
+  </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Aizat').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.aizat-report').html(response);
+            // Display Modal
+            $('#doubleClick-Aizat').modal('show');
+                     }
+                    });
+                });
+            });
         </script>
 
                <!-- END OF AIZAT -->
@@ -4241,7 +4229,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingPending2" class="tabHeadingPending">Update</label>
         <div class="tab" id="PendingJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="pending-update">
 
         </div></form></div>
@@ -4253,7 +4241,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -4299,36 +4287,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingPending" id="tabDoingPending6">
-        <label for="tabDoingPending6" class="tabHeadingPending"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="pending-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Pending').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.pending-report').html(response);
-            // Display Modal
-            $('#doubleClick-Pending').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingPending" id="tabDoingPending4">
         <label for="tabDoingPending4" class="tabHeadingPending">Accessories</label>
@@ -4370,9 +4328,6 @@ if(!isset($_SESSION['username']))
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
-
         <script type='text/javascript'>
             $(document).ready(function () {
             $('.Pending').click(function () {
@@ -4391,6 +4346,39 @@ if(!isset($_SESSION['username']))
              });
                 });
                      });
+        </script>
+
+        <!--Double click Report-->
+        <input type="radio" name="tabDoingPending" id="tabDoingPending6">
+        <label for="tabDoingPending6" class="tabHeadingPending"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="pending-report">
+
+        </div></form></div>
+
+        <!-- div for doubleclick and tabs -->
+        </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Pending').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.pending-report').html(response);
+            // Display Modal
+            $('#doubleClick-Pending').modal('show');
+                     }
+                    });
+                });
+            });
         </script>
 
 
@@ -4470,7 +4458,7 @@ if(!isset($_SESSION['username']))
         <label for="tabDoingIncomplete2" class="tabHeadingIncomplete">Update</label>
         <div class="tab" id="IncompleteJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-        <form action="ajaxtechupdate.php" method="post">
+        <form action="ajaxtechupdateadmin.php" method="post">
         <div class="incomplete-update">
 
         </div></form></div>
@@ -4482,7 +4470,7 @@ if(!isset($_SESSION['username']))
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate.php',
+            url: 'ajaxtechupdateadmin.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -4528,36 +4516,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-        <!--Double click Report-->
-        <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete6">
-        <label for="tabDoingIncomplete6" class="tabHeadingIncomplete"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="incomplete-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.Incomplete').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.incomplete-report').html(response);
-            // Display Modal
-            $('#doubleClick-Incomplete').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete4">
         <label for="tabDoingIncomplete4" class="tabHeadingIncomplete">Accessories</label>
@@ -4599,8 +4557,7 @@ if(!isset($_SESSION['username']))
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-    </div></div>
+
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -4622,7 +4579,39 @@ if(!isset($_SESSION['username']))
                      });
         </script>
 
-            
+                <!--Double click Report-->
+        <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete6">
+        <label for="tabDoingIncomplete6" class="tabHeadingIncomplete"> Report </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="incomplete-report">
+
+        </div></form></div>
+
+                <!-- div for doubleclick and tabs -->
+    </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.Incomplete').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.incomplete-report').html(response);
+            // Display Modal
+            $('#doubleClick-Incomplete').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
                 <!-- END OF INCOMPLETE -->
 
                 <!-- COMPLETED -->
@@ -4667,7 +4656,7 @@ if(!isset($_SESSION['username']))
                 <div class="tabC" id="completedJobInfoTab">
                 <div class="contentCompletedJobInfo">
                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-                <form action="ajaxtechnician.php" method="post">
+                <form action="ajaxjobcompleted.php" method="post">
                 <div class="completed-details">
                
                 </div></form></div></div>
@@ -4678,7 +4667,7 @@ if(!isset($_SESSION['username']))
                     var jobregister_id = $(this).data('id');
                     // AJAX request
                     $.ajax({
-                    url: 'ajaxtechnician.php',
+                    url: 'ajaxjobcompleted.php',
                     type: 'post',
                      data: {jobregister_id: jobregister_id},
                     success: function(response) {
@@ -4756,36 +4745,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-                <!--Double click Report-->
-        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted6">
-        <label for="tabDoingCompleted6" class="tabHeadingComplete"> Report </label>
-        <div class="tabC">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="ajaxreport.php" method="post">
-        <div class="completed-report">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('.completed').click(function() {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreport.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.completed-report').html(response);
-            // Display Modal
-            $('#doubleClick-completed').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted4">
         <label for="tabDoingCompleted4" class="tabHeadingComplete">Accessories</label>
@@ -4827,9 +4786,6 @@ if(!isset($_SESSION['username']))
 
         </div></form></div>
 
-        <!-- div for doubleclick and tabs -->
-        </div></div>
-
         <script type='text/javascript'>
             $(document).ready(function () {
             $('.completed').click(function () {
@@ -4848,6 +4804,41 @@ if(!isset($_SESSION['username']))
              });
                 });
                      });
+        </script>
+
+                        <!--Double click Report-->
+        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted6">
+        <label for="tabDoingCompleted6" class="tabHeadingComplete"> Report </label>
+        <div class="tabC">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
+        <form action="ajaxreportadmin.php" method="post">
+        <div class="completed-report">
+
+        </div></form></div>
+
+        
+        <!-- div for doubleclick and tabs -->
+        </div></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('.completed').click(function() {
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.completed-report').html(response);
+            // Display Modal
+            $('#doubleClick-completed').modal('show');
+                     }
+                    });
+                });
+            });
         </script>
 
 </section>

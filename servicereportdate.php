@@ -8,9 +8,9 @@ $con = mysqli_connect("localhost","root","","nwmsystem");
         $jobregister_id = $_POST['jobregister_id'];
         $srvcreportdate = $_POST['srvcreportdate'];
         
-        // $sql = "UPDATE job_register SET srvcreportdate ='$srvcreportdate' WHERE jobregister_id='$jobregister_id'";
+        $sql = "UPDATE job_register SET srvcreportdate ='$srvcreportdate' WHERE jobregister_id='$jobregister_id'";
 
-        $sql = "INSERT INTO servicereport (jobregister_id, srvcreportdate) VALUES ('$jobregister_id', '$srvcreportdate')";
+        // $sql = "INSERT INTO servicereport (jobregister_id, srvcreportdate) VALUES ('$jobregister_id', '$srvcreportdate')";
         
         $query=mysqli_query($con,$sql) or die(mysqli_error($con));
         
