@@ -35,7 +35,7 @@ if(!isset($_SESSION['username']))
     <link href="css/admin.css"rel="stylesheet" />
     <link href="css/adminhomepage.css"rel="stylesheet" />
     <link href="css/adminboard.css"rel="stylesheet" />
-       <link href="css/adminhomepage.css"rel="stylesheet" />
+    <link href="css/adminhomepage.css"rel="stylesheet" />
     <!-- <link href="tab.css"rel="stylesheet" /> -->
 
     <!-- Script -->
@@ -154,12 +154,13 @@ if(!isset($_SESSION['username']))
         <nav>
             <div class="sidebar-button">
                 <i class='bx bx-menu sidebarBtn' ></i>
-                <a href="Adminhomepage.php">
-                    <span class="dashboard">Home</span>
-                </a>
-                 <a href="adminjoblisting.php">
+            <button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
+                <!-- <a href="Adminhomepage.php"> -->
+                    <!-- <span class="dashboard" onclick="document.getElementById('doubleClick-Pending').style.display='none'">Home</span> -->
+                <!-- </a> -->
+                 <!-- <a href="adminjoblisting.php">
                     <span class="dashboard">Job Listing</span>
-                </a>
+                </a> -->
             </div>
 
             <div class="notification-button">
