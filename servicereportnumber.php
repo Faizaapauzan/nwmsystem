@@ -2,7 +2,7 @@
 
     include 'dbconnect.php';
 
-    $sql = ("SELECT srvcreportnumber FROM `servicereport_number`");
+    $sql = ("SELECT srvcreportnumber FROM `job_register`");
     $res = mysqli_query($conn,$sql);
     $last_id = 0;
     while($row = mysqli_fetch_array($res))

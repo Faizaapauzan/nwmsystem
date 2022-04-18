@@ -1,5 +1,7 @@
 <?php
 session_start();
+$today_date = date("Y.m.d");
+$_SESSION['storeDate'] = $today_date;
 ?>
 
 <?php
@@ -170,6 +172,10 @@ include 'dbconnect.php';
                 <div class="contentListAddForm">
                    <form id="user_form" method="post">
                         <div class="listAddForm-details">
+
+                        <?php if (isset($_SESSION["username"])) ?>
+                            <input type="hidden" name="today_date" id="today_date" value="<?php echo $_SESSION["showDate"] ?>" readonly>
+                        
                            
                             <div class="input-box">
                                 <label for="customerCode" class="details">Customer Code</label>
