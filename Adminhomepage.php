@@ -216,13 +216,26 @@ if(!isset($_SESSION['username']))
                 job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
+
+                $numRow = "SELECT * FROM `job_register`WHERE job_status= '' AND job_assign = '' ";
+                $numRow_run = mysqli_query ($conn,$numRow);
+
+                if ($row_Total = mysqli_num_rows($numRow_run))
+                {
+                    echo '<h4>Total: '.$row_Total.' </h4>';
+                }
+                else
+                {
+                    echo '<h4>No Data </h4>';
+                }
+
         while($row = $results->fetch_assoc()) {
         ?>
                             
         <div class="todo" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-1"  ondblclick="document.getElementById('doubleClick-1').style.display='block'">
         <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
         <ul class="b" id="draged">
-        <strong align="center"><?php echo $row['job_order_number']?></strong>
+        <strong text-align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
         <li><?php echo $row['machine_type']?></li>
@@ -262,13 +275,26 @@ if(!isset($_SESSION['username']))
                 job_assign = 'Sau Hwe' AND job_status = 'Incomplete')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
+
+            $numRow = "SELECT * FROM `job_register`WHERE job_assign = '' AND job_status = '' AND accessories_required = 'Yes' OR job_assign = '' AND job_status='Not Ready' AND accessories_required = 'Yes' ";
+            $numRow_run = mysqli_query ($conn,$numRow);
+
+            if ($row_Total = mysqli_num_rows($numRow_run))
+            {
+                echo '<h4>Total: '.$row_Total.' </h4>';
+            }
+            else
+            {
+                echo '<h4>No Data </h4>';
+            }
+                
         while($row = $results->fetch_assoc()) {
         ?>
 
         <div class="Store" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Store"  ondblclick="document.getElementById('doubleClick-Store').style.display='block'">
         <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
         <ul class="b" id="draged">
-        <strong align="center"><?php echo $row['job_order_number']?></strong>
+        <strong text-align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
         <li><?php echo $row['machine_type']?></li>
@@ -406,13 +432,27 @@ if(!isset($_SESSION['username']))
                 job_assign = 'Boon' AND job_status = 'Incomplete')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
+
+            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Boon' AND job_status = 'Doing' OR job_assign = 'Boon' AND job_status='' ";
+            $numRow_run = mysqli_query ($conn,$numRow);
+
+            if ($row_Total = mysqli_num_rows($numRow_run))
+            {
+                echo '<h4>Total: '.$row_Total.' </h4>';
+            }
+            else
+            {
+                echo '<h4>No Data </h4>';
+            }
+                    
+                    
         while($row = $results->fetch_assoc()) {
         ?>
 
         <div class="Boon" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Boon"  ondblclick="document.getElementById('doubleClick-Boon').style.display='block'">
         <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
         <ul class="b" id="draged">
-        <strong align="center"><?php echo $row['job_order_number']?></strong>
+        <strong text-align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
         <li><?php echo $row['machine_type']?></li>
@@ -638,13 +678,26 @@ if(!isset($_SESSION['username']))
                 job_assign = 'Hafiz' AND job_status = 'Incomplete')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
+
+        $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Hafiz' AND job_status = 'Doing' OR job_assign = 'Hafiz' AND job_status='' ";
+        $numRow_run = mysqli_query ($conn,$numRow);
+
+        if ($row_Total = mysqli_num_rows($numRow_run))
+        {
+            echo '<h4>Total: '.$row_Total.' </h4>';
+        }
+        else
+        {
+            echo '<h4>No Data </h4>';
+        }
+
         while($row = $results->fetch_assoc()) {
         ?>
                             
         <div class="Hafiz" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hafiz"  ondblclick="document.getElementById('doubleClick-Hafiz').style.display='block'">
         <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
         <ul class="b" id="draged">
-        <strong align="center"><?php echo $row['job_order_number']?></strong>
+        <strong text-align="center"><?php echo $row['job_order_number']?></strong>
         <li><?php echo $row['job_priority']?></li>
         <li><?php echo $row['customer_name']?></li>
         <li><?php echo $row['machine_type']?></li>
@@ -888,13 +941,27 @@ if(!isset($_SESSION['username']))
                     job_assign = 'Hamir' AND job_status = 'Incomplete')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
+
+
+                    $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Hamir' AND job_status = 'Doing' OR job_assign = 'Hamir' AND job_status='' ";
+                    $numRow_run = mysqli_query ($conn,$numRow);
+
+                    if ($row_Total = mysqli_num_rows($numRow_run))
+                    {
+                        echo '<h4>Total: '.$row_Total.' </h4>';
+                    }
+                    else
+                    {
+                        echo '<h4>No Data </h4>';
+                    }
+
                     while($row = $results->fetch_assoc()) {
             ?>
 
                 <div class="Hamir" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hamir"  ondblclick="document.getElementById('doubleClick-Hamir').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
@@ -1128,13 +1195,27 @@ if(!isset($_SESSION['username']))
                 job_assign = 'Hwa' AND job_status = 'Incomplete')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
+
+
+                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Hwa' AND job_status = 'Doing' OR job_assign = 'Hwa' AND job_status='' ";
+                $numRow_run = mysqli_query ($conn,$numRow);
+
+                if ($row_Total = mysqli_num_rows($numRow_run))
+                {
+                    echo '<h4>Total: '.$row_Total.' </h4>';
+                }
+                else
+                {
+                    echo '<h4>No Data </h4>';
+                }
+
             while($row = $results->fetch_assoc()) {
             ?>
 
             <div class="Hwa" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hwa"  ondblclick="document.getElementById('doubleClick-Hwa').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
-            <strong align="center"><?php echo $row['job_order_number']?></strong>
+            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
             <li><?php echo $row['machine_type']?></li>
@@ -1364,13 +1445,27 @@ if(!isset($_SESSION['username']))
                         job_assign = 'Isk' AND job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
+
+
+                    $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Isk' AND job_status = 'Doing' OR job_assign = 'Isk' AND job_status='' ";
+                    $numRow_run = mysqli_query ($conn,$numRow);
+
+                    if ($row_Total = mysqli_num_rows($numRow_run))
+                    {
+                        echo '<h4>Total: '.$row_Total.' </h4>';
+                    }
+                    else
+                    {
+                        echo '<h4>No Data </h4>';
+                    }
+
                         while($row = $results->fetch_assoc()) {
                 ?>
 
                 <div class="Isk" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Isk"  ondblclick="document.getElementById('doubleClick-Isk').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
@@ -1597,13 +1692,26 @@ if(!isset($_SESSION['username']))
                         job_assign = 'John' AND job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
+
+                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'John' AND job_status = 'Doing' OR job_assign = 'John' AND job_status='' ";
+                $numRow_run = mysqli_query ($conn,$numRow);
+
+                if ($row_Total = mysqli_num_rows($numRow_run))
+                {
+                    echo '<h4>Total: '.$row_Total.' </h4>';
+                }
+                else
+                {
+                    echo '<h4>No Data </h4>';
+                }
+
                 while($row = $results->fetch_assoc()) {
                 ?>
 
                 <div class="John" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-John"  ondblclick="document.getElementById('doubleClick-John').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
@@ -1833,13 +1941,26 @@ if(!isset($_SESSION['username']))
                         job_assign = 'Jun Jie' AND job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
+
+                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Jun Jie' AND job_status = 'Doing' OR job_assign = 'Jun Jie' AND job_status=''";
+                $numRow_run = mysqli_query ($conn,$numRow);
+
+                if ($row_Total = mysqli_num_rows($numRow_run))
+                {
+                    echo '<h4>Total: '.$row_Total.' </h4>';
+                }
+                else
+                {
+                    echo '<h4>No Data </h4>';
+                }
+
                         while($row = $results->fetch_assoc()) {
                 ?>
 
                 <div class="JunJie" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-JunJie"  ondblclick="document.getElementById('doubleClick-JunJie').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
@@ -2068,13 +2189,27 @@ if(!isset($_SESSION['username']))
                             job_assign = 'Will' AND job_status = 'Incomplete')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
+
+
+                    $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Will' AND job_status = 'Doing' OR job_assign = 'Will' AND job_status=''";
+                    $numRow_run = mysqli_query ($conn,$numRow);
+
+                    if ($row_Total = mysqli_num_rows($numRow_run))
+                    {
+                        echo '<h4>Total: '.$row_Total.' </h4>';
+                    }
+                    else
+                    {
+                        echo '<h4>No Data </h4>';
+                    }
+
                     while($row = $results->fetch_assoc()) {
                 ?>
 
                 <div class="Razwill" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Razwill"  ondblclick="document.getElementById('doubleClick-Razwill').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
@@ -2303,13 +2438,26 @@ if(!isset($_SESSION['username']))
                             job_assign = 'Sahele' AND job_status = 'Incomplete')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
+
+                    $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Sahele' AND job_status = 'Doing' OR job_assign = 'Sahele' AND job_status='' ";
+                    $numRow_run = mysqli_query ($conn,$numRow);
+
+                    if ($row_Total = mysqli_num_rows($numRow_run))
+                    {
+                        echo '<h4>Total: '.$row_Total.' </h4>';
+                    }
+                    else
+                    {
+                        echo '<h4>No Data </h4>';
+                    }
+
                             while($row = $results->fetch_assoc()) {
                 ?>  
                         
                 <div class="Sahele" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Sahele"  ondblclick="document.getElementById('doubleClick-Sahele').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
@@ -2537,13 +2685,26 @@ if(!isset($_SESSION['username']))
                         job_assign = 'Sazaly' AND job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
+
+                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Sazaly' AND job_status = 'Doing' OR job_assign = 'Sazaly' AND job_status=''";
+                $numRow_run = mysqli_query ($conn,$numRow);
+
+                if ($row_Total = mysqli_num_rows($numRow_run))
+                {
+                    echo '<h4>Total: '.$row_Total.' </h4>';
+                }
+                else
+                {
+                    echo '<h4>No Data </h4>';
+                }
+
                 while($row = $results->fetch_assoc()) {
                 ?>
                         
                 <div class="Sazaly" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Sazaly"  ondblclick="document.getElementById('doubleClick-Sazaly').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
@@ -2771,13 +2932,26 @@ if(!isset($_SESSION['username']))
                     job_assign = 'Faizan' AND job_status = 'Incomplete')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
+
+                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Faizan' AND job_status = 'Doing' OR job_assign = 'Faizan' AND job_status='' ";
+                $numRow_run = mysqli_query ($conn,$numRow);
+
+                if ($row_Total = mysqli_num_rows($numRow_run))
+                {
+                    echo '<h4>Total: '.$row_Total.' </h4>';
+                }
+                else
+                {
+                    echo '<h4>No Data </h4>';
+                }
+
             while($row = $results->fetch_assoc()) {
             ?>
                         
             <div class="Faizan" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Faizan"  ondblclick="document.getElementById('doubleClick-Faizan').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
-            <strong align="center"><?php echo $row['job_order_number']?></strong>
+            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
             <li><?php echo $row['machine_type']?></li>
@@ -3005,13 +3179,26 @@ if(!isset($_SESSION['username']))
                     job_assign = 'Fauzin' AND job_status = 'Incomplete')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
-                    while($row = $results->fetch_assoc()) {
+
+            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Fauzin' AND job_status = 'Doing' OR job_assign = 'Fauzin' AND job_status='' ";
+            $numRow_run = mysqli_query ($conn,$numRow);
+
+            if ($row_Total = mysqli_num_rows($numRow_run))
+            {
+                echo '<h4>Total: '.$row_Total.' </h4>';
+            }
+            else
+            {
+                echo '<h4>No Data </h4>';
+            }
+
+            while($row = $results->fetch_assoc()) {
             ?>
 
             <div class="Fauzin" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Fauzin"  ondblclick="document.getElementById('doubleClick-Fauzin').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
-            <strong align="center"><?php echo $row['job_order_number']?></strong>
+            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
             <li><?php echo $row['machine_type']?></li>
@@ -3241,13 +3428,26 @@ if(!isset($_SESSION['username']))
                     job_assign = 'Izaan' AND job_status = 'Incomplete')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
+
+            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Izaan' AND job_status = 'Doing' OR job_assign = 'Izaan' AND job_status=''";
+            $numRow_run = mysqli_query ($conn,$numRow);
+
+            if ($row_Total = mysqli_num_rows($numRow_run))
+            {
+                echo '<h4>Total: '.$row_Total.' </h4>';
+            }
+            else
+            {
+                echo '<h4>No Data </h4>';
+            }
+
             while($row = $results->fetch_assoc()) {
             ?>  
                         
             <div class="Izaan" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Izaan"  ondblclick="document.getElementById('doubleClick-Izaan').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
-            <strong align="center"><?php echo $row['job_order_number']?></strong>
+            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
             <li><?php echo $row['machine_type']?></li>
@@ -3477,13 +3677,25 @@ if(!isset($_SESSION['username']))
                     job_assign = 'Salam' AND job_status = 'Incomplete')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
+
+            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Salam' AND job_status = 'Doing' OR job_assign = 'Salam' AND job_status=''";
+            $numRow_run = mysqli_query ($conn,$numRow);
+
+            if ($row_Total = mysqli_num_rows($numRow_run))
+            {
+                echo '<h4>Total: '.$row_Total.' </h4>';
+            }
+            else
+            {
+                echo '<h4>No Data </h4>';
+}   
             while($row = $results->fetch_assoc()) {
             ?>
                         
             <div class="Salam" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Salam"  ondblclick="document.getElementById('doubleClick-Salam').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
-            <strong align="center"><?php echo $row['job_order_number']?></strong>
+            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
             <li><?php echo $row['machine_type']?></li>
@@ -3697,7 +3909,7 @@ if(!isset($_SESSION['username']))
             <!-- TECK -->
 
             <div class="overview-boxes" >
-            <div class="box" id="myModal">
+                <div class="box" id="myModal">
             <div class="left-side">
             <div class="box_topic">Teck</div>
                             
@@ -3714,13 +3926,26 @@ if(!isset($_SESSION['username']))
                     job_assign = 'Teck' AND job_status = 'Incomplete')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
+
+            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Teck' AND job_status = 'Doing' OR job_assign = 'Teck' AND job_status=''";
+            $numRow_run = mysqli_query ($conn,$numRow);
+
+            if ($row_Total = mysqli_num_rows($numRow_run))
+            {
+                echo '<h4>Total: '.$row_Total.' </h4>';
+            }
+            else
+            {
+                echo '<h4>No Data </h4>';
+            }
+
             while($row = $results->fetch_assoc()) {
             ?>
 
             <div class="Teck" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Teck"  ondblclick="document.getElementById('doubleClick-Teck').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
-            <strong align="center"><?php echo $row['job_order_number']?></strong>
+            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
             <li><?php echo $row['machine_type']?></li>
@@ -3952,13 +4177,26 @@ if(!isset($_SESSION['username']))
                     job_assign = 'Aizat' AND job_status = 'Incomplete')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
+
+            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Aizat' AND job_status = 'Doing' OR job_assign = 'Aizat' AND job_status=''";
+            $numRow_run = mysqli_query ($conn,$numRow);
+
+            if ($row_Total = mysqli_num_rows($numRow_run))
+            {
+                echo '<h4>Total: '.$row_Total.' </h4>';
+            }
+            else
+            {
+                echo '<h4>No Data </h4>';
+            }
+
             while($row = $results->fetch_assoc()) {
             ?>
 
             <div class="Aizat" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Aizat" ondblclick="document.getElementById('doubleClick-Aizat').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
-            <strong align="center"><?php echo $row['job_order_number']?></strong>
+            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
             <li><?php echo $row['customer_name']?></li>
             <li><?php echo $row['machine_type']?></li>
@@ -4178,13 +4416,26 @@ if(!isset($_SESSION['username']))
                         (job_status = 'Pending')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
+
+                $numRow = "SELECT * FROM `job_register`WHERE job_status = 'Pending' ";
+                $numRow_run = mysqli_query ($conn,$numRow);
+
+                if ($row_Total = mysqli_num_rows($numRow_run))
+                {
+                    echo '<h4>Total: '.$row_Total.' </h4>';
+                }
+                else
+                {
+                    echo '<h4>No Data </h4>';
+                }
+
                 while($row = $results->fetch_assoc()) {
                 ?>
 
                 <div class="Pending" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Pending"  ondblclick="document.getElementById('doubleClick-Pending').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
@@ -4407,13 +4658,26 @@ if(!isset($_SESSION['username']))
                         (job_status = 'Incomplete')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
+
+                $numRow = "SELECT * FROM `job_register`WHERE job_status = 'Incomplete' ";
+                $numRow_run = mysqli_query ($conn,$numRow);
+
+                 if ($row_Total = mysqli_num_rows($numRow_run))
+                {
+                        echo '<h4>Total: '.$row_Total.' </h4>';
+                }
+                 else
+                {
+                        echo '<h4>No Data </h4>';
+                 }
+
                 while($row = $results->fetch_assoc()) {
                 ?>
                         
                 <div class="Incomplete" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Incomplete"  ondblclick="document.getElementById('doubleClick-Incomplete').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
+                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
                 <li><?php echo $row['customer_name']?></li>
                 <li><?php echo $row['machine_type']?></li>
