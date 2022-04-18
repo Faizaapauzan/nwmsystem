@@ -624,7 +624,7 @@ if(!$db)
                         <h2>Job Details</h2>
                     </div>
 					
-					<label for="job_order_number" class:"details" >Job Order Number</label>
+					<label for="job_order_number" class="details" >Job Order Number</label>
 					<div class="technician-time">
 					<input type="text" id="Departure" name="job_order_number" class="technician-time-input" placeholder="Enter Job Order Number">
 					<button onclick="test();" class="technician-time-botton" type="submit">Get Job Order Number</button>

@@ -1,0 +1,285 @@
+table {
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px rgb(37, 19, 19);
+  background-color: #fff;
+  text-align: left;
+  overflow: hidden;
+  width: 100%;
+  display: fixed;
+  justify-content: center;
+}
+
+thead {
+  box-shadow: 0 5px 10px rgb(186, 189, 183);
+
+  /* padding: 1rem 5.1rem; */
+}
+
+th {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  height: 50px;
+}
+
+td {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.jobListingList {
+  padding-top: 1%;
+}
+
+.jobListingList h1 {
+  padding-bottom: 10px;
+  padding-left: 1%;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 100;
+}
+
+.accessoriesPopup .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.accessoriesPopup .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
+
+.contentAccessoriesPopup form .accessories-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
+
+.modal .contentAccessoriesPopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 550px;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
+
+.modal.active .contentAccessoriesPopup {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
+
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
+
+.updateBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
+
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
+
+.accessories-descriptions {
+  padding: 0.5rem;
+}
+
+.accessories-descriptions span {
+  color: #2f456e;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.adminlistingUpdateBtn {
+  display: flex;
+}
+
+.addAccessoriesBtn button {
+  width: 100%;
+  margin: 0 19px 5px 19px;
+  border-radius: 5px;
+}
+
+.addAccessoriesBtn {
+  display: flex;
+  margin-left: 85%;
+  margin-bottom: 5px;
+  margin-top: -40px;
+}
+
+#display_image {
+  width: 200px;
+  height: 130px;
+  border: 1px solid black;
+  background-position: center;
+  background-size: cover;
+}
+
+.search-panel {
+  height: 30px;
+  width: 50%;
+  border-radius: 5px;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+  position: static;
+}
+
+.loading-overlay {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  position: static;
+}
+
+.modal .contentAccessoriesPopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: auto;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
+
+/*.container{
+	padding: 20px;	
+}
+h1{
+	text-align: center;
+	font-size: 2rem;
+	color: #888888;
+	text-transform: uppercase;
+	font-family: monospace;
+    font-weight: bold;
+}*/
+
+.table.sortable thead .sorting {
+  position: relative;
+  cursor: pointer;
+  padding-right: 1.7em;
+}
+.table.sortable thead .sorting:before {
+  left: auto;
+  right: 1em;
+  /*content: "↑";*/
+  content: "\1F825";
+  position: absolute;
+  bottom: 0.5em;
+  display: block;
+  opacity: 0.3;
+}
+.table.sortable thead .sorting.asc:before {
+  opacity: 1;
+}
+.table.sortable thead .sorting:after {
+  left: auto;
+  right: 0.5em;
+  /*content: "↓";*/
+  content: "\1F827";
+  position: absolute;
+  bottom: 0.5em;
+  display: block;
+  opacity: 0.3;
+}
+.table.sortable thead .sorting.desc:after {
+  opacity: 1;
+}
+
+/* For Loading Overlay by CodexWorld */
+.datalist-wrapper {
+  position: relative;
+}
+.loading-overlay {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.7);
+}
+.overlay-content {
+  position: absolute;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #555;
+}
+
+/* For Pagination Links by CodexWorld */
+.pagination2 {
+  font-family: Verdana, sans-serif;
+  padding: 20px;
+  margin: 7px;
+  display: block;
+  text-align: center;
+}
+.pagination2 a {
+  margin: 2px;
+  padding: 0.3em 0.64em 0.43em 0.64em;
+  background-color: #ff3547;
+  text-decoration: none;
+  color: #fff;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  -webkit-border-radius: 0.125rem;
+  border-radius: 0.125rem;
+}
+.pagination2 a:hover,
+.pagination2 a:active {
+  padding: 0.3em 0.64em 0.43em 0.64em;
+  margin: 2px;
+  background-color: #de1818;
+  color: #fff;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 20px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}

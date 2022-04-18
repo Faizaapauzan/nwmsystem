@@ -4,7 +4,7 @@ session_start();
 
 if(!isset($_SESSION['username']))
 	{	
-        header("location:loginpage.php");
+        header("location:index.html");
 	}
 
     elseif($_SESSION['staff_position']== 'Admin')
@@ -16,7 +16,7 @@ if(!isset($_SESSION['username']))
 
   else
 	{
-			header("location:loginpage.php");
+			header("location:index.html");
 	}
 ?>
 
@@ -157,7 +157,9 @@ if(!isset($_SESSION['username']))
                 <a href="Adminhomepage.php">
                     <span class="dashboard">Home</span>
                 </a>
-   
+                 <a href="adminjoblisting.php">
+                    <span class="dashboard">Job Listing</span>
+                </a>
             </div>
 
             <div class="notification-button">
@@ -551,7 +553,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingBoon" id="tabDoingBoon5">
-        <label for="tabDoingBoon5" class="tabHeadingBoon"> Photo </label>
+        <label for="tabDoingBoon5" class="tabHeadingBoon"> Media </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -795,7 +797,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz5">
-        <label for="tabDoingHafiz5" class="tabHeadingHafiz">Photo</label>
+        <label for="tabDoingHafiz5" class="tabHeadingHafiz">Media</label>
         <div class="tab" id="HafizJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -1042,7 +1044,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir5">
-        <label for="tabDoingHamir5" class="tabHeadingHamir">Photo</label>
+        <label for="tabDoingHamir5" class="tabHeadingHamir">Media</label>
         <div class="tab" id="HamirJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -1280,7 +1282,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa5">
-        <label for="tabDoingHwa5" class="tabHeadingHwa">Photo</label>
+        <label for="tabDoingHwa5" class="tabHeadingHwa">Media</label>
         <div class="tab" id="HwaJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -1747,7 +1749,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn5">
-        <label for="tabDoingJohn5" class="tabHeadingJohn">Photo</label>
+        <label for="tabDoingJohn5" class="tabHeadingJohn">Media</label>
         <div class="tab" id=JohnJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -1983,7 +1985,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie5">
-        <label for="tabDoingJunJie5" class="tabHeadingJunJie">Photo</label>
+        <label for="tabDoingJunJie5" class="tabHeadingJunJie">Media</label>
         <div class="tab" id=JunJieJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -2218,7 +2220,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill5">
-        <label for="tabDoingRazwill5" class="tabHeadingRazwill">Photo</label>
+        <label for="tabDoingRazwill5" class="tabHeadingRazwill">Media</label>
         <div class="tab" id="RazwillJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -2453,7 +2455,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSahele" id="tabDoingSahele5">
-        <label for="tabDoingSahele5" class="tabHeadingSahele">Photo</label>
+        <label for="tabDoingSahele5" class="tabHeadingSahele">Media</label>
         <div class="tab" id="SaheleJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -2687,7 +2689,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly5">
-        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Photo</label>
+        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Media</label>
         <div class="tab" id="SazalyJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -2920,7 +2922,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan5">
-        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Photo</label>
+        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Media</label>
         <div class="tab" id="FaizanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3156,7 +3158,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin5">
-        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Photo</label>
+        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Media</label>
         <div class="tab" id="FauzinJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3391,7 +3393,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan5">
-        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Photo</label>
+        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Media</label>
         <div class="tab" id="IzaanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3627,7 +3629,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam5">
-        <label for="tabDoingSalam5" class="tabHeadingSalam">Photo</label>
+        <label for="tabDoingSalam5" class="tabHeadingSalam">Media</label>
         <div class="tab" id="SalamJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3865,7 +3867,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingTeck" id="tabDoingTeck5">
-        <label for="tabDoingTeck5" class="tabHeadingTeck">Photo</label>
+        <label for="tabDoingTeck5" class="tabHeadingTeck">Media</label>
         <div class="tab" id="TeckJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4099,7 +4101,7 @@ if(!isset($_SESSION['username']))
 
 <!--Double click Photo-->
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat5">
-        <label for="tabDoingAizat5" class="tabHeadingAizat"> Photo </label>
+        <label for="tabDoingAizat5" class="tabHeadingAizat"> Media </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4328,7 +4330,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingPending" id="tabDoingPending5">
-        <label for="tabDoingPending5" class="tabHeadingPending">Photo</label>
+        <label for="tabDoingPending5" class="tabHeadingPending">Media</label>
         <div class="tab" id="PendingJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4557,7 +4559,7 @@ if(!isset($_SESSION['username']))
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete5">
-        <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Photo</label>
+        <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Media</label>
         <div class="tab" id="IncompleteJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
