@@ -17,13 +17,13 @@
 <head>
 
 <meta charset=”UTF-8″>
-
+<link rel="stylesheet" type="text/css" href="css/tab.css"/>
+<link href="css/ajax.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/tab.css"/>
-<link href="css/ajax.css"rel="stylesheet" />
+
 
 </head>
 
@@ -105,12 +105,18 @@ form .submit-date label.details {
     <div class="input-box" style="display: flex; align-items: baseline;">
     <input type="date" id="srvcreportdate" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>">
     
-  <div class="input-group-append">
-    <button class="" type="submit" value="Submit" name="submit-date">SUBMIT</button>
+  <div class="input-group-append" style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
+    <button type="submit" value="Submit" name="submit-date" style="  background-color: #081d45;
+  color: white;
+  padding: 7px 67px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;">Submit</button>
 
 </form>
   	<form id="view_form" method="post">
-    <button class="userinfo btn btn-success" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>VIEW</button>
+    <button  style="background-color: #25561a;  padding: 7px 49px;" class="userinfo" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>View</button>
 </form>
             </div>
 
@@ -190,7 +196,7 @@ $result = mysqli_query($conn, $sql);
 <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
         <center>
-    <table class="table table-striped table-hover" style="width: 700px; margin-left: 41px;">
+    <table class="table table-striped table-hover" style="width: 700px; margin-left: -22px;">
     <thead>
     <tr>
   

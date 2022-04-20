@@ -1,9 +1,9 @@
 body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-color: #ffffff;
-    background-repeat: no-repeat
+  color: #000;
+  overflow-x: hidden;
+  height: 100%;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
 }
 
 .container {
@@ -16,96 +16,85 @@ body {
   flex-direction: column;
 }
 
+textarea {
+  resize: vertical;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 20px;
+}
 
+textarea:focus {
+  outline: none;
+}
 
-  textarea{
-    resize: vertical;
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 20px;
-  }
-    
-    
-  textarea:focus{
-    outline: none;
-  }
-  
-  /* Set a style for all buttons */
-  button {
-    background-color: #081D45;
-    color: white;
-    padding: 7px 10px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-right: 50px;
+/* Set a style for all buttons */
+button {
+  background-color: #081d45;
+  color: white;
+  padding: 7px 10px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
 
-    
-  }
-  
-  button:hover {
-    opacity: 0.8;
-  }
+button:hover {
+  opacity: 0.8;
+}
 
-  .updateBtn{
-    display: flex;
-    margin-left: 76%;
-    margin-bottom: 5px;
-    margin-top: 45px;
-    
-  }
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
 
-  textarea {
-    width: 100%;
-    padding: 7px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    text-align: left;
-    border: 1.7px solid rgb(201, 198, 198);
-    border-bottom-width: 2px;
-    border-radius: 5px;
-    
-  }
+textarea {
+  width: 100%;
+  padding: 7px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: left;
+  border: 1.7px solid rgb(201, 198, 198);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+}
 
-  .status{
-    border-radius: 6px;
-    font-size: 15px;
-    padding: 2px 5px 2px 5px;
-    width: auto;
-    text-align: center;
-    margin-top: -18px;
-    margin-left: 280px;
-    font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
-    float: right;
-    
-  }
+.status {
+  border-radius: 6px;
+  font-size: 15px;
+  padding: 2px 5px 2px 5px;
+  width: auto;
+  text-align: center;
+  margin-top: -18px;
+  margin-left: 280px;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+  float: right;
+}
 
-  #toDoStatus{
-    background: rgb(236,236,212);
-    color: rgb(133, 141, 22);
-   
-  }
+#toDoStatus {
+  background: rgb(236, 236, 212);
+  color: rgb(133, 141, 22);
+}
 
-  #incompleteStatus{
-    background: rgb(236,212,212);
-    color: rgb(124, 19, 19);
-  }
+#incompleteStatus {
+  background: rgb(236, 212, 212);
+  color: rgb(124, 19, 19);
+}
 
-  #pendingStatus{
-    background: rgb(212,228,236);
-    color: rgb(19, 115, 134);
-   
-  }
+#pendingStatus {
+  background: rgb(212, 228, 236);
+  color: rgb(19, 115, 134);
+}
 
-  #completedStatus{
-    background: rgb(214,237,226);
-    color: rgb(19, 133, 78);
-  }
+#completedStatus {
+  background: rgb(214, 237, 226);
+  color: rgb(19, 133, 78);
+}
 
 .technician-time {
   position: relative;
@@ -127,7 +116,7 @@ body {
   top: 3px;
   bottom: 3px;
   border: 0;
-  background: #081D45;
+  background: #081d45;
   color: #fff;
   outline: none;
   margin: 0;
@@ -135,43 +124,39 @@ body {
   z-index: 2;
 }
 
-  .input-box-leaving i{
-    position: absolute;
-    margin-top: -46px;
-    margin-left: 250px;
-    font-size: 25px;
-    cursor: pointer;
+.input-box-leaving i {
+  position: absolute;
+  margin-top: -46px;
+  margin-left: 250px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.input-box-departure i {
+  position: absolute;
+  margin-top: -45px;
+  margin-left: 250px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.input-box-arrival i {
+  position: absolute;
+  margin-top: -40px;
+  margin-left: 250px;
+  font-size: 25px;
+  cursor: pointer;
+}
 
-  }
-    .input-box-departure i{
-    position: absolute;
-    margin-top: -45px;
-    margin-left: 250px;
-    font-size: 25px;
-    cursor: pointer;
+.input-boxLocation i {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 250px;
+  font-size: 20px;
+  cursor: pointer;
+}
 
-  }
-    .input-box-arrival i{
-    position: absolute;
-    margin-top: -40px;
-    margin-left: 250px;
-    font-size: 25px;
-    cursor: pointer;
-
-  }
-
-  .input-boxLocation i{
-    position: absolute;
-    margin-top: 10px; !important
-    margin-left: 250px;
-    font-size: 20px;
-    cursor: pointer;
-
-  }
-
-  .updateBtn input {
+.updateBtn input {
   height: 30px;
-  width:100px;
+  width: 100px;
   border-radius: 5px;
   border: none;
   color: #fff;
@@ -251,7 +236,6 @@ body {
   cursor: pointer;
 }
 
-
 .input-box-leaving input[type="button"] {
   margin-bottom: 15px;
   width: 30%;
@@ -271,7 +255,6 @@ body {
   cursor: pointer;
 }
 
-
 .input-box-arrival input[type="button"] {
   margin-bottom: 15px;
   width: 30%;
@@ -290,5 +273,3 @@ body {
   margin-right: 10px;
   cursor: pointer;
 }
-
-

@@ -2,7 +2,7 @@ table {
   border-collapse: collapse;
   box-shadow: 0 5px 10px rgb(37, 19, 19);
   background-color: #fff;
-  text-align: left;
+  text-align: center;
   overflow: hidden;
   width: 100%;
   display: fixed;
@@ -11,6 +11,7 @@ table {
 
 thead {
   box-shadow: 0 5px 10px rgb(186, 189, 183);
+  text-align: center;
 
   /* padding: 1rem 5.1rem; */
 }

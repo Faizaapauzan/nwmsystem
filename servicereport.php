@@ -419,7 +419,7 @@ footer p {
     <p><label>Travel Time :</label><span><input type="technician_arrival" name="date" class="input" value="<?php echo difftime($DateTime1,$DateTime2)['h']?>   hours <?php echo difftime($DateTime1,$DateTime2)['m']?>  minutes" /></span></p>
     <p><label>Time At  Site :</label> <span><input type="text" name="technician_arrival" value="<?php echo $row['technician_arrival'] ?>" class="input" /></span></p>
     <p><label>Return Time :</label><span><input type="text" name="technician_leaving" value="<?php echo $row['technician_leaving'] ?>" class="input" /></span></p>
-    <p><label style="position:absolute;">Machine Name :</label> <span><textarea style="width: 247px; height: 45px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;"><?php echo $row['machine_name'] ?></textarea></span></p>
+    <p><label style="position:absolute;">Machine Name :</label> <span><textarea style="width: 247px; height: 45px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 117px;"><?php echo $row['machine_name'] ?></textarea></span></p>
     <p><label>Serial Number :</label> <span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input" /></span></p>
     <br/>
     <p>Submitted Items :-</p>
