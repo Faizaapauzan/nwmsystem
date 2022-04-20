@@ -48,7 +48,7 @@
     <div class="sidebar">
             <div class="logo-details">
                 <i class='bx bx-window-alt'></i>
-            <span class="logo_name">NWM System</span>
+            <span class="logo_name">NWM Admin System</span>
             </div>
         </a>
         
