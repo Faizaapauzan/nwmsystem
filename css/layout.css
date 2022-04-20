@@ -175,10 +175,9 @@ body {
 }
 
 .home-content .overview-boxes .box_topic {
-  font-size: 20px;
-  font-weight: 500;
-  margin-left: 15px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bolder;
+  float: left;
 }
 
 .Job_topic {
