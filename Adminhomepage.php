@@ -49,6 +49,14 @@ if(!isset($_SESSION['username']))
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
+<style>
+    h4{
+        display: inline-block;
+        
+        width: 90px;
+    }
+</style>
+
 
 </head>
  <body>
@@ -202,7 +210,7 @@ if(!isset($_SESSION['username']))
         <div class="box" id="myModal">
         <div class="left-side">
         <div class="box_topic">Job Listing</div>
-
+        
         <?php
         include 'dbconnect.php';
 
@@ -217,17 +225,19 @@ if(!isset($_SESSION['username']))
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
+                
                 $numRow = "SELECT * FROM `job_register`WHERE job_status= '' AND job_assign = '' ";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total: '.$row_Total.' </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                 }
                 else
                 {
-                    echo '<h4>No Data </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                 }
+              
 
         while($row = $results->fetch_assoc()) {
         ?>
@@ -276,16 +286,19 @@ if(!isset($_SESSION['username']))
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = '' AND job_status = '' AND accessories_required = 'Yes' OR job_assign = '' AND job_status='Not Ready' AND accessories_required = 'Yes' ";
+            $numRow = "SELECT * FROM `job_register` WHERE job_assign = '' AND job_status = '' AND accessories_required = 'Yes' 
+            OR 
+            job_assign = '' AND job_status='Not Ready' AND accessories_required = 'Yes' ";
+
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total: '.$row_Total.' </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;" >Total Job: '.$row_Total.' </h4>';
             }
             else
             {
-                echo '<h4>No Data </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
             }
                 
         while($row = $results->fetch_assoc()) {
@@ -418,7 +431,8 @@ if(!isset($_SESSION['username']))
         <div class="box" id="myModal">
         <div class="left-side" >
         <div class="box_topic">Boon</div>
-                        
+        
+        
         <?php
         include 'dbconnect.php';
                                 
@@ -433,16 +447,17 @@ if(!isset($_SESSION['username']))
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
+
             $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Boon' AND job_status = 'Doing' OR job_assign = 'Boon' AND job_status='' ";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total: '.$row_Total.' </h4>';
+                echo  '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
             }
             else
             {
-                echo '<h4>No Data </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
             }
                     
                     
@@ -684,11 +699,11 @@ if(!isset($_SESSION['username']))
 
         if ($row_Total = mysqli_num_rows($numRow_run))
         {
-            echo '<h4>Total: '.$row_Total.' </h4>';
+            echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
         }
         else
         {
-            echo '<h4>No Data </h4>';
+            echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
         }
 
         while($row = $results->fetch_assoc()) {
@@ -948,11 +963,11 @@ if(!isset($_SESSION['username']))
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4>Total: '.$row_Total.' </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                     }
                     else
                     {
-                        echo '<h4>No Data </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                     }
 
                     while($row = $results->fetch_assoc()) {
@@ -1202,11 +1217,11 @@ if(!isset($_SESSION['username']))
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total: '.$row_Total.' </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                 }
                 else
                 {
-                    echo '<h4>No Data </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                 }
 
             while($row = $results->fetch_assoc()) {
@@ -1452,11 +1467,11 @@ if(!isset($_SESSION['username']))
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4>Total: '.$row_Total.' </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                     }
                     else
                     {
-                        echo '<h4>No Data </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;>No Data </h4>';
                     }
 
                         while($row = $results->fetch_assoc()) {
@@ -1698,11 +1713,11 @@ if(!isset($_SESSION['username']))
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total: '.$row_Total.' </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                 }
                 else
                 {
-                    echo '<h4>No Data </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                 }
 
                 while($row = $results->fetch_assoc()) {
@@ -1947,11 +1962,11 @@ if(!isset($_SESSION['username']))
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total: '.$row_Total.' </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                 }
                 else
                 {
-                    echo '<h4>No Data </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                 }
 
                         while($row = $results->fetch_assoc()) {
@@ -2196,11 +2211,11 @@ if(!isset($_SESSION['username']))
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4>Total: '.$row_Total.' </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                     }
                     else
                     {
-                        echo '<h4>No Data </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                     }
 
                     while($row = $results->fetch_assoc()) {
@@ -2444,11 +2459,11 @@ if(!isset($_SESSION['username']))
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4>Total: '.$row_Total.' </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                     }
                     else
                     {
-                        echo '<h4>No Data </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                     }
 
                             while($row = $results->fetch_assoc()) {
@@ -2691,11 +2706,11 @@ if(!isset($_SESSION['username']))
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total: '.$row_Total.' </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                 }
                 else
                 {
-                    echo '<h4>No Data </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                 }
 
                 while($row = $results->fetch_assoc()) {
@@ -2938,11 +2953,11 @@ if(!isset($_SESSION['username']))
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total: '.$row_Total.' </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                 }
                 else
                 {
-                    echo '<h4>No Data </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                 }
 
             while($row = $results->fetch_assoc()) {
@@ -3159,9 +3174,9 @@ if(!isset($_SESSION['username']))
 
 
 
-            <!-- END OF FAIZAN -->
+            <!-- END OF FAIZAN --
 
-            <!-- FAUZIN -->
+            <!-FAUZIN -->
                 
             <div class="box">
             <div class="left-side">
@@ -3185,11 +3200,11 @@ if(!isset($_SESSION['username']))
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total: '.$row_Total.' </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
             }
             else
             {
-                echo '<h4>No Data </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
             }
 
             while($row = $results->fetch_assoc()) {
@@ -3434,11 +3449,11 @@ if(!isset($_SESSION['username']))
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total: '.$row_Total.' </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
             }
             else
             {
-                echo '<h4>No Data </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;>No Data </h4>';
             }
 
             while($row = $results->fetch_assoc()) {
@@ -3683,11 +3698,11 @@ if(!isset($_SESSION['username']))
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total: '.$row_Total.' </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
             }
             else
             {
-                echo '<h4>No Data </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
 }   
             while($row = $results->fetch_assoc()) {
             ?>
@@ -3932,11 +3947,11 @@ if(!isset($_SESSION['username']))
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total: '.$row_Total.' </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
             }
             else
             {
-                echo '<h4>No Data </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
             }
 
             while($row = $results->fetch_assoc()) {
@@ -4183,11 +4198,11 @@ if(!isset($_SESSION['username']))
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total: '.$row_Total.' </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
             }
             else
             {
-                echo '<h4>No Data </h4>';
+                echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
             }
 
             while($row = $results->fetch_assoc()) {
@@ -4422,11 +4437,11 @@ if(!isset($_SESSION['username']))
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total: '.$row_Total.' </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                 }
                 else
                 {
-                    echo '<h4>No Data </h4>';
+                    echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                 }
 
                 while($row = $results->fetch_assoc()) {
@@ -4664,11 +4679,11 @@ if(!isset($_SESSION['username']))
 
                  if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                        echo '<h4>Total: '.$row_Total.' </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">Total Job: '.$row_Total.' </h4>';
                 }
                  else
                 {
-                        echo '<h4>No Data </h4>';
+                        echo '<h4 style="position:relative; top: -41px; right:-160px;">No Data </h4>';
                  }
 
                 while($row = $results->fetch_assoc()) {
