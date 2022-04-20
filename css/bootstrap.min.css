@@ -1141,62 +1141,62 @@ mark,
   color: #337ab7;
 }
 a.text-primary:hover {
-  color: #286090;
+  color: #000000;
 }
 .text-success {
   color: #3c763d;
 }
 a.text-success:hover {
-  color: #2b542c;
+  color: #000000;
 }
 .text-info {
   color: #31708f;
 }
 a.text-info:hover {
-  color: #245269;
+  color: #000000;
 }
 .text-warning {
   color: #8a6d3b;
 }
 a.text-warning:hover {
-  color: #66512c;
+  color: #000000;
 }
 .text-danger {
   color: #a94442;
 }
 a.text-danger:hover {
-  color: #843534;
+  color: #000000;
 }
 .bg-primary {
   color: #fff;
   background-color: #337ab7;
 }
 a.bg-primary:hover {
-  background-color: #286090;
+  background-color: #000000;
 }
 .bg-success {
   background-color: #dff0d8;
 }
 a.bg-success:hover {
-  background-color: #c1e2b3;
+  background-color: #000000;
 }
 .bg-info {
   background-color: #d9edf7;
 }
 a.bg-info:hover {
-  background-color: #afd9ee;
+  background-color: #000000;
 }
 .bg-warning {
   background-color: #fcf8e3;
 }
 a.bg-warning:hover {
-  background-color: #f7ecb5;
+  background-color: #000000;
 }
 .bg-danger {
   background-color: #f2dede;
 }
 a.bg-danger:hover {
-  background-color: #e4b9b9;
+  background-color: #000000;
 }
 .page-header {
   padding-bottom: 9px;
@@ -2140,7 +2140,7 @@ caption {
   text-align: left;
 }
 th {
-  text-align: left;
+  text-align: center;
 }
 .table {
   width: 100%;

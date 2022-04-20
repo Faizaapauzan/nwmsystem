@@ -167,7 +167,7 @@ session_start();
 						<th>Job Order Number</th>
 						<th>Customer Name</th>
 						<th>Job Assign</th>
-                        <th>Delivery Date</th>
+                        <th>Report Date</th>
          				<th>Action</th>
 					</tr>
 				</thead>
