@@ -47,7 +47,7 @@ if(!isset($_SESSION['username']))
 	<script src="js/testing.js" type="text/javascript"></script>
 	
 
- 
+
 </head>
 
 <body>
@@ -64,13 +64,17 @@ if(!isset($_SESSION['username']))
            </div>		
 
            <div class="sidebar-button">
-            <i class='bx bx-detail'></i>
+          
             <a href="joblistingst.php">
                   <span class="dashboard">JOB LISTING</span>
               </a>
            </div>
-	
+
+           
           <div class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
+
+
+          
         </nav>
         
 		
@@ -105,7 +109,7 @@ if(!isset($_SESSION['username']))
               <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
 			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
                   <ul class="b" id="draged">
-                    <strong align="center"><?php echo $row['job_priority']?></strong>
+                    <strong text-align="center"><?php echo $row['job_priority']?></strong>
                     <li><?php echo $row['job_order_number']?></li>
                     <li><?php echo $row['job_name']?></li>
                     <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
@@ -146,7 +150,7 @@ if(!isset($_SESSION['username']))
               <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
 			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
                   <ul class="b" id="draged">
-                    <strong align="center"><?php echo $row['job_priority']?></strong>
+                    <strong text-align="center"><?php echo $row['job_priority']?></strong>
                     <li><?php echo $row['job_order_number']?></li>
                     <li><?php echo $row['job_name']?></li>
                     <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
@@ -186,7 +190,7 @@ if(!isset($_SESSION['username']))
               <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
 			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
                   <ul class="b" id="draged">
-                    <strong align="center"><?php echo $row['job_priority']?></strong>
+                    <strong text-align="center"><?php echo $row['job_priority']?></strong>
                     <li><?php echo $row['job_order_number']?></li>
                     <li><?php echo $row['job_name']?></li>
                     <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
@@ -225,7 +229,7 @@ if(!isset($_SESSION['username']))
               <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
 			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
                   <ul class="b" id="draged">
-                    <strong align="center"><?php echo $row['job_priority']?></strong>
+                    <strong text-align="center"><?php echo $row['job_priority']?></strong>
                     <li><?php echo $row['job_order_number']?></li>
                     <li><?php echo $row['job_name']?></li>
                     <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
@@ -277,7 +281,12 @@ if(!isset($_SESSION['username']))
               <div class="tabs" id="tab07">
                             <h6 class="text-muted">Report</h6>
 						</div>
-					
+
+           
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+              
 
 <!--JOB INFO-->
 						

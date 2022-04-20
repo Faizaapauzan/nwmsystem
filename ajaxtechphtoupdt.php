@@ -362,9 +362,14 @@ $(document).ready(function(){
 							<br>
 									<a href="javascript:void(0);" class="add_video" title="Add video" type="button">Click Here to Insert video</a>
 							<br><br>
-						</div>
 
-</div>  
+              
+						</div></div>
+            <br><div class="btn-box">
+        <button type="submit" name="hantar" value="update">Update</button>
+        </form></div>
+
+  
 
 <script>
   $(document).ready(function(){
@@ -521,9 +526,7 @@ $(document).ready(function(){
 <option value="Machine (After Service)" name="description[]">Machine (After Service)</option>
 </select>
 
-<br><div class="btn-box">
-<button type="submit" name="hantar" value="update">Update</button>
-</form></div>   </div>
+   </div>
 					
 <a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a></div></div>
 

@@ -110,6 +110,7 @@ a:hover {
   font-weight: 500;
   width: 100%;
   white-space: nowrap;
+  
 }
 
 .sidebar.active ~ .link_name {
@@ -118,7 +119,7 @@ a:hover {
 
 .home-section nav .sidebar-button i {
   font-size: -40px;
-
+  
   color: #fff;
 }
 
@@ -147,7 +148,8 @@ a:hover {
   letter-spacing: 1px;
   cursor: pointer;
   padding: 7px 10px;
-  margin-right: 5px;
+  margin-right: 10px;
+  
 }
 
 .home-section nav .sidebar-button1:hover {
@@ -167,6 +169,7 @@ a:hover {
   font-size: 17px;
   color: #fff;
 }
+
 
 .home-section a i {
   margin-left: 600px;
@@ -336,5 +339,14 @@ a {
 	background-color : #fff;
 	border: 1px solid rgba (0,0,0,.125);
 	border-radius: 0.25 rem;
+}
+
+
+.modal .close {
+  right: 20px;
+  top: -110px;
+  width: 20px;
+  height: 0px;
+  cursor: pointer;
 }
 
