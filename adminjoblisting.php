@@ -31,6 +31,34 @@ $query = $conn->query("SELECT * FROM job_register ORDER BY jobregister_id ASC LI
  
 ?>
 
+ <?php  
+ //Database connectivity  
+ $con=mysqli_connect('localhost','root','','nwmsystem');  
+ $sql=mysqli_query($con,"select * from job_register");  
+ //Get Update id and status  
+ if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {  
+      $jobregister_id=$_GET['jobregister_id'];  
+      $job_assign=$_GET['job_assign'];  
+      mysqli_query($con,"update job_register set job_assign='$job_assign' where jobregister_id='$jobregister_id'");  
+      header("location:adminjoblisting.php");  
+      die();  
+ }  
+ ?> 
+
+  <?php  
+ //Database connectivity  
+ $con=mysqli_connect('localhost','root','','nwmsystem');  
+ $sql=mysqli_query($con,"select * from job_register");  
+ //Get Update id and status  
+ if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant'])) {  
+      $jobregister_id=$_GET['jobregister_id'];  
+      $Job_assistant=$_GET['Job_assistant'];  
+      mysqli_query($con,"update job_register set Job_assistant='$Job_assistant' where jobregister_id='$jobregister_id'");  
+      header("location:adminjoblisting.php");  
+      die();  
+ }  
+ ?> 
+
 
 <!DOCTYPE html>
 <html>
@@ -550,7 +578,7 @@ $(function(){
                 <th scope="col" class="sorting" coltype="machine_code" colorder="">Machine Code</th>
                 <th scope="col" class="sorting" coltype="job_assign" colorder="">Job Assign</th>
                 <th scope="col" class="sorting" coltype="Job_assistant" colorder="">Assistant</th>
-                <th scope="col">Action</th>
+         
             </tr>
         </thead>
         <tbody>
@@ -559,7 +587,7 @@ $(function(){
                 while($row = $query->fetch_assoc()){ $i++; 
             ?>
             
-                 <tr data-row-id="<?php echo $row['jobregister_id'];?>">
+                 <tr>
                   
                     <th scope="row"><?php echo $i; ?></th>
                     <td data-id="<?php echo $row['jobregister_id'];?>" class='JobInfo' data-target="doubleClick-info"  onClick="document.getElementById('doubleClick-info').style.display='block'"><?php echo $row["job_order_number"]; ?></td>
@@ -568,8 +596,8 @@ $(function(){
                     <td><?php echo $row["customer_name"]; ?></td>
                     <td><?php echo $row["job_name"]; ?></td>
                     <td><?php echo $row["machine_code"]; ?></td>
-                    <td><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
-                     <?php
+                    <td> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" onchange="status_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"><option value=""> <?php echo $row['job_assign']?> </option>  
+                               <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
 
@@ -578,12 +606,19 @@ $(function(){
             echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
     ?></select>
-     <input type="hidden" name="jobregister_id" id='jobregister_id' value="<?php echo $row['jobregister_id']?>" onchange="GetJobAss(this.value)" readonly>
-    <input type="hidden" name="job_assign" id='job_assign' value="<?php echo $row['job_assign']?>" onchange="GetJobAss(this.value)" readonly></td>
-                    <td><?php echo $row["Job_assistant"]; ?></td>
-                    <td><input type="button" id="update_job" name="update_job" value="Update" />
-                    </td>
-     
+                      </td>  
+                    <td> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant']?> </option>
+                    <?php
+        include "dbconnect.php";  // Using database connection file here
+        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
+        }	
+    ?></select>
+</td>
+                  
                     
                 </tr>
             <?php 
@@ -596,37 +631,25 @@ $(function(){
         </table>
          </form>
 
-         <script>
-$(document).ready(function(){
-	
-$("#jobassignto").on("change",function(){
-   var GetValue=$("#jobassignto").val();
-   $("#job_assign").val(GetValue);
-});
-
-});
-</script>
-
-        <script>
-    $(document).ready(function () {
-        $('#update_job').click(function () {
-            var data = $('#jobupdate_form').serialize() + '&update_job=update_job';
-            $.ajax({
-                url: 'updatejoblisting.php',
-                type: 'post',
-                data: data,
-                success: function (response) {
-                    $('#jobmsg').text(response);
-                    $('#job_assign').text('');
-                               
-                }
-            });
-        });
-    });
-</script>
         
         <!-- Display pagination links -->
         <?php echo $pagination->createLinks(); ?>
+
+        <script type="text/javascript">  
+      function status_update(value,jobregister_id){  
+           //alert(id);  
+           let url = "adminjoblisting.php";  
+           window.location.href= url+"?jobregister_id="+jobregister_id+"&job_assign="+value;  
+      }  
+ </script>  
+
+         <script type="text/javascript">  
+      function assistant_update(value,jobregister_id){  
+           //alert(id);  
+           let url = "adminjoblisting.php";  
+           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant="+value;  
+      }  
+ </script>  
 
 
         <!--Double click Job Info (Job Order Number) -->
