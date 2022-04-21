@@ -272,9 +272,16 @@
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = '' AND job_status = '' AND accessories_required = 'Yes' 
+            $numRow = "SELECT * FROM `job_register`WHERE job_assign = '' AND job_status = ''  
             OR 
-            job_assign = '' AND job_status='Not Ready' AND accessories_required = 'Yes' ";
+            job_status = '' AND accessories_required = 'Yes'
+            OR
+            job_assign = '' AND accessories_required = 'Yes'
+            OR
+            job_assign = '' AND job_status='Not Ready' 
+            OR
+            job_status='Not Ready' AND accessories_required = 'Yes' ";
+            
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
