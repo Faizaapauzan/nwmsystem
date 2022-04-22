@@ -260,6 +260,7 @@ footer a {
   font-weight: 600;
   display: inline-block;
   margin-left: 64px;
+  
 }
 
 .sign2 {
@@ -282,6 +283,23 @@ footer p {
   display: inline-block;
 }
 
+tbody {
+  counter-reset: Serial;   
+}
+
+
+tr td:first-child:before {
+  counter-increment: Serial;      
+	content: counter(Serial) "."; 
+  padding-left: 5px;
+  padding: 5px;
+  
+
+}
+
+
+
+
 
     </style>
 
@@ -297,8 +315,8 @@ footer p {
     <button onclick="window.print();" class="btn btn-primary" id="print-btn" style="margin: 10px;">Print</button>
     </div>
 
-    <h3 style="display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 0em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;">
-    <center>NEO WOODWORKING MACHINERY SDN. BHD.</h3></center>
+    <h3 style="display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 0em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold; text-align:center">
+    NEO WOODWORKING MACHINERY SDN. BHD.</h3>
     <p><center>NO 1, JALAN KOTA MURNI, TAMAN INDUSTRI KOTA MURNI,<br/>
     OFF JALAN MINYAK BEKU 83000 BATU PAHAT, JOHOR.<br/>
     Tel: 07-4355595, 07-4355596 Fax: 07-4355596<br/>
@@ -387,10 +405,21 @@ footer p {
     <div class="try1">
     
     <p><label>Date :</label> <span><input type="text" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>" class="input"/></span></p>
-    <p><label style="position:absolute;">Customer Name :</label> <span><textarea style="width: 207px; height: 31px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;"><?php echo $row['customer_name'] ?></textarea></span></p>
+    <p><label style="position:absolute;">Customer Name :</label> <span><textarea id="txt" style="width: 207px; height:18px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;"><?php echo $row['customer_name'] ?></textarea></span></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label> <span><input type="text" name="job_name" value="<?php echo $row['job_name'] ?>" class="input" /></span></p>
     <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input" /></span></p>
+    <script>
+
+      const textarea = document.getElementById("txt");
+
+      textarea.addEventListener("input", function (e) {
+      this.style.height = "auto";
+      this.style.height = this.scrollHeight + "px";
+      });
+
+      </script>
+
     <br/>
     <p>Problem Description :-</p>
     <textarea style="   writing-mode: horizontal-tb !important;
@@ -419,11 +448,13 @@ footer p {
     <p><label>Travel Time :</label><span><input type="technician_arrival" name="date" class="input" value="<?php echo difftime($DateTime1,$DateTime2)['h']?>   hours <?php echo difftime($DateTime1,$DateTime2)['m']?>  minutes" /></span></p>
     <p><label>Time At  Site :</label> <span><input type="text" name="technician_arrival" value="<?php echo $row['technician_arrival'] ?>" class="input" /></span></p>
     <p><label>Return Time :</label><span><input type="text" name="technician_leaving" value="<?php echo $row['technician_leaving'] ?>" class="input" /></span></p>
-    <p><label style="position:absolute;">Machine Name :</label> <span><textarea style="width: 247px; height: 45px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 117px;"><?php echo $row['machine_name'] ?></textarea></span></p>
+    <p><label style="position:absolute;">Machine Name :</label> <span><textarea style="width: 247px; height: 45px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 117px; "><?php echo $row['machine_name'] ?></textarea></span></p>
     <p><label>Serial Number :</label> <span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input" /></span></p>
+
+
     <br/>
     <p>Submitted Items :-</p>
-    <textarea style=" writing-mode: horizontal-tb !important;
+    <textarea style=" writing-mode: horizontal-tb !important;s
     font-family: Arial;
     text-rendering: auto;
     color: -internal-light-dark(black, white);
@@ -470,31 +501,48 @@ footer p {
 
       $sql = "SELECT * FROM `job_accessories` WHERE  jobregister_id ='$jobregister_id'";
       $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
+  }
 
-  } ?>
+      if ($queryRecords) {
+        while ($row = mysqli_fetch_array($queryRecords)) {
 
+          ?>
+        <div class="part_used">
+        <table id="remark_grid" text-align="center" class="table table-condensed table-hover table-striped bootgrid-table" style="margin-top: -41px; margin-bottom: 14px; border-collapse: collapse; border: 1px solid black;">
+          <thead>
+          </thead>
+          <br/><br/>
+        <tbody>
+   
+         <th colspan="2" style="text-align:left; padding-left:5px;">Accessories/ Sparts Part Used:</th>
+         <?php foreach ($queryRecords as $res) :?>
+        
+            <tr data-row-id="<?php echo $res['id']; ?>">
+             <td></td></div>
+      
+            <td><input readonly type="text" style="font-size: 15px; border: none; width: 480px;" class="accessories_name" value="<?php echo $res['accessories_name']; ?>" /></td>
+            <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
 
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" style="margin-top: -41px; margin-bottom: 14px;">
+            </tr> 
 
-   <thead>
-   </thead>
-  <br/><br/>
-   <tbody>
-      <?php foreach ($queryRecords as $res) :?>
-      <tr data-row-id="<?php echo $res['id']; ?>">
-      <td></td>
-        <td><input readonly type="text" style="font-size: 15px; border: none; width: 380px;" class="accessories_name" value="<?php echo $res['accessories_name']; ?>" /></td>
-        <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
+     
+	        <?php endforeach; ?>
 
-      </tr>
-	  <?php endforeach; ?>
+    
 
+          </tbody>
+        </table>
 
-   </tbody>
-</table>
+          </div>
+
+        <?php
+           }
+
+        }
+        ?>
+
     </div></div></div>
-
-
+      
     </section>
     <br/>
 
