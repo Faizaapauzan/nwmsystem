@@ -403,7 +403,7 @@ tr td:first-child:before {
     <div class="try1">
     
     <p><label>Date :</label> <span><input type="text" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>" class="input"/></span></p>
-    <p><label style="position:absolute;">Customer Name :</label> <span><textarea id="txt" style="width: 207px; height:18px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;"><?php echo $row['customer_name'] ?></textarea></span></p>
+   <p><label style="position:absolute;">Customer Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textbox" contenteditable><?php echo $row['customer_name'] ?></span></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label> <span><input type="text" name="job_name" value="<?php echo $row['job_name'] ?>" class="input" /></span></p>
     <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input" /></span></p>
@@ -452,7 +452,7 @@ tr td:first-child:before {
 
     <br/>
     <p>Submitted Items :-</p>
-    <textarea style=" writing-mode: horizontal-tb !important;s
+    <textarea style=" writing-mode: horizontal-tb !important;
     font-family: Arial;
     text-rendering: auto;
     color: -internal-light-dark(black, white);
