@@ -207,6 +207,7 @@ if (!function_exists('difftime'))   {
   font-weight: 600;
   display: inline-block;
   margin-left: -1px;
+  max-width: 354px;
 }
 
 .try2 {
@@ -214,6 +215,7 @@ if (!function_exists('difftime'))   {
   font-weight: 600;
   display: inline-block;
   margin-left: -18px;
+  max-width: 354px;
 }
 
 .try3 {
@@ -368,10 +370,6 @@ footer p {
                 
         if (isset($_POST['jobregister_id'])) {
             $jobregister_id =$_POST['jobregister_id'];
-            // $query = ("SELECT c.* , p.* 
-            //         FROM job_register c,technician_remark p 
-            //         WHERE c.jobregister_id =  '$jobregister_id'
-            //         AND p.jobregister_id =  '$jobregister_id'");
             $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
             $query_run = mysqli_query($connection, $query);
             if ($query_run) {
@@ -387,7 +385,7 @@ footer p {
     <div class="try1">
     
     <p><label>Date :</label> <span><input type="text" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>" class="input"/></span></p>
-    <p><label style="position:absolute;">Customer Name :</label> <span><textarea style="width: 207px; height: 31px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;"><?php echo $row['customer_name'] ?></textarea></span></p>
+    <p><label style="position:absolute;">Customer Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textbox" contenteditable><?php echo $row['customer_name'] ?></span></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label> <span><input type="text" name="job_name" value="<?php echo $row['job_name'] ?>" class="input" /></span></p>
     <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input" /></span></p>
@@ -419,7 +417,7 @@ footer p {
     <p><label>Travel Time :</label><span><input type="technician_arrival" name="date" class="input" value="<?php echo difftime($DateTime1,$DateTime2)['h']?>   hours <?php echo difftime($DateTime1,$DateTime2)['m']?>  minutes" /></span></p>
     <p><label>Time At  Site :</label> <span><input type="text" name="technician_arrival" value="<?php echo $row['technician_arrival'] ?>" class="input" /></span></p>
     <p><label>Return Time :</label><span><input type="text" name="technician_leaving" value="<?php echo $row['technician_leaving'] ?>" class="input" /></span></p>
-    <p><label style="position:absolute;">Machine Name :</label> <span><textarea style="width: 247px; height: 45px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 117px;"><?php echo $row['machine_name'] ?></textarea></span></p>
+    <p><label style="position:absolute;">Machine Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" class="textarea" role="textbox" contenteditable><?php echo $row['machine_name'] ?></span></p>
     <p><label>Serial Number :</label> <span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input" /></span></p>
     <br/>
     <p>Submitted Items :-</p>
