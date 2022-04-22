@@ -366,6 +366,13 @@ thead {
   /* padding: 1rem 5.1rem; */
 }
 
+.Pending {
+  color: blue;
+} 
+
+.Incomplete {
+  color: orange;
+} 
 
 </style>
 <script>
@@ -589,14 +596,14 @@ $(function(){
             
                  <tr>
                   
-                    <th scope="row"><?php echo $i; ?></th>
-                    <td data-id="<?php echo $row['jobregister_id'];?>" class='JobInfo' data-target="doubleClick-info"  onClick="document.getElementById('doubleClick-info').style.display='block'"><?php echo $row["job_order_number"]; ?></td>
-                    <td><?php echo $row["job_priority"]; ?></td>
-                    <td><?php echo $row["job_status"]; ?></td>
-                    <td><?php echo $row["customer_name"]; ?></td>
-                    <td><?php echo $row["job_name"]; ?></td>
-                    <td><?php echo $row["machine_code"]; ?></td>
-                    <td> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" onchange="status_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"><option value=""> <?php echo $row['job_assign']?> </option>  
+                    <th class="<?php echo $row["job_status"]; ?>" scope="row"><?php echo $i; ?></th>
+                    <td data-id="<?php echo $row['jobregister_id'];?>" class='JobInfo <?php echo $row["job_status"]; ?>' data-target="doubleClick-info"  onClick="document.getElementById('doubleClick-info').style.display='block'"><?php echo $row["job_order_number"]; ?></td>
+                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_priority"]; ?></td>
+                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_status"]; ?></td>
+                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["customer_name"]; ?></td>
+                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_name"]; ?></td>
+                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["machine_code"]; ?></td>
+                    <td class="<?php echo $row["job_status"]; ?>"> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" onchange="status_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"><option value=""> <?php echo $row['job_assign']?> </option>  
                                <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
@@ -607,7 +614,7 @@ $(function(){
         }	
     ?></select>
                       </td>  
-                    <td> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant']?> </option>
+                    <td class="<?php echo $row["job_status"]; ?>"> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant']?> </option>
                     <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
