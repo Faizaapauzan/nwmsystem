@@ -518,7 +518,8 @@ tr td:first-child:before {
             <tr data-row-id="<?php echo $res['id']; ?>">
              <td></td></div>
       
-            <td><input readonly type="text" style="font-size: 15px; border: none; width: 480px;" class="accessories_name" value="<?php echo $res['accessories_name']; ?>" /></td>
+           
+            <td><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" contenteditable><?php echo $res['accessories_name']; ?></span></td>
             <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
 
             </tr> 
