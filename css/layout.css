@@ -15,6 +15,7 @@ body {
 
 .sidebar {
   position: fixed;
+  overflow-y:scroll;
   height: 100%;
   width: 240px;
   background: #0a2558;
