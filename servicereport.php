@@ -90,7 +90,7 @@ if (!function_exists('difftime'))   {
 
 .page[size="A4"] {
   width: 21cm;
-  height: 59.4cm;
+  height: 29.7cm;
   overflow: hidden;
 }
 
@@ -269,6 +269,7 @@ footer a {
   font-weight: 600;
   display: inline-block;
   margin-left: 38px;
+      margin-top: -37px;
 }
 
 .sign3 {
@@ -544,17 +545,32 @@ tr td:first-child:before {
       
     </section>
     <br/>
-
-    <div class="sign1"><input type="text" class="signature" value="<?php echo $_SESSION["username"] ?>" /><br />
-    <p>Issue By<br>
-    -</p></div>
-    <div class="sign2"><input type="text" class="signature" /><br />
-    <p>Customer Signature<br/>Date & Time : <input type="text" name="date" class="serviceno" /></p>
+    <?php
+        $connection = mysqli_connect("localhost", "root", "");
+        $db = mysqli_select_db($connection, 'nwmsystem');
+                
+        if (isset($_POST['jobregister_id'])) {
+            $jobregister_id =$_POST['jobregister_id'];
+            $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
+            $query_run = mysqli_query($connection, $query);
+            if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
+    <div class="sign1">
+    <p>Issue By : <input type="text" name="date" class="serviceno" value="<?php echo $_SESSION["username"] ?>" /></p>
+    </div>
+    <div class="sign2"><br />
+    <p>Customer Name : <input style="width:250px" type="text" name="date" class="serviceno" value="<?php echo $row['customer_name'] ?>" /></p>
+    <p>Phone Number : <input type="text" name="date" class="serviceno" value="<?php echo $row['cust_phone1'] ?>" /></p>
     </div>
     <!-- <div class="sign3"><p>Date and Time:</p></div> -->
     </form>
-
-
+          <?php
+            } ?>
+   <?php
+        }
+    }
+    ?>
     <?php
         }
     }
