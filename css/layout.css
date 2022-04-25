@@ -791,18 +791,18 @@ table tbody tr:hover {
 /*Staff*/
 table {
   border-collapse: collapse;
-  /* box-shadow: 0 5px 10px rgb(37, 19, 19);
-  background-color: #fff; */
+  /* box-shadow: 0 5px 10px rgb(37, 19, 19); */
+  background-color: #fff;
   text-align: left;
   overflow: hidden;
   width: 100%;
   display: fixed;
   justify-content: center;
 }
-/* 
+
 thead {
   box-shadow: 0 5px 10px rgb(186, 189, 183);
-} */
+}
 
 .staffList th {
   padding: 1rem 5.1rem;

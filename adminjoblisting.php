@@ -10,6 +10,7 @@ include_once 'Pagination.class.php';
 require_once 'dbconnect.php'; 
  
 // Set some useful configuration 
+$baseURL = 'getData.php'; 
 $limit = 10; 
  
 // Count of all records 
@@ -19,10 +20,12 @@ $rowCount= $result['rowNum'];
  
 // Initialize pagination class 
 $pagConfig = array( 
+    'baseURL' => $baseURL, 
     'totalRows' => $rowCount, 
     'perPage' => $limit, 
     'contentDiv' => 'dataContainer', 
-    'link_func' => 'columnSorting' 
+    'link_func' => 'columnSorting',
+    'link_search' => 'searchFilter'
 ); 
 $pagination =  new Pagination($pagConfig); 
  
@@ -441,6 +444,26 @@ $(function(){
 });
 </script>
 
+<script>
+function searchFilter(page_num) {
+    page_num = page_num?page_num:0;
+    var keywords = $('#keywords').val();
+    // var filterBy = $('#filterBy').val();
+    $.ajax({
+        type: 'POST',
+        url: 'getData.php',
+        data:'page='+page_num+'&keywords='+keywords,
+        beforeSend: function () {
+            $('.loading-overlay').show();
+        },
+        success: function (html) {
+            $('#dataContainer').html(html);
+            $('.loading-overlay').fadeOut("slow");
+        }
+    });
+}
+</script>
+
 </head>
 
 <body>
@@ -563,7 +586,10 @@ $(function(){
             </div>
            
         
+           <div class="search-panel">
 
+            <input type="text" class="form-control" id="keywords" placeholder="Type keywords..." onkeyup="searchFilter();">
+        </div>
 
 <div class="datalist-wrapper">
     <!-- Loading overlay -->
