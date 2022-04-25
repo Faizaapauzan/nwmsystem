@@ -338,14 +338,7 @@ $(document).ready(function(){
 									<td col-index='2' >
 									<video width="150" height="120" src="image/<?=$res['video_url']?>" controls></video></td>
 									
-									<td oldVal ="<?php echo $res['description'];?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 9px;">
-									<option value='' <?php if ($res['description'] == '') { echo "SELECTED"; } ?>></option>
-									<option value="Machine (Before Service)" <?php if ($res['description'] == "Machine (Before Service)") { echo "SELECTED";} ?>>Machine (Before Service)</option>
-									<option value="Accessories (Broken)" <?php if ($res['description'] == "Accessories (Broken)") { echo "SELECTED"; } ?>>Accessories (Broken)</option>
-									<option value="Accessories (New)" <?php if ($res['description'] == "Accessories (New)") { echo "SELECTED"; } ?>>Accessories (New)</option>
-									<option value="Machine (After Service)" <?php if ($res['description'] == "Machine (After Service)") { echo "SELECTED"; } ?>>Machine (After Service)</option>
-									</select></td>
-									
+								<td oldVal ="<?php echo $res['description'];?>"><?php echo $res['description'];?></td>
 									
 			
 									<td><span class='deleted'  style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
