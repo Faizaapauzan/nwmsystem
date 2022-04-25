@@ -212,7 +212,14 @@
                 DESC LIMIT 50");
 
                 
-                $numRow = "SELECT * FROM `job_register`WHERE job_status= '' AND job_assign = '' ";
+                $numRow = "SELECT * FROM `job_register`WHERE 
+                accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                OR
+                accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                OR
+                job_assign = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
+                OR
+                job_assign = '' AND job_status = 'Ready' AND job_cancel = '' ";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -272,15 +279,22 @@
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = '' AND job_status = ''  
-            OR 
-            job_status = '' AND accessories_required = 'Yes'
-            OR
-            job_assign = '' AND accessories_required = 'Yes'
-            OR
-            job_assign = '' AND job_status='Not Ready' 
-            OR
-            job_status='Not Ready' AND accessories_required = 'Yes' ";
+            $numRow = "SELECT * FROM `job_register`WHERE 
+            accessories_required = 'Yes' AND job_status = ''
+                OR
+                job_assign = 'Nuraein' AND job_status = ''
+                OR
+                job_assign = 'Sau Hwe' AND job_status = ''
+                OR
+                accessories_required = 'Yes' AND job_status = 'Not Ready'
+                OR
+                job_assign = 'Nuraein' AND job_status = 'Not Ready'
+                OR
+                job_assign = 'Sau Hwe' AND job_status = 'Not Ready'
+                OR
+                job_assign = 'Nuraein' AND job_status = 'Incomplete'
+                OR
+                job_assign = 'Sau Hwe' AND job_status = 'Incomplete' ";
             
             $numRow_run = mysqli_query ($conn,$numRow);
 
@@ -438,7 +452,14 @@
                 DESC LIMIT 50");
 
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Boon' AND job_status = 'Doing' OR job_assign = 'Boon' AND job_status='' ";
+            $numRow = "SELECT * FROM `job_register`WHERE 
+            job_assign = 'Boon' AND job_status = ''
+                OR
+                job_assign = 'Boon' AND job_status = 'Doing'
+                OR
+                job_assign = 'Boon' AND job_status = 'Ready'
+                OR
+                job_assign = 'Boon' AND job_status = 'Incomplete' ";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -684,7 +705,14 @@
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
-        $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Hafiz' AND job_status = 'Doing' OR job_assign = 'Hafiz' AND job_status='' ";
+        $numRow = "SELECT * FROM `job_register`WHERE 
+        job_assign = 'Hafiz' AND job_status = ''
+                OR
+                job_assign = 'Hafiz' AND job_status = 'Doing'
+                OR
+                job_assign = 'Hafiz' AND job_status = 'Ready'
+                OR
+                job_assign = 'Hafiz' AND job_status = 'Incomplete' ";
         $numRow_run = mysqli_query ($conn,$numRow);
 
         if ($row_Total = mysqli_num_rows($numRow_run))
@@ -948,7 +976,14 @@
                     DESC LIMIT 50");
 
 
-                    $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Hamir' AND job_status = 'Doing' OR job_assign = 'Hamir' AND job_status='' ";
+                    $numRow = "SELECT * FROM `job_register`WHERE 
+                    job_assign = 'Hamir' AND job_status = ''
+                    OR
+                    job_assign = 'Hamir' AND job_status = 'Doing'
+                    OR
+                    job_assign = 'Hamir' AND job_status = 'Ready'
+                    OR
+                    job_assign = 'Hamir' AND job_status = 'Incomplete' ";
                     $numRow_run = mysqli_query ($conn,$numRow);
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1202,7 +1237,14 @@
                 DESC LIMIT 50");
 
 
-                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Hwa' AND job_status = 'Doing' OR job_assign = 'Hwa' AND job_status='' ";
+                $numRow = "SELECT * FROM `job_register`WHERE 
+                job_assign = 'Hwa' AND job_status = ''
+                OR
+                job_assign = 'Hwa' AND job_status = 'Doing'
+                OR
+                job_assign = 'Hwa' AND job_status = 'Ready'
+                OR
+                job_assign = 'Hwa' AND job_status = 'Incomplete' ";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1452,7 +1494,14 @@
                         DESC LIMIT 50");
 
 
-                    $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Isk' AND job_status = 'Doing' OR job_assign = 'Isk' AND job_status='' ";
+                    $numRow = "SELECT * FROM `job_register`WHERE 
+                    job_assign = 'Isk' AND job_status = ''
+                        OR
+                        job_assign = 'Isk' AND job_status = 'Doing'
+                        OR
+                        job_assign = 'Isk' AND job_status = 'Ready'
+                        OR
+                        job_assign = 'Isk' AND job_status = 'Incomplete' ";
                     $numRow_run = mysqli_query ($conn,$numRow);
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1698,7 +1747,14 @@
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
-                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'John' AND job_status = 'Doing' OR job_assign = 'John' AND job_status='' ";
+                $numRow = "SELECT * FROM `job_register`WHERE 
+                job_assign = 'John' AND job_status = ''
+                        OR
+                        job_assign = 'John' AND job_status = 'Doing'
+                        OR
+                        job_assign = 'John' AND job_status = 'Ready'
+                        OR
+                        job_assign = 'John' AND job_status = 'Incomplete' ";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1947,7 +2003,14 @@
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
-                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Jun Jie' AND job_status = 'Doing' OR job_assign = 'Jun Jie' AND job_status=''";
+                $numRow = "SELECT * FROM `job_register`WHERE 
+                job_assign = 'Jun Jie' AND job_status = ''
+                        OR
+                        job_assign = 'Jun Jie' AND job_status = 'Doing'
+                        OR
+                        job_assign = 'Jun Jie' AND job_status = 'Ready'
+                        OR
+                        job_assign = 'Jun Jie' AND job_status = 'Incomplete'";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2196,7 +2259,14 @@
                             DESC LIMIT 50");
 
 
-                    $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Will' AND job_status = 'Doing' OR job_assign = 'Will' AND job_status=''";
+                    $numRow = "SELECT * FROM `job_register`WHERE 
+                    job_assign = 'Will' AND job_status = ''
+                            OR
+                            job_assign = 'Will' AND job_status = 'Doing'
+                            OR
+                            job_assign = 'Will' AND job_status = 'Ready'
+                            OR
+                            job_assign = 'Will' AND job_status = 'Incomplete'";
                     $numRow_run = mysqli_query ($conn,$numRow);
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2444,7 +2514,14 @@
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
 
-                    $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Sahele' AND job_status = 'Doing' OR job_assign = 'Sahele' AND job_status='' ";
+                    $numRow = "SELECT * FROM `job_register`WHERE 
+                    job_assign = 'Sahele' AND job_status = ''
+                            OR
+                            job_assign = 'Sahele' AND job_status = 'Doing'
+                            OR
+                            job_assign = 'Sahele' AND job_status = 'Ready'
+                            OR
+                            job_assign = 'Sahele' AND job_status = 'Incomplete' ";
                     $numRow_run = mysqli_query ($conn,$numRow);
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2691,7 +2768,14 @@
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
-                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Sazaly' AND job_status = 'Doing' OR job_assign = 'Sazaly' AND job_status=''";
+                $numRow = "SELECT * FROM `job_register`WHERE 
+                job_assign = 'Sazaly' AND job_status = ''
+                        OR
+                        job_assign = 'Sazaly' AND job_status = 'Doing'
+                         OR
+                        job_assign = 'Sazaly' AND job_status = 'Ready'
+                        OR
+                        job_assign = 'Sazaly' AND job_status = 'Incomplete'";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2938,7 +3022,14 @@
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
-                $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Faizan' AND job_status = 'Doing' OR job_assign = 'Faizan' AND job_status='' ";
+                $numRow = "SELECT * FROM `job_register`WHERE 
+                job_assign = 'Faizan' AND job_status = ''
+                    OR
+                    job_assign = 'Faizan' AND job_status = 'Doing'
+                    OR
+                    job_assign = 'Faizan' AND job_status = 'Ready'
+                    OR
+                    job_assign = 'Faizan' AND job_status = 'Incomplete' ";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3185,7 +3276,14 @@
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Fauzin' AND job_status = 'Doing' OR job_assign = 'Fauzin' AND job_status='' ";
+            $numRow = "SELECT * FROM `job_register`WHERE 
+            job_assign = 'Fauzin' AND job_status = ''
+                    OR
+                    job_assign = 'Fauzin' AND job_status = 'Doing'
+                    OR
+                    job_assign = 'Fauzin' AND job_status = 'Ready'
+                    OR
+                    job_assign = 'Fauzin' AND job_status = 'Incomplete' ";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3434,7 +3532,14 @@
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Izaan' AND job_status = 'Doing' OR job_assign = 'Izaan' AND job_status=''";
+            $numRow = "SELECT * FROM `job_register`WHERE 
+           job_assign = 'Izaan' AND job_status = ''
+                    OR
+                    job_assign = 'Izaan' AND job_status = 'Doing'
+                    OR
+                    job_assign = 'Izaan' AND job_status = 'Ready'
+                    OR
+                    job_assign = 'Izaan' AND job_status = 'Incomplete'";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3683,7 +3788,14 @@
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Salam' AND job_status = 'Doing' OR job_assign = 'Salam' AND job_status=''";
+            $numRow = "SELECT * FROM `job_register`WHERE 
+            job_assign = 'Salam' AND job_status = ''
+                    OR
+                    job_assign = 'Salam' AND job_status = 'Doing'
+                    OR
+                    job_assign = 'Salam' AND job_status = 'Ready'
+                    OR
+                    job_assign = 'Salam' AND job_status = 'Incomplete'";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3932,7 +4044,14 @@
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Teck' AND job_status = 'Doing' OR job_assign = 'Teck' AND job_status=''";
+            $numRow = "SELECT * FROM `job_register`WHERE 
+            job_assign = 'Teck' AND job_status = ''
+                    OR
+                    job_assign = 'Teck' AND job_status = 'Doing'
+                    OR
+                    job_assign = 'Teck' AND job_status = 'Ready'
+                    OR
+                    job_assign = 'Teck' AND job_status = 'Incomplete'";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -4183,7 +4302,14 @@
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE job_assign = 'Aizat' AND job_status = 'Doing' OR job_assign = 'Aizat' AND job_status=''";
+            $numRow = "SELECT * FROM `job_register`WHERE 
+            job_assign = 'Aizat' AND job_status = ''
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Doing'
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Ready'
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Incomplete'";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
