@@ -1,7 +1,7 @@
 table {
   border-collapse: collapse;
-  box-shadow: 0 5px 10px rgb(37, 19, 19);
-  background-color: #fff;
+  /* box-shadow: 0 5px 10px rgb(37, 19, 19);
+  background-color: #fff; */
   text-align: left;
   overflow: hidden;
   width: 100%;
@@ -9,11 +9,10 @@ table {
   justify-content: center;
 }
 
-thead {
+/* thead {
   box-shadow: 0 5px 10px rgb(186, 189, 183);
-
-  /* padding: 1rem 5.1rem; */
-}
+  padding: 1rem 5.1rem;
+} */
 
 th {
   font-size: 15px;
