@@ -512,7 +512,7 @@ tr td:first-child:before {
           <br/><br/>
         <tbody>
    
-         <th colspan="2" style="text-align:left; padding-left:5px;">Accessories/ Sparts Part Used:</th>
+         <th colspan="3" style="text-align:left; padding-left:5px;">Accessories/ Sparts Part Used:</th>
          <?php foreach ($queryRecords as $res) :?>
         
             <tr data-row-id="<?php echo $res['id']; ?>">
