@@ -90,7 +90,7 @@ if (!function_exists('difftime'))   {
 
 .page[size="A4"] {
   width: 21cm;
-  height: 29.7cm;
+  height: 59.4cm;
   overflow: hidden;
 }
 
