@@ -3,7 +3,6 @@
 include 'dbconnect.php';
 
 
-	{
 		if (isset($_POST['submit'])) {
       
         $machine_code = $_POST['machine_code'];
@@ -29,6 +28,6 @@ include 'dbconnect.php';
 			}
 		}
 
-	}
+	
 	
 ?>

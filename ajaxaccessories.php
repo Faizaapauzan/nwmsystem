@@ -63,6 +63,10 @@ while ($row = $result->fetch_assoc()) {
 </tr>
 
 <tr>
+<td>Unit of Measurement : </td><td><?php echo $row['accessories_uom']; ?></td>
+</tr>
+
+<tr>
 <td>Brand : </td><td><?php echo $row['accessories_brand']; ?></td>
 </tr>
 

@@ -85,13 +85,14 @@ include_once("dbconnect.php");
   
 ?>
  
-<table id="employee_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+<table id="employee_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="60%" cellspacing="0">
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
       <tr>
         <th>No</th>
          <th>Code</th>
          <th>Name</th>
+         <th>UOM</th>
          <th>Quantity</th>
       </tr>
    </thead>
@@ -102,6 +103,7 @@ include_once("dbconnect.php");
         <td></td>
         <td><label><a href="#" data-toggle="tooltip" class="fetch" id="<?php echo $res["accessories_id"]; ?>"><?php echo $res["accessories_code"]; ?></a></label></td>
          <td class="editable-col" contenteditable="true" col-index='1' oldVal ="<?php echo $res['accessories_name'];?>"><?php echo $res['accessories_name'];?></td>
+          <td class="editable-col" contenteditable="true" col-index='1' oldVal ="<?php echo $res['accessories_uom'];?>"><?php echo $res['accessories_uom'];?></td>
          <td class="editable-col" contenteditable="true" col-index='2' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
          <td><span class='delete' data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
       </tr>
@@ -120,14 +122,14 @@ include_once("dbconnect.php");
 </div>  
 <div class="btn-box">
 <p class="control"><b id="adminmsg"></b></p>
-<input type="button" id="update_adminacc" name="update_adminacc" value="Update" />
+<input type="button" id="update_acc" name="update_acc" value="Update" />
 <!-- <button type="submit" name="save" value="update">Update</button> -->
 </form></div>   
 
 <script>
     $(document).ready(function () {
-        $('#update_adminacc').click(function () {
-            var data = $('#adminacc_form').serialize() + '&update_adminacc=update_adminacc';
+        $('#update_acc').click(function () {
+            var data = $('#adminacc_form').serialize() + '&update_acc=update_acc';
             $.ajax({
                 url: 'addaccessoriesindex.php',
                 type: 'post',
@@ -137,6 +139,7 @@ include_once("dbconnect.php");
                     $('#s_accessories_id').text('');
                     $('#s_accessories_code').text('');
                     $('#s_accessories_name').text('');
+                    $('#s_accessories_uom').text('');
                     $('#s_accessories_quantity').text('');
                    
                 }
@@ -268,6 +271,7 @@ if (accessories_id != '') {
                 model.find(".accessories_id").val(accessories_id);
                 model.find(".accessories_code").val(result.accessories_code);
                 model.find(".accessories_name").val(result.accessories_name);
+                model.find(".accessories_uom").val(result.accessories_uom);
             }
         })
     }
@@ -318,7 +322,7 @@ include 'dbconnect.php';
  ?>
  <select class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
 <?php include "dbconnect.php";  // Using database connection file here
-                    $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
+                    $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
 
                     while($data = mysqli_fetch_array($records))
                      {
@@ -330,6 +334,7 @@ include 'dbconnect.php';
 <input type="hidden" name="accessories_id[]" class="accessories_id">
 <input type="text" class="accessories_code" name="accessories_code[]" placeholder="Accessories Code">
 <input type="text" class="accessories_name" name="accessories_name[]" placeholder="Accessories Name">
+<input type="text" class="accessories_uom" name="accessories_uom[]" placeholder="Unit of Measurement">
 <input type="text" class="accQuan" name="accessories_quantity[]" placeholder="Accessories Quantity">
 
 					

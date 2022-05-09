@@ -2,9 +2,7 @@
 
 include 'dbconnect.php';
 
-
-	{
-        if (isset($_POST['save_machine'])) {
+ if (isset($_POST['save_machine'])) {
             $machine_code = $_POST['machine_code'];
             $machine_name = $_POST['machine_name'];
             $machine_type = $_POST['machine_type'];
@@ -27,6 +25,6 @@ include 'dbconnect.php';
             } else {
                 echo "Failed to save data";
             }
-        }}
+        }
 
 ?>

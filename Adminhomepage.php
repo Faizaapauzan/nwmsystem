@@ -205,7 +205,9 @@
                 OR
                 accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                 OR
-                job_assign = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
+                job_assign = 'Nuraein' AND job_status = 'Ready' AND job_cancel = ''
+                OR
+                 job_assign = 'Sau Hwe' AND job_status = 'Ready' AND job_cancel = ''
                 OR
                 job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                 ORDER BY jobregisterlastmodify_at
@@ -4552,68 +4554,12 @@
                 include 'dbconnect.php';
                                 
                 $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, machine_type, job_status FROM job_register WHERE
-                        (job_status = 'Pending' AND job_assign = 'Boon'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Hafiz'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Hamir'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Isk'
-                        or
-                        job_status = 'Pending' AND job_assign = 'John'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Jun Jie'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Will'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Sahele'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Sazaly'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Faizan'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Fauzin'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Izaan'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Salam'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Teck'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Aizat')
+                        (job_status = 'Pending')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
                 $numRow = "SELECT * FROM `job_register`WHERE
-                 job_status = 'Pending' AND job_assign = 'Boon'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Hafiz'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Hamir'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Isk'
-                        or
-                        job_status = 'Pending' AND job_assign = 'John'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Jun Jie'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Will'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Sahele'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Sazaly'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Faizan'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Fauzin'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Izaan'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Salam'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Teck'
-                        OR
-                        job_status = 'Pending' AND job_assign = 'Aizat' ";
+                 job_status = 'Pending'";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))

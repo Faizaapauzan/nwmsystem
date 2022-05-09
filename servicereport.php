@@ -513,7 +513,7 @@ tr td:first-child:before {
           <br/><br/>
         <tbody>
    
-         <th colspan="3" style="text-align:left; padding-left:5px;">Accessories/ Sparts Part Used:</th>
+         <th colspan="4" style="text-align:left; padding-left:5px;">Accessories/ Sparts Part Used:</th>
          <?php foreach ($queryRecords as $res) :?>
         
             <tr data-row-id="<?php echo $res['id']; ?>">
@@ -521,6 +521,7 @@ tr td:first-child:before {
       
            
             <td><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" contenteditable><?php echo $res['accessories_name']; ?></span></td>
+            <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_uom" value="<?php echo $res['accessories_uom']; ?>" /></td>
             <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
 
             </tr> 
@@ -528,18 +529,18 @@ tr td:first-child:before {
      
 	        <?php endforeach; ?>
 
-    
+        <?php
+           }
+
+        }
+        ?>
 
           </tbody>
         </table>
 
           </div>
 
-        <?php
-           }
-
-        }
-        ?>
+    
 
     </div></div></div>
       
@@ -551,17 +552,17 @@ tr td:first-child:before {
                 
         if (isset($_POST['jobregister_id'])) {
             $jobregister_id =$_POST['jobregister_id'];
-            $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
+            $query = ("SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'");
             $query_run = mysqli_query($connection, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
     <div class="sign1">
-    <p>Issue By : <input type="text" name="date" class="serviceno" value="<?php echo $_SESSION["username"] ?>" /></p>
+    <p>Issue By : <input type="text" name="date" class="serviceno" value="<?php echo $row['job_assign'] ?>" /></p>
     </div>
     <div class="sign2"><br />
     <p>Customer Name : <input style="width:250px" type="text" name="date" class="serviceno" value="<?php echo $row['customer_name'] ?>" /></p>
-    <p>Phone Number : <input type="text" name="date" class="serviceno" value="<?php echo $row['cust_phone1'] ?>" /></p>
+    <p>Phone Number : <input style="width:250px" type="text" name="date" class="serviceno" value="<?php echo $row['cust_phone1'] ?>" /></p>
     </div>
     <!-- <div class="sign3"><p>Date and Time:</p></div> -->
     </form>

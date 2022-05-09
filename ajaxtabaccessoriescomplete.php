@@ -90,6 +90,7 @@ include_once("dbconnect.php");
         <th>No</th>
          <th>Code</th>
          <th>Name</th>
+         <th>UOM</th>
          <th>Quantity</th>
       </tr>
    </thead>
@@ -100,6 +101,7 @@ include_once("dbconnect.php");
         <td></td>
         <td><label><a href="#" data-toggle="tooltip" class="fetch" id="<?php echo $res["accessories_id"]; ?>"><?php echo $res["accessories_code"]; ?></a></label></td>
          <td class="editable-col" col-index='1' oldVal ="<?php echo $res['accessories_name'];?>"><?php echo $res['accessories_name'];?></td>
+         <td class="editable-col" col-index='1' oldVal ="<?php echo $res['accessories_uom'];?>"><?php echo $res['accessories_uom'];?></td>
          <td class="editable-col" col-index='2' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
          <td></td>
       </tr>

@@ -97,6 +97,7 @@ session_start();
             <label for="">Machine Brand</label>
             <input type="text" class="machine_brand" name="machine_brand" value="<?php echo $row['machine_brand']?>">
         </div>
+        
 
         <div class="input-box">
             <label for="accessories_required"  class="accessories_required">Accessories Required</label>
@@ -122,12 +123,17 @@ session_start();
 
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+            echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+            // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
-    ?></select>
-    <input type="hidden" name="job_assign" id='jobassign' value="<?php echo $row['job_assign']?>" onchange="GetJobAss(this.value)" readonly>
+    ?>
+ <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
+    <input type="hidden" name="job_assign" id='username' value="<?php echo $row['job_assign']?>">
+    <input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>  
+      <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>      
+</select>
+   
     </div>
-
 
       <div class="input-box">
         <label for="Job_assistant"  class="Job_assistant">Assistant:</label>
@@ -197,6 +203,62 @@ $("#jobassistantto").on("change",function(){
 
 });
 </script>
+
+<script>
+		// onkeyup event will occur when the user
+		// release the key and calls the function
+		// assigned to this event
+		function GetJobAss(str) {
+			if (str.length == 0) {
+				document.getElementById("username").value = "";
+                document.getElementById("technician_rank").value = "";
+                 document.getElementById("staff_position").value = "";
+		
+               
+				return;
+			}
+			else {
+
+				// Creates a new XMLHttpRequest object
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+
+					// Defines a function to be called when
+					// the readyState property changes
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						// Typical action to be performed
+						// when the document is ready
+						var myObj = JSON.parse(this.responseText);
+
+						// Returns the response data as a
+						// string and store this array in
+						// a variable assign the value
+						// received to first name input field
+						
+						document.getElementById
+							("username").value = myObj[0];
+						
+						// Assign the value received to
+						// last name input field
+						document.getElementById(
+							"technician_rank").value = myObj[1];
+
+                            document.getElementById(
+							"staff_position").value = myObj[2];
+                            
+					}
+				};
+
+				// xhttp.open("GET", "filename", true);
+				xmlhttp.open("GET", "fetchtechnicianrank.php?staffregister_id=" + str, true);
+				
+				// Sends the request to the server
+				xmlhttp.send();
+			}
+		}
+	</script>
 
 
         </body></html>

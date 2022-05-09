@@ -207,6 +207,10 @@ $query = $conn->query("SELECT * FROM accessories_list ORDER BY accessories_id AS
                                 <label for="AccessoriesName" class="details">Accessories Name</label>
                                 <input type="text" id="accessories_name" name="accessories_name" placeholder="Enter Accessories Name" required>
                             </div>
+                             <div class="input-box">
+                                <label for="AccessoriesUOM" class="details">Unit of Measurement</label>
+                                <input type="text" id="accessories_uom" name="accessories_uom" placeholder="Enter Accessories UOM" required>
+                            </div>
                             <div class="input-box">
                                 <label for="AccessoriesBrand" class="details">Accessories Brand</label>
                                 <input type="text" id="accessories_brand" name="accessories_brand" placeholder="Enter Accessories Brand" required>

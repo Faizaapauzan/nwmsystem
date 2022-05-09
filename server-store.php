@@ -6,8 +6,9 @@
 	//define index of column
 	$columns = array(
 		0 => 'accessories_name',
-		1 => 'accessories_quantity',
-        2 => 'accessories_remark'
+		1 => 'accessories_uom',
+		2 => 'accessories_quantity',
+        3 => 'accessories_remark'
 	);
 	$error = false;
 	$colVal = '';

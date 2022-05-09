@@ -163,67 +163,49 @@ include 'dbconnect.php';
             <div class="listAddForm">
                 <div class="title">Add Accessories</div>
                 <div class="contentListAddForm">
-                     <form id="accessoriesForm" method="post" enctype="multipart/form-data">
+                     <form action="accessoriesindex.php" method="post" enctype="multipart/form-data">
                         <div class="listAddForm-details">
                            <div class="input-box">
-                        <label for="AccessoriesCode" class="details">Accessories Code</label>
-                        <input type="text" id="accessories_code" name="accessories_code" onkeyup="checkAccessoriesCodelAvailability()" value="" class="form-control" placeholder="Enter Accessories Code" required> 
-                        <span style='color:red' id="accessories_code-availability-status"></span>
-                    </div>
+                                <label for="AccessoriesCode" class="details">Accessories Code</label>
+                                <input type="text" id="accessories_code" name="accessories_code" onkeyup="checkAccessoriesCodelAvailability()" value="" class="form-control" placeholder="Enter Accessories Code" required> 
+                                <span style='color:red' id="accessories_code-availability-status"></span>
+                            </div>
                             <div class="input-box">
                                 <label for="AccessoriesName" class="details">Accessories Name</label>
-                                <input type="text" id="AccessoriesName" name="accessories_name" placeholder="Enter Accessories Name" required>
+                                <input type="text" id="accessories_name" name="accessories_name" placeholder="Enter Accessories Name" required>
+                            </div>
+                             <div class="input-box">
+                                <label for="AccessoriesUOM" class="details">Unit of Measurement</label>
+                                <input type="text" id="accessories_uom" name="accessories_uom" placeholder="Enter Accessories UOM" required>
                             </div>
                             <div class="input-box">
                                 <label for="AccessoriesBrand" class="details">Accessories Brand</label>
-                                <input type="text" id="AccessoriesBrand" name="accessories_brand" placeholder="Enter Accessories Brand" required>
+                                <input type="text" id="accessories_brand" name="accessories_brand" placeholder="Enter Accessories Brand" required>
                             </div>
                             <div class="input-box">
-                                <label for="AccessoriesDescr" class="details">Accessories Description</label>
-                                <input type="text" id="AccessoriesDescr" name="accessories_description" placeholder="Enter Customer Description" required>
+                                <label for="customerGrade" class="details">Accessories Description</label>
+                                <input type="text" id="accessories_description" name="accessories_description" placeholder="Enter Customer Description" required>
                             </div>
                             <div class="photoBox">
                                 <label for="file_name" class="details">Photo</label>
-                                <input type="file" id="image_input" name="file_name" multiple>
+                                <input type="file" id="image_input" name="files[]" multiple>
                                 <div id="display_image"></div>
                             </div>
-                            <?php if (isset($_SESSION["username"])) ?>
+
+                              <?php if (isset($_SESSION["username"])) ?>
                             <input type="hidden" name="accessorieslistcreated_by" id="accessorieslistcreatedby" value="<?php echo $_SESSION["username"] ?>" readonly>
                              <input type="hidden" name="accessorieslistlasmodify_by" id="accessorieslistlasmodifyby" value="<?php echo $_SESSION["username"] ?>" readonly>
-                        </div>
+                            </div>
 
                         <div class="listAddFormbutton">
-                             <p class="control"><b id="accmesage"></b></p>
-                            <input class="button is-info is-large" id="save_acc" name="save_acc" type="button" value="Register" />
-                          <input type="button" onclick="document.getElementById('accessoriesAddForm').style.display='none'" value="Cancel" id="cancelbtn">
+                            <input type="submit" name="submit" value="Register">
+                            <input type="button" onclick="document.getElementById('accessoriesAddForm').style.display='none'" value="Cancel" id="cancelbtn">
                         </div>
                         </form>
                 </div>
             </div>
         </div> 
 
-         <script>
-    $(document).ready(function () {
-        $('#save_acc').click(function () {
-            var data = $('#accessoriesForm').serialize() + '&save_acc=save_acc';
-            $.ajax({
-                url: 'insertaccessories.php',
-                type: 'post',
-                data: data,
-                success: function (response) {
-                    $('#accmesage').text(response);
-                    $('#accessories_code').text('');
-                    $('#accessories_name').text('');
-                    $('#accessories_brand').text('');
-                    $('#accessories_description').text('');
-                    $('#file_name').text('');
-                    $('#accessorieslistcreated_by').text('');
-                  
-                }
-            });
-        });
-    });
-</script>
           
 <!--Finish add accessories -->
 
@@ -280,7 +262,7 @@ include 'dbconnect.php';
 			<div class="model">
                 <select class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
 <?php include "dbconnect.php";  // Using database connection file here
-                    $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
+                    $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
 
                     while($data = mysqli_fetch_array($records))
                      {
@@ -295,6 +277,7 @@ include 'dbconnect.php';
 <input type="hidden" name="accessories_id[]" class="accessories_id">
 <input type="text" class="accessories_code" name="accessories_code[]" placeholder="Accessories Code">
 <input type="text" class="accessories_name" name="accessories_name[]" placeholder="Accessories Name">
+<input type="text" class="accessories_uom" name="accessories_uom[]" placeholder="Accessories UOM">
 <input type="text" class="accQuan" name="accessories_quantity[]" placeholder="Accessories Quantity">
 
 
@@ -334,6 +317,7 @@ if (accessories_id != '') {
                 model.find(".accessories_id").val(accessories_id);
                 model.find(".accessories_code").val(result.accessories_code);
                 model.find(".accessories_name").val(result.accessories_name);
+                model.find(".accessories_uom").val(result.accessories_uom);
             }
         })
     }
@@ -374,6 +358,7 @@ if (accessories_id != '') {
 <input type="hidden" name="accessories_id[]" class="accessories_id">
 <input type="text" class="accessories_code" name="accessories_code[]" placeholder="Accessories Code">
 <input type="text" class="accessories_name" name="accessories_name[]" placeholder="Accessories Name">
+<input type="text" class="accessories_uom" name="accessories_uom[]" placeholder="Accessories UOM">
 <input type="text" class="accQuan" name="accessories_quantity[]" placeholder="Accessories Quantity">
 					
 <a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a></div></div>
@@ -477,39 +462,7 @@ $("#jobaccessories").on("change",function(){
 	</script>
 
 
-         <script>
 
-$(function() {
-    $("#save_acc").click(function(e) {
-        e.preventDefault();
-        var accessories_code = $("#accessories_code").val();
-		var dataString = 'accessories_code=' + accessories_code; 
-        if(accessories_code =='')
-        {   $('.success').fadeOut(200).hide();
-            $('.error').fadeIn(200).show();
-        }
-        else
-        {
-            $.ajax({
-                type: "POST",				
-                url: "insertaccessories.php",
-				data: dataString,
-                success: function(data) {
-                 $('#form').fadeOut(200).hide();
-                 $('.success').fadeIn(200).show();
-                 $('.error').fadeOut(200).hide();
-                 $('#accessoriesModel').append($('<option>', {
-                    value: data.id,
-                    text: accessories_code , accessories_name , accessories_id
-    }));
-}
-            });
-        }
-      
-    });
-});
-
-</script>   
 </section>
 
     <script>

@@ -7,7 +7,8 @@
 	$columns = array(
 		0 =>'accessories_code', 
 		1 => 'accessories_name',
-		2 => 'accessories_quantity'
+		2 => 'accessories_uom',
+		3 => 'accessories_quantity'
 	);
 	$error = false;
 	$colVal = '';
