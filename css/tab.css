@@ -202,7 +202,7 @@ a.badge:focus {
 }
 
 .alert {
-  padding: 15px;
+  padding: -1px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;

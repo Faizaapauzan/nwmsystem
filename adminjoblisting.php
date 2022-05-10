@@ -9,10 +9,7 @@ include_once 'Pagination.class.php';
 // Include database configuration file 
 require_once 'dbconnect.php'; 
  
-// Set some useful configuration 
-$baseURL = 'getData.php'; 
-$limit = 10; 
- 
+
 // Count of all records 
 $query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register"); 
 $result  = $query->fetch_assoc(); 
@@ -20,17 +17,14 @@ $rowCount= $result['rowNum'];
  
 // Initialize pagination class 
 $pagConfig = array( 
-    'baseURL' => $baseURL, 
+
     'totalRows' => $rowCount, 
-    'perPage' => $limit, 
-    'contentDiv' => 'dataContainer', 
-    'link_func' => 'columnSorting',
-    'link_search' => 'searchFilter'
+
 ); 
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM job_register ORDER BY jobregister_id ASC LIMIT $limit"); 
+$query = $conn->query("SELECT * FROM job_register"); 
  
 ?>
 
@@ -75,11 +69,14 @@ $query = $conn->query("SELECT * FROM job_register ORDER BY jobregister_id ASC LI
     <link href="css/layout.css" rel="stylesheet" />
     <link href="css/adminjoblisting.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
-   
+   <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
+
    <!-- Script -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script> 
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -378,91 +375,7 @@ thead {
 } 
 
 </style>
-<script>
 
-    function columnSorting(page_num){
-    page_num = page_num?page_num:0;
-	
-    let coltype='',colorder='',classAdd='',classRemove='';
-    $( "th.sorting" ).each(function() {
-        if($(this).attr('colorder') != ''){
-            coltype = $(this).attr('coltype');
-            colorder = $(this).attr('colorder');
-			
-            if(colorder == 'asc'){
-                classAdd = 'asc';
-                classRemove = 'desc';
-            }else{
-                classAdd = 'desc';
-                classRemove = 'asc';
-            }
-        }
-    });
-    
-    $.ajax({
-        type: 'POST',
-        url: 'getData.php',
-        data:'page='+page_num+'&coltype='+coltype+'&colorder='+colorder,
-        beforeSend: function () {
-            $('.loading-overlay').show();
-        },
-        success: function (html) {
-            $('#dataContainer').html(html);
-            
-            if(coltype != '' && colorder != ''){
-                $( "th.sorting" ).each(function() {
-                    if($(this).attr('coltype') == coltype){
-                        $(this).attr("colorder", colorder);
-                        $(this).removeClass(classRemove);
-                        $(this).addClass(classAdd);
-                    }
-                });
-            }
-            
-            $('.loading-overlay').fadeOut("slow");
-        }
-    });
-}
-
-$(function(){
-    $(document).on("click", "th.sorting", function(){
-        let current_colorder = $(this).attr('colorder');
-        $('th.sorting').attr('colorder', '');
-        $('th.sorting').removeClass('asc');
-        $('th.sorting').removeClass('desc');
-        if(current_colorder == 'asc'){
-            $(this).attr("colorder", "desc");
-            $(this).removeClass("asc");
-            $(this).addClass("desc");
-        }else{
-            $(this).attr("colorder", "asc");
-            $(this).removeClass("desc");
-            $(this).addClass("asc");
-        }
-        columnSorting();
-    });
-});
-</script>
-
-<script>
-function searchFilter(page_num) {
-    page_num = page_num?page_num:0;
-    var keywords = $('#keywords').val();
-    // var filterBy = $('#filterBy').val();
-    $.ajax({
-        type: 'POST',
-        url: 'getData.php',
-        data:'page='+page_num+'&keywords='+keywords,
-        beforeSend: function () {
-            $('.loading-overlay').show();
-        },
-        success: function (html) {
-            $('#dataContainer').html(html);
-            $('.loading-overlay').fadeOut("slow");
-        }
-    });
-}
-</script>
 
 </head>
 
@@ -584,52 +497,41 @@ function searchFilter(page_num) {
   <div class="addAccessoriesBtn">
                 <button style="color:#ccc;" class="btn-reset" onclick="document.location='adminjoblisting.php'">Refresh</button>
             </div>
-           
-        
-           <div class="search-panel">
 
-            <input type="text" class="form-control" id="keywords" placeholder="Type keywords..." onkeyup="searchFilter();">
-        </div>
+       <div class="datalist-wrapper">    
+        <div class="col-lg-12" style="border: none;">
 
-<div class="datalist-wrapper">
-    <!-- Loading overlay -->
-    <div class="loading-overlay"><div class="overlay-content">Loading...</div></div>
-    
-    <!-- Data list container -->
-    <div id="dataContainer">
-      <form id="jobupdate_form" method="post">
-      <p class="control"><b id="jobmsg"></b></p>
-        <table id="assign_grid" class="table table-striped sortable">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col" class="sorting" coltype="job_order_number" colorder="">Job Order Number</th>
-                <th scope="col" class="sorting" coltype="job_priority" colorder="">Job Priority</th>
-                <th scope="col" class="sorting" coltype="job_status" colorder="">Job Status</th>
-                <th scope="col" class="sorting" coltype="customer_name" colorder="">Customer Name</th>
-                <th scope="col" class="sorting" coltype="job_name" colorder="">Job Name</th>
-                <th scope="col" class="sorting" coltype="machine_code" colorder="">Machine Code</th>
-                <th scope="col" class="sorting" coltype="job_assign" colorder="">Job Assign</th>
-                <th scope="col" class="sorting" coltype="Job_assistant" colorder="">Assistant</th>
-         
-            </tr>
-        </thead>
-        <tbody>
-             <?php 
+
+
+        <table class="table table-striped sortable">
+<thead>
+    <tr>
+      <th>No</th>
+    <th>Job Order Number</th>
+    <th>Job Priority</th>
+    <th>Job Status</th>
+    <th>Customer Name</th>
+    <th>Job Name</th>
+    <th>Machine Code</th>
+    <th>Job Assign</th>
+    <th>Assistant</th>
+    </tr>
+</thead>
+<tbody>
+    <?php 
             if($query->num_rows > 0){ $i=0; 
                 while($row = $query->fetch_assoc()){ $i++; 
             ?>
-            
-                 <tr>
-                  
-                    <th class="<?php echo $row["job_status"]; ?>" scope="row"><?php echo $i; ?></th>
-                    <td data-id="<?php echo $row['jobregister_id'];?>" class='JobInfo <?php echo $row["job_status"]; ?>' data-target="doubleClick-info"  onClick="document.getElementById('doubleClick-info').style.display='block'"><?php echo $row["job_order_number"]; ?></td>
-                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_priority"]; ?></td>
-                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_status"]; ?></td>
-                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["customer_name"]; ?></td>
-                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_name"]; ?></td>
-                    <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["machine_code"]; ?></td>
-                    <td class="<?php echo $row["job_status"]; ?>"> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" onchange="status_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"><option value=""> <?php echo $row['job_assign']?> </option>  
+     
+    <tr>
+      <td class="<?php echo $row["job_status"]; ?>"><?php echo $i; ?></td>
+        <td data-id="<?php echo $row['jobregister_id'];?>" class='JobInfo <?php echo $row["job_status"]; ?>' data-target="doubleClick-info"  onClick="document.getElementById('doubleClick-info').style.display='block'"><?php echo $row["job_order_number"]; ?></td>
+        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_priority"]; ?></td>
+        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_status"]; ?></td>
+        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["customer_name"]; ?></td>
+        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_name"]; ?></td>
+        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["machine_code"]; ?></td>
+        <td class="<?php echo $row["job_status"]; ?>"> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" onchange="status_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"><option value=""> <?php echo $row['job_assign']?> </option>  
                                <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
@@ -638,9 +540,8 @@ function searchFilter(page_num) {
         {
             echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
-    ?></select>
-                      </td>  
-                    <td class="<?php echo $row["job_status"]; ?>"> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant']?> </option>
+    ?></select></td>
+        <td class="<?php echo $row["job_status"]; ?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant']?> </option>
                     <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
@@ -649,26 +550,24 @@ function searchFilter(page_num) {
         {
             echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
         }	
-    ?></select>
-</td>
-                  
-                    
-                </tr>
-            <?php 
+    ?></select></td>
+
+    </tr>
+ <?php 
                 } 
             }else{ 
                 echo '<tr><td colspan="6">No records found...</td></tr>'; 
             } 
             ?>
-        </tbody>
+</tbody>
         </table>
-         </form>
+		
 
-        
-        <!-- Display pagination links -->
-        <?php echo $pagination->createLinks(); ?>
+    </div>
+    </div>
+  </div>
 
-        <script type="text/javascript">  
+    <script type="text/javascript">  
       function status_update(value,jobregister_id){  
            //alert(id);  
            let url = "adminjoblisting.php";  
@@ -685,7 +584,15 @@ function searchFilter(page_num) {
  </script>  
 
 
-        <!--Double click Job Info (Job Order Number) -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('table').DataTable();
+
+    });
+
+</script>
+
+    <!--Double click Job Info (Job Order Number) -->
     <div id="doubleClick-info" class="modal">
     <div class="tabInfo">
 
@@ -878,6 +785,7 @@ function searchFilter(page_num) {
             });
         </script>
 
+         
 <script>
 let btn = document.querySelector("#btn");
 let sidebar = document.querySelector(".sidebar");
