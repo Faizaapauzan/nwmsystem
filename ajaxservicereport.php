@@ -42,6 +42,7 @@ while ($row = $result->fetch_assoc()) {
     $jobregister_id = $row['jobregister_id'];
     $job_name = $row['job_name'];
     $job_order_number = $row['job_order_number'];
+    $job_status = $row['job_status'];
     $job_description = $row['job_description'];
     $requested_date = $row['requested_date'];
     $job_assign = $row['job_assign'];
@@ -79,6 +80,10 @@ while ($row = $result->fetch_assoc()) {
 
     $response .= "<tr>";
     $response .= "<td>Service Engineer : </td><td>" .  $job_assign . "</td>";
+    $response .= "</tr>";
+
+    $response .= "<tr>";
+    $response .= "<td>Job Status : </td><td>" .  $job_status . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";

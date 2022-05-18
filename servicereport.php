@@ -483,10 +483,9 @@ tr td:first-child:before {
             <tr data-row-id="<?php echo $res['id']; ?>">
              <td></td></div>
       
-           
-            <td><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" name="accessories_name" contenteditable value="<?php echo $res['accessories_name']; ?>"/></span></td>
-            <td><input type="text" style="font-size: 15px; border: none;" class="accessories_uom" name="accessories_uom" value="<?php echo $res['accessories_uom']; ?>" /></td>
-            <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" name="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
+           <td><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" contenteditable><?php echo $row['accessories_name'] ?></span></td>
+            <td><input type="text" style="font-size: 15px; border: none; text-align:center;" class="accessories_uom" name="accessories_uom" value="<?php echo $res['accessories_uom']; ?>" /></td>
+            <td><input readonly type="text" style="font-size: 15px; border: none; text-align:center;" class="accessories_quantity" name="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
 
             </tr> 
      

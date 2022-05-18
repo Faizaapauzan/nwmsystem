@@ -59,47 +59,12 @@ $date = date('d-m-y');
       <?php foreach($queryRecords as $res) :?>
       <tr data-row-id="<?php echo $res['jobregister_id'];?>">
         <td style="display:none;"></td>
-            <td><?php echo $date; ?></td>
+            <td><label>Service Report Date :</label><?php echo $date; ?></td>
          <td><button class="userinfo btn btn-success" type="button" data-id='<?php echo $res['jobregister_id']; ?>'>VIEW</button></td>
       </tr>
 	  <?php endforeach;?>
    </tbody>
 </table>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$('td.editable-date').on('focusout', function() {
-		data = {};
-		data['val'] = $(this).text();
-		data['jobregister_id'] = $(this).parent('tr').attr('data-row-id');
-		data['index'] = $(this).attr('col-index');
-	    if($(this).attr('oldVal') === data['val'])
-		return false;
-
-		$.ajax({   
-				  
-					type: "POST",  
-					url: "server-reportdate.php",  
-					cache:false,  
-					data: data,
-					dataType: "json",				
-					success: function(response)  
-					{   
-						//$("#loading").hide();
-						if(!response.error) {
-							$("#msgdate").removeClass('alert-danger');
-							$("#msgdate").addClass('alert-success').html(response.msgdate);
-						} else {
-							$("#msgdate").removeClass('alert-success');
-							$("#msgdate").addClass('alert-danger').html(response.msgdate);
-						}
-					}   
-				});
-	});
-});
-
-
-</script>
 
 
 <!-- FOR VIEW SERVICE REPORT-->	
@@ -121,132 +86,7 @@ $(document).ready(function(){
     </script>
 
 
-<!-- FOR UPLOAD SERVICE REPORT -->
- 
-<form id="uploadreport-form" method="POST" action="uploadservicereport.php" enctype="multipart/form-data">
-<?php
-    include 'dbconnect.php';
-    
-    if (isset($_POST['jobregister_id'])) {
-        
-        $jobregister_id =$_POST['jobregister_id'];
-        
-        $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-        
-        $query_run = mysqli_query($conn, $query);
-            if ($query_run) {
-                while ($row = mysqli_fetch_array($query_run)) {
-?>
 
-
-       <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-
-<?php
-            }
-        }
-        }
-?>
-
-<br>
-
-<label for="reportdate">Upload Report:</label>
-<div class="input-group">
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" name="files[]" multiple>
-    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-  </div>
-  <div class="input-group-append">
-    <button class="btn btn-primary" name="update-report" value="Update" type="submit">UPDATE</button>
-  </div>
-</div>
-    </form> 
-
-<br>
-
-
-<form id="view_upload" method="">
-
-
-
-
-<?php
-include_once 'dbconnect.php';
-
-// fetch files
-$sql = "SELECT * FROM servicereport WHERE jobregister_id ='$jobregister_id'";
-$result = mysqli_query($conn, $sql);
-?>
-
-
-<section>
-
-                        <!-- Responsive table -->
-                        <div class="table-responsive">
-                            <table class="table m-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">File Name</th>
-                                        <th scope="col">Download</th>
-                                        <th scope="col">Action</th>
-                                        <th scope="col">Upload</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                <?php
-                
-                while($row = mysqli_fetch_array($result)) { ?>
-                <tr>
-                  
-                    <td><?php echo $row['file_name']; ?></td>
-                    <td><a href="servicereport/<?php echo $row['file_name']; ?>" download>Download</td>
-					<td><span class='deletes'  style="color:red;" data-id='<?php echo $row["servicereport_id"]; ?>'>Delete</span></td>
-          <td></td>
-                </tr>
-                <?php } ?>
-	
-
-                                </tbody>
-                            </table>
-
-                        </div>
- <script>
-  $(document).ready(function(){
-
- // Delete 
- $('.deletes').click(function(){
-   var el = this;
-  
-   // Delete id
-   var deletesid = $(this).data('id');
- 
-   var confirmalert = confirm("Are you sure?");
-   if (confirmalert == true) {
-      // AJAX Request
-      $.ajax({
-        url: 'servicereportdelete.php',
-        type: 'POST',
-        data: { servicereport_id:deletesid },
-        success: function(response){
-
-          if(response == 1){
-	    // Remove row from HTML Table
-	    $(el).closest('tr').css('background','tomato');
-	    $(el).closest('tr').fadeOut(800,function(){
-	       $(this).remove();
-	    });
-          }else{
-	    alert('Invalid ID.');
-          }
-
-        }
-      });
-   }
-
- });
-
-});
-
-</script>
                     </div>
 					<br>
 </section>
