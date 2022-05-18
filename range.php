@@ -12,6 +12,7 @@
 		if($row>0){
 			while($fetch=mysqli_fetch_array($query)){
 ?>
+
 	<tr>
         <td></td>
 		<td><?php echo $fetch['job_order_number']?></td>

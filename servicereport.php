@@ -490,7 +490,6 @@ tr td:first-child:before {
             <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" name="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
 
             </tr> 
-
      
 	        <?php endforeach; ?>
 
