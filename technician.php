@@ -84,24 +84,21 @@ if(!isset($_SESSION['username']))
         <div class="container">
           <div class="column">
             <p class="column-title" id="todo">Todo</p>
-  <?php
-              
+            
+            <?php
               include 'dbconnect.php';
               $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-			  customer_grade, job_status
-              FROM
-              job_register
+              jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
+              FROM job_register
               WHERE
               job_assign ='{$_SESSION['username']}' AND  job_status = ''
-			  OR
-			  job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete'
-              ORDER BY jobregisterlastmodify_at
-              DESC LIMIT 50");
-
+                OR
+              job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete'
+                OR
+              job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready'
+              ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
               while($row = $results->fetch_assoc()) {
-              
-              ?>
+            ?>
 			  
 
 			  

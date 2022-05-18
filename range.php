@@ -4,7 +4,6 @@
 
          $jobregister_id =$_POST['search'];
 
-
 		$date1 = date("Y-m-d", strtotime($_POST['date1']));
 		$date2 = date("Y-m-d", strtotime($_POST['date2']));
 		$query=mysqli_query($conn, "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id WHERE `srvcreportdate` BETWEEN '$date1' AND '$date2'") or die(mysqli_error($conn));
@@ -19,13 +18,12 @@
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['requested_date']?></td>
         <td><?php echo $fetch['srvcreportdate']?></td>
-        <td><?php echo $fetch['file_name']?></td>
+        <td><?php echo $fetch['srvcreportnumber']?></td>
         <td><div class='jobTypeUpdateDeleteBtn'>
         <button data-id="<?php echo $fetch["jobregister_id"]; ?>" class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
-        <button class="btn btn-success" id='btnEdit'><a href="servicereport/<?php echo $fetch['file_name']; ?>" download style="color: #ffffff;">Print</button>
+        <button class="userinfo btn btn-success" type="button" id='btnEdit' data-id='<?php echo $fetch['servicereport_id']; ?>' data-id2='<?php echo $fetch['jobregister_id']; ?>' style="color: #ffffff;">Print</button>
         </div>
         </td>
-		
 	</tr>
 <?php
 			}
@@ -42,27 +40,24 @@
                 ?>
 	<tr>
        
-
         <td></td>
         
 		<td><?php echo $fetch['job_order_number'];?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['requested_date']?></td>
         <td><?php echo $fetch['srvcreportdate']?></td>
-        <td><?php echo $fetch['file_name']?></td>
+        <td><?php echo $fetch['srvcreportnumber']?></td>
         <td>
             <div class='jobTypeUpdateDeleteBtn'>
-            <button data-id="<?php echo $fetch["jobregister_id"]; ?>" class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
-            <button class="btn btn-success" id='btnEdit'><a href="servicereport/<?php echo $fetch['file_name']; ?>" download style="color: #ffffff;">Print</button>
+            <button data-id="<?php echo $fetch["jobregister_id"]; ?>" data-id3="<?php echo $fetch["servicereport_id"]; ?>" class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
+            <button class="userinfo btn btn-success" type="button" id='btnEdit' data-id='<?php echo $fetch['servicereport_id']; ?>' data-id2='<?php echo $fetch['jobregister_id']; ?>' style="color: #ffffff;">Print</button>
             </div>
         </td>
 	</tr>
   
-
 <?php
             }
         } ?>
-
 
  <!--Double click Job Info (View Button) -->
     <div id="onClick-View" class="modal">
@@ -80,13 +75,13 @@
         <script type='text/javascript'>
             $(document).ready(function () {
             $('.viewinfo').click(function () {
-            var jobregister_id = $(this).data('id');
+            var servicereport_id = $(this).data('id3');
 
             // AJAX request
             $.ajax({
             url: 'ajaxservicereport.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+            data: { servicereport_id: servicereport_id },
             success: function (response) {
             // Add response in Modal body
             $('.view-details').html(response);
@@ -132,6 +127,25 @@
                 });
         </script>
 
+        <!-- FOR VIEW SERVICE REPORT-->	
+	    <script type='text/javascript'>
+        $(document).ready(function(){
+        $('.userinfo').click(function(){
+        var servicereport_id = $(this).data('id');
+        var jobregister_id = $(this).data('id2');
+        $.ajax({
+            url: 'servicereportADMIN.php',
+            type: 'post',
+            data: {servicereport_id: servicereport_id,
+                       jobregister_id: jobregister_id},
+            success: function(data){
+            var win = window.open('servicereportADMIN.php');
+            win.document.write(data);
+                        }
+                    });
+                });
+            });
+    </script>
+
      
  
-

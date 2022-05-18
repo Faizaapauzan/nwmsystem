@@ -2,22 +2,22 @@
 
     include 'dbconnect.php';
 
-    $sql = ("SELECT srvcreportnumber FROM `servicereport_number`");
-    $res = mysqli_query($conn,$sql);
-    $last_id = 0;
-    while($row = mysqli_fetch_array($res))
-    {
-        $last_id = $last_id+1;
-    }
-    $next_id = str_pad ($last_id+1,3,0, STR_PAD_LEFT);
-    date_default_timezone_set("Asia/Kuala_Lumpur");
     $m=date('m');
     $y=date('y');
+    $year = date('Y');
 
-    $srvcreportnumber = "S".$y.$m."-".$next_id;
+    $sql = mysqli_query($conn, "SELECT MAX(srvcreportnumber) AS max_code FROM servicereport WHERE month(today_date_report)='$m' AND year(today_date_report)='$year'");
+    $data = mysqli_fetch_array($sql);
+    $code = $data['max_code'];
+    $i = (int)substr($code, 7, 3);
+    $i++;
+
+    $srvcreportnumber = "S".$y.$m."-".sprintf("%03s",$i);
     
     echo $srvcreportnumber;
     
 ?>
+
+
 
 

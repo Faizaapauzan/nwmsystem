@@ -1,50 +1,4 @@
-<?php
-session_start();
-$today_date_report = date("Y.m.d");
-$_SESSION['storeDate'] = $today_date_report;
-?>
-
-<?php 
-
-include_once 'dbconnect.php';
-                
-        if (isset($_POST['jobregister_id'])) {
-            $jobregister_id =$_POST['jobregister_id'];
-  
-            $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
-            $query_run = mysqli_query($conn, $query);
-            if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-
-//  $date1 = $row['technician_departure'];
-//  $date2   = $row['technician_arrival'];
-
-$DateTime1 = $row['technician_departure'];
-$DateTime2   = $row['technician_arrival'];
-
-         ///////////////////////////////////////////
-if (!function_exists('difftime'))   {
-  function difftime($date1, $date2)  {
-                 $dif=array();
-                 $first = strtotime($date1);
-                 $second = strtotime($date2);
-                 $datediff = abs($first - $second);
-                 $dif['s'] = floor($datediff);
-                 $dif['m'] = floor($datediff/(60) % 60 ); //minute
-                $dif['h'] = floor($datediff/(60*60)); //hour
-                 
-
-           return $dif;
-             }
-         }
-?>
-   <?php
-        }
-    }
-    ?>
-
-              <?php
-            } ?>
+<?php session_start(); ?>
 
 <!doctype html>
 <html lang="en">
@@ -288,14 +242,12 @@ tbody {
   counter-reset: Serial;   
 }
 
-
 tr td:first-child:before {
   counter-increment: Serial;      
 	content: counter(Serial) "."; 
   padding-left: 5px;
   padding: 5px;
   
-
 }
 
     </style>
@@ -309,7 +261,7 @@ tr td:first-child:before {
     <div class="graphic-path">
 
     <div class="text-center">
-    
+    <button onclick="window.print();" class="btn btn-primary" id="print-btn" style="margin: 10px;">Print</button>
     </div>
 
     <h3 style="display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 0em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold; text-align:center">
@@ -326,41 +278,27 @@ tr td:first-child:before {
    <div class="SR">Service Report</div>
     <div class="text-center">
     </div>
-   
-    <button onclick="number();" class="btn btn-primary" id="print-btn">Click</button>
-    <script type="text/javascript">
-            function number()
-                {
-                    $.ajax({url:"servicereportnumber.php", success:function(result)
-                        {
-                            $("#numbreport").val(result);
-                        }
-                    })
-                }
-        </script>
-    
-    <form action="" method="POST">
 
-    <div class="SRno">Service Report No:<input type="text" name="srvcreportnumber" id="numbreport" value="" class="serviceno" /></div></center>
+    <?php
+        $connection = mysqli_connect("localhost", "root", "");
+        $db = mysqli_select_db($connection, 'nwmsystem');
+                
+        if (isset($_POST['servicereport_id'])) {
+            $servicereport_id =$_POST['servicereport_id'];
+            $query = ("SELECT * FROM admin_servicereport WHERE servicereport_id='$servicereport_id'");
+            $query_run = mysqli_query($connection, $query);
+            if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
+   
+    <form action="servicereport.php" method="post">
+    
+    <div class="SRno">Service Report No:<input type="text" name="srvcreportnumber" id="numbreport" value="<?php echo $row['srvcreportnumber'] ?>" class="serviceno" /></div></center>
     
     </div></div>
     <br/><br/>
     </section>
             
-    <?php
-        $connection = mysqli_connect("localhost", "root", "");
-        $db = mysqli_select_db($connection, 'nwmsystem');
-                
-        if (isset($_POST['jobregister_id'])) {
-            $jobregister_id =$_POST['jobregister_id'];
-            $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
-            $query_run = mysqli_query($connection, $query);
-            if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-    ?>
-
-    <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-
     <section class="store-user mt-5">
     <div class="col-10">
     <div class="row bb pb-3">
@@ -369,9 +307,9 @@ tr td:first-child:before {
     <div class="try1">
     
     <p><label>Date :</label> <span><input type="text" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>" class="input"/></span></p>
-    <p><label style="position:absolute;">Customer Name :</label><span><input type="text" name="customer_name" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textbox" contenteditable value="<?php echo $row['customer_name'] ?>"/></span></p>
+    <p><label style="position:absolute;">Customer Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textbox" contenteditable><?php echo $row['customer_name'] ?></span></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
-    <p><label>Service Type :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 2px;" name="job_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['job_name'] ?>"/></span></p>
+    <p><label>Service Type :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 2px;" class="textarea" role="textbox" contenteditable><?php echo $row['job_name'] ?></span></p>
     <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input" /></span></p>
     <script>
 
@@ -385,8 +323,8 @@ tr td:first-child:before {
       </script>
 
     <br/>
-    <p>Problem Description :-</p> 
-    <textarea name="remark_desc" style=" writing-mode: horizontal-tb !important;
+    <p>Problem Description :-</p>
+    <textarea style="   writing-mode: horizontal-tb !important;
     font-family: Arial;
     text-rendering: auto;
     color: -internal-light-dark(black, white);
@@ -409,16 +347,15 @@ tr td:first-child:before {
     </div>
 
     <div class="try2">
-    <p><label>Travel Time :</label><span><input type="technician_arrival" name="Travel_Time" class="input" value="<?php echo difftime($DateTime1,$DateTime2)['h']?>   hours <?php echo difftime($DateTime1,$DateTime2)['m']?>  minutes" /></span></p>
+    <p><label>Travel Time :</label><span><input type="technician_arrival" name="date" class="input" value="<?php echo $row['Travel_Time'] ?>" /></span></p>
     <p><label>Time At  Site :</label> <span><input type="text" name="technician_arrival" value="<?php echo $row['technician_arrival'] ?>" class="input" /></span></p>
     <p><label>Return Time :</label><span><input type="text" name="technician_leaving" value="<?php echo $row['technician_leaving'] ?>" class="input" /></span></p>
-    <p><label style="position:absolute;">Machine Name :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" name="machine_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['machine_name'] ?>"/></span></p>
-    <p><label>Serial Number :</label><span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input"/></span></p>
-
+    <p><label style="position:absolute;">Machine Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" class="textarea" role="textbox" contenteditable><?php echo $row['machine_name'] ?></span></p>
+    <p><label>Serial Number :</label> <span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input" /></span></p>
 
     <br/>
     <p>Submitted Items :-</p>
-    <textarea name="remark_solution" style=" writing-mode: horizontal-tb !important;
+    <textarea style=" writing-mode: horizontal-tb !important;
     font-family: Arial;
     text-rendering: auto;
     color: -internal-light-dark(black, white);
@@ -441,7 +378,7 @@ tr td:first-child:before {
     <br/></div>
     <br/><br/>
     <div class="try3">
-    <p>Report :-</p><textarea name="report" style="writing-mode: horizontal-tb !important;
+    <p>Report :-</p><textarea style="writing-mode: horizontal-tb !important;
     font-family: Arial;
     text-rendering: auto;
     text-align: start;
@@ -454,7 +391,7 @@ tr td:first-child:before {
     margin: 19px;
     padding: 1px 2px;
     border-width: 0px;
-    resize: none;"></textarea>
+    resize: none;"><?php echo $row['report'];?></textarea>
 
     </div>
 
@@ -485,9 +422,9 @@ tr td:first-child:before {
              <td></td></div>
       
            
-            <td><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" name="accessories_name" contenteditable value="<?php echo $res['accessories_name']; ?>"/></span></td>
-            <td><input type="text" style="font-size: 15px; border: none;" class="accessories_uom" name="accessories_uom" value="<?php echo $res['accessories_uom']; ?>" /></td>
-            <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" name="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
+            <td><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" contenteditable><?php echo $res['accessories_name']; ?></span></td>
+            <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_uom" value="<?php echo $res['accessories_uom']; ?>" /></td>
+            <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
 
             </tr> 
 
@@ -513,85 +450,22 @@ tr td:first-child:before {
         $connection = mysqli_connect("localhost", "root", "");
         $db = mysqli_select_db($connection, 'nwmsystem');
                 
-        if (isset($_POST['jobregister_id'])) {
-            $jobregister_id =$_POST['jobregister_id'];
-            $query = ("SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'");
+        if (isset($_POST['servicereport_id'])) {
+            $servicereport_id =$_POST['servicereport_id'];
+            $query = ("SELECT * FROM servicereport WHERE servicereport_id ='$servicereport_id'");
             $query_run = mysqli_query($connection, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
     <div class="sign1">
-    <p>Issue By : <input type="text" name="Issue_By" class="serviceno" value="<?php echo $row['job_assign'] ?>" /></p>
+    <p>Issue By : <input type="text" name="job_assign" class="serviceno" value="<?php echo $row['Issue_By'] ?>" /></p>
     </div>
     <div class="sign2"><br />
-    <p>Customer Name : <input style="width:250px" type="text" class="serviceno" name="cust" value="<?php echo $row['customer_name'] ?>" /></p>
-    <p>Phone Number : <input style="width:250px" type="text" class="serviceno" name="custphone" value="<?php echo $row['cust_phone1'] ?>" /></p>
+    <p>Customer Name : <input style="width:250px" type="text" name="customer_name" class="serviceno" value="<?php echo $row['cust'] ?>" /></p>
+    <p>Phone Number : <input style="width:250px" type="text" name="cust_phone1" class="serviceno" value="<?php echo $row['custphone'] ?>" /></p>
     </div>
     <!-- <div class="sign3"><p>Date and Time:</p></div> -->
-
-    <div><input type="button" onclick="submitForm();" id="print-btn" value="Save" /></div>
-
-        <script type="text/javascript">
-            function submitForm()
-              {
-                var jobregister_id = $('input[name=jobregister_id]').val();
-                var srvcreportdate = $('input[name=srvcreportdate]').val();
-                var customer_name = $('input[name=customer_name]').val();
-                var cust_phone1 = $('input[name=cust_phone1]').val();
-                var job_name = $('input[name=job_name]').val();
-                var job_assign = $('input[name=job_assign]').val();
-                var technician_arrival = $('input[name=technician_arrival]').val();
-                var technician_leaving = $('input[name=technician_leaving]').val();
-                var machine_name = $('input[name=machine_name]').val();
-                var serialnumber = $('input[name=serialnumber]').val();
-                var srvcreportnumber = $('input[name=srvcreportnumber]').val();
-                var Issue_By = $('input[name=Issue_By]').val();
-                var report = $('textarea[name=report]').val();
-                var cust = $('input[name=cust]').val();
-                var custphone = $('input[name=custphone]').val();
-                var Travel_Time = $('input[name=Travel_Time]').val();
-
-                if(jobregister_id!= '', srvcreportdate!= '', customer_name!= '', cust_phone1!= '', job_name!= '', job_assign!= '', technician_arrival!= '', technician_leaving!= '', machine_name!= '', serialnumber!= '',
-                srvcreportnumber!= '', Issue_By!= '', report!= '', cust!= '', custphone!= '', Travel_Time!= '')
-                  {
-                    var formData = {jobregister_id: jobregister_id,
-                                    srvcreportdate: srvcreportdate,
-                                    customer_name: customer_name,
-                                    cust_phone1: cust_phone1,
-                                    job_name: job_name,
-                                    job_assign: job_assign,
-                                    technician_arrival: technician_arrival,
-                                    technician_leaving: technician_leaving,
-                                    machine_name: machine_name,
-                                    serialnumber: serialnumber,
-                                    srvcreportnumber: srvcreportnumber,
-                                    Issue_By: Issue_By,
-                                    report: report,
-                                    cust: cust,
-                                    custphone: custphone,
-                                    Travel_Time: Travel_Time};
-                                    
-                    $('#message').html('<span style="color: red">Processing form. . . please wait. . .</span>');
-                    $.ajax({
-                            url: "servicereportindex.php", 
-                            type: 'POST', 
-                            data: formData, 
-                            success: function(response)
-                      {
-                        var res = JSON.parse(response);
-                        console.log(res);
-                        if(res.success == true)
-                        alert('Form is successfully saved');
-                        else
-                        alert('Form not submitted');
-                      }
-                    });
-                  }
-              } 
-        </script>
-
     </form>
-
           <?php
             } ?>
    <?php
@@ -602,6 +476,7 @@ tr td:first-child:before {
         }
     }
     ?>
+
               <?php
             } ?>
 

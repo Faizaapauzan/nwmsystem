@@ -172,11 +172,7 @@ include 'dbconnect.php';
                 <div class="contentListAddForm">
                    <form id="user_form" method="post">
                         <div class="listAddForm-details">
-
-                        <?php if (isset($_SESSION["username"])) ?>
-                            <input type="hidden" name="today_date" id="today_date" value="<?php echo $_SESSION["showDate"] ?>" readonly>
-                        
-                           
+   
                             <div class="input-box">
                                 <label for="customerCode" class="details">Customer Code</label>
                                 <input type="text" id="customerCode" name="customer_code" onkeyup="checkcustomer_codelAvailability()" value="" class="form-control" placeholder="Enter Customer Code" required> 
