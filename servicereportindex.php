@@ -6,7 +6,7 @@ $response = array('success' => false);
 
 if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!=''
     &&
-   isset($_POST['srvcreportdate']) && $_POST['srvcreportdate']!=''
+   isset($_POST['date']) && $_POST['date']!=''
     &&
    isset($_POST['customer_name']) && $_POST['customer_name']!=''
     &&
@@ -38,11 +38,11 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!=''
 
     {
         
-        $sql = "INSERT INTO servicereport ( jobregister_id, srvcreportdate, customer_name, cust_phone1, job_name, job_assign, technician_arrival, technician_leaving, machine_name, serialnumber,
+        $sql = "INSERT INTO servicereport ( jobregister_id, date, customer_name, cust_phone1, job_name, job_assign, technician_arrival, technician_leaving, machine_name, serialnumber,
                                            srvcreportnumber, Issue_By, report, cust, custphone, Travel_Time) 
                        
                        VALUES ('".addslashes($_POST['jobregister_id'])."',
-                               '".addslashes($_POST['srvcreportdate'])."',
+                               '".addslashes($_POST['date'])."',
                                '".addslashes($_POST['customer_name'])."',
                                '".addslashes($_POST['cust_phone1'])."',
                                '".addslashes($_POST['job_name'])."',

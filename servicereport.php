@@ -359,11 +359,7 @@ tr td:first-child:before {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
 
-    <?php
-// Return current date from the remote server
-$date = date('d-m-y');
-
-?>
+<input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
     <form action="servicereport.php" method="post">
     <section class="store-user mt-5">
@@ -373,7 +369,7 @@ $date = date('d-m-y');
     <div class="row extra-info pt-3">
     <div class="try1">
     
-    <p><label>Date :</label> <span><input type="text" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>" class="input"/></span></p>
+    <p><label>Date :</label> <span><input type="text" name="date" value="<?php echo $date = date('d-m-y'); ?>" class="input"/></span></p>
     <p><label style="position:absolute;">Customer Name :</label><span><input type="text" name="customer_name" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textbox" contenteditable value="<?php echo $row['customer_name'] ?>"/></span></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 2px;" name="job_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['job_name'] ?>"/></span></p>
@@ -539,7 +535,7 @@ $date = date('d-m-y');
             function submitForm()
               {
                 var jobregister_id = $('input[name=jobregister_id]').val();
-                var srvcreportdate = $('input[name=srvcreportdate]').val();
+                var date = $('input[name=date]').val();
                 var customer_name = $('input[name=customer_name]').val();
                 var cust_phone1 = $('input[name=cust_phone1]').val();
                 var job_name = $('input[name=job_name]').val();
@@ -555,11 +551,11 @@ $date = date('d-m-y');
                 var custphone = $('input[name=custphone]').val();
                 var Travel_Time = $('input[name=Travel_Time]').val();
 
-                if(jobregister_id!= '', srvcreportdate!= '', customer_name!= '', cust_phone1!= '', job_name!= '', job_assign!= '', technician_arrival!= '', technician_leaving!= '', machine_name!= '', serialnumber!= '',
+                if(jobregister_id!= '', date!= '', customer_name!= '', cust_phone1!= '', job_name!= '', job_assign!= '', technician_arrival!= '', technician_leaving!= '', machine_name!= '', serialnumber!= '',
                 srvcreportnumber!= '', Issue_By!= '', report!= '', cust!= '', custphone!= '', Travel_Time!= '')
                   {
                     var formData = {jobregister_id: jobregister_id,
-                                    srvcreportdate: srvcreportdate,
+                                    date: date,
                                     customer_name: customer_name,
                                     cust_phone1: cust_phone1,
                                     job_name: job_name,
