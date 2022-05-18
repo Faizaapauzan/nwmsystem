@@ -28,9 +28,6 @@ session_start();
 	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <title>NWM Technician Page</title>
-
-
-	
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -122,7 +119,7 @@ session_start();
 
   <div class="col-md-6">
     <label for="serialnumber" class="form-label">Serial Number</label>
-    <input type="text" class="form-control" id="serialnumber" value="    " style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="serialnumber" value="<?php echo $row['serialnumber']?>" style="background-color: white;" readonly>
   </div>   
 </form>
   <br>

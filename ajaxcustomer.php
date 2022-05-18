@@ -54,43 +54,43 @@ while ($row = $result->fetch_assoc()) {
 
 
     $response .= "<tr>";
-    $response .= "<td>ID : </td><td>" . $customer_id . "</td>";
+    $response .= "<td>Customer ID : </td><td>" . $customer_id . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Code : </td><td>" . $customer_code . "</td>";
+    $response .= "<td>Customer Code : </td><td>" . $customer_code . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Name : </td><td>" . $customer_name . "</td>";
+    $response .= "<td>Customer Name : </td><td>" . $customer_name . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Grade : </td><td>" . $customer_grade . "</td>";
+    $response .= "<td>Customer Grade : </td><td>" . $customer_grade . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>PIC : </td><td>" . $customer_PIC . "</td>";
+    $response .= "<td>Customer PIC : </td><td>" . $customer_PIC . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Phone 1 : </td><td>" . $cust_phone1 . "</td>";
+    $response .= "<td>Customer Phone 1 : </td><td>" . $cust_phone1 . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Phone 2 : </td><td>" . $cust_phone2 . "</td>";
+    $response .= "<td>Customer Phone 2 : </td><td>" . $cust_phone2 . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Address 1 : </td><td>" . $cust_address1 . "</td>";
+    $response .= "<td>Customer Address 1 : </td><td>" . $cust_address1 . "</td>";
     $response .= "</tr>";
 
      $response .= "<tr>";
-    $response .= "<td>Address 2 : </td><td>" . $cust_address2 . "</td>";
+    $response .= "<td>Customer Address 2 : </td><td>" . $cust_address2 . "</td>";
     $response .= "</tr>";
 
      $response .= "<tr>";
-    $response .= "<td>Address 3 : </td><td>" . $cust_address3 . "</td>";
+    $response .= "<td>Customer Address 3 : </td><td>" . $cust_address3 . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";

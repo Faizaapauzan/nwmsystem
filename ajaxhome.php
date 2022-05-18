@@ -93,6 +93,11 @@ session_start();
             <input type="text" class="machine_type" name="machine_type" value="<?php echo $row['machine_type']?>">
         </div>
 
+         <div class="input-box">
+            <label for="">Machine Serial Number</label>
+            <input type="text" class="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">
+        </div>
+
         <div class="input-box">
             <label for="">Machine Brand</label>
             <input type="text" class="machine_brand" name="machine_brand" value="<?php echo $row['machine_brand']?>">

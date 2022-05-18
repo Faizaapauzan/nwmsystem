@@ -34,7 +34,7 @@ include_once("dbconnect.php");
 
  <form id="storeupdate_form" method="post">
           <div id="storesmsg" class="alerts"></div>
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table">
 
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
@@ -55,16 +55,16 @@ include_once("dbconnect.php");
       <tr data-row-id="<?php echo $res['id'];?>">
         <td><input type="hidden" name="accessories_id" class="accessories_id" value="<?php echo $res['accessories_id'] ?>"><input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $res['jobregister_id'] ?>"></td>
         <td col-index='1' oldVal ="<?php echo $res['accessories_name'];?>"><?php echo $res['accessories_name'];?></td>
-         <td col-index='1' oldVal ="<?php echo $res['accessories_uom'];?>"><?php echo $res['accessories_uom'];?></td>
-        <td col-index='1' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
+         <td col-index='2' oldVal ="<?php echo $res['accessories_uom'];?>"><?php echo $res['accessories_uom'];?></td>
+        <td col-index='3' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
         <td><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 16px;" name='accessories_status[<?=$res['accessories_id']?>]'>
 <option value='' <?php if ($res['accessories_status'] == '') { echo "SELECTED"; } ?>></option>
 <option value="Ready" <?php if ($res['accessories_status'] == "Ready") { echo "SELECTED";} ?>>Ready</option>
 <option value="Not Ready" <?php if ($res['accessories_status'] == "Not Ready") { echo "SELECTED"; } ?>>Not Ready</option>
 </select></td>
-         <td class="editable-col" contenteditable="true" col-index='2' oldVal ="<?php echo $res['accessories_remark'];?>"><?php echo $res['accessories_remark'];?></td>
-          <td col-index='2' oldVal ="<?php echo $res['accessoriesregister_at'];?>"><?php echo $res['accessoriesregister_at'];?></td>
-           <td col-index='2' oldVal ="<?php echo $res['accessoriesmodify_at'];?>"><?php echo $res['accessoriesmodify_at'];?></td>
+         <td class="editable-col" contenteditable="true" col-index='4' oldVal ="<?php echo $res['accessories_remark'];?>"><?php echo $res['accessories_remark'];?></td>
+          <td oldVal ="<?php echo $res['accessoriesregister_at'];?>"><?php echo $res['accessoriesregister_at'];?></td>
+           <td oldVal ="<?php echo $res['accessoriesmodify_at'];?>"><?php echo $res['accessoriesmodify_at'];?></td>
       </tr>
 	  <?php endforeach;?>
   

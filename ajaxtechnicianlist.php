@@ -47,7 +47,6 @@ while ($row = $result->fetch_assoc()) {
     $staff_department = $row['staff_department'];
     $staff_position = $row['staff_position'];
     $staff_group = $row['staff_group'];
-    $technician_group  = $row['technician_group'];
     $technician_rank  = $row['technician_rank'];
     $job_ability  = $row['job_ability'];
     $staffregistercreated_by = $row['staffregistercreated_by'];
@@ -92,11 +91,6 @@ while ($row = $result->fetch_assoc()) {
     $response .= "<td>Group : </td><td>" . $staff_group . "</td>";
     $response .= "</tr>";
 
-    $response .= "<tr>";
-    $response .= "<td>Technician Group : </td><td>" . $technician_group . "</td>";
-    $response .= "</tr>";
-
-    
     $response .= "<tr>";
     $response .= "<td>Technician Rank : </td><td>" . $technician_rank . "</td>";
     $response .= "</tr>";

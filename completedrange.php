@@ -2,12 +2,12 @@
 	require'dbconnect.php';
 	if(ISSET($_POST['search'])){
 
-         $jobregister_id =$_POST['search'];
+        $jobregister_id =$_POST['search'];
 
 
 		$date1 = date("Y-m-d", strtotime($_POST['date1']));
 		$date2 = date("Y-m-d", strtotime($_POST['date2']));
-		$query=mysqli_query($conn, "SELECT * FROM job_register WHERE job_status = 'Completed' AND `srvcreportdate` BETWEEN '$date1' AND '$date2'") or die(mysqli_error($conn));
+		$query=mysqli_query($conn, "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id WHERE `date` BETWEEN '$date1' AND '$date2'") or die(mysqli_error($conn));
 		
         $row=mysqli_num_rows($query);
 		if($row>0){
@@ -18,7 +18,7 @@
 		<td><?php echo $fetch['job_order_number']?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['job_assign']?></td>
-        <td><?php echo $fetch['srvcreportdate']?></td>
+        <td><?php echo $fetch['date']?></td>
         <td><div class='jobTypeUpdateDeleteBtn'>
         <button data-jobregister_id="<?php echo $fetch["jobregister_id"]; ?>" class='userinfo' id='btnView' data-target="doubleClick-completed"  onclick="document.getElementById('doubleClick-completed').style.display='block'">Details</button>
         </div>
@@ -35,7 +35,7 @@
 		}
 	}else{
   
-            $query=mysqli_query($conn, "SELECT * FROM job_register WHERE (job_status = 'Completed')") or die(mysqli_error($conn));
+             $query=mysqli_query($conn, "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id") or die(mysqli_error($conn));
             while ($fetch=mysqli_fetch_array($query)) {
                 ?>
 	<tr>
@@ -46,7 +46,7 @@
 		<td><?php echo $fetch['job_order_number']?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['job_assign']?></td>
-        <td><?php echo $fetch['srvcreportdate']?></td>
+        <td><?php echo $fetch['date']?></td>
         <td>
             <div class='jobTypeUpdateDeleteBtn'>
             <button data-jobregister_id="<?php echo $fetch["jobregister_id"]; ?>" class='userinfo' id='btnView' data-target="doubleClick-completed"  onclick="document.getElementById('doubleClick-completed').style.display='block'">Details</button>

@@ -76,7 +76,6 @@ include_once("dbconnect.php");
 
   if (isset($_POST['jobregister_id'])) {
       $jobregister_id =$_POST['jobregister_id'];
-
       $sql = "SELECT * FROM `job_accessories` WHERE  jobregister_id ='$jobregister_id'";
       $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
   }
@@ -100,9 +99,9 @@ include_once("dbconnect.php");
       <tr data-row-id="<?php echo $res['id'];?>">
         <td></td>
         <td><label><a href="#" data-toggle="tooltip" class="fetch" id="<?php echo $res["accessories_id"]; ?>"><?php echo $res["accessories_code"]; ?></a></label></td>
-         <td class="editable-col" col-index='1' oldVal ="<?php echo $res['accessories_name'];?>"><?php echo $res['accessories_name'];?></td>
-         <td class="editable-col" col-index='1' oldVal ="<?php echo $res['accessories_uom'];?>"><?php echo $res['accessories_uom'];?></td>
-         <td class="editable-col" col-index='2' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
+         <td class="editable-col"><?php echo $res['accessories_name'];?></td>
+         <td class="editable-col"><?php echo $res['accessories_uom'];?></td>
+         <td class="editable-col"><?php echo $res['accessories_quantity'];?></td>
          <td></td>
       </tr>
 	  <?php endforeach;?>
