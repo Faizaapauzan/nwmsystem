@@ -427,7 +427,7 @@ $date = date('d-m-y');
 
     <br/>
     <p>Problem Description :-</p>
-    <textarea style="   writing-mode: horizontal-tb !important;
+    <textarea style="writing-mode: horizontal-tb !important;
     font-family: Arial;
     text-rendering: auto;
     color: -internal-light-dark(black, white);
@@ -524,13 +524,11 @@ $date = date('d-m-y');
             <tr data-row-id="<?php echo $res['id']; ?>">
              <td></td></div>
       
-           
             <td><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" contenteditable><?php echo $res['accessories_name']; ?></span></td>
             <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_uom" value="<?php echo $res['accessories_uom']; ?>" /></td>
             <td><input readonly type="text" style="font-size: 15px; border: none;" class="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
 
             </tr> 
-
      
 	        <?php endforeach; ?>
 

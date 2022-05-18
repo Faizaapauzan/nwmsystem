@@ -180,7 +180,7 @@ session_start();
 						<th>Customer Name</th>
 						<th>Requested Date</th>
             <th>Report Date</th>
-            <th>File Name</th>
+            <th>Service Report Number</th>
            
 						<th>Action</th>
 					</tr>

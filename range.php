@@ -13,16 +13,17 @@
 		if($row>0){
 			while($fetch=mysqli_fetch_array($query)){
 ?>
+
 	<tr>
         <td></td>
 		<td><?php echo $fetch['job_order_number']?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['requested_date']?></td>
         <td><?php echo $fetch['srvcreportdate']?></td>
-        <td><?php echo $fetch['file_name']?></td>
+        <td><?php echo $fetch['srvcreportnumber']?></td>
         <td><div class='jobTypeUpdateDeleteBtn'>
         <button data-id="<?php echo $fetch["jobregister_id"]; ?>" class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
-        <button class="btn btn-success" id='btnEdit'><a href="servicereport/<?php echo $fetch['file_name']; ?>" download style="color: #ffffff;">Print</button>
+        <button class="userinfo btn btn-success" type="button" id='btnEdit' data-id='<?php echo $fetch['jobregister_id']; ?>' style="color: #ffffff;">Print</button>
         </div>
         </td>
 		
@@ -49,11 +50,11 @@
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['requested_date']?></td>
         <td><?php echo $fetch['srvcreportdate']?></td>
-        <td><?php echo $fetch['file_name']?></td>
+        <td><?php echo $fetch['srvcreportnumber']?></td>
         <td>
             <div class='jobTypeUpdateDeleteBtn'>
             <button data-id="<?php echo $fetch["jobregister_id"]; ?>" class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
-            <button class="btn btn-success" id='btnEdit'><a href="servicereport/<?php echo $fetch['file_name']; ?>" download style="color: #ffffff;">Print</button>
+            <button class="userinfo btn btn-success" type="button" id='btnEdit' data-id='<?php echo $fetch['jobregister_id']; ?>' style="color: #ffffff;">Print</button>
             </div>
         </td>
 	</tr>
@@ -132,6 +133,23 @@
                 });
         </script>
 
+        <!-- FOR VIEW SERVICE REPORT-->	
+	    <script type='text/javascript'>
+        $(document).ready(function(){
+        $('.userinfo').click(function(){
+        var jobregister_id = $(this).data('id');
+        $.ajax({
+            url: 'servicereportADMIN.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(data){
+            var win = window.open('servicereportADMIN.php');
+            win.document.write(data);
+                        }
+                    });
+                });
+            });
+    </script>
+
      
  
-

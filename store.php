@@ -153,15 +153,15 @@ if(!isset($_SESSION['username']))
               FROM
               job_register
               WHERE
-              (accessories_required = 'Yes' AND job_status = ''
+              (accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
                OR
-               job_assign = 'Nuraein' AND job_status = 'Incomplete'
+               job_assign = 'Nuraein' AND job_status = 'Incomplete' AND job_cancel = ''
                OR
-                job_assign = 'Sau Hwe' AND job_status = 'Incomplete'
+                job_assign = 'Sau Hwe' AND job_status = 'Incomplete' AND job_cancel = ''
+               OR 
+               job_assign = 'Nuraein' AND job_status = '' AND job_cancel = ''
                OR
-               job_assign = 'Nuraein' AND job_status = ''
-               OR
-               job_assign = 'Sau Hwe' AND job_status = '')
+               job_assign = 'Sau Hwe' AND job_status = '' AND job_cancel = '')
 
               ORDER BY jobregisterlastmodify_at
               DESC LIMIT 50");
