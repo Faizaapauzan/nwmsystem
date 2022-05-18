@@ -32,6 +32,7 @@ if(isset($_POST["accessories_id"]))
   <p><img src="image/'.$row['file_name'].'" align="center" width="150px" height="160px" /></p>
   <p><b>Code</b> : '.$row['accessories_code'].'</p>
   <p><b>Name</b> : '.$row['accessories_name'].'</p>
+   <p><b>UOM</b> : '.$row['accessories_uom'].'</p>
   <p><b>Brand</b> : '.$row['accessories_brand'].'</p>
   <p><b>Description</b> : '.$row['accessories_description'].'</p>
   <p><b>Created by</b> : '.$row['accessorieslistcreated_by'].'</p>

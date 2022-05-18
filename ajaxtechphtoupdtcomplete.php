@@ -73,13 +73,7 @@ session_start();
       <?php foreach($queryRecords as $res) :?>
     <tr data-row-id="<?php echo $res['id'];?>">
     <td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"/></td>
-    <td oldVal ="<?php echo $res['description'];?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 16px;">
-<option value='' <?php if ($res['description'] == '') { echo "SELECTED"; } ?>></option>
-<option value="Machine (Before Service)" <?php if ($res['description'] == "Machine (Before Service)") { echo "SELECTED";} ?>>Machine (Before Service)</option>
-<option value="Accessories (Broken)" <?php if ($res['description'] == "Accessories (Broken)") { echo "SELECTED"; } ?>>Accessories (Broken)</option>
-<option value="Accessories (New)" <?php if ($res['description'] == "Accessories (New)") { echo "SELECTED"; } ?>>Accessories (New)</option>
-<option value="Machine (After Service)" <?php if ($res['description'] == "Machine (After Service)") { echo "SELECTED"; } ?>>Machine (After Service)</option>
-</select></td>
+    	<td oldVal ="<?php echo $res['description'];?>"><?php echo $res['description'];?></td>
          <td></td>
       </tr>
 	  <?php endforeach;?>
@@ -122,7 +116,119 @@ $(document).ready(function(){
 
 </script>
 
+<!---------------------------------- video ------------------------------------------>
+
+<!-- <div class="container" style="padding:50px 250px;"> -->		
+<form action="techvideoindex.php" class="video-inline" id="frm-add-video" action="javascript:void(0)" method="post" enctype="multipart/form-data">
+<div class="input-boxVideo" id="input_fields_wrap">  
+<div id="videomsg" class="alert"></div>
+
+<!-- for select job register id -->
+<div>
+      <?php
+      include 'dbconnect.php';
+      if (isset($_POST['jobregister_id'])) { 
+        $jobregister_id =$_POST['jobregister_id'];
+        $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
+        $query_run = mysqli_query($conn, $query);
+        if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+                ?>
+                
+        <div class="video">
+        <div class="input-box">
+        <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+        </div>
+
+ <?php }  } } ?>
+
+ <!-- for select data from tech photo update database -->
+ <?php include_once("dbconnect.php");
+
+  if (isset($_POST['jobregister_id'])) {
+      $jobregister_id =$_POST['jobregister_id'];
+
+      $sql = "SELECT * FROM `technician_videoupdate` WHERE  jobregister_id ='$jobregister_id'";
+      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
+
+  } ?>
+ 
+                        <!-- Responsive table -->
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Video</th>
+                                        <th scope="col">Description</th>
+                                     
+                                    </tr>
+                                </thead>
+                                <tbody >
+									<?php foreach($queryRecords as $res) :?>
+									<tr data-row-id="<?php echo $res['id'];?>">
+									
+									
+									<td col-index='2' >
+									<video width="150" height="120" src="image/<?=$res['video_url']?>" controls></video></td>
+									
+								<td oldVal ="<?php echo $res['description'];?>"><?php echo $res['description'];?></td>
+									
+			
+								
+									</tr>
+									<?php endforeach;?>
+                                </tbody>
+                            </table>
+							<br>
+									
+							<br><br>
+
+              
+						</div></div>
+            <br><div class="btn-box">
+       
+        </form></div>
+
+  
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('td.editable-col').on('focusout', function() {
+		data = {};
+		data['val'] = $(this).text();
+		data['id'] = $(this).parent('tr').attr('data-row-id');
+		data['index'] = $(this).attr('col-index');
+	    if($(this).attr('oldVal') === data['val'])
+		return false;
+
+		$.ajax({   
+				  
+					type: "POST",  
+					url: "techvideo-server.php",  
+					cache:false,  
+					data: data,
+					dataType: "json",				
+					success: function(response)  
+					{   
+						//$("#loading").hide();
+						if(!response.error) {
+							$("#videomsg").removeClass('alert-danger');
+							$("#videomsg").addClass('alert-success').html(response.msg);
+						} else {
+							$("#videomsg").removeClass('alert-success');
+							$("#videomsg").addClass('alert-danger').html(response.msg);
+						}
+					}   
+				});
+	});
+});
+
+</script>
+
+</<form>
+  
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="js/upload photo.js"></script> 
 </body>
 </html>

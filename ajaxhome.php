@@ -97,6 +97,7 @@ session_start();
             <label for="">Machine Brand</label>
             <input type="text" class="machine_brand" name="machine_brand" value="<?php echo $row['machine_brand']?>">
         </div>
+        
 
         <div class="input-box">
             <label for="accessories_required"  class="accessories_required">Accessories Required</label>
@@ -133,7 +134,6 @@ session_start();
 </select>
    
     </div>
-
 
       <div class="input-box">
         <label for="Job_assistant"  class="Job_assistant">Assistant:</label>

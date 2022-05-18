@@ -172,10 +172,14 @@ include 'dbconnect.php';
                 <div class="contentListAddForm">
                    <form id="user_form" method="post">
                         <div class="listAddForm-details">
-   
+
+                        <?php if (isset($_SESSION["username"])) ?>
+                          
+                        
+                           
                             <div class="input-box">
                                 <label for="customerCode" class="details">Customer Code</label>
-                                <input type="text" id="customerCode" name="customer_code" onkeyup="checkcustomer_codelAvailability()" value="" class="form-control" placeholder="Enter Customer Code" required> 
+                                <input type="text" id="customerCode" name="customer_code" onkeyup="checkcustomer_codelAvailability()" value="" class="form-control" placeholder="Enter Customer Code" required><span style='color:red'> **required </span> 
                                 <span id="customer_code-availability-status"></span>
                             </div>
                             <div class="input-box">
@@ -261,7 +265,7 @@ include 'dbconnect.php';
                         <div class="listAddForm-details">
                             <div class="input-box">
                                 <label for="JobCode" class="details">Job Code</label>
-                                <input type="text" id="job_code" name="job_code" onkeyup="checkJobCodelAvailability()" value="" class="form-control" placeholder="Enter Job Code" required> 
+                                <input type="text" id="job_code" name="job_code" onkeyup="checkJobCodelAvailability()" value="" class="form-control" placeholder="Enter Job Code" required><span style='color:red'> **required </span>  
                                 <span id="job_code-availability-status"></span>  
                             </div>
                             <div class="input-box">
@@ -323,7 +327,7 @@ include 'dbconnect.php';
                         <div class="listAddForm-details">
                             <div class="input-box">
                                 <label for="MachineCode" class="details">Machine Code</label>
-                                <input type="text" id="machineCode" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required> 
+                                <input type="text" id="machineCode" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required><span style='color:red'> **required </span>  
                                
                             </div>
                             <div class="input-box">
@@ -437,12 +441,14 @@ include 'dbconnect.php';
     <input type="hidden" id="text" class="form-control" name="customer_id" onchange="GetDetail(this.value)" readonly >  
     </div>
     <div class="input-box">
-    <input type="text" id="customer_code" class="form-control" name="customer_code" placeholder="Enter Customer Code" readonly >  
+    <input type="text" id="customer_code" class="form-control" name="customer_code" placeholder="Enter Customer Code" readonly >
     </div></div></div>
     <div class="dropdownCode">
     <!-- <div class="select"><i class='bx bxs-down-arrow'></i></div> -->
     <div class="add"><i class='bx bxs-plus-square'onclick="document.getElementById('popupListAddForm').style.display='block'"></i></div>
     </div>
+    <span style='color:red'> **required </span>  
+    <br/>
     <br/>               
     <div class="form-group"><label>Customer Name</label>
 	<input type="text" name="customer_name" id="customer_name" class="form-control" placeholder='Enter Customer Name'>
@@ -657,6 +663,9 @@ if(!$db)
                         <!-- <div class="select"><i class='bx bxs-down-arrow'></i></div> -->
                         <div class="add"><i class='bx bxs-plus-square' id="btnRegister" onclick="document.getElementById('jobAddForm').style.display='block'"></i></div>
                     </div>
+                    <span style='color:red'> **required </span> 
+                    <br/>
+                    <br/>
                     <div class="input-box">
                         <label for="job_name" class="details">Job Name</label>
                         <input type="text" id="job_name" name="job_name" placeholder="Enter Job Name" required>
@@ -835,6 +844,9 @@ $("#jobModel").on("change",function(){
                         <!-- <div class="select"><i class='bx bxs-down-arrow'></i></div> -->
                         <div class="add"><i class='bx bxs-plus-square' id="btnRegister" onclick="document.getElementById('machineAddForm').style.display='block'"></i></div>
                     </div>
+                    <span style='color:red'> **required </span> 
+                    <br/>
+                    <br/>
                     <div class="input-box">
                         <label for="machine_name" class="details">Machine Name</label>
                         <input type="text" id="machine_name" name="machine_name" placeholder="Enter Machine Name" required>

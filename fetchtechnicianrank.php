@@ -19,8 +19,6 @@ if ($staffregister_id !== "") {
 	$technician_rank = $row["technician_rank"];
     $staff_position = $row["staff_position"];
 
-
-
 }
 
 // Store it in a array

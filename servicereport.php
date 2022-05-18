@@ -359,8 +359,13 @@ tr td:first-child:before {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
 
-    <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+    <?php
+// Return current date from the remote server
+$date = date('d-m-y');
 
+?>
+
+    <form action="servicereport.php" method="post">
     <section class="store-user mt-5">
     <div class="col-10">
     <div class="row bb pb-3">
@@ -414,7 +419,6 @@ tr td:first-child:before {
     <p><label>Return Time :</label><span><input type="text" name="technician_leaving" value="<?php echo $row['technician_leaving'] ?>" class="input" /></span></p>
     <p><label style="position:absolute;">Machine Name :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" name="machine_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['machine_name'] ?>"/></span></p>
     <p><label>Serial Number :</label><span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input"/></span></p>
-
 
     <br/>
     <p>Submitted Items :-</p>
@@ -591,7 +595,6 @@ tr td:first-child:before {
         </script>
 
     </form>
-
           <?php
             } ?>
    <?php

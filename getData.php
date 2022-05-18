@@ -20,6 +20,7 @@ if(isset($_POST['page'])){
     require_once 'dbconnect.php'; 
      
     // Set some useful configuration 
+    $baseURL = 'getData.php'; 
     $offset = !empty($_POST['page'])?$_POST['page']:0; 
     $limit = 10; 
      
@@ -30,19 +31,25 @@ if(isset($_POST['page'])){
         $colorder = $_POST['colorder']; 
         $sortSQL = " ORDER BY $coltype $colorder"; 
     } 
+
+      if(!empty($_POST['keywords'])){ 
+        $sortSQL = " WHERE (job_order_number LIKE '%".$_POST['keywords']."%' OR job_priority LIKE '%".$_POST['keywords']."%' OR job_status LIKE '%".$_POST['keywords']."%' OR customer_name LIKE '%".$_POST['keywords']."%' OR job_name LIKE '%".$_POST['keywords']."%' OR machine_code LIKE '%".$_POST['keywords']."%' OR job_assign LIKE '%".$_POST['keywords']."%' OR Job_assistant LIKE '%".$_POST['keywords']."%') "; 
+    } 
      
     // Count of all records 
-    $query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register"); 
+    $query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register".$sortSQL); 
     $result  = $query->fetch_assoc(); 
     $rowCount= $result['rowNum']; 
      
     // Initialize pagination class 
     $pagConfig = array( 
+        'baseURL' => $baseURL, 
         'totalRows' => $rowCount, 
         'perPage' => $limit, 
         'currentPage' => $offset, 
         'contentDiv' => 'dataContainer', 
-        'link_func' => 'columnSorting' 
+        'link_func' => 'columnSorting',
+        'link_search' => 'searchFilter'
     ); 
     $pagination =  new Pagination($pagConfig); 
  
@@ -360,5 +367,4 @@ if(isset($_POST['page'])){
                 });
             });
         </script>
-
 

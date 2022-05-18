@@ -35,6 +35,10 @@ session_start();
                                     <label for=""> Accessories Name </label>
                                     <input type="text" name="accessories_name" id="accessories_name" class="form-control" value="<?php echo $row['accessories_name'] ?>">
                                 </div>
+                                 <div class="input-box">
+                                    <label for=""> Unit of Measurement </label>
+                                    <input type="text" name="accessories_uom" id="accessories_uom" class="form-control" value="<?php echo $row['accessories_uom'] ?>">
+                                </div>
                                 <div class="input-box">
                                     <label for=""> Accessories Group </label>
                                     <input type="text" name="accessories_brand" id="accessories_brand" class="form-control" value="<?php echo $row['accessories_brand'] ?>">
@@ -59,12 +63,13 @@ session_start();
                     if (isset($_POST['update'])) {
                         $accessories_code = $_POST['accessories_code'];
                         $accessories_name = $_POST['accessories_name'];
+                        $accessories_uom = $_POST['accessories_uom'];
                         $accessories_brand = $_POST['accessories_brand'];
                         $accessories_description = $_POST['accessories_description'];
                         $file_name = $_POST['file_name'];
                         $accessorieslistlasmodify_by = $_POST['accessorieslistlasmodify_by'];
 
-                        $query = "UPDATE accessories_list SET accessories_code='$accessories_code', accessories_name='$accessories_name', accessories_brand=' $accessories_brand', accessories_description='$accessories_description', file_name='$file_name', accessorieslistlasmodify_by='$accessorieslistlasmodify_by' WHERE accessories_id='$accessories_id'  ";
+                        $query = "UPDATE accessories_list SET accessories_code='$accessories_code', accessories_name='$accessories_name', accessories_uom='$accessories_uom', accessories_brand=' $accessories_brand', accessories_description='$accessories_description', file_name='$file_name', accessorieslistlasmodify_by='$accessorieslistlasmodify_by' WHERE accessories_id='$accessories_id'  ";
                         $query_run = mysqli_query($connection, $query);
 
                         if ($query_run) {

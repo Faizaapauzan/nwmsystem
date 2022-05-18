@@ -30,42 +30,77 @@
 </head>
 <body>
 
-<?php
-        include 'dbconnect.php';
-        if (isset($_POST['jobregister_id'])) {
-          $jobregister_id =$_POST['jobregister_id'];
-          $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-          $query_run = mysqli_query($conn, $query);
-          if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-    ?>
+     <?php
+//include connection file 
+include_once("dbconnect.php");
 
+  if (isset($_POST['jobregister_id'])) {
+      $jobregister_id =$_POST['jobregister_id'];
+
+      $sql = "SELECT * FROM `job_register` WHERE  jobregister_id ='$jobregister_id'";
+      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
+  }
+  
+?>
 
 <!-- FOR SUBMIT SERVICE REPORT DATE -->
 
-<form method="POST" action="servicereportdate.php">
-    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
- 
-	<label for="reportdate">Service Report Date:</label>
-<div class="input-group">
-  <input type="date" class="form-control" id="srvcreportdate" name="srvcreportdate" value="<?php echo $row['srvcreportdate'] ?>">
+<?php
+// Return current date from the remote server
+$date = date('d-m-y');
 
-
-  <div class="input-group-append">
-    <button class="btn btn-primary" type="submit" value="Submit" name="submit-date">SUBMIT</button>
-
-</form>
-  	<form id="view_form" method="post">
-    <button class="userinfo btn btn-success" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>VIEW</button>
-</form>
-            </div>
-
-    <?php
-    }
-  }
-}
 ?>
-   
+
+<table id="date_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+    <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
+
+<p class="controls"><b id="msgdate"></b></p>
+   <tbody id="_editable_table">
+      <?php foreach($queryRecords as $res) :?>
+      <tr data-row-id="<?php echo $res['jobregister_id'];?>">
+        <td style="display:none;"></td>
+            <td><?php echo $date; ?></td>
+         <td><button class="userinfo btn btn-success" type="button" data-id='<?php echo $res['jobregister_id']; ?>'>VIEW</button></td>
+      </tr>
+	  <?php endforeach;?>
+   </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('td.editable-date').on('focusout', function() {
+		data = {};
+		data['val'] = $(this).text();
+		data['jobregister_id'] = $(this).parent('tr').attr('data-row-id');
+		data['index'] = $(this).attr('col-index');
+	    if($(this).attr('oldVal') === data['val'])
+		return false;
+
+		$.ajax({   
+				  
+					type: "POST",  
+					url: "server-reportdate.php",  
+					cache:false,  
+					data: data,
+					dataType: "json",				
+					success: function(response)  
+					{   
+						//$("#loading").hide();
+						if(!response.error) {
+							$("#msgdate").removeClass('alert-danger');
+							$("#msgdate").addClass('alert-success').html(response.msgdate);
+						} else {
+							$("#msgdate").removeClass('alert-success');
+							$("#msgdate").addClass('alert-danger').html(response.msgdate);
+						}
+					}   
+				});
+	});
+});
+
+
+</script>
+
 
 <!-- FOR VIEW SERVICE REPORT-->	
 	    <script type='text/javascript'>
@@ -84,12 +119,6 @@
                 });
             });
     </script>
-
-
-
-	
-
-
 
 
 <!-- FOR UPLOAD SERVICE REPORT -->

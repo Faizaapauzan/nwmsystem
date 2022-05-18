@@ -41,6 +41,7 @@ include_once("dbconnect.php");
       <tr>
         <th>No</th>
         <th>Name</th>
+        <th>UOM</th>
         <th>Quantity</th>
         <th>Status</th>
         <th>Remarks</th>
@@ -54,6 +55,7 @@ include_once("dbconnect.php");
       <tr data-row-id="<?php echo $res['id'];?>">
         <td><input type="hidden" name="accessories_id" class="accessories_id" value="<?php echo $res['accessories_id'] ?>"><input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $res['jobregister_id'] ?>"></td>
         <td col-index='1' oldVal ="<?php echo $res['accessories_name'];?>"><?php echo $res['accessories_name'];?></td>
+         <td col-index='1' oldVal ="<?php echo $res['accessories_uom'];?>"><?php echo $res['accessories_uom'];?></td>
         <td col-index='1' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
         <td><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 16px;" name='accessories_status[<?=$res['accessories_id']?>]'>
 <option value='' <?php if ($res['accessories_status'] == '') { echo "SELECTED"; } ?>></option>

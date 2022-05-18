@@ -83,7 +83,7 @@ include_once("dbconnect.php");
   if (isset($_POST['jobregister_id'])) {
       $jobregister_id =$_POST['jobregister_id'];
 
-      $sql = "SELECT * FROM `technician_remark` WHERE  jobregister_id ='$jobregister_id'";
+      $sql = "SELECT * FROM `technician_remark` WHERE jobregister_id ='$jobregister_id'";
       $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
   }
   
@@ -91,6 +91,7 @@ include_once("dbconnect.php");
  
 
 <table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+    <p class="control"><b id="msgremark"></b></p>
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
       <tr>
@@ -122,7 +123,7 @@ include_once("dbconnect.php");
 </form>
 
 </div>  
-<p class="control"><b id="message"></b></p>
+
 <div class="updateBtn">
 <button type="button" id="update_remark" name="update_remark" value="Update" class="btn btn-primary">Update</button>
 
@@ -138,7 +139,7 @@ include_once("dbconnect.php");
                 type: 'post',
                 data: data,
                 success: function (response) {
-                    $('#message').text(response);
+                    $('#msgremark').text(response);
                     $('#s_remark_desc').text('');
                     $('#s_remark_solution').text('');
                
@@ -208,11 +209,11 @@ $(document).ready(function(){
 					{   
 						//$("#loading").hide();
 						if(!response.error) {
-							$("#msg").removeClass('alert-danger');
-							$("#msg").addClass('alert-success').html(response.msg);
+							$("#msgremark").removeClass('alert-danger');
+							$("#msgremark").addClass('alert-success').html(response.msgremark);
 						} else {
-							$("#msg").removeClass('alert-success');
-							$("#msg").addClass('alert-danger').html(response.msg);
+							$("#msgremark").removeClass('alert-success');
+							$("#msgremark").addClass('alert-danger').html(response.msgremark);
 						}
 					}   
 				});
