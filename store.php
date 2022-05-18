@@ -153,18 +153,12 @@ if(!isset($_SESSION['username']))
               FROM
               job_register
               WHERE
-              (accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
+              (accessories_required = 'Yes' AND job_status = ''
                OR
-               job_assign = 'Nuraein' AND job_status = 'Incomplete' AND job_cancel = ''
+               staff_position = 'Storekeeper' AND job_status = ''
                OR
-                job_assign = 'Sau Hwe' AND job_status = 'Incomplete' AND job_cancel = ''
-               OR 
-               job_assign = 'Nuraein' AND job_status = '' AND job_cancel = ''
-               OR
-               job_assign = 'Sau Hwe' AND job_status = '' AND job_cancel = '')
-
-              ORDER BY jobregisterlastmodify_at
-              DESC LIMIT 50");
+               staff_position = 'Storekeeper' AND job_status = 'Incomplete')
+              ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
 
               while($row = $results->fetch_assoc()) {
               
@@ -198,13 +192,10 @@ if(!isset($_SESSION['username']))
               FROM
               job_register
               WHERE
-              (job_assign = 'Nuraein' AND job_status = 'Ready'
-              OR
-              job_assign = 'Sau Hwe' AND job_status = 'Ready'
+              (staff_position = 'Storekeeper' AND job_status = 'Ready'
               OR
               accessories_required = 'Yes' AND job_status = 'Ready')
-              ORDER BY jobregisterlastmodify_at
-              DESC LIMIT 50");
+              ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
               while($row = $results->fetch_assoc()) {
               
               ?>
@@ -243,14 +234,12 @@ if(!isset($_SESSION['username']))
               WHERE
               (accessories_required = 'Yes' AND job_status = 'Not Ready'
               OR
+              staff_position = 'Storekeeper' AND job_status = 'Not Ready'
+              OR
               accessories_required = 'Yes' AND job_status = 'Pending'
               OR
-              job_assign = 'Nuraein' AND job_status = 'Pending'
-              OR
-              job_assign = 'Sau Hwe' AND job_status = 'Pending')
-
-              ORDER BY jobregisterlastmodify_at
-              DESC LIMIT 50");
+              staff_position = 'Storekeeper' AND job_status = 'Pending')
+              ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
               
               while($row = $results->fetch_assoc()) {
               

@@ -199,27 +199,25 @@
         include 'dbconnect.php';
 
         $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, accessories_required, job_status FROM job_register WHERE
-                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
-                OR
-                accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
-                OR
-                job_assign = 'Nuraein' AND job_status = 'Ready' AND job_cancel = ''
-                OR
-                 job_assign = 'Sau Hwe' AND job_status = 'Ready' AND job_cancel = ''
-                OR
-                job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+                 (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                                    OR
+                                                                accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
+                                                                    OR
+                                                                job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
                 
                 $numRow = "SELECT * FROM `job_register`WHERE 
-                accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
-                OR
-                accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
-                OR
-                job_assign = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
-                OR
-                job_assign = '' AND job_status = 'Ready' AND job_cancel = '' ";
+                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                                    OR
+                                                                accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
+                                                                    OR
+                                                                job_assign = '' AND job_status = 'Ready' AND job_cancel = '')";
                 $numRow_run = mysqli_query ($conn,$numRow);
 
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -261,48 +259,32 @@
         include 'dbconnect.php';
                                 
        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, accessories_required, job_status FROM job_register WHERE
-                (accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
-                OR
-                job_assign = 'Nuraein' AND job_status = '' AND job_cancel = ''
-                OR
-                job_assign = 'Sau Hwe' AND job_status = '' AND job_cancel = ''
-                OR
-                accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel = ''
-                OR
-                job_assign = 'Nuraein' AND job_status = 'Not Ready' AND job_cancel = ''
-                OR
-                job_assign = 'Sau Hwe' AND job_status = 'Not Ready' AND job_cancel = ''
-                OR
-                job_assign = 'Nuraein' AND job_status = 'Incomplete' AND job_cancel = ''
-                OR 
-                job_assign = 'Sau Hwe' AND job_status = 'Incomplete' AND job_cancel = ''
-                 OR
-                job_assign = 'Sau Hwe' AND job_status = 'Pending' AND job_cancel = ''
-                 OR
-                job_assign = 'Nuraein' AND job_status = 'Pending' AND job_cancel = '' )
+                (accessories_required = 'Yes' AND job_status = ''
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = ''
+                                                                    OR
+                                                                accessories_required = 'Yes' AND job_status = 'Not Ready'
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = 'Not Ready'
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = 'Incomplete'
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = 'Pending')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
             $numRow = "SELECT * FROM `job_register`WHERE 
-            accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
-                OR
-                job_assign = 'Nuraein' AND job_status = '' AND job_cancel = ''
-                OR
-                job_assign = 'Sau Hwe' AND job_status = '' AND job_cancel = ''
-                OR
-                accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel = ''
-                OR
-                job_assign = 'Nuraein' AND job_status = 'Not Ready' AND job_cancel = ''
-                OR
-                job_assign = 'Sau Hwe' AND job_status = 'Not Ready' AND job_cancel = ''
-                OR
-                job_assign = 'Nuraein' AND job_status = 'Incomplete' AND job_cancel = ''
-                OR
-                job_assign = 'Sau Hwe' AND job_status = 'Incomplete' AND job_cancel = ''
-                 OR
-                job_assign = 'Sau Hwe' AND job_status = 'Pending' AND job_cancel = ''
-                 OR
-                job_assign = 'Nuraein' AND job_status = 'Pending' AND job_cancel = '' ";
+             (accessories_required = 'Yes' AND job_status = ''
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = ''
+                                                                    OR
+                                                                accessories_required = 'Yes' AND job_status = 'Not Ready'
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = 'Not Ready'
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = 'Incomplete'
+                                                                    OR
+                                                                staff_position = 'Storekeeper' AND job_status = 'Pending')";
             
             $numRow_run = mysqli_query ($conn,$numRow);
 

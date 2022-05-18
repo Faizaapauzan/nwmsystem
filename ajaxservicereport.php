@@ -30,9 +30,10 @@
 <?php
 include "dbconnect.php";
 
-$jobregister_id =$_POST['jobregister_id'];
+$servicereport_id =$_POST['servicereport_id'];
 
-$sql = "SELECT * FROM job_register WHERE jobregister_id=" . $jobregister_id;
+$sql = "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id
+                 WHERE  servicereport_id ='$servicereport_id'";
 $result = $conn->query($sql);
 
 $response = "<table id='ajax' width='100%'>";
