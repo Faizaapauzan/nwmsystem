@@ -369,28 +369,20 @@ tr td:first-child:before {
     <div class="row extra-info pt-3">
     <div class="try1">
     
-    <p><label>Date :</label> <span><input type="text" name="date" value="<?php echo $date = date('d-m-y'); ?>" class="input"/></span></p>
-    <p><label style="position:absolute;">Customer Name :</label><span><input type="text" name="customer_name" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textbox" contenteditable value="<?php echo $row['customer_name'] ?>"/></span></p>
+    <p><label>Date :</label> <span><input type="text" name="date" value="<?php echo $date = date('Y-m-d'); ?>" class="input"/></span></p>
+    <p><label style="position:absolute;">Customer Name :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textarea" contenteditable><?php echo $row['customer_name'] ?></span><input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>" class="input" /></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 2px;" name="job_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['job_name'] ?>"/></span></p>
     <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input" /></span></p>
-    <script>
-
-      const textarea = document.getElementById("txt");
-
-      textarea.addEventListener("input", function (e) {
-      this.style.height = "auto";
-      this.style.height = this.scrollHeight + "px";
-      });
-
-      </script>
+   
 
     <br/>
     <p>Problem Description :-</p> 
-    <textarea name="remark_desc" style=" writing-mode: horizontal-tb !important;
+    <span style="writing-mode: horizontal-tb !important;
     font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
     text-rendering: auto;
-    color: -internal-light-dark(black, white);
     display: inline-block;
     text-align: start;
     cursor: text;
@@ -398,30 +390,33 @@ tr td:first-child:before {
     overflow-wrap: break-word;
     column-count: initial !important;
     width: 311px;
-    height: 100px;
-    border-width: 1px;
+    height: auto;
     margin: 19px;
     padding: 1px 2px;
-    resize: none;">
+    border-width: 1px;
+    resize: none;
+    box-sizing: border-box;
+    border-style: solid;" 
+    class="textarea" role="textarea" contenteditable>
     <?php foreach($query_run as $res) :?>
     <?php echo $res['remark_desc'];?>&#13;&#10;
     <?php endforeach;?>
-    </textarea>
+    </span>
     </div>
 
     <div class="try2">
     <p><label>Travel Time :</label><span><input type="technician_arrival" name="Travel_Time" class="input" value="<?php echo difftime($DateTime1,$DateTime2)['h']?>   hours <?php echo difftime($DateTime1,$DateTime2)['m']?>  minutes" /></span></p>
     <p><label>Time At  Site :</label> <span><input type="text" name="technician_arrival" value="<?php echo $row['technician_arrival'] ?>" class="input" /></span></p>
     <p><label>Return Time :</label><span><input type="text" name="technician_leaving" value="<?php echo $row['technician_leaving'] ?>" class="input" /></span></p>
-    <p><label style="position:absolute;">Machine Name :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" name="machine_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['machine_name'] ?>"/></span></p>
+    <p><label style="position:absolute;">Machine Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" class="textarea" role="textarea" contenteditable><?php echo $row['machine_name'] ?></span><input type="hidden" name="machine_name" value="<?php echo $row['machine_name'] ?>" class="input" /></p>
     <p><label>Serial Number :</label><span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input"/></span></p>
-
     <br/>
     <p>Submitted Items :-</p>
-    <textarea name="remark_solution" style=" writing-mode: horizontal-tb !important;
+    <span style="writing-mode: horizontal-tb !important;
     font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
     text-rendering: auto;
-    color: -internal-light-dark(black, white);
     display: inline-block;
     text-align: start;
     cursor: text;
@@ -429,15 +424,19 @@ tr td:first-child:before {
     overflow-wrap: break-word;
     column-count: initial !important;
     width: 311px;
-    height: 100px;
+    height: auto;
     margin: 19px;
     padding: 1px 2px;
     border-width: 1px;
-    resize: none;">
+    resize: none;
+    box-sizing: border-box;
+    border-style: solid;" 
+     class="textarea" role="textarea" contenteditable>
     <?php foreach($query_run as $res) :?>
     <?php echo $res['remark_solution'];?>&#13;&#10;
     <?php endforeach;?>
-    </textarea>
+    </span>
+
     <br/></div>
     <br/><br/>
     <div class="try3">
@@ -523,7 +522,7 @@ tr td:first-child:before {
     <p>Issue By : <input type="text" name="Issue_By" class="serviceno" value="<?php echo $row['job_assign'] ?>" /></p>
     </div>
     <div class="sign2"><br />
-    <p>Customer Name : <input style="width:250px" type="text" class="serviceno" name="cust" value="<?php echo $row['customer_name'] ?>" /></p>
+    <p>Customer Name : <input style="width:300px" type="text" class="serviceno" name="cust" value="<?php echo $row['customer_name'] ?>" /></p>
     <p>Phone Number : <input style="width:250px" type="text" class="serviceno" name="custphone" value="<?php echo $row['cust_phone1'] ?>" /></p>
     </div>
     <!-- <div class="sign3"><p>Date and Time:</p></div> -->

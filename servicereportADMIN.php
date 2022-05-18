@@ -324,10 +324,11 @@ tr td:first-child:before {
 
     <br/>
     <p>Problem Description :-</p>
-    <textarea style="   writing-mode: horizontal-tb !important;
+    <span style="writing-mode: horizontal-tb !important;
     font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
     text-rendering: auto;
-    color: -internal-light-dark(black, white);
     display: inline-block;
     text-align: start;
     cursor: text;
@@ -335,15 +336,18 @@ tr td:first-child:before {
     overflow-wrap: break-word;
     column-count: initial !important;
     width: 311px;
-    height: 100px;
-    border-width: 1px;
+    height: auto;
     margin: 19px;
     padding: 1px 2px;
-    resize: none;">
+    border-width: 1px;
+    resize: none;
+    box-sizing: border-box;
+    border-style: solid;" 
+    class="textarea" role="textarea" contenteditable>
     <?php foreach($query_run as $res) :?>
     <?php echo $res['remark_desc'];?>&#13;&#10;
     <?php endforeach;?>
-    </textarea>
+    </span>
     </div>
 
     <div class="try2">
@@ -355,10 +359,11 @@ tr td:first-child:before {
 
     <br/>
     <p>Submitted Items :-</p>
-    <textarea style=" writing-mode: horizontal-tb !important;
+   <span style="writing-mode: horizontal-tb !important;
     font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
     text-rendering: auto;
-    color: -internal-light-dark(black, white);
     display: inline-block;
     text-align: start;
     cursor: text;
@@ -366,15 +371,18 @@ tr td:first-child:before {
     overflow-wrap: break-word;
     column-count: initial !important;
     width: 311px;
-    height: 100px;
+    height: auto;
     margin: 19px;
     padding: 1px 2px;
     border-width: 1px;
-    resize: none;">
+    resize: none;
+    box-sizing: border-box;
+    border-style: solid;" 
+     class="textarea" role="textarea" contenteditable>
     <?php foreach($query_run as $res) :?>
     <?php echo $res['remark_solution'];?>&#13;&#10;
     <?php endforeach;?>
-    </textarea>
+    </span>
     <br/></div>
     <br/><br/>
     <div class="try3">

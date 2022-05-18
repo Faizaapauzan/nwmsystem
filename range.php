@@ -6,7 +6,7 @@
 
 		$date1 = date("Y-m-d", strtotime($_POST['date1']));
 		$date2 = date("Y-m-d", strtotime($_POST['date2']));
-		$query=mysqli_query($conn, "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id WHERE `srvcreportdate` BETWEEN '$date1' AND '$date2'") or die(mysqli_error($conn));
+		$query=mysqli_query($conn, "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id WHERE `date` BETWEEN '$date1' AND '$date2'") or die(mysqli_error($conn));
 		
         $row=mysqli_num_rows($query);
 		if($row>0){
@@ -18,7 +18,7 @@
 		<td><?php echo $fetch['job_order_number']?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['requested_date']?></td>
-        <td><?php echo $fetch['srvcreportdate']?></td>
+        <td><?php echo $fetch['date']?></td>
         <td><?php echo $fetch['srvcreportnumber']?></td>
         <td><div class='jobTypeUpdateDeleteBtn'>
         <button data-id="<?php echo $fetch["jobregister_id"]; ?>" class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
@@ -46,7 +46,7 @@
 		<td><?php echo $fetch['job_order_number'];?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['requested_date']?></td>
-        <td><?php echo $fetch['srvcreportdate']?></td>
+        <td><?php echo $fetch['date']?></td>
         <td><?php echo $fetch['srvcreportnumber']?></td>
         <td>
             <div class='jobTypeUpdateDeleteBtn'>
