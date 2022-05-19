@@ -41,8 +41,6 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 		
 	</head>
-
-
     <body>
 
       <div class="sidebar">
@@ -156,10 +154,8 @@ session_start();
             </div>
         </nav>
 	
-
-<div class="jobTypeList">
-            <h1>Completed Job List</h1>
-	
+        <div class="jobTypeList">
+        <h1>Completed Job List</h1>
 		
 		<form class="form-inline" method="POST" action="">
             <table>
@@ -167,7 +163,7 @@ session_start();
                 <td><input type="date" class="form-control" placeholder="START"  name="date1"/></td>
                 <td><input type="date" class="form-control" placeholder="END"  name="date2"/></td>
                 <td><button id="btn_search" name="search" class="btn-search">Search</button></td>
-                <td><button class="btn-reset" onclick="document.location='jobcompleted.php'">Refresh</button></td>
+                <td><button id="btn-reset" class="btn-reset" onclick="document.location='jobcompleted.php'">Refresh</button></td>
                 </tr>
             </table>
 		</form>

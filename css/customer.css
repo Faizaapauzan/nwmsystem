@@ -41,7 +41,6 @@ a {
   padding-bottom: 10px;
   padding-left: 1%;
   font-size: 30px;
-  font-family: cursive;
   font-weight: 100;
 }
 
@@ -138,7 +137,7 @@ a {
 
 .addCustomerBtn button {
   width: 100%;
-  margin: 0 19px 5px 19px;
+  /* margin: 0 19px 5px 19px; */
   border-radius: 5px;
 }
 
@@ -283,7 +282,7 @@ form .listAddFormbutton #cancelbtn {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: auto;
+  width: 650px;
   transform: translate(-50%, -50%);
   background: #fff;
   z-index: 2;

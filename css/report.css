@@ -254,8 +254,8 @@ input[type="datetime-local"] {
 /* The Close Button (x) */
 .techClose {
   position: absolute;
-  right: 166px;
-  margin-top: 135px;
+  right: 545px;
+  margin-top: 97px;
   top: 0;
   color: #000;
   font-size: 35px;

@@ -19,6 +19,8 @@ session_start();
 
 <link rel="stylesheet" type="text/css" href="css/tab.css"/>
 <link href="css/ajaxtab.css"rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css">
+<script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
 <!-- <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -26,14 +28,12 @@ session_start();
 <!-- <script src="popper.js"></script>   -->
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- script for select 2 -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-
 
 </head>
 <body>
@@ -41,7 +41,7 @@ session_start();
  <form id="adminacc_form" method="post">
  <div class="input-boxAccessories" id="input_fields_wrapAccessories">
   
-     <div id="msg" class="alert"></div>
+<div id="msg" class="alert"></div>
 <div>
 
 <form class="form-inline" id="frm-add-data" action="javascript:void(0)">
@@ -109,8 +109,7 @@ include_once("dbconnect.php");
       </tr>
 	  <?php endforeach;?>
   
-   </tbody>
-    
+</tbody>
 </table>
 
 <!-- <button onclick="javascript:void(0);" class="add_button" title="Add field">Add</button> -->
@@ -320,7 +319,7 @@ include 'dbconnect.php';
         }
         }
  ?>
- <select class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
+ <select id="select_box" class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
 <?php include "dbconnect.php";  // Using database connection file here
                     $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
 
@@ -373,13 +372,14 @@ include 'dbconnect.php';
   });
 
   </script>
-<!-- 
-     <script>
-        $(document).ready(function(){
-            
-            // Initialize select2
-            $("#selectacc").select2();
 
-         
-        });
-        </script> -->
+
+<script>
+
+    var select_box_element = document.querySelector('#select_box');
+
+    dselect(select_box_element, {
+        search: true
+    });
+
+</script>

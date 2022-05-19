@@ -87,294 +87,7 @@ $query = $conn->query("SELECT * FROM job_register");
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-<style>
 
-    .input-box-address {
-  margin-bottom: 15px;
-  padding: 0 15px 0 15px;
-}
-.input-box-address {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.input-box-address input,
-.input-box-address select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-.input-box-address input:focus,
-.input-box-address input:valid,
-.input-box-address select:focus,
-.input-box-address select:valid {
-  border-color: #081d45;
-}
-
-/* The Close Button (x) */
-.techClose {
-  position: absolute;
-  right: 166px;
-  margin-top: 135px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.techClose:hover,
-.techClose:focus {
-  color: red;
-  cursor: pointer;
-}
-
-/*TABS PENDING*/
-.tabInfo {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-
-.tabInfo .JobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 0px;
-}
-
-.tabInfo .tabHeadingInfo {
-  order: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  margin-right: 3.2rem;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  transition: background ease 0.3s;
-}
-
-.tabInfo .tab {
-  order: 9;
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-  padding: 20px;
-}
-
-/*JOB INFO*/
-
-.JobInfo,
-#JobInfo {
-
-  font-size: 14px;
-  cursor: pointer;
-  text-align: left;
-  text-decoration: underline;
-}
-
-.JobInfoTab {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 300px;
-}
-.JobInfoTab .title {
-  font-size: 25px;
-  font-weight: 500;
-  position: relative;
-}
-.JobInfoTab .title::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 90px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #ffb300, #ff4da6, #924adb);
-}
-.contentJobInfo form .info-details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 30px 20px 2px 20px;
-}
-form .info-details .input-box {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
-  padding: 0 15px 0 15px;
-}
-form .info-details label.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.info-details .input-box input,
-.info-details .input-box select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-.info-details .input-box input:focus,
-.info-details .input-box input:valid,
-.info-details .input-box select:focus,
-.info-details .input-box select:valid {
-  border-color: #081d45;
-}
-
-form .category {
-  display: flex;
-  width: 80%;
-  margin: 14px 0;
-  justify-content: space-between;
-}
-form .category label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-form .button {
-  height: 45px;
-  margin: 35px 0;
-  margin-bottom: 50px;
-}
-form .button input {
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: #081d45;
-  margin-bottom: 10px;
-}
-form .button input:hover {
-  /* transform: scale(0.99); */
-  opacity: 0.8;
-}
-form .button #cancelbtn {
-  background-color: #f44336;
-}
-@media (max-width: 584px) {
-  .container {
-    max-width: 100%;
-  }
-  form .info-details .input-box {
-    margin-bottom: 15px;
-
-    width: 100%;
-  }
-  form .category {
-    width: 100%;
-  }
-  .content form .info-details {
-    max-height: 300px;
-    overflow-y: scroll;
-  }
-  .info-details::-webkit-scrollbar {
-    width: 5px;
-  }
-}
-@media (max-width: 459px) {
-  .container .content .category {
-    flex-direction: column;
-  }
-}
-
-input[type="text"],
-input[type="date"],
-input[type="datetime-local"] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-.tabInfo input[type="radio"] {
-  display: none;
-}
-
-.tabInfo input[type="radio"]:checked + label {
-  background: rgba(209, 209, 209, 0.377);
-}
-
-.tabInfo input[type="radio"]:checked + label + .tab {
-  display: block;
-}
-
-@media (max-width: 465px) {
-  .tabInfo .tab,
-  .tabInfo label {
-    order: initial;
-  }
-
-  .tabInfo label {
-    width: 100%;
-    margin-left: 50px;
-  }
-}
-
-table {
-  border-collapse: collapse;
-  box-shadow: 0 5px 10px rgb(37, 19, 19);
-  background-color: #fff;
-  text-align: center;
-  overflow: hidden;
-  width: 100%;
-  display: fixed;
-  justify-content: center;
-}
-
-thead {
-  box-shadow: 0 5px 10px rgb(186, 189, 183);
-  text-align: center;
-
-  /* padding: 1rem 5.1rem; */
-}
-
-.Pending {
-  color: blue;
-} 
-
-.Incomplete {
-  color: orange;
-} 
-
-</style>
 
 
 </head>
@@ -608,7 +321,8 @@ thead {
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('.JobInfo').click(function () {
+            $('body').on('click','.JobInfo',function(){
+            // $('.JobInfo').click(function () {
             var jobregister_id = $(this).data('id');
 
             // AJAX request
@@ -640,7 +354,7 @@ thead {
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('.JobInfo').click(function () {
+             $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
 
             // AJAX request
@@ -672,7 +386,7 @@ thead {
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('.JobInfo').click(function () {
+            $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
@@ -703,7 +417,7 @@ thead {
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('.JobInfo').click(function () {
+             $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
@@ -734,7 +448,7 @@ thead {
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('.JobInfo').click(function () {
+            $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
@@ -767,7 +481,7 @@ thead {
 
         <script type='text/javascript'>
             $(document).ready(function() {
-            $('.JobInfo').click(function() {
+            $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({

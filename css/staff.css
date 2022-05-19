@@ -1,110 +1,103 @@
+.staffPopup .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
 
-        .staffPopup .title {
-            font-size: 25px;
-            font-weight: 500;
-            position: relative;
+.staffPopup .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #081d45);
+}
 
-        }
+.contentStaffPopup form .staff-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 25px 20px 2px 20px;
+}
 
-        .staffPopup .title::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 3px;
-            width: 30px;
-            border-radius: 5px;
-            background: linear-gradient(135deg, #71b7e6, #081D45);
-        }
+.modal .contentStaffPopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 600px;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: boder-box;
+  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+}
 
-        .contentStaffPopup form .staff-details {
+.modal.active .contentStaffPopup {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale;
+}
 
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 25px 20px 2px 20px;
+.modal .close {
+  right: 10px;
+  top: -140px;
+  width: 30px;
+  height: 30px;
+}
 
-        }
+.updateBtn button {
+  width: 100%;
+  margin: 0 5px 5px 8px;
+}
 
-        .modal .contentStaffPopup {
-           position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-            width: 600px;
-            z-index: 2;
-            padding: 20px;
-            box-sizing: boder-box;
-            margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
 
-        }
+.popup-job-description {
+  align-content: center;
+}
 
-        .modal.active .contentStaffPopup {
-            transition: all 300ms ease-in-out;
-            transform: translate(-50%, -50%) scale;
-        }
+.staff-descriptions {
+  padding: 0.5rem;
+}
 
-        .modal .close {
-            right: 10px;
-            top: -140px;
-            width: 30px;
-            height: 30px;
+.staff-descriptions span {
+  color: #2f456e;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
 
-        }
+.staffRegisterBtn button {
+  width: 100%;
+  /* margin: 0 19px 5px 19px; */
+  border-radius: 5px;
+}
 
-        .updateBtn button {
-            width: 100%;
-            margin: 0 5px 5px 8px;
-        }
+.staffRegisterBtn {
+  display: flex;
+  margin-left: 85%;
+  margin-bottom: 5px;
+  margin-top: -40px;
+}
 
-        .updateBtn {
-            display: flex;
-            margin-left: 76%;
-            margin-bottom: 5px;
-            margin-top: 45px;
-        }
+#btnRegister {
+  background: #2f456e;
+}
 
-        .popup-job-description {
-            align-content: center;
-        }
+.staffUpdateDeleteBtn {
+  display: flex;
+  width: 70%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
 
-        .staff-descriptions {
-            padding: 0.5rem;
-        }
-
-        .staff-descriptions span {
-            color: #2f456e;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .staffRegisterBtn button {
-            width: 100%;
-            margin: 0 19px 5px 19px;
-            border-radius: 5px;
-
-        }
-
-        .staffRegisterBtn {
-            display: flex;
-            margin-left: 85%;
-            margin-bottom: 5px;
-            margin-top: -40px;
-        }
-
-        #btnRegister {
-            background: #2f456e;
-        }
-
-        .staffUpdateDeleteBtn {
-            display: flex;
-            width: 70%;
-            table-layout: fixed;
-            border-collapse: collapse;
-        }
-
-        .updatetech form .staff-details {
+.updatetech form .staff-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -156,7 +149,6 @@ form .button {
   height: 35px;
   margin: 35px 0;
   margin-bottom: 50px;
-  
 }
 form .button input {
   height: 100%;

@@ -10,8 +10,7 @@
     if ($query_run) {
         while ($row = mysqli_fetch_array($query_run)) {
     ?>
-            <div class="container">
-                <div class="jumbotron">
+            
                     <div class="row">
                         <div class="col-md-12">
                             <form action="deleteaccessories.php" method="post">

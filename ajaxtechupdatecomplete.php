@@ -7,7 +7,8 @@ session_start();
 <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-<link href="css/ajaxtechupdate.css"rel="stylesheet" />
+	<link href="css/ajaxtechupdate.css"rel="stylesheet" />
+  
 </script> 
 </head>
 
@@ -31,7 +32,7 @@ session_start();
      <div class="input-box-departure">
             <label for="">Departure Time</label>
                <div class="technician-time">
-            <input readonly type="text" class="technician_departure" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>">
+            <input type="text" class="technician_departure" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>" readonly>
           
             <!-- <div class="alarm-button"><i class='bx bx-alarm' onclick="test1()"></i></div> -->
                 </div>
@@ -39,7 +40,7 @@ session_start();
         <div class="input-box-arrival">
             <label for="">Arrival Time</label>
             <div class="technician-time">
-            <input readonly type="text" class="technician_arrival" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>">
+            <input type="text" class="technician_arrival" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>" readonly>
             
             <!-- <div class="alarm-button"><i class='bx bx-alarm' onclick="test2()"></i></div> -->
                 </div>
@@ -47,14 +48,14 @@ session_start();
         <div class="input-box-leaving">
             <label for="">Leaving Time</label>
             <div class="technician-time">
-            <input readonly type="text" class="technician_leaving" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>">
+            <input type="text" class="technician_leaving" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>" readonly >
             
     
                 </div>
               </div>
                 <div class="input-boxLocation" id="inputLocationBox">
                 <label for="Location" class="details">Location</label>
-                <div class="add_field_button1"><i class='bx bx-compass'></i></div>
+                <div class="add_field_button1"></div>
                 <textarea readonly style="width: 290px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
                 <textarea readonly style="width: 290px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
               </div>

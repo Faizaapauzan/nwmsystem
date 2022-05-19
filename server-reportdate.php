@@ -5,16 +5,15 @@
 	
 	//define index of column
 	$columns = array(
-		1 => 'accessories_name',
-		2 => 'accessories_uom',
-		3 => 'accessories_quantity',
-        4 => 'accessories_remark'
+		1 =>'srvcreportdate', 
+
+		
 	);
 	$error = false;
 	$colVal = '';
 	$colIndex = $rowId = 0;
 	
-	$storesmsg = array('status' => !$error, 'msg' => 'Failed! updation in mysql');
+	$msgdate = array('status' => !$error, 'msgdate' => 'Failed! updation in mysql');
 
 	if(isset($_POST)){
     if(isset($_POST['val']) && !empty($_POST['val']) && !$error) {
@@ -30,23 +29,23 @@
     } else {
       $error = true;
     }
-    if(isset($_POST['id']) && $_POST['id'] > 0 && !$error) {
-      $rowId = $_POST['id'];
+    if(isset($_POST['jobregister_id']) && $_POST['jobregister_id'] > 0 && !$error) {
+      $rowId = $_POST['jobregister_id'];
       $error = false;
     } else {
       $error = true;
     }
 	
 	if(!$error) {
-			$sql = "UPDATE job_accessories SET ".$columns[$colIndex]." = '".$colVal."' WHERE id='".$rowId."'";
+			$sql = "UPDATE job_register SET ".$columns[$colIndex]." = '".$colVal."' WHERE jobregister_id='".$rowId."'";
 			$status = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-			$storesmsg = array('error' => $error, 'message' => 'Update Succeed !');
+			$msgdate = array('error' => $error, 'msgdate' => 'Update Succeed !');
 	} else {
-		$storesmsg = array('error' => $error, 'message' => 'Update Failed !');
+		$msgdate = array('error' => $error, 'msgdate' => 'Update Failed !');
 	}
 	}
 	// send data as json format
-	echo json_encode($storesmsg);
+	echo json_encode($msgdate);
 	
 ?>
 	

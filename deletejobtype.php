@@ -10,12 +10,11 @@
     if ($query_run) {
         while ($row = mysqli_fetch_array($query_run)) {
     ?>
-            <div class="container">
-                <div class="jumbotron">
+     
                     <div class="row">
                         <div class="col-md-12">
                             <form action="deletejobtype.php" method="post">
-                                 <p>Are you sure you want to delete this user ?</p>
+                                 <p>Are you sure you want to delete this job ?</p>
                                 <input type="hidden" name="jobtype_id" value="<?php echo $row['jobtype_id']; ?>">
 
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

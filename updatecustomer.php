@@ -17,9 +17,6 @@ session_start();
     ?>
  
 
-            <div class="container">
-                <div class="jumbotron">
-
                     <div class="row">
                     <div class="updatetech">
 

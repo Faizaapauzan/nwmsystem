@@ -240,7 +240,6 @@ input[type="datetime-local"] {
   padding-bottom: 10px;
   padding-left: 1%;
   font-size: 30px;
-  font-family: cursive;
   font-weight: 100;
 }
 
@@ -383,5 +382,281 @@ input[type="datetime-local"] {
 .techClose:hover,
 .techClose:focus {
   color: red;
+  cursor: pointer;
+}
+
+body {
+  color: #000;
+  overflow-x: hidden;
+  height: 100%;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+}
+
+.container {
+  padding: 1%;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 0 30px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+textarea {
+  resize: vertical;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #081d45;
+  color: white;
+  padding: 7px 10px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.updateBtn {
+  display: flex;
+  margin-left: 76%;
+  margin-bottom: 5px;
+  margin-top: 45px;
+}
+
+textarea {
+  width: 100%;
+  padding: 7px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: left;
+  border: 1.7px solid rgb(201, 198, 198);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+}
+
+.status {
+  border-radius: 6px;
+  font-size: 15px;
+  padding: 2px 5px 2px 5px;
+  width: auto;
+  text-align: center;
+  margin-top: -18px;
+  margin-left: 280px;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+  float: right;
+}
+
+#toDoStatus {
+  background: rgb(236, 236, 212);
+  color: rgb(133, 141, 22);
+}
+
+#incompleteStatus {
+  background: rgb(236, 212, 212);
+  color: rgb(124, 19, 19);
+}
+
+#pendingStatus {
+  background: rgb(212, 228, 236);
+  color: rgb(19, 115, 134);
+}
+
+#completedStatus {
+  background: rgb(214, 237, 226);
+  color: rgb(19, 133, 78);
+}
+
+.technician-time {
+  position: relative;
+  width: flex;
+}
+
+.technician-time-input {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 10px 100px 10px 20px;
+  line-height: 1;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.technician-butang {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  bottom: 3px;
+  border: 0;
+  background: #081d45;
+  color: #fff;
+  outline: none;
+  margin: 0;
+  padding: 0 10px;
+  z-index: 2;
+}
+
+.input-box-leaving i {
+  position: absolute;
+  margin-top: -46px;
+  margin-left: 250px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.input-box-departure i {
+  position: absolute;
+  margin-top: -45px;
+  margin-left: 250px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.input-box-arrival i {
+  position: absolute;
+  margin-top: -40px;
+  margin-left: 250px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.input-boxLocation i {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 250px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.updateBtn input {
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+
+.input-box-arrival input {
+  margin-bottom: 15px;
+  width: 75%;
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  margin-right: 10px;
+}
+
+.input-box-leaving input {
+  margin-bottom: 15px;
+  width: 75%;
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  margin-right: 10px;
+}
+
+.input-box-departure input[type="text"] {
+  margin-bottom: 15px;
+  width: 75%;
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  margin-right: 10px;
+}
+
+.input-box-departure input[type="button"] {
+  margin-bottom: 15px;
+  width: 30%;
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  background-color: #1a0845;
+  color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.input-box-leaving input[type="button"] {
+  margin-bottom: 15px;
+  width: 30%;
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  background-color: #1a0845;
+  color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.input-box-arrival input[type="button"] {
+  margin-bottom: 15px;
+  width: 30%;
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  background-color: #1a0845;
+  color: #fff;
+  margin-right: 10px;
   cursor: pointer;
 }

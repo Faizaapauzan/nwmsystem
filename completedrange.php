@@ -11,7 +11,7 @@
 		
         $row=mysqli_num_rows($query);
 		if($row>0){
-			while($fetch=mysqli_fetch_array($query)){
+		while($fetch=mysqli_fetch_array($query)){
 ?>
 	<tr>
         <td></td>

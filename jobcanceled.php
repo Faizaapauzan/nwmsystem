@@ -1,7 +1,31 @@
 <?php
-session_start();
+session_start(); ?>
 
+<?php 
+// Include pagination library file 
+include_once 'Pagination.class.php'; 
+ 
+// Include database configuration file 
+require_once 'dbconnect.php'; 
+ 
+
+// Count of all records 
+$query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register WHERE job_cancel = 'YES'"); 
+$result  = $query->fetch_assoc(); 
+$rowCount= $result['rowNum']; 
+ 
+// Initialize pagination class 
+$pagConfig = array( 
+ 
+    'totalRows' => $rowCount, 
+  
+); 
+$pagination =  new Pagination($pagConfig); 
+ 
+// Fetch records based on the limit 
+$query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER BY jobregister_id ASC"); 
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -14,13 +38,19 @@ session_start();
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <link href="css/layout.css" rel="stylesheet" />
     <link href="css/jobcanceled.css" rel="stylesheet" />
-    <script src="js/form-validation.js"></script>  
-    <!-- Script -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="js/number.js" type="text/javascript" defer></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
+   
+   <!-- Script -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
@@ -29,9 +59,10 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
+
 <body>
 
-        <div class="sidebar">
+<div class="sidebar">
             <div class="logo-details">
                 <i class='bx bx-window-alt'></i>
             <span class="logo_name">NWM System</span>
@@ -95,12 +126,13 @@ session_start();
                 </a>
             </li>
 
-                        <li>
+            <li>
                 <a href="jobcompleted.php">
                     <i class="fa fa-check-square-o"></i>
                     <span class="link_name">Completed Job</span>
                 </a>
             </li>
+
 
             <li>
                 <a href="jobcanceled.php">
@@ -126,7 +158,6 @@ session_start();
         </ul>
     </div>
 
-
     <!--Home navigation-->
     <section class="home-section">
         <nav>
@@ -142,190 +173,163 @@ session_start();
             </div>
         </nav>
 
-        <!--Job Type-->
+
+        <!--Canceled Job List-->
 
         <div class="jobTypeList">
             <h1>Canceled Job List</h1>
+            <div class="addJobTypeBtn">
+            <button class="btn-reset" onclick="document.location='jobcanceled.php'">Refresh</button>
+            </div>
 
-            <?php
-            include 'dbconnect.php';
+        <div class="datalist-wrapper">    
+        <div class="col-lg-12" style="border: none;">
+
+        <table class="table table-striped sortable">
+<thead>
+    <tr>
+    <th>No</th>
+    <th>Job Order Number</th>
+    <th>Customer Name</th>
+    <th>Requested Date</th>
+    <th>Action</th>
+    
+    </tr>
+</thead>
+<tbody>
+    <?php 
+            if($query->num_rows > 0){ $i=0; 
+                while($row = $query->fetch_assoc()){ $i++; 
             ?>
-
-            <!-- Jobtype DataTales -->
-
-            <?php
-            $sql = "SELECT * FROM job_register WHERE (job_cancel = 'YES')";
-
-            $result = $conn->query($sql);
-            ?>
-
-
-            <table id='auto' width="100%">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Job Order Number</th>
-                        <th>Customer Name</th>
-                        <th>Requested Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($result->num_rows > 0) {
-                        // output data of each row
-                        while ($row = $result->fetch_assoc()) {
-                            $jobregister_id = $row['jobregister_id'];
-                            $job_order_number = $row['job_order_number'];
-                            $customer_name = $row['customer_name'];
-                            $requested_date = $row['requested_date'];
-                            $jobregistercreated_by = $row['jobregistercreated_by'];
-                            $jobregistercreated_at = $row['jobregistercreated_at'];
-                            $jobregisterlastmodify_by = $row['jobregisterlastmodify_by'];
-                            $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
-
-                            echo  "<tr>                            
-<td></td>
-<td>$job_order_number</td>
-<td>$customer_name</td>
-<td>$requested_date</td>
-<td>
-<div class=jobTypeUpdateDeleteBtn>
-<button data-jobregister_id='" . $jobregister_id . "' class='userinfo' type='button' id='btnView'>View</button>
-<button data-jobregister_id='" . $jobregister_id . "' class='updateinfo' type='button' id='btnEdit'>Update</button>
-
-</td>
+     
+    <tr>
+        <td><?php echo $i; ?></td>
+        <td><?php echo $row["job_order_number"]; ?></td>
+        <td><?php echo $row["customer_name"]; ?></td>
+        <td><?php echo $row["requested_date"]; ?></td>
+        <td><div class='jobTypeUpdateDeleteBtn'>
+<button data-jobregister_id="<?php echo $row['jobregister_id'];?>" class='userinfo' type='button' id='btnView'>View</button>
+<button data-jobregister_id="<?php echo $row['jobregister_id'];?>" class='updateinfo' type='button' id='btnEdit'>Update</button>
 </div>
+</td>
+       
 
-</tr>";
-                        }
-                    } else {
-                        echo "0 results";
-                    }
-                    $conn->close();
-                    ?>
+    </tr>
+ <?php 
+                } 
+            }else{ 
+                echo '<tr><td colspan="6">No records found...</td></tr>'; 
+            } 
+            ?>
+</tbody>
+        </table>
+		
 
-                    </tr>
-                </tbody>
-            </table>
+    </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('table').DataTable();
+
+    });
+
+</script>
+
+          <!--Update Job Canceled -->
+
+            <div class="modal fade" id="empModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+
+            <div class="jobTypePopup">
+            <div class="contentjobTypePopup">
+            <div class="title">Canceled Job</div>
+            <div class="jobType-details">
+            <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
+
+            </div>         
+            <div class="modal-body">                         
+            </div>
+            </div>
+
+            <script type='text/javascript'>
+                $(document).ready(function() {
+                $('body').on('click','.updateinfo',function(){
+                var jobregister_id = $(this).data('jobregister_id');
+                // AJAX request
+                $.ajax({
+                    url: 'updatejobcancel.php',
+                    type: 'post',
+                    data: { jobregister_id: jobregister_id },
+                    success: function(response) {
+                // Add response in Modal body
+                    $('.modal-body').html(response);
+                // Display Modal
+                    $('#empModal').modal('show');
+                                    }
+                                });
+                            });
+                        });
+            </script>
+
+        <!-- View Modal -->
+       <div class="modal fade" id="empModal" role="dialog">
+        <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="jobTypePopup">
+        <div class="contentjobTypePopup">
+        <div class="title">Canceled Job</div>
+        <div class="jobType-details">
+        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
+
+        </div>            
+        <div class="modal-body">
+        <h5>Canceled Job Info</h5>  
+        </div>
         </div>
 
-<!--Update JobType -->
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('body').on('click','.userinfo',function(){           
+            var userid = $(this).data('jobregister_id');
 
- <div class="modal fade" id="empModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-
-               <div class="jobTypePopup">
-                    <div class="contentjobTypePopup">
-                        <div class="title">Canceled Job</div>
-                        <div class="jobType-details">
-                            <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-
-                        </div>
-                        <br />
-                        <div class="modal-body">    
-                             <h5>Canceled Job Update</h5>                       
-                        </div>
-
-
-                    </div>
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-
-                            $('.updateinfo').click(function() {
-
-                                var jobregister_id = $(this).data('jobregister_id');
-
-                                // AJAX request
-                                $.ajax({
-                                    url: 'updatejobcancel.php',
-                                    type: 'post',
-                                    data: {
-                                        jobregister_id: jobregister_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.modal-body').html(response);
-
-                                        // Display Modal
-                                        $('#empModal').modal('show');
+        // AJAX request
+            $.ajax({
+                url: 'ajaxjobcanceled.php',
+                type: 'post',
+                data: { userid: userid },
+                success: function(response) {
+        // Add response in Modal body
+                $('.modal-body').html(response);
+        // Display Modal
+                $('#empModal').modal('show');
                                     }
                                 });
                             });
                         });
-                    </script>
-        
+        </script>
 
 
+         
+<script>
+let btn = document.querySelector("#btn");
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function(){
+    sidebar.classList.toggle("active");
+    if(sidebar.classList.contains("active")){
+        sidebar.classList.replace("bx-menu","bx-menu-alt-right")
+    }else
+    sidebarBtn.classList.replace("bx-menu-alt-right","bx-menu");
+}
+</script>
 
-        <!--Job Type list pop up form-->
-        <!-- Modal -->
-        <div class="modal fade" id="empModal" role="dialog">
-            <div class="modal-dialog">
+</div>
+</div>
 
-                <!-- Modal content-->
-                <div class="jobTypePopup">
-                    <div class="contentjobTypePopup">
-                        <div class="title">Canceled Job</div>
-                        <div class="jobType-details">
-                            <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-
-                        </div>
-                        <br />
-                        
-                        <div class="modal-body">
-                        <h5>Canceled Job Info</h5>  
-                        </div>
-
-
-                    </div>
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-
-                            $('.userinfo').click(function() {
-
-                                var userid = $(this).data('jobregister_id');
-
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxjobcanceled.php',
-                                    type: 'post',
-                                    data: {
-                                        userid: userid
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.modal-body').html(response);
-
-                                        // Display Modal
-                                        $('#empModal').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-
-    </section>
-
-
-    </section>
-
-    <script>
-        let btn = document.querySelector("#btn");
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-
-        sidebarBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-            if (sidebar.classList.contains("active")) {
-                sidebar.classList.replace("bx-menu", "bx-menu-alt-right")
-            } else
-                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-        }
-    </script>
 </body>
 </html>

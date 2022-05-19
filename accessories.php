@@ -8,10 +8,7 @@ include_once 'Pagination.class.php';
 // Include database configuration file 
 require_once 'dbconnect.php'; 
  
-// Set some useful configuration 
-$baseURL = 'searchAccessories.php'; 
-$limit = 10; 
- 
+
 // Count of all records 
 $query   = $conn->query("SELECT COUNT(*) as rowNum FROM accessories_list"); 
 $result  = $query->fetch_assoc(); 
@@ -19,16 +16,14 @@ $rowCount= $result['rowNum'];
  
 // Initialize pagination class 
 $pagConfig = array( 
-    'baseURL' => $baseURL, 
+ 
     'totalRows' => $rowCount, 
-    'perPage' => $limit, 
-    'contentDiv' => 'dataContainer', 
-    'link_func' => 'searchFilter' 
+  
 ); 
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM accessories_list ORDER BY accessories_id ASC LIMIT $limit"); 
+$query = $conn->query("SELECT * FROM accessories_list ORDER BY accessories_id ASC"); 
 ?>
 
 
@@ -45,14 +40,17 @@ $query = $conn->query("SELECT * FROM accessories_list ORDER BY accessories_id AS
     <link href="css/accessories.css" rel="stylesheet" />
      <!-- <link href="machine.css" rel="stylesheet" /> -->
     <script src="js/number.js" type="text/javascript" defer></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
    
    <!-- Script -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
@@ -251,94 +249,62 @@ $query = $conn->query("SELECT * FROM accessories_list ORDER BY accessories_id AS
 
 
 
-    <div class="search-panel">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <input type="text" class="form-control" id="keywords" placeholder="Type keywords..." onkeyup="searchFilter();">
-        </div>
-            <!-- <div class="form-group col-md-6">
-             <button class="btn-reset" onclick="document.location='report.php'">Refresh</button>
-        </div>
-         -->
-        <!-- <div class="form-group col-md-4">
-            <select class="form-control" id="filterBy" onchange="searchFilter();">
-                <option value="">Filter by Status</option>
-                <option value="1">Active</option>
-                <option value="0">Inactive</option>
-            </select>
-        </div> -->
-    </div>
-</div>
+ <div class="datalist-wrapper">    
+        <div class="col-lg-12" style="border: none;">
 
-            <div class="datalist-wrapper">
-    <!-- Loading overlay -->
-    <div class="loading-overlay"><div class="overlay-content">Loading...</div></div>
-              
-            <!-- Customer DataTales -->
-             <div id="dataContainer">
-        <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Brand</th>
-                <th>Action</th>
-            </tr>
-        </thead>
 
-         <tbody>
-            <?php 
+
+        <table class="table table-striped sortable">
+<thead>
+    <tr>
+    <th>No</th>
+    <th>Name</th>
+    <th>Code</th>
+    <th>Brand</th>
+    <th>Action</th>
+    
+    </tr>
+</thead>
+<tbody>
+    <?php 
             if($query->num_rows > 0){ $i=0; 
                 while($row = $query->fetch_assoc()){ $i++; 
             ?>
-                <tr>
-                    <th scope="row"><?php echo $i; ?></th>
-                    <td><?php echo $row["accessories_name"]; ?></td>
-                    <td><?php echo $row["accessories_code"]; ?></td>
-                    <td><?php echo $row["accessories_brand"]; ?></td>
-                    <td><div class='accessoriesUpdateDeleteBtn'>
+     
+    <tr>
+        <td><?php echo $i; ?></td>
+        <td><?php echo $row["accessories_name"]; ?></td>
+        <td><?php echo $row["accessories_code"]; ?></td>
+        <td><?php echo $row["accessories_brand"]; ?></td>
+        <td><div class='accessoriesUpdateDeleteBtn'>
 <button data-accessories_id="<?php echo $row['accessories_id'];?>" class='userinfo' type='button' id='btnView'>View</button>
 <button data-accessories_id="<?php echo $row['accessories_id'];?>" class='updateinfo' type='button' id='btnEdit'>Update</button>
 <button data-accessories_id="<?php echo $row['accessories_id'];?>" class='deletebtn' type='button' id='btnDelete'>Delete</button>
 </div>
 </td>
-                    
-                </tr>
-            <?php 
+       
+
+    </tr>
+ <?php 
                 } 
             }else{ 
                 echo '<tr><td colspan="6">No records found...</td></tr>'; 
             } 
             ?>
-        </tbody>
+</tbody>
         </table>
-        <br/>
-        <br/>
+		
 
-                <!-- Display pagination links -->
-        <?php echo $pagination->createLinks(); ?>
     </div>
-</div>
+    </div>
+  </div>
 
-<script>
-function searchFilter(page_num) {
-    page_num = page_num?page_num:0;
-    var keywords = $('#keywords').val();
-    // var filterBy = $('#filterBy').val();
-    $.ajax({
-        type: 'POST',
-        url: 'searchAccessories.php',
-        data:'page='+page_num+'&keywords='+keywords,
-        beforeSend: function () {
-            $('.loading-overlay').show();
-        },
-        success: function (html) {
-            $('#dataContainer').html(html);
-            $('.loading-overlay').fadeOut("slow");
-        }
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('table').DataTable();
+
     });
-}
+
 </script>
 
         <!--Delete Accesssories -->      
@@ -365,24 +331,19 @@ function searchFilter(page_num) {
                     </div>
                     <script type='text/javascript'>
                         $(document).ready(function() {
+                        $('body').on('click','.deletebtn',function(){ 
+                        var accessories_id = $(this).data('accessories_id');
 
-                            $('.deletebtn').click(function() {
-
-                                var accessories_id = $(this).data('accessories_id');
-
-                                // AJAX request
-                                $.ajax({
-                                    url: 'deleteaccessories.php',
-                                    type: 'post',
-                                    data: {
-                                        accessories_id: accessories_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.modal-body').html(response);
-
-                                        // Display Modal
-                                        $('#empModal').modal('show');
+                        // AJAX request
+                        $.ajax({
+                            url: 'deleteaccessories.php',
+                            type: 'post',
+                            data: { accessories_id: accessories_id },
+                            success: function(response) {
+                            // Add response in Modal body
+                            $('.modal-body').html(response);
+                            // Display Modal
+                            $('#empModal').modal('show');
                                     }
                                 });
                             });
@@ -392,7 +353,7 @@ function searchFilter(page_num) {
 
           <!--Update Customer -->
 
- <div class="modal fade" id="empModal" role="dialog">
+            <div class="modal fade" id="empModal" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
@@ -413,24 +374,18 @@ function searchFilter(page_num) {
                     </div>
                     <script type='text/javascript'>
                         $(document).ready(function() {
-
-                            $('.updateinfo').click(function() {
-
-                                var accessories_id = $(this).data('accessories_id');
-
-                                // AJAX request
-                                $.ajax({
-                                    url: 'updateaccessories.php',
-                                    type: 'post',
-                                    data: {
-                                        accessories_id: accessories_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.modal-body').html(response);
-
-                                        // Display Modal
-                                        $('#empModal').modal('show');
+                        $('body').on('click','.updateinfo',function(){
+                        var accessories_id = $(this).data('accessories_id');
+                        // AJAX request
+                        $.ajax({
+                            url: 'updateaccessories.php',
+                            type: 'post',
+                            data: { accessories_id: accessories_id },
+                            success: function(response) {
+                            // Add response in Modal body
+                            $('.modal-body').html(response);
+                            // Display Modal
+                            $('#empModal').modal('show');
                                     }
                                 });
                             });
@@ -460,93 +415,42 @@ function searchFilter(page_num) {
                     </div>
                     <script type='text/javascript'>
                         $(document).ready(function() {
+                        $('body').on('click','.userinfo',function(){
+                        var userid = $(this).data('accessories_id');
 
-                            $('.userinfo').click(function() {
-
-                                var userid = $(this).data('accessories_id');
-
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxaccessories.php',
-                                    type: 'post',
-                                    data: {
-                                        userid: userid
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.modal-body').html(response);
-
-                                        // Display Modal
-                                        $('#empModal').modal('show');
+                        // AJAX request
+                        $.ajax({
+                            url: 'ajaxaccessories.php',
+                            type: 'post',
+                            data: {userid: userid},
+                            success: function(response) {
+                            // Add response in Modal body
+                            $('.modal-body').html(response);
+                            // Display Modal
+                            $('#empModal').modal('show');
                                     }
                                 });
                             });
                         });
                     </script>
 
-    </section>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
+         
+<script>
+let btn = document.querySelector("#btn");
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function(){
+    sidebar.classList.toggle("active");
+    if(sidebar.classList.contains("active")){
+        sidebar.classList.replace("bx-menu","bx-menu-alt-right")
+    }else
+    sidebarBtn.classList.replace("bx-menu-alt-right","bx-menu");
+}
+</script>
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id02');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id03');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id04');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        let btn = document.querySelector("#btn");
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-
-        sidebarBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-            if (sidebar.classList.contains("active")) {
-                sidebar.classList.replace("bx-menu", "bx-menu-alt-right")
-            } else
-                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-        }
-    </script>
+</div>
+</div>
 
 <script src="js/upload photo.js"></script>
 <script src="js/form-validation.js"></script>

@@ -31,8 +31,7 @@ if(!isset($_SESSION['username']))
     <title>Technician Job Listing</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <link href="css/tech.css"rel="stylesheet" />
-    <link href="css/tech.css"rel="stylesheet" />
-    <link href="css/techjoblisitng.css"rel="stylesheet" />
+    <link href="css/techjoblisting.css"rel="stylesheet" />
     <script src="js/todotech.js" type="text/javascript" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
