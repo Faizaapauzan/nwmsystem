@@ -22,12 +22,10 @@ if($cek > 0){
 
  if($data['staff_position']=="Admin"){
 
-
   $_SESSION['username'] = $username;
   $_SESSION['staff_position'] = "Admin";
 
   header("location:Adminhomepage.php");
-
 
  }else if($data['staff_position']=="Technician" AND $data['technician_rank']=="1st Leader"){
 
@@ -50,11 +48,15 @@ if($cek > 0){
 	 
 	$_SESSION['username'] = $username;
 	$_SESSION['staff_position'] = "Storekeeper";
-	header("location:store.php"); 
-	 
+	header("location:store.php");
+
+}else if($data['username']=="KEONG"){
+
+	$_SESSION['username'] = $KEONG;
+	header("location:neosaukeong.php"); 
+    	 
  }else{
 
- 
   header("location:index.html?pesan=gagal");
  } 
 }else{

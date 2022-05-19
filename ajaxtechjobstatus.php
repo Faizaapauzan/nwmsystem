@@ -92,37 +92,51 @@ body {
         </select>
   </div>
 
-    
     <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
     <!-- <button type="submit" id="button" name="update" class="button">Update Job Status</button> -->
 
+<p class="control"><b id="messagestatus"></b></p>
 <div class="btn-box">
-<p class="control"><b id="mesejstatus"></b></p>
-<button type="button" id="update_techstatus" name="update_techstatus" value="Update" class="btn btn-primary">Update</button>
+<button type="button" id="update_techstatus" name="update_techstatus" value="Update" class="btn btn-primary" onclick="submitFormstatus();">Update</button>
 <br><br>
 </form>
 
 
-<script>
-    $(document).ready(function () {
-        $('#update_techstatus').click(function () {
-            var data = $('#techstatus_form').serialize() + '&update_techstatus=update_techstatus';
-            $.ajax({
-                url: 'techstatusindex.php',
-                type: 'post',
-                data: data,
-                success: function (response) {
-                    $('#mesejstatus').text(response);
-                    $('#job_status').text('');
-                    $('#jobregisterlastmodify_by').text('');
+<script type="text/javascript">
 
-                   
-                }
-            });
-        });
-    });
-</script>
+            function submitFormstatus()
+              {
+                var job_status = $('select[name=job_status]').val();
+                var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
+                var jobregister_id = $('input[name=jobregister_id]').val();
+                
+                if(job_status!='' || job_status=='',
+                   jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='',
+                   jobregister_id!='' || jobregister_id=='')
+
+                  {
+                    var formData = {job_status: job_status,
+                        jobregisterlastmodify_by: jobregisterlastmodify_by,
+                        jobregister_id: jobregister_id};
+                                    
+                    $.ajax({
+                            url: "techstatusindex.php", 
+                            type: 'POST', 
+                            data: formData, 
+                            success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#messagestatus').html('<span style="color: black">Update Saved!</span>');
+                        else
+                          $('#messagestatus').html('<span style="color: red">Data Cannot Be Saved</span>');
+                      }
+                    });
+                  }
+              } 
+        </script>
 
 <?php
 
