@@ -175,7 +175,7 @@ include 'dbconnect.php';
                 <div class="home-content">
                       <i class='bx bx-menu' ></i>
                           <a href="homepagev2.php">
-                          <span class="text" style="">Home</span>
+                          <span class="text">Home</span>
                           </a>
 
                 </div>

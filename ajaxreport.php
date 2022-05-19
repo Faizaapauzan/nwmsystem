@@ -53,7 +53,6 @@ include_once("dbconnect.php");
   
 ?>
 
-<!-- FOR SUBMIT SERVICE REPORT DATE -->
 
 <?php
 // Return current date from the remote server
@@ -61,8 +60,8 @@ $date = date('d-m-y');
 
 ?>
 
-  <div class="input-group-append">
-    <button class="buttonbiru" type="submit" value="Submit" name="submit-date">SUBMIT</button>
+<table id="date_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+    <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
 
 <p class="controls"><b id="msgdate"></b></p>
    <tbody id="_editable_table">
