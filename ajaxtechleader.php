@@ -98,6 +98,11 @@ session_start();
   </div> 
 
   <div class="col-md-6">
+            <label for=""  class="form-label">Machine Serial Number</label>
+            <input type="text" class="form-control" name="serialnumber" style="background-color: white;" value="<?php echo $row['serialnumber']?>" readonly>
+        </div>
+
+  <div class="col-md-6">
     <label for="" class="form-label">Machine Brand</label>
     <input type="text" class="form-control" id="machine_brand" name="machine_brand" value="<?php echo $row['machine_brand']?>" style="background-color: white;" readonly>
   </div>
