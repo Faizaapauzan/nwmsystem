@@ -1,26 +1,4 @@
-<?php
- session_start();
- // cek apakah yang mengakses halaman ini sudah login
- if($_SESSION['username']==""){
-  header("location:index.html?pesan=gagal");
- }
-
-if(!isset($_SESSION['username']))
-	{	
-    header("location:index.html");
-	}
-
-    elseif($_SESSION['username']== 'KEONG')
-	{
-
-	}
-
-  else
-	{
-			header("location:index.html");
-	}
-
-?>
+<?php session_start(); ?>
 
 
 <!DOCTYPE html>
