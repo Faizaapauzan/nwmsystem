@@ -110,7 +110,6 @@ include_once("dbconnect.php");
          <td><span class='deletes' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
       </tr>
 	  <?php endforeach;?>
-  
    </tbody>
     
 </table>
@@ -142,11 +141,11 @@ include_once("dbconnect.php");
                     $('#msgremark').text(response);
                     $('#s_remark_desc').text('');
                     $('#s_remark_solution').text('');
-               
                 }
             });
         });
     });
+
 </script>
 
 <script>
