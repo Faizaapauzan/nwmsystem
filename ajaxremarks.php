@@ -23,8 +23,9 @@ session_start();
 	<!-- <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'> -->
     <title>NWM Technician Page</title>
 
-	<link rel="stylesheet" type="text/css" href="css/tab.css"/>
+
 	<link href="css/ajax.css"rel="stylesheet" />
+
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
@@ -38,7 +39,13 @@ session_start();
 
 </head>
 
+<style>
+  
+.status{
+  float:none;
+}
 
+</style>
 
 <body>
 		     
@@ -124,7 +131,7 @@ include_once("dbconnect.php");
 </div>  
 <p class="control"><b id="message"></b></p>
 <div class="updateBtn">
-<button type="button" id="update_remark" name="update_remark" value="Update" class="btn btn-primary">Update</button>
+<button type="button" id="update_remark" name="update_remark" value="Update" class="buttonbiru" style="width: auto;">Update</button>
 
 <!-- <button type="submit" name="update" value="update">Update</button> -->
 </form></div>  

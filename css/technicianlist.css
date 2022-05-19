@@ -62,8 +62,8 @@ td {
 
         .modal .contentStaffPopup {
            position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 420px;
+            left: 672px;
             transform: translate(-50%, -50%);
             background: #fff;
             width: 700px;
@@ -267,8 +267,8 @@ fieldset {
             font-weight: 500;
             letter-spacing: 1px;
             margin-left: 10px;
-            margin-bottom: 50px;
-            margin-top: 50px;
+            margin-bottom: 7px;
+            margin-top: 51px;
             position: static;
             
         }
@@ -281,3 +281,5 @@ fieldset {
         } 
     
 
+
+        

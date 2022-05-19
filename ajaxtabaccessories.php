@@ -17,7 +17,7 @@ session_start();
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" type="text/css" href="css/tab.css"/>
+
 <link href="css/ajaxtab.css"rel="stylesheet" />
 <!-- <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

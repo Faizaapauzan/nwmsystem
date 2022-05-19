@@ -808,15 +808,6 @@
   padding: 20px;
 }
 
-.welcome {
-  font-size: 30px;
-  font-family: "Garamond";
-  font-variant: small-caps;
-  color: #000099;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
 
 #myBtn {
   display: none;
@@ -869,22 +860,6 @@
 }
 
 /*COMPLETED*/
-.completed,
-#completed {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  background-color: #f7f7f7ab;
-  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
-    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
-  border-radius: 12px;
-  padding: 0.7rem 2rem;
-  font-size: 14px;
-  margin: 10px 10px;
-  cursor: pointer;
-  text-align: left;
-}
 
 .completedJobInfoTab {
   max-width: 700px;
@@ -1046,22 +1021,6 @@ input[type="datetime-local"] {
 
 /*STORE*/
 
-.Store,
-#Store {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  background-color: #f7f7f7ab;
-  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
-    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
-  border-radius: 12px;
-  padding: 0.7rem 2rem;
-  font-size: 14px;
-  margin: 10px 10px;
-  cursor: pointer;
-  text-align: left;
-}
 
 .StoreJobInfoTab {
   max-width: 700px;
@@ -4143,22 +4102,6 @@ input[type="datetime-local"] {
 
 /*PENDING*/
 
-.Pending,
-#Pending {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  background-color: #f7f7f7ab;
-  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
-    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
-  border-radius: 12px;
-  padding: 0.7rem 2rem;
-  font-size: 14px;
-  margin: 10px 10px;
-  cursor: pointer;
-  text-align: left;
-}
 
 .PendingJobInfoTab {
   max-width: 700px;
@@ -4320,22 +4263,6 @@ input[type="datetime-local"] {
 
 /*INCOMPLETE*/
 
-.Incomplete,
-#Incomplete {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  background-color: #f7f7f7ab;
-  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
-    rgba(15, 15, 15, 0.1) 0px 0px 0px 4px;
-  border-radius: 12px;
-  padding: 0.7rem 2rem;
-  font-size: 14px;
-  margin: 10px 10px;
-  cursor: pointer;
-  text-align: left;
-}
 
 .IncompleteJobInfoTab {
   max-width: 700px;

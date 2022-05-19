@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 
 <?php
 
@@ -29,7 +26,7 @@ session_start();
 	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <title>NWM Technician Page</title>
-    <link href="css/testing.css"rel="stylesheet" />
+    <link href="css/technicianmain.css"rel="stylesheet" />
 	
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -37,38 +34,13 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="js/testing.js" type="text/javascript"></script>
-
+</head>
 <style>
-
-.btn btn-primary {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #008CBA;
+  
+.status{
+  float:none;
 }
 
-.btn btn-primary {
-  background-color: #008CBA;
-  color: white;
-}
-
-
-body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-color: #ffffff;
-    background-repeat: no-repeat
-}
-
-.container {
-  padding: 1%;
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  padding: 0 30px;
-  margin-bottom: 20px;
-  flex-direction: column;
-}
 
 </style>
 
@@ -99,7 +71,8 @@ body {
 
 <div class="btn-box">
 <p class="control"><b id="mesejstatus"></b></p>
-<button type="button" id="update_techstatus" name="update_techstatus" value="Update" class="btn btn-primary">Update</button>
+<button type="button" id="update_techstatus" name="update_techstatus" value="Update" class="buttonbiru" style="width:auto;">Update</button>
+</div>
 <br><br>
 </form>
 

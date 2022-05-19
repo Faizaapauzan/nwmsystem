@@ -25,9 +25,10 @@ session_start();
     <meta name="keywords" content="" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <title>NWM Technician Page</title>
+	  <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	  <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href="css/technicianmain.css"rel="stylesheet" />
+    <title>ajax technician</title>
 
 
 	
@@ -41,6 +42,16 @@ session_start();
 
 	
 </head>
+
+<style>
+  
+.status{
+  float:none;
+}
+
+</style>
+
+
 
 <body>
 
@@ -124,6 +135,8 @@ session_start();
     <label for="serialnumber" class="form-label">Serial Number</label>
     <input type="text" class="form-control" id="serialnumber" value="    " style="background-color: white;" readonly>
   </div>   
+  
+
 </form>
   <br>
   

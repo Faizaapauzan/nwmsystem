@@ -2,7 +2,13 @@
 <html>
 
 <head>
-    <style>
+
+
+
+</head>
+
+
+<style>
         #ajax {
             border: 1px solid #ddd;
             text-align: left;
@@ -24,7 +30,6 @@
             padding: 10px;
         }
     </style>
-</head>
 
 </html>
 <?php

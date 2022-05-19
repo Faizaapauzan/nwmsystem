@@ -5,6 +5,8 @@ $db = mysqli_select_db($connection, 'nwmsystem');
     if(isset($_POST['update']))
     {   
         $jobregister_id = $_POST['jobregister_id'];
+        $technician_rank = $_POST['technician_rank'];
+        $staff_position = $_POST['staff_position'];
         $job_priority = $_POST['job_priority'];
         $job_order_number = $_POST['job_order_number'];
         $job_name = $_POST['job_name'];
@@ -31,6 +33,8 @@ $db = mysqli_select_db($connection, 'nwmsystem');
         $query = "UPDATE job_register SET
                         
 job_priority='$job_priority',
+technician_rank='$technician_rank',
+staff_position='$staff_position',
 job_order_number='$job_order_number',
 job_name='$job_name',
 job_description='$job_description',

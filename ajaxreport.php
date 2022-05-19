@@ -25,9 +25,19 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/tab.css"/>
 	<link href="css/ajax.css"rel="stylesheet" />
-
+	<link href="css/technicianmain.css"rel="stylesheet" />
 
 </head>
+
+<style>
+  
+.status{
+  float:none;
+}
+
+
+
+</style>
 <body>
 
 <?php
@@ -52,7 +62,7 @@
 
 
   <div class="input-group-append">
-    <button class="btn btn-primary" type="submit" value="Submit" name="submit-date">SUBMIT</button>
+    <button class="buttonbiru" type="submit" value="Submit" name="submit-date">SUBMIT</button>
 
 </form>
   	<form id="view_form" method="post">
@@ -127,7 +137,7 @@
     <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
   </div>
   <div class="input-group-append">
-    <button class="btn btn-primary" name="update-report" value="Update" type="submit">UPDATE</button>
+    <button class="buttonbiru" name="update-report" value="Update" type="submit">UPDATE</button>
   </div>
 </div>
     </form> 

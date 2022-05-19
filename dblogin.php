@@ -3,6 +3,8 @@
 session_start();
 
 
+
+
 include 'dbconnect.php';
 
 
@@ -13,6 +15,8 @@ $password = $_POST['password'];
 $sql = mysqli_query($conn,"SELECT * FROM staff_register WHERE username='$username' and password='$password'");
 
 $cek = mysqli_num_rows($sql);
+
+
 
 
 if($cek > 0){
@@ -55,10 +59,10 @@ if($cek > 0){
  }else{
 
  
-  header("location:index.html?pesan=gagal");
+  header("location:index.php?error");
  } 
 }else{
- header("location:index.html?pesan=gagal");
+ header("location:index.php?error");
 }
-
 ?>
+
