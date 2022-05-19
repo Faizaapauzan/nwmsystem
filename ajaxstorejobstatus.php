@@ -17,7 +17,7 @@ session_start();
             while ($row = mysqli_fetch_array($query_run)) {
                 ?>
 
- <form action="" method="post">
+    <form action="" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     
     <div class="JobStatusUpdate">
@@ -30,7 +30,9 @@ session_start();
         </select>
     </div>
     
-   
+    <?php if (isset($_SESSION["username"])) ?>
+    <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+
     <button type="submit" id="update" name="update" class="btn btn-primary"> Update Data </button>
 </form>
 
@@ -39,10 +41,13 @@ session_start();
 if (isset($_POST['update'])) {
     
     $job_status = $_POST['job_status'];
+    $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
     
     $query = "UPDATE job_register SET
     
-    job_status ='$job_status'
+    job_status ='$job_status',
+    jobregisterlastmodify_by ='$jobregisterlastmodify_by'
+    
     
     WHERE jobregister_id='$jobregister_id'";
     
