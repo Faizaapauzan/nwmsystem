@@ -1,36 +1,40 @@
 <?php
-$connection = mysqli_connect("localhost","root","");
-$db = mysqli_select_db($connection, 'nwmsystem');
 
-    if(isset($_POST['update_tech']))
-    {   
-        $jobregister_id = $_POST['jobregister_id'];
+include 'dbconnect.php';
+
+$response = array('success' => false);
+
+if(isset($_POST['technician_departure']) && $_POST['technician_departure']!='' || $_POST['technician_departure']==''
+    &&
+   isset($_POST['technician_arrival']) && $_POST['technician_arrival']!='' || $_POST['technician_arrival']==''
+    &&
+   isset($_POST['technician_leaving']) && $_POST['technician_leaving']!='' || $_POST['technician_leaving']==''
+    &&
+   isset($_POST['latitude']) && $_POST['latitude']!='' || $_POST['latitude']=='' 
+    &&
+   isset($_POST['longitude']) && $_POST['longitude']!='' || $_POST['longitude']==''
+    &&
+   isset($_POST['jobregisterlastmodify_by']) && $_POST['jobregisterlastmodify_by']!='' || $_POST['jobregisterlastmodify_by']==''
+    &&
+   isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']=='')
+
+    {
         
-    $technician_departure = $_POST['technician_departure'];
-    $technician_arrival = $_POST['technician_arrival'];
-    $technician_leaving = $_POST['technician_leaving'];
-    $latitude = $_POST['latitude'];
-    $longitude = $_POST['longitude'];
-
-
         $sql = "UPDATE job_register SET
-                        
-    technician_departure ='$technician_departure',
-    technician_arrival ='$technician_arrival',
-    technician_leaving ='$technician_leaving',
-    latitude ='$latitude',
-    longitude ='$longitude'
-
-
-WHERE jobregister_id='$jobregister_id'";
-
-       $query=mysqli_query($connection,$sql) or die(mysqli_error($connection));
-if($query)
-{
-	echo "Data Saved Successfully";
-	
-} else {
-	echo "Failed to save data";
-}
+                       technician_departure ='".addslashes($_POST['technician_departure'])."',
+                       technician_arrival ='".addslashes($_POST['technician_arrival'])."',
+                       technician_leaving ='".addslashes($_POST['technician_leaving'])."',
+                       latitude ='".addslashes($_POST['latitude'])."',
+                       longitude ='".addslashes($_POST['longitude'])."',
+                       jobregisterlastmodify_by ='".addslashes($_POST['jobregisterlastmodify_by'])."'
+                WHERE  jobregister_id ='".addslashes($_POST['jobregister_id'])."' ";
+        
+        if($conn->query($sql))
+        {
+            $response['success'] = true;
+        }
     }
+
+echo json_encode($response);
+
 ?>

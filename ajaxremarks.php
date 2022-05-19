@@ -91,7 +91,6 @@ include_once("dbconnect.php");
  
 
 <table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
-    <p class="control"><b id="msgremark"></b></p>
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
       <tr>
@@ -124,6 +123,7 @@ include_once("dbconnect.php");
 
 </div>  
 
+<p class="control"><b id="msgremark"></b></p>
 <div class="updateBtn">
 <button type="button" id="update_remark" name="update_remark" value="Update" class="btn btn-primary">Update</button>
 

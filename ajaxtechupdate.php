@@ -38,10 +38,10 @@ session_start();
         if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
                 ?>
- <form id="techupdate_form" method="post">
+
+ <form action="ajaxtechupdate.php" method="post">
+
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-
-
 
 <label>Departure Time</label>
 <div class="input-group mb-3">
@@ -61,9 +61,6 @@ session_start();
                 </script>
 </div>
 
-
-
-
 <label>Arrival Time</label>
 <div class="input-group mb-3">
   <input readonly type="text" class="form-control" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
@@ -81,9 +78,6 @@ session_start();
                 }
                 </script>
 </div>
-
-
-
 
 <label>Leaving Time</label>
 <div class="input-group mb-3">
@@ -104,8 +98,6 @@ session_start();
                 </script>
 </div>
 
-
-
                 <div class="input-boxLocation" id="inputLocationBox">
                 <label for="Location" class="details">Location</label>
                 <div class="add_field_button1"></div>
@@ -115,12 +107,14 @@ session_start();
               </div>
 
 			  <button type="button" onclick="getLocation()" class="btn btn-info">Click to Get Location</button>
+
+        <?php if (isset($_SESSION["username"])) ?>
+    <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
             
-
-
-            <p class="control"><b id="mesg"></b></p>
+            <p class="control"><b id="message"></b></p>
             <div class="updateBtn">
-			<button type="button" id="update_tech" name="update_tech" value="Update" class="btn btn-primary">Update</button>
+              <button type="button" id="update_tech" name="update_tech" value="Update" class="btn btn-primary" onclick="submitForm();">Update</button>
+      
               <!-- <button type="submit" id="submit" name="update" class="btn btn-primary"> Update  </button> -->
             </div>           
 </form>
@@ -145,29 +139,53 @@ session_start();
 
        </script>
 
-<script>
-    $(document).ready(function () {
-        $('#update_tech').click(function () {
-            var data = $('#techupdate_form').serialize() + '&update_tech=update_tech';
-            $.ajax({
-                url: 'techupdateindex.php',
-                type: 'post',
-                data: data,
-                success: function (response) {
-                    $('#mesg').text(response);
-                    $('#technician_departure').text('');
-                    $('#technician_arrival').text('');
-                    $('#technician_leaving').text('');
-                    $('#latitude').text('');
-                    $('#longitude').text('');
-                   
-                }
-            });
-        });
-    });
-</script>
-     
+<script type="text/javascript">
 
+            function submitForm()
+              {
+                var technician_departure = $('input[name=technician_departure]').val();
+                var technician_arrival = $('input[name=technician_arrival]').val();
+                var technician_leaving = $('input[name=technician_leaving]').val();
+                var latitude = $('textarea[name=latitude]').val();
+                var longitude = $('textarea[name=longitude]').val();
+                var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
+                var jobregister_id = $('input[name=jobregister_id]').val();
+                
+                if(technician_departure!='' || technician_departure=='', 
+                   technician_arrival!='' || technician_arrival=='', 
+                   technician_leaving!='' || technician_leaving=='', 
+                   latitude!='' || latitude=='', 
+                   longitude!='' || longitude=='',
+                   jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='',
+                   jobregister_id!='' || jobregister_id=='')
+
+                  {
+                    var formData = {technician_departure: technician_departure,
+                                    technician_arrival: technician_arrival,
+                                    technician_leaving: technician_leaving,
+                                    latitude: latitude,
+                                    longitude: longitude,
+                                    jobregisterlastmodify_by: jobregisterlastmodify_by,
+                                    jobregister_id: jobregister_id};
+                                    
+                    $.ajax({
+                            url: "techupdateindex.php", 
+                            type: 'POST', 
+                            data: formData, 
+                            success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#message').html('<span style="color: green">Update Saved!</span>');
+                        else
+                          $('#message').html('<span style="color: red">Data Cannot Be Saved</span>');
+                      }
+                    });
+                  }
+              } 
+        </script>
+     
            <?php
         }
     }

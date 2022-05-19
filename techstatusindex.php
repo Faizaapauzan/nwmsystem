@@ -1,28 +1,28 @@
-<?php 
+<?php
 
 include 'dbconnect.php';
 
-if (isset($_POST['jobregister_id'])) {
-      $jobregister_id =$_POST['jobregister_id'];
+$response = array('success' => false);
 
-      $sql = "SELECT jobregister_id FROM `job_accessories` WHERE  jobregister_id ='$jobregister_id'";
-  }
+if(isset($_POST['job_status']) && $_POST['job_status']!='' || $_POST['job_status']==''
+    &&
+   isset($_POST['jobregisterlastmodify_by']) && $_POST['jobregisterlastmodify_by']!='' || $_POST['jobregisterlastmodify_by']==''
+    &&
+   isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']=='')
 
-        if (isset($_POST['update_techstatus'])) {
-
-
-           $job_status = $_POST['job_status'];
-
-         $query = "UPDATE job_register SET job_status ='$job_status' WHERE jobregister_id='$jobregister_id'";
-    
-                            
-            $query_run=mysqli_query($conn, $query) or die(mysqli_error($conn));
-            if ($query_run) {
-                echo "Data Saved Successfully";
-            } else {
-                echo "Failed to save data";
-            }
+    {
+        
+        $sql = "UPDATE job_register SET 
+                       job_status ='".addslashes($_POST['job_status'])."',
+                       jobregisterlastmodify_by ='".addslashes($_POST['jobregisterlastmodify_by'])."' 
+                 WHERE jobregister_id='".addslashes($_POST['jobregister_id'])."'";
+        
+        if($conn->query($sql))
+        {
+            $response['success'] = true;
         }
-    
+    }
+
+echo json_encode($response);
 
 ?>
