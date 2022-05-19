@@ -8,7 +8,7 @@ include_once 'Pagination.class.php';
  
 // Include database configuration file 
 require_once 'dbconnect.php'; 
- 
+
 
 // Count of all records 
 $query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register"); 
@@ -19,6 +19,7 @@ $rowCount= $result['rowNum'];
 $pagConfig = array( 
 
     'totalRows' => $rowCount, 
+
 
 ); 
 $pagination =  new Pagination($pagConfig); 
@@ -61,18 +62,6 @@ $query = $conn->query("SELECT * FROM job_register");
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <head>
     <meta name="keywords" content="" />
@@ -80,20 +69,11 @@ $query = $conn->query("SELECT * FROM job_register");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NWM Job Listing</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <link href="css/layout.css" rel="stylesheet" />
-    <link href="css/adminjoblisting.css" rel="stylesheet" />
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-   <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/> -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
-
-   <!-- Script -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <link href="css/adminjoblistinghomepage.css" rel="stylesheet" />
     <link href="css/adminjoblisting1.css" rel="stylesheet" />
-
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+   <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
 
    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/> -->
 
@@ -116,6 +96,7 @@ $query = $conn->query("SELECT * FROM job_register");
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 
 
+</head>
 
 
 
@@ -281,16 +262,14 @@ $query = $conn->query("SELECT * FROM job_register");
 			<div class="addAccessoriesBtn">
                 <button style="color:#ccc;" class="btn-reset" onclick="document.location='adminjoblisting.php'">Refresh</button>
             </div>
-
-       <div class="datalist-wrapper">    
+			
+            <div class="datalist-wrapper">    
         <div class="col-lg-12" style="border: none;">
-
-
 
         <table class="table table-striped sortable">
 <thead>
     <tr>
-      <th>No</th>
+     <th>No</th>
     <th>Job Order Number</th>
     <th>Job Priority</th>
     <th>Job Status</th>
@@ -302,6 +281,7 @@ $query = $conn->query("SELECT * FROM job_register");
     </tr>
 </thead>
 <tbody>
+
     <?php 
             if($query->num_rows > 0){ $i=0; 
                 while($row = $query->fetch_assoc()){ $i++; 
@@ -343,15 +323,15 @@ $query = $conn->query("SELECT * FROM job_register");
                 echo '<tr><td colspan="6">No records found...</td></tr>'; 
             } 
             ?>
-</tbody>
-        </table>
-		
 
-    </div>
+
+</tbody>
+</table>			
+       </div>
     </div>
   </div>
 
-    <script type="text/javascript">  
+<script type="text/javascript">  
       function status_update(value,jobregister_id){  
            //alert(id);  
            let url = "adminjoblisting.php";  
@@ -359,7 +339,13 @@ $query = $conn->query("SELECT * FROM job_register");
       }  
  </script>  
 
-
+         <script type="text/javascript">  
+      function assistant_update(value,jobregister_id){  
+           //alert(id);  
+           let url = "adminjoblisting.php";  
+           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant="+value;  
+      }  
+ </script>  
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -450,7 +436,7 @@ $query = $conn->query("SELECT * FROM job_register");
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('body').on('click','.JobInfo',function(){
+            $('.JobInfo').click(function () {
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
@@ -563,22 +549,6 @@ $query = $conn->query("SELECT * FROM job_register");
             });
         </script>
 
-         
-<script>
-let btn = document.querySelector("#btn");
-let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".sidebarBtn");
-sidebarBtn.onclick = function(){
-    sidebar.classList.toggle("active");
-    if(sidebar.classList.contains("active")){
-        sidebar.classList.replace("bx-menu","bx-menu-alt-right")
-    }else
-    sidebarBtn.classList.replace("bx-menu-alt-right","bx-menu");
-}
-</script>
-
-</div>
-</div>
 
 
 
