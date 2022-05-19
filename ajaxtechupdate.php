@@ -115,9 +115,10 @@ session_start();
               </div>
 
 			  <button type="button" onclick="getLocation()" class="btn btn-info">Click to Get Location</button>
-            
 
-
+        <?php if (isset($_SESSION["username"])) ?>
+<input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+          
             <p class="control"><b id="mesg"></b></p>
             <div class="updateBtn">
 			<button type="button" id="update_tech" name="update_tech" value="Update" class="btn btn-primary">Update</button>
@@ -160,6 +161,7 @@ session_start();
                     $('#technician_leaving').text('');
                     $('#latitude').text('');
                     $('#longitude').text('');
+                    $('#jobregisterlastmodify_by').text('');
                    
                 }
             });
