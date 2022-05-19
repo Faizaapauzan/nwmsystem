@@ -114,7 +114,6 @@ session_start();
 							  <button type="button" onclick="getLocation()" class="buttonbiru" style="width: min-content; position: absolute; top:292px; left:306px;">Get Location</button>
               </div>
 
-			  <button type="button" onclick="getLocation()" class="btn btn-info">Click to Get Location</button>
 
         <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
