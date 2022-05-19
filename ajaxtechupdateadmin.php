@@ -91,10 +91,13 @@ session_start();
                 <textarea style="width: 290px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
                 <textarea style="width: 290px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
               </div>
+
+              <?php if (isset($_SESSION["username"])) ?>
+              <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
               
 
             <div class="updateBtn">
-            <p class="control"><b id="mesg"></b></p>
+            <p class="control"><b id="techupdateadminmsg"></b></p>
             <input type="button" id="update_tech" name="update_tech" value="Update" />
               <!-- <button type="submit" id="submit" name="update" class="btn btn-primary"> Update  </button> -->
             </div>           
@@ -129,12 +132,13 @@ session_start();
                 type: 'post',
                 data: data,
                 success: function (response) {
-                    $('#mesg').text(response);
+                    $('#techupdateadminmsg').text(response);
                     $('#technician_departure').text('');
                     $('#technician_arrival').text('');
                     $('#technician_leaving').text('');
                     $('#latitude').text('');
                     $('#longitude').text('');
+                    $('#jobregisterlastmodify_by').text('');
                    
                 }
             });

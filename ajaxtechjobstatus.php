@@ -115,6 +115,7 @@ body {
                 success: function (response) {
                     $('#mesejstatus').text(response);
                     $('#job_status').text('');
+                    $('#jobregisterlastmodify_by').text('');
 
                    
                 }

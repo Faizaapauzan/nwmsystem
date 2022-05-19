@@ -3,7 +3,9 @@
 include 'dbconnect.php';
 
 if (isset($_POST['jobregister_id'])) {
+
       $jobregister_id =$_POST['jobregister_id'];
+      $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
 
       $sql = "SELECT jobregister_id FROM `job_accessories` WHERE  jobregister_id ='$jobregister_id'";
   }
@@ -13,7 +15,12 @@ if (isset($_POST['jobregister_id'])) {
 
            $job_status = $_POST['job_status'];
 
-         $query = "UPDATE job_register SET job_status ='$job_status' WHERE jobregister_id='$jobregister_id'";
+         $query = "UPDATE job_register SET 
+         
+         job_status ='$job_status',
+         jobregisterlastmodify_by ='$jobregisterlastmodify_by' 
+         
+         WHERE jobregister_id='$jobregister_id'";
     
                             
             $query_run=mysqli_query($conn, $query) or die(mysqli_error($conn));

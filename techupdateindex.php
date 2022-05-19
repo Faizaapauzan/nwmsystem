@@ -11,6 +11,7 @@ $db = mysqli_select_db($connection, 'nwmsystem');
     $technician_leaving = $_POST['technician_leaving'];
     $latitude = $_POST['latitude'];
     $longitude = $_POST['longitude'];
+    $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
 
 
         $sql = "UPDATE job_register SET
@@ -19,7 +20,8 @@ $db = mysqli_select_db($connection, 'nwmsystem');
     technician_arrival ='$technician_arrival',
     technician_leaving ='$technician_leaving',
     latitude ='$latitude',
-    longitude ='$longitude'
+    longitude ='$longitude',
+    jobregisterlastmodify_by ='$jobregisterlastmodify_by'
 
 
 WHERE jobregister_id='$jobregister_id'";
