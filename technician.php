@@ -1,14 +1,14 @@
- <?php
+<?php
  session_start();
  // cek apakah yang mengakses halaman ini sudah login
  if($_SESSION['staff_position']=="" AND $_SESSION['technician_rank']=="" ){
-  header("location:index.html?pesan=gagal");
+  header("location:index.php?error");
  }
 
 
 if(!isset($_SESSION['username']))
 	{	
-    header("location:index.html");
+    header("location:index.php?error");
 	}
 
     elseif($_SESSION['staff_position']== 'Technician')
@@ -18,284 +18,278 @@ if(!isset($_SESSION['username']))
 
   else
 	{
-			header("location:index.html");
+			header("location:index.php?error");
 	}
 
 ?>
 
 
+
 <!DOCTYPE html>
-
-
-<html lang="en">
+<html>
 
 <head>
-
     <meta name="keywords" content="" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+    <title>Technician</title>
+    <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <title>NWM Technician Page</title>
-    <link href="css/testing.css"rel="stylesheet" />
-	
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
+    <link href="css/technicianmain.css" rel="stylesheet" />
+
+    <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	<script src="js/testing.js" type="text/javascript"></script>
-	
+    <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
+    <!--Boxicons link -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
 </head>
+
+
 
 <body>
 
-    <!--Home navigation-->
-    <section class="home-section">
-        <nav>
-		
-           <div class="sidebar-button1">
-            <i class='bx bx-log-out'></i>
-            <a href="logout.php">
-                  <span class="dashboard">LOGOUT</span>
-            </a>
-           </div>		
+  <nav class="navbar">
+    <div class="wrapper">
+    <ul class="main-nav" id="js-menu">
+      <li>
+        <a href="#" class="nav-links sidebarbutton" style="text-decoration: none;">ATTENDANCE</a>
+      </li>
+	  <li>
+        <a href="joblistingst.php" class="nav-links sidebarbutton" style="text-decoration: none;">JOB LISTING</a>
+      </li>
+    </ul>
+    <ul class="ul2">
+      <li>
+        <a href="#" class="nav-links"><i class='bx bxs-bell-ring'></i></a>
+      </li>
+      <li>
+        <a href="logout.php" class="nav-links"><i class="bx bx-log-out"></i></a>
+      </li>
+    </ul>
+    </div>
+  </nav>
 
-           <div class="sidebar-button">
-          
-            <a href="joblistingst.php">
-                  <span class="dashboard">JOB LISTING</span>
-              </a>
-           </div>
 
-           
-          <div class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
-
-
-          
-        </nav>
-        
-		
 <!--TODO-->
 
 
         <div class="container">
-          <div class="column">
-            <p class="column-title" id="todo">Todo</p>
-            
-            <?php
-              include 'dbconnect.php';
-              $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
-              FROM job_register
-              WHERE
-              job_assign ='{$_SESSION['username']}' AND  job_status = ''
-                OR
-              job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete'
-                OR
-              job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready'
-              ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-              while($row = $results->fetch_assoc()) {
-            ?>
+			  <div style="text-align: center; font-size: 35px; font-weight: bold;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
+			
+      
+				<div class="column" >
+					<p class="column-title"id="doing" >Todo</p>
+          <?php            
+								include 'dbconnect.php';
+								$results = $conn->query("SELECT
+								jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+								customer_grade, job_status, job_description, machine_name
+								FROM
+								job_register
+								WHERE
+								job_assign ='{$_SESSION['username']}' AND  job_status = ''
+								OR
+								job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete'
+								ORDER BY jobregisterlastmodify_at
+								DESC LIMIT 50");
+
+								while($row = $results->fetch_assoc()) {             
+							?>
+
+						
+				            <div class="cards">
+								<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
+									<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
+										<ul class="b" id="draged">
+										<strong text-align="center"><?php echo $row['job_priority']?></strong>
+										<li><?php echo $row['job_order_number']?></li>
+										<li><?php echo $row['job_description']?></li>
+										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+										<li><?php echo $row['machine_name']?></li>
+										</ul>
+										<div class="status"  id="incompleteStatus">
+										<?php echo $row['job_status']?>
+										</div>
+								</div>
+							</div>
+					<?php } ?>				
+				</div>
+				
+				
+<!--DOING-->				
+				
+				<div class="column" >
+					<p class="column-title"id="doing" >Doing</p>
+						<?php            
+							include 'dbconnect.php';
+							$results = $conn->query("SELECT
+							jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+							customer_grade, job_status, job_description, machine_name
+							FROM
+							job_register
+							WHERE
+							job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing'
+
+							ORDER BY jobregisterlastmodify_at
+							DESC LIMIT 50");
+
+							while($row = $results->fetch_assoc()) {
+              
+						?>
+						
+				            <div class="cards">
+								<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
+									<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
+										<ul class="b" id="draged">
+										<strong text-align="center"><?php echo $row['job_priority']?></strong>
+										<li><?php echo $row['job_order_number']?></li>
+										<li><?php echo $row['job_description']?></li>
+										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+										<li><?php echo $row['machine_name']?></li>
+										</ul>
+										<div class="status"  id="doingStatus">
+										<?php echo $row['job_status']?>
+										</div>
+								</div>
+							</div>
+					<?php } ?>				
+				</div>
+				
+<!--PENDING-->
+
+
+				<div class="column" >
+					<p class="column-title"id="pending" >Pending</p>
+					<?php             
+						include 'dbconnect.php';
+						$results = $conn->query("SELECT
+						jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+						customer_grade, job_status, job_description, machine_name
+						FROM
+						job_register
+						WHERE
+						job_assign ='{$_SESSION['username']}' AND  job_status = 'Pending'
+
+						ORDER BY jobregisterlastmodify_at
+						DESC LIMIT 50");
+
+						while($row = $results->fetch_assoc()) {
+              
+					?>
 			  
+						<div class="cards">
+							<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
+								<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
+									<ul class="b" id="draged">
+										<strong text-align="center"><?php echo $row['job_priority']?></strong>
+										<li><?php echo $row['job_order_number']?></li>
+										<li><?php echo $row['job_description']?></li>
+										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+										<li><?php echo $row['machine_name']?></li>
+									</ul>
+										<div class="status"  id="pendingStatus">
+										<?php echo $row['job_status']?>
+										</div>
+							</div>
+						</div>
+					<?php } ?>
+				</div>				
+				
+<!--COMPLETED-->				
 
+				<div class="column" >
+					<p class="column-title"id="done" >Completed</p>
+					<?php             
+						include 'dbconnect.php';
+						$results = $conn->query("SELECT
+						jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+						customer_grade, job_status, machine_name, job_description
+						FROM
+						job_register
+						WHERE
+						job_assign ='{$_SESSION['username']}' AND  job_status = 'Completed'
+
+						ORDER BY jobregisterlastmodify_at
+						DESC LIMIT 50");
+
+						while($row = $results->fetch_assoc()) {
+              
+					?>
 			  
-              <div class="cards">
-              <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-                  <ul class="b" id="draged">
-                    <strong text-align="center"><?php echo $row['job_priority']?></strong>
-                    <li><?php echo $row['job_order_number']?></li>
-                    <li><?php echo $row['job_name']?></li>
-                    <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-                  </ul>
-                    <div class="status"  id="toDoStatus">
-                    <?php echo $row['job_status']?>
-                    </div>
-                </div>
-              </div>
-
-              <?php } ?>
-            
-            </div>
-			
-			
-			<div class="column" >
-              <p class="column-title"id="doing" >Doing</p>
-
-  <?php
-              
-              include 'dbconnect.php';
-              $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-			  customer_grade, job_status
-              FROM
-              job_register
-              WHERE
-              job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing'
-
-              ORDER BY jobregisterlastmodify_at
-              DESC LIMIT 50");
-
-              while($row = $results->fetch_assoc()) {
-              
-              ?>
-			  
-              <div class="cards">
-              <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-                  <ul class="b" id="draged">
-                    <strong text-align="center"><?php echo $row['job_priority']?></strong>
-                    <li><?php echo $row['job_order_number']?></li>
-                    <li><?php echo $row['job_name']?></li>
-                    <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-                  </ul>
-                    <div class="status"  id="toDoStatus">
-                    <?php echo $row['job_status']?>
-                    </div>
-                </div>
-              </div>
-
-              <?php } ?>
-            </div>
-			
-			
-			<div class="column" >
-              <p class="column-title"id="pending" >Pending</p>
-
-  <?php
-              
-              include 'dbconnect.php';
-              $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-			  customer_grade, job_status
-              FROM
-              job_register
-              WHERE
-              job_assign ='{$_SESSION['username']}' AND  job_status = 'Pending'
-
-              ORDER BY jobregisterlastmodify_at
-              DESC LIMIT 50");
-
-              while($row = $results->fetch_assoc()) {
-              
-              ?>
-			  
-              <div class="cards">
-              <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-                  <ul class="b" id="draged">
-                    <strong text-align="center"><?php echo $row['job_priority']?></strong>
-                    <li><?php echo $row['job_order_number']?></li>
-                    <li><?php echo $row['job_name']?></li>
-                    <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-                  </ul>
-                    <div class="status"  id="toDoStatus">
-                    <?php echo $row['job_status']?>
-                    </div>
-                </div>
-              </div>
-
-              <?php } ?>
-            </div>
-			
-			<div class="column" >
-              <p class="column-title"id="done" >Completed</p>
-
-  <?php
-              
-              include 'dbconnect.php';
-              $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-			  customer_grade, job_status
-              FROM
-              job_register
-              WHERE
-              job_assign ='{$_SESSION['username']}' AND  job_status = 'Completed'
-
-              ORDER BY jobregisterlastmodify_at
-              DESC LIMIT 50");
-
-              while($row = $results->fetch_assoc()) {
-              
-              ?>
-			  
-              <div class="cards">
-              <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-			  	<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-                  <ul class="b" id="draged">
-                    <strong text-align="center"><?php echo $row['job_priority']?></strong>
-                    <li><?php echo $row['job_order_number']?></li>
-                    <li><?php echo $row['job_name']?></li>
-                    <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-                  </ul>
-                    <div class="status"  id="toDoStatus">
-                    <?php echo $row['job_status']?>
-                    </div>
-                </div>
-              </div>
-
-              <?php } ?>
-            </div>
-			
-			
- <!--VIEW BUTTON MODAL AJAX-->
-	
+						<div class="cards">
+							<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
+								<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
+									<ul class="b" id="draged">
+										<strong text-align="center"><?php echo $row['job_priority']?></strong>
+										<li><?php echo $row['job_order_number']?></li>
+										<li><?php echo $row['job_description']?></li>
+										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+										<li><?php echo $row['machine_name']?></li>
+									</ul>
+										<div class="status"  id="completedStatus">
+										<?php echo $row['job_status']?>
+										</div>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+		
+</div>
 
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
             <div role="document" class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">	
-					
+                    <div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">						
                         <div class="tabs active" id="tab01">
-                            <h6 class="font-weight-bold">Job Info</h6>
+                           <h6 class="font-weight-bold">Job Info</h6>
 						</div>
 						
                         <div class="tabs" id="tab02">
-                            <h6 class="text-muted">Update</h6>
-						</div>
+                           <h6 class="text-muted">Update</h6>
+					    </div>
 						
                         <div class="tabs" id="tab03">
-                            <h6 class="text-muted">Remarks</h6>
-						</div>	
+                           <h6 class="text-muted">Remarks</h6>
+					    </div>	
+								
+					    <div class="tabs" id="tab04">
+                           <h6 class="text-muted">Accessories</h6>
+					    </div>
 						
-                      
+					    <div class="tabs" id="tab05">
+                           <h6 class="text-muted">Media</h6>
+					    </div>
 						
-						<div class="tabs" id="tab04">
-                            <h6 class="text-muted">Accessories</h6>
-						</div>
-						
-						<div class="tabs" id="tab05">
-                            <h6 class="text-muted">Media</h6>
-						</div>
-						
-						<div class="tabs" id="tab06">
+					    <div class="tabs" id="tab06">
                             <h6 class="text-muted">Job Status</h6>
-						</div>
+					    </div>
 
-              <div class="tabs" id="tab07">
+                        <div class="tabs" id="tab07">
                             <h6 class="text-muted">Report</h6>
 						</div>
+          
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        <span aria-hidden="true">&times;</span>
+					    </button>
 
-           
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-              
 
-<!--JOB INFO-->
+<!--TOP BAR-->
 						
-                    <div class="line"></div>
-					<br>
-                    <div class="modal-body p-0">
+						<div class="line"></div>
+							<br>
+						<div class="modal-body p-0">
+					
+					
+<!--JOB INFO-->					
                         <fieldset class="show" id="tab011">
 
-
-							   <form action="" method="post">
-									<div class="tech-details">
-             
+								<form action="" method="post">
+									<div class="tech-details">           
 									</div>
 								</form>
 						<script type='text/javascript'>
@@ -324,16 +318,16 @@ if(!isset($_SESSION['username']))
 				});
 			});
     
-	</script>								
-					</fieldset>						
-		</div>
+						</script>								
+						</fieldset>						
+						
+
 
 
 <!--UPDATE-->
 
                         <fieldset id="tab021">
                           
-
 
 								<form action="ajaxtechupdate.php" method="post">
 									<div class="techupdate-details">
@@ -365,9 +359,7 @@ if(!isset($_SESSION['username']))
 						});
 					});
       
-				</script>
-
-                            
+							</script>                         
                         </fieldset>
 
 
@@ -408,7 +400,6 @@ if(!isset($_SESSION['username']))
                         </fieldset>
 
 
-
 <!--ACCESSORIES-->
 
                         <fieldset id="tab041">
@@ -441,13 +432,12 @@ if(!isset($_SESSION['username']))
 							});
 						});
 					});
-				</script>							
-							
-							
-							
+							</script>														
 						</fieldset>
-						
-<!--PHOTO-->						
+
+
+
+<!--MEDIA-->						
 						
                         <fieldset id="tab051">
                             
@@ -479,10 +469,7 @@ if(!isset($_SESSION['username']))
 							});
 						});
 					});
-				</script>							
-							
-							
-							
+							</script>												
 						</fieldset>
 
 
@@ -518,14 +505,10 @@ if(!isset($_SESSION['username']))
 							});
 						});
 					});
-				</script>							
-							
-							
-							
-						</fieldset>				
-            
-            
-            <!--REPORT-->
+							</script>													
+						</fieldset>		
+
+<!--REPORT-->
 
                         <fieldset id="tab071">
                             
@@ -558,20 +541,15 @@ if(!isset($_SESSION['username']))
 							});
 						});
 					});
-				</script>
-                            
+							</script>                          
                         </fieldset>
 
 
 
-		</div>			
-        </div>						
-		</div>
-		</div>			
-			
-			
-
 </div>
-			
-			
+</div>
+</div>
+</div>
+</div>
+
 </body>

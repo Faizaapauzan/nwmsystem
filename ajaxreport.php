@@ -25,9 +25,19 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/tab.css"/>
 	<link href="css/ajax.css"rel="stylesheet" />
-
+	<link href="css/technicianmain.css"rel="stylesheet" />
 
 </head>
+
+<style>
+  
+.status{
+  float:none;
+}
+
+
+
+</style>
 <body>
 
      <?php
@@ -51,8 +61,8 @@ $date = date('d-m-y');
 
 ?>
 
-<table id="date_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
-    <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
+  <div class="input-group-append">
+    <button class="buttonbiru" type="submit" value="Submit" name="submit-date">SUBMIT</button>
 
 <p class="controls"><b id="msgdate"></b></p>
    <tbody id="_editable_table">

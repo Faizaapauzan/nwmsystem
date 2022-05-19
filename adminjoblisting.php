@@ -28,6 +28,9 @@ $query = $conn->query("SELECT * FROM job_register");
  
 ?>
 
+
+
+
  <?php  
  //Database connectivity  
  $con=mysqli_connect('localhost','root','','nwmsystem');  
@@ -57,9 +60,20 @@ $query = $conn->query("SELECT * FROM job_register");
  ?> 
 
 
-<!DOCTYPE html>
-<html>
 
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
 <head>
     <meta name="keywords" content="" />
     <meta charset="utf-8" />
@@ -77,6 +91,20 @@ $query = $conn->query("SELECT * FROM job_register");
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <link href="css/adminjoblistinghomepage.css" rel="stylesheet" />
+    <link href="css/adminjoblisting1.css" rel="stylesheet" />
+
+
+   <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/> -->
+
+   <!-- Script -->
+   
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -90,124 +118,167 @@ $query = $conn->query("SELECT * FROM job_register");
 
 
 
-</head>
 
 <body>
 
-<div class="sidebar">
-            <div class="logo-details">
-                <i class='bx bx-window-alt'></i>
-            <span class="logo_name">NWM System</span>
-            </div>
-        </a>
-        
-        <ul class="nav-links">
-               <li>
-                <a href="jobregister.php">
-                    <i class='bx bx-registered'></i>
-                    <span class="link_name">Register Job</span>
-                </a>
-            </li>
-
-             <li>
-                <a href="accessoriesregister.php">
-                    <i class='bx bx-spreadsheet'></i>
-                    <span class="link_name">Job Accessories</span>
-                </a>
-            </li>
-           
-            <li>
-                <a href="staff.php">
-                    <i class="bx bxs-id-card"></i>
-                    <span class="link_name">Staff</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="technicianlist.php">
-                    <i class="fa fa-users"></i>
-                    <span class="link_name">Technician</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="customer.php">
-                    <i class='bx bxs-user'></i>
-                    <span class="link_name">Customers</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="machine.php">
-                    <i class="bx bxl-medium-square"></i>
-                    <span class="link_name">Machine</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="accessories.php">
-                    <i class="bx bx-wrench"></i>
-                    <span class="link_name">Accessories</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="jobtype.php">
-                    <i class="bx bx-briefcase"></i>
-                    <span class="link_name">Job Type</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="jobcompleted.php">
-                    <i class="fa fa-check-square-o"></i>
-                    <span class="link_name">Completed Job</span>
-                </a>
-            </li>
-
-
-            <li>
-                <a href="jobcanceled.php">
-                    <i class="fa fa-minus-square"></i>
-                    <span class="link_name">Canceled Job</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="report.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Report</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out'></i>
-                    <span class="link_name">Log Out</span>
-                </a>
-            </li>
-            
-        </ul>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus'></i>
+      <span class="logo_name">NWM SYSTEM</span>
     </div>
 
-    <!--Home navigation-->
-    <section class="home-section">
-        <nav>
-            <div class="sidebar-button">
-                <i class='bx bx-menu sidebarBtn'></i>
-                <a href="Adminhomepage.php">
-                    <span class="dashboard">Home</span>
-            </div>
-            <div class="notification-button">
-                <a href="#">
-                    <i class='bx bxs-bell-ring'></i>
-                </a>
-            </div>
-        </nav>
+    <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
 
-         <div class="jobListingList">
+    <ul class="nav-links">
+
+      <li>
+        <a href="jobregister.php">
+          <i class='bx bx-registered' ></i>
+          <span class="link_name">Register Job</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="jobregister.php">Register Job</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <div class="iocn-link">
+          <a href="accessoriesregister.php">
+            <i class='bx bx-spreadsheet' ></i>
+            <span class="link_name">Job Accessories</span>
+          </a>
+        </div>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="accessoriesregister.php">Job Accessories</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <div class="iocn-link">
+          <a href="staff.php">
+            <i class='bx bx-id-card' ></i>
+            <span class="link_name">Staff</span>
+          </a>
+        </div>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="staff.php">Staff</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="technicianlist.php">
+          <i class='fa fa-users' ></i>
+          <span class="link_name">Technician</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="technicianlist.php">Technician</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="customer.php">
+          <i class='bx bx-user' ></i>
+          <span class="link_name">Customers</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="customer.php">Customers</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <div class="iocn-link">
+          <a href="machine.php">
+            <i class='fa fa-medium' ></i>
+            <span class="link_name">Machine</span>
+          </a>
+        </div>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="machine.php">Machine</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="accessories.php">
+          <i class='bx bx-wrench' ></i>
+          <span class="link_name">Accessories</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="accessories.php">Accessories</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="jobtype.php">
+          <i class='bx bx-briefcase'></i>
+          <span class="link_name">Job Type</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="jobtype.php">Job Type</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="jobcompleted.php">
+          <i class='fa fa-check-square-o' ></i>
+          <span class="link_name">Completed Job</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="jobcanceled.php">
+          <i class='fa fa-minus-square' ></i>
+          <span class="link_name">Canceled Job</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
+        </ul>
+      </li>
+      
+      <li>
+        <a href="report.php">
+          <i class='bx bxs-report' ></i>
+          <span class="link_name">Report</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="report.php">Report</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="logout.php">
+          <i class='bx bx-log-out' ></i>
+          <span class="link_name">Logout</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="logout.php">Logout</a></li>
+        </ul>
+      </li>
+
+
+  </div>
+
+
+
+    <!--Home navigation-->
+<section class="home-section">
+    <nav>
+                <div class="home-content">
+                      <i class='bx bx-menu' ></i>
+                          <a>
+						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
+                          </a>
+
+                 </div>
+
+    </nav>
+
+
+        <div class="machineList">
             <h1>Job Listing</h1>
-  <div class="addAccessoriesBtn">
+			<div class="addAccessoriesBtn">
                 <button style="color:#ccc;" class="btn-reset" onclick="document.location='adminjoblisting.php'">Refresh</button>
             </div>
 
@@ -288,13 +359,6 @@ $query = $conn->query("SELECT * FROM job_register");
       }  
  </script>  
 
-         <script type="text/javascript">  
-      function assistant_update(value,jobregister_id){  
-           //alert(id);  
-           let url = "adminjoblisting.php";  
-           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant="+value;  
-      }  
- </script>  
 
 
 <script type="text/javascript">
@@ -515,3 +579,32 @@ sidebarBtn.onclick = function(){
 
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+</section>
+
+  <script>
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e)=>{
+   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+   arrowParent.classList.toggle("showMenu");
+    });
+  }
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("close");
+  });
+  </script>
+
+</body>

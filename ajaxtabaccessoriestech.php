@@ -36,8 +36,17 @@ session_start();
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/tab.css"/>
 	<link href="css/ajaxtabtech.css"rel="stylesheet" />
+    <link href="css/technicianmain.css"rel="stylesheet" />
 </head>
 
+<style>
+  
+.status{
+  float:none;
+}
+
+
+</style>
 <body>
 
 
@@ -128,7 +137,7 @@ include_once("dbconnect.php");
 </div>  
 <p class="control"><b id="mesej"></b></p>
 <div class="updateBtn">
-<button type="button" id="update_acc" name="update_acc" value="Update" class="btn btn-primary">Update</button>
+<button type="button" id="update_techacc" name="update_techacc" value="Update" class="buttonbiru">Update</button>
 </div>
 </form> 
 

@@ -30,11 +30,44 @@ td {
   padding-bottom: 10px;
 }
 
-.staffPopup .title {
-  font-size: 25px;
-  font-weight: 500;
-  position: relative;
-}
+        .staffPopup .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+
+        }
+
+        .staffPopup .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71b7e6, #081D45);
+        }
+
+        .contentStaffPopup form .staff-details {
+
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 25px 20px 2px 20px;
+
+        }
+
+        .modal .contentStaffPopup {
+           position: absolute;
+            top: 420px;
+            left: 672px;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            width: 700px;
+            z-index: 2;
+            padding: 20px;
+            box-sizing: boder-box;
+            margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
 
 .staffPopup .title::before {
   content: "";
@@ -237,13 +270,29 @@ form .button #cancelbtn {
 }
 
 fieldset {
-  overflow: hidden;
-  width: 100%;
-  border-radius: 5px;
-  border-color: #081d45;
-  padding: 20px;
-  margin: 20px 0 0 0;
-}
+      overflow: hidden;
+      width: 100%;
+      border-radius: 5px;
+      border-color: #081d45;
+      padding: 20px;
+       margin: 20px 0 0 0;
+    }
+
+     .search-panel {
+
+            height: 30px;
+            width: 50%;
+            border-radius: 5px;
+            border: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-left: 10px;
+            margin-bottom: 7px;
+            margin-top: 51px;
+            position: static;
+            
+        }
 
 .search-panel {
   height: 30px;
@@ -259,8 +308,5 @@ fieldset {
   position: static;
 }
 
-.loading-overlay {
-  margin-bottom: 10px;
-  margin-left: 10px;
-  position: static;
-}
+
+        

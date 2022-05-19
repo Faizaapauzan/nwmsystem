@@ -449,7 +449,7 @@ tr td:first-child:before {
     overflow-wrap: break-word;
     column-count: initial !important;
     width: 621px;
-    height: 300px;
+    height: 200px;
     margin: 19px;
     padding: 1px 2px;
     border-width: 0px;
@@ -480,7 +480,7 @@ tr td:first-child:before {
          <th colspan="4" style="text-align:left; padding-left:5px;">Accessories/ Sparts Part Used:</th>
          <?php foreach ($queryRecords as $res) :?>
         
-            <tr data-row-id="<?php echo $res['id']; ?>">
+            <tr style="font-size: 15px;" data-row-id="<?php echo $res['id']; ?>">
              <td></td></div>
       
            <td><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" contenteditable><?php echo $row['accessories_name'] ?></span></td>

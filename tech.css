@@ -1,0 +1,243 @@
+@charset "utf-8";
+
+
+
+
+
+*{
+    box-sizing: border-box
+
+}
+ 
+body{
+    background:#fff;
+    color:  #333;
+}
+  
+  
+.container{
+    padding: 1%;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0 30px;
+    margin-bottom: 20px;
+}
+
+
+
+  
+.column{
+    background: #f5f5f5;
+    margin-right: 2%;
+    padding: 1%;
+    border-radius: 3px;
+    width: 32%;
+    float: left;
+    height: auto;
+}
+  
+  
+column:last-of-type{
+    margin-right: 0;
+}
+  
+.column-title{
+    font-weight: bold;
+    margin: 5px 0 20px;
+  }
+    
+
+.card{
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 250ms;
+}
+    
+
+.card .selected{
+    transform: scale(1.15);
+    z-index: 1;
+}
+      
+  
+textarea{
+    border: none;
+    resize: vertical;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+    
+    
+textarea:focus{
+    outline: none;
+}
+
+
+
+
+
+/*Job Info*/
+.TechJobInfo{
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    margin: 30px 300px 30px 300px;
+    
+  }
+  .TechJobInfo .title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+    
+  }
+  .TechJobInfo .title::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 90px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #FFB300, #ff4da6, #924adb);
+  }
+  .contentTechJobInfo form .tech-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 30px 20px 2px 20px;
+  
+  }
+  form .tech-details .input-box{
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
+    padding: 0 15px 0 15px;
+  }
+  form .input-box label.details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  .tech-details .input-box input,.tech-details .input-box select{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+  .tech-details .input-box input:focus,
+  .tech-details .input-box input:valid,
+  .tech-details .input-box select:focus,
+  .tech-details .input-box select:valid{
+    border-color: #081D45;
+  }
+   
+   form .category{
+     display: flex;
+     width: 80%;
+     margin: 14px 0 ;
+     justify-content: space-between;
+   }
+   form .category label{
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+   }
+  
+   form .button{
+     height: 45px;
+     margin: 35px 0;
+     margin-bottom: 50px;
+   }
+   form .button input{
+     height: 100%;
+     width: 100%;
+     border-radius: 5px;
+     border: none;
+     color: #fff;
+     font-size: 18px;
+     font-weight: 500;
+     letter-spacing: 1px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     background-color: #081D45;
+     margin-bottom: 10px;
+   }
+   form .button input:hover{
+    /* transform: scale(0.99); */
+    opacity: 0.8;
+    }
+    form .button #cancelbtn{
+        background-color: #f44336;
+    }
+   @media(max-width: 584px){
+   .container{
+    max-width: 100%;
+  }
+  form .tech-details .input-box{
+      margin-bottom: 15px;
+      
+      width: 100%;
+    }
+    form .category{
+      width: 100%;
+    }
+    .content form .tech-details{
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+    .tech-details::-webkit-scrollbar{
+      width: 5px;
+    }
+    }
+    @media(max-width: 459px){
+    .container .content .category{
+      flex-direction: column;
+    }
+  }
+
+
+  input[type=text],input[type=date],input[type=datetime-local] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .techClose {
+    position: absolute;
+    right: 166px;
+    margin-top: 145px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  .techClose:hover,
+  .techClose:focus {
+    color: red;
+    cursor: pointer;
+  }
+
+  .modal .techClose{
+    right: 380px;
+    top: -30px;
+    width: 30px;
+    height: 30px;
+    
+}

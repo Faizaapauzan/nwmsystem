@@ -22,8 +22,14 @@
 
 <body>
 
+    <?php
+    if(isset($_GET['error'])==true){
+        echo'<font color="#FF0000"><p align="center">Wrong Username or Password</p></font>';
+    }
+    
+    ?>
+        
     <div class="container" id="container">
-
         <div class="form-container sign-in-container">
             <form action="dblogin.php" method="post">
                 <img src="image/login.png" alt="user icon" width="100" height="100">

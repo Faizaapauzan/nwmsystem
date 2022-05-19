@@ -24,6 +24,7 @@ session_start();
         <label for="Accessories" class="details">Job Status Update</label>
         <select type="text" id="job_status" name="job_status">
             <option value='' <?php if($row['job_status'] == '') { echo "SELECTED"; } ?>></option>
+            <option value="Doing" <?php if($row['job_status'] == "Doing") { echo "SELECTED"; } ?>>Doing</option>            
             <option value="Pending" <?php if($row['job_status'] == "Pending") { echo "SELECTED"; } ?>>Pending</option>
             <option value="Ready" <?php if($row['job_status'] == "Ready") { echo "SELECTED"; } ?>>Ready</option>
             <option value="Not Ready" <?php if($row['job_status'] == "Not Ready") { echo "SELECTED"; } ?>>Not ready</option>
