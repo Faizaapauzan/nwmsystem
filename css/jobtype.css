@@ -51,7 +51,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
-  width: 450px;
+  width: auto;
   z-index: 2;
   padding: 20px;
   box-sizing: boder-box;

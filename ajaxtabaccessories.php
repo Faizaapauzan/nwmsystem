@@ -17,7 +17,7 @@ session_start();
 <head>
 <meta charset="UTF-8">
 
-
+<link rel="stylesheet" type="text/css" href="css/tab.css"/>
 <link href="css/ajaxtab.css"rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css">
 <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
