@@ -120,7 +120,7 @@ session_start();
             
             <p class="control"><b id="message"></b></p>
             <div class="updateBtn">
-              <button type="button" id="update_tech" name="update_tech" value="Update" class="btn btn-primary" onclick="submitForm();">Update</button>
+              <button type="button" id="update_tech" name="update_tech" value="Update" class="buttonbiru" onclick="submitForm();">Update</button>
       
               <!-- <button type="submit" id="submit" name="update" class="btn btn-primary"> Update  </button> -->
             </div>           
