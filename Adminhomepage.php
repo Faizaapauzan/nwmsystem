@@ -1080,7 +1080,8 @@
 
 <!-- HAMIR -->
 
-            <div class="overview-boxes" >
+            <div class="" >
+			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
             <div class="box_topic">Hamir</div>
@@ -2127,7 +2128,8 @@
 
                 <!-- JUN JIE -->
 
-            <div class="overview-boxes" >
+            <div class="" >
+			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
             <div class="box_topic">Jun Jie</div>
@@ -3162,7 +3164,8 @@
 
                 <!-- FAIZAN -->
 
-            <div class="overview-boxes" >
+            <div class="" >
+			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
             <div class="box_topic">Faizan</div>
@@ -4199,7 +4202,8 @@
 
             <!-- TECK -->
 
-            <div class="overview-boxes" >
+            <div class="" >
+			<div class="row">
                 <div class="box" id="myModal">
             <div class="left-side">
             <div class="box_topic">Teck</div>
