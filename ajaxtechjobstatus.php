@@ -64,6 +64,28 @@
         </select>
   </div>
 
+
+<!--PENDING & INCOMPLETE-->
+
+
+
+
+
+  <!--  <div class="form-group row">
+    <label for="reason" class="col-sm-2 col-form-label">Reason</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Type Here">
+    </div>
+  </div> -->
+  
+
+
+
+
+<!--PENDING & INCOMPLETE END-->
+
+
+
     <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
     <!-- <button type="submit" id="button" name="update" class="button">Update Job Status</button> -->

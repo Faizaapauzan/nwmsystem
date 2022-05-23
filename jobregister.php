@@ -49,7 +49,7 @@ include 'dbconnect.php';
 
   <div class="sidebar close">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
+	    <img src="neo.png" height="65" width="75"></img>
       <span class="logo_name">NWM SYSTEM</span>
     </div>
 
@@ -1068,6 +1068,7 @@ $("#machineModel").on("change",function(){
 	</script>
 
     <script>
+	
         var jobInfo1 = document.getElementById("jobInfo1");
         var jobInfo2 = document.getElementById("jobInfo2");
         var jobInfo3 = document.getElementById("jobInfo3");
@@ -1081,36 +1082,42 @@ $("#machineModel").on("change",function(){
         var progress = document.getElementById("progress");
 
         btnNext1.onclick = function() {
+			window.scrollTo(0,0)
             jobInfo1.style.left = "-1300px";
             jobInfo2.style.left = "40px";
             progress.style.width = "50%";
         }
 
         btnBack2.onclick = function() {
+			window.scrollTo(0,0)
             jobInfo1.style.left = "40px";
             jobInfo2.style.left = "1300px";
             progress.style.width = "25%";
         }
 
         btnNext2.onclick = function() {
+			window.scrollTo(0,0)
             jobInfo2.style.left = "-1300px";
             jobInfo3.style.left = "40px";
             progress.style.width = "75%";
         }
 
         btnBack3.onclick = function() {
+			window.scrollTo(0,0)
             jobInfo2.style.left = "40px";
             jobInfo3.style.left = "1300px";
             progress.style.width = "50%";
         }
 
         btnNext3.onclick = function() {
+			window.scrollTo(0,0)
             jobInfo3.style.left = "-1300px";
             jobInfo4.style.left = "40px";
             progress.style.width = "100%";
         }
 
         btnBack4.onclick = function() {
+			window.scrollTo(0,0)
             jobInfo3.style.left = "40px";
             jobInfo4.style.left = "1300px";
             progress.style.width = "75%";

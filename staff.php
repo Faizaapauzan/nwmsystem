@@ -66,7 +66,7 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
 
   <div class="sidebar close">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
+	    <img src="neo.png" height="65" width="75"></img>
       <span class="logo_name">NWM SYSTEM</span>
     </div>
 
