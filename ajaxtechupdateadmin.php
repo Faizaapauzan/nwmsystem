@@ -97,7 +97,7 @@ session_start();
               
 
             <div class="updateBtn">
-            <p class="control"><b id="techupdateadminmsg"></b></p>
+            <p class="control"><b id="adminmessage"></b></p>
             <input type="button" id="update_tech" name="update_tech" value="Update" />
               <!-- <button type="submit" id="submit" name="update" class="btn btn-primary"> Update  </button> -->
             </div>           
@@ -131,16 +131,15 @@ session_start();
                 url: 'techupdateindex.php',
                 type: 'post',
                 data: data,
-                success: function (response) {
-                    $('#techupdateadminmsg').text(response);
-                    $('#technician_departure').text('');
-                    $('#technician_arrival').text('');
-                    $('#technician_leaving').text('');
-                    $('#latitude').text('');
-                    $('#longitude').text('');
-                    $('#jobregisterlastmodify_by').text('');
-                   
-                }
+                success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#adminmessage').html('<span style="color: green">Update Saved!</span>');
+                        else
+                          $('#adminmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+                      }
             });
         });
     });

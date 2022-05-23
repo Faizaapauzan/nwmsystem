@@ -120,7 +120,7 @@ include_once("dbconnect.php");
 
 </div>  
 <div class="btn-box">
-<p class="control"><b id="adminmsg"></b></p>
+<p class="control"><b id="accessoriesmessage"></b></p>
 <input type="button" id="update_acc" name="update_acc" value="Update" />
 <!-- <button type="submit" name="save" value="update">Update</button> -->
 </form></div>   
@@ -133,15 +133,15 @@ include_once("dbconnect.php");
                 url: 'addaccessoriesindex.php',
                 type: 'post',
                 data: data,
-                success: function (response) {
-                    $('#adminmsg').text(response);
-                    $('#s_accessories_id').text('');
-                    $('#s_accessories_code').text('');
-                    $('#s_accessories_name').text('');
-                    $('#s_accessories_uom').text('');
-                    $('#s_accessories_quantity').text('');
-                   
-                }
+                success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#accessoriesmessage').html('<span style="color: green">Update Saved!</span>');
+                        else
+                          $('#accessoriesmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+                      }
             });
         });
     });

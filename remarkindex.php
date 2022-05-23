@@ -2,6 +2,8 @@
 session_start();
 $con = mysqli_connect("localhost","root","","nwmsystem");
 
+$response = array('success' => false);
+
 if(isset($_POST['update_remark']))
 {
     $jobregister_id = $_POST['jobregister_id'];
@@ -21,10 +23,11 @@ if(isset($_POST['update_remark']))
 
     if($query)
 {
-	echo "Data Saved Successfully";
+	 $response['success'] = true;
 	
-} else {
-	echo "Failed to save data";
-}
+} 
+
+echo json_encode($response);
+
 }
 ?>

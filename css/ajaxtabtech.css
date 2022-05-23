@@ -1,9 +1,9 @@
 body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-color: #ffffff;
-    background-repeat: no-repeat
+  color: #000;
+  overflow-x: hidden;
+  height: 100%;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
 }
 
 .container {
@@ -16,165 +16,167 @@ body {
   flex-direction: column;
 }
 
-
-
-
-
-  /*Accessories*/
-  .input-boxAccessories i{
-    position: absolute;
-    margin-top: 20px;
-    margin-left: 590px;
-    font-size: 20px;
-    cursor: pointer;
-
-  }
-
-  .input-boxAccessories input, .input-boxAccessories select{
-    margin-bottom: 15px;
-    width: calc(100% / 4 - 20px);
-    padding: 0 15px 0 15px;
-    height: 45px;
-    outline: none;
-    font-size: 13px;
-    border-radius: 5px;
-    padding-left: 25px;
-    border: 1px solid #ccc;
-    border-bottom-width: 2px;
-    transition: all 0.3s ease;
-    border-color: #081D45;
-    margin-right: 10px; 
-  }
-
-  form .input-boxAccessories {
-    width: 100%;
-    margin-left: 12px;
-  }
-
-  form .tech-details .input-boxAccessories{
-      margin-bottom: 15px;
-  }
-
-  .input-boxAccessories i:hover,
-  .input-boxAccessories i:focus {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-
-  .dropDown i{
-    left: 10px;
-  }
-
-.content{
-    border: 1px solid black;
-    padding: 5px;
-    margin-bottom: 5px;
-}
-.content span{
-    width: 250px;
-
+/*Accessories*/
+.input-boxAccessories i {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 590px;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.content span:hover{
-    cursor: pointer;
+.input-boxAccessories input,
+.input-boxAccessories select {
+  margin-bottom: 15px;
+  width: calc(100% / 4 - 12px);
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 13px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  margin-right: 10px;
 }
 
-.tooltip{
-  position:absolute;
-  z-index:1070;
-  display:block;
-  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size:12px;
-  font-style:normal;
-  font-weight:400;
-  line-height:1.42857143;
-  text-align:left;
-  text-align:start;
-  text-decoration:none;
-  text-shadow:none;
-  text-transform:none;
-  letter-spacing:normal;
-  word-break:normal;
-  word-spacing:normal;
-  word-wrap:normal;
-  white-space:normal;
-  filter:alpha(opacity=0);
-  opacity:0;
-  line-break:auto
-}
-.tooltip.in{
-  filter:alpha(opacity=90);
-  opacity:.9
-}.tooltip.right{
-  padding:0 5px;
-  margin-left:3px
+form .input-boxAccessories {
+  width: 70%;
+  margin-left: -17px;
+  overflow-x: auto;
 }
 
-.tooltip-inner{
-  max-width:200px;
-  padding:3px 8px;
-  color:#fff;
-  background-color:#000;
-  border-radius:4px
-}
-.tooltip-arrow{
-  position:absolute;
-  width:0;
-  height:0;
-  border-color:transparent;
-  border-style:solid
-}
-.tooltip.top .tooltip-arrow{
-  bottom:0;
-  left:50%;
-  margin-left:-5px;
-  border-width:5px 5px 0;
-  border-top-color:#000
-}
-.tooltip.top-left .tooltip-arrow{
-  right:5px;
-  bottom:0;
-  margin-bottom:-5px;
-  border-width:5px 5px 0;
-  border-top-color:#000
-}
-.tooltip.top-right .tooltip-arrow{
-  bottom:0;
-  left:5px;
-  margin-bottom:-5px;
-  border-width:5px 5px 0;
-  border-top-color:#000
-}
-.tooltip.right .tooltip-arrow{
-  top:50%;
-  left:0;
-  margin-top:-5px;
-  border-width:5px 5px 5px 0;
-  border-right-color:#000
-}
-.tooltip.left .tooltip-arrow{
-  top:50%;right:0;
-  margin-top:-5px;
-  border-width:5px 0 5px 5px;
-  border-left-color:#000
-}
-.tooltip.bottom .tooltip-arrow{
-  top:0;left:50%;
-  margin-left:-5px;
-  border-width:0 5px 5px;
-  border-bottom-color:#000
-}
-.tooltip.bottom-left .tooltip-arrow{
-  top:0;right:5px;
-  margin-top:-5px;
-  border-width:0 5px 5px;
-  border-bottom-color:#000
-}
-.tooltip.bottom-right .tooltip-arrow{
-  top:0;left:5px;margin-top:-5px;
-  border-width:0 5px 5px;border-bottom-color:#000
+form .tech-details .input-boxAccessories {
+  margin-bottom: 15px;
 }
 
+.input-boxAccessories i:hover,
+.input-boxAccessories i:focus {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.dropDown i {
+  left: 10px;
+}
+
+.content {
+  border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.content span {
+  width: 250px;
+}
+
+.content span:hover {
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: left;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  white-space: normal;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  line-break: auto;
+}
+.tooltip.in {
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+}
+.tooltip.right {
+  padding: 0 5px;
+  margin-left: 3px;
+}
+
+.tooltip-inner {
+  max-width: 200px;
+  padding: 3px 8px;
+  color: #fff;
+  background-color: #000;
+  border-radius: 4px;
+}
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+.tooltip.top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+.tooltip.top-left .tooltip-arrow {
+  right: 5px;
+  bottom: 0;
+  margin-bottom: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+.tooltip.top-right .tooltip-arrow {
+  bottom: 0;
+  left: 5px;
+  margin-bottom: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+.tooltip.right .tooltip-arrow {
+  top: 50%;
+  left: 0;
+  margin-top: -5px;
+  border-width: 5px 5px 5px 0;
+  border-right-color: #000;
+}
+.tooltip.left .tooltip-arrow {
+  top: 50%;
+  right: 0;
+  margin-top: -5px;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #000;
+}
+.tooltip.bottom .tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
+.tooltip.bottom-left .tooltip-arrow {
+  top: 0;
+  right: 5px;
+  margin-top: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
+.tooltip.bottom-right .tooltip-arrow {
+  top: 0;
+  left: 5px;
+  margin-top: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
 
 .alerts {
   padding: 15px;
@@ -252,9 +254,9 @@ body {
   color: #843534;
 }
 
-  .btn-box input {
+.btn-box input {
   height: 30px;
-  width:100px;
+  width: 100px;
   border-radius: 5px;
   border: none;
   color: #fff;
@@ -266,4 +268,3 @@ body {
   background-color: #081d45;
   margin-bottom: 10px;
 }
-

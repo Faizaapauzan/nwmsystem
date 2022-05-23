@@ -129,7 +129,7 @@ include_once("dbconnect.php");
 
 </div>  
 
-<p class="control"><b id="msgremark"></b></p>
+<p class="control"><b id="remarkmessage"></b></p>
 <div class="updateBtn">
 <button type="button" id="update_remark" name="update_remark" value="Update" class="buttonbiru" style="width: auto;">Update</button>
 
@@ -144,11 +144,15 @@ include_once("dbconnect.php");
                 url: 'remarkindex.php',
                 type: 'post',
                 data: data,
-                success: function (response) {
-                    $('#msgremark').text(response);
-                    $('#s_remark_desc').text('');
-                    $('#s_remark_solution').text('');
-                }
+                success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#remarkmessage').html('<span style="color: green">Update Saved!</span>');
+                        else
+                          $('#remarkmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+                      }
             });
         });
     });

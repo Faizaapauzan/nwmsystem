@@ -7,6 +7,7 @@ table {
   width: 100%;
   display: fixed;
   justify-content: center;
+  overflow-x: auto;
 }
 
 /* thead {
@@ -227,23 +228,6 @@ form .input-box label.details {
 .staff-details .input-box select:focus,
 .staff-details .input-box select:valid {
   border-color: #081d45;
-}
-
-table {
-  border-collapse: collapse;
-  box-shadow: 0 5px 10px rgb(37, 19, 19);
-  background-color: #fff;
-  text-align: left;
-  overflow: hidden;
-  width: 100%;
-  display: fixed;
-  justify-content: center;
-}
-
-thead {
-  box-shadow: 0 5px 10px rgb(186, 189, 183);
-
-  /* padding: 1rem 5.1rem; */
 }
 
 th {

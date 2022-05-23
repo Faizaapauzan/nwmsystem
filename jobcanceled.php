@@ -357,24 +357,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
         </script>
 
 
-         
-<script>
-let btn = document.querySelector("#btn");
-let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".sidebarBtn");
-sidebarBtn.onclick = function(){
-    sidebar.classList.toggle("active");
-    if(sidebar.classList.contains("active")){
-        sidebar.classList.replace("bx-menu","bx-menu-alt-right")
-    }else
-    sidebarBtn.classList.replace("bx-menu-alt-right","bx-menu");
-}
-</script>
 
-</div>
-</div>
-
-    </section>
 
 
     </section>

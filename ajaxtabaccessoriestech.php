@@ -94,7 +94,9 @@ include_once("dbconnect.php");
 
 
                         <!-- Responsive table -->
-                        <div class="table-responsive">
+                        <div class="table-responsive" style=" width: 70%;
+  margin-left: 3px;
+  overflow-x: auto;">
                             <table class="table m-0">
                                 <thead>
                                     <tr>
@@ -126,9 +128,9 @@ include_once("dbconnect.php");
 </form>
 
 </div>  
-<p class="control"><b id="mesej"></b></p>
+<p class="control"><b id="acctechmessage"></b></p>
 <div class="updateBtn">
-<button type="button" id="update_acc" name="update_acc" value="Update" class="btn btn-primary">Update</button>
+<button type="button" id="update_acc" name="update_acc" value="Update" class="btn btn-primary" style="margin-left: -143px;">Update</button>
 </div>
 </form> 
 
@@ -140,15 +142,15 @@ include_once("dbconnect.php");
                 url: 'addaccessoriesindex.php',
                 type: 'post',
                 data: data,
-                success: function (response) {
-                    $('#mesej').text(response);
-                    $('#s_accessories_id').text('');
-                    $('#s_accessories_code').text('');
-                    $('#s_accessories_name').text('');
-                    $('#s_accessories_uom').text('');
-                    $('#s_accessories_quantity').text('');
-                   
-                }
+                 success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#acctechmessage').html('<span style="color: green">Update Saved!</span>');
+                        else
+                          $('#acctechmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+                      }
             });
         });
     });

@@ -2,6 +2,7 @@
 session_start();
 $con = mysqli_connect("localhost","root","","nwmsystem");
 
+$response = array('success' => false);
 
   if (isset($_POST['jobregister_id'])) {
       $jobregister_id =$_POST['jobregister_id'];
@@ -40,11 +41,12 @@ if(isset($_POST['update_acc']))
 
       if($query)
 {
-	echo "Data Saved Successfully";
+    $response['success'] = true;
 	
-} else {
-	echo "Failed to save data";
-}
+} 
+
+echo json_encode($response);
+
 }
   
 ?>
