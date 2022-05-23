@@ -106,13 +106,15 @@ session_start();
                 </script>
 </div>
 
-                <div class="input-boxLocation" id="inputLocationBox">
+  <div class="input-boxLocation" id="inputLocationBox">
                 <label for="Location" class="details">Location</label>
                 <div class="add_field_button1"></div>
                 <textarea style="width: 290px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
                 <textarea style="width: 290px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
-							  <button type="button" onclick="getLocation()" class="buttonbiru" style="width: min-content; position: absolute; top:292px; left:306px;">Get Location</button>
+				
               </div>
+
+			  <button type="button" onclick="getLocation()" class="buttonbiru">Click to Get Location</button>
 
 
         <?php if (isset($_SESSION["username"])) ?>
@@ -202,7 +204,5 @@ session_start();
             } ?>
 
      
-     
-
 
 </body>

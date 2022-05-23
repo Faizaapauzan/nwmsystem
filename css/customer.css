@@ -75,6 +75,7 @@ a {
   transform: translate(-50%, -50%);
   background: #fff;
   width: 550px;
+  height: auto;
   z-index: 2;
   padding: 20px;
   box-sizing: boder-box;
@@ -261,7 +262,6 @@ form .listAddFormbutton #cancelbtn {
 }
 
 .search-panel {
-
   height: 30px;
   width: 50%;
   border-radius: 5px;
@@ -273,15 +273,13 @@ form .listAddFormbutton #cancelbtn {
   margin-bottom: 18px;
   margin-top: 11px;
   position: static;
-  
 }
 
-.loading-overlay{
+.loading-overlay {
   margin-bottom: 10px;
   margin-left: 10px;
   position: static;
-
-} 
+}
 
 .modal .contentCustomerPopup {
   position: absolute;
