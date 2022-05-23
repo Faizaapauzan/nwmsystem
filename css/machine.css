@@ -7,7 +7,6 @@ table {
   width: 100%;
   display: fixed;
   justify-content: center;
-  overflow-x: auto;
 }
 
 /* thead {
