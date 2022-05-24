@@ -4785,7 +4785,7 @@
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxhome.php',
+                                        url: 'ajaxhomepending.php',
                                         type: 'post',
                                         data: { jobregister_id: jobregister_id },
                                         success: function (response) {

@@ -28,6 +28,7 @@ $db = mysqli_select_db($connection, 'nwmsystem');
         $job_assign = $_POST['job_assign'];
         $Job_assistant = $_POST['Job_assistant'];
         $job_cancel = $_POST['job_cancel'];
+        $job_status = $_POST['job_status'];
         $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
 
         $query = "UPDATE job_register SET
@@ -55,6 +56,7 @@ accessories_required='$accessories_required',
 job_assign ='$job_assign',
 Job_assistant ='$Job_assistant',
 job_cancel ='$job_cancel',
+job_status ='$job_status',
 jobregisterlastmodify_by ='$jobregisterlastmodify_by'
 
 WHERE jobregister_id='$jobregister_id'";
