@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -68,7 +68,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -113,7 +113,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -158,7 +158,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -203,7 +203,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -248,7 +248,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -293,7 +293,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -338,7 +338,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -383,7 +383,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -428,7 +428,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -473,7 +473,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -518,7 +518,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -563,7 +563,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -608,7 +608,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -653,7 +653,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -698,7 +698,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -743,7 +743,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -788,7 +788,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -807,7 +807,6 @@
   background: #fff;
   padding: 20px;
 }
-
 
 #myBtn {
   display: none;
@@ -1021,7 +1020,6 @@ input[type="datetime-local"] {
 
 /*STORE*/
 
-
 .StoreJobInfoTab {
   max-width: 700px;
   width: 100%;
@@ -1160,8 +1158,7 @@ input[type="datetime-local"] {
 .tabStore {
   display: flex;
   flex-wrap: wrap;
-  max-width: 700px;
-  width: 100%;
+  max-width: 1000px;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
@@ -1181,7 +1178,7 @@ input[type="datetime-local"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
@@ -1558,7 +1555,7 @@ input[type="datetime-local"] {
 .tabAizat {
   display: flex;
   flex-wrap: wrap;
-  max-width: 700px;
+  max-width: 800px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -1579,11 +1576,12 @@ input[type="datetime-local"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.4rem;
   margin-right: 0.2rem;
   cursor: pointer;
   background-color: #fff;
   font-weight: bold;
+  font-size: 15px;
   transition: background ease 0.3s;
 }
 
@@ -4102,7 +4100,6 @@ input[type="datetime-local"] {
 
 /*PENDING*/
 
-
 .PendingJobInfoTab {
   max-width: 700px;
   width: 100%;
@@ -4262,7 +4259,6 @@ input[type="datetime-local"] {
 }
 
 /*INCOMPLETE*/
-
 
 .IncompleteJobInfoTab {
   max-width: 700px;
