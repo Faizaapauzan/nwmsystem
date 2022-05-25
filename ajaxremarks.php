@@ -97,7 +97,7 @@ include_once("dbconnect.php");
 ?>
  
 
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+<table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -10px;" id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
       <tr>
@@ -219,11 +219,11 @@ $(document).ready(function(){
 					{   
 						//$("#loading").hide();
 						if(!response.error) {
-							$("#msgremark").removeClass('alert-danger');
-							$("#msgremark").addClass('alert-success').html(response.msgremark);
+							$("#remarkmessage").removeClass('alert-danger');
+							$("#remarkmessage").addClass('alert-success').html(response.remarkmessage);
 						} else {
-							$("#msgremark").removeClass('alert-success');
-							$("#msgremark").addClass('alert-danger').html(response.msgremark);
+							$("#remarkmessage").removeClass('alert-success');
+							$("#remarkmessage").addClass('alert-danger').html(response.remarkmessage);
 						}
 					}   
 				});

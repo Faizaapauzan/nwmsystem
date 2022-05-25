@@ -14,7 +14,7 @@
 	$colVal = '';
 	$colIndex = $rowId = 0;
 	
-	$msg = array('status' => !$error, 'msg' => 'Failed! updation in mysql');
+	$accessoriesmessage = array('status' => !$error, 'accessoriesmessage' => 'Failed! updation in mysql');
 
 	if(isset($_POST)){
     if(isset($_POST['val']) && !empty($_POST['val']) && !$error) {
@@ -40,13 +40,13 @@
 	if(!$error) {
 			$sql = "UPDATE job_accessories SET ".$columns[$colIndex]." = '".$colVal."' WHERE id='".$rowId."'";
 			$status = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-			$msg = array('error' => $error, 'msg' => 'Update Succeed !');
+			$accessoriesmessage = array('error' => $error, 'accessoriesmessage' => 'Update Succeed !');
 	} else {
-		$msg = array('error' => $error, 'msg' => 'Update Failed !');
+		$accessoriesmessage = array('error' => $error, 'accessoriesmessage' => 'Update Failed !');
 	}
 	}
 	// send data as json format
-	echo json_encode($msg);
+	echo json_encode($accessoriesmessage);
 	
 ?>
 	

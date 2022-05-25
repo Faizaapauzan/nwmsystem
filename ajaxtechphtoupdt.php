@@ -133,7 +133,7 @@ form .upload-report label.details {
  
       <!-- Photos Table Before Service -->
       <div class="table-responsive">
-      <table>
+      <table >
       <thead>
       <tr>
       <th scope="col">Photo</th>

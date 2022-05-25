@@ -19,13 +19,16 @@ session_start();
 
 <link rel="stylesheet" type="text/css" href="css/tab.css"/>
 <link href="css/ajaxtab.css"rel="stylesheet" />
-<link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css">
-<script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
+
 <!-- <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!-- <script src="popper.js"></script>   -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+<!-- Select2 JS --> 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -41,7 +44,7 @@ session_start();
  <form id="adminacc_form" method="post">
  <div class="input-boxAccessories" id="input_fields_wrapAccessories">
   
-<div id="msg" class="alert"></div>
+<!-- <div id="accessoriesmessage" class="alert"></div> -->
 <div>
 
 <form class="form-inline" id="frm-add-data" action="javascript:void(0)">
@@ -85,7 +88,7 @@ include_once("dbconnect.php");
   
 ?>
  
-<table id="employee_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="60%" cellspacing="0">
+<table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -18px;" id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table" width="60%" cellspacing="0">
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
       <tr>
@@ -237,11 +240,11 @@ $(document).ready(function(){
 					{   
 						//$("#loading").hide();
 						if(!response.error) {
-							$("#msg").removeClass('alert-danger');
-							$("#msg").addClass('alert-success').html(response.msg);
+							$("#accessoriesmessage").removeClass('alert-danger');
+							$("#accessoriesmessage").addClass('alert-success').html(response.accessoriesmessage);
 						} else {
-							$("#msg").removeClass('alert-success');
-							$("#msg").addClass('alert-danger').html(response.msg);
+							$("#accessoriesmessage").removeClass('alert-success');
+							$("#accessoriesmessage").addClass('alert-danger').html(response.accessoriesmessage);
 						}
 					}   
 				});
@@ -319,7 +322,7 @@ include 'dbconnect.php';
         }
         }
  ?>
- <select id="select_box" class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
+ <select style="width: 90%;"  id="select_box" class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
 <?php include "dbconnect.php";  // Using database connection file here
                     $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
 
@@ -330,12 +333,13 @@ include 'dbconnect.php';
                      }	
   ?>   
 </select>
+<div id="results">
 <input type="hidden" name="accessories_id[]" class="accessories_id">
-<input type="text" class="accessories_code" name="accessories_code[]" placeholder="Accessories Code">
+<input type="text" id="codes" class="accessories_code" name="accessories_code[]" placeholder="Accessories Code">
 <input type="text" class="accessories_name" name="accessories_name[]" placeholder="Accessories Name">
 <input type="text" class="accessories_uom" name="accessories_uom[]" placeholder="Unit of Measurement">
 <input type="text" class="accQuan" name="accessories_quantity[]" placeholder="Accessories Quantity">
-
+</div>
 					
 <a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a></div></div>
 
@@ -373,13 +377,25 @@ include 'dbconnect.php';
 
   </script>
 
+  <script>
 
-<script>
+    $(document).ready(function(){
+ 
+  // Initialize select2
+  $("#select_box").select2();
 
-    var select_box_element = document.querySelector('#select_box');
+  // Read selected option
+  $('#update_acc').click(function(){
+    var accessories_id = $('#select_box option:selected').text();
+    var accessories_code = $('#select_box').val();
 
-    dselect(select_box_element, {
-        search: true
-    });
+    $('#results').html("id : " + accessories_id + ", name : " + accessories_code);
 
-</script>
+  });
+});
+
+    </script>
+
+
+
+

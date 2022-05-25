@@ -13,7 +13,7 @@
 	$colVal = '';
 	$colIndex = $rowId = 0;
 	
-	$msgremark = array('status' => !$error, 'msgremark' => 'Failed! updation in mysql');
+	$remarkmessage = array('status' => !$error, 'remarkmessage' => 'Failed! updation in mysql');
 
 	if(isset($_POST)){
     if(isset($_POST['val']) && !empty($_POST['val']) && !$error) {
@@ -39,13 +39,13 @@
 	if(!$error) {
 			$sql = "UPDATE technician_remark SET ".$columns[$colIndex]." = '".$colVal."' WHERE id='".$rowId."'";
 			$status = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-			$msgremark = array('error' => $error, 'msgremark' => 'Update Succeed !');
+			$remarkmessage = array('error' => $error, 'remarkmessage' => 'Update Succeed !');
 	} else {
-		$msgremark = array('error' => $error, 'msgremark' => 'Update Failed !');
+		$remarkmessage = array('error' => $error, 'remarkmessage' => 'Update Failed !');
 	}
 	}
 	// send data as json format
-	echo json_encode($msgremark);
+	echo json_encode($remarkmessage);
 	
 ?>
 	

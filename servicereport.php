@@ -383,6 +383,7 @@ tr td:first-child:before {
     font-size: 13px;
     font-weight: 500;
     text-rendering: auto;
+    line-height: 12px;
     display: inline-block;
     text-align: start;
     cursor: text;
@@ -418,6 +419,7 @@ tr td:first-child:before {
     font-weight: 500;
     text-rendering: auto;
     display: inline-block;
+    line-height: 12px;
     text-align: start;
     cursor: text;
     white-space: pre-wrap;
@@ -481,7 +483,7 @@ tr td:first-child:before {
          <?php foreach ($queryRecords as $res) :?>
         
             <tr style="font-size: 15px;" data-row-id="<?php echo $res['id']; ?>">
-             <td></td></div>
+             <td style="vertical-align: baseline;"></td></div>
       
            <td><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" contenteditable><?php echo $row['accessories_name'] ?></span></td>
             <td><input type="text" style="font-size: 15px; border: none; text-align:center;" class="accessories_uom" name="accessories_uom" value="<?php echo $res['accessories_uom']; ?>" /></td>
