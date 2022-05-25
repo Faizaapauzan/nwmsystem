@@ -60,7 +60,7 @@ session_start();
 
   } ?>
  
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+<table style="box-shadow: 0 5px 10px #f7f7f7;" id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
    <thead>
     <tr>
     <th>Photo</th>
@@ -155,7 +155,7 @@ $(document).ready(function(){
  
                         <!-- Responsive table -->
                         <div class="table-responsive">
-                            <table class="table m-0">
+                            <table style="box-shadow: 0 5px 10px #f7f7f7;" class="table m-0">
                                 <thead>
                                     <tr>
                                         <th scope="col">Video</th>

@@ -1,0 +1,204 @@
+body {
+  color: #000;
+  overflow-x: hidden;
+  height: 100%;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+}
+
+.container {
+  padding: 1%;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 0 30px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+/*Remark*/
+.input-boxRemark i {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 600px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.input-boxRemark input {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 15px);
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  margin-right: 10px;
+}
+
+form .input-boxRemark {
+  width: 100%;
+  margin-left: 1px;
+  margin-top: -36px;
+}
+
+form .tech-details .input-boxRemark {
+  margin-bottom: 15px;
+}
+
+.remove_field {
+  position: absolute;
+  /*margin-left: 50px;*/
+  margin-top: 10px;
+  color: #000;
+  font-size: 35px;
+}
+
+.input-boxRemark i:hover,
+.input-boxRemark i:focus {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.remove_field:hover,
+.remove_field:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/*Accessories*/
+.input-boxAccessories i {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 590px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.input-boxAccessories input,
+.input-boxAccessories select {
+  margin-bottom: 15px;
+  width: calc(100% / 4 - 12px);
+  padding: 0 15px 0 15px;
+  height: 45px;
+  outline: none;
+  font-size: 13px;
+  border-radius: 5px;
+  padding-left: 25px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  margin-right: 10px;
+}
+
+form .input-boxAccessories {
+  width: 100%;
+  margin-left: 12px;
+}
+
+form .tech-details .input-boxAccessories {
+  margin-bottom: 15px;
+}
+
+.input-boxAccessories i:hover,
+.input-boxAccessories i:focus {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.dropDown i {
+  left: 10px;
+}
+
+.content {
+  border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.content span {
+  width: 250px;
+}
+
+.content span:hover {
+  cursor: pointer;
+}
+
+.btn-box input {
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #081d45;
+  margin-bottom: 10px;
+}
+
+form .upload-report .input-box {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  width: calc(100% / 2 - -335px);
+  padding: 0 -9px 0 15px;
+}
+form .upload-report label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.upload-report .input-box input,
+.upload-report .input-box select {
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.upload-report .input-box input:focus,
+.upload-report .input-box input:valid,
+.upload-report .input-box select:focus,
+.upload-report .input-box select:valid {
+  border-color: #081d45;
+}
+
+form .submit-date .submit-date {
+  margin-bottom: 40px;
+  width: calc(100% / 2 - -344px);
+  padding: 0 -9px 0 15px;
+}
+form .submit-date label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.submit-date .input-box input,
+.submit-date .input-box select {
+  height: 35px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.submit-date .input-box input:focus,
+.submit-date .input-box input:valid,
+.submit-date .input-box select:focus,
+.submit-date .input-box select:valid {
+  border-color: #081d45;
+}

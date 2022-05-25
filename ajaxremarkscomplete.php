@@ -21,7 +21,7 @@ session_start();
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/tab.css"/>
-<link href="css/ajax.css"rel="stylesheet" />
+<link href="css/ajaxcompleted.css"rel="stylesheet" />
 
 </head>
 <body>
@@ -74,7 +74,7 @@ include_once("dbconnect.php");
   
 ?>
  
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+<table style="box-shadow: 0 5px 10px #f7f7f7;" id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
       <tr>

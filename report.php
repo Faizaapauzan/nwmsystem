@@ -40,11 +40,9 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-
-
     <body>
 
-  <div class="sidebar close" style="opacity: 5; line-height: 1;">
+  <div class="sidebar close" style="opacity: 5; line-height: 1; ">
     <div class="logo-details">
 	    <img src="neo.png" height="65" width="75"></img>
       <span class="logo_name">NWM SYSTEM</span>

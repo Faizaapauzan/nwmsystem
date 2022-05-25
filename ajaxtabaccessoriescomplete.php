@@ -82,7 +82,7 @@ include_once("dbconnect.php");
   
 ?>
  
-<table id="employee_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+<table style="box-shadow: 0 5px 10px #f7f7f7;" id="employee_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
       <tr>

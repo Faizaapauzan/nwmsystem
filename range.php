@@ -68,7 +68,7 @@
         <label for="tabViewInfo1" class="tabHeadingView"> Job Info </label>
         <div class="tab" id="ViewJobInfoTab">
         <div class="contentViewJobInfo">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('onClick-View').style.display='none'">&times</div>
+        <div style="right: 540px; top: -7px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('onClick-View').style.display='none'">&times</div>
         <div class="view-details">
 
         </div></div></div>
@@ -100,7 +100,7 @@
         <input type="radio" name="tabViewInfo" id="tabViewInfo2">
         <label for="tabViewInfo2" class="tabHeadingView"> Media </label>
         <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('onClick-View').style.display='none'">&times</div>
+        <div style="right: 540px; top: -7px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('onClick-View').style.display='none'">&times</div>
         <!-- <form action="ajaxtabaccessories.php" method="post"> -->
         <div class="view-photos">
 

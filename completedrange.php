@@ -189,7 +189,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted5">
-        <label for="tabDoingCompleted5" class="tabHeadingComplete">Photo</label>
+        <label for="tabDoingCompleted5" class="tabHeadingComplete">Media</label>
         <div class="tabC" id="completedJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">

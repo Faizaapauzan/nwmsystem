@@ -322,7 +322,7 @@
                     <div class="tab">
                         <div class="TechJobInfoTab">
                             <div class="contentTechJobInfo">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                                <div style="right: 327px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
                                 <form action="ajaxtabaccessories.php" method="post">
                                     <div class="acc-details">
 
@@ -427,7 +427,7 @@
                     <label for="tabDoingStore1" class="tabHeadingStore"> Job Info </label>
                     <div class="tab" id="StoreJobInfoTab">
                         <div class="contentStoreJobInfo">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                            <div style="right: 327px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                             <form action="homeindex.php" method="post">
                                 <div class="store-details">
 
@@ -461,7 +461,7 @@
                     <input type="radio" name="tabDoingStore" id="tabDoingStore2">
                     <label for="tabDoingStore2" class="tabHeadingStore"> Accessories </label>
                     <div class="tab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <div style="right: 327px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxtabaccessories.php" method="post">
                             <div class="store-accessories">
 
@@ -494,7 +494,7 @@
                     <input type="radio" name="tabDoingStore" id="tabDoingStore3">
                     <label for="tabDoingStore3" class="tabHeadingStore"> Update </label>
                     <div class="tab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <div style="right: 327px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxstoreupdate.php" method="post">
                             <div class="store-update">
 
