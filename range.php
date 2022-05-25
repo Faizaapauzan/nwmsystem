@@ -1,5 +1,5 @@
 <?php
-	require'dbconnect.php';
+	require 'dbconnect.php';
 	if(ISSET($_POST['search'])){
 
          $jobregister_id =$_POST['search'];
@@ -21,7 +21,7 @@
         <td><?php echo $fetch['date']?></td>
         <td><?php echo $fetch['srvcreportnumber']?></td>
         <td><div class='jobTypeUpdateDeleteBtn'>
-        <button data-id="<?php echo $fetch["jobregister_id"]; ?>" class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
+        <button data-id="<?php echo $fetch["jobregister_id"]; ?>" data-id3="<?php echo $fetch["servicereport_id"]; ?>"  class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
         <button class="userinfo btn btn-success" type="button" id='btnEdit' data-id='<?php echo $fetch['servicereport_id']; ?>' data-id2='<?php echo $fetch['jobregister_id']; ?>' style="color: #ffffff;">Print</button>
         </div>
         </td>

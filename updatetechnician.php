@@ -16,7 +16,7 @@
 ?>
       
                 
-                    <div class="row">
+                    <div class="row" >
                         <div class="updatetech">
                             <form action="updatetechnician.php" method="post">
                                 <div class="staff-details">
@@ -38,7 +38,7 @@
                                 <fieldset>
                               <div class="input-box">
                                     <label for=""> <h2>Job Ability</h2> </label></div>
-                                    <div class="row"> 
+                                    <div class="row" style="margin-right: -22px; margin-left: -6px;"> 
                                     <div class="col"> 
                                 <input type="checkbox" id="ability" name="job_ability[]" value="WIRING" <?php if(in_array("WIRING", $ability1)) { echo "checked"; } ?>><label for="WIRING"> WIRING </label></div>
                                  <div class="col"> 

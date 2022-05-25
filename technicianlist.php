@@ -36,13 +36,11 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NWM Technician</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <link href="css/homepage.css" rel="stylesheet" />
-	    <link href="css/machine.css" rel="stylesheet" />
-    <link href="css/technicianlist.css" rel="stylesheet" />
-    <script src="js/home.js" type="text/javascript" defer></script>
-    <script src="js/popup.js" type="text/javascript" defer></script>
+    <link href="css/homepage.css"rel="stylesheet" />
+	  <link href="css/machine.css"rel="stylesheet" />
     <script src="js/number.js" type="text/javascript" defer></script>
-    <script src="js/form-validation.js"></script>
+    <script src="js/form-validation.js"></script>  
+    <link href="css/technicianlist.css" rel="stylesheet" />
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
@@ -65,6 +63,7 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
 
 
 <body>
+
   <div class="sidebar close">
     <div class="logo-details">
 	    <img src="neo.png" height="65" width="75"></img>
@@ -217,19 +216,16 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
 
     </nav>  
 
-     
-         <!--Customer-->
-
-        <!--Staff List-->
-
+          <!--Technician List-->
         <div class="technicianList">
-            <h1 style="padding-left:7px;">Technician List</h1>
-            <div class="staffRegisterBtn">
-            <button class="btn-reset" onclick="document.location='technicianlist.php'">Refresh</button>
-            </div>
+        <h1>Technician List</h1>
+
+        <div class="staffRegisterBtn">
+        <button class="btn-reset" onclick="document.location='technicianlist.php'">Refresh</button>
+        </div>
 
         <div class="datalist-wrapper">    
-        <div class="col-lg-12" style="border: none;">
+        <div class="col-lg-12" style="border: none; padding-left: 8px;">
 
     <table class="table table-striped sortable">
     <thead>
@@ -249,11 +245,11 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
             ?>
      
     <tr>
-        <td><?php echo $i; ?></td>
-       <td><?php echo $row["staff_fullname"]; ?></td>
-        <td><?php echo $row["technician_rank"]; ?></td>
-        <td><?php echo $row["job_ability"]; ?></td>
-       <td><div class='staffUpdateDeleteBtn'>
+      <td><?php echo $i; ?></td>
+      <td><?php echo $row["staff_fullname"]; ?></td>
+      <td><?php echo $row["technician_rank"]; ?></td>
+      <td><?php echo $row["job_ability"]; ?></td>
+      <td><div class='staffUpdateDeleteBtn'>
 <button data-staffregister_id="<?php echo $row['staffregister_id'];?>" class='userinfo' type='button' id='btnView'>View</button>
 <button data-staffregister_id="<?php echo $row['staffregister_id'];?>" class='updateinfo' type='button' id='btnEdit'>Update</button>
 <button data-staffregister_id="<?php echo $row['staffregister_id'];?>" class='deletebtn' type='button' id='btnDelete'>Delete</button>
@@ -283,7 +279,7 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
 
 </script>
 
-     <!--Delete Staff -->      
+      <!--Delete Staff -->      
 
     <div class="modal fade" id="empModal" role="dialog">
     <div class="modal-dialog">

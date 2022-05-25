@@ -1405,8 +1405,8 @@ pre code {
   margin-left: auto;
 }
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: -22px;
+  margin-left: -21px;
 }
 .col-xs-1,
 .col-sm-1,
@@ -1458,8 +1458,8 @@ pre code {
 .col-lg-12 {
   position: relative;
   min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 8px;
+  padding-left: 11px;
 }
 .col-xs-1,
 .col-xs-2,

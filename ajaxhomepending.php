@@ -186,10 +186,12 @@
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-         <button type="submit" id="submit" name="update">Update</button></n>
-         <button type="button" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormDuplicate();">Duplicate</button>
-         <p class="control"><b id="messageDuplicate"></b></p>
          
+         <div class="DuplicateUpdateButton" style="display: inline-flex; width: 100%;">
+         <button type="submit" id="submit" name="update">Update</button></n>
+         <button type="button" style="background-color: #f43636 ;" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormDuplicate();">Duplicate</button>
+            </div>
+            <p class="control"><b id="messageDuplicate"></b></p>
     </form>
             
          <?php

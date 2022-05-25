@@ -17,7 +17,7 @@
 		<td><?php echo $fetch['job_order_number']?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['job_assign']?></td>
-        <td><?php echo $fetch['date']?></td>
+        <td><?php echo $fetch['today_date']?></td>
         <td><div class='jobTypeUpdateDeleteBtn'>
         <button data-jobregister_id="<?php echo $fetch["jobregister_id"]; ?>" class='userinfo' id='btnView' data-target="doubleClick-completed"  onclick="document.getElementById('doubleClick-completed').style.display='block'">Details</button>
         </div>
