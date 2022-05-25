@@ -182,13 +182,13 @@
             <option value="Completed" <?php if($row['job_status'] == "Completed") { echo "SELECTED"; } ?>>Completed</option>
         </select>
         </div>
-         
+
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-         <button type="submit" id="submit" name="update">Update</button></n>
-         <button type="button" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormDuplicate();">Duplicate</button>
-         <p class="control"><b id="messageDuplicate"></b></p>
+         <button type="submit" id="submit" name="update">Update</button><br>
+         <button type="button" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormDuplicate();" style="background:#9E0000">Duplicate</button><br>
+         <p class="control"><b id="messageDuplicate"></b></p><br>
          
     </form>
             
