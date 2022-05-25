@@ -322,7 +322,7 @@
                     <div class="tab">
                         <div class="TechJobInfoTab">
                             <div class="contentTechJobInfo">
-                                <div style="right: 327px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
                                 <form action="ajaxtabaccessories.php" method="post">
                                     <div class="acc-details">
 
