@@ -27,12 +27,71 @@
 
 </head>
 
-<body>	
-<form action="techphtoupdtindex.php" class="remark-inline" id="frm-add-remark" action="javascript:void(0)" method="post" enctype="multipart/form-data">
-<div class="input-boxPhoto" id="input_fields_wrap">  
-<div id="photomsg" class="alert"></div>
+<style media="screen">
+    #preview{
+      display: flex;
+      width: 200px;
+      height: 200px;
+      border: 1px solid black;
+      margin-top: -15px;
+      flex-wrap: wrap;
+      overflow-y: scroll;
+    }
+    #preview img{
+      width: 50%;
+      height: 50%;
+    }
 
- <!-- for select job register id -->
+    /* #ImageRow {
+      margin-right: 20px;
+      margin-left: 40px;
+      display: flex; 
+      width: 200px; 
+      height: 200px;
+
+    } */
+
+    
+form .upload-report .input-box {
+  padding-left: 49px;
+  margin-bottom: 1px;
+  margin-top: 7px;
+  width: calc(100% / 2 - -302px);
+  padding: 0 -9px 0 15px;
+}
+form .upload-report label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.upload-report .input-box input,
+.upload-report .input-box select {
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.upload-report .input-box input:focus,
+.upload-report .input-box input:valid,
+.upload-report .input-box select:focus,
+.upload-report .input-box select:valid {
+  border-color: #081d45;
+}
+
+
+
+  </style>
+
+<body>	
+
+<form action="insertphoto.php" method="post" enctype="multipart/form-data">
+
+<!-- for select job register id -->
 <div>
       <?php
       include 'dbconnect.php';
@@ -44,91 +103,134 @@
             while ($row = mysqli_fetch_array($query_run)) {
                 ?>
                 
-        <div class="photo">
         <div class="input-box">
         <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
         </div>
 
  <?php }  } } ?>
 
+
+ <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
+  <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+  <div class="update-form">
+    <div class="upload-report">
+    <div class="input-box" style="display: flex;">
+    <input type="file" name="imageFile[]" required multiple class="form-control">
+     <input type="submit" name="uploadImageBtn" id="uploadImageBtn" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+    </div>
+    </div>
+               
  <!-- for select data from tech photo update database -->
  <?php include_once("dbconnect.php");
 
   if (isset($_POST['jobregister_id'])) {
       $jobregister_id =$_POST['jobregister_id'];
 
-      $sql = "SELECT * FROM `technician_photoupdate` WHERE  jobregister_id ='$jobregister_id'";
+      $sql =  "SELECT * FROM technician_photoupdate WHERE description='Machine (Before Service)' AND jobregister_id ='$jobregister_id'";
       $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
 
   } ?>
  
-                        <!-- Responsive table -->
-                        <div class="table-responsive">
-                            <table class="table m-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+      <!-- Photos Table Before Service -->
+      <div class="table-responsive">
+      <table>
+      <thead>
+      <tr>
+      <th scope="col">Photo</th>
+      <th scope="col">Action</th>
+      </tr>
+      </thead>
 
-								<?php foreach($queryRecords as $res) :?>
-								<tr data-row-id="<?php echo $res['id'];?>">
-								<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"><a href="image/<?php echo $res['file_name']; ?>" style="text-align:center;" download>Download</td>
-								<td oldVal ="<?php echo $res['description'];?>"><?php echo $res['description'];?></td>
-                
-								<td><span class='deleted' style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+      <tbody>
 
-								</tr>
-								<?php endforeach;?>
+			<?php foreach($queryRecords as $res) :?>
+			<tr data-row-id="<?php echo $res['id'];?>">
+			<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"></td>
+	    <td><a href="image/<?php echo $res['file_name']; ?>" style="text-align:center;" download>Download</td>           
+			<td><span class='deleted' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+
+			</tr>
+			<?php endforeach;?>
 
  
-                                </tbody>	
-                            </table>
-                        </div>
-                    </div>
-								<br>
-								<a href="javascript:void(0);" class="add_photo" title="Add photo" type="button">Click Here to Insert Photo</a>
-								<br><br>
-                              
-                <br><div class="btn-box">
-<button type="submit" name="update" value="update">Update</button>
-</form></div>
+      </tbody>	
+      </table>
+        </div>
+    </div>
+ 
+        
+</form>
+<br/><br/>
+<form action="insertphoto.php" method="post" enctype="multipart/form-data">
 
-<script>
-  $(document).ready(function(){
- // Delete 
- $('.updated').click(function(){
-   var el = this;
-   // Delete id
-   var updatedid = $(this).data('id');
-   var confirmalert = confirm("Are you sure?");
-   if (confirmalert == true) {
-      // AJAX Request
-      $.ajax({
-        url: 'techphoto_update.php',
-        type: 'POST',
-        data: { id:updatedid },
-        success: function(response){
+<!-- for select job register id -->
+<div>
+      <?php
+      include 'dbconnect.php';
+      if (isset($_POST['jobregister_id'])) { 
+        $jobregister_id =$_POST['jobregister_id'];
+        $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
+        $query_run = mysqli_query($conn, $query);
+        if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+                ?>
+   
+        <div class="input-box">
+        <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
-          if(response == 1){
-	   
-          }else{
-	    alert('Invalid ID.');
-          }
+ <?php }  } } ?>
 
-        }
-      });
-   }
+ <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
+  <input type="hidden" id="description" name="description" value="Machine (After Service)">
+  <div class="update-form">
+    <div class="upload-report">
+    <div class="input-box" style="display: flex;">
+    <input type="file" name="imageFile[]" required multiple class="form-control">
+     <input type="submit" name="uploadImageBtn" id="uploadImageBtn" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+    </div>
+    </div>
+          
+     <!-- for select data from tech photo update database -->
+ <?php include_once("dbconnect.php");
 
- });
+  if (isset($_POST['jobregister_id'])) {
+      $jobregister_id =$_POST['jobregister_id'];
 
-});
+      $sql =  "SELECT * FROM technician_photoupdate WHERE description='Machine (After Service)' AND jobregister_id ='$jobregister_id'";
+      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
 
-</script>
+  } ?>
 
+    <!-- Photos Table Before Service -->
+      <div class="table-responsive">
+      <table>
+      <thead>
+      <tr>
+      <th scope="col">Photo</th>
+      <th scope="col">Action</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+			<?php foreach($queryRecords as $res) :?>
+			<tr data-row-id="<?php echo $res['id'];?>">
+			<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"></td>
+	    <td><a href="image/<?php echo $res['file_name']; ?>" style="text-align:center;" download>Download</td>           
+			<td><span class='deleted' style="color: red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+
+			</tr>
+			<?php endforeach;?>
+
+ 
+      </tbody>	
+      </table>
+        </div>
+    </div>
+ 
+        
+</form>
+    
 <script>
   $(document).ready(function(){
  // Delete 
@@ -165,380 +267,40 @@
 
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	$('td.editable-col').on('focusout', function() {
-		data = {};
-		data['val'] = $(this).text();
-		data['id'] = $(this).parent('tr').attr('data-row-id');
-		data['index'] = $(this).attr('col-index');
-	    if($(this).attr('oldVal') === data['val'])
-		return false;
+<!-- 
+    <p>Preview</p>
+    <div id = "preview">
 
-		$.ajax({   
-				  
-					type: "POST",  
-					url: "techphoto_server.php",  
-					cache:false,  
-					data: data,
-					dataType: "json",				
-					success: function(response)  
-					{   
-						//$("#loading").hide();
-						if(!response.error) {
-							$("#photomsg").removeClass('alert-danger');
-							$("#photomsg").addClass('alert-success').html(response.msg);
-						} else {
-							$("#photomsg").removeClass('alert-success');
-							$("#photomsg").addClass('alert-danger').html(response.msg);
-						}
-					}   
-				});
-	});
-});
-
-</script>
-
-   <!--Accessories add-->
   <script type="text/javascript">
-
-		$(document).ready(function () {
-
-			var maxField = 10; // Total 100 product fields we add
-
-			var addButton = $('.add_photo'); // Add more button selector
-
-			var wrapper = $('.photo'); // Input fields wrapper
-
-			var fieldHTML = `
-
-		<div class="photo-element">
-   
-        <div class="photo">
-        
-        <?php
-        
-        include 'dbconnect.php';
-        
-        if (isset($_POST['jobregister_id'])) {
-
-        $jobregister_id =$_POST['jobregister_id'];
-
-        $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-    
-        $query_run = mysqli_query($conn, $query);
-        if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-                ?>
-
-<div class="photo">
-  <div class="input-box">
-    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
- </div>
-
- <?php
-            }
+      function preview(){
+        var totalFiles = $('#fileImg').get(0).files.length;
+        for(var i = 0; i < totalFiles; i++){
+          $('#preview').append("<img src = '"+URL.createObjectURL(event.target.files[i])+"'>");
         }
-        }
- ?>
+      }
 
-<div>
-<input type="file" class="tech_photo" onchange="pic.src=window.URL.createObjectURL(this.files[0])" name="files[]" multiple><br>
-<img id="pic" width="150px" height="120px"/><br>
-<select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 16px;" name='description[]'>
-<option value='' name="description[]"></option>
-<option value="Machine (Before Service)" name="description[]">Machine (Before Service)</option>
-<option value="Accessories (Broken)" name="description[]">Accessories (Broken)</option>
-<option value="Accessories (New)" name="description[]">Accessories (New)</option>
-<option value="Machine (After Service)" name="description[]">Machine (After Service)</option>
-</select>
+      function submitData(){
+        $(document).ready(function(){
+          var formData = new FormData();
 
-   </div>
-					
-<a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a></div></div>
-
-				`; //New input field html 
-
-			var x = 1; //Initial field counter is 1
-
-			$(addButton).click(function () {
-				//Check maximum number of input fields
-				if (x < maxField) {
-					x++; //Increment field counter
-					$(wrapper).append(fieldHTML);
-				}
-			});
-
-			//Once remove button is clicked
-			$(wrapper).on('click', '.remove_button', function (e) {
-				e.preventDefault();
-				$(this).parent().closest(".photo-element").remove();
-				x--; //Decrement field counter
-			});
-		});
-</script>
-</form>
-
-
-
-
-
-<!---------------------------------- video ------------------------------------------>
-
-<!-- <div class="container" style="padding:50px 250px;"> -->		
-<form action="techvideoindex.php" class="video-inline" id="frm-add-video" action="javascript:void(0)" method="post" enctype="multipart/form-data">
-<div class="input-boxVideo" id="input_fields_wrap">  
-<div id="videomsg" class="alert"></div>
-
-<!-- for select job register id -->
-<div>
-      <?php
-      include 'dbconnect.php';
-      if (isset($_POST['jobregister_id'])) { 
-        $jobregister_id =$_POST['jobregister_id'];
-        $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-        $query_run = mysqli_query($conn, $query);
-        if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-                ?>
-                
-        <div class="video">
-        <div class="input-box">
-        <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        </div>
-
- <?php }  } } ?>
-
- <!-- for select data from tech photo update database -->
- <?php include_once("dbconnect.php");
-
-  if (isset($_POST['jobregister_id'])) {
-      $jobregister_id =$_POST['jobregister_id'];
-
-      $sql = "SELECT * FROM `technician_videoupdate` WHERE  jobregister_id ='$jobregister_id'";
-      $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
-
-  } ?>
- 
-                        <!-- Responsive table -->
-                        <div class="table-responsive">
-                            <table class="table m-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Video</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody >
-									<?php foreach($queryRecords as $res) :?>
-									<tr data-row-id="<?php echo $res['id'];?>">
-									
-									
-									<td col-index='2' >
-									<video width="150" height="120" src="image/<?=$res['video_url']?>" controls></video></td>
-									
-								<td oldVal ="<?php echo $res['description'];?>"><?php echo $res['description'];?></td>
-									
-			
-									<td><span class='deleted'  style="color:red;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
-									</tr>
-									<?php endforeach;?>
-                                </tbody>
-                            </table>
-							<br>
-									<a href="javascript:void(0);" class="add_video" title="Add video" type="button">Click Here to Insert video</a>
-							<br><br>
-
-              
-						</div></div>
-            <br><div class="btn-box">
-        <button type="submit" name="hantar" value="update">Update</button>
-        </form></div>
-
-  
-
-<script>
-  $(document).ready(function(){
- // Delete 
- $('.updated').click(function(){
-   var el = this;
-   // Delete id
-   var updatedid = $(this).data('id');
-   var confirmalert = confirm("Are you sure?");
-   if (confirmalert == true) {
-      // AJAX Request
-      $.ajax({
-        url: 'techvideo-update.php',
-        type: 'POST',
-        data: { id:updatedid },
-        success: function(response){
-
-          if(response == 1){
-	   
-          }else{
-	    alert('Invalid ID.');
+          var totalFiles = $("#fileImg").get(0).files.length;
+          for (var i = 0; i < totalFiles; i++) {
+              formData.append("fileImg[]", $("#fileImg").get(0).files[i]);
           }
 
-        }
-      });
-   }
-
- });
-
-});
-
-</script>
-
-<script>
-  $(document).ready(function(){
- // Delete 
- $('.deleted').click(function(){
-   var el = this;
-   // Delete id
-   var deletedid = $(this).data('id');
-   var confirmalert = confirm("Are you sure?");
-   if (confirmalert == true) {
-      // AJAX Request
-      $.ajax({
-        url: 'techvideo-delete.php',
-        type: 'POST',
-        data: { id:deletedid },
-        success: function(response){
-
-          if(response == 1){
-	    // Remove row from HTML Table
-	    $(el).closest('tr').css('background','tomato');
-	    $(el).closest('tr').fadeOut(800,function(){
-	       $(this).remove();
-	    });
-          }else{
-	    alert('Invalid ID.');
-          }
-
-        }
-      });
-   }
-
- });
-
-});
-
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$('td.editable-col').on('focusout', function() {
-		data = {};
-		data['val'] = $(this).text();
-		data['id'] = $(this).parent('tr').attr('data-row-id');
-		data['index'] = $(this).attr('col-index');
-	    if($(this).attr('oldVal') === data['val'])
-		return false;
-
-		$.ajax({   
-				  
-					type: "POST",  
-					url: "techvideo-server.php",  
-					cache:false,  
-					data: data,
-					dataType: "json",				
-					success: function(response)  
-					{   
-						//$("#loading").hide();
-						if(!response.error) {
-							$("#videomsg").removeClass('alert-danger');
-							$("#videomsg").addClass('alert-success').html(response.msg);
-						} else {
-							$("#videomsg").removeClass('alert-success');
-							$("#videomsg").addClass('alert-danger').html(response.msg);
-						}
-					}   
-				});
-	});
-});
-
-</script>
-
-   <!--Accessories add-->
-  <script type="text/javascript">
-
-		$(document).ready(function () {
-
-			var maxField = 10; // Total 100 product fields we add
-
-			var addButton = $('.add_video'); // Add more button selector
-
-			var wrapper = $('.video'); // Input fields wrapper
-
-			var fieldHTML = `
-
-		<div class="video-element">
-   
-        <div class="video">
-        
-        <?php
-        
-        include 'dbconnect.php';
-        
-        if (isset($_POST['jobregister_id'])) {
-
-        $jobregister_id =$_POST['jobregister_id'];
-
-        $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-    
-        $query_run = mysqli_query($conn, $query);
-        if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-                ?>
-
-<div class="video">
-  <div class="input-box">
-    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
- </div>
-
- <?php
+          $.ajax({
+            url: 'insertphoto.php',
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success:function(response){
+              alert(response);
             }
-        }
-        }
- ?>
-
-<div>
-<input type="file" class="tech_video" name="files[]" multiple><br>
-<select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; outline: none; font-size: 16px;" name='description[]'>
-<option value='' name="description[]"></option>
-<option value="Machine (Before Service)" name="description[]">Machine (Before Service)</option>
-<option value="Accessories (Broken)" name="description[]">Accessories (Broken)</option>
-<option value="Accessories (New)" name="description[]">Accessories (New)</option>
-<option value="Machine (After Service)" name="description[]">Machine (After Service)</option>
-</select>
-
-   </div>
-					
-<a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a></div></div>
-
-				`; //New input field html 
-
-			var x = 1; //Initial field counter is 1
-
-			$(addButton).click(function () {
-				//Check maximum number of input fields
-				if (x < maxField) {
-					x++; //Increment field counter
-					$(wrapper).append(fieldHTML);
-				}
-			});
-
-			//Once remove button is clicked
-			$(wrapper).on('click', '.remove_button', function (e) {
-				e.preventDefault();
-				$(this).parent().closest(".video-element").remove();
-				x--; //Decrement field counter
-			});
-		});
-</script>
-</<form>
-  
+          });
+        });
+      }
+    </script> -->
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>

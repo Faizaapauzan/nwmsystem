@@ -13,13 +13,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-     <title>NWM Admin Homepage</title>
+     <title>NWM Admin Page</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
     <link rel="stylesheet" href="style.css">
     <link href="css/homepage.css"rel="stylesheet" />
     <link href="css/adminhomepage.css"rel="stylesheet" />
-    <link href="css/machine.css"rel="stylesheet" />
+    <!-- <link href="css/machine.css"rel="stylesheet" /> -->
        <link href="css/adminboard.css"rel="stylesheet" />
         <link href="css/admin.css"rel="stylesheet" />
     <!-- Boxiocns CDN Link -->
@@ -358,22 +358,7 @@
     </div>						
 						
 						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
+				
 				
 						
                         <div class="box" id="myModal">
@@ -742,7 +727,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingBoon" id="tabDoingBoon5">
-        <label for="tabDoingBoon5" class="tabHeadingBoon"> Media </label>
+        <label for="tabDoingBoon5" class="tabHeadingBoon"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -763,6 +748,37 @@
         success: function (response) {
         // Add response in Modal body
         $('.boon-photos').html(response);
+        // Display Modal
+        $('#doubleClick-Boon').modal('show');
+                }
+            });
+        });
+    });
+    </script>
+
+      <!--Double click Video-->
+        <input type="radio" name="tabDoingBoon" id="tabDoingBoon7">
+        <label for="tabDoingBoon7" class="tabHeadingBoon"> Video </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="boon-videos">
+
+        </div></form></div>
+        
+    
+    <script type='text/javascript'>
+        $(document).ready(function () {
+        $('body').on('click','.Boon',function(){ 
+        var jobregister_id = $(this).data('id');
+        // AJAX request
+        $.ajax({
+        url: 'ajaxtechvideoupdt.php',
+        type: 'post',
+        data: { jobregister_id: jobregister_id },
+        success: function (response) {
+        // Add response in Modal body
+        $('.boon-videos').html(response);
         // Display Modal
         $('#doubleClick-Boon').modal('show');
                 }
@@ -1009,7 +1025,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz5">
-        <label for="tabDoingHafiz5" class="tabHeadingHafiz">Media</label>
+        <label for="tabDoingHafiz5" class="tabHeadingHafiz">Photo</label>
         <div class="tab" id="HafizJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -1041,6 +1057,42 @@
     });
 
         </script>
+
+          <!--Double click Vidoe-->
+        <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz7">
+        <label for="tabDoingHafiz7" class="tabHeadingHafiz">Video</label>
+        <div class="tab" id="HafizJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="hafiz-video">
+
+        </div></form></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Hafiz',function(){ 
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+
+            // Add response in Modal body
+            $('.hafiz-video').html(response);
+            // Display Modal
+            $('#doubleClick-Hafiz').modal('show');
+                }
+            });
+        });
+    });
+
+        </script>
+
 
                <!-- Double click Report -->
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz6">
@@ -1282,7 +1334,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir5">
-        <label for="tabDoingHamir5" class="tabHeadingHamir">Media</label>
+        <label for="tabDoingHamir5" class="tabHeadingHamir">Photo</label>
         <div class="tab" id="HamirJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -1310,6 +1362,38 @@
              });
 
         </script>
+
+            <!--Double click Photo-->
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir7">
+        <label for="tabDoingHamir7" class="tabHeadingHamir">Video</label>
+        <div class="tab" id="HamirJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="hamir-video">
+
+        </div></form></div>
+
+          <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Hamir',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.hamir-video').html(response);
+            // Display Modal
+            $('#doubleClick-Hamir').modal('show');
+                }
+                    });
+                 });
+             });
+
+        </script>
+
 
                 <!-- Double click Report -->
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir6">
@@ -1545,7 +1629,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa5">
-        <label for="tabDoingHwa5" class="tabHeadingHwa">Media</label>
+        <label for="tabDoingHwa5" class="tabHeadingHwa">Photo</label>
         <div class="tab" id="HwaJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -1565,6 +1649,36 @@
             success: function (response) {
             // Add response in Modal body
             $('.hwa-photos').html(response);
+            // Display Modal
+            $('#doubleClick-Hwa').modal('show');
+                }
+            });
+                     });
+                });
+        </script>
+
+         <!--Double click Video-->
+        <input type="radio" name="tabDoingHwa" id="tabDoingHwa7">
+        <label for="tabDoingHwa7" class="tabHeadingHwa">Video</label>
+        <div class="tab" id="HwaJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="hwa-video">
+
+        </div></form></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Hwa',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.hwa-video').html(response);
             // Display Modal
             $('#doubleClick-Hwa').modal('show');
                 }
@@ -1802,7 +1916,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk5">
-        <label for="tabDoingIsk5" class="tabHeadingIsk">Update</label>
+        <label for="tabDoingIsk5" class="tabHeadingIsk">Photo</label>
         <div class="tab" id="IskJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -1829,6 +1943,37 @@
                      });
              });
         </script>
+
+              <!--Double click Photo-->
+        <input type="radio" name="tabDoingIsk" id="tabDoingIsk7">
+        <label for="tabDoingIsk7" class="tabHeadingIsk">Video</label>
+        <div class="tab" id="IskJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="isk-video">
+
+        </div></form></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Isk',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.isk-video').html(response);
+            // Display Modal
+            $('#doubleClick-Isk').modal('show');
+                }
+                 });
+                     });
+             });
+        </script>
+
 
                 <!--Double click Report-->
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk6">
@@ -2061,7 +2206,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn5">
-        <label for="tabDoingJohn5" class="tabHeadingJohn">Media</label>
+        <label for="tabDoingJohn5" class="tabHeadingJohn">Photo</label>
         <div class="tab" id=JohnJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -2089,6 +2234,39 @@
                 });
                      });
         </script>
+
+ <!--Double click Video-->
+        <input type="radio" name="tabDoingJohn" id="tabDoingJohn7">
+        <label for="tabDoingJohn7" class="tabHeadingJohn">Video</label>
+        <div class="tab" id=JohnJobInfoTab>
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="john-video">
+
+        </div></form></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.John',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.john-video').html(response);
+            // Display Modal
+            $('#doubleClick-John').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+
 
                 <!--Double click Report-->
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn6">
@@ -2322,7 +2500,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie5">
-        <label for="tabDoingJunJie5" class="tabHeadingJunJie">Media</label>
+        <label for="tabDoingJunJie5" class="tabHeadingJunJie">Photo</label>
         <div class="tab" id=JunJieJobInfoTab>
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -2343,6 +2521,37 @@
             success: function (response) {
             // Add response in Modal body
             $('.junjie-photos').html(response);
+            // Display Modal
+            $('#doubleClick-JunJie').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+         <!--Double click Video-->
+        <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie7">
+        <label for="tabDoingJunJie7" class="tabHeadingJunJie">Video</label>
+        <div class="tab" id=JunJieJobInfoTab>
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="junjie-video">
+
+        </div></form></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.JunJie',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.junjie-video').html(response);
             // Display Modal
             $('#doubleClick-JunJie').modal('show');
                 }
@@ -2582,7 +2791,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill5">
-        <label for="tabDoingRazwill5" class="tabHeadingRazwill">Media</label>
+        <label for="tabDoingRazwill5" class="tabHeadingRazwill">Photo</label>
         <div class="tab" id="RazwillJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -2610,6 +2819,38 @@
                 });
                      });
         </script>
+
+          <!--Double click Video-->
+        <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill7">
+        <label for="tabDoingRazwill7" class="tabHeadingRazwill">Video</label>
+        <div class="tab" id="RazwillJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="razwill-video">
+
+        </div></form></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Razwill',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.razwill-video').html(response);
+            // Display Modal
+            $('#doubleClick-Razwill').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
 
                 <!--Double click Report-->
         <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill6">
@@ -2841,7 +3082,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSahele" id="tabDoingSahele5">
-        <label for="tabDoingSahele5" class="tabHeadingSahele">Media</label>
+        <label for="tabDoingSahele5" class="tabHeadingSahele">Photo</label>
         <div class="tab" id="SaheleJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -2861,6 +3102,36 @@
             success: function (response) {
             // Add response in Modal body
             $('.sahele-photos').html(response);
+            // Display Modal
+            $('#doubleClick-Sahele').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+          <!--Double click Photo-->
+        <input type="radio" name="tabDoingSahele" id="tabDoingSahele7">
+        <label for="tabDoingSahele7" class="tabHeadingSahele">Video</label>
+        <div class="tab" id="SaheleJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="sahele-video">
+
+        </div></form></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Sahele',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.sahele-video').html(response);
             // Display Modal
             $('#doubleClick-Sahele').modal('show');
                 }
@@ -3099,7 +3370,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly5">
-        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Media</label>
+        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Photo</label>
         <div class="tab" id="SazalyJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3119,6 +3390,36 @@
             success: function (response) {
             // Add response in Modal body
             $('.sazaly-photos').html(response);
+            // Display Modal
+            $('#doubleClick-Sazaly').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+        <!--Double click Photo-->
+        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly7">
+        <label for="tabDoingSazaly7" class="tabHeadingSazaly">Video</label>
+        <div class="tab" id="SazalyJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="sazaly-video">
+
+        </div></form></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Sazaly',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.sazaly-video').html(response);
             // Display Modal
             $('#doubleClick-Sazaly').modal('show');
                 }
@@ -3357,7 +3658,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan5">
-        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Media</label>
+        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Photo</label>
         <div class="tab" id="FaizanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3377,6 +3678,36 @@
             success: function (response) {
             // Add response in Modal body
             $('.faizan-photos').html(response);
+            // Display Modal
+            $('#doubleClick-Faizan').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+          <!--Double click Video-->
+        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan7">
+        <label for="tabDoingFaizan7" class="tabHeadingFaizan">Video</label>
+        <div class="tab" id="FaizanJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="faizan-video">
+
+        </div></form></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Faizan',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.faizan-video').html(response);
             // Display Modal
             $('#doubleClick-Faizan').modal('show');
                 }
@@ -3617,7 +3948,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin5">
-        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Media</label>
+        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Photo</label>
         <div class="tab" id="FauzinJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3645,6 +3976,38 @@
                 });
                      });
         </script>
+
+        <!--Double click Video-->
+        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin7">
+        <label for="tabDoingFauzin7" class="tabHeadingFauzin">Video</label>
+        <div class="tab" id="FauzinJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="fauzin-video">
+
+        </div></form></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Fauzin',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.fauzin-video').html(response);
+            // Display Modal
+            $('#doubleClick-Fauzin').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
 
                 <!--Double click Report-->
         <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin6">
@@ -3876,7 +4239,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan5">
-        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Media</label>
+        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Photo</label>
         <div class="tab" id="IzaanJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -3897,6 +4260,37 @@
             success: function (response) {
             // Add response in Modal body
             $('.izaan-photos').html(response);
+            // Display Modal
+            $('#doubleClick-Izaan').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+        <!--Double click Video-->
+        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan7">
+        <label for="tabDoingIzaan7" class="tabHeadingIzaan">Video</label>
+        <div class="tab" id="IzaanJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="izaan-video">
+
+        </div></form></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Izaan',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.izaan-video').html(response);
             // Display Modal
             $('#doubleClick-Izaan').modal('show');
                 }
@@ -4135,7 +4529,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam5">
-        <label for="tabDoingSalam5" class="tabHeadingSalam">Media</label>
+        <label for="tabDoingSalam5" class="tabHeadingSalam">Photo</label>
         <div class="tab" id="SalamJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4163,6 +4557,39 @@
                 });
                      });
         </script>
+
+ <!--Double click Video-->
+
+        <input type="radio" name="tabDoingSalam" id="tabDoingSalam7">
+        <label for="tabDoingSalam7" class="tabHeadingSalam">Video</label>
+        <div class="tab" id="SalamJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="salam-video">
+
+        </div></form></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Salam',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.salam-video').html(response);
+            // Display Modal
+            $('#doubleClick-Salam').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+        
 
                <!--Double click Report-->
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam6">
@@ -4398,7 +4825,7 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingTeck" id="tabDoingTeck5">
-        <label for="tabDoingTeck5" class="tabHeadingTeck">Media</label>
+        <label for="tabDoingTeck5" class="tabHeadingTeck">Photo</label>
         <div class="tab" id="TeckJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4426,6 +4853,38 @@
                 });
                      });
         </script>
+
+         <!--Double click Video-->
+        <input type="radio" name="tabDoingTeck" id="tabDoingTeck7">
+        <label for="tabDoingTeck7" class="tabHeadingTeck">Video</label>
+        <div class="tab" id="TeckJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="teck-video">
+
+        </div></form></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Teck',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.teck-video').html(response);
+            // Display Modal
+            $('#doubleClick-Teck').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
 
                         <!--Double click Report-->
         <input type="radio" name="tabDoingTeck" id="tabDoingTeck6">
@@ -4656,7 +5115,7 @@
 
 <!--Double click Photo-->
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat5">
-        <label for="tabDoingAizat5" class="tabHeadingAizat"> Media </label>
+        <label for="tabDoingAizat5" class="tabHeadingAizat"> Photo </label>
         <div class="tab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4677,6 +5136,37 @@
             success: function(response) { 
             // Add response in Modal body
             $('.Aizat-photo-details').html(response);
+            // Display Modal
+            $('#doubleClick-Aizat').modal('show');
+                }
+                    });
+                    });
+                });
+        </script>
+
+<!--Double click Video-->
+        <input type="radio" name="tabDoingAizat" id="tabDoingAizat7">
+        <label for="tabDoingAizat7" class="tabHeadingAizat"> Video </label>
+        <div class="tab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="Aizat-video-details">
+
+        </div></form></div>
+
+      
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('body').on('click','.Aizat',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) { 
+            // Add response in Modal body
+            $('.Aizat-video-details').html(response);
             // Display Modal
             $('#doubleClick-Aizat').modal('show');
                 }
@@ -4831,6 +5321,37 @@
                                 });
                             });
                         </script>
+
+                            <!--Double click Remarks-->
+        <input type="radio" name="tabDoingPending" id="tabDoingPending3">
+        <label for="tabDoingPending3" class="tabHeadingPending">Remarks</label>
+        <div class="tab" id="PendingJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+        <form action="ajaxremarks.php" method="post">
+        <div class="pending-remark">
+
+        </div></form></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Pending',function(){ 
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxremarks.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.pending-remark').html(response);
+            // Display Modal
+            $('#doubleClick-Pending').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
 						
             <!-- Pending Accessories Tab -->
 
@@ -4866,10 +5387,10 @@
                         </script>
 
 
-<!-- Pending MEDIA Tab -->
+<!-- Pending Photo Tab -->
 
                     <input type="radio" name="tabDoingPending" id="tabDoingPending5">
-                    <label for="tabDoingPending5" class="tabHeadingPending">Media</label>
+                    <label for="tabDoingPending5" class="tabHeadingPending">Photo</label>
                     <div class="tab" id="PendingJobInfoTab">
                         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
                         <form action="ajaxtechphtoupdt.php" method="post">
@@ -4901,8 +5422,38 @@
 
 
 
-<!-- Pending MEDIA Tab -->
+<!-- Pending Video Tab -->
 
+                    <input type="radio" name="tabDoingPending" id="tabDoingPending7">
+                    <label for="tabDoingPending7" class="tabHeadingPending">Video</label>
+                    <div class="tab" id="PendingJobInfoTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                        <form action="ajaxtechvideoupdt.php" method="post">
+                            <div class="pending-video">
+
+                            </div>
+                        </form>
+                    </div>
+                    
+                        <script type='text/javascript'>
+                            $(document).ready(function () {
+                                $('.Pending').click(function () {
+                                    var jobregister_id = $(this).data('id');
+                                    // AJAX request
+                                    $.ajax({
+                                        url: 'ajaxtechvideoupdt.php',
+                                        type: 'post',
+                                        data: { jobregister_id: jobregister_id },
+                                        success: function (response) {
+                                            // Add response in Modal body
+                                            $('.pending-video').html(response);
+                                            // Display Modal
+                                            $('#doubleClick-Pending').modal('show');
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
 
 
 
@@ -4945,16 +5496,6 @@
                         </script>
 
 
-									
-						
-						
-						
-						
-						
-						
-						
-						
-						
 							
                         <div class="box" id="myModal">
                               <div class="box_topic">Incomplete</div>
@@ -5141,7 +5682,7 @@
 <!-- Pending MEDIA Tab -->
 
                     <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete5">
-                    <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Media</label>
+                    <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Photo</label>
                     <div class="tab" id="IncompleteJobInfoTab">
                         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
                         <form action="ajaxtechphtoupdt.php" method="post">
@@ -5172,8 +5713,38 @@
                         </script>
 
 
+<!-- Pending VIDEO Tab -->
 
-<!-- Pending MEDIA Tab -->
+                    <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete7">
+                    <label for="tabDoingIncomplete7" class="tabHeadingIncomplete">Video</label>
+                    <div class="tab" id="IncompleteJobInfoTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                        <form action="ajaxtechvideoupdt.php" method="post">
+                            <div class="incomplete-video">
+
+                            </div>
+                        </form>
+                    </div>
+
+                        <script type='text/javascript'>
+                            $(document).ready(function () {
+                                $('.Incomplete').click(function () {
+                                    var jobregister_id = $(this).data('id');
+                                    // AJAX request
+                                    $.ajax({
+                                        url: 'ajaxtechvideoupdt.php',
+                                        type: 'post',
+                                        data: { jobregister_id: jobregister_id },
+                                        success: function (response) {
+                                            // Add response in Modal body
+                                            $('.incomplete-video').html(response);
+                                            // Display Modal
+                                            $('#doubleClick-Incomplete').modal('show');
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
 					
 				
 			

@@ -262,16 +262,22 @@ if(!isset($_SESSION['username']))
 					    </div>
 						
 					    <div class="tabs" id="tab05">
-                           <h6 class="text-muted">Media</h6>
+                           <h6 class="text-muted">Photo</h6>
 					    </div>
+
+							 <div class="tabs" id="tab06">
+                            <h6 class="text-muted">Video</h6>
+						</div>
 						
-					    <div class="tabs" id="tab06">
+					    <div class="tabs" id="tab07">
                             <h6 class="text-muted">Job Status</h6>
 					    </div>
 
-                        <div class="tabs" id="tab07">
+                        <div class="tabs" id="tab08">
                             <h6 class="text-muted">Report</h6>
 						</div>
+
+					
           
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					        <span aria-hidden="true">&times;</span>
@@ -437,12 +443,12 @@ if(!isset($_SESSION['username']))
 
 
 
-<!--MEDIA-->						
+<!--PHOTOS-->						
 						
                         <fieldset id="tab051">
                             
 							
-						        <form action="ajaxtechphtoupdt.php" method="post">
+						        <form action="ajaxtechnicianphoto.php" method="post">
 									<div class="photo-details">
 									</div>
 								</form>	
@@ -456,7 +462,7 @@ if(!isset($_SESSION['username']))
         // AJAX request
         
 								$.ajax({
-								url: 'ajaxtechphtoupdt.php',
+								url: 'ajaxtechnicianphoto.php',
 								type: 'post',
 								data: {jobregister_id: jobregister_id},
 								success: function(response) {
@@ -472,10 +478,47 @@ if(!isset($_SESSION['username']))
 							</script>												
 						</fieldset>
 
+								<!--MEDIA-->
+
+                        <fieldset id="tab061">
+                            
+
+							    <form action="ajaxtechnicianvideo.php" method="post">
+									<div class="video-details">
+									</div>
+								</form>
+								
+								
+								<script type='text/javascript'>
+
+								$(document).ready(function() {
+								$('.card').click(function() {
+								var jobregister_id = $(this).data('id');
+        
+        // AJAX request
+        
+								$.ajax({
+								url: 'ajaxtechnicianvideo.php',
+								type: 'post',
+								data: {jobregister_id: jobregister_id},
+								success: function(response) {
+                
+        // Add response in Modal body
+								$('.video-details').html(response);
+        // Display Modal
+								$('#myModal').modal('show');
+								}
+							});
+						});
+					});
+							</script>                          
+                        </fieldset>
+
+
 
 <!--JOB STATUS-->
 
-                        <fieldset id="tab061">
+                        <fieldset id="tab071">
                            
 							
 							    <form action="ajaxtechjobstatus.php" method="post">
@@ -510,7 +553,7 @@ if(!isset($_SESSION['username']))
 
 <!--REPORT-->
 
-                        <fieldset id="tab071">
+                        <fieldset id="tab081">
                             
 
 							    <form action="ajaxreport.php" method="post">
@@ -544,6 +587,7 @@ if(!isset($_SESSION['username']))
 							</script>                          
                         </fieldset>
 
+				
 
 
 </div>
