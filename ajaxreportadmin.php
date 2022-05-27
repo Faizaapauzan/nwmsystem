@@ -115,8 +115,10 @@ form .submit-date label.details {
    
     </form>
   	<form id="view_form" method="post">
+    <div style="display:flex;">
     <button  style="padding: 8px 44px; border-radius: 4px;" class="userinfo" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>New</button></n>
-    <button  style="padding: 8px 44px; border-radius: 4px; margin-inline: 5px; background-color: #f43636 ;" class="useredit" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>Edit</button>
+    <button  style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" class="useredit" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>Edit</button>
+    </div>  
     </form>
     </div>
 
