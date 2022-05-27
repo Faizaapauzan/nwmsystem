@@ -11,7 +11,7 @@ include_once 'dbconnect.php';
         if (isset($_POST['jobregister_id'])) {
             $jobregister_id =$_POST['jobregister_id'];
   
-            $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
+            $query = ("SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'");
             $query_run = mysqli_query($conn, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
@@ -339,7 +339,7 @@ tr td:first-child:before {
                 }
         </script>
     
-    <form action="" method="POST">
+    <form action="servicereport.php" method="post">
 
     <div class="SRno">Service Report No:<input type="text" name="srvcreportnumber" id="numbreport" value="" class="serviceno" /></div></center>
     
@@ -353,15 +353,14 @@ tr td:first-child:before {
                 
         if (isset($_POST['jobregister_id'])) {
             $jobregister_id =$_POST['jobregister_id'];
-            $query = ("SELECT * FROM service_report WHERE jobregister_id='$jobregister_id'");
+            $query = ("SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'");
             $query_run = mysqli_query($connection, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
 
-<input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
-    <form action="servicereport.php" method="post">
     <section class="store-user mt-5">
     <div class="col-10">
     <div class="row bb pb-3">
@@ -375,10 +374,9 @@ tr td:first-child:before {
     <p><label>Service Type :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 2px;" name="job_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['job_name'] ?>"/></span></p>
     <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input" /></span></p>
    
-
     <br/>
     <p>Problem Description :-</p> 
-    <span style="writing-mode: horizontal-tb !important;
+    <textarea style="writing-mode: horizontal-tb !important;
     font-family: Arial;
     font-size: 13px;
     font-weight: 500;
@@ -389,6 +387,7 @@ tr td:first-child:before {
     cursor: text;
     white-space: pre-wrap;
     overflow-wrap: break-word;
+    overflow:hidden;
     column-count: initial !important;
     width: 311px;
     height: auto;
@@ -398,11 +397,19 @@ tr td:first-child:before {
     resize: none;
     box-sizing: border-box;
     border-style: solid;" 
-    class="textarea" role="textarea" contenteditable>
-    <?php foreach($query_run as $res) :?>
-    <?php echo $res['remark_desc'];?>&#13;&#10;
-    <?php endforeach;?>
-    </span>
+    id="autoresizing" name="Problem_Description" value=""></textarea>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+    <script type="text/javascript">
+    $('#autoresizing').on('input', function () {
+        this.style.height = 'auto';
+          
+        this.style.height = 
+                (this.scrollHeight) + 'px';
+    });
+    </script>
+ 
     </div>
 
     <div class="try2">
@@ -412,8 +419,9 @@ tr td:first-child:before {
     <p><label style="position:absolute;">Machine Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" class="textarea" role="textarea" contenteditable><?php echo $row['machine_name'] ?></span><input type="hidden" name="machine_name" value="<?php echo $row['machine_name'] ?>" class="input" /></p>
     <p><label>Serial Number :</label><span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input"/></span></p>
     <br/>
+
     <p>Submitted Items :-</p>
-    <span style="writing-mode: horizontal-tb !important;
+    <textarea style="writing-mode: horizontal-tb !important;
     font-family: Arial;
     font-size: 13px;
     font-weight: 500;
@@ -424,6 +432,7 @@ tr td:first-child:before {
     cursor: text;
     white-space: pre-wrap;
     overflow-wrap: break-word;
+    overflow:hidden;
     column-count: initial !important;
     width: 311px;
     height: auto;
@@ -432,12 +441,17 @@ tr td:first-child:before {
     border-width: 1px;
     resize: none;
     box-sizing: border-box;
-    border-style: solid;" 
-     class="textarea" role="textarea" contenteditable>
-    <?php foreach($query_run as $res) :?>
-    <?php echo $res['remark_solution'];?>&#13;&#10;
-    <?php endforeach;?>
-    </span>
+    border-style: solid;"
+    id="autoresizing_item" name="Submitted_Items" value=""></textarea>
+
+     <script type="text/javascript">
+        $('#autoresizing_item').on('input', function () {
+            this.style.height = 'auto';
+              
+            this.style.height = 
+                    (this.scrollHeight) + 'px';
+        });
+    </script>
 
     <br/></div>
     <br/><br/>
@@ -549,9 +563,11 @@ tr td:first-child:before {
                 var cust = $('input[name=cust]').val();
                 var custphone = $('input[name=custphone]').val();
                 var Travel_Time = $('input[name=Travel_Time]').val();
+                var Submitted_Items = $('textarea[name=Submitted_Items]').val();
+                var Problem_Description = $('textarea[name=Problem_Description]').val();
 
                 if(jobregister_id!= '', date!= '', customer_name!= '', cust_phone1!= '', job_name!= '', job_assign!= '', technician_arrival!= '', technician_leaving!= '', machine_name!= '', serialnumber!= '',
-                srvcreportnumber!= '', Issue_By!= '', report!= '', cust!= '', custphone!= '', Travel_Time!= '')
+                srvcreportnumber!= '', Issue_By!= '', report!= '', cust!= '', custphone!= '', Travel_Time!= '', Submitted_Items!= '', Problem_Description!= '')
                   {
                     var formData = {jobregister_id: jobregister_id,
                                     date: date,
@@ -568,7 +584,9 @@ tr td:first-child:before {
                                     report: report,
                                     cust: cust,
                                     custphone: custphone,
-                                    Travel_Time: Travel_Time};
+                                    Travel_Time: Travel_Time,
+                                    Submitted_Items: Submitted_Items,
+                                    Problem_Description: Problem_Description};
                                     
                     $('#message').html('<span style="color: red">Processing form. . . please wait. . .</span>');
                     $.ajax({

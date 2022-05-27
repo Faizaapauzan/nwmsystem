@@ -663,7 +663,7 @@
             });
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingBoon" id="tabDoingBoon3">
         <label for="tabDoingBoon3" class="tabHeadingBoon"> Remarks </label>
         <div class="tab">
@@ -691,7 +691,7 @@
                     });
                 });
             });
-        </script>
+        </script> -->
 
 
         <!--Double click Accessories -->
@@ -953,7 +953,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz3">
         <label for="tabDoingHafiz3" class="tabHeadingHafiz">Remark</label>
         <div class="tab" id=HafizJobInfoTab>
@@ -985,7 +985,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
  
 
@@ -1266,7 +1266,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir3">
         <label for="tabDoingHamir3" class="tabHeadingHamir">Remarks</label>
         <div class="tab" id="HamirJobInfoTab">
@@ -1297,7 +1297,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir4">
@@ -1530,7 +1530,7 @@
         </script>
 
 
-        <!--Double click Update-->
+        <!-- Double click Update
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa2">
         <label for="tabDoingHwa2" class="tabHeadingHwa">Update</label>
         <div class="tab" id="HwaJobInfoTab">
@@ -1560,9 +1560,9 @@
                 });
             });
 
-        </script>
+        </script> -->
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa3">
         <label for="tabDoingHwa3" class="tabHeadingHwa">Remarks</label>
         <div class="tab" id="HwaJobInfoTab">
@@ -1592,7 +1592,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa4">
@@ -1819,7 +1819,7 @@
 
         </script>
 
-        <!--Double click Update-->
+        <!-- Double click Update
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk2">
         <label for="tabDoingIsk2" class="tabHeadingIsk">Update</label>
         <div class="tab" id="IskJobInfoTab">
@@ -1849,9 +1849,9 @@
                 });
             });
 
-        </script>
+        </script> -->
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk3">
         <label for="tabDoingIsk3" class="tabHeadingIsk">Remarks</label>
         <div class="tab" id="IskJobInfoTab">
@@ -1882,7 +1882,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk4">
@@ -2142,7 +2142,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn3">
         <label for="tabDoingJohn3" class="tabHeadingJohn">Remarks</label>
         <div class="tab" id=JohnJobInfoTab>
@@ -2171,7 +2171,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn4">
@@ -2435,7 +2435,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie3">
         <label for="tabDoingJunJie3" class="tabHeadingJunJie">Remarks</label>
         <div class="tab" id=JunJieJobInfoTab>
@@ -2464,7 +2464,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
 
         <!--Double click Accessories -->
@@ -2726,7 +2726,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill3">
         <label for="tabDoingRazwill3" class="tabHeadingRazwill">Remarks</label>
         <div class="tab" id=RazwillJobInfoTab>
@@ -2755,7 +2755,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
 
         <!--Double click Accessories -->
@@ -3017,7 +3017,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingSahele" id="tabDoingSahele3">
         <label for="tabDoingSahele3" class="tabHeadingSahele">Remarks</label>
         <div class="tab" id="SaheleJobInfoTab">
@@ -3046,7 +3046,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
  
         <!--Double click Accessories -->
@@ -3306,7 +3306,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly3">
         <label for="tabDoingSazaly3" class="tabHeadingSazaly">Remarks</label>
         <div class="tab" id="SazalyJobInfoTab">
@@ -3335,7 +3335,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly4">
@@ -3594,7 +3594,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan3">
         <label for="tabDoingFaizan3" class="tabHeadingFaizan">Remarks</label>
         <div class="tab" id="FaizanJobInfoTab">
@@ -3623,7 +3623,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan4">
@@ -3883,7 +3883,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin3">
         <label for="tabDoingFauzin3" class="tabHeadingFauzin">Remarks</label>
         <div class="tab" id="FauzinJobInfoTab">
@@ -3912,7 +3912,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
 
         <!--Double click Accessories -->
@@ -4175,7 +4175,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan3">
         <label for="tabDoingIzaan3" class="tabHeadingIzaan">Remarks</label>
         <div class="tab" id="IzaanJobInfoTab">
@@ -4204,7 +4204,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan4">
@@ -4465,7 +4465,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam3">
         <label for="tabDoingSalam3" class="tabHeadingSalam">Remarks</label>
         <div class="tab" id="SalamJobInfoTab">
@@ -4494,7 +4494,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam4">
@@ -4760,7 +4760,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingTeck" id="tabDoingTeck3">
         <label for="tabDoingTeck3" class="tabHeadingTeck">Remarks</label>
         <div class="tab" id="TeckJobInfoTab">
@@ -4789,7 +4789,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
 
         <!--Double click Accessories -->
@@ -5051,7 +5051,7 @@
             });
         </script>
 
-         <!--Double click Remarks-->
+         <!-- Double click Remarks
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat3">
         <label for="tabDoingAizat3" class="tabHeadingAizat"> Remarks </label>
         <div class="tab">
@@ -5080,7 +5080,7 @@
                      });
                  });
             });
-        </script>
+        </script> -->
 
 <!--Double click Accessories -->
 
@@ -5322,7 +5322,7 @@
                             });
                         </script>
 
-                            <!--Double click Remarks-->
+                            <!-- Double click Remarks
         <input type="radio" name="tabDoingPending" id="tabDoingPending3">
         <label for="tabDoingPending3" class="tabHeadingPending">Remarks</label>
         <div class="tab" id="PendingJobInfoTab">
@@ -5351,7 +5351,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 						
             <!-- Pending Accessories Tab -->
 
@@ -5609,7 +5609,7 @@
                             });
                         </script>
 
-            <!-- Incomplete Remark Tab -->
+            <!-- Incomplete Remark Tab
 
                     <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete3">
                     <label for="tabDoingIncomplete3" class="tabHeadingIncomplete">Remarks</label>
@@ -5640,7 +5640,7 @@
                                     });
                                 });
                             });
-                        </script>						
+                        </script>						 -->
 							
 							
             <!-- Incomplete Accessories Tab -->
