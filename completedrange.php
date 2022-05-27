@@ -125,7 +125,7 @@
 
         </script>
 
-        <!--Double click Remarks-->
+        <!-- Double click Remarks
         <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted3">
         <label for="tabDoingCompleted3" class="tabHeadingComplete">Remarks</label>
         <div class="tabC" id="completedJobInfoTab">
@@ -154,7 +154,7 @@
                 });
             });
 
-        </script>
+        </script> -->
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted4">
