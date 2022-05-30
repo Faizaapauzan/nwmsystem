@@ -5220,7 +5220,7 @@
                             <?php
                                 include 'dbconnect.php';
                                 
-                                $results = $conn->query("SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status
+                                $results = $conn->query("SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status, reason
                                                          FROM job_register WHERE job_status = 'Pending'
                                                          ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                 $numRow = "SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status
@@ -5246,6 +5246,7 @@
 									<li><?php echo $row['machine_type']?></li>
 									<li><?php echo $row['job_description']?></li>
 									<li><?php echo $row['job_status']?></li>
+                                    <li><b>Pending Reason: </b><?php echo $row['reason']?></li>
 									</ul>
 								</div>
                             <?php } ?>                              
@@ -5503,7 +5504,7 @@
                             <?php
                                 include 'dbconnect.php';
                                 
-                                $results = $conn->query("SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status
+                                $results = $conn->query("SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status, reason
                                                          FROM job_register WHERE job_status = 'Incomplete'
                                                          ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                 $numRow = "SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status
@@ -5529,6 +5530,7 @@
 											<li><?php echo $row['machine_type']?></li>
 											<li><?php echo $row['job_description']?></li>
 											<li><?php echo $row['job_status']?></li>
+                                            <b>Incomplete Reason: </b><?php echo $row['reason']?>
 										</ul>
 									</div>
 									<?php } ?>                              

@@ -18,7 +18,7 @@ if($_SESSION['staff_position']==""){
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
    	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <title>NWM Technician Page</title>
+    <title>NWM Store Page</title>
     <link href="css/testing.css"rel="stylesheet" />
 	
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
@@ -48,14 +48,8 @@ if($_SESSION['staff_position']==""){
              <i class='bx bx-log-out'></i>
          </a>
      </div> -->
-
    
     </nav>
-
-
-
-
-
         
         <div class="container">
         <div style="text-align: center; font-size: 35px; font-weight: bold;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
@@ -71,11 +65,14 @@ if($_SESSION['staff_position']==""){
               FROM
               job_register
               WHERE
-              accessories_required = 'Yes' AND job_status = ''
-               OR
-               job_assign = '{$_SESSION['username']}' AND job_status = 'Incomplete'
-               OR
-               job_assign = '{$_SESSION['username']}' AND job_status = ''
+                accessories_required = 'Yes' AND job_status = ''
+                  OR
+                staff_position = 'Storekeeper' AND job_status = ''
+                  OR
+                accessories_required = 'Yes' AND job_status = 'Incomplete'
+                  OR
+                staff_position = 'Storekeeper' AND job_status = 'Incomplete'
+                 
 
 
               ORDER BY jobregisterlastmodify_at
@@ -102,7 +99,6 @@ if($_SESSION['staff_position']==""){
               <?php } ?>
 
             </div>
-
 
             <div class="column">
             <p class="column-title" id="doing">Doing</p>
@@ -118,8 +114,7 @@ if($_SESSION['staff_position']==""){
               WHERE
               accessories_required = 'Yes' AND job_status = 'Doing'
                OR
-               job_assign = '{$_SESSION['username']}' AND job_status = 'Doing'
-
+              staff_position = 'Storekeeper' AND job_status = 'Doing'
 
               ORDER BY jobregisterlastmodify_at
               DESC LIMIT 50");
@@ -145,7 +140,6 @@ if($_SESSION['staff_position']==""){
 
             </div>
 
-
             <div class="column">
               <p class="column-title"id="pending" >Accessories Ready</p>
 
@@ -157,7 +151,7 @@ if($_SESSION['staff_position']==""){
               FROM
               job_register
               WHERE
-              job_assign = '{$_SESSION['username']}' AND job_status = 'Ready'
+              staff_position = 'Storekeeper' AND job_status = 'Ready'
               OR
               accessories_required = 'Yes' AND job_status = 'Ready'
               ORDER BY jobregisterlastmodify_at
@@ -194,7 +188,7 @@ if($_SESSION['staff_position']==""){
               include 'dbconnect.php';
 
               $results = $conn->query("SELECT
-              jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
+              jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status, reason
               FROM
               job_register
               WHERE
@@ -202,7 +196,9 @@ if($_SESSION['staff_position']==""){
               OR
               staff_position = 'Storekeeper' AND job_status = 'Not Ready'
               OR
-              job_assign = '{$_SESSION['username']}' AND job_status = 'Pending'
+              accessories_required = 'Yes' AND job_status = 'Pending'
+              OR
+              staff_position = 'Storekeeper' AND job_status = 'Pending'
 
 
               ORDER BY jobregisterlastmodify_at
@@ -220,6 +216,7 @@ if($_SESSION['staff_position']==""){
                     <li><?php echo $row['job_order_number']?></li>
                     <li><?php echo $row['job_name']?></li>
                     <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+                    <li><b>Pending Reason: </b><?php echo $row['reason']?></li>
                   </ul>
                     <div class="status"  id="pendingStatus">
                     <?php echo $row['job_status']?>

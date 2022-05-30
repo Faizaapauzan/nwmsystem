@@ -336,7 +336,7 @@ tr td:first-child:before {
     overflow:hidden;
     column-count: initial !important;
     width: 311px;
-    height: auto;
+    height: 72px;
     margin: 19px;
     padding: 1px 2px;
     border-width: 1px;
@@ -382,7 +382,7 @@ tr td:first-child:before {
     column-count: initial !important;
     width: 311px;
     min-height: 10px;
-    height: auto;
+    height: 72px;
     margin: 19px;
     padding: 1px 2px;
     border-width: 1px;
@@ -561,9 +561,9 @@ tr td:first-child:before {
                         var res = JSON.parse(response);
                         console.log(res);
                         if(res.success == true)
-                        alert('Form is successfully saved');
+                        alert('Report is successfully updated');
                         else
-                        alert('Form not submitted');
+                        alert('Report failed to update');
                       }
                     });
                   }

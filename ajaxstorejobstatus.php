@@ -17,7 +17,7 @@ session_start();
             while ($row = mysqli_fetch_array($query_run)) {
                 ?>
 
-    <form action="" method="post">
+    <form action="ajaxstorejobstatus.php" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     
     <div class="JobStatusUpdate">
@@ -30,6 +30,29 @@ session_start();
             <option value="Not Ready" <?php if($row['job_status'] == "Not Ready") { echo "SELECTED"; } ?>>Not ready</option>
         </select>
     </div>
+
+    <!--PENDING & INCOMPLETE REASON-->
+
+  <div id="reason" class="form-group row">
+    <label for="reason" class="col-sm-2 col-form-label">Reason</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputreason" name="reason" value="<?php echo $row['reason'] ?>">
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function myFunctionStore() {
+      var x = document.getElementById("job_status").value;
+      if(x == 'Pending' || x == 'Incomplete'){
+        document.getElementById("reason").style.display = 'block';
+      }
+      else {
+        document.getElementById("reason").style.display = 'none';
+      }
+    }
+</script>
+  
+<!--PENDING & INCOMPLETE END REASON-->
     
     <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
@@ -42,11 +65,13 @@ session_start();
 if (isset($_POST['update'])) {
     
     $job_status = $_POST['job_status'];
+    $reason = $_POST['reason'];
     $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
     
     $query = "UPDATE job_register SET
     
     job_status ='$job_status',
+    reason ='$reason',
     jobregisterlastmodify_by ='$jobregisterlastmodify_by'
     
     

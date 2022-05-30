@@ -165,7 +165,7 @@ if(!isset($_SESSION['username']))
 						include 'dbconnect.php';
 						$results = $conn->query("SELECT
 						jobregister_id, job_order_number, job_priority, job_name, customer_name,
-						customer_grade, job_status, job_description, machine_name, machine_type, serialnumber
+						customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason
 						FROM
 						job_register
 						WHERE
@@ -189,6 +189,7 @@ if(!isset($_SESSION['username']))
 										<li><?php echo $row['machine_name']?></li>
 										<li><?php echo $row['machine_type']?></li>
 										<li><?php echo $row['serialnumber']?></li>
+										<li><b>Pending Reason: </b><?php echo $row['reason']?></li>
 									</ul>
 										<div class="status"  id="pendingStatus">
 										<?php echo $row['job_status']?>

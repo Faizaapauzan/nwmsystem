@@ -51,6 +51,7 @@
 
 
  <form id="techstatus_form" method="post">
+
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
   <div class="form-group">
@@ -64,27 +65,28 @@
         </select>
   </div>
 
+<!--PENDING & INCOMPLETE REASON-->
 
-<!--PENDING & INCOMPLETE-->
-
-
-
-
-
-  <!--  <div class="form-group row">
+  <div id="reason" class="form-group row">
     <label for="reason" class="col-sm-2 col-form-label">Reason</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Type Here">
+      <input type="text" class="form-control" id="inputreason" name="reason" value="<?php echo $row['reason'] ?>">
     </div>
-  </div> -->
+  </div>
+
+  <script type="text/javascript">
+    function myFunction() {
+      var x = document.getElementById("job_status").value;
+      if(x == 'Pending' || x == 'Incomplete'){
+        document.getElementById("reason").style.display = 'block';
+      }
+      else {
+        document.getElementById("reason").style.display = 'none';
+      }
+    }
+</script>
   
-
-
-
-
-<!--PENDING & INCOMPLETE END-->
-
-
+<!--PENDING & INCOMPLETE END REASON-->
 
     <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
@@ -96,23 +98,25 @@
 <br><br>
 </form>
 
-
 <script type="text/javascript">
 
             function submitFormstatus()
               {
                 var job_status = $('select[name=job_status]').val();
+                var reason = $('input[name=reason]').val();
                 var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
                 var jobregister_id = $('input[name=jobregister_id]').val();
                 
                 if(job_status!='' || job_status=='',
+                   reason!='' || reason=='',
                    jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='',
                    jobregister_id!='' || jobregister_id=='')
 
                   {
                     var formData = {job_status: job_status,
-                        jobregisterlastmodify_by: jobregisterlastmodify_by,
-                        jobregister_id: jobregister_id};
+                                        reason: reason,
+                      jobregisterlastmodify_by: jobregisterlastmodify_by,
+                                jobregister_id: jobregister_id};
                                     
                     $.ajax({
                             url: "techstatusindex.php", 
