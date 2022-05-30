@@ -42,6 +42,40 @@
       height: 50%;
     }
 
+        
+form .upload-photo .input-box {
+  padding-left: 49px;
+  margin-bottom: 1px;
+  margin-top: 7px;
+  /* width: calc(100% / 2 - -302px); */
+  padding: 0 -9px 0 15px;
+}
+form .upload-photo label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.upload-photo .input-box input,
+.upload-photo .input-box select {
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.upload-photo .input-box input:focus,
+.upload-photo .input-box input:valid,
+.upload-photo .input-box select:focus,
+.upload-photo .input-box select:valid {
+  border-color: #081d45;
+}
+
+
+
 
   </style>
 
