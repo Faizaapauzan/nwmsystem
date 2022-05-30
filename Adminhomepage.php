@@ -229,7 +229,7 @@
                             <?php
                                 include 'dbconnect.php';
                             
-                                $results = $conn->query("SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status FROM job_register WHERE
+                                $results = $conn->query("SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status, reason FROM job_register WHERE
                                                                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                                                                     OR
                                                                 accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
@@ -268,6 +268,7 @@
 										<li><?php echo $row['job_description']?></li>
 										<li><b><?php echo $row['accessories_required']?></b> accessories required</li>
 										<li><?php echo $row['job_status']?></li>
+                                        <strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
 										</ul>
 								</div>
                             <?php } ?>             
@@ -356,18 +357,14 @@
 
         </div>
     </div>						
-						
-						
-				
-				
-						
+
                         <div class="box" id="myModal">
                               <div class="box_topic">Store</div>
 
                              <?php
                                 include 'dbconnect.php';
                                 
-                                $results = $conn->query("SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status FROM job_register WHERE
+                                $results = $conn->query("SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status, reason FROM job_register WHERE
                                                                (accessories_required = 'Yes' AND job_status = ''
                                                                     OR
                                                                 staff_position = 'Storekeeper' AND job_status = ''
@@ -414,6 +411,7 @@
 													<li><?php echo $row['machine_type']?></li>
 													<li><?php echo $row['job_description']?></li>
 													<li><?php echo $row['job_status']?></li>
+                                                    <strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
 												</ul>
 										</div>
 												<?php } ?>                                                           
@@ -544,7 +542,7 @@
         <?php
         include 'dbconnect.php';
                                 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                 (job_assign = 'Boon' AND job_status = ''
                 OR
                 job_assign = 'Boon' AND job_status = 'Doing'
@@ -832,7 +830,7 @@
         <?php
         include 'dbconnect.php';
                                 
-        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+        $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                 (job_assign = 'Hafiz' AND job_status = ''
                 OR
                 job_assign = 'Hafiz' AND job_status = 'Doing'
@@ -1142,7 +1140,7 @@
                     include 'dbconnect.php';
                                 
                     $results = $conn->query("SELECT
-                    jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status
+                    jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason
                     FROM job_register WHERE
                     (job_assign = 'Hamir' AND job_status = ''
                     OR
@@ -1440,7 +1438,7 @@
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                 (job_assign = 'Hwa' AND job_status = ''
                 OR
                 job_assign = 'Hwa' AND job_status = 'Doing'
@@ -1731,7 +1729,7 @@
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                         (job_assign = 'Isk' AND job_status = ''
                         OR
                         job_assign = 'Isk' AND job_status = 'Doing'
@@ -2020,7 +2018,7 @@
                 <?php
                 include 'dbconnect.php';
                                 
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                         (job_assign = 'John' AND job_status = ''
                         OR
                         job_assign = 'John' AND job_status = 'Doing'
@@ -2314,7 +2312,7 @@
                             
             <?php
                 include 'dbconnect.php';                
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                         (job_assign = 'Jun Jie' AND job_status = ''
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Doing'
@@ -2604,7 +2602,7 @@
                             
                 <?php
                     include 'dbconnect.php';
-                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                             (job_assign = 'Will' AND job_status = ''
                             OR
                             job_assign = 'Will' AND job_status = 'Doing'
@@ -2896,7 +2894,7 @@
                             
                 <?php
                     include 'dbconnect.php';
-                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                    $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                             (job_assign = 'Sahele' AND job_status = ''
                             OR
                             job_assign = 'Sahele' AND job_status = 'Doing'
@@ -3184,7 +3182,7 @@
                             
                 <?php
                  include 'dbconnect.php';
-                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+                $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                         (job_assign = 'Sazaly' AND job_status = ''
                         OR
                         job_assign = 'Sazaly' AND job_status = 'Doing'
@@ -3473,7 +3471,7 @@
                             
             <?php
             include 'dbconnect.php';
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                     (job_assign = 'Faizan' AND job_status = ''
                     OR
                     job_assign = 'Faizan' AND job_status = 'Doing'
@@ -3761,7 +3759,7 @@
                             
             <?php
             include 'dbconnect.php';
-            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status FROM job_register WHERE
+            $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
                     (job_assign = 'Fauzin' AND job_status = ''
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Doing'
@@ -5530,7 +5528,7 @@
 											<li><?php echo $row['machine_type']?></li>
 											<li><?php echo $row['job_description']?></li>
 											<li><?php echo $row['job_status']?></li>
-                                            <b>Incomplete Reason: </b><?php echo $row['reason']?>
+                                            <li><b>Incomplete Reason: </b><?php echo $row['reason']?></li>
 										</ul>
 									</div>
 									<?php } ?>                              

@@ -88,7 +88,7 @@ if(!isset($_SESSION['username']))
 								include 'dbconnect.php';
 								$results = $conn->query("SELECT
 								jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-								customer_grade, job_status, job_description, machine_name
+								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason
 								FROM
 								job_register
 								WHERE
@@ -111,6 +111,9 @@ if(!isset($_SESSION['username']))
 										<li><?php echo $row['job_description']?></li>
 										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['machine_name']?></li>
+										<li><?php echo $row['machine_type']?></li>
+										<li><?php echo $row['serialnumber']?></li>
+										<strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
 										</ul>
 										<div class="status"  id="incompleteStatus">
 										<?php echo $row['job_status']?>
@@ -129,7 +132,7 @@ if(!isset($_SESSION['username']))
 							include 'dbconnect.php';
 							$results = $conn->query("SELECT
 							jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-							customer_grade, job_status, job_description, machine_name
+							customer_grade, job_status, job_description, machine_name, machine_type, serialnumber
 							FROM
 							job_register
 							WHERE
@@ -151,6 +154,8 @@ if(!isset($_SESSION['username']))
 										<li><?php echo $row['job_description']?></li>
 										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['machine_name']?></li>
+										<li><?php echo $row['machine_type']?></li>
+										<li><?php echo $row['serialnumber']?></li>
 										</ul>
 										<div class="status"  id="doingStatus">
 										<?php echo $row['job_status']?>
@@ -211,7 +216,7 @@ if(!isset($_SESSION['username']))
 						include 'dbconnect.php';
 						$results = $conn->query("SELECT
 						jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-						customer_grade, job_status, machine_name, job_description
+						customer_grade, job_status, machine_name, job_description, machine_type, serialnumber
 						FROM
 						job_register
 						WHERE
@@ -233,6 +238,8 @@ if(!isset($_SESSION['username']))
 										<li><?php echo $row['job_description']?></li>
 										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['machine_name']?></li>
+										<li><?php echo $row['machine_type']?></li>
+										<li><?php echo $row['serialnumber']?></li>
 									</ul>
 										<div class="status"  id="completedStatus">
 										<?php echo $row['job_status']?>
