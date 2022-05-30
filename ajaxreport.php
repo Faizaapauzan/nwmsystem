@@ -69,14 +69,15 @@ $date = date('d-m-y');
       <tr data-row-id="<?php echo $res['jobregister_id'];?>">
         <td style="display:none;"></td>
             <td><label>Service Report Date :</label><?php echo $date; ?></td>
-         <td><button class="userinfo btn btn-success" type="button" data-id='<?php echo $res['jobregister_id']; ?>'>VIEW</button></td>
+         <td><button class="userinfo btn btn-success" type="button" data-id='<?php echo $res['jobregister_id']; ?>'>NEW</button></td>
+         <td><button class="useredit btn btn-success" type="button" style="background:#081d45;" data-id2='<?php echo $res['jobregister_id']; ?>'>EDIT</button></td>
       </tr>
 	  <?php endforeach;?>
    </tbody>
 </table>
 
 
-<!-- FOR VIEW SERVICE REPORT-->	
+<!-- FOR NEW SERVICE REPORT-->	
 	    <script type='text/javascript'>
         $(document).ready(function(){
         $('.userinfo').click(function(){
@@ -93,6 +94,26 @@ $date = date('d-m-y');
                 });
             });
     </script>
+<!-- FOR NEW SERVICE REPORT-->
+
+<!-- FOR EDIT SERVICE REPORT-->	
+<script type='text/javascript'>
+        $(document).ready(function(){
+        $('.useredit').click(function(){
+        var jobregister_id = $(this).data('id2');
+        $.ajax({
+            url: 'servicereportEDIT.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(data){
+            var win = window.open('servicereportEDIT.php');
+            win.document.write(data);
+                        }
+                    });
+                });
+            });
+    </script>
+<!-- FOR EDIT SERVICE REPORT-->	
 
 
 

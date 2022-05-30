@@ -34,12 +34,16 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!=''
     &&
    isset($_POST['custphone']) && $_POST['custphone']!=''
     &&
-   isset($_POST['Travel_Time']) && $_POST['Travel_Time']!='')
+   isset($_POST['Travel_Time']) && $_POST['Travel_Time']!=''
+    &&
+   isset($_POST['Submitted_Items']) && $_POST['Submitted_Items']!=''
+    &&
+   isset($_POST['Problem_Description']) && $_POST['Problem_Description']!='')
 
     {
         
         $sql = "INSERT INTO servicereport ( jobregister_id, date, customer_name, cust_phone1, job_name, job_assign, technician_arrival, technician_leaving, machine_name, serialnumber,
-                                           srvcreportnumber, Issue_By, report, cust, custphone, Travel_Time) 
+                                           srvcreportnumber, Issue_By, report, cust, custphone, Travel_Time, Submitted_Items, Problem_Description) 
                        
                        VALUES ('".addslashes($_POST['jobregister_id'])."',
                                '".addslashes($_POST['date'])."',
@@ -56,7 +60,9 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!=''
                                '".addslashes($_POST['report'])."',
                                '".addslashes($_POST['cust'])."',
                                '".addslashes($_POST['custphone'])."',
-                               '".addslashes($_POST['Travel_Time'])."')";
+                               '".addslashes($_POST['Travel_Time'])."',
+                               '".addslashes($_POST['Submitted_Items'])."',
+                               '".addslashes($_POST['Problem_Description'])."')";
         
         if($conn->query($sql))
         {

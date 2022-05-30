@@ -115,7 +115,10 @@ form .submit-date label.details {
    
     </form>
   	<form id="view_form" method="post">
-    <button  style="padding: 8px 44px; border-radius: 4px;" class="userinfo" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>View</button>
+    <div style="display:flex;">
+    <button  style="padding: 8px 44px; border-radius: 4px;" class="userinfo" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>New</button></n>
+    <button  style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" class="useredit" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>Edit</button>
+    </div>  
     </form>
     </div>
 
@@ -135,6 +138,25 @@ form .submit-date label.details {
                 });
             });
     </script>
+
+    <!-- FOR EDIT SERVICE REPORT-->	
+    <script type='text/javascript'>
+        $(document).ready(function(){
+        $('.useredit').click(function(){
+        var jobregister_id = $(this).data('id');
+        $.ajax({
+            url: 'servicereportEDIT.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(data){
+            var win = window.open('servicereportEDIT.php');
+            win.document.write(data);
+                        }
+                    });
+                });
+            });
+    </script>
+    <!-- FOR EDIT SERVICE REPORT-->	
 
     <?php
     }
