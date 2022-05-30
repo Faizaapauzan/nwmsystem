@@ -261,7 +261,7 @@ include 'dbconnect.php';
                             </div>
                              <div class="input-box">
                                 <label for="customerPhone" class="details">Phone 2</label>
-                                <input type="text" id="phone1" name="cust_phone1" placeholder="Enter Customer Phone">
+                                <input type="text" id="phone2" name="cust_phone2" placeholder="Enter Customer Phone">
                             </div>
                              <input type="hidden" name="customercreated_by" id="customercreatedby" value="<?php echo $_SESSION["username"] ?>" readonly>
                             <input type="hidden" name="customerlasmodify_by" id="customerlasmodifyby" value="<?php echo $_SESSION["username"] ?>" readonly>

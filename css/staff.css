@@ -84,10 +84,11 @@
   margin-left: 85%;
   margin-bottom: 5px;
   margin-top: -40px;
+  margin-right: 3px;
 }
 
 #btnRegister {
-  background: #2f456e;
+  background: #081d45;
 }
 
 .staffUpdateDeleteBtn {
@@ -95,6 +96,9 @@
   width: 70%;
   table-layout: fixed;
   border-collapse: collapse;
+  /* padding-left: 158px;
+  padding-right: 57px;
+  margin-left: 179px; */
 }
 
 .updatetech form .staff-details {

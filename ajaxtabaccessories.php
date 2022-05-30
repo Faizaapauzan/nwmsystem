@@ -296,10 +296,8 @@ if (accessories_id != '') {
 			var fieldHTML = `
 
 		<div class="field-element">
-   
-        <div class="model">
-         <?php
-include 'dbconnect.php';
+    <div class="model">
+         <?php include 'dbconnect.php';
 
     if (isset($_POST['jobregister_id'])) {
 
@@ -322,6 +320,7 @@ include 'dbconnect.php';
         }
         }
  ?>
+ 
  <select style="width: 90%;"  id="select_box" class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
 <?php include "dbconnect.php";  // Using database connection file here
                     $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 

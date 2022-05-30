@@ -73,7 +73,7 @@ session_start();
 <div class="input-group mb-3">
   <input readonly type="text" class="form-control" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
   <div class="input-group-append">
-    <button class="buttonbiru" onclick="test2()" type="button">Arrival</button>
+    <button style="padding-left: 64px;" class="buttonbiru" onclick="test2()" type="button">Arrival</button>
   </div>
              <script type="text/javascript">
               function test2()
@@ -91,7 +91,7 @@ session_start();
 <div class="input-group mb-3">
   <input readonly type="text" class="form-control" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
   <div class="input-group-append">
-    <button class="buttonbiru" onclick="test3()" type="button">Leaving</button>
+    <button style="padding-left: 51px;" class="buttonbiru" onclick="test3()" type="button">Leaving</button>
   </div>
               <script type="text/javascript">
               function test3()
@@ -106,11 +106,12 @@ session_start();
                 </script>
 </div>
 
+    <label for="Location" class="details">Location</label>
   <div class="input-boxLocation" id="inputLocationBox">
-                <label for="Location" class="details">Location</label>
+            
                 <div class="add_field_button1"></div>
-                <textarea style="width: 290px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
-                <textarea style="width: 290px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
+                <textarea style="width: 210px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
+                <textarea style="width: 210px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
 				
               </div>
 
@@ -122,7 +123,7 @@ session_start();
             
             <p class="control"><b id="message"></b></p>
             <div class="updateBtn">
-              <button type="button" id="update_tech" name="update_tech" value="Update" class="buttonbiru" onclick="submitForm();">Update</button>
+              <button style="padding-left: 26px;" type="button" id="update_tech" name="update_tech" value="Update" class="buttonbiru" onclick="submitForm();">Update</button>
       
               <!-- <button type="submit" id="submit" name="update" class="btn btn-primary"> Update  </button> -->
             </div>           

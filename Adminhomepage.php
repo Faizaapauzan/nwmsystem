@@ -13,7 +13,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-     <title>NWM Admin Page</title>
+     <title>Admin Homepage</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
     <link rel="stylesheet" href="style.css">

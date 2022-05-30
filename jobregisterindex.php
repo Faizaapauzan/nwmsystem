@@ -65,9 +65,30 @@
 	 cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, machine_code, machine_name,
      machine_type, machine_brand, serialnumber, accessories_required, jobregistercreated_by, jobregisterlastmodify_by)
 
-    VALUES ('default', '$job_code', '$job_name', '$job_order_number', '$job_description', '$customer_code',
-     '$customer_name', '$customer_grade', '$job_priority', '$requested_date', '$delivery_date', ' $customer_PIC', '$cust_phone1', '$cust_phone2',
-     '$cust_address1', '$cust_address2', '$cust_address3', '$machine_code', '$machine_name', '$machine_type','$machine_brand', '$serialnumber' , '$accessories_required', '$jobregistercreated_by', '$jobregisterlastmodify_by' )";
+VALUES ('default','".addslashes($_POST['job_code'])."',
+    	'".addslashes($_POST['job_name'])."',
+        '".addslashes($_POST['job_order_number'])."',
+        '".addslashes($_POST['job_description'])."',
+		'".addslashes($_POST['customer_code'])."',
+        '".addslashes($_POST['customer_name'])."',
+        '".addslashes($_POST['customer_grade'])."',
+		'".addslashes($_POST['job_priority'])."',
+		'".addslashes($_POST['requested_date'])."',
+		'".addslashes($_POST['delivery_date'])."',
+		 '".addslashes($_POST['customer_PIC'])."',
+        '".addslashes($_POST['cust_phone1'])."',
+        '".addslashes($_POST['cust_phone2'])."',
+        '".addslashes($_POST['cust_address1'])."',
+        '".addslashes($_POST['cust_address2'])."',
+        '".addslashes($_POST['cust_address3'])."',
+        '".addslashes($_POST['machine_code'])."',
+        '".addslashes($_POST['machine_name'])."',
+        '".addslashes($_POST['machine_type'])."',
+		'".addslashes($_POST['machine_brand'])."',
+        '".addslashes($_POST['serialnumber'])."',
+        '".addslashes($_POST['accessories_required'])."',
+        '".addslashes($_POST['jobregistercreated_by'])."',
+        '".addslashes($_POST['jobregisterlastmodify_by'])."')";
 
 
 	if (mysqli_query($conn, $sql)) {

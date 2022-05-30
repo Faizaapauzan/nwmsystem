@@ -51,86 +51,86 @@ session_start();
 
   <div class="col-md-6">
     <label for="" class="form-label">Job Priority</label>
-    <input type="text" class="form-control" id="job_priority" name="job_priority" value="<?php echo $row['job_priority']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="job_priority" value="<?php echo $row['job_priority']?>" style="background-color: white;" readonly>
   </div>
   
   <div class="col-md-6">
     <label for="" class="form-label">Job Order Number</label>
-    <input type="text" class="form-control" id="job_order_number" name="job_order_number" value="<?php echo $row['job_order_number']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="job_order_number" value="<?php echo $row['job_order_number']?>" style="background-color: white;" readonly>
   </div>
   
   <div class="col-md-6">
     <label for="" class="form-label">Job Name</label>
-    <input type="text" class="form-control" id="job_name" name="job_name" value="<?php echo $row['job_name']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="job_name" value="<?php echo $row['job_name']?>" style="background-color: white;" readonly>
   </div>  
   
   <div class="col-md-6">
     <label for="" class="form-label">Requested Date</label>
-    <input type="date" class="form-control" id="requested_date" name="requested_date" value="<?php echo $row['requested_date']?>" style="background-color: white;" readonly>
+    <input type="date" class="form-control" id="requested_date" value="<?php echo $row['requested_date']?>" style="background-color: white;" readonly>
   </div>   
   
   <div class="col-md-6">
     <label for="" class="form-label">Delivery Date</label>
-    <input type="date" class="form-control" id="delivery_date" name="delivery_date" value="<?php echo $row['delivery_date']?>" style="background-color: white;" readonly>
+    <input type="date" class="form-control" id="delivery_date" value="<?php echo $row['delivery_date']?>" style="background-color: white;" readonly>
   </div>   
   
   <div class="col-md-6">
     <label for="" class="form-label">Customer Name</label>
-    <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?php echo $row['customer_name']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="customer_name" value="<?php echo $row['customer_name']?>" style="background-color: white;" readonly>
   </div> 
 
   <div class="col-md-6">
     <label for="" class="form-label">Customer Grade</label>
-    <input type="text" class="form-control" id="customer_grade" name="customer_grade" value="<?php echo $row['customer_grade']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="customer_grade" value="<?php echo $row['customer_grade']?>" style="background-color: white;" readonly>
   </div> 
 
   <div class="col-md-6">
     <label for="" class="form-label">Job Description</label>
-    <input type="text" class="form-control" id="job_description" name="job_description" value="<?php echo $row['job_description']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="job_description" value="<?php echo $row['job_description']?>" style="background-color: white;" readonly>
   </div> 
 
   <div class="col-md-6">
     <label for="" class="form-label">Customer Address</label>
-    <input type="text" class="form-control" id="customer_address1" name="customer_address1" value="<?php echo $row['cust_address1']?>" style="background-color: white;" readonly>
-	<input type="text" class="form-control" id="customer_address2" name="customer_address2" value="<?php echo $row['cust_address2']?>" style="background-color: white;" readonly>
-    <input type="text" class="form-control" id="customer_address3" name="customer_address3" value="<?php echo $row['cust_address3']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="customer_address1" value="<?php echo $row['cust_address1']?>" style="background-color: white;" readonly>
+	<input type="text" class="form-control" id="customer_address2" value="<?php echo $row['cust_address2']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="customer_address3" value="<?php echo $row['cust_address3']?>" style="background-color: white;" readonly>
   </div> 
 
   <div class="col-md-6">
     <label for="" class="form-label">Customer PIC</label>
-    <input type="text" class="form-control" id="customer_PIC" name="customer_PIC" value="<?php echo $row['customer_PIC']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="customer_PIC" value="<?php echo $row['customer_PIC']?>" style="background-color: white;" readonly>
   </div> 
 
   <div class="col-md-6">
     <label for="" class="form-label">Contact Number</label>
-    <input type="text" class="form-control" id="cust_phone1" name="cust_phone1" value="<?php echo $row['cust_phone1']?>" style="background-color: white;" readonly>
-	<input type="text" class="form-control" id="cust_phone2" name="cust_phone2" value="<?php echo $row['cust_phone2']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="cust_phone1" value="<?php echo $row['cust_phone1']?>" style="background-color: white;" readonly>
+	<input type="text" class="form-control" id="cust_phone2" value="<?php echo $row['cust_phone2']?>" style="background-color: white;" readonly>
   </div>   
   
   <div class="col-md-6">
     <label for="" class="form-label">Machine Name</label>
-    <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;" readonly>
   </div> 
   
   <div class="col-md-6">
     <label for="" class="form-label">Machine Type</label>
-    <input type="text" class="form-control" id="machine_type" name="machine_type" value="<?php echo $row['machine_type']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="machine_type" value="<?php echo $row['machine_type']?>" style="background-color: white;" readonly>
   </div> 
 
   <div class="col-md-6">
             <label for=""  class="form-label">Machine Serial Number</label>
-            <input type="text" class="form-control" name="serialnumber" style="background-color: white;" value="<?php echo $row['serialnumber']?>" readonly>
+            <input type="text" class="form-control" style="background-color: white;" value="<?php echo $row['serialnumber']?>" readonly>
         </div>
 
   <div class="col-md-6">
     <label for="" class="form-label">Machine Brand</label>
-    <input type="text" class="form-control" id="machine_brand" name="machine_brand" value="<?php echo $row['machine_brand']?>" style="background-color: white;" readonly>
+    <input type="text" class="form-control" id="machine_brand" value="<?php echo $row['machine_brand']?>" style="background-color: white;" readonly>
   </div>
   
   
   <div class="col-md-6">
     <label for="accessories_required">Accessories Required</label>
-    <select class="form-control" id="accessories_required">
+    <select class="form-control" id="accessories_required" name="accessories_required">
                 <option value='' <?php if ($row['accessories_required'] == '') {
                     echo "SELECTED";
                 } ?>></option>
@@ -144,22 +144,25 @@ session_start();
   </div>  
   
 
-
-
   <div class="col-md-6">
     <label for="job_assign">Job Assign To :</label>
-    <select class="form-control" id="jobassignto" onchange="GetJobAss(this.value)">
-			 <option value=""> <?php echo $row['job_assign']?> </option>
+  <select class="form-control" id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
                      <?php
         include "dbconnect.php";  // Using database connection file here
-       $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
+        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+            echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+            // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
-    ?></select>
-    <input type="hidden" name="job_assign" id='jobassign' value="<?php echo $row['job_assign']?>" onchange="GetJobAss(this.value)" readonly>
+    ?>
+<input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
+<input type="hidden" name="job_assign" id='username' value="<?php echo $row['job_assign']?>">
+<input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>  
+<input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>      
+</select>
+   
     </div>
 
 
@@ -248,6 +251,63 @@ $("#jobassistantto").on("change",function(){
 
 });
 </script>
+
+<script>
+		// onkeyup event will occur when the user
+		// release the key and calls the function
+		// assigned to this event
+		function GetJobAss(str) {
+			if (str.length == 0) {
+				document.getElementById("username").value = "";
+                document.getElementById("technician_rank").value = "";
+                 document.getElementById("staff_position").value = "";
+		
+               
+				return;
+			}
+			else {
+
+				// Creates a new XMLHttpRequest object
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+
+					// Defines a function to be called when
+					// the readyState property changes
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						// Typical action to be performed
+						// when the document is ready
+						var myObj = JSON.parse(this.responseText);
+
+						// Returns the response data as a
+						// string and store this array in
+						// a variable assign the value
+						// received to first name input field
+						
+						document.getElementById
+							("username").value = myObj[0];
+						
+						// Assign the value received to
+						// last name input field
+						document.getElementById(
+							"technician_rank").value = myObj[1];
+
+                            document.getElementById(
+							"staff_position").value = myObj[2];
+                            
+					}
+				};
+
+				// xhttp.open("GET", "filename", true);
+				xmlhttp.open("GET", "fetchtechnicianrank.php?staffregister_id=" + str, true);
+				
+				// Sends the request to the server
+				xmlhttp.send();
+			}
+		}
+	</script>
+
 
 
         </body></html>

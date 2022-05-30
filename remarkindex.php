@@ -16,7 +16,15 @@ if(isset($_POST['update_remark']))
     $s_remark_solution = $remark_solution[$index];
      
 
-    $sql = "INSERT INTO `technician_remark`(`jobregister_id`, `remark_desc`,`remark_solution`) VALUES ('$jobregister_id','$s_remark_desc','$s_remark_solution')";
+    $sql = "INSERT INTO `technician_remark`(`jobregister_id`, `remark_desc`,`remark_solution`) VALUES 
+    
+     
+    ('".addslashes($jobregister_id)."',
+    '".addslashes($s_remark_desc)."',
+     '".addslashes($s_remark_solution)."')";
+
+
+
     $query=mysqli_query($con,$sql) or die(mysqli_error($con));
 
     }

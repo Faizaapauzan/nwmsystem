@@ -79,20 +79,18 @@ session_start();
                         $customerlasmodify_by = $_POST['customerlasmodify_by'];
 
                         $query = "UPDATE customer_list SET
-customer_code='$customer_code',
-customer_name='$customer_name',
-customer_grade='$customer_grade',
-customer_PIC='$customer_PIC',
-cust_phone1='$cust_phone1',
-cust_phone2='$cust_phone2',
-cust_address1='$cust_address1',
-cust_address2='$cust_address2',
-cust_address3='$cust_address3',
-customerlasmodify_by='$customerlasmodify_by'
+            customer_code ='".addslashes($customer_code)."',
+            customer_name ='".addslashes($customer_name)."',
+            customer_grade ='".addslashes($customer_grade)."',
+            customer_PIC ='".addslashes($customer_PIC)."',
+            cust_phone1 ='".addslashes($cust_phone1)."',
+            cust_phone2 ='".addslashes($cust_phone2)."',
+            cust_address1 ='".addslashes($cust_address1)."',
+            cust_address2 ='".addslashes($cust_address2)."',
+            cust_address3 ='".addslashes($cust_address3)."',
+            customerlasmodify_by ='".addslashes($customerlasmodify_by)."'
 
-
-WHERE customer_id='$customer_id'";
-
+             WHERE  customer_id ='".addslashes($customer_id)."' ";
                         $query_run = mysqli_query($connection, $query);
 
                         if ($query_run) {

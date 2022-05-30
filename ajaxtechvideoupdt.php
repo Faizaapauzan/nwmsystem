@@ -41,16 +41,6 @@
       width: 50%;
       height: 50%;
     }
-
-    /* #ImageRow {
-      margin-right: 20px;
-      margin-left: 40px;
-      display: flex; 
-      width: 200px; 
-      height: 200px;
-
-    } */
-
     
 form .upload-report .input-box {
   padding-left: 49px;
@@ -83,13 +73,11 @@ form .upload-report label.details {
   border-color: #081d45;
 }
 
-
-
   </style>
 
 <body>	
 
-<form action="techvideoindex.php" method="post" enctype="multipart/form-data">
+ <form id="submitVideoBefore">
 
 <!-- for select job register id -->
 <div>
@@ -112,15 +100,19 @@ form .upload-report label.details {
 
  <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
   <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+  <div id="previewBeforeVideo"></div>
   <div class="update-form">
     <div class="upload-report">
     <div class="input-box" style="display: flex;">
-    <input type="file" name="videoFile[]" required multiple class="form-control">
-     <input type="submit" name="uploadVideoBtn" id="uploadVideoBtn" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+    <input type="file" class="form-control" name="multipleVideo[]" id="multipleVideo" required="" multiple>
+     <input type="submit" name="uploadVideo" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
     </div>
     </div>
+     <div class="message">
+    <p class="control"><b id="messageVideoBefore"></b></p>
+  </div>
                
- <!-- for select data from tech photo update database -->
+ <!-- for select data from tech video update database -->
  <?php include_once("dbconnect.php");
 
   if (isset($_POST['jobregister_id'])) {
@@ -133,23 +125,14 @@ form .upload-report label.details {
  
       <!-- Photos Table Before Service -->
       <div class="table-responsive">
-      <table>
-      <thead>
-      <tr>
-      <th scope="col">Video</th>
-      <th scope="col">Action</th>
-      </tr>
-      </thead>
-
-      <tbody>
+      <table style="box-shadow: 0 5px 10px #f7f7f7;" >
+      <tbody style="display: flex; flex-wrap: wrap; padding-left: 66px;">
 
 			<?php foreach($queryRecords as $res) :?>
-			<tr data-row-id="<?php echo $res['id'];?>">
-			<td col-index='2'><video width="150" height="120" src="image/<?=$res['video_url']?>" controls></video></td>
-	    <td><a href="image/<?php echo $res['video_url']; ?>" style="text-align:center;" download>Download</td>           
-			<td><span class='deletedv' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
-
-			</tr>
+			<tr style="display:grid; padding-left: 25px;" ><td><video width="170" height="150" src="image/<?=$res['video_url']?>" controls></video></td>       
+			<td ><span class='deletedv' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span>
+      </td>
+		</tr> 
 			<?php endforeach;?>
 
  
@@ -160,8 +143,59 @@ form .upload-report label.details {
  
         
 </form>
-<br/><br/>
-<form action="techvideoindex.php" method="post" enctype="multipart/form-data">
+
+<script type="text/javascript">
+        $(document).ready(function(){
+
+            function previewVideos() {
+
+                var $preview = $('#previewBeforeVideo').empty();
+                if (this.files) $.each(this.files, readAndPreview);
+
+                function readAndPreview(i, file) {
+                
+                var reader = new FileReader();
+
+                $(reader).on("load", function() {
+                  $preview.append($("<video/>", {src:this.result, height:100}));
+                });
+
+                reader.readAsDataURL(file);
+                
+              }
+
+            }
+
+            $('#multipleVideo').on("change", previewVideos);
+
+            $("#submitVideoBefore").on("submit", function(e){
+                e.preventDefault();
+                $.ajax({
+                    url  :"uploadvideo.php",
+                    type :"POST",
+                    cache:false,
+                    contentType : false, // you can also use multipart/form-data replace of false
+                    processData : false,
+                    data: new FormData(this),
+                   success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#messageVideoBefore').html('<span style="color: green">Video Uploaded!</span>');
+                        else
+                          $('#messageVideoBefore').html('<span style="color: red">Video cannot be Upload</span>');
+                      $("#multipleVideo").val("");
+                    }
+                });
+            });
+        });
+    </script>
+<br/>
+
+<!-- AFTER -->
+
+ <form id="submitAfterVideo">
 
 <!-- for select job register id -->
 <div>
@@ -180,17 +214,21 @@ form .upload-report label.details {
 
  <?php }  } } ?>
 
-  <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
+ <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
   <input type="hidden" id="description" name="description" value="Machine (After Service)">
+    <div id="previewAfterVideo"></div>
   <div class="update-form">
     <div class="upload-report">
     <div class="input-box" style="display: flex;">
-    <input type="file" name="videoFile[]" required multiple class="form-control">
-     <input type="submit" name="uploadVideoBtn" id="uploadVideoBtn" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+     <input type="file" class="form-control" name="multipleVideo[]" id="multipleAfterVideo" required="" multiple>
+     <input type="submit" name="uploadVideo" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
     </div>
     </div>
-               
- <!-- for select data from tech photo update database -->
+         <div class="message">
+    <p class="control"><b id="messageVideoAfter"></b></p>
+  </div>
+          
+     <!-- for select data from tech photo update database -->
  <?php include_once("dbconnect.php");
 
   if (isset($_POST['jobregister_id'])) {
@@ -200,26 +238,17 @@ form .upload-report label.details {
       $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
 
   } ?>
- 
-      <!-- Photos Table Before Service -->
-      <div class="table-responsive">
-      <table>
-      <thead>
-      <tr>
-      <th scope="col">Video</th>
-      <th scope="col">Action</th>
-      </tr>
-      </thead>
 
-      <tbody>
+    <!-- Photos Table After Service -->
+      <div class="table-responsive">
+      <table style="box-shadow: 0 5px 10px #f7f7f7;" >
+      <tbody style="display: flex; flex-wrap: wrap; padding-left: 66px;">
 
 			<?php foreach($queryRecords as $res) :?>
-			<tr data-row-id="<?php echo $res['id'];?>">
-			<td col-index='2'><video width="150" height="120" src="image/<?=$res['video_url']?>" controls></video></td>
-	    <td><a href="image/<?php echo $res['video_url']; ?>" style="text-align:center;" download>Download</td>           
-			<td><span class='deletedv' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
-
-			</tr>
+			<tr style="display:grid; padding-left: 25px;" ><td><video width="170" height="150" src="image/<?=$res['video_url']?>" controls></video></td>       
+			<td ><span class='deletedv' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span>
+      </td>
+		</tr> 
 			<?php endforeach;?>
 
  
@@ -231,8 +260,6 @@ form .upload-report label.details {
         
 </form>
     
-
-
 <script>
   $(document).ready(function(){
  // Delete 
@@ -268,42 +295,53 @@ form .upload-report label.details {
 });
 
 </script>
-
-<!-- 
-    <p>Preview</p>
-    <div id = "preview">
-
-  <script type="text/javascript">
-      function preview(){
-        var totalFiles = $('#fileImg').get(0).files.length;
-        for(var i = 0; i < totalFiles; i++){
-          $('#preview').append("<img src = '"+URL.createObjectURL(event.target.files[i])+"'>");
-        }
-      }
-
-      function submitData(){
+<script type="text/javascript">
         $(document).ready(function(){
-          var formData = new FormData();
 
-          var totalFiles = $("#fileImg").get(0).files.length;
-          for (var i = 0; i < totalFiles; i++) {
-              formData.append("fileImg[]", $("#fileImg").get(0).files[i]);
-          }
+            function previewVideos() {
 
-          $.ajax({
-            url: 'insertphoto.php',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success:function(response){
-              alert(response);
+                var $preview = $('#previewAfterVideo').empty();
+                if (this.files) $.each(this.files, readAndPreview);
+
+                function readAndPreview(i, file) {
+                
+                var reader = new FileReader();
+
+                $(reader).on("load", function() {
+                  $preview.append($("<video/>", {src:this.result, height:100}));
+                });
+
+                reader.readAsDataURL(file);
+                
+              }
+
             }
-          });
-        });
-      }
-    </script> -->
 
+            $('#multipleAfterVideo').on("change", previewVideos);
+
+            $("#submitAfterVideo").on("submit", function(e){
+                e.preventDefault();
+                $.ajax({
+                    url  :"uploadvideo.php",
+                    type :"POST",
+                    cache:false,
+                    contentType : false, // you can also use multipart/form-data replace of false
+                    processData : false,
+                    data: new FormData(this),
+                  success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#messageVideoAfter').html('<span style="color: green">Video Uploaded!</span>');
+                        else
+                          $('#messageVideoAfter').html('<span style="color: red">Video cannot be Upload</span>');
+                      $("#multipleAfterVideo").val("");
+                    }
+                });
+            });
+        });
+    </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

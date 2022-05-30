@@ -28,16 +28,27 @@
 </head>
 
 <style media="screen">
- 
-    
+    #preview{
+      display: flex;
+      width: 200px;
+      height: 200px;
+      border: 1px solid black;
+      margin-top: -15px;
+      flex-wrap: wrap;
+      overflow-y: scroll;
+    }
+    #preview img{
+      width: 50%;
+      height: 50%;
+    }
+
+        
 form .upload-photo .input-box {
-  padding-left: 40px;
-  margin-bottom: 17px;
+  padding-left: 49px;
+  margin-bottom: 1px;
   margin-top: 7px;
-  width: calc(100% / 2 - -231px);
+  /* width: calc(100% / 2 - -302px); */
   padding: 0 -9px 0 15px;
-      margin-left: -30px;
-    margin-right: 29px;
 }
 form .upload-photo label.details {
   display: block;
@@ -47,7 +58,7 @@ form .upload-photo label.details {
 .upload-photo .input-box input,
 .upload-photo .input-box select {
   height: 40px;
-  width: 200px;
+  width: 100%;
   outline: none;
   font-size: 16px;
   border-radius: 5px;
@@ -65,11 +76,12 @@ form .upload-photo label.details {
 
 
 
+
   </style>
 
 <body>	
 
-<form action="insertphoto.php" method="post" enctype="multipart/form-data">
+ <form id="submitForm">
 
 <!-- for select job register id -->
 <div>
@@ -92,12 +104,18 @@ form .upload-photo label.details {
 
  <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
   <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+  <div id="previewBefore"></div>
   <div class="update-form">
-    <div class="upload-photo">
+    <div class="upload-photo" style="padding-bottom: 10px; border-radius: 3px;">
     <div class="input-box" style="display: flex;">
-    <input type="file" name="imageFile[]" required multiple class="form-control">
-     <input type="submit" name="uploadImageBtn" id="uploadImageBtn" value="Upload Machine (Before Service)" style="font-size: 12px; background-color: #081d45; color: #fff; cursor: pointer;">
+    <input type="file" class="form-control" name="multipleFile[]" id="multipleFile" required="" multiple>
+     <input type="submit" name="upload" value="Upload Machine (Before Service)" style="font-size: 13px; background-color: #081d45; color: #fff; cursor: pointer;     padding-left: 15px;
+    padding-right: 12px;
+    border-radius: 4px;">
     </div>
+    </div>
+    <div class="message">
+    <p class="control"><b id="messageImagebefore"></b></p>
     </div>
                
  <!-- for select data from tech photo update database -->
@@ -113,23 +131,15 @@ form .upload-photo label.details {
  
       <!-- Photos Table Before Service -->
       <div class="table-responsive">
-      <table class="table m-0">
-      <thead>
-      <tr>
-      <th scope="col">Photo</th>
-      <th scope="col">Action</th>
-      </tr>
-      </thead>
-
-      <tbody>
+      <table style="box-shadow: 0 5px 10px #f7f7f7;" >
+      <tbody style="display: flex; flex-wrap: wrap;">
 
 			<?php foreach($queryRecords as $res) :?>
-			<tr data-row-id="<?php echo $res['id'];?>">
-			<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"></td>
-	    <td><a href="image/<?php echo $res['file_name']; ?>" style="text-align:center;" download>Download</td>           
-			<td><span class='deleted' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
-
-			</tr>
+			<tr style="display:grid; padding-left: 25px;" ><td><a href="image/<?php echo $res['file_name']; ?>" download>
+<img src="<?php echo 'image/'.$res['file_name']; ?>" id="display_image"></td>       
+			<td ><span class='deleted' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span>
+      </td>
+		</tr> 
 			<?php endforeach;?>
 
  
@@ -140,8 +150,56 @@ form .upload-photo label.details {
  
         
 </form>
-<br/><br/>
-<form action="insertphoto.php" method="post" enctype="multipart/form-data">
+
+<script type="text/javascript">
+        $(document).ready(function(){
+
+            function previewImages() {
+
+                var $preview = $('#previewBefore').empty();
+                if (this.files) $.each(this.files, readAndPreview);
+
+                function readAndPreview(i, file) {
+                
+                var reader = new FileReader();
+
+                $(reader).on("load", function() {
+                  $preview.append($("<img/>", {src:this.result, height:100}));
+                });
+
+                reader.readAsDataURL(file);
+                
+              }
+
+            }
+
+            $('#multipleFile').on("change", previewImages);
+
+            $("#submitForm").on("submit", function(e){
+                e.preventDefault();
+                $.ajax({
+                    url  :"uploads.php",
+                    type :"POST",
+                    cache:false,
+                    contentType : false, // you can also use multipart/form-data replace of false
+                    processData : false,
+                    data: new FormData(this),
+                    success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#messageImagebefore').html('<span style="color: green">Image Uploaded!</span>');
+                        else
+                          $('#messageImagebefore').html('<span style="color: red">Image cannot be Upload</span>');
+                      $("#multipleFile").val("");
+                    }
+                });
+            });
+        });
+    </script>
+<br/>
+ <form id="submitAfterForm">
 
 <!-- for select job register id -->
 <div>
@@ -160,14 +218,20 @@ form .upload-photo label.details {
 
  <?php }  } } ?>
 
- <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
+<b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
   <input type="hidden" id="description" name="description" value="Machine (After Service)">
+    <div id="previewAfter"></div>
   <div class="update-form">
-    <div class="upload-photo">
+    <div class="upload-photo" style="padding-bottom: 10px; border-radius: 3px;">
     <div class="input-box" style="display: flex;">
-    <input type="file" name="imageFile[]" required multiple class="form-control">
-     <input type="submit" name="uploadImageBtn" id="uploadImageBtn" value="Upload Machine (After Service)" style="font-size: 12px; background-color: #081d45; color: #fff; cursor: pointer;">
+     <input type="file" class="form-control" name="multipleFile[]" id="multipleAfter" required="" multiple>
+     <input type="submit" name="upload" value="Upload Machine (After Service)" style="font-size: 13px; background-color: #081d45; color: #fff; cursor: pointer;     padding-left: 15px;
+    padding-right: 12px;
+    border-radius: 4px;">
     </div>
+    </div>
+    <div class="message">
+    <p class="control"><b id="messageImageAfter"></b></p>
     </div>
           
      <!-- for select data from tech photo update database -->
@@ -183,23 +247,15 @@ form .upload-photo label.details {
 
     <!-- Photos Table Before Service -->
       <div class="table-responsive">
-       <table class="table m-0">
-      <thead>
-      <tr>
-      <th scope="col">Photo</th>
-      <th scope="col">Action</th>
-      </tr>
-      </thead>
-
-      <tbody>
+      <table style="box-shadow: 0 5px 10px #f7f7f7;" >
+      <tbody style="display: flex; flex-wrap: wrap;">
 
 			<?php foreach($queryRecords as $res) :?>
-			<tr data-row-id="<?php echo $res['id'];?>">
-			<td col-index='2'><img src="image/<?php echo $res['file_name']; ?>" id="display_image"></td>
-	    <td><a href="image/<?php echo $res['file_name']; ?>" style="text-align:center;" download>Download</td>           
-			<td><span class='deleted' style="color: red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
-
-			</tr>
+			<tr style="display:grid; padding-left: 25px;" ><td><a href="image/<?php echo $res['file_name']; ?>" download>
+<img src="<?php echo 'image/'.$res['file_name']; ?>" id="display_image"></td>       
+			<td ><span class='deleted' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span>
+      </td>
+		</tr> 
 			<?php endforeach;?>
 
  
@@ -211,8 +267,6 @@ form .upload-photo label.details {
         
 </form>
     
-
-
 <script>
   $(document).ready(function(){
  // Delete 
@@ -231,7 +285,7 @@ form .upload-photo label.details {
 
           if(response == 1){
 	    // Remove row from HTML Table
-	    $(el).closest('tr').css('background','tomato');
+	    // $(el).closest('td').css('background','tomato');
 	    $(el).closest('tr').fadeOut(800,function(){
 	       $(this).remove();
 	    });
@@ -248,7 +302,53 @@ form .upload-photo label.details {
 });
 
 </script>
+<script type="text/javascript">
+        $(document).ready(function(){
 
+            function previewImages() {
+
+                var $preview = $('#previewAfter').empty();
+                if (this.files) $.each(this.files, readAndPreview);
+
+                function readAndPreview(i, file) {
+                
+                var reader = new FileReader();
+
+                $(reader).on("load", function() {
+                  $preview.append($("<img/>", {src:this.result, height:100}));
+                });
+
+                reader.readAsDataURL(file);
+                
+              }
+
+            }
+
+            $('#multipleAfter').on("change", previewImages);
+
+            $("#submitAfterForm").on("submit", function(e){
+                e.preventDefault();
+                $.ajax({
+                    url  :"uploads.php",
+                    type :"POST",
+                    cache:false,
+                    contentType : false, // you can also use multipart/form-data replace of false
+                    processData : false,
+                    data: new FormData(this),
+                    success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#messageImageAfter').html('<span style="color: green">Image Uploaded!</span>');
+                        else
+                          $('#messageImageAfter').html('<span style="color: red">Image cannot be Upload</span>');
+                      $("#multipleAfter").val("");
+                    }
+                });
+            });
+        });
+    </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

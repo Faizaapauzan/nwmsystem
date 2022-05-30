@@ -131,7 +131,7 @@ include_once("dbconnect.php");
 
 <p class="control"><b id="remarkmessage"></b></p>
 <div class="updateBtn">
-<button type="button" id="update_remark" name="update_remark" value="Update" class="buttonbiru" style="width: auto;">Update</button>
+<button type="button" id="update_remark" name="update_remark" value="Update" class="buttonbiru" style="padding-left: 30px;">Update</button>
 
 <!-- <button type="submit" name="update" value="update">Update</button> -->
 </form></div>  

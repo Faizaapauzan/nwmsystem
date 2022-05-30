@@ -1,9 +1,11 @@
-<?php
-$connection = mysqli_connect("localhost","root","");
-$db = mysqli_select_db($connection, 'nwmsystem');
+	<?php
+	include 'dbconnect.php';
+	?> 
+	
 
-    if(isset($_POST['update']))
-    {   
+	<?php
+
+    if (isset($_POST['update'])) {
         $jobregister_id = $_POST['jobregister_id'];
         $technician_rank = $_POST['technician_rank'];
         $staff_position = $_POST['staff_position'];
@@ -28,49 +30,47 @@ $db = mysqli_select_db($connection, 'nwmsystem');
         $job_assign = $_POST['job_assign'];
         $Job_assistant = $_POST['Job_assistant'];
         $job_cancel = $_POST['job_cancel'];
-        $job_status = $_POST['job_status'];
+
         $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
 
-        $query = "UPDATE job_register SET
-                        
-job_priority='$job_priority',
-technician_rank='$technician_rank',
-staff_position='$staff_position',
-job_order_number='$job_order_number',
-job_name='$job_name',
-job_description='$job_description',
-requested_date='$requested_date',
-delivery_date='$delivery_date',
-customer_name='$customer_name',
-customer_grade='$customer_grade',
-cust_address1='$cust_address1',
-cust_address2='$cust_address2',
-cust_address3='$cust_address3',
-customer_PIC='$customer_PIC',
-cust_phone1='$cust_phone1',
-cust_phone2='$cust_phone2',
-machine_name='$machine_name',
-machine_type='$machine_type',
-machine_brand='$machine_brand',
-accessories_required='$accessories_required',
-job_assign ='$job_assign',
-Job_assistant ='$Job_assistant',
-job_cancel ='$job_cancel',
-job_status ='$job_status',
-jobregisterlastmodify_by ='$jobregisterlastmodify_by'
+        $sql = "UPDATE job_register SET
 
-WHERE jobregister_id='$jobregister_id'";
+            job_priority ='".addslashes($job_priority)."',
+            technician_rank ='".addslashes($technician_rank)."',
+            staff_position ='".addslashes($staff_position)."',
+            job_order_number ='".addslashes($job_order_number)."',
+            job_name ='".addslashes($job_name)."',
+            job_description ='".addslashes($job_description)."',
+            requested_date ='".addslashes($requested_date)."',
+            delivery_date ='".addslashes($delivery_date)."',
+            customer_name ='".addslashes($customer_name)."',
+            customer_grade ='".addslashes($customer_grade)."',
+            cust_address1 ='".addslashes($cust_address1)."',
+            cust_address2 ='".addslashes($cust_address2)."',
+            cust_address3 ='".addslashes($cust_address3)."',
+            customer_PIC ='".addslashes($customer_PIC)."',
+            cust_phone1 ='".addslashes($cust_phone1)."',
+            cust_phone2 ='".addslashes($cust_phone2)."',
+            machine_name ='".addslashes($machine_name)."',
+            machine_type ='".addslashes($machine_type)."',
+            machine_brand ='".addslashes($machine_brand)."',
+            accessories_required ='".addslashes($accessories_required)."',
+            job_assign ='".addslashes($job_assign)."',
+            Job_assistant ='".addslashes($Job_assistant)."',
+            job_cancel ='".addslashes($job_cancel)."',
 
- $query_run = mysqli_query($connection, $query);
+            jobregisterlastmodify_by ='".addslashes($jobregisterlastmodify_by)."'
 
-        {
+             WHERE  jobregister_id ='".addslashes($jobregister_id)."' ";
+        
+        if (mysqli_query($conn, $sql)) {
+            header("location: Adminhomepage.php");
+        } else {
+            echo "ERROR: Hush! Sorry $sql. "
+            . mysqli_error($conn);
+        }
 
-                        if ($query_run) {
-                            echo '<script> alert("Data Updated"); </script>';
-                            header("location:Adminhomepage.php");
-                        } else {
-                            echo '<script> alert("Data Not Updated"); </script>';
-                        }
-                    }
+        // Close connection
+        mysqli_close($conn);
     }
-             ?>
+	?>

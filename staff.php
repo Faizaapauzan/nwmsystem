@@ -44,8 +44,11 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
     <script src="js/number.js" type="text/javascript" defer></script>
     <script src="js/form-validation.js"></script>
 
+    <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
+<!-- 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/> -->
    
    <!-- Script -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -259,13 +262,19 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
 
         <div class="input-box">
         <label for="department" class="details">Department</label>
-        <input type="text" id="department" name="staff_department" placeholder="Enter department">
+        <select id="department" name="staff_department">
+                  <option value=""></option>
+        <option value="Management">Management</option>
+        <option value="Maintenance">Maintenance</option>
+        <option value="Store">Store</option>
+       
+        </select>
         </div>
 
         <div class="input-box">
         <label for="position" class="details">Position</label>
-        <select id="position" name="staff_position" required>
-        <option value=""></option>
+        <select id="position" name="staff_position">
+ <option value=""></option>
         <option value="Admin">Admin</option>
         <option value="Manager">Manager</option>
         <option value="Technician">Technician</option>
@@ -276,20 +285,20 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
         <div class="input-box">
         <label for="group" class="details">Group</label>
         <select id="staffgroup" name="staff_group">
-        <option value='' <?php if ($row['staff_group'] == '') { echo "SELECTED"; } ?>></option>
-        <option value="Service" <?php if ($row['staff_group'] == "Service") { echo "SELECTED"; } ?>>Service</option>
-        <option value="Management" <?php if ($row['staff_group'] == "Management") { echo "SELECTED"; } ?>>Management</option>
-        <option value="Storekeeper" <?php if ($row['staff_group'] == "Storekeeper") { echo "SELECTED"; } ?>>Storekeeper</option>
+        <option value=""></option>
+        <option value="Service">Service</option>
+        <option value="Management">Management</option>
+        <option value="Storekeeper">Storekeeper</option>
         </select>
         </div>
 
         <div class="input-box">
         <label for="techGroup" class="details">Technician Group</label>
         <select id="techGroup" name="technician_rank">
-        <option value='' <?php if ($row['technician_rank'] == '') { echo "SELECTED"; } ?>></option>
-        <option value="1st Leader" <?php if ($row['technician_rank'] == "1st Leader") { echo "SELECTED"; } ?>>1st Leader</option>
-        <option value="2nd Leader" <?php if ($row['technician_rank'] == "2nd Leader") { echo "SELECTED";} ?>>2nd Leader</option>
-        <option value="Assistant Leader" <?php if ($row['technician_rank'] == "Assistant Leader") { echo "SELECTED"; } ?>>Assistant Leader</option>
+        <option value=""></option>
+        <option value="1st Leader">1st Leader</option>
+        <option value="2nd Leader">2nd Leader</option>
+        <option value="Assistant Leader">Assistant Leader</option>
         </select>
         </div> 
 
@@ -300,8 +309,7 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
 
         <div class="input-box">
         <label for="password" class="details">Password</label>
-        <input type="password" id="password" name="password" oninput="validatepassword()" value="" class="form-control" placeholder="Enter Password" required>
-        <span style='color:red' id="message1"></span>  
+        <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required>
         </div>
 
         <?php if (isset($_SESSION["username"])) ?>
@@ -354,10 +362,10 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
             ?>
      
     <tr>
-        <td><?php echo $i; ?></td>
+        <td style="text-align: center;"><?php echo $i; ?></td>
         <td><?php echo $row["staff_fullname"]; ?></td>
-        <td><?php echo $row["employee_id"]; ?></td>
-        <td><?php echo $row["staff_position"]; ?></td>
+        <td style="text-align: center;"><?php echo $row["employee_id"]; ?></td>
+        <td style="text-align: center;"><?php echo $row["staff_position"]; ?></td>
         <td><div class='staffUpdateDeleteBtn'>
 <button data-staffregister_id="<?php echo $row["staffregister_id"]; ?>" class='userinfo' id='btnView'>View</button>
 <button data-staffregister_id="<?php echo $row["staffregister_id"];?>" class='updateinfo' id='btnEdit'>Update</button>

@@ -5,6 +5,7 @@
   header("location:index.php?error");
  }
 
+
 if(!isset($_SESSION['username']))
 	{	
     header("location:index.php?error");
@@ -17,10 +18,12 @@ if(!isset($_SESSION['username']))
 
   else
 	{
-		header("location:index.php?error");
+			header("location:index.php?error");
 	}
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -46,6 +49,8 @@ if(!isset($_SESSION['username']))
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
 </head>
 
+
+
 <body>
 
   <nav class="navbar">
@@ -69,18 +74,21 @@ if(!isset($_SESSION['username']))
     </div>
   </nav>
 
+
 <!--TODO-->
+
 
         <div class="container">
 			  <div style="text-align: center; font-size: 35px; font-weight: bold;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
 			
+      
 				<div class="column" >
 					<p class="column-title"id="doing" >Todo</p>
           <?php            
 								include 'dbconnect.php';
 								$results = $conn->query("SELECT
 								jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber
+								customer_grade, job_status, job_description, machine_name
 								FROM
 								job_register
 								WHERE
@@ -100,11 +108,9 @@ if(!isset($_SESSION['username']))
 										<ul class="b" id="draged">
 										<strong text-align="center"><?php echo $row['job_priority']?></strong>
 										<li><?php echo $row['job_order_number']?></li>
-										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['job_description']?></li>
+										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['machine_name']?></li>
-										<li><?php echo $row['machine_type']?></li>
-										<li><?php echo $row['serialnumber']?></li>
 										</ul>
 										<div class="status"  id="incompleteStatus">
 										<?php echo $row['job_status']?>
@@ -123,7 +129,7 @@ if(!isset($_SESSION['username']))
 							include 'dbconnect.php';
 							$results = $conn->query("SELECT
 							jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-							customer_grade, job_status, job_description, machine_name, machine_type, serialnumber
+							customer_grade, job_status, job_description, machine_name
 							FROM
 							job_register
 							WHERE
@@ -142,11 +148,9 @@ if(!isset($_SESSION['username']))
 										<ul class="b" id="draged">
 										<strong text-align="center"><?php echo $row['job_priority']?></strong>
 										<li><?php echo $row['job_order_number']?></li>
-										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['job_description']?></li>
+										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['machine_name']?></li>
-										<li><?php echo $row['machine_type']?></li>
-										<li><?php echo $row['serialnumber']?></li>
 										</ul>
 										<div class="status"  id="doingStatus">
 										<?php echo $row['job_status']?>
@@ -184,12 +188,15 @@ if(!isset($_SESSION['username']))
 									<ul class="b" id="draged">
 										<strong text-align="center"><?php echo $row['job_priority']?></strong>
 										<li><?php echo $row['job_order_number']?></li>
-										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['job_description']?></li>
+										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['machine_name']?></li>
+<<<<<<< HEAD
 										<li><?php echo $row['machine_type']?></li>
 										<li><?php echo $row['serialnumber']?></li>
 										<li><b>Pending Reason: </b><?php echo $row['reason']?></li>
+=======
+>>>>>>> 9f5b5a65cec6108ca49a5b888a611443654fc659
 									</ul>
 										<div class="status"  id="pendingStatus">
 										<?php echo $row['job_status']?>
@@ -206,8 +213,8 @@ if(!isset($_SESSION['username']))
 					<?php             
 						include 'dbconnect.php';
 						$results = $conn->query("SELECT
-						jobregister_id, job_order_number, job_priority, job_name, customer_name,
-						customer_grade, job_status, job_description, machine_name, machine_type, serialnumber
+						jobregister_id, job_order_number, job_priority, job_name, customer_name, 
+						customer_grade, job_status, machine_name, job_description
 						FROM
 						job_register
 						WHERE
@@ -226,11 +233,9 @@ if(!isset($_SESSION['username']))
 									<ul class="b" id="draged">
 										<strong text-align="center"><?php echo $row['job_priority']?></strong>
 										<li><?php echo $row['job_order_number']?></li>
-										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['job_description']?></li>
+										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['machine_name']?></li>
-										<li><?php echo $row['machine_type']?></li>
-										<li><?php echo $row['serialnumber']?></li>
 									</ul>
 										<div class="status"  id="completedStatus">
 										<?php echo $row['job_status']?>
@@ -263,16 +268,22 @@ if(!isset($_SESSION['username']))
 					    </div>
 						
 					    <div class="tabs" id="tab05">
-                           <h6 class="text-muted">Media</h6>
+                           <h6 class="text-muted">Photo</h6>
 					    </div>
+
+							 <div class="tabs" id="tab06">
+                            <h6 class="text-muted">Video</h6>
+						</div>
 						
-					    <div class="tabs" id="tab06">
+					    <div class="tabs" id="tab07">
                             <h6 class="text-muted">Job Status</h6>
 					    </div>
 
-                        <div class="tabs" id="tab07">
+                        <div class="tabs" id="tab08">
                             <h6 class="text-muted">Report</h6>
 						</div>
+
+					
           
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					        <span aria-hidden="true">&times;</span>
@@ -307,7 +318,6 @@ if(!isset($_SESSION['username']))
 						type: 'post',
 						data: {jobregister_id: jobregister_id},
 						success: function(response) {
-
 // Add response in Modal body
 
 						$('.tech-details').html(response);
@@ -323,10 +333,14 @@ if(!isset($_SESSION['username']))
 						</script>								
 						</fieldset>						
 						
+
+
+
 <!--UPDATE-->
 
                         <fieldset id="tab021">
                           
+
 								<form action="ajaxtechupdate.php" method="post">
 									<div class="techupdate-details">
 
@@ -361,8 +375,8 @@ if(!isset($_SESSION['username']))
                         </fieldset>
 
 
-<!-- REMARKS
-
+<!--REMARKS-->
+<!-- 
                         <fieldset id="tab031">
                           
 
@@ -435,12 +449,12 @@ if(!isset($_SESSION['username']))
 
 
 
-<!--MEDIA-->						
+<!--PHOTOS-->						
 						
                         <fieldset id="tab051">
                             
 							
-						        <form action="ajaxtechphtoupdt.php" method="post">
+						        <form action="ajaxtechnicianphoto.php" method="post">
 									<div class="photo-details">
 									</div>
 								</form>	
@@ -454,7 +468,7 @@ if(!isset($_SESSION['username']))
         // AJAX request
         
 								$.ajax({
-								url: 'ajaxtechphtoupdt.php',
+								url: 'ajaxtechnicianphoto.php',
 								type: 'post',
 								data: {jobregister_id: jobregister_id},
 								success: function(response) {
@@ -470,10 +484,49 @@ if(!isset($_SESSION['username']))
 							</script>												
 						</fieldset>
 
-<!--JOB STATUS-->
+								<!--MEDIA-->
 
                         <fieldset id="tab061">
+                            
+
+							    <form action="ajaxtechnicianvideo.php" method="post">
+									<div class="video-details">
+									</div>
+								</form>
+								
+								
+								<script type='text/javascript'>
+
+								$(document).ready(function() {
+								$('.card').click(function() {
+								var jobregister_id = $(this).data('id');
+        
+        // AJAX request
+        
+								$.ajax({
+								url: 'ajaxtechnicianvideo.php',
+								type: 'post',
+								data: {jobregister_id: jobregister_id},
+								success: function(response) {
+                
+        // Add response in Modal body
+								$('.video-details').html(response);
+        // Display Modal
+								$('#myModal').modal('show');
+								}
+							});
+						});
+					});
+							</script>                          
+                        </fieldset>
+
+
+
+<!--JOB STATUS-->
+
+                        <fieldset id="tab071">
                            
+							
 							    <form action="ajaxtechjobstatus.php" method="post">
 									<div class="techjobstatus-details">
 
@@ -506,7 +559,7 @@ if(!isset($_SESSION['username']))
 
 <!--REPORT-->
 
-                        <fieldset id="tab071">
+                        <fieldset id="tab081">
                             
 
 							    <form action="ajaxreport.php" method="post">
@@ -540,6 +593,7 @@ if(!isset($_SESSION['username']))
 							</script>                          
                         </fieldset>
 
+				
 
 
 </div>

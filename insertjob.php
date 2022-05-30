@@ -10,7 +10,15 @@ $job_description=$_POST['job_description'];
 $jobtypecreated_by = $_POST['jobtypecreated_by'];
 $jobtypelastmodify_by = $_POST['jobtypelastmodify_by'];
 
-$sql="INSERT INTO `jobtype_list`(`job_code`, `job_name`, `job_description`, `jobtypecreated_by`, `jobtypelastmodify_by`) VALUES ('$job_code','$job_name','$job_description','$jobtypecreated_by','$jobtypelastmodify_by')";
+$sql="INSERT INTO `jobtype_list`(`job_code`, `job_name`, `job_description`, `jobtypecreated_by`, `jobtypelastmodify_by`) 
+
+VALUES ('".addslashes($_POST['job_code'])."',
+		'".addslashes($_POST['job_name'])."',	
+        '".addslashes($_POST['job_description'])."',
+		'".addslashes($_POST['jobtypecreated_by'])."',
+		'".addslashes($_POST['jobtypelastmodify_by'])."')";
+
+
 $query=mysqli_query($conn,$sql) or die(mysqli_error($conn));
 if($query)
 {
