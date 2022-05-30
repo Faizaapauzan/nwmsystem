@@ -191,12 +191,9 @@ if(!isset($_SESSION['username']))
 										<li><?php echo $row['job_description']?></li>
 										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
 										<li><?php echo $row['machine_name']?></li>
-<<<<<<< HEAD
 										<li><?php echo $row['machine_type']?></li>
 										<li><?php echo $row['serialnumber']?></li>
 										<li><b>Pending Reason: </b><?php echo $row['reason']?></li>
-=======
->>>>>>> 9f5b5a65cec6108ca49a5b888a611443654fc659
 									</ul>
 										<div class="status"  id="pendingStatus">
 										<?php echo $row['job_status']?>
