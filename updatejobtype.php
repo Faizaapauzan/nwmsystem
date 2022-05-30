@@ -56,7 +56,15 @@ session_start();
                         $job_description = $_POST['job_description'];
                         $jobtypelastmodify_by = $_POST['jobtypelastmodify_by'];
 
-                        $query = "UPDATE jobtype_list SET job_code='$job_code', job_name='$job_name', job_description='$job_description', jobtypelastmodify_by='$jobtypelastmodify_by' WHERE jobtype_id='$jobtype_id'  ";
+                        $query = "UPDATE jobtype_list SET 
+
+                        job_code ='".addslashes($job_code)."',
+                        job_name ='".addslashes($job_name)."',
+                        job_description ='".addslashes($job_description)."',
+                        jobtypelastmodify_by ='".addslashes($jobtypelastmodify_by)."'
+
+                        WHERE  jobtype_id ='".addslashes($jobtype_id)."' ";
+                        
                         $query_run = mysqli_query($connection, $query);
 
                         if ($query_run) {

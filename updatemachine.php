@@ -95,17 +95,17 @@ session_start();
                         $machinelistlastmodify_by = $_POST['machinelistlastmodify_by'];
 
                         $query = "UPDATE machine_list SET
-machine_code='$machine_code',
-machine_name='$machine_name',
-machine_type='$machine_type',
-machine_brand='$machine_brand',
-serialnumber='$serialnumber',
-customer_name='$customer_name',
-purchase_date='$purchase_date',
-machine_description='$machine_description',
-machinelistlastmodify_by='$machinelistlastmodify_by'
+            machine_code ='".addslashes($machine_code)."',
+            machine_name ='".addslashes($machine_name)."',
+            machine_type ='".addslashes($machine_type)."',
+            machine_brand ='".addslashes($machine_brand)."',
+            serialnumber ='".addslashes($serialnumber)."',
+            customer_name ='".addslashes($customer_name)."',
+            purchase_date ='".addslashes($purchase_date)."',
+            machine_description ='".addslashes($machine_description)."',
+            machinelistlastmodify_by ='".addslashes($machinelistlastmodify_by)."'
 
-WHERE machine_id='$machine_id'";
+             WHERE  machine_id ='".addslashes($machine_id)."' ";
 
                         $query_run = mysqli_query($connection, $query);
 

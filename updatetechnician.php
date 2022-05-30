@@ -16,7 +16,7 @@
 ?>
       
                 
-                    <div class="row" >
+            
                         <div class="updatetech">
                             <form action="updatetechnician.php" method="post">
                                 <div class="staff-details">

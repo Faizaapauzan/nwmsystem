@@ -207,7 +207,7 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
     <section class="home-section">
     <nav>
                 <div class="home-content">
-                      <i class='bx bx-menu' ></i>
+                <i class='bx bx-menu' ></i>
                           <a>
 						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
                           </a>
@@ -225,7 +225,7 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
         </div>
 
         <div class="datalist-wrapper">    
-        <div class="col-lg-12" style="border: none; padding-left: 8px;">
+        <div class="col-lg-12" style="border: none; padding-right: 8px; padding-left: 8px;">
 
     <table class="table table-striped sortable">
     <thead>

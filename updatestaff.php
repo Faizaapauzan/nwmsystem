@@ -43,7 +43,12 @@
 
                                 <div class="input-box">
                                     <label for=""> Department </label>
-                                    <input type="text" name="staff_department" id="staff_department" class="form-control" value="<?php echo $row['staff_department'] ?>">
+                                    <select type="text" id="staff_department" name="staff_department" value="<?php echo $row['staff_department'] ?>">
+            <option value="Management" <?php if($row['staff_department'] == "Management") { echo "SELECTED"; } ?>>Management</option>
+            <option value="Maintenance" <?php if($row['staff_department'] == "Maintenance") { echo "SELECTED"; } ?>>Maintenance</option>
+            <option value="Store" <?php if($row['staff_department'] == "Store") { echo "SELECTED"; } ?>>Store</option>
+
+                                    </select>
                                 </div>
 
                                 <div class="input-box">
@@ -85,6 +90,9 @@
                                     <label for=""> Password </label>
                                     <input type="text" name="password" id="password" class="form-control" value="<?php echo $row['password'] ?>">
                                 </div>
+
+                                <?php if (isset($_SESSION["username"])) ?>
+                                <input type="hidden" name="staffregisterlastmodify_by" id="staffregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
 
                                 <button type="submit" name="update" class="btn btn-primary"> Update Data </button>
                                 </form>

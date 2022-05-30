@@ -18,8 +18,26 @@ include 'dbconnect.php';
     $technician_rank = $_POST['technician_rank'];
     $username = $_POST['username'];
     $password= $_POST['password'];
+    $staffregisterlastmodify_by = $_POST['staffregisterlastmodify_by'];
 
-     $query = "UPDATE staff_register SET staff_fullname='$staff_fullname', employee_id='$employee_id', staff_phone='$staff_phone', staff_email='$staff_email', staff_department='$staff_department', staff_position='$staff_position', staff_group='$staff_group', technician_group='$technician_group', technician_rank='$technician_rank', username='$username', password='$password' WHERE staffregister_id='$staffregister_id'  ";
+     $query = "UPDATE staff_register SET 
+
+    staff_fullname ='".addslashes($staff_fullname)."',
+    employee_id ='".addslashes($employee_id)."',
+    staff_phone ='".addslashes($staff_phone)."',
+    staff_email ='".addslashes($staff_email)."',
+    staff_department ='".addslashes($staff_department)."',
+    staff_position ='".addslashes($staff_position)."',
+    staff_group ='".addslashes($staff_group)."',
+    technician_group ='".addslashes($technician_group)."',
+    technician_rank ='".addslashes($technician_rank)."',
+    username ='".addslashes($username)."',
+    password ='".addslashes($password)."',
+    staffregisterlastmodify_by ='".addslashes($staffregisterlastmodify_by)."'
+
+    WHERE  staffregister_id ='".addslashes($staffregister_id)."' ";
+     
+     
      $query_run = mysqli_query($conn, $query);
      
 if ($query_run) {

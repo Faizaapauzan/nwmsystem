@@ -94,9 +94,7 @@ include_once("dbconnect.php");
 
 
                         <!-- Responsive table -->
-                        <div class="table-responsive" style=" width: 70%;
-  margin-left: 3px;
-  overflow-x: auto;">
+                        <div class="table-responsive" style=" width: 75%; margin-left: -6px; overflow-x: auto;">
                             <table class="table m-0">
                                 <thead>
                                     <tr>
@@ -130,7 +128,7 @@ include_once("dbconnect.php");
 </div>  
 <p class="control"><b id="acctechmessage"></b></p>
 <div class="updateBtn">
-<button type="button" id="update_acc" name="update_acc" value="Update" class="btn btn-primary" style="margin-left: -143px;">Update</button>
+<button type="button" id="update_acc" name="update_acc" value="Update" class="btn btn-primary" style="margin-left: -168px; background-color: #081d45; border: none;" >Update</button>
 </div>
 </form> 
 
@@ -245,11 +243,11 @@ $(document).ready(function(){
 					{   
 						//$("#loading").hide();
 						if(!response.error) {
-							$("#mesej").removeClass('alerts-danger');
-							$("#mesej").addClass('alerts-success').html(response.message);
+							$("#acctechmessage").removeClass('alerts-danger');
+							$("#acctechmessage").addClass('alerts-success').html(response.acctechmessage);
 						} else {
-							$("#mesej").removeClass('alerts-success');
-							$("#mesej").addClass('alerts-danger').html(response.message);
+							$("#acctechmessage").removeClass('alerts-success');
+							$("#acctechmessage").addClass('alerts-danger').html(response.acctechmessage);
 						}
 					}   
 				});

@@ -35,7 +35,17 @@ include 'dbconnect.php';
 
 
 					
-VALUES ('$customer_code', '$customer_name', '$customer_grade', ' $customer_PIC', '$cust_phone1', '$cust_phone2', '$cust_address1', '$cust_address2', '$cust_address3', '$customercreated_by', '$customerlasmodify_by')";
+  VALUES ('".addslashes($_POST['customer_code'])."',
+        '".addslashes($_POST['customer_name'])."',
+        '".addslashes($_POST['customer_grade'])."',
+        '".addslashes($_POST['customer_PIC'])."',
+        '".addslashes($_POST['cust_phone1'])."',
+        '".addslashes($_POST['cust_phone2'])."',
+        '".addslashes($_POST['cust_address1'])."',
+        '".addslashes($_POST['cust_address2'])."',
+        '".addslashes($_POST['cust_address3'])."',
+        '".addslashes($_POST['customercreated_by'])."',
+		'".addslashes($_POST['customerlasmodify_by'])."')";
 
 
 			if (mysqli_query($conn, $sql)) {

@@ -259,7 +259,7 @@ $query = $conn->query("SELECT * FROM job_register");
         <div class="machineList">
             <h1>Job Listing</h1>
 			<div class="addAccessoriesBtn">
-                <button style="color:#ccc;" class="btn-reset" onclick="document.location='adminjoblisting.php'">Refresh</button>
+                <button class="btn-reset" onclick="document.location='adminjoblisting.php'">Refresh</button>
             </div>
 			
             <div class="datalist-wrapper">    
@@ -487,7 +487,7 @@ $query = $conn->query("SELECT * FROM job_register");
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingInfo" id="tabDoingInfo5">
-        <label for="tabDoingInfo5" class="tabHeadingInfo">Media</label>
+        <label for="tabDoingInfo5" class="tabHeadingInfo">Photo</label>
         <div class="tab" id="JobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-info').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
@@ -514,6 +514,38 @@ $query = $conn->query("SELECT * FROM job_register");
                 });
                      });
         </script>
+
+          <!--Double click Video-->
+        <input type="radio" name="tabDoingInfo" id="tabDoingInfo7">
+        <label for="tabDoingInfo7" class="tabHeadingInfo">Video</label>
+        <div class="tab" id="JobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-info').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdt.php" method="post">
+        <div class="info-video">
+
+        </div></form></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.JobInfo',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-video').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+
 
         <!--Double click Report-->
         <input type="radio" name="tabDoingInfo" id="tabDoingInfo6">

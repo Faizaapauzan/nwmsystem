@@ -69,6 +69,7 @@
   width: 24%;
   margin: 0 5px 5px 8px;
   background-color: #09275eef;
+  z-index: auto;
 }
 
 .jobRegisterContainer input[type="text"],
