@@ -2,6 +2,11 @@
 session_start();
 ?>
 
+<style>
+#reason {
+  display:none;  
+}
+</style>
 <?php
 
     $connection = mysqli_connect("localhost", "root", "");
@@ -22,7 +27,7 @@ session_start();
     
     <div class="JobStatusUpdate">
         <label for="Accessories" class="details">Job Status Update</label>
-        <select type="text" id="job_status" name="job_status">
+        <select type="text" id="job_status" name="job_status" onchange="myFunction()">
             <option value='' <?php if($row['job_status'] == '') { echo "SELECTED"; } ?>></option>
             <option value="Doing" <?php if($row['job_status'] == "Doing") { echo "SELECTED"; } ?>>Doing</option>            
             <option value="Pending" <?php if($row['job_status'] == "Pending") { echo "SELECTED"; } ?>>Pending</option>
@@ -43,7 +48,7 @@ session_start();
   <script type="text/javascript">
     function myFunctionStore() {
       var x = document.getElementById("job_status").value;
-      if(x == 'Pending' || x == 'Incomplete'){
+      if(x == 'Pending' || x == 'Not Ready'){
         document.getElementById("reason").style.display = 'block';
       }
       else {
