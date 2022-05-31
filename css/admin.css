@@ -196,7 +196,7 @@ input[type="datetime-local"] {
 }
 
 .modal .techClose {
-  right: 442px;
+  right: 509px;
   top: -49px;
   width: 30px;
   height: 30px;
@@ -223,7 +223,7 @@ input[type="datetime-local"] {
 .tabs {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -261,7 +261,7 @@ input[type="datetime-local"] {
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 .tabs input[type="radio"] {

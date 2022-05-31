@@ -13,7 +13,7 @@ session_start();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/tab.css"rel="stylesheet" />
-<link href="css/ajaxstoreupdate.css"rel="stylesheet" />
+<link href="css/ajaxstoreupdateADMIN.css"rel="stylesheet" />
 </head>
 
 <body>
@@ -31,10 +31,10 @@ include_once("dbconnect.php");
   }
   
 ?>
-<div style="overflow-x: auto; margin-top: -73px;">
+
  <form id="storeupdate_form" method="post">
           <div id="storesmsg" class="alerts"></div>
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table">
+<table id="remark_grid" style="box-shadow: 0 5px 10px #f7f7f7;" class="table table-condensed table-hover table-striped bootgrid-table">
 
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
@@ -69,9 +69,9 @@ include_once("dbconnect.php");
 	  <?php endforeach;?>
   
    </tbody>
-
+    
 </table>
- </div>
+
 
 
 <div class="btn-box">

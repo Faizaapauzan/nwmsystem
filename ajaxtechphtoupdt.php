@@ -100,8 +100,7 @@ form .upload-report label.details {
         $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
         $query_run = mysqli_query($conn, $query);
         if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-                ?>
+            while ($row = mysqli_fetch_array($query_run)) { ?>
                 
         <div class="input-box">
         <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
@@ -115,7 +114,7 @@ form .upload-report label.details {
   <div id="previewBefore"></div>
   <div class="update-form">
     <div class="upload-report">
-    <div class="input-box" style="display: flex;">
+    <div class="input-box" style="display: flex; margin-left: -16px;">
     <input type="file" class="form-control" name="multipleFile[]" id="multipleFile" required="" multiple>
     <input type="submit" name="upload" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
     </div>
@@ -230,7 +229,7 @@ form .upload-report label.details {
     <div id="previewAfter"></div>
   <div class="update-form">
     <div class="upload-report">
-    <div class="input-box" style="display: flex;">
+    <div class="input-box" style="display: flex; margin-left: -16px;">
      <input type="file" class="form-control" name="multipleFile[]" id="multipleAfter" required="" multiple>
      <input type="submit" name="upload" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
     </div>

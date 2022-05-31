@@ -22,7 +22,7 @@ session_start();
                 ?>
 
 
- <form action="homeindex.php" method="post" style="display: contents;">
+ <form action="homeindex.php" method="post" style="display: flex; flex-flow: wrap;">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
      <div class="input-box">
@@ -65,7 +65,7 @@ session_start();
             <input type="text" class="customer_PIC" name="customer_PIC" value="<?php echo $row['customer_PIC']?>">
         </div>
 
-         <div class="input-box-address">
+         <div class="input-box-address" style="width: 661px;">
             <label for="">Customer Address</label>
             <input type="text" class="cust_address1" name="cust_address1" value="<?php echo $row['cust_address1']?>">
             <input type="text" class="cust_address2" name="cust_address2" value="<?php echo $row['cust_address2']?>">
@@ -83,11 +83,12 @@ session_start();
             <input type="text" class="cust_phone2" name="cust_phone2" value="<?php echo $row['cust_phone2']?>">
         </div>
 
-        <div class="input-box">
+        <div class="input-box-address" style="width: 661px;">
             <label for="">Machine Name</label>
             <input type="text" class="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
         </div>
-
+        
+          
         <div class="input-box">
             <label for="">Machine Type</label>
             <input type="text" class="machine_type" name="machine_type" value="<?php echo $row['machine_type']?>">
@@ -264,6 +265,37 @@ $("#jobassistantto").on("change",function(){
 			}
 		}
 	</script>
+
+    <!-- <script>
+
+        $.fn.textWidth = function(text, font) {
+    
+    if (!$.fn.textWidth.fakeEl) $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
+    
+    $.fn.textWidth.fakeEl.text(text || this.val() || this.text() || this.attr('placeholder')).css('font', font || this.css('font'));
+    
+    return $.fn.textWidth.fakeEl.width();
+};
+
+$('.width-dynamic').on('input', function() {
+    var inputWidth = $(this).textWidth();
+    $(this).css({
+        width: inputWidth
+    })
+}).trigger('input');
+
+
+function inputWidth(elem, minW, maxW) {
+    elem = $(this);
+    console.log(elem)
+}
+
+var targetElem = $('.width-dynamic');
+
+inputWidth(targetElem);
+
+        </script> -->
+
 
 
         </body></html>

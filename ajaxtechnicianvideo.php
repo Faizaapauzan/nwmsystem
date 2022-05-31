@@ -47,7 +47,7 @@
 
 <body>	
 
- <form id="submitVideoBefore">
+ <form style="margin-left: -3px;" id="submitVideoBefore">
 
 <!-- for select job register id -->
 <div>
@@ -67,7 +67,7 @@
 
  <?php }  } } ?>
 
- <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
+ <b><label style="margin-left: -3px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
   <input type="hidden" id="description" name="description" value="Machine (Before Service)">
   <div id="previewBeforeVideo"></div>
   <div class="update-form">
@@ -185,7 +185,7 @@
 
  <?php }  } } ?>
 
- <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
+ <b><label style="margin-left: -3px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
   <input type="hidden" id="description" name="description" value="Machine (After Service)">
     <div id="previewAfterVideo"></div>
   <div class="update-form">

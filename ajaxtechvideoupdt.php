@@ -103,7 +103,7 @@ form .upload-report label.details {
   <div id="previewBeforeVideo"></div>
   <div class="update-form">
     <div class="upload-report">
-    <div class="input-box" style="display: flex;">
+    <div class="input-box" style="display: flex; margin-left: -16px;">
     <input type="file" class="form-control" name="multipleVideo[]" id="multipleVideo" required="" multiple>
      <input type="submit" name="uploadVideo" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
     </div>
@@ -126,10 +126,10 @@ form .upload-report label.details {
       <!-- Photos Table Before Service -->
       <div class="table-responsive">
       <table style="box-shadow: 0 5px 10px #f7f7f7;" >
-      <tbody style="display: flex; flex-wrap: wrap; padding-left: 66px;">
+      <tbody style="display: flex; flex-wrap: wrap; padding-left: 15px;">
 
 			<?php foreach($queryRecords as $res) :?>
-			<tr style="display:grid; padding-left: 25px;" ><td><video width="170" height="150" src="image/<?=$res['video_url']?>" controls></video></td>       
+			<tr style="display:grid; padding-left: 25px; margin-left: 3px;" ><td><video width="170" height="150" src="image/<?=$res['video_url']?>" controls></video></td>       
 			<td ><span class='deletedv' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span>
       </td>
 		</tr> 
@@ -219,7 +219,7 @@ form .upload-report label.details {
     <div id="previewAfterVideo"></div>
   <div class="update-form">
     <div class="upload-report">
-    <div class="input-box" style="display: flex;">
+    <div class="input-box" style="display: flex; margin-left: -16px;">
      <input type="file" class="form-control" name="multipleVideo[]" id="multipleAfterVideo" required="" multiple>
      <input type="submit" name="uploadVideo" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
     </div>
@@ -242,10 +242,10 @@ form .upload-report label.details {
     <!-- Photos Table After Service -->
       <div class="table-responsive">
       <table style="box-shadow: 0 5px 10px #f7f7f7;" >
-      <tbody style="display: flex; flex-wrap: wrap; padding-left: 66px;">
+      <tbody style="display: flex; flex-wrap: wrap; padding-left: 15px;">
 
 			<?php foreach($queryRecords as $res) :?>
-			<tr style="display:grid; padding-left: 25px;" ><td><video width="170" height="150" src="image/<?=$res['video_url']?>" controls></video></td>       
+			<tr style="display:grid; padding-left: 25px; margin-left: 3px;" ><td><video width="170" height="150" src="image/<?=$res['video_url']?>" controls></video></td>       
 			<td ><span class='deletedv' style="color:red; cursor: pointer;" data-id='<?php echo $res["id"]; ?>'>Delete</span>
       </td>
 		</tr> 

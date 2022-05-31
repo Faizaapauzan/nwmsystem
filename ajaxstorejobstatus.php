@@ -39,9 +39,9 @@ session_start();
     <!--PENDING & INCOMPLETE REASON-->
 
   <div id="reason" class="form-group row">
-    <label for="reason" class="col-sm-2 col-form-label">Reason</label>
+    <label style="margin-bottom: 24px; margin-left: 36px;" for="reason" class="col-sm-2 col-form-label">Reason</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputreason" name="reason" value="<?php echo $row['reason'] ?>">
+      <input style="width: 284px; height: 62px; margin-left: 115px; margin-top: -51px;" type="text" class="form-control" id="inputreason" name="reason" value="<?php echo $row['reason'] ?>">
     </div>
   </div>
 
@@ -62,7 +62,7 @@ session_start();
     <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
 
-    <button type="submit" id="update" name="update" class="btn btn-primary"> Update Data </button>
+    <button style="border-color: #081d45; background-color: #081d45; margin-left: 35px; margin-bottom: 20px;" type="submit" id="update" name="update" class="btn btn-primary"> Update Data </button>
 </form>
 
 <?php
