@@ -286,7 +286,7 @@
                     <div class="tab" id=jobInfoTabs>
                         <div class="TechJobInfoTab">
                             <div class="contentTechJobInfo">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                                <div style="right: 513px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
                                 <form action="homeindex.php" method="post">
                                     <div class="tech-details">
 
@@ -323,7 +323,7 @@
                     <div class="tab">
                         <div class="TechJobInfoTab">
                             <div class="contentTechJobInfo">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                                <div style="right: 513px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
                                 <form action="ajaxtabaccessories.php" method="post">
                                     <div class="acc-details">
 
@@ -424,8 +424,10 @@
                     <input type="radio" name="tabDoingStore" id="tabDoingStore1" checked="checked">
                     <label for="tabDoingStore1" class="tabHeadingStore"> Job Info </label>
                     <div class="tab" id="StoreJobInfoTab">
-                        <div class="contentStoreJobInfo">
-                            <div style="right: 327px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <div class="contentStoreJobInfo" style="padding-left: 66px;
+    margin-left: -89px;
+    margin-top: -47px;">
+                            <div style="right: 450px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                             <form action="homeindex.php" method="post">
                                 <div class="store-details">
 
@@ -459,7 +461,7 @@
                     <input type="radio" name="tabDoingStore" id="tabDoingStore2">
                     <label for="tabDoingStore2" class="tabHeadingStore"> Accessories </label>
                     <div class="tab">
-                        <div style="right: 327px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <div style="right: 450px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxtabaccessories.php" method="post">
                             <div class="store-accessories">
 
@@ -492,8 +494,8 @@
                     <input type="radio" name="tabDoingStore" id="tabDoingStore3">
                     <label for="tabDoingStore3" class="tabHeadingStore"> Update </label>
                     <div class="tab">
-                        <div style="right: 327px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
-                        <form action="ajaxstoreupdate.php" method="post">
+                        <div style="right: 450px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <form action="ajaxstoreupdateADMIN.php" method="post">
                             <div class="store-update">
 
                             </div>
@@ -508,7 +510,7 @@
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxstoreupdate.php',
+                                        url: 'ajaxstoreupdateADMIN.php',
                                         type: 'post',
                                         data: {jobregister_id: jobregister_id},
                                         success: function(response) {
@@ -603,7 +605,7 @@
         <input type="radio" name="tabDoingBoon" id="tabDoingBoon1" checked="checked">
         <label for="tabDoingBoon1" class="tabHeadingBoon"> Job Info </label>
         <div class="tab" id="BoonJobInfoTab">
-        <div class="contentBoonJobInfo">
+        <div class="contentBoonJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="boon-details">
@@ -890,7 +892,7 @@
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz1" checked="checked">
         <label for="tabDoingHafiz1" class="tabHeadingHafiz"> Job Info </label>
         <div class="tab" id="HafizJobInfoTab">
-        <div class="contentHafizJobInfo">
+        <div class="contentHafizJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="hafiz-details">
@@ -1201,7 +1203,7 @@
         <input type="radio" name="tabDoingHamir" id="tabDoingHamir1" checked="checked">
         <label for="tabDoingHamir1" class="tabHeadingHamir"> Job Info </label>
         <div class="tab" id=HamirJobInfoTab>
-        <div class="contentHamirJobInfo">
+        <div class="contentHamirJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="hamir-details">
@@ -1498,7 +1500,7 @@
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa1" checked="checked">
         <label for="tabDoingHwa1" class="tabHeadingHwa"> Job Info </label>
         <div class="tab" id="HwaJobInfoTab">
-        <div class="contentHwaJobInfo">
+        <div class="contentHwaJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="hwa-details">
@@ -1528,7 +1530,7 @@
         </script>
 
 
-        <!-- Double click Update
+        <!-- Double click Update -->
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa2">
         <label for="tabDoingHwa2" class="tabHeadingHwa">Update</label>
         <div class="tab" id="HwaJobInfoTab">
@@ -1558,7 +1560,7 @@
                 });
             });
 
-        </script> -->
+        </script>
 
         <!-- Double click Remarks
         <input type="radio" name="tabDoingHwa" id="tabDoingHwa3">
@@ -1789,7 +1791,7 @@
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk1" checked="checked">
         <label for="tabDoingIsk1" class="tabHeadingIsk"> Job Info </label>
         <div class="tab" id="IskJobInfoTab">
-        <div class="contentIskJobInfo">
+        <div class="contentIskJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="isk-details">
@@ -1817,7 +1819,7 @@
 
         </script>
 
-        <!-- Double click Update
+        <!-- Double click Update -->
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk2">
         <label for="tabDoingIsk2" class="tabHeadingIsk">Update</label>
         <div class="tab" id="IskJobInfoTab">
@@ -1847,7 +1849,7 @@
                 });
             });
 
-        </script> -->
+        </script>
 
         <!-- Double click Remarks
         <input type="radio" name="tabDoingIsk" id="tabDoingIsk3">
@@ -2078,7 +2080,7 @@
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn1" checked="checked">
         <label for="tabDoingJohn1" class="tabHeadingJohn"> Job Info </label>
         <div class="tab" id="JohnJobInfoTab">
-        <div class="contentJohnJobInfo">
+        <div class="contentJohnJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="john-details">
@@ -2371,7 +2373,7 @@
         <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie1" checked="checked">
         <label for="tabDoingJunJie1" class="tabHeadingJunJie"> Job Info </label>
         <div class="tab" id="JunJieJobInfoTab">
-        <div class="contentJunJieJobInfo">
+        <div class="contentJunJieJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="junjie-details">
@@ -2663,7 +2665,7 @@
         <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill1" checked="checked">
         <label for="tabDoingRazwill1" class="tabHeadingRazwill"> Job Info </label>
         <div class="tab" id="RazwillJobInfoTab">
-        <div class="contentRazwillJobInfo">
+        <div class="contentRazwillJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="razwill-details">
@@ -2953,7 +2955,7 @@
         <input type="radio" name="tabDoingSahele" id="tabDoingSahele1" checked="checked">
         <label for="tabDoingSahele1" class="tabHeadingSahele"> Job Info </label>
         <div class="tab" id="SaheleJobInfoTab">
-        <div class="contentSaheleJobInfo">
+        <div class="contentSaheleJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="sahele-details">
@@ -3243,7 +3245,7 @@
         <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly1" checked="checked">
         <label for="tabDoingSazaly1" class="tabHeadingSazaly"> Job Info </label>
         <div class="tab" id="SazalyJobInfoTab">
-        <div class="contentSazalyJobInfo">
+        <div class="contentSazalyJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="sazaly-details">
@@ -3530,7 +3532,7 @@
         <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan1" checked="checked">
         <label for="tabDoingFaizan1" class="tabHeadingFaizan"> Job Info </label>
         <div class="tab" id="FaizanJobInfoTab">
-        <div class="contentFaizanJobInfo">
+        <div class="contentFaizanJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="faizan-details">
@@ -3819,7 +3821,7 @@
         <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin1" checked="checked">
         <label for="tabDoingFauzin1" class="tabHeadingFauzin"> Job Info </label>
         <div class="tab" id="FauzinJobInfoTab">
-        <div class="contentFauzinJobInfo">
+        <div class="contentFauzinJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="fauzin-details">
@@ -4111,7 +4113,7 @@
         <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan1" checked="checked">
         <label for="tabDoingIzaan1" class="tabHeadingIzaan"> Job Info </label>
         <div class="tab" id="IzaanJobInfoTab">
-        <div class="contentIzaanJobInfo">
+        <div class="contentIzaanJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="izaan-details">
@@ -4402,7 +4404,7 @@
         <input type="radio" name="tabDoingSalam" id="tabDoingSalam1" checked="checked">
         <label for="tabDoingSalam1" class="tabHeadingSalam"> Job Info </label>
         <div class="tab" id="SalamJobInfoTab">
-        <div class="contentSalamJobInfo">
+        <div class="contentSalamJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="salam-details">
@@ -4696,7 +4698,7 @@
         <input type="radio" name="tabDoingTeck" id="tabDoingTeck1" checked="checked">
         <label for="tabDoingTeck1" class="tabHeadingTeck"> Job Info </label>
         <div class="tab" id="TeckJobInfoTab">
-        <div class="contentTeckJobInfo">
+        <div class="contentTeckJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="teck-details">
@@ -4990,7 +4992,7 @@
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat1" checked="checked">
         <label for="tabDoingAizat1" class="tabHeadingAizat"> Job Info </label>
         <div class="tab" id=AizatJobInfoTab>
-        <div class="contentAizatJobInfo">
+        <div class="contentAizatJobInfo" style="margin-top: -27px; margin-left: -22px;">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
         <div class="aizat-details">
@@ -5258,7 +5260,7 @@
                     <label for="tabDoingPending1" class="tabHeadingPending"> Job Info </label>
 					
                     <div class="tab" id="PendingJobInfoTab">
-                        <div class="contentPendingJobInfo">
+                        <div class="contentPendingJobInfo" style="margin-top: -27px; margin-left: -22px;">
                             <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
                             <form action="homeindex.php" method="post">
                                 <div class="pending-details">
@@ -5545,7 +5547,7 @@
                     <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete1" checked="checked">
                     <label for="tabDoingIncomplete1" class="tabHeadingIncomplete"> Job Info </label>
                     <div class="tab" id="IncompleteJobInfoTab">
-                        <div class="contentIncompleteJobInfo">
+                        <div class="contentIncompleteJobInfo" style="margin-top: -27px; margin-left: -22px;">
                             <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
                             <form action="homeindex.php" method="post">
                                 <div class="incomplete-details">

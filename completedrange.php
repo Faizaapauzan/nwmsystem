@@ -189,17 +189,14 @@
 
         <!--Double click Photo-->
         <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted5">
-        <label for="tabDoingCompleted5" class="tabHeadingComplete">Media</label>
+        <label for="tabDoingCompleted5" class="tabHeadingComplete">Photo</label>
         <div class="tabC" id="completedJobInfoTab">
         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
+        <form action="ajaxtechphtoupdtcomplete.php" method="post">
         <div class="completed-photos">
 
         </div></form></div>
 
-                
-        <!-- div for doubleclick and tabs -->
-        </div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -213,6 +210,40 @@
             success: function (response) {
             // Add response in Modal body
             $('.completed-photos').html(response);
+            // Display Modal
+            $('#doubleClick-completed').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+                <!--Double click Video-->
+        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted6">
+        <label for="tabDoingCompleted6" class="tabHeadingComplete">Video</label>
+        <div class="tabC" id="completedJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
+        <form action="ajaxtechvideoupdtcomplete.php" method="post">
+        <div class="completed-video">
+
+        </div></form></div>
+
+                
+        <!-- div for doubleclick and tabs -->
+        </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            $('.userinfo').click(function () {
+            var jobregister_id = $(this).data('jobregister_id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdtcomplete.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.completed-video').html(response);
             // Display Modal
             $('#doubleClick-completed').modal('show');
                 }

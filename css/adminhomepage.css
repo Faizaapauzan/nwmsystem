@@ -47,7 +47,7 @@
 .tabIncomplete {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -85,14 +85,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS PENDING*/
 .tabPending {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -130,14 +130,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS TECK*/
 .tabTeck {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -175,14 +175,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS SALAM*/
 .tabSalam {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -220,14 +220,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS IZAAN*/
 .tabIzaan {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -265,14 +265,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS FAUZIN*/
 .tabFauzin {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -310,14 +310,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS FAIZAN*/
 .tabFaizan {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -355,14 +355,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS sazaly*/
 .tabSazaly {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -400,14 +400,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS SAHELE*/
 .tabSahele {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -445,14 +445,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS RAZWILL*/
 .tabRazwill {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -490,14 +490,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS JUNJIE*/
 .tabJunJie {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -535,14 +535,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS JOHN*/
 .tabJohn {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -580,14 +580,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS ISK*/
 .tabIsk {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -625,14 +625,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS HWA*/
 .tabHwa {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -670,14 +670,14 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS HAMIR*/
 .tabHamir {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -715,7 +715,7 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 /*TABS HAFIZ*/
@@ -767,7 +767,7 @@
 .tabBoon {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -805,7 +805,7 @@
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 #myBtn {
@@ -1555,7 +1555,7 @@ input[type="datetime-local"] {
 .tabAizat {
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 729px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
@@ -1593,7 +1593,7 @@ input[type="datetime-local"] {
   display: none;
   padding: 1rem;
   background: #fff;
-  padding: 20px;
+  padding: 12px;
 }
 
 .tabAizat input[type="radio"] {
