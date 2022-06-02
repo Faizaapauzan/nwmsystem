@@ -5,7 +5,6 @@
   header("location:index.php?error");
  }
 
-
 if(!isset($_SESSION['username']))
 	{	
     header("location:index.php?error");
@@ -22,8 +21,6 @@ if(!isset($_SESSION['username']))
 	}
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -49,7 +46,51 @@ if(!isset($_SESSION['username']))
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
 </head>
 
+<style>
+.dropbtn {
+    background-color: #1a0845;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding: 7px 7px;
+    margin-right: 10px;
+}
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color:whitesmoke;
+}
+</style>
 
 <body>
 
@@ -60,7 +101,13 @@ if(!isset($_SESSION['username']))
         <a href="#" class="nav-links sidebarbutton" style="text-decoration: none;">ATTENDANCE</a>
       </li> -->
 	  <li>
-        <a href="joblistingst.php" class="nav-links sidebarbutton" style="text-decoration: none;">JOB LISTING</a>
+		  <div class="dropdown">
+			  <button class="dropbtn">Click Here</button>
+			  <div class="dropdown-content">
+				  <a href="techresthour.php">Rest Hour</a>
+				  <a href="techreportoff.php">Report Off</a>
+				</div>
+			</div>
       </li>
     </ul>
     <ul class="ul2">
@@ -74,14 +121,11 @@ if(!isset($_SESSION['username']))
     </div>
   </nav>
 
-
 <!--TODO-->
-
 
         <div class="container">
 			  <div style="text-align: center; font-size: 35px; font-weight: bold;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
 			
-      
 				<div class="column" >
 					<p class="column-title"id="doing" >Todo</p>
           <?php            
@@ -101,7 +145,6 @@ if(!isset($_SESSION['username']))
 								while($row = $results->fetch_assoc()) {             
 							?>
 
-						
 				            <div class="cards">
 								<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
 									<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
@@ -122,7 +165,6 @@ if(!isset($_SESSION['username']))
 							</div>
 					<?php } ?>				
 				</div>
-				
 				
 <!--DOING-->				
 				
@@ -166,7 +208,6 @@ if(!isset($_SESSION['username']))
 				</div>
 				
 <!--PENDING-->
-
 
 				<div class="column" >
 					<p class="column-title"id="pending" >Pending</p>
@@ -287,19 +328,15 @@ if(!isset($_SESSION['username']))
                             <h6 class="text-muted">Report</h6>
 						</div>
 
-					
-          
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					        <span aria-hidden="true">&times;</span>
 					    </button>
-
 
 <!--TOP BAR-->
 						
 						<div class="line"></div>
 							<br>
 						<div class="modal-body p-0">
-					
 					
 <!--JOB INFO-->					
                         <fieldset class="show" id="tab011">
@@ -337,14 +374,10 @@ if(!isset($_SESSION['username']))
 						</script>								
 						</fieldset>						
 						
-
-
-
 <!--UPDATE-->
 
                         <fieldset id="tab021">
                           
-
 								<form action="ajaxtechupdate.php" method="post">
 									<div class="techupdate-details">
 
@@ -378,12 +411,10 @@ if(!isset($_SESSION['username']))
 							</script>                         
                         </fieldset>
 
-
 <!--REMARKS-->
 <!-- 
                         <fieldset id="tab031">
                           
-
 								<form action="ajaxremarks.php" method="post">
 									<div class="remark-details">
 									</div>
@@ -415,12 +446,10 @@ if(!isset($_SESSION['username']))
                             
                         </fieldset> -->
 
-
 <!--ACCESSORIES-->
 
                         <fieldset id="tab041">
                             
-							
 								<form action="ajaxtabaccessoriestech.php" method="post">
 									<div class="acc-details">
 									</div>
@@ -451,13 +480,10 @@ if(!isset($_SESSION['username']))
 							</script>														
 						</fieldset>
 
-
-
 <!--PHOTOS-->						
 						
                         <fieldset id="tab051">
                             
-							
 						        <form action="ajaxtechnicianphoto.php" method="post">
 									<div class="photo-details">
 									</div>
@@ -492,12 +518,10 @@ if(!isset($_SESSION['username']))
 
                         <fieldset id="tab061">
                             
-
 							    <form action="ajaxtechnicianvideo.php" method="post">
 									<div class="video-details">
 									</div>
 								</form>
-								
 								
 								<script type='text/javascript'>
 
@@ -524,13 +548,10 @@ if(!isset($_SESSION['username']))
 							</script>                          
                         </fieldset>
 
-
-
 <!--JOB STATUS-->
 
                         <fieldset id="tab071">
                            
-							
 							    <form action="ajaxtechjobstatus.php" method="post">
 									<div class="techjobstatus-details">
 
@@ -565,12 +586,10 @@ if(!isset($_SESSION['username']))
 
                         <fieldset id="tab081">
                             
-
 							    <form action="ajaxreport.php" method="post">
 									<div class="report-details">
 									</div>
 								</form>
-								
 								
 								<script type='text/javascript'>
 
@@ -596,10 +615,6 @@ if(!isset($_SESSION['username']))
 					});
 							</script>                          
                         </fieldset>
-
-				
-
-
 </div>
 </div>
 </div>
