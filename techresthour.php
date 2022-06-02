@@ -31,7 +31,20 @@
         <?php if (isset($_SESSION["username"])) ?>
         <input type="text" name="technician" id="technician" value="<?php echo $_SESSION["username"] ?>" style="border:none;" readonly>
         <label>Assistant: </label>
-        <input type="text" name="assistant" id="assistant" placeholder="Assistant name" style="border:none;">
+  
+        <select id="jobassistantto" name="assistant" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['assistant']?>">  </option>
+                     <?php
+        include "dbconnect.php";  // Using database connection file here
+        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
+        }	
+    ?></select>
+
+    <input type="hidden" name="assistant" id='assistant' value="<?php echo $row['assistant']?>" onchange="GetAssistant(this.value)" readonly>
+    
       </div>
       </div>
       
@@ -89,10 +102,10 @@
         <div class="card" data-id="<?php echo $row['resthour_id'];?>" data-toggle="modal" data-target="#myModal" >
         <button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->
         <ul class="b" id="draged">
-          <li>Technician: <?php echo $row['technician']?></li>
+          Technician: <?php echo $row['technician']?>
           <li>Out: <?php echo $row['tech_out']?></li>
           <li>In: <?php echo $row['tech_in']?></li>
-          <li>Assistant: <?php echo $row['assistant']?></li>
+          Assistant: <?php echo $row['assistant']?>
           <li>Out: <?php echo $row['ass_out']?></li>
           <li>In: <?php echo $row['ass_in']?></li>
         </ul>
@@ -146,6 +159,18 @@
     </div>
   </div>
 <!-- Display modal -->
+
+
+<script>
+$(document).ready(function(){
+	
+$("#jobassistantto").on("change",function(){
+   var GetValue=$("#jobassistantto").val();
+   $("#assistant").val(GetValue);
+});
+
+});
+</script>
 
 </body>
 </html>
