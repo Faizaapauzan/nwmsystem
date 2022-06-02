@@ -193,7 +193,7 @@ form .upload-report label.details {
                         var res = JSON.parse(response);
                         console.log(res);
                         if(res.success == true)
-                          $('#messageImagebefore').html('<span style="color: green">Image Uploaded!</span>');
+                          $('#messageImagebefore').html('<span style="color: green">Image Successfully Uploaded!</span>');
                         else
                           $('#messageImagebefore').html('<span style="color: red">Image cannot be Upload</span>');
                       $("#multipleFile").val("");
@@ -344,7 +344,7 @@ form .upload-report label.details {
                         var res = JSON.parse(response);
                         console.log(res);
                         if(res.success == true)
-                          $('#messageImageAfter').html('<span style="color: green">Image Uploaded!</span>');
+                          $('#messageImageAfter').html('<span style="color: green">Image Successfully Uploaded!</span>');
                         else
                           $('#messageImageAfter').html('<span style="color: red">Image cannot be Upload</span>');
                       $("#multipleAfter").val("");
