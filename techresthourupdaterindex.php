@@ -20,7 +20,7 @@ if(isset($_POST['tech_out']) && $_POST['tech_out']!='' || $_POST['tech_out']==''
                        tech_out ='".addslashes($_POST['tech_out'])."',
                        tech_in ='".addslashes($_POST['tech_in'])."',
                        ass_out ='".addslashes($_POST['ass_out'])."',
-                       ass_in ='".addslashes($_POST['ass_in'])."'
+                       ass_in ='".addslashes($_POST['ass_in'])."',
                 WHERE  resthour_id ='".addslashes($_POST['resthour_id'])."' ";
         
         if($conn->query($sql))

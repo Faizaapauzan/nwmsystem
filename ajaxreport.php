@@ -70,7 +70,7 @@ $date = date('d-m-y');
         <td style="display:none;"></td>
             <td><label>Service Report Date :</label><?php echo $date; ?></td>
          <td><button class="userinfo btn btn-success" type="button" data-id='<?php echo $res['jobregister_id']; ?>'>NEW</button></td>
-         <td><button class="useredit btn btn-success" type="button" style="background:#081d45; border-color: #081d45;" data-id2='<?php echo $res['jobregister_id']; ?>'>EDIT</button></td>
+         <td><button class="useredit btn btn-success" type="button" style="background:#081d45;" data-id2='<?php echo $res['jobregister_id']; ?>'>EDIT</button></td>
       </tr>
 	  <?php endforeach;?>
    </tbody>

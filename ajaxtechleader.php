@@ -89,7 +89,7 @@ session_start();
     <input type="text" class="form-control" id="job_description" value="<?php echo $row['job_description']?>" style="background-color: white;" readonly>
   </div> 
 
-  <div class="col-md-12">
+  <div class="col-md-6">
     <label for="" class="form-label">Customer Address</label>
     <input type="text" class="form-control" id="customer_address1" value="<?php echo $row['cust_address1']?>" style="background-color: white;" readonly>
 	<input type="text" class="form-control" id="customer_address2" value="<?php echo $row['cust_address2']?>" style="background-color: white;" readonly>
@@ -213,8 +213,7 @@ session_start();
 <div class="col align-self-end" >         		 
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-         <button type="submit" id="submit" name="update" class="btn btn-primary" style="background-color: #1a0845; border-color: #1a0845;">Update</button>	
-         	<button type="button" class="btn btn-primary" style="background-color: #1a0845; border-color: #1a0845; width: 81px;" data-dismiss="modal">Close</button>
+         <button type="submit" id="submit" name="update" class="btn btn-primary">Update</button>	
 </div>		 
     </form>
 	<br>
