@@ -4,41 +4,41 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!=''
+if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']==''
     &&
-   isset($_POST['date']) && $_POST['date']!=''
+   isset($_POST['date']) && $_POST['date']!='' || $_POST['date']==''
     &&
-   isset($_POST['customer_name']) && $_POST['customer_name']!=''
+   isset($_POST['customer_name']) && $_POST['customer_name']!='' || $_POST['customer_name']==''
     &&
-   isset($_POST['cust_phone1']) && $_POST['cust_phone1']!=''
+   isset($_POST['cust_phone1']) && $_POST['cust_phone1']!='' || $_POST['cust_phone1']==''
     &&
-   isset($_POST['job_name']) && $_POST['job_name']!=''
+   isset($_POST['job_name']) && $_POST['job_name']!='' || $_POST['job_name']==''
     &&
-   isset($_POST['job_assign']) && $_POST['job_assign']!=''
+   isset($_POST['job_assign']) && $_POST['job_assign']!='' || $_POST['job_assign']==''
     &&
-   isset($_POST['technician_arrival']) && $_POST['technician_arrival']!=''
+   isset($_POST['technician_arrival']) && $_POST['technician_arrival']!='' || $_POST['technician_arrival']==''
     &&
-   isset($_POST['technician_leaving']) && $_POST['technician_leaving']!=''
+   isset($_POST['technician_leaving']) && $_POST['technician_leaving']!='' || $_POST['technician_leaving']==''
     &&
-   isset($_POST['machine_name']) && $_POST['machine_name']!=''
+   isset($_POST['machine_name']) && $_POST['machine_name']!='' || $_POST['machine_name']==''
     &&
-   isset($_POST['serialnumber']) && $_POST['serialnumber']!=''
+   isset($_POST['serialnumber']) && $_POST['serialnumber']!='' || $_POST['serialnumber']==''
     &&
    isset($_POST['srvcreportnumber']) && $_POST['srvcreportnumber']!=''
     &&
-   isset($_POST['Issue_By']) && $_POST['Issue_By']!=''
+   isset($_POST['Issue_By']) && $_POST['Issue_By']!='' || $_POST['Issue_By']==''
     &&
-   isset($_POST['report']) && $_POST['report']!=''
+   isset($_POST['report']) && $_POST['report']!='' || $_POST['report']==''
     &&
-   isset($_POST['cust']) && $_POST['cust']!=''
+   isset($_POST['cust']) && $_POST['cust']!='' || $_POST['cust']==''
     &&
-   isset($_POST['custphone']) && $_POST['custphone']!=''
+   isset($_POST['custphone']) && $_POST['custphone']!='' || $_POST['custphone']==''
     &&
-   isset($_POST['Travel_Time']) && $_POST['Travel_Time']!=''
+   isset($_POST['Travel_Time']) && $_POST['Travel_Time']!='' || $_POST['Travel_Time']==''
     &&
-   isset($_POST['Submitted_Items']) && $_POST['Submitted_Items']!=''
+   isset($_POST['Submitted_Items']) && $_POST['Submitted_Items']!='' || $_POST['Submitted_Items']==''
     &&
-   isset($_POST['Problem_Description']) && $_POST['Problem_Description']!='')
+   isset($_POST['Problem_Description']) && $_POST['Problem_Description']!='' || $_POST['Problem_Description']=='')
 
     {
         
