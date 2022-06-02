@@ -107,10 +107,6 @@ if(!isset($_SESSION['username']))
   <nav class="navbar">
     <div class="wrapper">
     <ul class="main-nav" id="js-menu">
-      <!-- <li>
-        <a href="#" class="nav-links sidebarbutton" style="text-decoration: none;">ATTENDANCE</a>
-      </li> -->
-	  <li>
 		  <div class="dropdown">
 			  <button class="dropbtn">Click Here</button>
 			  <div class="dropdown-content">
@@ -118,15 +114,11 @@ if(!isset($_SESSION['username']))
 				  <a href="techreportoff.php">Report Off</a>
 				</div>
 			</div>
-      </li>
     </ul>
     <ul class="ul2">
       <!-- <li>
         <a href="#" class="nav-links"><i class='bx bxs-bell-ring'></i></a>
       </li> -->
-      <li>
-        <a href="logout.php" class="nav-links"><i class="bx bx-log-out"></i></a>
-      </li>
     </ul>
     </div>
   </nav>
