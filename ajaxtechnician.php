@@ -95,7 +95,7 @@ session_start();
     <input type="text" class="form-control" id="jobdescription" value="<?php echo $row['job_description']?>" style="background-color: white;" readonly>
   </div> 
 
-  <div class="col-md-6">
+  <div class="col-md-12">
     <label for="customeraddress" class="form-label">Customer Address</label>
     <input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address1']?>" style="background-color: white;" readonly>
 	<input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address2']?>" style="background-color: white;" readonly>
@@ -129,7 +129,7 @@ session_start();
   </div> 
 
   <div class="col-md-6">
-    <label for="serialnumber" class="form-label">Serial Number</label>
+    <label for="serialnumber" class="form-label">Machine Serial Number</label>
     <input type="text" class="form-control" id="serialnumber" value="<?php echo $row['serialnumber']?>" style="background-color: white;" readonly>
   </div>   
   
