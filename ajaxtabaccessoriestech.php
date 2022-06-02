@@ -94,7 +94,7 @@ include_once("dbconnect.php");
 
 
                         <!-- Responsive table -->
-                        <div class="table-responsive" style=" width: 75%; margin-left: -6px; overflow-x: auto;">
+                        <div class="table-responsive" style="width: 437px; margin-left: 1px; overflow-x: auto;">
                             <table class="table m-0">
                                 <thead>
                                     <tr>

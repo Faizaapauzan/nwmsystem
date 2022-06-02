@@ -173,12 +173,12 @@ session_start();
 				});
 							</script>	
 
-							
+<!-- 							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 							</div>					
 
-	
+	 -->
 					
 						</fieldset>
 					</div>
@@ -187,10 +187,6 @@ session_start();
 				</div>
 			</div>
 		</div>
-
-
-
-
 
 
  <!--VIEW COMPLETED BUTTON MODAL AJAX-->
@@ -252,8 +248,7 @@ session_start();
 								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 							</div>					
 
-	
-					
+
 						</fieldset>
 					</div>
 
