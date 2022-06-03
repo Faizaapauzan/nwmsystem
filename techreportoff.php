@@ -1,18 +1,20 @@
 <?php
  session_start();
+//  $today_date = date("Y.m.d");
+// $_SESSION['storeDate'] = $today_date;
 
 ?>
 
   <?php  
  //Database connectivity  
  $con=mysqli_connect('localhost','root','','nwmsystem');  
- $sql=mysqli_query($con,"select * from staff_register");  
+ $sql=mysqli_query($con,"select * from job_register");  
  //Get Update id and status  
- if (isset($_GET['staffregister_id']) && isset($_GET['tech_avai'])) {  
-      $staffregister_id=$_GET['staffregister_id'];  
-      $tech_avai = $_GET['tech_avai'];  
-      mysqli_query($con,"update staff_register set tech_avai='$tech_avai' where staffregister_id='$staffregister_id'");  
-      header("location:techreportoff.php");  
+ if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant'])) {  
+      $jobregister_id=$_GET['jobregister_id'];  
+      $Job_assistant=$_GET['Job_assistant'];  
+      mysqli_query($con,"update job_register set Job_assistant='$Job_assistant' where jobregister_id='$jobregister_id'");  
+      header("location:adminjoblisting.php");  
       die();  
  }  
  ?> 
@@ -51,21 +53,17 @@
 </head>
 
 <style>
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: auto;
+  bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
   z-index: 1;
-}
+  
 
+}
 
 .dropdown-content a {
   color: black;
@@ -82,6 +80,10 @@
   display: block;
 }
 
+.dropdown:hover .dropbtn {
+  color:whitesmoke;
+}
+
 #notYetStatus{
 	position: static;
 }
@@ -94,15 +96,16 @@ display:none;
 
 <body>
 
-  <nav class="navbar">
-		<div class="wrapper">
-			<ul class="main-nav" id="js-menu">
-        <a href="technician.php" class="nav-links sidebarbutton" style="text-decoration: none;">Home</a>
-			</ul>
-		</div>
-  </nav>
-
 	<nav class="nav">
+	
+					  <div class="nav__link nav__link dropdown">
+			<i class="material-icons">access_time</i>
+			<span class="nav__text">Clock In</span>
+			  <div class="dropdown-content">
+				  <a href="techresthour.php">Rest Hour</a>
+				  <a href="techreportoff.php">Report Off</a>
+				</div>
+			</div>
 	
 		<a href="joblistst.php" class="nav__link nav__link">
 			<i class="material-icons">list_alt</i>
@@ -118,17 +121,16 @@ display:none;
 			<i class="material-icons">home</i>
 			<span class="nav__text">Home</span>
 		</a>
-
-		<a href="incompletejoblistst.php" class="nav__link">
-			<i class="material-icons">do_not_disturb_on</i>
-			<span class="nav__text">Incomplete</span>
-		</a>
 		
 		<a href="completejoblistst.php" class="nav__link">
 			<i class="material-icons">check_circle</i>
 			<span class="nav__text">Complete</span>
 		</a>
 		
+		<a href="incompletejoblistst.php" class="nav__link">
+			<i class="material-icons">do_not_disturb_on</i>
+			<span class="nav__text">Incomplete</span>
+		</a>
 		<a href="logout.php" class="nav__link">
 			<i class="material-icons">logout</i>
 			<span class="nav__text">Logout</span>
@@ -140,15 +142,17 @@ display:none;
 <div class="column" >
 <p class="column-title" id="technician" >Technician Report OFF</p>
 <form action="" method="POST">
-<div class="nama" style="display: flex; padding-left: 2px;">
-<input style="width: fit-content;" type="text" name="username" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" class="form-control" readonly>
-<button style="margin-left: 2px;" type="submit" class="btn btn-primary">Click</button>
+<div class="row">
+<div class="col-md-8">
+<input type="text" name="username" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" class="form-control">
 </div>
-</div>
+	<div class="col-md-4">
+	<button type="submit" class="btn btn-primary">Click</button>
+	</div></div>
 </form> 
 
 <div class="cards">
-<div class="card" style="position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
+<div class="card" style=" position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
 							
 <?php
 
@@ -170,7 +174,7 @@ include 'dbconnect.php';
 
 ?>
 
-	
+	<div class="row">
 	<div class="col-md-12" style="position: static;">
 	<hr>							
 	<form action="" method="post">
@@ -179,22 +183,22 @@ include 'dbconnect.php';
 	<div class="form-group mb-3">
 	<label for="">Technician Availability</label>
 	<div class="input-box">
-	<select style="width: 200px;" id="tech_avai" name="tech_avai" class="form-control" onchange="available_update(this.options[this.selectedIndex].value,'<?php echo $row['staffregister_id'] ?>')">
+	<select id="tech_avai" name="tech_avai" class="form-control" onchange="myFunction()">
 	<option value='' <?php if ($row['tech_avai'] == '') {echo "SELECTED";} ?>></option>
 	<option value="OFF" <?php if ($row['tech_avai'] == "OFF") {echo "SELECTED";} ?>>OFF</option>
 	</select>
 	</div>
 	<br>
-	<!-- <div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div> -->
+	<div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
 	<p class="control"><b id="message-update"></b></p>
 	</div>
 	<?php } } } ?>
 	</form>
-
-	<script type="text/javascript">  
-      function available_update(value,staffregister_id){  
-           //alert(id);  
-          var staffregister_id = $('input[name=staffregister_id]').val();
+									
+	<script type="text/javascript">
+		function updateForm()
+		{
+			var staffregister_id = $('input[name=staffregister_id]').val();
 			var tech_avai = $('select[name=tech_avai]').val();
 			if(staffregister_id!='' || staffregister_id=='',
 			tech_avai!='' || tech_avai=='')
@@ -208,15 +212,6 @@ include 'dbconnect.php';
 			data: formData,
 			success: function(response)
 			{
-
-				var x = document.getElementById("tech_avai").value;
-				if(x == 'OFF'){
-				document.getElementById("off-report").style.display = 'block';
-						}
-				else {
-				document.getElementById("off-report").style.display = 'none';
-						}
-
 			var res = JSON.parse(response);
 			console.log(res);
 			if(res.success == true)
@@ -243,7 +238,7 @@ include 'dbconnect.php';
 	<div class="form-group mb-3">
 	<label for="">Reason</label>
 	<div class="input-box">
-	<select style="width: 250px;" id="reason" name="reason" class="form-control">
+	<select id="reason" name="reason" class="form-control">
 	<option value=""></option>
 	<option value="Paid Leave">Paid Leave</option>
 	<option value="Unpaid Leave">Unpaid Leave</option>
@@ -254,12 +249,12 @@ include 'dbconnect.php';
 
 	<div class="form-group mb-3">
 	<label for="">From</label>
-	<input style="width: 250px;" type="date" name="date_from" class="form-control">
+	<input type="date" name="date_from" class="form-control">
 	</div>
 
 	<div class="form-group mb-3">
 	<label for="">To</label>
-	<input style="width: 250px;" type="date" name="date_to" class="form-control">
+	<input type="date" name="date_to" class="form-control">
 	</div>
 
 	<br>

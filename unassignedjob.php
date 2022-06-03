@@ -1,13 +1,17 @@
 <?php
 session_start();
-?>
+ if($_SESSION['technician_rank']!="1st Leader" ){
+  header("location:completejoblistnd.php");
+ }
 
+
+
+?>
 
 
 <html lang="en">
 
 <head>
-
 
 	<title>Job Listing</title>
 	<meta charset="UTF-8">
@@ -19,7 +23,6 @@ session_start();
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="#"rel="shortcut icon" />
 	
-
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -27,8 +30,6 @@ session_start();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="js/testing.js" type="text/javascript"></script>
 	<script src="js/search.js" type="text/javascript"></script>
-
-
 
 </head>
 
@@ -43,7 +44,6 @@ session_start();
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   
-
 }
 
 .dropdown-content a {
@@ -73,8 +73,7 @@ session_start();
 
 <body>
 
-
-<nav class="nav">
+	<nav class="nav">
 	
 	<div class="nav__link nav__link dropdown">
 	  <i class="material-icons">list_alt</i>
@@ -90,17 +89,16 @@ session_start();
 	  <span class="nav__text">Home</span>
   </a>
 
-  <a href="incompletejoblistnd.php" class="nav__link">
+  <a href="incompletejoblistst.php" class="nav__link">
 	  <i class="material-icons">do_not_disturb_on</i>
 	  <span class="nav__text">Incomplete</span>
   </a>
   
-  <a href="completejoblistnd.php" class="nav__link">
+  <a href="completejoblistst.php" class="nav__link">
 	  <i class="material-icons">check_circle</i>
 	  <span class="nav__text">Complete</span>
   </a>
-</nav>
-	
+	</nav>
 	
 <div class="container">	
 
@@ -110,17 +108,20 @@ session_start();
 </div>	
 
     <div class="column">
-        <p class="column-title" id="joblisting"><b>Incomplete</b></p>
-            <?php
-                include 'dbconnect.php';
-                $results = $conn->query("SELECT
-                jobregister_id, job_order_number, job_priority, job_name, customer_name,
-				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, staff_position, job_assign
-                FROM job_register WHERE
-                (job_status = 'Incomplete')
-                ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-                while($row = $results->fetch_assoc()) {
-            ?>
+        <p class="column-title" id="joblisting"><b>Unassigned Job</b></p>
+                            <?php
+                                include 'dbconnect.php';
+                            
+                                $results = $conn->query("SELECT jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name, 
+								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason FROM job_register WHERE
+                                                               (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                                    OR
+                                                                accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                                    OR
+                                                                job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+                                                        ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                while($row = $results->fetch_assoc()) {
+                            ?>
 			
 			<div class="cards">
 				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
@@ -141,11 +142,25 @@ session_start();
 		</div>
 		<?php } ?>
                     </div>
-	
+					
+					
+
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 	
  <!--VIEW BUTTON MODAL AJAX-->
 	
-
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
             <div role="document" class="modal-dialog">
                 <div class="modal-content">
@@ -158,7 +173,6 @@ session_start();
 							<span aria-hidden="true">&times;</span>
 						</button>
 	
-
 <!--JOB INFO-->
 						
                     <div class="line"></div>
@@ -166,13 +180,11 @@ session_start();
                     <div class="modal-body p-0">
                         <fieldset class="show" id="tab011">
 						
-						
                         <form action="techleaderindex.php" method="post">
                             <div class="tech-details">
 
                             </div>
                         </form>				
-						
 						
 							<script type='text/javascript'>
 
@@ -197,13 +209,10 @@ session_start();
 				});
 							</script>	
 
-							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 							</div>					
 
-	
-					
 						</fieldset>
 					</div>
 
@@ -212,14 +221,8 @@ session_start();
 			</div>
 		</div>
 
-
-
-
-
-
  <!--VIEW COMPLETED BUTTON MODAL AJAX-->
 	
-
         <div id="mymodalCompleted" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
             <div role="document" class="modal-dialog">
                 <div class="modal-content">
@@ -232,7 +235,6 @@ session_start();
 							<span aria-hidden="true">&times;</span>
 						</button>
 	
-
 <!--JOB INFO-->
 						
                     <div class="line"></div>
@@ -240,13 +242,11 @@ session_start();
                     <div class="modal-body p-0">
                         <fieldset class="show" id="tab011">
 						
-						
                         <form action="techleaderindex.php" method="post">
                             <div class="tech-details">
 
                             </div>
                         </form>				
-						
 						
 							<script type='text/javascript'>
 
@@ -271,13 +271,10 @@ session_start();
 				});
 							</script>	
 
-							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 							</div>					
 
-	
-					
 						</fieldset>
 					</div>
 

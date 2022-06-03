@@ -39,6 +39,36 @@ session_start();
 
 <style>
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: auto;
+  bottom: 55px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  padding-right: 7px;
+
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color:whitesmoke;
+}
 
 #notYetStatus{
 	position: static;
@@ -51,32 +81,29 @@ session_start();
 
 	<nav class="nav">
 	
-	
-		<a href="joblistst.php" class="nav__link nav__link">
-			<i class="material-icons">list_alt</i>
-			<span class="nav__text">Job Listing</span>
-		</a>
-		
-		<a href="pendingjoblistst.php" class="nav__link">
-			<i class="material-icons">pending_actions</i>
-			<span class="nav__text">Pending</span>
-		</a>
-		
-		<a href="technician.php" class="nav__link">
-			<i class="material-icons">home</i>
-			<span class="nav__text">Home</span>
-		</a>
+	<div class="nav__link nav__link dropdown">
+	  <i class="material-icons">list_alt</i>
+	  <span class="nav__text">Job Listing</span>
+		<div class="dropdown-content">
+			<a href="assignedjob.php">Assigned Job</a>
+			<a href="unassignedjob.php">Unassigned Job</a>
+		  </div>
+	  </div>
+	  
+  <a href="technician.php" class="nav__link">
+	  <i class="material-icons">home</i>
+	  <span class="nav__text">Home</span>
+  </a>
 
-		<a href="incompletejoblistst.php" class="nav__link">
-			<i class="material-icons">do_not_disturb_on</i>
-			<span class="nav__text">Incomplete</span>
-		</a>
-		
-		<a href="completejoblistst.php" class="nav__link">
-			<i class="material-icons">check_circle</i>
-			<span class="nav__text">Complete</span>
-		</a>
-		
+  <a href="incompletejoblistst.php" class="nav__link">
+	  <i class="material-icons">do_not_disturb_on</i>
+	  <span class="nav__text">Incomplete</span>
+  </a>
+  
+  <a href="completejoblistst.php" class="nav__link">
+	  <i class="material-icons">check_circle</i>
+	  <span class="nav__text">Complete</span>
+  </a>
 	</nav>
 	
 	
@@ -92,29 +119,33 @@ session_start();
             <?php
                 include 'dbconnect.php';
                 $results = $conn->query("SELECT
-                jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
-                FROM
-                job_register WHERE
+                jobregister_id, job_order_number, job_priority, job_name, customer_name,
+				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, staff_position, job_assign
+                FROM job_register WHERE
                 (job_status = 'Incomplete')
                 ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                 while($row = $results->fetch_assoc()) {
             ?>
-            
+			
 			<div class="cards">
-            <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
-            <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
-                <li><?php echo $row['job_priority']?></li>
-                <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
-                <li><?php echo $row['job_status']?></li>
-            </ul>
-            </div>
+				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
+				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+					<ul class="b" id="draged">
+						<strong text-align="center"><?php echo $row['job_priority']?></strong>
+						<li><?php echo $row['job_order_number']?></li>
+						<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+						<li><?php echo $row['job_description']?></li>
+						<li><?php echo $row['machine_name']?></li>
+						<li><?php echo $row['machine_type']?></li>
+						<li><?php echo $row['serialnumber']?></li>
+					</ul>
+					<div class="status" style="font-family: sans-serif;">
+					<strong><?php echo $row['job_assign']?></strong>
+				</div>
 			</div>
-            <?php } ?>
-    </div>
+		</div>
+		<?php } ?>
+                    </div>
 	
 	
  <!--VIEW BUTTON MODAL AJAX-->

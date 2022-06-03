@@ -1,15 +1,7 @@
-<?php
- session_start();
- // cek apakah yang mengakses halaman ini sudah login
- if($_SESSION['username']=="KEONG" ){
-	
- }
-
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
 
@@ -19,8 +11,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <title>NWM Technician Page</title>
-    <link href="css/technicianmain.css"rel="stylesheet" />
+    <title>NWM Neo Sau Keong</title>
+    <link href="css/testing.css"rel="stylesheet" />
 	
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,16 +27,22 @@
 
 
 
+<section class="home-section">
 
 
-<nav class="navbar">
-    <div class="wrapper">
-    <ul class="main-nav" id="js-menu">
-      <li>
-        <a href="logout.php" class="nav-links sidebarbutton" style="text-decoration: none;"><i class='bx'></i>LOGOUT</a>
-      </li>
-    </div>
-  </nav>
+    <nav>
+    <div class="sidebar-button1">
+            <i class='bx bx-log-out'></i>
+            <a href="logout.php">
+                  <span class="dashboard">LOGOUT</span>
+            </a>
+           </div>
+    </nav>
+	
+<div class="example" style="margin:auto;max-width:1096px">
+    <input type="text" id="search">
+    <input type="button" id="button" onmousedown="doSearch(document.getElementById('search').value)" value="Find">
+</div>	
 
 
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
@@ -78,10 +76,6 @@
 
 <div class="container">
 
-<div class="example" style="text-align: end; padding-bottom: 10px;" >
-    <input type="text" id="search">
-    <input type="button"  id="button" onmousedown="doSearch(document.getElementById('search').value)" value="Find">
-</div>	
 
     <div class="column">
             <p class="column-title" id="joblisting">Job Listing</p>
@@ -103,7 +97,7 @@
         
 		<div class="cards">
 			<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-			<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+			<button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
 				<ul class="b" id="draged">
 					<strong align="center"><?php echo $row['job_order_number']?></strong>
 					<li><?php echo $row['job_priority']?></li>
@@ -140,7 +134,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -176,7 +170,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -212,7 +206,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -247,7 +241,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -282,7 +276,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -317,7 +311,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -352,7 +346,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -387,7 +381,7 @@
         
 		<div class="cards">
         <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-        <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+        <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
         <ul class="b" id="draged">
             <strong align="center"><?php echo $row['job_order_number']?></strong>
             <li><?php echo $row['job_priority']?></li>
@@ -422,7 +416,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -457,7 +451,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -492,7 +486,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -527,7 +521,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -562,7 +556,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -597,7 +591,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -633,7 +627,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -669,7 +663,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -698,7 +692,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -728,7 +722,7 @@
             
 			<div class="cards">
             <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+            <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
             <ul class="b" id="draged">
                 <strong align="center"><?php echo $row['job_order_number']?></strong>
                 <li><?php echo $row['job_priority']?></li>
@@ -772,6 +766,7 @@
                 </div>
 
  </div>		
+</section>
 
  <!--VIEW BUTTON MODAL AJAX-->
 	
@@ -827,10 +822,10 @@
 				});
 							</script>	
 
-<!-- 							
+							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-							</div>					 -->
+							</div>					
 
 	
 					

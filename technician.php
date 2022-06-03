@@ -53,14 +53,7 @@ if(!isset($_SESSION['username']))
 
 <style>
 
-
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
+.dropdown-content1 {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -70,6 +63,43 @@ if(!isset($_SESSION['username']))
   z-index: 1;
 }
 
+
+.dropdown-content1 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  padding-right: 7px;
+
+}
+
+.dropdown-content1 a:hover {background-color: #f1f1f1}
+
+.dropdown1:hover .dropdown-content1 {
+  display: block;
+}
+
+.dropdown1:hover .dropbtn1 {
+  color:whitesmoke;
+}
+
+
+
+
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: auto;
+  bottom: 55px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+
+}
 
 .dropdown-content a {
   color: black;
@@ -102,9 +132,9 @@ if(!isset($_SESSION['username']))
   <nav class="navbar1">
 		<div class="wrapper">
 			<ul class="main-nav" id="js-menu">
-				<div class="dropdown">
-					<button class="nav1-links sidebarbutton dropbtn">Clock In</button>
-						<div class="dropdown-content">
+				<div class="dropdown1">
+					<button class="nav1-links sidebarbutton dropbtn1">Clock In</button>
+						<div class="dropdown-content1">
 							<a href="techresthour.php">Rest Hour</a>
 							<a href="techreportoff.php">Report Off</a>
 						</div>
@@ -116,20 +146,18 @@ if(!isset($_SESSION['username']))
     </div>
 		</div>
   </nav>
-  
+
 <nav class="nav">
 	
-	  
-  <a href="joblistst.php" class="nav__link nav__link">
+	<div class="nav__link nav__link dropdown">
 	  <i class="material-icons">list_alt</i>
 	  <span class="nav__text">Job Listing</span>
-  </a>
-  
-  <a href="pendingjoblistst.php" class="nav__link">
-	  <i class="material-icons">pending_actions</i>
-	  <span class="nav__text">Pending</span>
-  </a>
-  
+		<div class="dropdown-content">
+			<a href="assignedjob.php">Assigned Job</a>
+			<a href="unassignedjob.php">Unassigned Job</a>
+		  </div>
+	  </div>
+	  
   <a href="technician.php" class="nav__link">
 	  <i class="material-icons">home</i>
 	  <span class="nav__text">Home</span>

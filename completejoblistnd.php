@@ -26,6 +26,33 @@
 
 <style>
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: auto;
+  bottom: 55px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  padding-right: 7px;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color:whitesmoke;
+}
 
 #notYetStatus{
 	position: static;
@@ -36,17 +63,15 @@
 
 <nav class="nav">
 	
-	  
-  <a href="joblistnd.php" class="nav__link nav__link">
+	<div class="nav__link nav__link dropdown">
 	  <i class="material-icons">list_alt</i>
 	  <span class="nav__text">Job Listing</span>
-  </a>
-  
-  <a href="pendingjoblistnd.php" class="nav__link">
-	  <i class="material-icons">pending_actions</i>
-	  <span class="nav__text">Pending</span>
-  </a>
-  
+		<div class="dropdown-content">
+			<a href="assignedjob.php">Assigned Job</a>
+			<a href="unassignedjob.php">Unassigned Job</a>
+		  </div>
+	  </div>
+	  
   <a href="technician.php" class="nav__link">
 	  <i class="material-icons">home</i>
 	  <span class="nav__text">Home</span>
@@ -61,7 +86,6 @@
 	  <i class="material-icons">check_circle</i>
 	  <span class="nav__text">Complete</span>
   </a>
-  
 </nav>
 	
 <div class="container">	
