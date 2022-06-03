@@ -1,15 +1,10 @@
-<?php
-session_start();
-?>
-
-
+<?php session_start(); ?>
 
 <html lang="en">
 
 <head>
 
-
-	<title>Job Listing</title>
+	<title>Incomplete Job Listing</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,7 +14,6 @@ session_start();
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="#"rel="shortcut icon" />
 	
-
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -27,8 +21,6 @@ session_start();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="js/testing.js" type="text/javascript"></script>
 	<script src="js/search.js" type="text/javascript"></script>
-
-
 
 </head>
 
@@ -43,6 +35,31 @@ session_start();
 
 <body>
 
+<nav class="nav">
+	
+	<div class="nav__link nav__link dropdown">
+	  <i class="material-icons">access_time</i>
+	  <span class="nav__text">Clock In</span>
+		<div class="dropdown-content">
+			<a href="techresthour.php">Rest Hour</a>
+			<a href="techreportoff.php">Report Off</a>
+		  </div>
+	  </div>
+	  
+  <a href="joblistnd.php" class="nav__link nav__link">
+	  <i class="material-icons">list_alt</i>
+	  <span class="nav__text">Job Listing</span>
+  </a>
+  
+  <a href="pendingjoblistnd.php" class="nav__link">
+	  <i class="material-icons">pending_actions</i>
+	  <span class="nav__text">Pending</span>
+  </a>
+  
+  <a href="technician.php" class="nav__link">
+	  <i class="material-icons">home</i>
+	  <span class="nav__text">Home</span>
+  </a>
 
 <nav class="nav">
 	
@@ -87,26 +104,31 @@ session_start();
             <?php
                 include 'dbconnect.php';
                 $results = $conn->query("SELECT
-                jobregister_id, job_order_number, job_priority, job_name, customer_name, customer_grade, job_status
+                jobregister_id, job_order_number, job_priority, job_name, customer_name,
+				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason, staff_position, job_assign
                 FROM
-                job_register WHERE
-                (job_status = 'Incomplete')
+                job_register WHERE job_status = 'Incomplete'
                 ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                 while($row = $results->fetch_assoc()) {
             ?>
             
 			<div class="cards">
-            <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
-            <ul class="b" id="draged">
-                <strong align="center"><?php echo $row['job_order_number']?></strong>
-                <li><?php echo $row['job_priority']?></li>
-                <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['customer_grade']?></li>
-                <li><?php echo $row['job_name']?></li>
-                <li><?php echo $row['job_status']?></li>
-            </ul>
-            </div>
+				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
+				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+					<ul class="b" id="draged">
+						<strong text-align="center"><?php echo $row['job_priority']?></strong>
+						<li><?php echo $row['job_order_number']?></li>
+						<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+						<li><?php echo $row['job_description']?></li>
+						<li><?php echo $row['machine_name']?></li>
+						<li><?php echo $row['machine_type']?></li>
+						<li><?php echo $row['serialnumber']?></li>
+						<strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
+					</ul>
+					<div class="status" style="font-family: sans-serif;">
+					<strong><?php echo $row['job_assign']?></strong>
+					</div>
+				</div>
 			</div>
             <?php } ?>
     </div>

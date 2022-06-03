@@ -145,7 +145,6 @@ if(!isset($_SESSION['username']))
 	  <span class="nav__text">Complete</span>
   </a>
   
-
 </nav>
 
 <!--TODO-->
