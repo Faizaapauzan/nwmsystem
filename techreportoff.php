@@ -1,5 +1,26 @@
-<?php session_start(); ?>
+<?php
+ session_start();
+//  $today_date = date("Y.m.d");
+// $_SESSION['storeDate'] = $today_date;
+
+?>
+
+  <?php  
+ //Database connectivity  
+ $con=mysqli_connect('localhost','root','','nwmsystem');  
+ $sql=mysqli_query($con,"select * from job_register");  
+ //Get Update id and status  
+ if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant'])) {  
+      $jobregister_id=$_GET['jobregister_id'];  
+      $Job_assistant=$_GET['Job_assistant'];  
+      mysqli_query($con,"update job_register set Job_assistant='$Job_assistant' where jobregister_id='$jobregister_id'");  
+      header("location:adminjoblisting.php");  
+      die();  
+ }  
+ ?> 
+
  
+
 <!DOCTYPE html>
 <html>
 
@@ -7,8 +28,9 @@
     <meta name="keywords" content="" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Technician OFF</title>
+    <title>Technician OFF </title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
@@ -31,31 +53,16 @@
 </head>
 
 <style>
-.dropbtn {
-    background-color: #1a0845;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    font-size: 17px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    cursor: pointer;
-    padding: 7px 7px;
-    margin-right: 10px;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: auto;
+  bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  
+
 }
 
 .dropdown-content a {
@@ -63,6 +70,8 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  padding-right: 7px;
+
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -87,7 +96,6 @@ display:none;
 
 <body>
 
-<!-- Home Button -->
 	<nav class="nav">
 	
 					  <div class="nav__link nav__link dropdown">
@@ -128,185 +136,200 @@ display:none;
 			<span class="nav__text">Logout</span>
 		</a>
 	</nav>
-<!-- Home Button -->
 	
-	<div class="column" >
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="cards">
-					<div class="card">
-						<!--Technician Availability-->
-						<div class="card-body">
-							<form action="" method="POST">
-								<div class="row">
-									<div class="col-md-8">
-										<input type="text" name="username" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" class="form-control">
-									</div>
-									<div class="col-md-4">
-										<button type="submit" class="btn btn-primary">Click</button>
-									</div>
-								</div>
-							</form>
-							<div class="row">
-								<div class="col-md-12">
-									<hr>
-									
-									<?php
-										include 'dbconnect.php';
+<!-- save technician and assistant name -->
+<div class="container">
+<div class="column" >
+<p class="column-title" id="technician" >Technician Report OFF</p>
+<form action="" method="POST">
+<div class="row">
+<div class="col-md-8">
+<input type="text" name="username" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" class="form-control">
+</div>
+	<div class="col-md-4">
+	<button type="submit" class="btn btn-primary">Click</button>
+	</div></div>
+</form> 
+
+<div class="cards">
+<div class="card" style=" position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
+							
+<?php
+
+include 'dbconnect.php';
 										
-										if(isset($_POST['username']))
-											{
-												$username = $_POST['username'];
-												$query = "SELECT * FROM staff_register WHERE username ='$username'";
-												$query_run = mysqli_query($conn, $query);
-												if(mysqli_num_rows($query_run) > 0)
-											{
-												foreach($query_run as $row)
-											{
-									?>
+		if(isset($_POST['username']))
+
+{
+								
+	$username = $_POST['username'];
+
+	$query = "SELECT * FROM staff_register WHERE username ='$username'";
+	$query_run = mysqli_query($conn, $query);
+
+	if(mysqli_num_rows($query_run) > 0)
+		{
+			foreach($query_run as $row)
+		{
+
+?>
+
+	<div class="row">
+	<div class="col-md-12" style="position: static;">
+	<hr>							
+	<form action="" method="post">
 									
-									<form action="" method="post">
-										<input type="hidden" name="staffregister_id" class="staffregister_id" value="<?php echo $row['staffregister_id'] ?>">
-										<div class="form-group mb-3">
-											<label for="">Technician Availability</label>
-											<div class="input-box">
-												<select id="tech_avai" name="tech_avai" class="form-control" onchange="myFunction()">
-												<option value='' <?php if ($row['tech_avai'] == '') {echo "SELECTED";} ?>></option>
-												<option value="OFF" <?php if ($row['tech_avai'] == "OFF") {echo "SELECTED";} ?>>OFF</option>
-											</select>
-										</div>
-										<br>
-										<div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
-										<p class="control"><b id="message-update"></b></p>
-										</div>
-									<?php } } } ?>
-									</form>
+	<input type="hidden" name="staffregister_id" class="staffregister_id" value="<?php echo $row['staffregister_id'] ?>">
+	<div class="form-group mb-3">
+	<label for="">Technician Availability</label>
+	<div class="input-box">
+	<select id="tech_avai" name="tech_avai" class="form-control" onchange="myFunction()">
+	<option value='' <?php if ($row['tech_avai'] == '') {echo "SELECTED";} ?>></option>
+	<option value="OFF" <?php if ($row['tech_avai'] == "OFF") {echo "SELECTED";} ?>>OFF</option>
+	</select>
+	</div>
+	<br>
+	<div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
+	<p class="control"><b id="message-update"></b></p>
+	</div>
+	<?php } } } ?>
+	</form>
 									
-									<script type="text/javascript">
-										function updateForm()
-											{
-												var staffregister_id = $('input[name=staffregister_id]').val();
-												var tech_avai = $('select[name=tech_avai]').val();
-												if(staffregister_id!='' || staffregister_id=='',
-												tech_avai!='' || tech_avai=='')
-											{
-											var formData = {staffregister_id: staffregister_id,
-								                                   tech_avai: tech_avai};
+	<script type="text/javascript">
+		function updateForm()
+		{
+			var staffregister_id = $('input[name=staffregister_id]').val();
+			var tech_avai = $('select[name=tech_avai]').val();
+			if(staffregister_id!='' || staffregister_id=='',
+			tech_avai!='' || tech_avai=='')
+			{
+			var formData = {staffregister_id: staffregister_id,
+			tech_avai: tech_avai};
 																   
-																$.ajax({
-																	url: "techOFFindex.php",
-																	type: 'POST',
-																	data: formData,
-																	success: function(response)
-																	{
-																		var res = JSON.parse(response);
-																		console.log(res);
-																		if(res.success == true)
-																		$('#message-update').html('<span style="color: green">Update Saved!</span>');
-																		else
-																		$('#message-update').html('<span style="color: red">Update Cannot Be Saved</span>');
-																	}
-																});
-															}
-														} 
-						</script>
+			$.ajax({
+			url: "techOFFindex.php",
+			type: 'POST',
+			data: formData,
+			success: function(response)
+			{
+			var res = JSON.parse(response);
+			console.log(res);
+			if(res.success == true)
+			$('#message-update').html('<span style="color: green">Update Saved!</span>');
+			else
+			$('#message-update').html('<span style="color: red">Update Cannot Be Saved</span>');
+			}
+				});
+					}
+						} 
+	</script>
     
-				<!--Technician Availability-->
+	<!--Technician Availability-->
 				
-				<!-- Unavailable Date -->
+	<!-- Unavailable Date -->
 				
-				<form action="" method="post" id="off-report">
+	<form action="" method="post" id="off-report">
 
-				<?php if (isset($_SESSION["username"])) ?>
-				<input type="text" name="tech_name" id="tech_name" value="<?php echo $_SESSION["username"] ?>" style="border:none;" readonly hidden>
-					
-				<div class="form-group mb-3">
-					<label for="">Reason</label>
-					<div class="input-box">
-						<select id="reason" name="reason" class="form-control">
-							<option value=""></option>
-							<option value="Paid Leave">Paid Leave</option>
-							<option value="Unpaid Leave">Unpaid Leave</option>
-							<option value="Emergency leave">Emergency leave</option>
-							<option value="Sick leave">Sick leave</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group mb-3">
-					<label for="">From</label>
-					<input type="date" name="date_from" class="form-control">
-				</div>
-				<div class="form-group mb-3">
-					<label for="">To</label>
-					<input type="date" name="date_to" class="form-control">
-				</div>
+	<?php if (isset($_SESSION["username"])) ?>
+	<input type="text" name="tech_name" id="tech_name" value="<?php echo $_SESSION["username"] ?>" style="border:none;" readonly hidden>
 
-				<br>
+	<input type="hidden" name="staffregister_id" class="staffregister_id" value="<?php echo $row['staffregister_id'] ?>">
+
+	<div class="form-group mb-3">
+	<label for="">Reason</label>
+	<div class="input-box">
+	<select id="reason" name="reason" class="form-control">
+	<option value=""></option>
+	<option value="Paid Leave">Paid Leave</option>
+	<option value="Unpaid Leave">Unpaid Leave</option>
+	<option value="Emergency leave">Emergency leave</option>
+	<option value="Sick leave">Sick leave</option>
+	</select>
+	</div></div>
+
+	<div class="form-group mb-3">
+	<label for="">From</label>
+	<input type="date" name="date_from" class="form-control">
+	</div>
+
+	<div class="form-group mb-3">
+	<label for="">To</label>
+	<input type="date" name="date_to" class="form-control">
+	</div>
+
+	<br>
 				
-				<div><input type="button" onclick="UnavailableForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
-				<p class="control"><b id="message-Unavailable"></b></p>
-	
-				</form>
+	<div><input type="button" onclick="UnavailableForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
+	<p class="control"><b id="message-Unavailable"></b></p>
+	</form>
 
-				<script type="text/javascript">
-					function myFunction() {
-						var x = document.getElementById("tech_avai").value;
-						if(x == 'OFF'){
-							document.getElementById("off-report").style.display = 'block';
+	<script type="text/javascript">
+		function myFunction() {
+			var x = document.getElementById("tech_avai").value;
+				if(x == 'OFF'){
+				document.getElementById("off-report").style.display = 'block';
 						}
-						else {
-							document.getElementById("off-report").style.display = 'none';
+				else {
+				document.getElementById("off-report").style.display = 'none';
 						}
 						}
-                </script>
+    </script>
 
-				<script type="text/javascript">
-							function UnavailableForm()
-								{
-									var tech_name = $('input[name=tech_name]').val();
-									var reason = $('select[name=reason]').val();
-									var date_from = $('input[name=date_from]').val();
-									var date_to = $('input[name=date_to]').val();
+	<script type="text/javascript">
+		function UnavailableForm(){
+
+		var staffregister_id = $('input[name=staffregister_id]').val();
+		var tech_name = $('input[name=tech_name]').val();
+		var reason = $('select[name=reason]').val();
+		var date_from = $('input[name=date_from]').val();
+		var date_to = $('input[name=date_to]').val();
 									
-									if(tech_name!='' || tech_name=='',
-									      reason!='' || reason=='',
-									   date_from!='' || date_from=='',
-									     date_to!='' || date_to=='')
-										 
-										 {
-											 var formData = {tech_name: tech_name,
-												                reason: reason,
-												             date_from: date_from,
-												               date_to: date_to};
+			if(staffregister_id!='' || staffregister_id=='',
+				tech_name!='' || tech_name=='',
+				reason!='' || reason=='',
+				date_from!='' || date_from=='',
+				date_to!='' || date_to=='')						 
+			{
+				var formData = {staffregister_id: staffregister_id, tech_name: tech_name,
+				reason: reason,date_from: date_from,date_to: date_to};
 																   
-																$.ajax({
-																	url: "techunavailableindex.php",
-																	type: 'POST',
-																	data: formData,
-																	success: function(response)
-																	{
-																		var res = JSON.parse(response);
-																		console.log(res);
-																		if(res.success == true)
-																		$('#message-Unavailable').html('<span style="color: green">You are currently on leave!</span>');
-																		else
-																		$('#message-Unavailable').html('<span style="color: red">Update Cannot Be Saved</span>');
-																	}
-																});
-															}
-														} 
-						</script>
+				$.ajax({
+					url: "techunavailableindex.php",
+					type: 'POST',
+					data: formData,
+					success: function(response)
+				{
+					var res = JSON.parse(response);
+					console.log(res);
+					if(res.success == true)
+					$('#message-Unavailable').html('<span style="color: green">You are currently on leave!</span>');
+					else
+					$('#message-Unavailable').html('<span style="color: red">Update Cannot Be Saved</span>');
+							}
+								});
+									}
+									} 
+	</script>
 
 				<!-- Unavailable Date -->
 						
-                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>				
 </div>
 </div>
+</div>
+
+
+<!-- SEARCH TO DISPLAY REST HOUR IN AND OUT -->	
+
+<!--TOP BAR-->
+						
+						<div class="line" style="background-color: #181148;"></div>
+							<br>
+						<div class="modal-body p-0">
+					
+
+
 
 </body>
 </html>

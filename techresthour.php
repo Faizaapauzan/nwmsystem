@@ -220,11 +220,10 @@
 			<p class="column-title" id="technician" >Rest Hour</p>
       <hr>
 <div class="cards">
-  <div class="card">
+  <div class="card" style=" position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
         <input type="hidden" name="resthour_id" class="resthour_id" value="<?= $row['resthour_id']; ?>">
 
 
-                <div class="dalamboard" style="padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
                 <div style="font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
     <label style="font-weight: 600; font-size: 20px;"><?= $row['technician']; ?></label>
     <div style="width: fit-content;" class="input-group mb-3">
@@ -302,7 +301,7 @@
     
     <p class="control"><b id="message-update"></b></p>
     <div style="width: fit-content;" class="updateBtn">
-    <div><input type="button" onclick="updateForm();" class="buttonbiru" style="height: 39px; padding-left: 36px; font-size: 15px;" value="Update" /></div>
+    <div><input type="button" onclick="updateForm();" class="buttonbiru" style="margin-bottom: 20px; height: 39px; padding-left: 36px; font-size: 15px;" value="Update" /></div>
     </div></div>
     </form>
     
@@ -360,7 +359,6 @@
    </div>
    </div>
    		</div>
-                                  </div>
 
 
 <!-- SEARCH TO DISPLAY REST HOUR IN AND OUT -->	

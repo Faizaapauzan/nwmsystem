@@ -4,7 +4,9 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['tech_name']) && $_POST['tech_name']!='' || $_POST['tech_name']==''
+if(isset($_POST['staffregister_id']) && $_POST['staffregister_id']!='' || $_POST['staffregister_id']==''
+    &&
+     isset($_POST['tech_name']) && $_POST['tech_name']!='' || $_POST['tech_name']==''
     &&
    isset($_POST['reason']) && $_POST['reason']!='' || $_POST['reason']==''
     &&
@@ -14,9 +16,10 @@ if(isset($_POST['tech_name']) && $_POST['tech_name']!='' || $_POST['tech_name']=
 
     {
         
-        $sql = "INSERT INTO tech_off (tech_name, reason, date_from, date_to) 
+        $sql = "INSERT INTO tech_off (staffregister_id, tech_name, reason, date_from, date_to) 
                        
-                       VALUES ('".addslashes($_POST['tech_name'])."',
+                       VALUES ('".addslashes($_POST['staffregister_id'])."',
+                       '".addslashes($_POST['tech_name'])."',
                                '".addslashes($_POST['reason'])."',
                                '".addslashes($_POST['date_from'])."',
                                '".addslashes($_POST['date_to'])."')";
