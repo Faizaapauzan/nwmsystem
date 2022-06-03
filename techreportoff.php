@@ -88,12 +88,45 @@ display:none;
 <body>
 
 <!-- Home Button -->
-	<nav class="navbar">
-		<div class="wrapper">
-			<ul class="main-nav" id="js-menu">
-				<a href="technician.php" class="nav-links sidebarbutton" style="text-decoration: none;"><i class='bx bx-home'></i>HOME</a>
-			</ul>
-		</div>
+	<nav class="nav">
+	
+					  <div class="nav__link nav__link dropdown">
+			<i class="material-icons">access_time</i>
+			<span class="nav__text">Clock In</span>
+			  <div class="dropdown-content">
+				  <a href="techresthour.php">Rest Hour</a>
+				  <a href="techreportoff.php">Report Off</a>
+				</div>
+			</div>
+	
+		<a href="joblistst.php" class="nav__link nav__link">
+			<i class="material-icons">list_alt</i>
+			<span class="nav__text">Job Listing</span>
+		</a>
+		
+		<a href="pendingjoblistst.php" class="nav__link">
+			<i class="material-icons">pending_actions</i>
+			<span class="nav__text">Pending</span>
+		</a>
+		
+		<a href="technician.php" class="nav__link">
+			<i class="material-icons">home</i>
+			<span class="nav__text">Home</span>
+		</a>
+		
+		<a href="completejoblistst.php" class="nav__link">
+			<i class="material-icons">check_circle</i>
+			<span class="nav__text">Complete</span>
+		</a>
+		
+		<a href="incompletejoblistst.php" class="nav__link">
+			<i class="material-icons">do_not_disturb_on</i>
+			<span class="nav__text">Incomplete</span>
+		</a>
+		<a href="logout.php" class="nav__link">
+			<i class="material-icons">logout</i>
+			<span class="nav__text">Logout</span>
+		</a>
 	</nav>
 <!-- Home Button -->
 	

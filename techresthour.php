@@ -1,5 +1,9 @@
 <?php
- session_start(); ?>
+ session_start();
+//  $today_date = date("Y.m.d");
+// $_SESSION['storeDate'] = $today_date;
+
+?>
  
 
 <!DOCTYPE html>
@@ -11,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Technician Rest Hour</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
@@ -33,31 +38,16 @@
 </head>
 
 <style>
-.dropbtn {
-    background-color: #1a0845;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    font-size: 17px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    cursor: pointer;
-    padding: 7px 7px;
-    margin-right: 10px;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: auto;
+  bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  
+
 }
 
 .dropdown-content a {
@@ -65,6 +55,8 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  padding-right: 7px;
+
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -85,14 +77,46 @@
 
 <body>
 
-  <nav class="navbar">
-    <div class="wrapper">
-    <ul class="main-nav" id="js-menu">
-		   <a href="technician.php" class="nav-links sidebarbutton" style="text-decoration: none;"><i class='bx bx-home'></i>HOME</a>
-    </ul>
-   
-    </div>
-  </nav>
+	<nav class="nav">
+	
+					  <div class="nav__link nav__link dropdown">
+			<i class="material-icons">access_time</i>
+			<span class="nav__text">Clock In</span>
+			  <div class="dropdown-content">
+				  <a href="techresthour.php">Rest Hour</a>
+				  <a href="techreportoff.php">Report Off</a>
+				</div>
+			</div>
+	
+		<a href="joblistst.php" class="nav__link nav__link">
+			<i class="material-icons">list_alt</i>
+			<span class="nav__text">Job Listing</span>
+		</a>
+		
+		<a href="pendingjoblistst.php" class="nav__link">
+			<i class="material-icons">pending_actions</i>
+			<span class="nav__text">Pending</span>
+		</a>
+		
+		<a href="technician.php" class="nav__link">
+			<i class="material-icons">home</i>
+			<span class="nav__text">Home</span>
+		</a>
+		
+		<a href="completejoblistst.php" class="nav__link">
+			<i class="material-icons">check_circle</i>
+			<span class="nav__text">Complete</span>
+		</a>
+		
+		<a href="incompletejoblistst.php" class="nav__link">
+			<i class="material-icons">do_not_disturb_on</i>
+			<span class="nav__text">Incomplete</span>
+		</a>
+		<a href="logout.php" class="nav__link">
+			<i class="material-icons">logout</i>
+			<span class="nav__text">Logout</span>
+		</a>
+	</nav>
 	
 <!-- save technician and assistant name -->
 <div class="container">
@@ -120,6 +144,9 @@
 
     <input type="hidden" name="assistant" id='assistant' value="<?php if(isset($_GET['assistant'])){echo $_GET['assistant'];} ?>" onchange="GetAssistant(this.value)" readonly>
     
+    <input type="hidden" name="today_date" id='today_date' value="<?php echo $date = date('Y-m-d'); ?>" readonly>
+
+  
       </div>
       </div>
       
@@ -140,13 +167,14 @@
         {
           var technician = $('input[name=technician]').val();
           var assistant = $('input[name=assistant]').val();
-          
+          var today_date = $('input[name=today_date]').val();
+
           if(technician!='' || technician=='',
-              assistant!='' || assistant=='')
+              assistant!='' || assistant=='',
+              today_date!='' || today_date=='')
              
              {
-               var formData = {technician: technician,
-                                assistant: assistant};
+               var formData = {technician: technician, assistant: assistant,  today_date: today_date};
                                 
                                 $.ajax({
                                   url: "techresthourindex.php", 
@@ -179,7 +207,7 @@
           $technician = $_GET['technician'];
           $assistant = $_GET['assistant'];
 
-          $query = "SELECT * FROM technician_resthour WHERE technician='$technician' AND assistant='$assistant' ORDER BY resthour_id DESC LIMIT 1";
+          $query = "SELECT * FROM technician_resthour WHERE technician='$technician' AND assistant='$assistant' ORDER BY resthour_id DESC";
           $query_run = mysqli_query($con, $query);
 
           if(mysqli_num_rows($query_run) > 0){
@@ -194,8 +222,11 @@
 <div class="cards">
   <div class="card">
         <input type="hidden" name="resthour_id" class="resthour_id" value="<?= $row['resthour_id']; ?>">
+
+
                 <div class="dalamboard" style="padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
-    <label><?= $row['technician']; ?></label>
+                <div style="font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
+    <label style="font-weight: 600; font-size: 20px;"><?= $row['technician']; ?></label>
     <div style="width: fit-content;" class="input-group mb-3">
     <input readonly type="text" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
@@ -205,7 +236,7 @@
     <script type="text/javascript">
       function tech_outs()
         {
-          $.ajax({url:"departureTime.php", success:function(result)
+          $.ajax({url:"techresthourtime.php", success:function(result)
             {
               $("#tech_out").val(result);
                         }
@@ -223,7 +254,7 @@
     <script type="text/javascript">
       function tech_ins()
         {
-          $.ajax({url:"departureTime.php", success:function(result)
+          $.ajax({url:"techresthourtime.php", success:function(result)
         {
           $("#tech_in").val(result);
         }
@@ -232,7 +263,7 @@
     </script>
     </div>
 
-    <label><?= $row['assistant']; ?></label>
+    <label style="font-weight: 600; font-size: 20px;"><?= $row['assistant']; ?></label>
     <div style="width: fit-content;" class="input-group mb-3">
     <input readonly type="text" class="form-control" id="ass_out" name="ass_out" value="<?= $row['ass_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
@@ -242,7 +273,7 @@
     <script type="text/javascript">
       function ass_outs()
         {
-          $.ajax({url:"departureTime.php", success:function(result)
+          $.ajax({url:"techresthourtime.php", success:function(result)
         {
           $("#ass_out").val(result);
         }
@@ -260,7 +291,7 @@
     <script type="text/javascript">
       function ass_ins()
         {
-          $.ajax({url:"departureTime.php", success:function(result)
+          $.ajax({url:"techresthourtime.php", success:function(result)
         {
           $("#ass_in").val(result);
         }
