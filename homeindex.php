@@ -30,7 +30,7 @@
         $job_assign = $_POST['job_assign'];
         $Job_assistant = $_POST['Job_assistant'];
         $job_cancel = $_POST['job_cancel'];
-        $job_status = $_POST['job_status'];
+
         $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
 
         $sql = "UPDATE job_register SET
@@ -58,7 +58,7 @@
             job_assign ='".addslashes($job_assign)."',
             Job_assistant ='".addslashes($Job_assistant)."',
             job_cancel ='".addslashes($job_cancel)."',
-            job_status ='".addslashes($job_status)."',
+
             jobregisterlastmodify_by ='".addslashes($jobregisterlastmodify_by)."'
 
              WHERE  jobregister_id ='".addslashes($jobregister_id)."' ";
@@ -73,6 +73,4 @@
         // Close connection
         mysqli_close($conn);
     }
-
-  
 	?>

@@ -20,7 +20,6 @@ if($_SESSION['staff_position']==""){
    	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <title>Storekeeper</title>
     <link href="css/testing.css"rel="stylesheet" />
-    
 	
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -43,12 +42,9 @@ if($_SESSION['staff_position']==""){
       <!-- <li>
         <a href="#" class="nav-links"><i class='bx bxs-bell-ring'></i></a>
       </li> -->
-
-              <i class='bx bx-log-out'></i>
-              <a href="logout.php">
-                    <span class="dashboard">LOGOUT</span>
-                </a>
-     
+      <li>
+        <a href="logout.php" class="nav-links"><i class="bx bx-log-out"></i></a>
+      </li>
     </ul>
     </div>
   </nav>

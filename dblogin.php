@@ -31,14 +31,6 @@ if($cek > 0){
 
   header("location:Adminhomepage.php");
 
-  }else if($data['staff_position']=="Manager"){
-
-  $_SESSION['username'] = $username;
-  $_SESSION['staff_position'] = "Manager";
-  
-  header("location:Adminhomepage.php");
-
-
  }else if($data['staff_position']=="Technician" AND $data['technician_rank']=="1st Leader"){
 
   $_SESSION['username'] = $username;
