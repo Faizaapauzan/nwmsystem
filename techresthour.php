@@ -1,5 +1,9 @@
 <?php
- session_start(); ?>
+ session_start();
+//  $today_date = date("Y.m.d");
+// $_SESSION['storeDate'] = $today_date;
+
+?>
  
 
 <!DOCTYPE html>
@@ -120,6 +124,9 @@
 
     <input type="hidden" name="assistant" id='assistant' value="<?php if(isset($_GET['assistant'])){echo $_GET['assistant'];} ?>" onchange="GetAssistant(this.value)" readonly>
     
+    <input type="hidden" name="today_date" id='today_date' value="<?php echo $date = date('Y-m-d'); ?>" readonly>
+
+  
       </div>
       </div>
       
@@ -140,13 +147,14 @@
         {
           var technician = $('input[name=technician]').val();
           var assistant = $('input[name=assistant]').val();
-          
+          var today_date = $('input[name=today_date]').val();
+
           if(technician!='' || technician=='',
-              assistant!='' || assistant=='')
+              assistant!='' || assistant=='',
+              today_date!='' || today_date=='')
              
              {
-               var formData = {technician: technician,
-                                assistant: assistant};
+               var formData = {technician: technician, assistant: assistant,  today_date: today_date};
                                 
                                 $.ajax({
                                   url: "techresthourindex.php", 
@@ -179,7 +187,7 @@
           $technician = $_GET['technician'];
           $assistant = $_GET['assistant'];
 
-          $query = "SELECT * FROM technician_resthour WHERE technician='$technician' AND assistant='$assistant' ORDER BY resthour_id DESC LIMIT 1";
+          $query = "SELECT * FROM technician_resthour WHERE technician='$technician' AND assistant='$assistant' ORDER BY today_date DESC";
           $query_run = mysqli_query($con, $query);
 
           if(mysqli_num_rows($query_run) > 0){
@@ -194,8 +202,11 @@
 <div class="cards">
   <div class="card">
         <input type="hidden" name="resthour_id" class="resthour_id" value="<?= $row['resthour_id']; ?>">
+
+
                 <div class="dalamboard" style="padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
-    <label><?= $row['technician']; ?></label>
+                <div style="font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
+    <label style="font-weight: 600; font-size: 20px;"><?= $row['technician']; ?></label>
     <div style="width: fit-content;" class="input-group mb-3">
     <input readonly type="text" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
@@ -205,7 +216,7 @@
     <script type="text/javascript">
       function tech_outs()
         {
-          $.ajax({url:"departureTime.php", success:function(result)
+          $.ajax({url:"techresthourtime.php", success:function(result)
             {
               $("#tech_out").val(result);
                         }
@@ -223,7 +234,7 @@
     <script type="text/javascript">
       function tech_ins()
         {
-          $.ajax({url:"departureTime.php", success:function(result)
+          $.ajax({url:"techresthourtime.php", success:function(result)
         {
           $("#tech_in").val(result);
         }
@@ -232,7 +243,7 @@
     </script>
     </div>
 
-    <label><?= $row['assistant']; ?></label>
+    <label style="font-weight: 600; font-size: 20px;"><?= $row['assistant']; ?></label>
     <div style="width: fit-content;" class="input-group mb-3">
     <input readonly type="text" class="form-control" id="ass_out" name="ass_out" value="<?= $row['ass_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
@@ -242,7 +253,7 @@
     <script type="text/javascript">
       function ass_outs()
         {
-          $.ajax({url:"departureTime.php", success:function(result)
+          $.ajax({url:"techresthourtime.php", success:function(result)
         {
           $("#ass_out").val(result);
         }
@@ -260,7 +271,7 @@
     <script type="text/javascript">
       function ass_ins()
         {
-          $.ajax({url:"departureTime.php", success:function(result)
+          $.ajax({url:"techresthourtime.php", success:function(result)
         {
           $("#ass_in").val(result);
         }
