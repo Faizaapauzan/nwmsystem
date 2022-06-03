@@ -107,8 +107,8 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-7">
-            <div class="card mt-5">
+        <div style="position:static;" class="col-md-7">
+            <div style="position:static;" class="card mt-5">
 				<!--Technician Availability-->
                 <div class="card-body">
                     <form action="" method="POST">
@@ -122,7 +122,7 @@
                         </div>
                     </form>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div style="position:static;" class="col-md-12">
                             <hr>
                             <?php
                             include 'dbconnect.php';
