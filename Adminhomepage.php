@@ -568,14 +568,20 @@
                 job_assign = 'Boon' AND job_status = 'Pending'                
                 OR
                 job_assign = 'Boon' AND job_status = 'Incomplete' ";
+            
             $numRow_run = mysqli_query ($conn,$numRow);
-
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
                 echo  '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
+            
+            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Boon'"); 
+            while($data = mysqli_fetch_array($records))
+                {
+                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                }
     
-        while($row = $results->fetch_assoc()) {
+            while($row = $results->fetch_assoc()) {
         ?>
 
         <div class="Boon" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Boon"  ondblclick="document.getElementById('doubleClick-Boon').style.display='block'">
@@ -850,16 +856,18 @@
                 job_assign = 'Hafiz' AND job_status = 'Pending'
                 OR
                 job_assign = 'Hafiz' AND job_status = 'Incomplete' ";
+        
         $numRow_run = mysqli_query ($conn,$numRow);
-
         if ($row_Total = mysqli_num_rows($numRow_run))
         {
             echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
         }
-        else
-        {
-            echo '<h4 style="text-align:right;">No Data </h4>';
-        }
+        
+        $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Hafiz'");
+        while($data = mysqli_fetch_array($records))
+            {
+                echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+            }
 
         while($row = $results->fetch_assoc()) {
         ?>
@@ -1162,16 +1170,18 @@
                     job_assign = 'Hamir' AND job_status = 'Pending'
                     OR
                     job_assign = 'Hamir' AND job_status = 'Incomplete' ";
+                    
                     $numRow_run = mysqli_query ($conn,$numRow);
-
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
-                    else
-                    {
-                        echo '<h4 style="text-align:right;">No Data </h4>';
-                    }
+                    
+                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Hamir'");
+                    while($data = mysqli_fetch_array($records))
+                        {
+                            echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                        }
 
                     while($row = $results->fetch_assoc()) {
             ?>
@@ -1459,8 +1469,8 @@
                 job_assign = 'Hwa' AND job_status = 'Ready'
                 OR
                 job_assign = 'Hwa' AND job_status = 'Incomplete' ";
+                
                 $numRow_run = mysqli_query ($conn,$numRow);
-
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
@@ -1472,7 +1482,7 @@
                         echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying data in option menu
                     }	
 
-            while($row = $results->fetch_assoc()) {
+                while($row = $results->fetch_assoc()) {
             ?>
 
             <div class="Hwa" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hwa"  ondblclick="document.getElementById('doubleClick-Hwa').style.display='block'">
@@ -1741,7 +1751,6 @@
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
-
                     $numRow = "SELECT * FROM `job_register`WHERE 
                     job_assign = 'Isk' AND job_status = ''
                         OR
@@ -1752,18 +1761,25 @@
                         job_assign = 'Isk' AND job_status = 'Pending'
                         OR
                         job_assign = 'Isk' AND job_status = 'Incomplete' ";
+                    
                     $numRow_run = mysqli_query ($conn,$numRow);
-
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
-                    else
-                    {
-                        echo '<h4 style="text-align:right;">No Data </h4>';
-                    }
 
-                        while($row = $results->fetch_assoc()) {
+                    else
+                        {
+                            echo '<h4 style="text-align:right;">No Data </h4>';
+                        }
+                    
+                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Isk'");
+                    while($data = mysqli_fetch_array($records))
+                        {
+                            echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                        }
+
+                    while($row = $results->fetch_assoc()) {
                 ?>
 
                 <div class="Isk" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Isk"  ondblclick="document.getElementById('doubleClick-Isk').style.display='block'">
@@ -2040,16 +2056,18 @@
                         job_assign = 'John' AND job_status = 'Pending'
                         OR
                         job_assign = 'John' AND job_status = 'Incomplete' ";
+                
                 $numRow_run = mysqli_query ($conn,$numRow);
-
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
-                else
-                {
-                    echo '<h4 style="text-align:right;">No Data </h4>';
-                }
+                
+                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='John'");
+                while($data = mysqli_fetch_array($records))
+                    {
+                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                    }
 
                 while($row = $results->fetch_assoc()) {
                 ?>
@@ -2334,18 +2352,20 @@
                         job_assign = 'Jun Jie' AND job_status = 'Pending'
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Incomplete'";
+                
                 $numRow_run = mysqli_query ($conn,$numRow);
-
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
-                else
-                {
-                    echo '<h4 style="text-align:right;">No Data </h4>';
-                }
+                
+                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Jun Jie'");
+                while($data = mysqli_fetch_array($records))
+                    {
+                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                    }
 
-                        while($row = $results->fetch_assoc()) {
+                while($row = $results->fetch_assoc()) {
                 ?>
 
                 <div class="JunJie" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-JunJie"  ondblclick="document.getElementById('doubleClick-JunJie').style.display='block'">
@@ -2631,10 +2651,12 @@
                     {
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
-                    else
-                    {
-                        echo '<h4 style="text-align:right;">No Data </h4>';
-                    }
+                    
+                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Will'");
+                    while($data = mysqli_fetch_array($records))
+                        {
+                            echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                        }
 
                     while($row = $results->fetch_assoc()) {
                 ?>
@@ -2916,18 +2938,20 @@
                             job_assign = 'Sahele' AND job_status = 'Pending'
                             OR
                             job_assign = 'Sahele' AND job_status = 'Incomplete' ";
+                    
                     $numRow_run = mysqli_query ($conn,$numRow);
-
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
-                    else
-                    {
-                        echo '<h4 style="text-align:right;">No Data </h4>';
-                    }
+                    
+                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Sahele'");
+                    while($data = mysqli_fetch_array($records))
+                        {
+                            echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                        }
 
-                            while($row = $results->fetch_assoc()) {
+                    while($row = $results->fetch_assoc()) {
                 ?>  
                         
                 <div class="Sahele" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Sahele"  ondblclick="document.getElementById('doubleClick-Sahele').style.display='block'">
@@ -3204,16 +3228,18 @@
                         job_assign = 'Sazaly' AND job_status = 'Pending'
                         OR
                         job_assign = 'Sazaly' AND job_status = 'Incomplete'";
+                
                 $numRow_run = mysqli_query ($conn,$numRow);
-
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
-                else
-                {
-                    echo '<h4 style="text-align:right;">No Data </h4>';
-                }
+                
+                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Sazaly'");
+                while($data = mysqli_fetch_array($records))
+                    {
+                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                    }
 
                 while($row = $results->fetch_assoc()) {
                 ?>
@@ -3493,18 +3519,20 @@
                     job_assign = 'Faizan' AND job_status = 'Pending'
                     OR
                     job_assign = 'Faizan' AND job_status = 'Incomplete' ";
+                
                 $numRow_run = mysqli_query ($conn,$numRow);
-
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
-                else
-                {
-                    echo '<h4 style="text-align:right;">No Data </h4>';
-                }
+                
+                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Faizan'");
+                while($data = mysqli_fetch_array($records))
+                    {
+                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                    }
 
-            while($row = $results->fetch_assoc()) {
+                while($row = $results->fetch_assoc()) {
             ?>
                         
             <div class="Faizan" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Faizan"  ondblclick="document.getElementById('doubleClick-Faizan').style.display='block'">
@@ -3781,16 +3809,18 @@
                     job_assign = 'Fauzin' AND job_status = 'Pending'
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Incomplete' ";
+            
             $numRow_run = mysqli_query ($conn,$numRow);
-
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
-            else
-            {
-                echo '<h4 style="text-align:right;">No Data </h4>';
-            }
+            
+            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Fauzin'");
+            while($data = mysqli_fetch_array($records))
+                {
+                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                }
 
             while($row = $results->fetch_assoc()) {
             ?>
@@ -4073,16 +4103,18 @@
                     job_assign = 'Izaan' AND job_status = 'Pending'
                     OR
                     job_assign = 'Izaan' AND job_status = 'Incomplete'";
+            
             $numRow_run = mysqli_query ($conn,$numRow);
-
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
-            else
-            {
-                echo '<h4 style="text-align:right;">No Data </h4>';
-            }
+
+            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Izaan'");
+            while($data = mysqli_fetch_array($records))
+                {
+                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                }
 
             while($row = $results->fetch_assoc()) {
             ?>  
@@ -4364,16 +4396,19 @@
                     job_assign = 'Salam' AND job_status = 'Pending'
                     OR
                     job_assign = 'Salam' AND job_status = 'Incomplete'";
+            
             $numRow_run = mysqli_query ($conn,$numRow);
-
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
-            else
-            {
-                echo '<h4 style="text-align:right;">No Data </h4>';
-}   
+            
+            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Salam'");
+            while($data = mysqli_fetch_array($records))
+                {
+                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                }
+            
             while($row = $results->fetch_assoc()) {
             ?>
                         
@@ -4658,16 +4693,18 @@
                     job_assign = 'Teck' AND job_status = 'Pending'
                     OR
                     job_assign = 'Teck' AND job_status = 'Incomplete'";
+            
             $numRow_run = mysqli_query ($conn,$numRow);
-
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
-            else
-            {
-                echo '<h4 style="text-align:right;">No Data </h4>';
-            }
+            
+            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Teck'");
+            while($data = mysqli_fetch_array($records))
+                {
+                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                }
 
             while($row = $results->fetch_assoc()) {
             ?>
@@ -4958,6 +4995,12 @@
             {
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
+
+            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Aizat'");
+            while($data = mysqli_fetch_array($records))
+                {
+                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                }
 
             while($row = $results->fetch_assoc()) {
             ?>

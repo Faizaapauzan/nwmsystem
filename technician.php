@@ -100,6 +100,7 @@ if(!isset($_SESSION['username']))
 	position: static;
 }
 
+
 </style>
 
 <body>
