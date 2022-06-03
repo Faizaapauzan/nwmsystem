@@ -91,7 +91,7 @@ session_start();
     <input type="text" class="form-control" id="jobdescription" value="<?php echo $row['job_description']?>" style="background-color: white;" readonly>
   </div> 
 
-  <div class="col-md-6">
+  <div class="col-md-12">
     <label for="customeraddress" class="form-label">Customer Address</label>
     <input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address1']?>" style="background-color: white;" readonly>
 	<input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address2']?>" style="background-color: white;" readonly>
@@ -131,89 +131,18 @@ session_start();
 
   <div class="col-md-6">
     <label for="accessories_required">Accessories Required</label>
-    <select disabled class="form-control" id="accessories_required" readonly>
-                <option value='' <?php if ($row['accessories_required'] == '') {
-                    echo "SELECTED";
-                } ?>></option>
-                <option value="Yes" <?php if ($row['accessories_required'] == "Yes") {
-                    echo "SELECTED";
-                } ?>>Yes</option>
-                <option value="No" <?php if ($row['accessories_required'] == "No") {
-                    echo "SELECTED";
-                } ?>>No</option>
-    </select>
+     <input type="text" class="form-control" id="asasistant" value="<?php echo $row['accessories_required']?>" style="background-color: white;" readonly>
+
   </div>
 
   <div class="col-md-6">
     <label for="job_assign">Job Assign To :</label>
-    <select disabled class="form-control" id="job_assign" readonly>
-                <option value='' <?php if ($row['job_assign'] == '') {
-                    echo "SELECTED";
-                } ?>></option>
-                <option value="Boon" <?php if ($row['job_assign'] == "Boon") {
-                    echo "SELECTED";
-                } ?>>Boon</option>
-                <option value="Hafiz" <?php if ($row['job_assign'] == "Hafiz") {
-                    echo "SELECTED";
-                } ?>>Hafiz</option>
-                <option value="Hamir" <?php if ($row['job_assign'] == "Hamir") {
-                    echo "SELECTED";
-                } ?>>Hamir</option>
-                <option value="Hwa" <?php if ($row['job_assign'] == "Hwa") {
-                    echo "SELECTED";
-                } ?>>Hwa</option>
-                <option value="Isk" <?php if ($row['job_assign'] == "Isk") {
-                    echo "SELECTED";
-                } ?>>Isk</option>
-                <option value="John" <?php if ($row['job_assign'] == "John") {
-                    echo "SELECTED";
-                } ?>>John</option>
-                <option value="Jun Jie" <?php if ($row['job_assign'] == "Jun Jie") {
-                    echo "SELECTED";
-                } ?>>Jun Jie</option>
-                <option value="Razwill" <?php if ($row['job_assign'] == "Razwill") {
-                    echo "SELECTED";
-                } ?>>Razwill</option>
-                <option value="Sahele" <?php if ($row['job_assign'] == "Sahele") {
-                    echo "SELECTED";
-                } ?>>Sahele</option>
-                <option value="Sazaly" <?php if ($row['job_assign'] == "Sazaly") {
-                    echo "SELECTED";
-                } ?>>Sazaly</option>
-                <option value="Teck" <?php if ($row['job_assign'] == "Teck") {
-                    echo "SELECTED";
-                } ?>>Teck</option>
-                <option value="Keong" <?php if ($row['job_assign'] == "Aizat") {
-                    echo "SELECTED";
-                } ?>>Keong</option>
-                <option value="Storekeeper" <?php if ($row['job_assign'] == "Storekeeper") {
-                    echo "SELECTED";
-                } ?>>Storekeeper</option>
-                <option value="Cancel" <?php if ($row['job_assign'] == "Cancel") {
-                    echo "SELECTED";
-                } ?>>Cancel</option>
-    </select>
+    <input type="text" class="form-control" id="asasistant" value="<?php echo $row['job_assign']?>" style="background-color: white;" readonly>
   </div>
 
   <div class="col-md-6">
     <label for="Job_assistant">Assistant :</label>
-    <select disabled class="form-control" id="Job_assistant" readonly>
-                <option value='' <?php if ($row['Job_assistant'] == '') {
-                    echo "SELECTED";
-                } ?>></option>
-                <option value="Boon" <?php if ($row['Job_assistant'] == "Boon") {
-                    echo "SELECTED";
-                } ?>>Boon</option>
-                <option value="Hafiz" <?php if ($row['Job_assistant'] == "Hafiz") {
-                    echo "SELECTED";
-                } ?>>Hafiz</option>
-                <option value="Hamir" <?php if ($row['Job_assistant'] == "Hamir") {
-                    echo "SELECTED";
-                } ?>>Hamir</option>
-                <option value="Hwa" <?php if ($row['Job_assistant'] == "Hwa") {
-                    echo "SELECTED";
-                } ?>>Hwa</option>
-    </select>
+     <input type="text" class="form-control" id="asasistant" value="<?php echo $row['Job_assistant']?>" style="background-color: white;" readonly>
   </div>
 
   <div class="col-md-6">

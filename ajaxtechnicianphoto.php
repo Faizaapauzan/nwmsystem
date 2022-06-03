@@ -81,7 +81,7 @@ form .upload-photo label.details {
 
 <body>	
 
- <form style="margin-left: -43px;" id="submitForm">
+ <form style="margin-left: -19px;" id="submitForm">
 
 <!-- for select job register id -->
 <div>

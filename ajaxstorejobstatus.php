@@ -26,8 +26,8 @@ session_start();
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     
     <div class="JobStatusUpdate">
-        <label for="Accessories" class="details">Job Status Update</label>
-        <select type="text" id="job_status" name="job_status" onchange="myFunction()">
+        <label style="margin-left: 40px;" class="details">Job Status Update</label>
+        <select type="text" id="job_status" name="job_status" onchange="myFunctionStore()">
             <option value='' <?php if($row['job_status'] == '') { echo "SELECTED"; } ?>></option>
             <option value="Doing" <?php if($row['job_status'] == "Doing") { echo "SELECTED"; } ?>>Doing</option>            
             <option value="Pending" <?php if($row['job_status'] == "Pending") { echo "SELECTED"; } ?>>Pending</option>

@@ -171,6 +171,8 @@ if(!isset($_SESSION['username']))
 								job_assign ='{$_SESSION['username']}' AND  job_status = ''
 								OR
 								job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete'
+								OR
+								job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready'
 								ORDER BY jobregisterlastmodify_at
 								DESC LIMIT 50");
 

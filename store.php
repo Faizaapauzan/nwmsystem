@@ -18,7 +18,7 @@ if($_SESSION['staff_position']==""){
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
    	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <title>NWM Store Page</title>
+    <title>Storekeeper</title>
     <link href="css/testing.css"rel="stylesheet" />
 	
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
@@ -383,18 +383,5 @@ if($_SESSION['staff_position']==""){
             </div>
          </div>
 
-
-
-         
-
-
-
-
-
-
-
-
-
 </body>
-
 </html>

@@ -17,7 +17,7 @@ session_start();
 </head>
 
 <body>
-<!-- <div class="container" style="padding:50px 250px;"> -->
+<div class="container" style="padding-left: 4px; overflow-x: auto;">
 
 <?php
 //include connection file 
@@ -31,12 +31,10 @@ include_once("dbconnect.php");
   }
   
 ?>
-<div style="overflow-x: auto; margin-top: -73px;">
+<!-- <div class="update-store" style="overflow-x: auto; margin-top: -73px;"> -->
  <form id="storeupdate_form" method="post">
-          <div id="storesmsg" class="alerts"></div>
-<table id="remark_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table">
-
-    <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
+          <!-- <div id="storesmsg" class="alerts"></div> -->
+<table id="remark_grid" style="margin-top: -60px;" class="table table-condensed table-hover table-striped bootgrid-table">
    <thead>
       <tr>
         <th>No</th>

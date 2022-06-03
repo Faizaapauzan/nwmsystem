@@ -59,7 +59,7 @@
     <div class="input-group mb-3">
         <input readonly type="text" class="form-control" id="tech_in" name="tech_in" value="<?php echo $row['tech_in'] ?>" aria-describedby="basic-addon2">
         <div class="input-group-append">
-            <button class="buttonbiru" onclick="tech_ins()" style="width: fit-content;" type="button">IN</button>
+            <button class="buttonbiru" onclick="tech_ins()" style="width: fit-content; padding-left: 55px;" type="button">IN</button>
         </div>
         
         <script type="text/javascript">
@@ -96,7 +96,7 @@
     <div class="input-group mb-3">
         <input readonly type="text" class="form-control" id="ass_in" name="ass_in" value="<?php echo $row['ass_in'] ?>" aria-describedby="basic-addon2">
         <div class="input-group-append">
-            <button class="buttonbiru" onclick="ass_ins()" style="width: fit-content;" type="button">IN</button>
+            <button class="buttonbiru" onclick="ass_ins()" style="width: fit-content; padding-left: 60px;" type="button">IN</button>
         </div>
         
         <script type="text/javascript">
@@ -113,7 +113,7 @@
     
     <p class="control"><b id="message-update"></b></p>
     <div class="updateBtn">
-        <div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
+        <div><input type="button" onclick="updateForm();" class="buttonbiru" style="height: 39px; padding-left: 21px; font-size: 15px;" value="Update" /></div>
     </div>
     
     </form>
