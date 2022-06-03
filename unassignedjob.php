@@ -1,7 +1,7 @@
 <?php
 session_start();
  if($_SESSION['technician_rank']!="1st Leader" ){
-  header("location:completejoblistnd.php");
+  header("location:unassignedjobnd.php");
  }
 
 
@@ -83,7 +83,12 @@ session_start();
 			<a href="unassignedjob.php">Unassigned Job</a>
 		  </div>
 	  </div>
-	  
+
+  <a href="pendingjoblistst.php" class="nav__link">
+	  <i class="material-icons">pending_actions</i>
+	  <span class="nav__text">Pending</span>
+  </a>
+  
   <a href="technician.php" class="nav__link">
 	  <i class="material-icons">home</i>
 	  <span class="nav__text">Home</span>

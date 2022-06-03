@@ -65,19 +65,14 @@
 <nav class="nav">
 	
 	<div class="nav__link nav__link dropdown">
-	  <i class="material-icons">access_time</i>
-	  <span class="nav__text">Clock In</span>
-		<div class="dropdown-content">
-			<a href="techresthour.php">Rest Hour</a>
-			<a href="techreportoff.php">Report Off</a>
-		  </div>
-	  </div>
-	  
-  <a href="joblistnd.php" class="nav__link nav__link">
 	  <i class="material-icons">list_alt</i>
 	  <span class="nav__text">Job Listing</span>
-  </a>
-  
+		<div class="dropdown-content">
+			<a href="assignedjob.php">Assigned Job</a>
+			<a href="unassignedjob.php">Unassigned Job</a>
+		  </div>
+	  </div>
+
   <a href="pendingjoblistnd.php" class="nav__link">
 	  <i class="material-icons">pending_actions</i>
 	  <span class="nav__text">Pending</span>
@@ -97,11 +92,6 @@
 	  <i class="material-icons">check_circle</i>
 	  <span class="nav__text">Complete</span>
   </a>
-  
-  <a href="logout.php" class="nav__link">
-	  <i class="material-icons">logout</i>
-	  <span class="nav__text">Logout</span>
-  </a>
 </nav>
 	
 <div class="container">	
@@ -112,38 +102,38 @@
 </div>	
 
     <div class="column">
+    <div class="column">
         <p class="column-title" id="joblisting"><b>Pending</b></p>
             <?php
                 include 'dbconnect.php';
                 $results = $conn->query("SELECT
                 jobregister_id, job_order_number, job_priority, job_name, customer_name,
-				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason, staff_position, job_assign
+				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, staff_position, job_assign
                 FROM job_register WHERE
-                (job_status = 'Pending' AND staff_position='Technician')
+                (job_status = 'Pending')
                 ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                 while($row = $results->fetch_assoc()) {
             ?>
-            
+			
 			<div class="cards">
-            <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-            <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
-				<ul class="b" id="draged">
-				<strong text-align="center"><?php echo $row['job_priority']?></strong>
-				<li><?php echo $row['job_order_number']?></li>
-				<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-				<li><?php echo $row['job_description']?></li>
-				<li><?php echo $row['machine_name']?></li>
-				<li><?php echo $row['machine_type']?></li>
-				<li><?php echo $row['serialnumber']?></li>
-				<strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
-				</ul>
-				<div class="status" style="font-family: sans-serif;">
+				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
+				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
+					<ul class="b" id="draged">
+						<strong text-align="center"><?php echo $row['job_priority']?></strong>
+						<li><?php echo $row['job_order_number']?></li>
+						<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+						<li><?php echo $row['job_description']?></li>
+						<li><?php echo $row['machine_name']?></li>
+						<li><?php echo $row['machine_type']?></li>
+						<li><?php echo $row['serialnumber']?></li>
+					</ul>
+					<div class="status" style="font-family: sans-serif;">
 					<strong><?php echo $row['job_assign']?></strong>
 				</div>
-            </div>
 			</div>
-            <?php } ?>
-    </div>
+		</div>
+		<?php } ?>
+                    </div>
 	
  <!--VIEW BUTTON MODAL AJAX-->
 	

@@ -74,7 +74,12 @@
 			<a href="unassignedjob.php">Unassigned Job</a>
 		  </div>
 	  </div>
-	  
+
+  <a href="pendingjoblistnd.php" class="nav__link">
+	  <i class="material-icons">pending_actions</i>
+	  <span class="nav__text">Pending</span>
+  </a>
+  
   <a href="technician.php" class="nav__link">
 	  <i class="material-icons">home</i>
 	  <span class="nav__text">Home</span>
