@@ -18,6 +18,7 @@
 
     <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
 
 	<script src="https://kit.fontawesome.com/7b6b55bad0.js" crossorigin="anonymous"></script>
@@ -95,15 +96,15 @@
 	
 <!-- save technician and assistant name -->
 <div class="container">
-	<div class="column" >
-					<p class="column-title" id="technician" >Technician & Assistant In Charge</p>
-  <form action="techresthour.php" method="post">
+<div class="column" >
+<p class="column-title" id="technician" >Technician & Assistant In Charge</p>
+<form action="" method="GET">
     
       <div style="display: inline-flex;">
       <div class="input-box">
         <label style="font-size: 15px;">Technician: </label>
         <?php if (isset($_SESSION["username"])) ?>
-        <input type="text" name="technician" id="technician" value="<?php echo $_SESSION["username"] ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>
+        <input type="text" name="technician" id="technician" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>
         <label style="font-size: 15px;">Assistant: </label>
   
         <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto" name="assistant" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['assistant']?>">  </option>
@@ -117,16 +118,16 @@
         }	
     ?></select>
 
-    <input type="hidden" name="assistant" id='assistant' value="<?php echo $row['assistant']?>" onchange="GetAssistant(this.value)" readonly>
+    <input type="hidden" name="assistant" id='assistant' value="<?php if(isset($_GET['assistant'])){echo $_GET['assistant'];} ?>" onchange="GetAssistant(this.value)" readonly>
     
       </div>
       </div>
       
       <div>
-        <div><input type="button" onclick="submitFormrest();" class="buttonbiru" style="width: fit-content; margin-top: 19px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" value="Save" /></div>
-           <!-- <button style="width: fit-content; padding:5px;" type="button" id="update_rest" name="update_rest" value="Save" class="buttonbiru" onclick="submitFormrest();">Update</button> -->
+        <div><input type="button" onclick="submitFormrest();" class="buttonbiru" style="width: fit-content; margin-top: 19px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" value="Save" />
+         <button style="width: fit-content; margin-top: -4px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" type="submit" class="btn btn-primary">Search</button>
         <p class="control"><b id="message"></b></p>
-      </div>
+      </div></div>
       
   </form>
   </div>
@@ -166,34 +167,172 @@
   </script>
 <!-- script to save technician and assistant name -->
 
-<!--BOARD REST HOUR-->
+<!-- SEARCH TO DISPLAY REST HOUR IN AND OUT -->
 
-				<div class="column" >
-					<p class="column-title" id="technician" >Rest Hour</p>
-         <?php
-      include 'dbconnect.php';
-      $query = "SELECT * FROM technician_resthour ORDER BY resthour_id DESC LIMIT 1";
-      $result = mysqli_query($conn, $query);
-  ?>
-   <?php while($row = mysqli_fetch_array($result)) { ?>
 
-				            <div class="cards">
-							 <div class="card" data-id="<?php echo $row['resthour_id'];?>" data-toggle="modal" data-target="#myModal" >
-									<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-									<ul class="b" id="draged">
-          Technician: <?php echo $row['technician']?>
-          <li>Out: <?php echo $row['tech_out']?></li>
-          <li>In: <?php echo $row['tech_in']?></li>
-          Assistant: <?php echo $row['assistant']?>
-          <li>Out: <?php echo $row['ass_out']?></li>
-          <li>In: <?php echo $row['ass_in']?></li>
-        </ul>
-										
-								</div>
-							</div>
-					<?php } ?>				
-				</div>
-				
+
+      <?php 
+        $con = mysqli_connect("localhost","root","","nwmsystem");
+
+        if(isset($_GET['technician'])) {
+                                     
+          $technician = $_GET['technician'];
+          $assistant = $_GET['assistant'];
+
+          $query = "SELECT * FROM technician_resthour WHERE technician='$technician' AND assistant='$assistant' ORDER BY resthour_id DESC LIMIT 1";
+          $query_run = mysqli_query($con, $query);
+
+          if(mysqli_num_rows($query_run) > 0){
+
+           foreach($query_run as $row)
+
+              { ?>
+
+                    <div class="column" >
+			<p class="column-title" id="technician" >Rest Hour</p>
+      <hr>
+<div class="cards">
+  <div class="card">
+        <input type="hidden" name="resthour_id" class="resthour_id" value="<?= $row['resthour_id']; ?>">
+                <div class="dalamboard" style="padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
+    <label><?= $row['technician']; ?></label>
+    <div style="width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+    <button class="buttonbiru" onclick="tech_outs()" style="width: fit-content;" type="button">OUT</button>
+    </div>
+        
+    <script type="text/javascript">
+      function tech_outs()
+        {
+          $.ajax({url:"departureTime.php", success:function(result)
+            {
+              $("#tech_out").val(result);
+                        }
+                    })
+                }
+    </script>
+    </div>
+        
+    <div style="width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" class="form-control" id="tech_in" name="tech_in" value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+    <button class="buttonbiru" onclick="tech_ins()" style="width: fit-content; padding-left: 55px;" type="button">IN</button>
+    </div>
+        
+    <script type="text/javascript">
+      function tech_ins()
+        {
+          $.ajax({url:"departureTime.php", success:function(result)
+        {
+          $("#tech_in").val(result);
+        }
+          })
+                }
+    </script>
+    </div>
+
+    <label><?= $row['assistant']; ?></label>
+    <div style="width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" class="form-control" id="ass_out" name="ass_out" value="<?= $row['ass_out']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+    <button class="buttonbiru" onclick="ass_outs()" type="button" style="width: fit-content;">OUT</button>
+    </div>
+        
+    <script type="text/javascript">
+      function ass_outs()
+        {
+          $.ajax({url:"departureTime.php", success:function(result)
+        {
+          $("#ass_out").val(result);
+        }
+          })
+                }
+    </script>
+    </div>
+ 
+    <div style="width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" class="form-control" id="ass_in" name="ass_in" value="<?= $row['ass_in']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+    <button class="buttonbiru" onclick="ass_ins()" style="width: fit-content; padding-left: 60px;" type="button">IN</button>
+    </div>
+        
+    <script type="text/javascript">
+      function ass_ins()
+        {
+          $.ajax({url:"departureTime.php", success:function(result)
+        {
+          $("#ass_in").val(result);
+        }
+          })
+              }
+    </script>
+    </div>
+    
+    <p class="control"><b id="message-update"></b></p>
+    <div style="width: fit-content;" class="updateBtn">
+    <div><input type="button" onclick="updateForm();" class="buttonbiru" style="height: 39px; padding-left: 36px; font-size: 15px;" value="Update" /></div>
+    </div></div>
+    </form>
+    
+    <script type="text/javascript">
+
+      function updateForm()
+              {
+                var tech_out = $('input[name=tech_out]').val();
+                var tech_in = $('input[name=tech_in]').val();
+                var ass_out = $('input[name=ass_out]').val();
+                var ass_in = $('input[name=ass_in]').val();
+                var resthour_id = $('input[name=resthour_id]').val();
+                
+                if(tech_out!='' || tech_out=='', 
+                    tech_in!='' || tech_in=='', 
+                    ass_out!='' || ass_out=='',
+                     ass_in!='' || ass_in=='',
+                resthour_id!='' || resthour_id=='')
+
+                  {
+                    var formData = {tech_out: tech_out,
+                                     tech_in: tech_in,
+                                     ass_out: ass_out,
+                                      ass_in: ass_in,
+                                 resthour_id: resthour_id};
+                                    
+                    $.ajax({
+                            url: "techresthourupdaterindex.php", 
+                            type: 'POST', 
+                            data: formData, 
+                            success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#message-update').html('<span style="color: green">Update Saved!</span>');
+                        else
+                          $('#message-update').html('<span style="color: red">Data Cannot Be Saved</span>');
+                      }
+                    });
+                  }
+              } 
+    </script>
+            <?php
+                    }
+                            }
+                       else
+                                        {
+                                            echo "No Record Found";
+                                        }
+                                    }
+                                   
+                                ?>
+
+   </div>
+   </div>
+   		</div>
+                                  </div>
+
+
+<!-- SEARCH TO DISPLAY REST HOUR IN AND OUT -->	
 
 <!--TOP BAR-->
 						
@@ -201,51 +340,6 @@
 							<br>
 						<div class="modal-body p-0">
 					
-<!-- Display modal -->
-  <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
-    <div role="document" class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-          <div class="tabs active" id="tab01">
-            <h6 class="font-weight-bold">Rest Hour</h6>
-          </div>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="line"></div>
-          <br>
-          <div class="modal-body p-0">
-            
-          <fieldset class="show" id="tab011">
-            <form action="" method="post">
-              <div class="tech-details">
-
-              </div>
-            </form>
-  <script type='text/javascript'>
-    $(document).ready(function() {
-      $('.card').click(function() {
-        var resthour_id = $(this).data('id');
-        $.ajax({
-          url: 'ajaxresthour.php',
-          type: 'post',
-          data: {resthour_id: resthour_id},
-          success: function(response) {
-            $('.tech-details').html(response);
-            $('#myModal').modal('show');
-          }
-        });
-      });
-    });
-  </script>								
-						</fieldset>						
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- Display modal -->
-
 
 <script>
 $(document).ready(function(){
