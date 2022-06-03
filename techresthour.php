@@ -187,7 +187,7 @@
           $technician = $_GET['technician'];
           $assistant = $_GET['assistant'];
 
-          $query = "SELECT * FROM technician_resthour WHERE technician='$technician' AND assistant='$assistant' ORDER BY today_date DESC";
+          $query = "SELECT * FROM technician_resthour WHERE technician='$technician' AND assistant='$assistant' ORDER BY resthour_id DESC";
           $query_run = mysqli_query($con, $query);
 
           if(mysqli_num_rows($query_run) > 0){
