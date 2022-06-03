@@ -47,7 +47,7 @@
         <script type="text/javascript">
             function tech_outs()
                 {
-                    $.ajax({url:"departureTime.php", success:function(result)
+                    $.ajax({url:"techresthourtime.php", success:function(result)
                         {
                             $("#tech_out").val(result);
                         }
@@ -65,7 +65,7 @@
         <script type="text/javascript">
             function tech_ins()
                 {
-                    $.ajax({url:"departureTime.php", success:function(result)
+                    $.ajax({url:"techresthourtime.php", success:function(result)
                         {
                             $("#tech_in").val(result);
                         }
@@ -84,7 +84,7 @@
         <script type="text/javascript">
             function ass_outs()
                 {
-                    $.ajax({url:"departureTime.php", success:function(result)
+                    $.ajax({url:"techresthourtime.php", success:function(result)
                         {
                             $("#ass_out").val(result);
                         }
@@ -102,7 +102,7 @@
         <script type="text/javascript">
             function ass_ins()
                 {
-                    $.ajax({url:"departureTime.php", success:function(result)
+                    $.ajax({url:"techresthourtime.php", success:function(result)
                         {
                             $("#ass_in").val(result);
                         }
