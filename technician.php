@@ -55,17 +55,21 @@ if(!isset($_SESSION['username']))
 
 
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: auto;
-  bottom: 55px;
+  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
   z-index: 1;
-  
-
 }
+
 
 .dropdown-content a {
   color: black;
@@ -95,59 +99,62 @@ if(!isset($_SESSION['username']))
 
 <body>
 
-	<nav class="nav">
-
-
-		
-		  <div class="nav__link nav__link dropdown">
-			<i class="material-icons">access_time</i>
-			<span class="nav__text">Clock In</span>
-			  <div class="dropdown-content">
-				  <a href="techresthour.php">Rest Hour</a>
-				  <a href="techreportoff.php">Report Off</a>
+  <nav class="navbar1">
+		<div class="wrapper">
+			<ul class="main-nav" id="js-menu">
+				<div class="dropdown">
+					<button class="nav1-links sidebarbutton dropbtn">Clock In</button>
+						<div class="dropdown-content">
+							<a href="techresthour.php">Rest Hour</a>
+							<a href="techreportoff.php">Report Off</a>
+						</div>
 				</div>
-			</div>
-			
+			</ul>
+			    <div class="ul2">
+        <a href="logout.php" class="nav1-links"><i class="bx bx-log-out"></i></a>
 
-		
-		<a href="joblistst.php" class="nav__link nav__link">
-			<i class="material-icons">list_alt</i>
-			<span class="nav__text">Job Listing</span>
-		</a>
-		
-		<a href="pendingjoblistst.php" class="nav__link">
-			<i class="material-icons">pending_actions</i>
-			<span class="nav__text">Pending</span>
-		</a>
-		
-		<a href="technician.php" class="nav__link">
-			<i class="material-icons">home</i>
-			<span class="nav__text">Home</span>
-		</a>
-		
-		<a href="completejoblistst.php" class="nav__link">
-			<i class="material-icons">check_circle</i>
-			<span class="nav__text">Complete</span>
-		</a>
-		
-		<a href="incompletejoblistst.php" class="nav__link">
-			<i class="material-icons">do_not_disturb_on</i>
-			<span class="nav__text">Incomplete</span>
-		</a>
-		<a href="logout.php" class="nav__link">
-			<i class="material-icons">logout</i>
-			<span class="nav__text">Logout</span>
-		</a>		
-	</nav>
+    </div>
+		</div>
+  </nav>
+  
+<nav class="nav">
+	
+	  
+  <a href="joblistst.php" class="nav__link nav__link">
+	  <i class="material-icons">list_alt</i>
+	  <span class="nav__text">Job Listing</span>
+  </a>
+  
+  <a href="pendingjoblistst.php" class="nav__link">
+	  <i class="material-icons">pending_actions</i>
+	  <span class="nav__text">Pending</span>
+  </a>
+  
+  <a href="technician.php" class="nav__link">
+	  <i class="material-icons">home</i>
+	  <span class="nav__text">Home</span>
+  </a>
+
+  <a href="incompletejoblistst.php" class="nav__link">
+	  <i class="material-icons">do_not_disturb_on</i>
+	  <span class="nav__text">Incomplete</span>
+  </a>
+  
+  <a href="completejoblistst.php" class="nav__link">
+	  <i class="material-icons">check_circle</i>
+	  <span class="nav__text">Complete</span>
+  </a>
+  
+
+</nav>
 
 <!--TODO-->
 
         <div class="container">
 			  <div style="text-align: center; font-size: 35px; font-weight: bold;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
-			
 				<div class="column" >
 					<p class="column-title"id="doing" >Todo</p>
-          <?php            
+							<?php            
 								include 'dbconnect.php';
 								$results = $conn->query("SELECT
 								jobregister_id, job_order_number, job_priority, job_name, customer_name, 
@@ -168,23 +175,23 @@ if(!isset($_SESSION['username']))
 
 				            <div class="cards">
 								<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-									<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-										<ul class="b" id="draged">
+									<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->
+									<ul class="b" id="draged">
 										<strong text-align="center"><?php echo $row['job_priority']?></strong>
 										<li><?php echo $row['job_order_number']?></li>
-										<li><?php echo $row['job_description']?></li>
 										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+										<li><?php echo $row['job_description']?></li>
 										<li><?php echo $row['machine_name']?></li>
 										<li><?php echo $row['machine_type']?></li>
 										<li><?php echo $row['serialnumber']?></li>
 										<strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
-										</ul>
-										<div class="status"  id="incompleteStatus">
+									</ul>
+									<div class="status"  id="incompleteStatus">
 										<?php echo $row['job_status']?>
-										</div>
+									</div>
 								</div>
 							</div>
-					<?php } ?>				
+							<?php } ?>				
 				</div>
 				
 <!--DOING-->				
@@ -210,22 +217,22 @@ if(!isset($_SESSION['username']))
 						
 				            <div class="cards">
 								<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-									<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-										<ul class="b" id="draged">
-										<strong text-align="center"><?php echo $row['job_priority']?></strong>
-										<li><?php echo $row['job_order_number']?></li>
-										<li><?php echo $row['job_description']?></li>
-										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-										<li><?php echo $row['machine_name']?></li>
-										<li><?php echo $row['machine_type']?></li>
-										<li><?php echo $row['serialnumber']?></li>
-										</ul>
-										<div class="status"  id="doingStatus">
-										<?php echo $row['job_status']?>
-										</div>
+								<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->
+								<ul class="b" id="draged">
+									<strong text-align="center"><?php echo $row['job_priority']?></strong>
+									<li><?php echo $row['job_order_number']?></li>
+									<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+									<li><?php echo $row['job_description']?></li>
+									<li><?php echo $row['machine_name']?></li>
+									<li><?php echo $row['machine_type']?></li>
+									<li><?php echo $row['serialnumber']?></li>
+								</ul>
+								<div class="status"  id="doingStatus">
+									<?php echo $row['job_status']?>
 								</div>
 							</div>
-					<?php } ?>				
+							</div>
+						<?php } ?>				
 				</div>
 				
 <!--PENDING-->
@@ -251,20 +258,20 @@ if(!isset($_SESSION['username']))
 			  
 						<div class="cards">
 							<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-								<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-									<ul class="b" id="draged">
-										<strong text-align="center"><?php echo $row['job_priority']?></strong>
-										<li><?php echo $row['job_order_number']?></li>
-										<li><?php echo $row['job_description']?></li>
-										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-										<li><?php echo $row['machine_name']?></li>
-										<li><?php echo $row['machine_type']?></li>
-										<li><?php echo $row['serialnumber']?></li>
-										<li><b>Pending Reason: </b><?php echo $row['reason']?></li>
-									</ul>
-										<div class="status"  id="pendingStatus">
-										<?php echo $row['job_status']?>
-										</div>
+							<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->
+							<ul class="b" id="draged">
+								<strong text-align="center"><?php echo $row['job_priority']?></strong>
+								<li><?php echo $row['job_order_number']?></li>
+								<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+								<li><?php echo $row['job_description']?></li>
+								<li><?php echo $row['machine_name']?></li>
+								<li><?php echo $row['machine_type']?></li>
+								<li><?php echo $row['serialnumber']?></li>
+								<strong>Pending Reason:<?php echo $row['reason']?></strong>
+							</ul>
+							<div class="status"  id="pendingStatus">
+								<?php echo $row['job_status']?>
+							</div>
 							</div>
 						</div>
 					<?php } ?>
@@ -290,22 +297,22 @@ if(!isset($_SESSION['username']))
 						while($row = $results->fetch_assoc()) {
               
 					?>
-			  
+					
 						<div class="cards">
 							<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-								<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->                  
-									<ul class="b" id="draged">
-										<strong text-align="center"><?php echo $row['job_priority']?></strong>
-										<li><?php echo $row['job_order_number']?></li>
-										<li><?php echo $row['job_description']?></li>
-										<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-										<li><?php echo $row['machine_name']?></li>
-										<li><?php echo $row['machine_type']?></li>
-										<li><?php echo $row['serialnumber']?></li>
-									</ul>
-										<div class="status"  id="completedStatus">
-										<?php echo $row['job_status']?>
-										</div>
+							<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->
+							<ul class="b" id="draged">
+								<strong text-align="center"><?php echo $row['job_priority']?></strong>
+								<li><?php echo $row['job_order_number']?></li>
+								<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+								<li><?php echo $row['job_description']?></li>
+								<li><?php echo $row['machine_name']?></li>
+								<li><?php echo $row['machine_type']?></li>
+								<li><?php echo $row['serialnumber']?></li>
+							</ul>
+							<div class="status"  id="completedStatus">
+								<?php echo $row['job_status']?>
+							</div>
 							</div>
 						</div>
 					<?php } ?>

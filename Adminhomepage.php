@@ -1,12 +1,30 @@
 <?php
  session_start();
-
  // cek apakah yang mengakses halaman ini sudah login
- if($_SESSION['staff_position']==""){
-  header("location:index.php?pesan=gagal");
-  
+ if($_SESSION['staff_position']=="" ){
+  header("location:index.php?error");
  }
- ?>
+
+if(!isset($_SESSION['username']))
+	{	
+    header("location:index.php?error");
+	}
+
+    elseif($_SESSION['staff_position']== 'Admin')
+	{
+
+	}
+
+        elseif($_SESSION['staff_position']== 'Manager')
+	{
+	}
+
+  else
+	{
+			header("location:index.php?error");
+	}
+
+?>
 
 <!DOCTYPE html>
 <!-- Created by CodingLab |www.youtube.com/CodingLabYT-->

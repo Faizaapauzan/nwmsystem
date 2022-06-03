@@ -34,36 +34,6 @@ session_start();
 
 <style>
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: auto;
-  bottom: 55px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  
-
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  padding-right: 7px;
-
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
-  color:whitesmoke;
-}
 
 #notYetStatus{
 	position: static;
@@ -74,46 +44,35 @@ session_start();
 <body>
 
 
-	<nav class="nav">
+<nav class="nav">
 	
-			  <div class="nav__link nav__link dropdown">
-			<i class="material-icons">access_time</i>
-			<span class="nav__text">Clock In</span>
-			  <div class="dropdown-content">
-				  <a href="techresthour.php">Rest Hour</a>
-				  <a href="techreportoff.php">Report Off</a>
-				</div>
-			</div>
-	
-		<a href="joblistnd.php" class="nav__link nav__link">
-			<i class="material-icons">list_alt</i>
-			<span class="nav__text">Job Listing</span>
-		</a>
-		
-		<a href="pendingjoblistnd.php" class="nav__link">
-			<i class="material-icons">pending_actions</i>
-			<span class="nav__text">Pending</span>
-		</a>
-		
-		<a href="technician.php" class="nav__link">
-			<i class="material-icons">home</i>
-			<span class="nav__text">Home</span>
-		</a>
-		
-		<a href="completejoblistnd.php" class="nav__link">
-			<i class="material-icons">check_circle</i>
-			<span class="nav__text">Complete</span>
-		</a>
-		
-		<a href="incompletejoblistnd.php" class="nav__link">
-			<i class="material-icons">do_not_disturb_on</i>
-			<span class="nav__text">Incomplete</span>
-		</a>
-		<a href="logout.php" class="nav__link">
-			<i class="material-icons">logout</i>
-			<span class="nav__text">Logout</span>
-		</a>
-	</nav>
+	  
+  <a href="joblistnd.php" class="nav__link nav__link">
+	  <i class="material-icons">list_alt</i>
+	  <span class="nav__text">Job Listing</span>
+  </a>
+  
+  <a href="pendingjoblistnd.php" class="nav__link">
+	  <i class="material-icons">pending_actions</i>
+	  <span class="nav__text">Pending</span>
+  </a>
+  
+  <a href="technician.php" class="nav__link">
+	  <i class="material-icons">home</i>
+	  <span class="nav__text">Home</span>
+  </a>
+
+  <a href="incompletejoblistnd.php" class="nav__link">
+	  <i class="material-icons">do_not_disturb_on</i>
+	  <span class="nav__text">Incomplete</span>
+  </a>
+  
+  <a href="completejoblistnd.php" class="nav__link">
+	  <i class="material-icons">check_circle</i>
+	  <span class="nav__text">Complete</span>
+  </a>
+  
+</nav>
 	
 	
 <div class="container">	

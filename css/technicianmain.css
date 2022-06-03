@@ -4,6 +4,38 @@
   margin: 0;
 }
 
+
+
+
+ul {
+  list-style-type: none;
+}
+
+.nav1-links, .logo {
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+}
+
+.navbar1 {padding: 20px;}
+.navbar1, ul {display: flex; flex-direction:row;}
+ul li {padding: 0 5px;}
+.wrapper {display:flex; justify-content: space-between; width:100%; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .nav {
   position: fixed;
   bottom: 0;
@@ -92,7 +124,7 @@ body {
 .column {
   background: #f5f5f5;
   margin-right: 2%;
-  padding: 1%;
+  padding: 2.5%;
   border-radius: 3px;
   width: 100%;
   float: left;

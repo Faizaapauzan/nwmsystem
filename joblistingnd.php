@@ -105,12 +105,12 @@ session_start();
 			<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
 				<ul class="b" id="draged">
 					<strong align="center"><?php echo $row['job_order_number']?></strong>
-					<li><?php echo $row['job_priority']?></li>
-					<li><?php echo $row['customer_name']?></li>
-					<li><?php echo $row['customer_grade']?></li>
-					<li><?php echo $row['job_name']?></li>
-					<li><b><?php echo $row['accessories_required']?></b> accessories required</li>
-					<li><?php echo $row['job_status']?></li>
+					<li><?php echo $row['job_order_number']?></li>
+                    <li><?php echo $row['job_description']?></li>
+                    <li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+                    <li><?php echo $row['machine_name']?></li>
+                    <li><?php echo $row['machine_type']?></li>
+                    <li><?php echo $row['serialnumber']?></li>
 				</ul>
 			</div>
 		</div>
