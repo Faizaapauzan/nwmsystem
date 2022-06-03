@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Technician</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
@@ -37,31 +38,16 @@
 </head>
 
 <style>
-.dropbtn {
-    background-color: #1a0845;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    font-size: 17px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    cursor: pointer;
-    padding: 7px 7px;
-    margin-right: 10px;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: auto;
+  bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  
+
 }
 
 .dropdown-content a {
@@ -69,6 +55,8 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  padding-right: 7px;
+
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -89,14 +77,46 @@
 
 <body>
 
-  <nav class="navbar">
-    <div class="wrapper">
-    <ul class="main-nav" id="js-menu">
-		   <a href="technician.php" class="nav-links sidebarbutton" style="text-decoration: none;"><i class='bx bx-home'></i>HOME</a>
-    </ul>
-   
-    </div>
-  </nav>
+	<nav class="nav">
+	
+					  <div class="nav__link nav__link dropdown">
+			<i class="material-icons">access_time</i>
+			<span class="nav__text">Clock In</span>
+			  <div class="dropdown-content">
+				  <a href="techresthour.php">Rest Hour</a>
+				  <a href="techreportoff.php">Report Off</a>
+				</div>
+			</div>
+	
+		<a href="joblistst.php" class="nav__link nav__link">
+			<i class="material-icons">list_alt</i>
+			<span class="nav__text">Job Listing</span>
+		</a>
+		
+		<a href="pendingjoblistst.php" class="nav__link">
+			<i class="material-icons">pending_actions</i>
+			<span class="nav__text">Pending</span>
+		</a>
+		
+		<a href="technician.php" class="nav__link">
+			<i class="material-icons">home</i>
+			<span class="nav__text">Home</span>
+		</a>
+		
+		<a href="completejoblistst.php" class="nav__link">
+			<i class="material-icons">check_circle</i>
+			<span class="nav__text">Complete</span>
+		</a>
+		
+		<a href="incompletejoblistst.php" class="nav__link">
+			<i class="material-icons">do_not_disturb_on</i>
+			<span class="nav__text">Incomplete</span>
+		</a>
+		<a href="logout.php" class="nav__link">
+			<i class="material-icons">logout</i>
+			<span class="nav__text">Logout</span>
+		</a>
+	</nav>
 	
 <!-- save technician and assistant name -->
 <div class="container">
