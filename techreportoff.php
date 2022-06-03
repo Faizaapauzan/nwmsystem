@@ -1,96 +1,162 @@
 <?php session_start(); ?>
-
+ 
 <!DOCTYPE html>
 <html>
+
 <head>
-	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-	<title>Technician Report Off</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <link href="css/technicianmain.css"rel="stylesheet" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <meta name="keywords" content="" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Technician OFF</title>
+    <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href="css/technicianmain.css" rel="stylesheet" />
+
+    <!-- Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
+
+	<script src="https://kit.fontawesome.com/7b6b55bad0.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!--Boxicons link -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
 </head>
+
+<style>
+.dropbtn {
+    background-color: #1a0845;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding: 7px 7px;
+    margin-right: 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color:whitesmoke;
+}
+
+#notYetStatus{
+	position: static;
+}
+
+#off-report {
+display:none;  
+}
+
+</style>
 
 <body>
 
 <!-- Home Button -->
-<nav class="navbar">
-    <div class="wrapper">
-    <ul class="main-nav" id="js-menu">
-        <a href="technician.php" class="nav-links sidebarbutton" style="text-decoration: none;"><i class='bx bx-home'></i>HOME</a>
-    </div>
-  </nav>
+	<nav class="navbar">
+		<div class="wrapper">
+			<ul class="main-nav" id="js-menu">
+				<a href="technician.php" class="nav-links sidebarbutton" style="text-decoration: none;"><i class='bx bx-home'></i>HOME</a>
+			</ul>
+		</div>
+	</nav>
 <!-- Home Button -->
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-7">
-            <div class="card mt-5">
-				<!--Technician Availability-->
-                <div class="card-body">
-                    <form action="" method="POST">
-                        <div class="row">
-                            <div class="col-md-8">
-							<input type="text" name="username" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" class="form-control">
-                            </div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary">Click</button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <hr>
-                            <?php
-                            include 'dbconnect.php';
-                            if(isset($_POST['username']))
-                                {
-                                    $username = $_POST['username'];
-                                    $query = "SELECT * FROM staff_register WHERE username ='$username'";
-                                    $query_run = mysqli_query($conn, $query);
-                                    if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $row)
-                                            {
-                            ?>
-
-							<form action="" method="post">
-
-                            <input type="hidden" name="staffregister_id" class="staffregister_id" value="<?php echo $row['staffregister_id'] ?>">
-                            <div class="form-group mb-3">
-                                <label for="">Technician Availability</label>
-                                <div class="input-box">
-									<select id="tech_avai" name="tech_avai" class="form-control">
-										<option value='' <?php if ($row['tech_avai'] == '') {echo "SELECTED";} ?>></option>
-										<option value="OFF" <?php if ($row['tech_avai'] == "OFF") {echo "SELECTED";} ?>>OFF</option>
-									</select>
+	
+	<div class="column" >
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="cards">
+					<div class="card">
+						<!--Technician Availability-->
+						<div class="card-body">
+							<form action="" method="POST">
+								<div class="row">
+									<div class="col-md-8">
+										<input type="text" name="username" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" class="form-control">
+									</div>
+									<div class="col-md-4">
+										<button type="submit" class="btn btn-primary">Click</button>
+									</div>
 								</div>
-
-								<br>
-
-								<div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
-								<p class="control"><b id="message-update"></b></p>
-                            </div>
-                            
-                            <?php } } } ?>
-  							
-						</form>
-						
-						<script type="text/javascript">
-							function updateForm()
-								{
-									var staffregister_id = $('input[name=staffregister_id]').val();
-									var tech_avai = $('select[name=tech_avai]').val();
-									if(staffregister_id!='' || staffregister_id=='',
-									          tech_avai!='' || tech_avai=='')
-										{
+							</form>
+							<div class="row">
+								<div class="col-md-12">
+									<hr>
+									
+									<?php
+										include 'dbconnect.php';
+										
+										if(isset($_POST['username']))
+											{
+												$username = $_POST['username'];
+												$query = "SELECT * FROM staff_register WHERE username ='$username'";
+												$query_run = mysqli_query($conn, $query);
+												if(mysqli_num_rows($query_run) > 0)
+											{
+												foreach($query_run as $row)
+											{
+									?>
+									
+									<form action="" method="post">
+										<input type="hidden" name="staffregister_id" class="staffregister_id" value="<?php echo $row['staffregister_id'] ?>">
+										<div class="form-group mb-3">
+											<label for="">Technician Availability</label>
+											<div class="input-box">
+												<select id="tech_avai" name="tech_avai" class="form-control" onchange="myFunction()">
+												<option value='' <?php if ($row['tech_avai'] == '') {echo "SELECTED";} ?>></option>
+												<option value="OFF" <?php if ($row['tech_avai'] == "OFF") {echo "SELECTED";} ?>>OFF</option>
+											</select>
+										</div>
+										<br>
+										<div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
+										<p class="control"><b id="message-update"></b></p>
+										</div>
+									<?php } } } ?>
+									</form>
+									
+									<script type="text/javascript">
+										function updateForm()
+											{
+												var staffregister_id = $('input[name=staffregister_id]').val();
+												var tech_avai = $('select[name=tech_avai]').val();
+												if(staffregister_id!='' || staffregister_id=='',
+												tech_avai!='' || tech_avai=='')
+											{
 											var formData = {staffregister_id: staffregister_id,
 								                                   tech_avai: tech_avai};
 																   
@@ -105,7 +171,7 @@
 																		if(res.success == true)
 																		$('#message-update').html('<span style="color: green">Update Saved!</span>');
 																		else
-																		$('#message-update').html('<span style="color: red">Data Cannot Be Saved</span>');
+																		$('#message-update').html('<span style="color: red">Update Cannot Be Saved</span>');
 																	}
 																});
 															}
@@ -116,7 +182,7 @@
 				
 				<!-- Unavailable Date -->
 				
-				<form action="" method="post">
+				<form action="" method="post" id="off-report">
 
 				<?php if (isset($_SESSION["username"])) ?>
 				<input type="text" name="tech_name" id="tech_name" value="<?php echo $_SESSION["username"] ?>" style="border:none;" readonly hidden>
@@ -150,6 +216,18 @@
 				</form>
 
 				<script type="text/javascript">
+					function myFunction() {
+						var x = document.getElementById("tech_avai").value;
+						if(x == 'OFF'){
+							document.getElementById("off-report").style.display = 'block';
+						}
+						else {
+							document.getElementById("off-report").style.display = 'none';
+						}
+						}
+                </script>
+
+				<script type="text/javascript">
 							function UnavailableForm()
 								{
 									var tech_name = $('input[name=tech_name]').val();
@@ -177,9 +255,9 @@
 																		var res = JSON.parse(response);
 																		console.log(res);
 																		if(res.success == true)
-																		$('#message-Unavailable').html('<span style="color: green">Update Saved!</span>');
+																		$('#message-Unavailable').html('<span style="color: green">You are currently on leave!</span>');
 																		else
-																		$('#message-Unavailable').html('<span style="color: red">Data Cannot Be Saved</span>');
+																		$('#message-Unavailable').html('<span style="color: red">Update Cannot Be Saved</span>');
 																	}
 																});
 															}
@@ -195,7 +273,7 @@
         </div>
     </div>
 </div>
+</div>
 
 </body>
-
 </html>
