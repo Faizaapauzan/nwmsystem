@@ -574,12 +574,7 @@
             {
                 echo  '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
-            else
-            {
-                echo '<h4 style="text-align:right;">No Data </h4>';
-            }
-                    
-                    
+    
         while($row = $results->fetch_assoc()) {
         ?>
 
@@ -1470,10 +1465,12 @@
                 {
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
-                else
-                {
-                    echo '<h4 style="text-align:right;">No Data </h4>';
-                }
+                
+                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='HWA' ");  // Use select query here 
+                while($data = mysqli_fetch_array($records))
+                    {
+                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying data in option menu
+                    }	
 
             while($row = $results->fetch_assoc()) {
             ?>
@@ -4960,10 +4957,6 @@
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
-            }
-            else
-            {
-                echo '<h4 style="text-align:right;">No Data </h4>';
             }
 
             while($row = $results->fetch_assoc()) {

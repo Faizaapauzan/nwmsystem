@@ -56,7 +56,7 @@ include_once("dbconnect.php");
 
 <?php
 // Return current date from the remote server
-$date = date('d-m-y');
+$date = date('d-m-Y');
 
 ?>
 
