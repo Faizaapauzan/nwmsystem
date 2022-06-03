@@ -566,9 +566,27 @@ tr td:first-child:before {
                 var Submitted_Items = $('textarea[name=Submitted_Items]').val();
                 var Problem_Description = $('textarea[name=Problem_Description]').val();
 
-                if(jobregister_id!= '', date!= '', customer_name!= '', cust_phone1!= '', job_name!= '', job_assign!= '', technician_arrival!= '', technician_leaving!= '', machine_name!= '', serialnumber!= '',
-                srvcreportnumber!= '', Issue_By!= '', report!= '', cust!= '', custphone!= '', Travel_Time!= '', Submitted_Items!= '', Problem_Description!= '')
+                if(jobregister_id!= '' || jobregister_id == '',
+                   date!= '' || date == '', 
+                   customer_name!= '' || customer_name == '', 
+                   cust_phone1!= '' || cust_phone1 == '', 
+                   job_name!= '' || job_name == '', 
+                   job_assign!= '' || job_assign == '', 
+                   technician_arrival!= '' || technician_arrival == '', 
+                   technician_leaving!= '' || technician_leaving == '', 
+                   machine_name!= '' || machine_name == '', 
+                   serialnumber!= '' || serialnumber == '',
+                   srvcreportnumber!= '', 
+                   Issue_By!= '' || Issue_By == '', 
+                   report!= '' || report == '', 
+                   cust!= '' || cust == '', 
+                   custphone!= '' || custphone == '', 
+                   Travel_Time!= '' || Travel_Time == '', 
+                   Submitted_Items!= '' || Submitted_Items == '', 
+                   Problem_Description!= '' || Problem_Description == '')
+
                   {
+
                     var formData = {jobregister_id: jobregister_id,
                                     date: date,
                                     customer_name: customer_name,
