@@ -146,8 +146,8 @@
 							<?php            
 								include 'dbconnect.php';
 								$results = $conn->query("SELECT
-								jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name, job_cancel 
-								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason, staff_position
+								jobregister_id, job_order_number, job_priority, job_name, customer_name, job_assign, 
+								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason
 								FROM
 								job_register
 								WHERE

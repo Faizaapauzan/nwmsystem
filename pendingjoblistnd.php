@@ -107,10 +107,10 @@
             <?php
                 include 'dbconnect.php';
                 $results = $conn->query("SELECT
-                jobregister_id, job_order_number, job_priority, job_name, customer_name,
+                jobregister_id, job_order_number, job_priority, job_name, customer_name, reason,
 				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, staff_position, job_assign
                 FROM job_register WHERE
-                (job_status = 'Pending')
+                (staff_position ='Technician' AND job_status = 'Pending' )
                 ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                 while($row = $results->fetch_assoc()) {
             ?>
@@ -126,6 +126,7 @@
 						<li><?php echo $row['machine_name']?></li>
 						<li><?php echo $row['machine_type']?></li>
 						<li><?php echo $row['serialnumber']?></li>
+						<strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
 					</ul>
 					<div class="status" style="font-family: sans-serif;">
 					<strong><?php echo $row['job_assign']?></strong>

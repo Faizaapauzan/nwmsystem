@@ -3,16 +3,13 @@ session_start();
  if($_SESSION['technician_rank']!="1st Leader" ){
   header("location:assignedjobnd.php");
  }
-
-
-
 ?>
 
 <html lang="en">
 
 <head>
 
-	<title>Job Listing</title>
+	<title>Assigned Job</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -113,15 +110,15 @@ session_start();
 
     <div class="column">
         <p class="column-title" id="joblisting"><b>Todo</b></p>
-							<?php            
+		<?php            
 								include 'dbconnect.php';
 								$results = $conn->query("SELECT
 								jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name, 
-								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason
+								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason, staff_position, job_cancel
 								FROM
 								job_register
 								WHERE
-								job_assign ='{$_SESSION['username']}' AND  job_status = ''
+								staff_position ='Technician' AND  job_status = '' AND job_cancel=''
 								ORDER BY jobregisterlastmodify_at
 								DESC LIMIT 50");
 
@@ -151,15 +148,15 @@ session_start();
 					
     <div class="column">
         <p class="column-title" id="joblisting"><b>Doing</b></p>
-							<?php            
+		<?php            
 								include 'dbconnect.php';
 								$results = $conn->query("SELECT
-								jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name, 
+								jobregister_id, job_order_number, job_priority, job_name, customer_name, job_assign, 
 								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason
 								FROM
 								job_register
 								WHERE
-								job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing'
+								staff_position ='Technician' AND  job_status = 'Doing' AND job_cancel=''
 								ORDER BY jobregisterlastmodify_at
 								DESC LIMIT 50");
 
@@ -185,20 +182,6 @@ session_start();
 		</div>
 		<?php } ?>
                     </div>
-
-
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 	
  <!--VIEW BUTTON MODAL AJAX-->
 	
@@ -236,7 +219,7 @@ session_start();
 							// AJAX request
         
 							$.ajax({
-							url: 'ajaxtechnonleader.php',
+							url: 'ajaxtechleader.php',
 							type: 'post',
 							data: {jobregister_id: jobregister_id},
 							success: function(response) {

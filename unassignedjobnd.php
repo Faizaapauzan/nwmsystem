@@ -118,7 +118,7 @@
 									 ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
 									 while($row = $results->fetch_assoc()) {
 		?>
-			
+
 			<div class="cards">
 				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
 				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
@@ -135,23 +135,7 @@
 		</div>
 		<?php } ?>
                     </div>
-					
-					
-
-
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-	
+								
  <!--VIEW BUTTON MODAL AJAX-->
 	
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
