@@ -52,31 +52,19 @@ if(!isset($_SESSION['username']))
 </head>
 
 <style>
-.dropbtn {
-    background-color: #1a0845;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    font-size: 17px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    cursor: pointer;
-    padding: 7px 7px;
-    margin-right: 10px;
-}
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+
 
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: auto;
+  bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  
+
 }
 
 .dropdown-content a {
@@ -84,6 +72,8 @@ if(!isset($_SESSION['username']))
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  padding-right: 7px;
+
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -105,25 +95,21 @@ if(!isset($_SESSION['username']))
 
 <body>
 
-  <nav class="navbar">
-    <div class="wrapper">
-    <ul class="main-nav" id="js-menu">
-		  <div class="dropdown">
-			  <button class="dropbtn">Click Here</button>
+	<nav class="nav">
+
+
+		
+		  <div class="nav__link nav__link dropdown">
+			<i class="material-icons">access_time</i>
+			<span class="nav__text">Clock In</span>
 			  <div class="dropdown-content">
 				  <a href="techresthour.php">Rest Hour</a>
 				  <a href="techreportoff.php">Report Off</a>
 				</div>
 			</div>
-    </ul>
-    <ul class="ul2">
-      <!-- <li>
-        <a href="#" class="nav-links"><i class='bx bxs-bell-ring'></i></a>
-      </li> -->
-    </ul>
-    </div>
-  </nav>
-	<nav class="nav">
+			
+
+		
 		<a href="joblistst.php" class="nav__link nav__link">
 			<i class="material-icons">list_alt</i>
 			<span class="nav__text">Job Listing</span>
