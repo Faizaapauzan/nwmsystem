@@ -33,23 +33,21 @@ if($_SESSION['staff_position']==""){
 <body>
 
     <!--Home navigation-->
-    <section class="home-section">
-    <nav>
-		
-    <div class="sidebar-button">
-     <i class='bx bx-log-out'></i>
-     <a href="logout.php">
-           <span class="dashboard">LOGOUT</span>
-     </a>
-    </div>	
 
-<!--            <div class="sidebar-button">
-         <a href="logout.php">
-             <i class='bx bx-log-out'></i>
-         </a>
-     </div> -->
-   
-    </nav>
+  <nav class="navbar">
+    <div class="wrapper">
+    <ul class="main-nav" id="js-menu">
+    </ul>
+    <ul class="ul2">
+      <!-- <li>
+        <a href="#" class="nav-links"><i class='bx bxs-bell-ring'></i></a>
+      </li> -->
+      <li>
+        <a href="logout.php" class="nav-links"><i class="bx bx-log-out"></i></a>
+      </li>
+    </ul>
+    </div>
+  </nav>
         
         <div class="container">
         <div style="text-align: center; font-size: 35px; font-weight: bold;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
@@ -230,7 +228,6 @@ if($_SESSION['staff_position']==""){
 
             </div>
           </div>
-        </section>
 
 
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
