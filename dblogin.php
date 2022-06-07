@@ -31,6 +31,11 @@ if($cek > 0){
 
   header("location:Adminhomepage.php");
 
+  }else if($data['username']=="KEONG"){
+	  
+	  $_SESSION['username'] = $username;
+	  header("location:neosaukeong.php"); 
+	  
   }else if($data['staff_position']=="Manager"){
 
   $_SESSION['username'] = $username;
@@ -62,12 +67,7 @@ if($cek > 0){
 	$_SESSION['staff_position'] = "Storekeeper";
 	header("location:store.php");
 
-}else if($data['username']=="KEONG"){
-
-	$_SESSION['username'] = $KEONG;
-	header("location:neosaukeong.php"); 
-    	 
- }else{
+}else{
 
  
   header("location:index.php?error");

@@ -30,6 +30,7 @@
   display: none;
   position: absolute;
   background-color: #f9f9f9;
+  padding-left: 20px;
   min-width: auto;
   bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

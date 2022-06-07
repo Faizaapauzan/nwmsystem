@@ -36,6 +36,7 @@ session_start();
 
 .dropdown-content {
   display: none;
+  padding-left: 20px;
   position: absolute;
   background-color: #f9f9f9;
   min-width: auto;

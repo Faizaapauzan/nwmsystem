@@ -94,6 +94,7 @@ if(!isset($_SESSION['username']))
   position: absolute;
   background-color: #f9f9f9;
   min-width: auto;
+  padding-left: 20px;
   bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -179,6 +180,7 @@ if(!isset($_SESSION['username']))
   </a>
   
 </nav>
+
 
 <!--TODO-->
 

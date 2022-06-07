@@ -44,6 +44,7 @@
   background-color: #f9f9f9;
   min-width: auto;
   bottom: 55px;
+  padding-left: 20px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   
