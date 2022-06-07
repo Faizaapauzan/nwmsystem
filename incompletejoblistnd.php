@@ -1,15 +1,10 @@
-<?php
-session_start();
-?>
-
-
+<?php session_start(); ?>
 
 <html lang="en">
 
 <head>
 
-
-	<title>Job Listing</title>
+	<title>Incomplete Job Listing</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,8 +23,6 @@ session_start();
 	<script src="js/testing.js" type="text/javascript"></script>
 	<script src="js/search.js" type="text/javascript"></script>
 
-
-
 </head>
 
 <style>
@@ -43,8 +36,6 @@ session_start();
   bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  
-
 }
 
 .dropdown-content a {
@@ -73,7 +64,6 @@ session_start();
 </style>
 
 <body>
-
 
 <nav class="nav">
 	
@@ -120,7 +110,7 @@ session_start();
             <?php
                 include 'dbconnect.php';
                 $results = $conn->query("SELECT
-                jobregister_id, job_order_number, job_priority, job_name, customer_name,
+                jobregister_id, job_order_number, job_priority, job_name, customer_name, reason,
 				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, staff_position, job_assign
                 FROM job_register WHERE
                 (job_status = 'Incomplete')
@@ -139,6 +129,7 @@ session_start();
 						<li><?php echo $row['machine_name']?></li>
 						<li><?php echo $row['machine_type']?></li>
 						<li><?php echo $row['serialnumber']?></li>
+						<strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
 					</ul>
 					<div class="status" style="font-family: sans-serif;">
 					<strong><?php echo $row['job_assign']?></strong>

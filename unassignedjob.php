@@ -3,17 +3,13 @@ session_start();
  if($_SESSION['technician_rank']!="1st Leader" ){
   header("location:unassignedjobnd.php");
  }
-
-
-
 ?>
-
 
 <html lang="en">
 
 <head>
 
-	<title>Job Listing</title>
+	<title>Unassigned Job</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -147,23 +143,7 @@ session_start();
 		</div>
 		<?php } ?>
                     </div>
-					
-					
-
-
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-	
+						
  <!--VIEW BUTTON MODAL AJAX-->
 	
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
@@ -200,7 +180,7 @@ session_start();
 							// AJAX request
         
 							$.ajax({
-							url: 'ajaxtechnonleader.php',
+							url: 'ajaxtechleader.php',
 							type: 'post',
 							data: {jobregister_id: jobregister_id},
 							success: function(response) {

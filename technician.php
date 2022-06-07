@@ -301,7 +301,7 @@ if(!isset($_SESSION['username']))
 								<li><?php echo $row['machine_name']?></li>
 								<li><?php echo $row['machine_type']?></li>
 								<li><?php echo $row['serialnumber']?></li>
-								<strong>Pending Reason:<?php echo $row['reason']?></strong>
+								<li><strong style="color:red">Pending Reason: <?php echo $row['reason']?></strong></li>
 							</ul>
 							<div class="status"  id="pendingStatus">
 								<?php echo $row['job_status']?>

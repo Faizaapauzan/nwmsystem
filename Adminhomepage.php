@@ -1786,11 +1786,6 @@ if(!isset($_SESSION['username']))
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
 
-                    else
-                        {
-                            echo '<h4 style="text-align:right;">No Data </h4>';
-                        }
-                    
                     $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Isk'");
                     while($data = mysqli_fetch_array($records))
                         {

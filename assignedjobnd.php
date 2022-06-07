@@ -109,11 +109,11 @@
 								include 'dbconnect.php';
 								$results = $conn->query("SELECT
 								jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name, 
-								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason
+								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason, staff_position, job_cancel
 								FROM
 								job_register
 								WHERE
-								job_assign ='{$_SESSION['username']}' AND  job_status = ''
+								staff_position ='Technician' AND  job_status = '' AND job_cancel=''
 								ORDER BY jobregisterlastmodify_at
 								DESC LIMIT 50");
 
@@ -146,12 +146,12 @@
 							<?php            
 								include 'dbconnect.php';
 								$results = $conn->query("SELECT
-								jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name, 
+								jobregister_id, job_order_number, job_priority, job_name, customer_name, job_assign, 
 								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason
 								FROM
 								job_register
 								WHERE
-								job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing'
+								staff_position ='Technician' AND  job_status = 'Doing' AND job_cancel=''
 								ORDER BY jobregisterlastmodify_at
 								DESC LIMIT 50");
 
@@ -178,20 +178,6 @@
 		<?php } ?>
                     </div>
 
-
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-	
  <!--VIEW BUTTON MODAL AJAX-->
 	
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">

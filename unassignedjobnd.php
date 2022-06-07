@@ -101,24 +101,24 @@
 <div class="example" style="text-align: end; padding-bottom: 10px;" >
     <input type="text" id="search">
     <input type="button"  id="button" onmousedown="doSearch(document.getElementById('search').value)" value="Find">
-</div>	
-
-    <div class="column">
-        <p class="column-title" id="joblisting"><b>Unassigned Job</b></p>
-                            <?php
-                                include 'dbconnect.php';
-                            
-                                $results = $conn->query("SELECT jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name, 
-								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason FROM job_register WHERE
-                                                               (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
-                                                                    OR
-                                                                accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
-                                                                    OR
-                                                                job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
-                                                        ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-                                while($row = $results->fetch_assoc()) {
-                            ?>
+</div>
+	<div class="column">
+		<p class="column-title" id="joblisting"><b>Unassigned Job</b></p>
+		
+		<?php
+			include 'dbconnect.php';
 			
+			$results = $conn->query("SELECT jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name,
+											customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason FROM job_register WHERE
+											(accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+												OR
+											 accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+											 	OR
+											 job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+									 ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+									 while($row = $results->fetch_assoc()) {
+		?>
+
 			<div class="cards">
 				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
 				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
@@ -131,30 +131,11 @@
 						<li><?php echo $row['machine_type']?></li>
 						<li><?php echo $row['serialnumber']?></li>
 					</ul>
-					<div class="status" style="font-family: sans-serif;">
-					<strong><?php echo $row['job_assign']?></strong>
-				</div>
 			</div>
 		</div>
 		<?php } ?>
                     </div>
-					
-					
-
-
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-	
+								
  <!--VIEW BUTTON MODAL AJAX-->
 	
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">

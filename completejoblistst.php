@@ -1,20 +1,15 @@
 <?php
 session_start();
- if($_SESSION['technician_rank']!="1st Leader" ){
+ if($_SESSION['technician_rank']!="1st Leader"){
   header("location:completejoblistnd.php");
  }
-
-
-
 ?>
-
 
 <html lang="en">
 
 <head>
 
-
-	<title>Job Listing</title>
+	<title>Completed Job List</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,7 +19,6 @@ session_start();
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="#"rel="shortcut icon" />
 	
-
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -32,8 +26,6 @@ session_start();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="js/testing.js" type="text/javascript"></script>
 	<script src="js/search.js" type="text/javascript"></script>
-
-
 
 </head>
 
@@ -48,8 +40,6 @@ session_start();
   bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  
-
 }
 
 .dropdown-content a {
@@ -79,7 +69,6 @@ session_start();
 </style>
 
 <body>
-
 
 	<nav class="nav">
 	
@@ -123,7 +112,7 @@ session_start();
 
     <div class="column">
         <p class="column-title" id="joblisting"><b>Completed</b></p>
-            <?php
+		<?php
                 include 'dbconnect.php';
                 $results = $conn->query("SELECT
                 jobregister_id, job_order_number, job_priority, job_name, customer_name,

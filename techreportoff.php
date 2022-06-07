@@ -134,17 +134,15 @@ display:none;
 <div class="column" >
 <p class="column-title" id="technician" >Technician Report OFF</p>
 <form action="" method="POST">
-<div class="row">
-<div class="col-md-8">
-<input type="text" name="username" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" class="form-control">
+<div class="nama" style="display: flex; padding-left: 2px;">
+<input style="width: fit-content;" type="text" name="username" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" class="form-control" readonly>
+<button style="margin-left: 2px;" type="submit" class="btn btn-primary">Click</button>
 </div>
-	<div class="col-md-4">
-	<button type="submit" class="btn btn-primary">Click</button>
-	</div></div>
+</div>
 </form> 
 
 <div class="cards">
-<div class="card" style=" position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
+<div class="card" style="position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
 							
 <?php
 
@@ -166,7 +164,7 @@ include 'dbconnect.php';
 
 ?>
 
-	<div class="row">
+	
 	<div class="col-md-12" style="position: static;">
 	<hr>							
 	<form action="" method="post">
@@ -175,22 +173,22 @@ include 'dbconnect.php';
 	<div class="form-group mb-3">
 	<label for="">Technician Availability</label>
 	<div class="input-box">
-	<select id="tech_avai" name="tech_avai" class="form-control" onchange="myFunction()">
+	<select style="width: 200px;" id="tech_avai" name="tech_avai" class="form-control" onchange="available_update(this.options[this.selectedIndex].value,'<?php echo $row['staffregister_id'] ?>')">
 	<option value='' <?php if ($row['tech_avai'] == '') {echo "SELECTED";} ?>></option>
 	<option value="OFF" <?php if ($row['tech_avai'] == "OFF") {echo "SELECTED";} ?>>OFF</option>
 	</select>
 	</div>
 	<br>
-	<div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div>
+	<!-- <div><input type="button" onclick="updateForm();" class="buttonbiru" style="width: fit-content; padding:5px;" value="Update" /></div> -->
 	<p class="control"><b id="message-update"></b></p>
 	</div>
 	<?php } } } ?>
 	</form>
-									
-	<script type="text/javascript">
-		function updateForm()
-		{
-			var staffregister_id = $('input[name=staffregister_id]').val();
+
+	<script type="text/javascript">  
+      function available_update(value,staffregister_id){  
+           //alert(id);  
+          var staffregister_id = $('input[name=staffregister_id]').val();
 			var tech_avai = $('select[name=tech_avai]').val();
 			if(staffregister_id!='' || staffregister_id=='',
 			tech_avai!='' || tech_avai=='')
@@ -204,6 +202,15 @@ include 'dbconnect.php';
 			data: formData,
 			success: function(response)
 			{
+
+				var x = document.getElementById("tech_avai").value;
+				if(x == 'OFF'){
+				document.getElementById("off-report").style.display = 'block';
+						}
+				else {
+				document.getElementById("off-report").style.display = 'none';
+						}
+
 			var res = JSON.parse(response);
 			console.log(res);
 			if(res.success == true)
@@ -214,12 +221,17 @@ include 'dbconnect.php';
 				});
 					}
 						} 
-	</script>
+      
+			
+							
+ </script>  
+
     
 	<!--Technician Availability-->
 				
 	<!-- Unavailable Date -->
-				
+	<div class="cards">
+<div class="card" style="position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">			
 	<form action="" method="post" id="off-report">
 
 	<?php if (isset($_SESSION["username"])) ?>
@@ -230,7 +242,7 @@ include 'dbconnect.php';
 	<div class="form-group mb-3">
 	<label for="">Reason</label>
 	<div class="input-box">
-	<select id="reason" name="reason" class="form-control">
+	<select style="width: 250px;" id="reason" name="reason" class="form-control">
 	<option value=""></option>
 	<option value="Paid Leave">Paid Leave</option>
 	<option value="Unpaid Leave">Unpaid Leave</option>
@@ -241,12 +253,12 @@ include 'dbconnect.php';
 
 	<div class="form-group mb-3">
 	<label for="">From</label>
-	<input type="date" name="date_from" class="form-control">
+	<input style="width: 250px;" type="date" name="date_from" class="form-control">
 	</div>
 
 	<div class="form-group mb-3">
 	<label for="">To</label>
-	<input type="date" name="date_to" class="form-control">
+	<input style="width: 250px;" type="date" name="date_to" class="form-control">
 	</div>
 
 	<br>
@@ -255,17 +267,6 @@ include 'dbconnect.php';
 	<p class="control"><b id="message-Unavailable"></b></p>
 	</form>
 
-	<script type="text/javascript">
-		function myFunction() {
-			var x = document.getElementById("tech_avai").value;
-				if(x == 'OFF'){
-				document.getElementById("off-report").style.display = 'block';
-						}
-				else {
-				document.getElementById("off-report").style.display = 'none';
-						}
-						}
-    </script>
 
 	<script type="text/javascript">
 		function UnavailableForm(){
@@ -307,6 +308,7 @@ include 'dbconnect.php';
 						
                     </div>
                     </div>				
+</div>
 </div>
 </div>
 </div>
