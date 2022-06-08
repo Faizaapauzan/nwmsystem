@@ -121,6 +121,7 @@
         <label style="font-size: 15px;">Technician: </label>
         <?php if (isset($_SESSION["username"])) ?>
         <input type="text" name="technician" id="technician" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>
+       <br/>
         <label style="font-size: 15px;">Assistant: </label>
   
         <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto" name="assistant" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['assistant']?>">  </option>
