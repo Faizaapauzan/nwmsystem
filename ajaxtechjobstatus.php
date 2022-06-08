@@ -94,8 +94,8 @@ function myFunction() {
 <!-- <button type="submit" id="button" name="update" class="button">Update Job Status</button> -->
 
 <p class="control"><b id="messagestatus"></b></p>
-<div class="btn-box">
-<button type="button" id="update_techstatus" name="update_techstatus" value="Update" class="buttonbiru" onclick="submitFormstatus();">Update</button>
+<div style="text-align: end;" class="btn-box">
+<button type="button" id="update_techstatus" name="update_techstatus" value="Update" style="width: fit-content;" class="buttonbiru" onclick="submitFormstatus();">Update</button>
 <br><br>
 </form>
 
