@@ -52,7 +52,77 @@ if(!isset($_SESSION['username']))
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
+<style>
 
+    .dropdown-content1 {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+
+.dropdown-content1 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  padding-right: 7px;
+
+}
+
+.dropdown-content1 a:hover {background-color: #f1f1f1}
+
+.dropdown1:hover .dropdown-content1 {
+  display: block;
+}
+
+.dropdown1:hover .dropbtn1 {
+  color:whitesmoke;
+}
+
+
+
+
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: auto;
+  padding-left: 20px;
+  bottom: 55px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  padding-right: 7px;
+
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color:whitesmoke;
+}
+
+    </style>
 
    
 <body>
@@ -200,10 +270,23 @@ if(!isset($_SESSION['username']))
 <section class="home-section">
     <nav>
                 <div class="home-content">
+
+
+
                       <i class='bx bx-menu' ></i>
-                          <a>
+
+                <ul class="main-nav" id="js-menu">
+				<div class="dropdown1">
+					<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="nav1-links sidebarbutton dropbtn1">Home</button>
+						<div class="dropdown-content1">
+							<a href="Adminhomepage.php">Homepage</a>
+							<a href="adminjoblisting.php">Job Listing</a>
+						</div>
+				</div>
+			</ul>
+                          <!-- <a>
 						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                          </a>
+                          </a> -->
 
                  </div>
 
