@@ -216,12 +216,12 @@
         <input type="hidden" name="resthour_id" class="resthour_id" value="<?= $row['resthour_id']; ?>">
 
 
-                <div style="font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
-    <label style="font-weight: 600; font-size: 20px;"><?= $row['technician']; ?></label>
-    <div style="width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
+                <div style=" position: static; font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
+    <label style="position: static; font-weight: 600; font-size: 20px;"><?= $row['technician']; ?></label>
+    <div style=" position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
-    <button class="buttonbiru" onclick="tech_outs()" style="width: fit-content;" type="button">OUT</button>
+    <button class="buttonbiru" onclick="tech_outs()" style="position: static; width: fit-content;" type="button">OUT</button>
     </div>
         
     <script type="text/javascript">
@@ -236,10 +236,10 @@
     </script>
     </div>
         
-    <div style="width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" class="form-control" id="tech_in" name="tech_in" value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
+    <div style="position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="tech_in" value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
-    <button class="buttonbiru" onclick="tech_ins()" style="width: fit-content; padding-left: 55px;" type="button">IN</button>
+    <button class="buttonbiru" onclick="tech_ins()" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
     </div>
         
     <script type="text/javascript">
@@ -254,11 +254,11 @@
     </script>
     </div>
 
-    <label style="font-weight: 600; font-size: 20px;"><?= $row['assistant']; ?></label>
-    <div style="width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" class="form-control" id="ass_out" name="ass_out" value="<?= $row['ass_out']; ?>" aria-describedby="basic-addon2">
+    <label style=" position: static; font-weight: 600; font-size: 20px;"><?= $row['assistant']; ?></label>
+    <div style="position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="ass_out" name="ass_out" value="<?= $row['ass_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
-    <button class="buttonbiru" onclick="ass_outs()" type="button" style="width: fit-content;">OUT</button>
+    <button class="buttonbiru" onclick="ass_outs()" type="button" style="position: static; width: fit-content;">OUT</button>
     </div>
         
     <script type="text/javascript">
@@ -273,10 +273,10 @@
     </script>
     </div>
  
-    <div style="width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" class="form-control" id="ass_in" name="ass_in" value="<?= $row['ass_in']; ?>" aria-describedby="basic-addon2">
+    <div style=" position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="ass_in" name="ass_in" value="<?= $row['ass_in']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
-    <button class="buttonbiru" onclick="ass_ins()" style="width: fit-content; padding-left: 60px;" type="button">IN</button>
+    <button class="buttonbiru" onclick="ass_ins()" style="position: static; width: fit-content; padding-left: 60px;" type="button">IN</button>
     </div>
         
     <script type="text/javascript">
@@ -292,8 +292,8 @@
     </div>
     
     <p class="control"><b id="message-update"></b></p>
-    <div style="width: fit-content;" class="updateBtn">
-    <div><input type="button" onclick="updateForm();" class="buttonbiru" style="margin-bottom: 20px; height: 39px; padding-left: 36px; font-size: 15px;" value="Update" /></div>
+    <div style="position: static; width: fit-content;" class="updateBtn">
+    <div><input type="button" onclick="updateForm();" class="buttonbiru" style="position: static; margin-bottom: 20px; height: 39px; padding-left: 36px; font-size: 15px;" value="Update" /></div>
     </div></div>
     </form>
     

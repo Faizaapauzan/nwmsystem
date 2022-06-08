@@ -24,6 +24,84 @@
 	<script src="js/search.js" type="text/javascript"></script>
 	
 </head>
+
+<style>
+
+.dropdown-content1 {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+
+.dropdown-content1 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  padding-right: 7px;
+
+}
+
+.dropdown-content1 a:hover {background-color: #f1f1f1}
+
+.dropdown1:hover .dropdown-content1 {
+  display: block;
+}
+
+.dropdown1:hover .dropbtn1 {
+  color:whitesmoke;
+}
+
+
+
+
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: auto;
+  padding-left: 20px;
+  bottom: 55px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  padding-right: 7px;
+
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color:whitesmoke;
+}
+
+#notYetStatus{
+	position: static;
+}
+
+
+</style>
+
 <body>
 
 
@@ -33,6 +111,7 @@
   <nav class="navbar1">
 		<div class="wrapper">
 			<ul class="main-nav" id="js-menu">
+
 			</ul>
 			    <div class="ul2">
         <a href="logout.php" class="nav1-links"><i class="bx bx-log-out"></i></a>
@@ -40,6 +119,39 @@
     </div>
 		</div>
   </nav>
+
+<nav class="nav">
+	
+	<div class="nav__link nav__link dropdown">
+	  <i class="material-icons">list_alt</i>
+	  <span class="nav__text">Job Listing</span>
+		<div class="dropdown-content">
+			<a href="assignedjob.php">Assigned Job</a>
+			<a href="unassignedjob.php">Unassigned Job</a>
+		  </div>
+	  </div>
+	  
+  <a href="pendingjoblistst.php" class="nav__link">
+	  <i class="material-icons">pending_actions</i>
+	  <span class="nav__text">Pending</span>
+  </a>
+  
+  <a href="technician.php" class="nav__link">
+	  <i class="material-icons">home</i>
+	  <span class="nav__text">Home</span>
+  </a>
+
+  <a href="incompletejoblistst.php" class="nav__link">
+	  <i class="material-icons">do_not_disturb_on</i>
+	  <span class="nav__text">Incomplete</span>
+  </a>
+  
+  <a href="completejoblistst.php" class="nav__link">
+	  <i class="material-icons">check_circle</i>
+	  <span class="nav__text">Complete</span>
+  </a>
+  
+</nav>
 
 
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
@@ -750,8 +862,8 @@
             ?>
             
 			<div class="cards">
-            <div class="completed" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodalCompleted">
-                        <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
+            <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
+                        <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
                         <ul class="b" id="draged">
                             <strong align="center"><?php echo $row['job_order_number']?></strong>
                             <li><?php echo $row['job_priority']?></li>
