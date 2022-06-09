@@ -151,7 +151,7 @@ if(!isset($_SESSION['username']))
 				</div>
 			</ul>
 			    <div class="ul2">
-        <a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:36px;"></i></a>
+        <a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:32px;"></i></a>
 
     </div>
 		</div>
