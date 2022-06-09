@@ -64,7 +64,7 @@
              WHERE  jobregister_id ='".addslashes($jobregister_id)."' ";
         
         if (mysqli_query($conn, $sql)) {
-            header("location: Adminhomepage.php");
+            header("Location:".$_SERVER["HTTP_REFERER"]);
         } else {
             echo "ERROR: Hush! Sorry $sql. "
             . mysqli_error($conn);

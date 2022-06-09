@@ -265,18 +265,18 @@ $query = $conn->query("SELECT * FROM job_register");
             <div class="datalist-wrapper">    
         <div class="col-lg-12" style="border: none;">
 
-        <table class="table table-striped sortable">
+        <table id="myTable" class="table table-striped sortable">
 <thead>
     <tr>
-     <th>No</th>
-    <th>Job Order Number</th>
-    <th>Job Priority</th>
-    <th>Job Status</th>
-    <th>Customer Name</th>
-    <th>Job Name</th>
-    <th>Machine Code</th>
-    <th>Job Assign</th>
-    <th>Assistant</th>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;" >No</td>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Order Number</td>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Priority</td>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Status</td>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Customer Name</td>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Name</td>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Machine Code</td>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Assign</td>
+    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Assistant</td>
     </tr>
 </thead>
 <tbody>
@@ -287,14 +287,14 @@ $query = $conn->query("SELECT * FROM job_register");
             ?>
      
     <tr>
-      <td class="<?php echo $row["job_status"]; ?>"><?php echo $i; ?></td>
-        <td data-id="<?php echo $row['jobregister_id'];?>" class='JobInfo <?php echo $row["job_status"]; ?>' data-target="doubleClick-info"  onClick="document.getElementById('doubleClick-info').style.display='block'"><?php echo $row["job_order_number"]; ?></td>
-        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_priority"]; ?></td>
-        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_status"]; ?></td>
-        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["customer_name"]; ?></td>
-        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["job_name"]; ?></td>
-        <td class="<?php echo $row["job_status"]; ?>"><?php echo $row["machine_code"]; ?></td>
-        <td class="<?php echo $row["job_status"]; ?>"> <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" onchange="status_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"><option value=""> <?php echo $row['job_assign']?> </option>  
+      <td id="<?php echo $row["job_status"]; ?>"><?php echo $i; ?></td>
+        <td id="<?php echo $row["job_status"]; ?>" data-id="<?php echo $row['jobregister_id'];?>" class = '<?php echo $row["job_status"]; ?>' onClick="document.getElementById('doubleClick-info').style.display='block'"><p style="cursor:pointer; text-decoration: underline; text-align: left; padding-left: 40px; height: 34px; font-weight: 400;" data-id="<?php echo $row['jobregister_id'];?>" class = 'JobInfo'><?php echo $row["job_order_number"]; ?></p></td>
+        <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["job_priority"]; ?></td>
+        <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["job_status"]; ?></td>
+        <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["customer_name"]; ?></td>
+        <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["job_name"]; ?></td>
+        <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["machine_code"]; ?></td>
+        <td id="<?php echo $row["job_status"]; ?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" onchange="status_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"><option value=""> <?php echo $row['job_assign']?> </option>  
                                <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
@@ -304,7 +304,7 @@ $query = $conn->query("SELECT * FROM job_register");
             echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
     ?></select></td>
-        <td class="<?php echo $row["job_status"]; ?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant']?> </option>
+        <td id="<?php echo $row["job_status"]; ?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant']?> </option>
                     <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
@@ -338,7 +338,7 @@ $query = $conn->query("SELECT * FROM job_register");
       }  
  </script>  
 
-         <script type="text/javascript">  
+    <script type="text/javascript">  
       function assistant_update(value,jobregister_id){  
            //alert(id);  
            let url = "adminjoblisting.php";  
@@ -347,12 +347,11 @@ $query = $conn->query("SELECT * FROM job_register");
  </script>  
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('table').DataTable();
-
-    });
-
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
 </script>
+
 
     <!--Double click Job Info (Job Order Number) -->
     <div id="doubleClick-info" class="modal">
@@ -370,7 +369,30 @@ $query = $conn->query("SELECT * FROM job_register");
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('body').on('click','.JobInfo',function(){
+            $('body').on('click','.Pending',function(){
+            // $('.JobInfo').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxhomepending.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-details').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show'); 
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+            <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Doing',function(){
             // $('.JobInfo').click(function () {
             var jobregister_id = $(this).data('id');
 
@@ -391,7 +413,129 @@ $query = $conn->query("SELECT * FROM job_register");
 
         </script>
 
-         <!--Double click Update-->
+         <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Incomplete',function(){
+            // $('.false').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxhome.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-details').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+         <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Ready',function(){
+            // $('.false').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxhome.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-details').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        
+         <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Not Ready',function(){
+            // $('.false').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxhome.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-details').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        
+         <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Completed',function(){
+            // $('.false').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxjobcompleted.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-details').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+                // $("p").click(function() {
+            $('body').on('click','.JobInfo',function(){
+            // $('body').on('click','.val()',function(){
+            // $('.false').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxhome.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-details').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+
+        <!--Double click Update-->
         <input type="radio" name="tabDoingInfo" id="tabDoingInfo2">
         <label for="tabDoingInfo2" class="tabHeadingInfo">Update</label>
         <div class="tab" id="JobInfoTab">
@@ -403,6 +547,139 @@ $query = $conn->query("SELECT * FROM job_register");
 
         <script type='text/javascript'>
             $(document).ready(function () {
+             $('body').on('click','.Pending',function(){
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechupdateadmin.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-update').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Doing',function(){
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechupdateadmin.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-update').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Incomplete',function(){
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechupdateadmin.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-update').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Ready',function(){
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechupdateadmin.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-update').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Not Ready',function(){
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechupdateadmin.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-update').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Completed',function(){
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechupdatecomplete.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-update').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+            // $("th").click(function() {
              $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
 
@@ -423,36 +700,6 @@ $query = $conn->query("SELECT * FROM job_register");
 
         </script>
 
-        <!--Double click Remarks-->
-        <input type="radio" name="tabDoingInfo" id="tabDoingInfo3">
-        <label for="tabDoingInfo3" class="tabHeadingInfo">Remarks</label>
-        <div class="tab" id="JobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-info').style.display='none'">&times</div>
-        <form action="ajaxremarks.php" method="post">
-        <div class="info-remark">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('.JobInfo').click(function () {
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxremarks.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.info-remark').html(response);
-            // Display Modal
-            $('#doubleClick-info').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingInfo" id="tabDoingInfo4">
@@ -466,6 +713,133 @@ $query = $conn->query("SELECT * FROM job_register");
 
         <script type='text/javascript'>
             $(document).ready(function () {
+             $('body').on('click','.Doing',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtabaccessories.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-accessories').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+         <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Pending',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtabaccessories.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-accessories').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+         <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Incomplete',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtabaccessories.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-accessories').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+         <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Ready',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtabaccessories.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-accessories').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+         <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Not Ready',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtabaccessories.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-accessories').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+         <script type='text/javascript'>
+            $(document).ready(function () {
+             $('body').on('click','.Completed',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtabaccessoriescomplete.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-accessories').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+              //  $("th").click(function() {
              $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
             // AJAX request
@@ -497,6 +871,127 @@ $query = $conn->query("SELECT * FROM job_register");
 
         <script type='text/javascript'>
             $(document).ready(function () {
+            $('body').on('click','.Doing',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechphtoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-photos').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Pending',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechphtoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-photos').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+            <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Incomplete',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechphtoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-photos').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Ready',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechphtoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-photos').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Not Ready',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechphtoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-photos').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Completed',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechphtoupdtcomplete.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-photos').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+            <script type='text/javascript'>
+            $(document).ready(function () {
+            // $("th").click(function() {
             $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
             // AJAX request
@@ -527,6 +1022,127 @@ $query = $conn->query("SELECT * FROM job_register");
 
         <script type='text/javascript'>
             $(document).ready(function () {
+            $('body').on('click','.Doing',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-video').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+              <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Pending',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-video').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+              <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Incomplete',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-video').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+              <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Not Ready',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-video').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+              <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Ready',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdt.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-video').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+              <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Completed',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxtechvideoupdtcomplete.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-video').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                }
+             });
+                });
+                     });
+        </script>
+
+              <script type='text/javascript'>
+            $(document).ready(function () {
+              //  $("th").click(function() {
             $('body').on('click','.JobInfo',function(){
             var jobregister_id = $(this).data('id');
             // AJAX request
@@ -562,7 +1178,7 @@ $query = $conn->query("SELECT * FROM job_register");
 
         <script type='text/javascript'>
             $(document).ready(function() {
-            $('body').on('click','.JobInfo',function(){
+            $('body').on('click','.Doing',function(){
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
@@ -580,6 +1196,127 @@ $query = $conn->query("SELECT * FROM job_register");
             });
         </script>
 
+                <script type='text/javascript'>
+            $(document).ready(function() {
+            $('body').on('click','.Pending',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.info-report').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function() {
+            $('body').on('click','.Ready',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.info-report').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('body').on('click','.Not Ready',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.info-report').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
+            <script type='text/javascript'>
+            $(document).ready(function() {
+            $('body').on('click','.Incomplete',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.info-report').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function() {
+            $('body').on('click','.Completed',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.info-report').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function() {
+              //  $("p").click(function() {
+            $('body').on('click','.JobInfo',function(){
+            var jobregister_id = $(this).data('id');
+            // AJAX request
+            $.ajax({
+            url: 'ajaxreportadmin.php',
+            type: 'post',
+            data: {jobregister_id: jobregister_id},
+            success: function(response) {
+            // Add response in Modal body
+            $('.info-report').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show');
+                     }
+                    });
+                });
+            });
+        </script>
 
 
 </section>

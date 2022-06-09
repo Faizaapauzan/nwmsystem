@@ -176,7 +176,8 @@
                 } ?>>YES</option>
             </select>
         </div>
-         
+          <input type="hidden" class="job_status" name="job_status" value="<?php echo $row['job_status']?>">
+
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
          <button type="submit" id="submit" name="update" class="btn btn-primary">Update</button>
