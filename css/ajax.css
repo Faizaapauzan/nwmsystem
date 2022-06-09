@@ -81,19 +81,19 @@ form .tech-details .input-boxRemark {
 
 .input-boxAccessories input,
 .input-boxAccessories select {
-  margin-bottom: 15px;
-  width: calc(100% / 4 - 12px);
-  padding: 0 15px 0 15px;
-  height: 45px;
-  outline: none;
-  font-size: 13px;
-  border-radius: 5px;
-  padding-left: 25px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-  border-color: #081d45;
-  margin-right: 10px;
+    margin-bottom: 12px;
+    width: calc(100% / 4 - -307px);
+    /* padding: 0 0 0 0; */
+    height: 45px;
+    outline: none;
+    font-size: 13px;
+    border-radius: -64px;
+    padding-left: 25px;
+    border: -26px solid #ccc;
+    border-bottom-width: -14px;
+    transition: all 0.3s ease;
+    border-color: #081d45;
+    margin-right: 10px;
 }
 
 form .input-boxAccessories {

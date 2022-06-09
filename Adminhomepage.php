@@ -561,7 +561,7 @@ if(!isset($_SESSION['username']))
             
                     <input type="radio" name="tabDoingStore" id="tabDoingStore2">
                     <label for="tabDoingStore2" class="tabHeadingStore"> Accessories </label>
-                    <div class="tab">
+                    <div style="min-width: -webkit-fill-available;" class="tab">
                         <div style="right: 450px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxtabaccessories.php" method="post">
                             <div class="store-accessories">
