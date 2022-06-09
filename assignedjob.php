@@ -33,6 +33,7 @@ session_start();
 
 .dropdown-content {
   display: none;
+  padding-left: 20px;
   position: absolute;
   background-color: #f9f9f9;
   min-width: auto;
@@ -275,67 +276,7 @@ session_start();
 			</div>
 		</div>
 
- <!--VIEW COMPLETED BUTTON MODAL AJAX-->
-	
-        <div id="mymodalCompleted" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
-            <div role="document" class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">	
-					
-                        <div class="tabs active" id="tab01">
-                            <h6 class="font-weight-bold">Job Info</h6>
-						</div>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-	
-<!--JOB INFO-->
-						
-                    <div class="line"></div>
-					<br>
-                    <div class="modal-body p-0">
-                        <fieldset class="show" id="tab011">
-						
-                        <form action="techleaderindex.php" method="post">
-                            <div class="tech-details">
 
-                            </div>
-                        </form>				
-						
-							<script type='text/javascript'>
-
-							$(document).ready(function() {
-							$('.completed').click(function() {
-							var jobregister_id = $(this).data('id');
-        
-							// AJAX request
-        
-							$.ajax({
-							url: 'ajaxtechnician.php',
-							type: 'post',
-							data: {jobregister_id: jobregister_id},
-							success: function(response) {
-							// Add response in Modal body
-							$('.tech-details').html(response);
-							// Display Modal
-							$('#mymodalCompleted').modal('show');
-							}
-						});
-					});
-				});
-							</script>	
-
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-							</div>					
-
-						</fieldset>
-					</div>
-
-					</div>
-				</div>
-			</div>
-		</div>	
 </div>	
 
 	<script src="https://kit.fontawesome.com/7b6b55bad0.js" crossorigin="anonymous"></script>

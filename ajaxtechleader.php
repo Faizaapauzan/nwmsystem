@@ -1,9 +1,7 @@
-<?php
-session_start();
-?>
-
+<?php session_start(); ?>
 
 <!DOCTYPE html>
+
 <head>
 
 <meta name="keywords" content="" />
@@ -25,7 +23,14 @@ session_start();
 
 </head>
 
+<style>
+    .OFF{
+        color: red;
+    }
+</style>
+
 <body>
+
 <?php
     $connection = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($connection, 'nwmsystem');
@@ -149,11 +154,11 @@ session_start();
   <select class="form-control" id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
                      <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
+        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+            echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']."</option>";  // displaying data in option menu
             // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
     ?>
@@ -175,11 +180,11 @@ session_start();
 		<option value=""> <?php echo $row['Job_assistant']?> </option>
                      <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' OR staff_position = 'General Worker' ORDER BY staffregister_id ASC");  // Use select query here 
+        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' OR staff_position = 'General Worker' ORDER BY staffregister_id ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
+            echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']." " . $data['tech_avai']."</option>";  // displaying data in option menu
         }	
     ?></select>
 
