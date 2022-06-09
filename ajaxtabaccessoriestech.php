@@ -339,9 +339,9 @@ include 'dbconnect.php';
   ?>   
 </select>
 <input type="hidden" name="accessories_id[]" class="accessories_id">
-<input type="text" class="accessories_code" name="accessories_code[]" placeholder="Accessories Code">
+<input type="text" class="accessories_code" name="accessories_code[]" placeholder="Accessories Code" hidden>
 <input type="text" class="accessories_name" name="accessories_name[]" placeholder="Accessories Name">
-<input type="text" class="accessories_uom" name="accessories_uom[]" placeholder="Unit of Measurement">
+<input type="text" class="accessories_uom" name="accessories_uom[]" placeholder="Unit of Measurement" hidden>
 <input type="text" class="accQuan" name="accessories_quantity[]" placeholder="Accessories Quantity">
 
 					
