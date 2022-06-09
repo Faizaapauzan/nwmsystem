@@ -141,7 +141,7 @@ if(!isset($_SESSION['username']))
 		<div class="wrapper">
 			<ul class="main-nav" id="js-menu">
 				<div class="dropdown1">
-					<button class="navTime-links dropbtn1"><i class="bx bx-time" style="font-size:37px"></i></button>
+				<a class="nav1-links"><i class="bx bx-time" style="font-size:36px"></i></a>
 						<div class="dropdown-content1">
 							<a href="techresthour.php">Rest Hour</a>
 							<a href="techreportoff.php">Report Off</a>
