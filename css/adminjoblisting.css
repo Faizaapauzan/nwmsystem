@@ -560,10 +560,10 @@ thead {
   /* padding: 1rem 5.1rem; */
 }
 
-.Pending {
+#Pending {
   color: blue;
 }
 
-.Incomplete {
+#Incomplete {
   color: orange;
 }
