@@ -114,6 +114,21 @@ if(!isset($_SESSION['username']))
 	position: static;
 }
 
+.card-complete{
+	
+	    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1pxsolidrgba(0,0,0,.125);
+    border-radius: 0.25rem;
+	
+}
 </style>
 
 <body>
