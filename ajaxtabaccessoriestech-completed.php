@@ -81,7 +81,8 @@ include_once("dbconnect.php");
   
 ?>
                         <!-- Responsive table -->
-                        <div class="table-responsive" style="width: 437px; margin-left: 1px; overflow-x: auto;">
+<div style="display: inline-grid;" class="bomb">
+                        <div class="table-responsive" style="overflow-x: auto;">
                             <table class="table m-0">
                                 <thead>
                                     <tr>
@@ -90,7 +91,6 @@ include_once("dbconnect.php");
                                         <th scope="col">Name</th>
                                         <th scope="col">UOM</th>
 										<th scope="col">Quantity</th>
-										<th scope="col">Action</th>
                                     </tr>
                                 </thead>
 										<tbody id="_editable_table">
@@ -107,6 +107,7 @@ include_once("dbconnect.php");
 									</tbody>
                             </table>
                         </div>	
+</div>
                         </form>
 
 </div>  

@@ -94,7 +94,8 @@ include_once("dbconnect.php");
 
 
                         <!-- Responsive table -->
-                        <div class="table-responsive" style="width: 437px; margin-left: 1px; overflow-x: auto;">
+<div style="display: inline-grid;" class="bomb">
+                        <div class="table-responsive" style="overflow-x: auto;">
                             <table class="table m-0">
                                 <thead>
                                     <tr>
@@ -121,6 +122,7 @@ include_once("dbconnect.php");
 									</tbody>
                             </table>
                         </div>
+</div>
 <a href="javascript:void(0);" class="add_button" title="Add field" type="button">Click Here to Add Accessories</a>
 	
 </form>
