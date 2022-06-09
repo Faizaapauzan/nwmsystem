@@ -1,14 +1,13 @@
-<?php
-session_start();
-?>
-
+<?php session_start(); ?>
 
 <!DOCTYPE html>
+
 <style>
     .OFF{
         color: red;
     }
-    </style>
+</style>
+
 <body>
 <?php
     $connection = mysqli_connect("localhost", "root", "");
@@ -150,11 +149,11 @@ session_start();
         <select id="jobassistantto" name="Job_assistant" onchange="GetAssistant(this.value)"> <option value=""> <?php echo $row['Job_assistant']?> </option>
                      <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here 
+        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
+            echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']." " . $data['tech_avai']."</option>";  // displaying data in option menu
         }	
     ?></select>
 

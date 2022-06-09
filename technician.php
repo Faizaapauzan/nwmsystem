@@ -63,14 +63,12 @@ if(!isset($_SESSION['username']))
   z-index: 1;
 }
 
-
 .dropdown-content1 a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   padding-right: 7px;
-
 }
 
 .dropdown-content1 a:hover {background-color: #f1f1f1}
@@ -83,12 +81,6 @@ if(!isset($_SESSION['username']))
   color:whitesmoke;
 }
 
-
-
-
-
-
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -98,8 +90,6 @@ if(!isset($_SESSION['username']))
   bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  
-
 }
 
 .dropdown-content a {
@@ -108,7 +98,6 @@ if(!isset($_SESSION['username']))
   text-decoration: none;
   display: block;
   padding-right: 7px;
-
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -124,7 +113,6 @@ if(!isset($_SESSION['username']))
 #notYetStatus{
 	position: static;
 }
-
 
 </style>
 
@@ -180,7 +168,6 @@ if(!isset($_SESSION['username']))
   </a>
   
 </nav>
-
 
 <!--TODO-->
 
@@ -246,7 +233,6 @@ if(!isset($_SESSION['username']))
 							DESC LIMIT 50");
 
 							while($row = $results->fetch_assoc()) {
-              
 						?>
 						
 				            <div class="cards">
@@ -309,51 +295,8 @@ if(!isset($_SESSION['username']))
 							</div>
 						</div>
 					<?php } ?>
-				</div>				
-				
-<!--COMPLETED-->				
-
-				<div class="column" >
-					<p class="column-title"id="done" >Completed</p>
-					<?php             
-						include 'dbconnect.php';
-						$results = $conn->query("SELECT
-						jobregister_id, job_order_number, job_priority, job_name, customer_name, 
-						customer_grade, job_status, machine_name, job_description, machine_type, serialnumber
-						FROM
-						job_register
-						WHERE
-						job_assign ='{$_SESSION['username']}' AND  job_status = 'Completed'
-
-						ORDER BY jobregisterlastmodify_at
-						DESC LIMIT 50");
-
-						while($row = $results->fetch_assoc()) {
-              
-					?>
-					
-						<div class="cards">
-							<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal" >
-							<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->
-							<ul class="b" id="draged">
-								<strong text-align="center"><?php echo $row['job_priority']?></strong>
-								<li><?php echo $row['job_order_number']?></li>
-								<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-								<li><?php echo $row['job_description']?></li>
-								<li><?php echo $row['machine_name']?></li>
-								<li><?php echo $row['machine_type']?></li>
-								<li><?php echo $row['serialnumber']?></li>
-							</ul>
-							<div class="status"  id="completedStatus">
-								<?php echo $row['job_status']?>
-							</div>
-							</div>
-						</div>
-					<?php } ?>
 				</div>
 		
-</div>
-
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
             <div role="document" class="modal-dialog">
                 <div class="modal-content">
@@ -682,5 +625,326 @@ if(!isset($_SESSION['username']))
 </div>
 </div>
 </div>
+
+<!-- Completed Job -->
+
+	<div class="column" >
+		<p class="column-title"id="done" >Completed</p>
+			
+			<?php
+				include 'dbconnect.php';
+				$results = $conn->query("SELECT
+				jobregister_id, job_order_number, job_priority, job_name, customer_name,
+				customer_grade, job_status, machine_name, job_description, machine_type, serialnumber
+				FROM job_register
+				WHERE job_assign ='{$_SESSION['username']}' AND  job_status = 'Completed'
+				ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+				while($row = $results->fetch_assoc()) {
+			?>
+			
+				<div class="cards">
+					<div class="card-complete" id="notYetStatus" data-id-complete="<?php echo $row['jobregister_id'];?>"  data-toggle="modal" data-target="#myModal-completed" >
+					<button type="button" class="btn btn-light text-left font-weight-bold font-color-black"> <!-- Modal-->
+					<ul class="b" id="draged">
+						<strong text-align="center"><?php echo $row['job_priority']?></strong>
+						<li><?php echo $row['job_order_number']?></li>
+						<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
+						<li><?php echo $row['job_description']?></li>
+						<li><?php echo $row['machine_name']?></li>
+						<li><?php echo $row['machine_type']?></li>
+						<li><?php echo $row['serialnumber']?></li>
+					</ul>
+					<div class="status"  id="completedStatus">
+						<?php echo $row['job_status']?>
+					</div>
+					</div>
+				</div>
+			<?php } ?>
+	</div>
+</div>
+	
+	<div id="myModal-completed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
+		<div role="document" class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
+					<div class="tabs active" id="tab11">
+						<h6 class="font-weight-bold">Job Info</h6>
+					</div>
+					<div class="tabs" id="tab12">
+						<h6 class="text-muted">Update</h6>
+					</div>
+					<!-- <div class="tabs" id="tab03">
+						<h6 class="text-muted">Remarks</h6>
+					</div>	 -->
+					<div class="tabs" id="tab14">
+						<h6 class="text-muted">Accessories</h6>
+					</div>
+					<div class="tabs" id="tab15">
+						<h6 class="text-muted">Photo</h6>
+					</div>
+					<div class="tabs" id="tab16">
+						<h6 class="text-muted">Video</h6>
+					</div>
+					<div class="tabs" id="tab17">
+						<h6 class="text-muted">Job Status</h6>
+					</div>
+					<div class="tabs" id="tab18">
+						<h6 class="text-muted">Report</h6>
+					</div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+<!--TOP BAR-->
+					<div class="line"></div>
+					<br>
+					<div class="modal-body p-0">
+					
+<!--Job Info Completed-->
+					
+					<fieldset class="show" id="tab111">
+						
+					<form action="" method="post">
+						<div class="tech-details-completed">
+
+						</div>
+					</form>
+					
+					<script type='text/javascript'>
+						$(document).ready(function() {
+						$('.card-complete').click(function() {
+							var jobregister_id = $(this).data('id-complete');
+							$.ajax({
+								url: 'ajaxtechnician.php',
+								type: 'post',
+								data: {jobregister_id: jobregister_id},
+								success: function(response) {
+									$('.tech-details-completed').html(response);
+									$('#myModal-completed').modal('show');
+								}
+							});
+						});
+					});
+					</script>
+
+					</fieldset>						
+						
+<!--Update Completed-->
+
+                    <fieldset id="tab121">
+						
+					<form action="ajaxtechupdate-completed.php" method="post">
+						<div class="techupdate-details-completed">
+
+						</div>
+					</form>
+					
+					<script type='text/javascript'>
+						$(document).ready(function() {
+							$('.card-complete').click(function() {
+								var jobregister_id = $(this).data('id-complete');
+								$.ajax({
+									url:'ajaxtechupdate-completed.php',
+									type:'post',
+									data:{jobregister_id: jobregister_id},
+									success: function(response) {
+										$('.techupdate-details-completed').html(response);
+										$('#myModal-completed').modal('show');
+									}
+								});
+							});
+						});
+					</script>
+
+					</fieldset>
+
+<!-- REMARKS
+ 
+                        <fieldset id="tab031">
+                          
+								<form action="ajaxremarks.php" method="post">
+									<div class="remark-details">
+									</div>
+								</form>		
+								
+							<script type='text/javascript'>
+
+							$(document).ready(function() {
+							$('.card').click(function() {
+							var jobregister_id = $(this).data('id');
+        
+        // AJAX request
+        
+							$.ajax({
+							url: 'ajaxremarks.php',
+							type: 'post',
+							data: {jobregister_id: jobregister_id},
+							success: function(response) {
+                
+         // Add response in Modal body
+							$('.remark-details').html(response);
+         // Display Modal
+							$('#myModal').modal('show');
+							}
+						});
+					});
+				});
+			</script>
+                            
+                        </fieldset> -->
+
+<!--Accessories Completed-->
+
+					<fieldset id="tab141">
+						
+					<form action="ajaxtabaccessoriestech-completed.php" method="post">
+						<div class="acc-details-completed">
+
+						</div>
+					</form>
+					
+					<script type='text/javascript'>
+						$(document).ready(function() {
+							$('.card-complete').click(function() {
+								var jobregister_id = $(this).data('id-complete');
+								$.ajax({
+									url: 'ajaxtabaccessoriestech-completed.php',
+									type: 'post',
+									data: {jobregister_id: jobregister_id},
+									success: function(response) {
+										// Add response in Modal body
+										$('.acc-details-completed').html(response);
+										// Display Modal
+										$('#myModal-completed').modal('show');
+									}
+								});
+							});
+						});
+					</script>														
+					
+					</fieldset>
+
+<!--Photos Completed-->
+
+					<fieldset id="tab151">
+						
+					<form action="ajaxtechnicianphoto-completed.php" method="post">
+						<div class="photo-details-completed">
+
+						</div>
+					</form>
+					
+					<script type='text/javascript'>
+						$(document).ready(function() {
+							$('.card-complete').click(function() {
+								var jobregister_id = $(this).data('id-complete');
+								$.ajax({
+									url: 'ajaxtechnicianphoto-completed.php',
+									type: 'post',
+									data: {jobregister_id: jobregister_id},
+									success: function(response) {
+										$('.photo-details-completed').html(response);
+										$('#myModal-completed').modal('show');
+									}
+								});
+							});
+						});
+					</script>
+					
+					</fieldset>
+					
+<!--Video Completed-->
+				
+					<fieldset id="tab161">
+						
+					<form action="ajaxtechnicianvideo-completed.php" method="post">
+						<div class="video-details-completed">
+
+						</div>
+					</form>
+					
+					<script type='text/javascript'>
+						$(document).ready(function() {
+							$('.card-complete').click(function() {
+								var jobregister_id = $(this).data('id-complete');
+								$.ajax({
+								url: 'ajaxtechnicianvideo-completed.php',
+								type: 'post',
+								data: {jobregister_id: jobregister_id},
+								success: function(response) {
+									$('.video-details-completed').html(response);
+									$('#myModal-completed').modal('show');
+								}
+							});
+						});
+					});
+					</script>
+					
+					</fieldset>
+
+<!--Job Status Completed-->
+
+					<fieldset id="tab171">
+						
+					<form action="ajaxtechjobstatus-completed.php" method="post">
+						<div class="techjobstatus-details-completed">
+
+						</div>
+					</form>
+					
+					<script type='text/javascript'>
+						$(document).ready(function() {
+							$('.card-complete').click(function() {
+								var jobregister_id = $(this).data('id-complete');
+								$.ajax({
+									url: 'ajaxtechjobstatus-completed.php',
+									type: 'post',
+									data: {jobregister_id: jobregister_id},
+									success: function(response) {
+										$('.techjobstatus-details-completed').html(response);
+										$('#myModal-completed').modal('show');
+									}
+								});
+							});
+						});
+					</script>													
+					
+					</fieldset>		
+
+<!--Report Completed-->
+
+					<fieldset id="tab181">
+						
+					<form action="ajaxreport.php" method="post">
+						<div class="report-details-completed">
+
+						</div>
+					</form>
+					
+					<script type='text/javascript'>
+						$(document).ready(function() {
+							$('.card-complete').click(function() {
+								var jobregister_id = $(this).data('id-complete');
+								$.ajax({
+									url: 'ajaxreport.php',
+									type: 'post',
+									data: {jobregister_id: jobregister_id},
+									success: function(response) {
+										$('.report-details-completed').html(response);
+										$('#myModal-completed').modal('show');
+									}
+								});
+							});
+						});
+					</script>
+					
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Completed Job -->
 
 </body>
