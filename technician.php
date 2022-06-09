@@ -78,7 +78,11 @@ if(!isset($_SESSION['username']))
 }
 
 .dropdown1:hover .dropbtn1 {
-  color:whitesmoke;
+  color:#1565c0;
+}
+
+.dropbtn1{
+	border:none
 }
 
 .dropdown-content {
@@ -116,7 +120,7 @@ if(!isset($_SESSION['username']))
 
 .card-complete{
 	
-	    position: relative;
+	position: relative;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
@@ -137,7 +141,7 @@ if(!isset($_SESSION['username']))
 		<div class="wrapper">
 			<ul class="main-nav" id="js-menu">
 				<div class="dropdown1">
-					<button class="nav1-links sidebarbutton dropbtn1">Clock In</button>
+					<button class="navTime-links dropbtn1"><i class="bx bx-time" style="font-size:37px"></i></button>
 						<div class="dropdown-content1">
 							<a href="techresthour.php">Rest Hour</a>
 							<a href="techreportoff.php">Report Off</a>
@@ -145,7 +149,7 @@ if(!isset($_SESSION['username']))
 				</div>
 			</ul>
 			    <div class="ul2">
-        <a href="logout.php" class="nav1-links"><i class="bx bx-log-out"></i></a>
+        <a href="logout.php" class="nav1-links"><i class="bx bx-log-out" style="font-size:36px"></i></a>
 
     </div>
 		</div>

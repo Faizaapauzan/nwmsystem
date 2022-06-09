@@ -4,9 +4,6 @@
   margin: 0;
 }
 
-
-
-
 ul {
   list-style-type: none;
 }
@@ -14,7 +11,13 @@ ul {
 .nav1-links, .logo {
   text-decoration: none;
   color: #000;
-  font-size: 20px;
+}
+
+.navTime-links, .logo {
+  text-decoration: none;
+  color: #000;
+  border:none;
+  background: none;
 }
 
 .navbar1 {padding: 20px;}
@@ -22,19 +25,6 @@ ul {
 ul li {padding: 0 5px;}
 .wrapper {display:flex; justify-content: space-between; width:100%; 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .nav {
   position: fixed;
