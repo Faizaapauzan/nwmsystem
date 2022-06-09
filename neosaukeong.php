@@ -750,8 +750,8 @@
             ?>
             
 			<div class="cards">
-            <div class="completed" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodalCompleted">
-                        <button type="button" class="btn btn-outline-dark text-left font-weight-bold font-color-black">
+            <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
+                        <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
                         <ul class="b" id="draged">
                             <strong align="center"><?php echo $row['job_order_number']?></strong>
                             <li><?php echo $row['job_priority']?></li>

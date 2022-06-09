@@ -299,7 +299,7 @@ if(!isset($_SESSION['username']))
 		
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
             <div role="document" class="modal-dialog">
-                <div class="modal-content">
+                <div style="padding-bottom: 26px;" class="modal-content">
                     <div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">						
                         <div class="tabs active" id="tab01">
                            <h6 class="font-weight-bold">Job Info</h6>

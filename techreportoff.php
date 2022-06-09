@@ -142,7 +142,7 @@ display:none;
 </form> 
 
 <div class="cards">
-<div class="card" style="position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
+<div class="card" style="position: static; margin-top: 20px; margin-bottom: 20px;">
 							
 <?php
 
@@ -173,7 +173,7 @@ include 'dbconnect.php';
 	<div class="form-group mb-3">
 	<label for="">Technician Availability</label>
 	<div class="input-box">
-	<select style="width: 200px;" id="tech_avai" name="tech_avai" class="form-control" onchange="available_update(this.options[this.selectedIndex].value,'<?php echo $row['staffregister_id'] ?>')">
+	<select style="width: 155px;" id="tech_avai" name="tech_avai" class="form-control" onchange="available_update(this.options[this.selectedIndex].value,'<?php echo $row['staffregister_id'] ?>')">
 	<option value='' <?php if ($row['tech_avai'] == '') {echo "SELECTED";} ?>></option>
 	<option value="OFF" <?php if ($row['tech_avai'] == "OFF") {echo "SELECTED";} ?>>OFF</option>
 	</select>
@@ -242,7 +242,7 @@ include 'dbconnect.php';
 	<div class="form-group mb-3">
 	<label for="">Reason</label>
 	<div class="input-box">
-	<select style="width: 250px;" id="reason" name="reason" class="form-control">
+	<select style="width: 200px;" id="reason" name="reason" class="form-control">
 	<option value=""></option>
 	<option value="Paid Leave">Paid Leave</option>
 	<option value="Unpaid Leave">Unpaid Leave</option>
@@ -253,12 +253,12 @@ include 'dbconnect.php';
 
 	<div class="form-group mb-3">
 	<label for="">From</label>
-	<input style="width: 250px;" type="date" name="date_from" class="form-control">
+	<input style="width: 200px;" type="date" name="date_from" class="form-control">
 	</div>
 
 	<div class="form-group mb-3">
 	<label for="">To</label>
-	<input style="width: 250px;" type="date" name="date_to" class="form-control">
+	<input style="width: 200px;" type="date" name="date_to" class="form-control">
 	</div>
 
 	<br>

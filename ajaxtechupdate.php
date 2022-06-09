@@ -12,7 +12,6 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <title>NWM Technician Page</title>
-	  <link href="css/ajaxtechupdate.css" rel="stylesheet" />
     <link href="css/technicianmain.css" rel="stylesheet" />
     <link href="main.css" rel="stylesheet" />
 
@@ -110,20 +109,21 @@ session_start();
   <div class="input-boxLocation" id="inputLocationBox">
             
                 <div class="add_field_button1"></div>
-                <textarea style="width: 210px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
-                <textarea style="width: 210px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
+                <textarea style=" text-align: center; padding-top: 7px; width: 210px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
+                <textarea style=" text-align: center; padding-top: 7px; width: 210px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
 				
               </div>
 
-			  <button type="button" onclick="getLocation()" class="buttonbiru">Click to Get Location</button>
-
+			<div style="text-align: center;" class="loc">
+			  <button type="button" style="width: fit-content" onclick="getLocation()" class="buttonbiru">Click to Get Location</button>
+			</div>
 
         <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
             
             <p class="control"><b id="message"></b></p>
-            <div class="updateBtn">
-              <button style="padding-left: 26px;" type="button" id="update_tech" name="update_tech" value="Update" class="buttonbiru" onclick="submitForm();">Update</button>
+            <div style="text-align: end;" class="updateBtn">
+              <button style="width: fit-content;" type="button" id="update_tech" name="update_tech" value="Update" class="buttonbiru" onclick="submitForm();">Update</button>
       
               <!-- <button type="submit" id="submit" name="update" class="btn btn-primary"> Update  </button> -->
             </div>           
