@@ -49,6 +49,9 @@ if(!isset($_SESSION['username']))
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
+
+	<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+	
 </head>
 
 <style>
@@ -141,7 +144,7 @@ if(!isset($_SESSION['username']))
 		<div class="wrapper">
 			<ul class="main-nav" id="js-menu">
 				<div class="dropdown1">
-				<a class="nav1-links"><i class="bx bx-time" style="font-size:36px"></i></a>
+				<a class="nav1-links"><i class="iconify" data-icon="mdi:calendar-clock" style="font-size:37px;"></i></a>
 						<div class="dropdown-content1">
 							<a href="techresthour.php">Rest Hour</a>
 							<a href="techreportoff.php">Report Off</a>
@@ -149,7 +152,7 @@ if(!isset($_SESSION['username']))
 				</div>
 			</ul>
 			    <div class="ul2">
-        <a href="logout.php" class="nav1-links"><i class="bx bx-log-out" style="font-size:36px"></i></a>
+        <a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:32px;"></i></a>
 
     </div>
 		</div>
@@ -202,11 +205,11 @@ if(!isset($_SESSION['username']))
 								FROM
 								job_register
 								WHERE
-								job_assign ='{$_SESSION['username']}' AND  job_status = ''
+								job_assign ='{$_SESSION['username']}' AND  job_status = '' AND job_cancel = ''
 								OR
-								job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete'
+								job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete' AND job_cancel = ''
 								OR
-								job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready'
+								job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready' AND job_cancel = ''
 								ORDER BY jobregisterlastmodify_at
 								DESC LIMIT 50");
 
@@ -246,7 +249,7 @@ if(!isset($_SESSION['username']))
 							FROM
 							job_register
 							WHERE
-							job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing'
+							job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing' AND job_cancel = ''
 
 							ORDER BY jobregisterlastmodify_at
 							DESC LIMIT 50");

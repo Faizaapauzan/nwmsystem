@@ -125,7 +125,37 @@ session_start();
                 jobregister_id, job_order_number, job_priority, job_name, customer_name, reason,
 				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, staff_position, job_assign
                 FROM job_register WHERE
-                (staff_position ='Technician' AND job_status = 'Pending' )
+                (job_assign ='AIZAT' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='BOON' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='FAIZAN' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='FAUZIN' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='HAFIZ' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='HAMIR' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='HWA' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='ISK' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='IZAAN' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='JOHN' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='JUN JIE' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='WILL' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='SAHELE' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='SALAM' AND  job_status = 'Pending' AND job_cancel=''
+					OR
+				 job_assign ='SAZALY' AND  job_status = 'Pending' AND job_cancel=''
+					OR 
+				 job_assign ='TECK' AND  job_status = 'Pending' AND job_cancel='' )
                 ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                 while($row = $results->fetch_assoc()) {
             ?>

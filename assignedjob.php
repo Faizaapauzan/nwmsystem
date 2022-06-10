@@ -187,7 +187,37 @@ session_start();
 								FROM
 								job_register
 								WHERE
-								staff_position ='Technician' AND  job_status = 'Doing' AND job_cancel=''
+								job_assign ='AIZAT' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='BOON' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='FAIZAN' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='FAUZIN' AND  job_status = 'Doing' AND job_cancel=''
+								Or
+								job_assign ='HAFIZ' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='HAMIR' AND  job_status = '' AND job_cancel=''
+								OR
+								job_assign ='HWA' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='ISK' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='IZAAN' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='JOHN' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='JUN JIE' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='WILL' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='SAHELE' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='SALAM' AND  job_status = 'Doing' AND job_cancel=''
+								OR
+								job_assign ='SAZALY' AND  job_status = 'Doing' AND job_cancel=''
+								OR 
+								job_assign ='TECK' AND  job_status = 'Doing' AND job_cancel=''
 								ORDER BY jobregisterlastmodify_at
 								DESC LIMIT 50");
 
