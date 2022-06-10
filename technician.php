@@ -355,10 +355,9 @@ if(!isset($_SESSION['username']))
                             <h6 class="text-muted">Report</h6>
 						</div>
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					        <span aria-hidden="true">&times;</span>
-					    </button>
 
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" style="font-size:20px;"></i></button>
+						
 <!--TOP BAR-->
 						
 						<div class="line"></div>
