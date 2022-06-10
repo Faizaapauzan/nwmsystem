@@ -44,6 +44,7 @@ session_start();
 .tooltip {
 z-index: 1000000;
   background-color: black;
+  width: 360px;
   opacity: 1;
   color: #fff;
   text-align: center;
