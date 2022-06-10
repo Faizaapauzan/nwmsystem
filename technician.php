@@ -51,6 +51,7 @@ if(!isset($_SESSION['username']))
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
 
 	<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+	
 </head>
 
 <style>
@@ -204,11 +205,11 @@ if(!isset($_SESSION['username']))
 								FROM
 								job_register
 								WHERE
-								job_assign ='{$_SESSION['username']}' AND  job_status = ''
+								job_assign ='{$_SESSION['username']}' AND  job_status = '' AND job_cancel = ''
 								OR
-								job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete'
+								job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete' AND job_cancel = ''
 								OR
-								job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready'
+								job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready' AND job_cancel = ''
 								ORDER BY jobregisterlastmodify_at
 								DESC LIMIT 50");
 
@@ -248,7 +249,7 @@ if(!isset($_SESSION['username']))
 							FROM
 							job_register
 							WHERE
-							job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing'
+							job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing' AND job_cancel = ''
 
 							ORDER BY jobregisterlastmodify_at
 							DESC LIMIT 50");

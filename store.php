@@ -29,6 +29,8 @@ if($_SESSION['staff_position']==""){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	  <script src="js/testing.js" type="text/javascript"></script>
 
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
 </head>
 
 <body>
@@ -44,10 +46,7 @@ if($_SESSION['staff_position']==""){
         <a href="#" class="nav-links"><i class='bx bxs-bell-ring'></i></a>
       </li> -->
 
-              <i class='bx bx-log-out'></i>
-              <a href="logout.php">
-                    <span class="dashboard">LOGOUT</span>
-                </a>
+              <a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:32px;"></i></a>
      
     </ul>
     </div>
@@ -67,13 +66,13 @@ if($_SESSION['staff_position']==""){
               FROM
               job_register
               WHERE
-                accessories_required = 'Yes' AND job_status = ''
+                accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
                   OR
-                staff_position = 'Storekeeper' AND job_status = ''
+                staff_position = 'Storekeeper' AND job_status = '' AND job_cancel = ''
                   OR
-                accessories_required = 'Yes' AND job_status = 'Incomplete'
+                accessories_required = 'Yes' AND job_status = 'Incomplete' AND job_cancel = ''
                   OR
-                staff_position = 'Storekeeper' AND job_status = 'Incomplete'
+                staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel = ''
                  
 
 
@@ -114,9 +113,9 @@ if($_SESSION['staff_position']==""){
               FROM
               job_register
               WHERE
-              accessories_required = 'Yes' AND job_status = 'Doing'
+              accessories_required = 'Yes' AND job_status = 'Doing' AND job_cancel = ''
                OR
-              staff_position = 'Storekeeper' AND job_status = 'Doing'
+              staff_position = 'Storekeeper' AND job_status = 'Doing' AND job_cancel = ''
 
               ORDER BY jobregisterlastmodify_at
               DESC LIMIT 50");
@@ -153,9 +152,9 @@ if($_SESSION['staff_position']==""){
               FROM
               job_register
               WHERE
-              staff_position = 'Storekeeper' AND job_status = 'Ready'
+              staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
               OR
-              accessories_required = 'Yes' AND job_status = 'Ready'
+              accessories_required = 'Yes' AND job_status = 'Ready' AND job_cancel = ''
               ORDER BY jobregisterlastmodify_at
               DESC LIMIT 50");
               while($row = $results->fetch_assoc()) {
@@ -194,13 +193,13 @@ if($_SESSION['staff_position']==""){
               FROM
               job_register
               WHERE
-              accessories_required = 'Yes' AND job_status = 'Not Ready'
+              accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel = ''
               OR
-              staff_position = 'Storekeeper' AND job_status = 'Not Ready'
+              staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel = ''
               OR
-              accessories_required = 'Yes' AND job_status = 'Pending'
+              accessories_required = 'Yes' AND job_status = 'Pending' AND job_cancel = ''
               OR
-              staff_position = 'Storekeeper' AND job_status = 'Pending'
+              staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel = ''
 
 
               ORDER BY jobregisterlastmodify_at
