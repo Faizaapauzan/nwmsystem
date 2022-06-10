@@ -5,18 +5,8 @@ session_start();
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
- #display_image{
-        width: 150px;
-        height: 160px;
-        border: 1px solid black;
-        background-position: center;
-        background-size: cover;
-        }
-        
-        </style>
-    </head>
+
+
 
 
 <?php

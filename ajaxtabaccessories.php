@@ -20,6 +20,7 @@ session_start();
 <link rel="stylesheet" type="text/css" href="css/tab.css"/>
 
 <!-- <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script> -->
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!-- <script src="popper.js"></script>   -->
@@ -37,6 +38,24 @@ session_start();
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 </head>
+
+<style>
+
+.tooltip {
+z-index: 1000000;
+  background-color: black;
+  opacity: 1;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+}
+
+
+</style>
 <body>
 		
  <form id="adminacc_form" method="post">
@@ -102,7 +121,7 @@ include_once("dbconnect.php");
       <?php foreach($queryRecords as $res) :?>
       <tr data-row-id="<?php echo $res['id'];?>">
         <td></td>
-        <td><label><a href="#" data-toggle="tooltip" class="fetch" id="<?php echo $res["accessories_id"]; ?>"><?php echo $res["accessories_code"]; ?></a></label></td>
+        <td><a style="color: blue; cursor: pointer;"  data-toggle="tooltip" class="hover" id="<?php echo $res["accessories_id"]; ?>"><?php echo $res["accessories_code"]; ?></a></td>
          <td class="editable-col" contenteditable="true" col-index='1' oldVal ="<?php echo $res['accessories_name'];?>"><?php echo $res['accessories_name'];?></td>
           <td class="editable-col" contenteditable="true" col-index='2' oldVal ="<?php echo $res['accessories_uom'];?>"><?php echo $res['accessories_uom'];?></td>
          <td class="editable-col" contenteditable="true" col-index='3' oldVal ="<?php echo $res['accessories_quantity'];?>"><?php echo $res['accessories_quantity'];?></td>
@@ -188,6 +207,9 @@ include_once("dbconnect.php");
 
 </script>
 
+
+
+
 <script>
  $(document).ready(function(){
 
@@ -216,6 +238,9 @@ include_once("dbconnect.php");
   }
  });
 </script>
+
+
+
 
 <script type="text/javascript">
 $(document).ready(function(){
