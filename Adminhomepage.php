@@ -381,7 +381,7 @@ if(!isset($_SESSION['username']))
                     <div class="tab" id=jobInfoTabs>
                         <div class="TechJobInfoTab">
                             <div class="contentTechJobInfo">
-                                <div style="right: 513px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                                <div style="right: 348px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
                                 <form action="homeindex.php" method="post">
                                     <div class="tech-details">
 
@@ -418,7 +418,7 @@ if(!isset($_SESSION['username']))
                     <div class="tab">
                         <div class="TechJobInfoTab">
                             <div class="contentTechJobInfo">
-                                <div style="right: 513px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                                <div style="right: 348px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
                                 <form action="ajaxtabaccessories.php" method="post">
                                     <div class="acc-details">
 
@@ -522,7 +522,7 @@ if(!isset($_SESSION['username']))
                         <div class="contentStoreJobInfo" style="padding-left: 66px;
     margin-left: -89px;
     margin-top: -47px;">
-                            <div style="right: 450px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                            <div style="right: 288px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                             <form action="homeindex.php" method="post">
                                 <div class="store-details">
 
@@ -556,7 +556,7 @@ if(!isset($_SESSION['username']))
                     <input type="radio" name="tabDoingStore" id="tabDoingStore2">
                     <label for="tabDoingStore2" class="tabHeadingStore"> Accessories </label>
                     <div style="min-width: -webkit-fill-available;" class="tab">
-                        <div style="right: 450px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <div style="right: 288px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxtabaccessories.php" method="post">
                             <div class="store-accessories">
 
@@ -589,7 +589,7 @@ if(!isset($_SESSION['username']))
                     <input type="radio" name="tabDoingStore" id="tabDoingStore3">
                     <label for="tabDoingStore3" class="tabHeadingStore"> Update </label>
                     <div class="tab">
-                        <div style="right: 450px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <div style="right: 288px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxstoreupdateADMIN.php" method="post">
                             <div class="store-update">
 
