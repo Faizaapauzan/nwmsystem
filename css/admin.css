@@ -75,8 +75,8 @@
   /* margin: 30px 20px 2px 20px; */
 }
 form .tech-details .input-box {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
+  margin-bottom: 4px;
+  width: calc(100% / 2 - 5px);
   padding: 0 15px 0 15px;
 }
 form .input-box label.details {
@@ -196,8 +196,8 @@ input[type="datetime-local"] {
 }
 
 .modal .techClose {
-  right: 335px;
-  top: -49px;
+  right: 505px;
+  top: -51px;
   width: 30px;
   height: 30px;
 }
@@ -317,4 +317,40 @@ textarea {
   margin-left: 76%;
   margin-bottom: 5px;
   margin-top: 45px;
+}
+
+.contentTechJobInfo form .assign-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: auto;
+  /* margin: 30px 20px 2px 20px; */
+}
+form .assign-details .input-box {
+  margin-bottom: 4px;
+  width: calc(100% / 2 - 5px);
+  padding: 0 15px 0 15px;
+}
+form .input-box label.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.assign-details .input-box input,
+.assign-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.assign-details .input-box input:focus,
+.assign-details .input-box input:valid,
+.assign-details .input-box select:focus,
+.assign-details .input-box select:valid {
+  border-color: #081d45;
 }

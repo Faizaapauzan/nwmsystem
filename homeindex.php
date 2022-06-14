@@ -7,8 +7,6 @@
 
     if (isset($_POST['update'])) {
         $jobregister_id = $_POST['jobregister_id'];
-        $technician_rank = $_POST['technician_rank'];
-        $staff_position = $_POST['staff_position'];
         $job_priority = $_POST['job_priority'];
         $job_order_number = $_POST['job_order_number'];
         $job_name = $_POST['job_name'];
@@ -27,8 +25,6 @@
         $machine_type = $_POST['machine_type'];
         $machine_brand = $_POST['machine_brand'];
         $accessories_required = $_POST['accessories_required'];
-        $job_assign = $_POST['job_assign'];
-        $Job_assistant = $_POST['Job_assistant'];
         $job_cancel = $_POST['job_cancel'];
         $job_status = $_POST['job_status'];
         $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
@@ -36,8 +32,6 @@
         $sql = "UPDATE job_register SET
 
             job_priority ='".addslashes($job_priority)."',
-            technician_rank ='".addslashes($technician_rank)."',
-            staff_position ='".addslashes($staff_position)."',
             job_order_number ='".addslashes($job_order_number)."',
             job_name ='".addslashes($job_name)."',
             job_description ='".addslashes($job_description)."',
@@ -55,8 +49,6 @@
             machine_type ='".addslashes($machine_type)."',
             machine_brand ='".addslashes($machine_brand)."',
             accessories_required ='".addslashes($accessories_required)."',
-            job_assign ='".addslashes($job_assign)."',
-            Job_assistant ='".addslashes($Job_assistant)."',
             job_cancel ='".addslashes($job_cancel)."',
             job_status ='".addslashes($job_status)."',
             jobregisterlastmodify_by ='".addslashes($jobregisterlastmodify_by)."'
