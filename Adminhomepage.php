@@ -64,7 +64,6 @@ if(!isset($_SESSION['username']))
   z-index: 1;
 }
 
-
 .dropdown-content1 a {
   color: black;
   padding: 12px 16px;
@@ -84,12 +83,6 @@ if(!isset($_SESSION['username']))
   color:whitesmoke;
 }
 
-
-
-
-
-
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -99,7 +92,6 @@ if(!isset($_SESSION['username']))
   bottom: 55px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  
 
 }
 
@@ -120,6 +112,21 @@ if(!isset($_SESSION['username']))
 
 .dropdown:hover .dropbtn {
   color:whitesmoke;
+}
+
+.updateBtn input {
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #081d45;
+    margin-bottom: 10px;
 }
 
     </style>
@@ -562,7 +569,7 @@ if(!isset($_SESSION['username']))
                         <div class="contentStoreJobInfo" style="padding-left: 66px;
     margin-left: -89px;
     margin-top: -47px;">
-                            <div style="right: 453px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                            <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                             <form action="homeindex.php" method="post">
                                 <div class="store-details">
 
@@ -596,7 +603,7 @@ if(!isset($_SESSION['username']))
                     <input type="radio" name="tabDoingStore" id="tabDoingStore2">
                     <label for="tabDoingStore2" class="tabHeadingStore"> Accessories </label>
                     <div style="min-width: -webkit-fill-available;" class="tab">
-                        <div style="right: 453px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxtabaccessories.php" method="post">
                             <div class="store-accessories">
 
@@ -628,8 +635,8 @@ if(!isset($_SESSION['username']))
         
                     <input type="radio" name="tabDoingStore" id="tabDoingStore3">
                     <label for="tabDoingStore3" class="tabHeadingStore"> Update </label>
-                    <div class="tab">
-                        <div style="right: 453px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                      <div style="min-width: -webkit-fill-available;" class="tab">
+                        <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxstoreupdateADMIN.php" method="post">
                             <div class="store-update">
 

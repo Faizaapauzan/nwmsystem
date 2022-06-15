@@ -193,6 +193,11 @@ session_start();
                         <div class="tabs active" id="tab01">
                             <h6 class="font-weight-bold">Job Info</h6>
 						</div>
+
+						<div class="tabs" id="tab02">
+                           <h6 class="text-muted">Job Assign</h6>
+					    </div>
+
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -235,15 +240,45 @@ session_start();
 					});
 				});
 							</script>	
-
-							
-							<!-- <div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-							</div>					
-
-	 -->
-					
+				
 						</fieldset>
+
+						 <fieldset id="tab021">
+                          
+								<form action="jobassignst.php" method="post">
+								<div class="tech-assign">
+
+									</div>
+								</form>
+								
+								<script type='text/javascript'>
+        
+								$(document).ready(function() {
+          
+								$('.card').click(function() {
+            
+								var jobregister_id = $(this).data('id');
+            
+// AJAX request
+            
+								$.ajax({
+								url:'jobassignst.php',
+								type:'post',
+								data:{jobregister_id: jobregister_id},
+								success: function(response) {
+// Add response in Modal body
+								$('.tech-assign').html(response);
+// Display Modal
+								$('#myModal').modal('show');
+								}
+							});
+						});
+					});
+      
+							</script>                         
+                        </fieldset>
+
+
 					</div>
 
 					</div>

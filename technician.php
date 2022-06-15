@@ -326,14 +326,16 @@ if(!isset($_SESSION['username']))
                         <div class="tabs active" id="tab01">
                            <h6 class="font-weight-bold">Job Info</h6>
 						</div>
+
+						  <div class="tabs" id="tab03">
+                           <h6 class="text-muted">Job Assign</h6>
+					    </div>	
 						
                         <div class="tabs" id="tab02">
                            <h6 class="text-muted">Update</h6>
 					    </div>
 						
-                        <!-- <div class="tabs" id="tab03">
-                           <h6 class="text-muted">Remarks</h6>
-					    </div>	 -->
+                      
 								
 					    <div class="tabs" id="tab04">
                            <h6 class="text-muted">Accessories</h6>
@@ -438,10 +440,10 @@ if(!isset($_SESSION['username']))
                         </fieldset>
 
 <!--REMARKS-->
-<!-- 
+
                         <fieldset id="tab031">
                           
-								<form action="ajaxremarks.php" method="post">
+								<form action="jobassignnd.php" method="post">
 									<div class="remark-details">
 									</div>
 								</form>		
@@ -455,7 +457,7 @@ if(!isset($_SESSION['username']))
         // AJAX request
         
 							$.ajax({
-							url: 'ajaxremarks.php',
+							url: 'jobassignnd.php',
 							type: 'post',
 							data: {jobregister_id: jobregister_id},
 							success: function(response) {
@@ -470,7 +472,7 @@ if(!isset($_SESSION['username']))
 				});
 			</script>
                             
-                        </fieldset> -->
+                        </fieldset>
 
 <!--ACCESSORIES-->
 
@@ -691,12 +693,14 @@ if(!isset($_SESSION['username']))
 					<div class="tabs active" id="tab11">
 						<h6 class="font-weight-bold">Job Info</h6>
 					</div>
+								<div class="tabs" id="tab13">
+						<h6 class="text-muted">Job Assign</h6>
+					</div>
+
 					<div class="tabs" id="tab12">
 						<h6 class="text-muted">Update</h6>
 					</div>
-					<!-- <div class="tabs" id="tab03">
-						<h6 class="text-muted">Remarks</h6>
-					</div>	 -->
+			
 					<div class="tabs" id="tab14">
 						<h6 class="text-muted">Accessories</h6>
 					</div>
@@ -748,7 +752,37 @@ if(!isset($_SESSION['username']))
 					});
 					</script>
 
-					</fieldset>						
+					</fieldset>		
+					
+					<!-- REMARKS -->
+ 
+  <fieldset id="tab131">
+						
+					<form action="jobassignst-completed.php" method="post">
+						<div class="techupdate-assign-completed">
+
+						</div>
+					</form>
+					
+					<script type='text/javascript'>
+						$(document).ready(function() {
+							$('.card-complete').click(function() {
+								var jobregister_id = $(this).data('id-complete');
+								$.ajax({
+									url:'jobassignst-completed.php',
+									type:'post',
+									data:{jobregister_id: jobregister_id},
+									success: function(response) {
+										$('.techupdate-assign-completed').html(response);
+										$('#myModal-completed').modal('show');
+									}
+								});
+							});
+						});
+					</script>
+
+					</fieldset>
+
 						
 <!--Update Completed-->
 
@@ -779,40 +813,7 @@ if(!isset($_SESSION['username']))
 
 					</fieldset>
 
-<!-- REMARKS
- 
-                        <fieldset id="tab031">
-                          
-								<form action="ajaxremarks.php" method="post">
-									<div class="remark-details">
-									</div>
-								</form>		
-								
-							<script type='text/javascript'>
 
-							$(document).ready(function() {
-							$('.card').click(function() {
-							var jobregister_id = $(this).data('id');
-        
-        // AJAX request
-        
-							$.ajax({
-							url: 'ajaxremarks.php',
-							type: 'post',
-							data: {jobregister_id: jobregister_id},
-							success: function(response) {
-                
-         // Add response in Modal body
-							$('.remark-details').html(response);
-         // Display Modal
-							$('#myModal').modal('show');
-							}
-						});
-					});
-				});
-			</script>
-                            
-                        </fieldset> -->
 
 <!--Accessories Completed-->
 

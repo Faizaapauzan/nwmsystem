@@ -34,7 +34,7 @@ include_once("dbconnect.php");
 
  <form id="storeupdate_form" method="post">
           <div id="storesmsg" class="alerts"></div>
-<table id="remark_grid" style="box-shadow: 0 5px 10px #f7f7f7;" class="table table-condensed table-hover table-striped bootgrid-table">
+<table id="remark_grid" style="box-shadow: 0 5px 10px #f7f7f7; margin-top: -54px; margin-left: -5px;" class="table table-condensed table-hover table-striped bootgrid-table">
 
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>

@@ -8,22 +8,35 @@ ul {
   list-style-type: none;
 }
 
-.nav1-links, .logo {
+.nav1-links,
+.logo {
   text-decoration: none;
   color: #000;
 }
 
-.navTime-links, .logo {
+.navTime-links,
+.logo {
   text-decoration: none;
   color: #000;
-  border:none;
+  border: none;
   background: none;
 }
 
-.navbar1 {padding: 20px;}
-.navbar1, ul {display: flex; flex-direction:row;}
-ul li {padding: 0 5px;}
-.wrapper {display:flex; justify-content: space-between; width:100%; 
+.navbar1 {
+  padding: 20px;
+}
+.navbar1,
+ul {
+  display: flex;
+  flex-direction: row;
+}
+ul li {
+  padding: 0 5px;
+}
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .nav {
@@ -34,12 +47,11 @@ ul li {padding: 0 5px;}
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   display: flex;
-
 }
 
-.nav__text{
-	font-size:small;
-	font-weight: bold;
+.nav__text {
+  font-size: small;
+  font-weight: bold;
 }
 
 .nav__link {
@@ -215,7 +227,7 @@ button:focus {
 }
 
 .tabs {
-  margin: 2px 5px 0px 5px;
+  margin: 2px 2px 4px 4px;
   padding-bottom: 10px;
   cursor: pointer;
 }
@@ -291,8 +303,3 @@ a:hover {
 #myBtn:hover {
   background-color: #555;
 }
-
-
-
-
-

@@ -19,19 +19,18 @@
         $job_status = $_POST['job_status'];
         $jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
 
-        $sql = "UPDATE job_register SET
+      $sql = "UPDATE job_register SET 
+                    technician_rank ='".addslashes($_POST['technician_rank'])."',
+                    staff_position ='".addslashes($_POST['staff_position'])."',
+                    job_assign ='".addslashes($_POST['job_assign'])."',
+                    Job_assistant ='".addslashes($_POST['Job_assistant'])."',
+                    Job_assistant2 ='".addslashes($_POST['Job_assistant2'])."',
+                    Job_assistant3 ='".addslashes($_POST['Job_assistant3'])."',
+                    Job_assistant4 ='".addslashes($_POST['Job_assistant4'])."',
+                    job_status ='".addslashes($_POST['job_status'])."',
+                    jobregisterlastmodify_by ='".addslashes($_POST['jobregisterlastmodify_by'])."' 
 
-            technician_rank ='".addslashes($technician_rank)."',
-            staff_position ='".addslashes($staff_position)."',
-            job_assign ='".addslashes($job_assign)."',
-            Job_assistant ='".addslashes($Job_assistant)."',
-            Job_assistant2 ='".addslashes($Job_assistant2)."',
-            Job_assistant3 ='".addslashes($Job_assistant3)."',
-            Job_assistant4 ='".addslashes($Job_assistant4)."',
-            job_status ='".addslashes($job_status)."',
-            jobregisterlastmodify_by ='".addslashes($jobregisterlastmodify_by)."'
-
-             WHERE  jobregister_id ='".addslashes($jobregister_id)."' ";
+                 WHERE jobregister_id='".addslashes($_POST['jobregister_id'])."'";
         
       if($conn->query($sql))
         {

@@ -331,7 +331,7 @@ input[type="datetime-local"] {
 .tabStore {
   display: flex;
   flex-wrap: wrap;
-  max-width: 788px;
+  max-width: 825px;
   width: 100%;
   background-color: #fff;
   border-radius: 5px;

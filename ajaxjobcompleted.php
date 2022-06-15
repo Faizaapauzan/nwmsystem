@@ -55,7 +55,10 @@ while ($row = $result->fetch_assoc()) {
     $cust_address3 = $row['cust_address3'];
     $machine_type = $row['machine_type'];
     $machine_brand = $row['machine_brand'];
-    $Job_assistant = $row['Job_assistant'];    
+    $Job_assistant = $row['Job_assistant']; 
+    $Job_assistant2 = $row['Job_assistant2']; 
+    $Job_assistant3 = $row['Job_assistant3']; 
+    $Job_assistant4 = $row['Job_assistant4'];    
     $job_description = $row['job_description'];
     $machine_name = $row['machine_name'];
     $jobregistercreated_by = $row['jobregistercreated_by'];
@@ -117,7 +120,7 @@ while ($row = $result->fetch_assoc()) {
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Assistant : </td><td>" . $Job_assistant . "</td>";
+    $response .= "<td>Assistant : </td><td>" . $Job_assistant . "  " . $Job_assistant2 . "  " . $Job_assistant3 . "  " . $Job_assistant4 . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";

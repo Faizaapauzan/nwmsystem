@@ -136,16 +136,6 @@ session_start();
   </div>
 
   <div class="col-md-6">
-    <label for="job_assign">Job Assign To :</label>
-    <input type="text" class="form-control" id="asasistant" value="<?php echo $row['job_assign']?>" style="background-color: white;" readonly>
-  </div>
-
-  <div class="col-md-6">
-    <label for="Job_assistant">Assistant :</label>
-     <input type="text" class="form-control" id="asasistant" value="<?php echo $row['Job_assistant']?>" style="background-color: white;" readonly>
-  </div>
-
-  <div class="col-md-6">
     <label for="job_description" class="form-label">Job Description</label>
     <input type="text" class="form-control" id="job_description" value="<?php echo $row['job_description']?>" style="background-color: white;" readonly>
   </div> 

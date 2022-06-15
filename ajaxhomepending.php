@@ -65,7 +65,7 @@
 
          <div class="input-box-address">
             <label for="">Customer Address</label>
-            <input type="text" class="cust_address1" name="cust_address1" value="<?php echo $row['cust_address1']?>">
+            <input type="text" style="width: 100%;" class="cust_address1" name="cust_address1" value="<?php echo $row['cust_address1']?>">
             <input type="text" class="cust_address2" name="cust_address2" value="<?php echo $row['cust_address2']?>">
             <input type="text" class="cust_address3" name="cust_address3" value="<?php echo $row['cust_address3']?>">
             <br/><br/>
@@ -117,46 +117,7 @@
             </select>
         </div>
 
-   <div class="input-box">
-            <label for="job_assign" class="job_assign">Job Assign to:</label>
-             <select type="text" id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
-                     <?php
-        include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
-
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
-            // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
-        }	
-    ?>
-
- <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
-    <input type="hidden" name="job_assign" id='username' value="<?php echo $row['job_assign']?>">
-    <input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>  
-      <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>      
-</select>
-   
-    </div>
-
-      <div class="input-box">
-        <label for="Job_assistant"  class="Job_assistant">Assistant:</label>
-        <select type="text" id="jobassistantto" name="Job_assistant" onchange="GetAssistant(this.value)"> <option value=""> <?php echo $row['Job_assistant']?> </option>
-                     <?php
-        include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here 
-
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
-
-        }
-        
-    ?></select>
-
-    <input type="hidden" name="Job_assistant" id='assistant' value="<?php echo $row['Job_assistant']?>" onchange="GetAssistant(this.value)" readonly>
-      </div>
-
+  
         <div class="input-box">
             <label for="">Job Description</label>
             <textarea name="job_description" class="job_description" rows="3" cols="100" style="width: 300px; height: 63px;"><?php echo $row['job_description']?></textarea>
