@@ -1,12 +1,11 @@
 <?php
- session_start();
-//  $today_date = date("Y.m.d");
-// $_SESSION['storeDate'] = $today_date;
-
+session_start();
+$today_date = date("d-m-Y");
+$_SESSION['storeDate'] = $today_date;
 ?>
  
-
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -15,10 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Technician Rest Hour</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href="css/technicianmain.css" rel="stylesheet" />
 
     <!-- Script -->
@@ -26,8 +25,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
 
-	<script src="https://kit.fontawesome.com/7b6b55bad0.js" crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+	  <script src="https://kit.fontawesome.com/7b6b55bad0.js" crossorigin="anonymous"></script>
+	  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -47,8 +46,6 @@
   padding-left: 20px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  
-
 }
 
 .dropdown-content a {
@@ -57,7 +54,6 @@
   text-decoration: none;
   display: block;
   padding-right: 7px;
-
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -74,6 +70,13 @@
 	position: static;
 }
 
+.AddAssisstant{
+  display: none;
+}
+
+.showAssRestHour{
+  display: none;
+}
 </style>
 
 <body>
@@ -87,7 +90,7 @@
 			<a href="assignedjob.php">Assigned Job</a>
 			<a href="unassignedjob.php">Unassigned Job</a>
 		  </div>
-	  </div>
+	</div>
 
   <a href="pendingjoblistst.php" class="nav__link">
 	  <i class="material-icons">pending_actions</i>
@@ -114,60 +117,135 @@
 <div class="container">
 <div class="column" >
 <p class="column-title" id="technician" >Technician & Assistant In Charge</p>
-<form action="" method="GET">
-    
-      <div style="display: inline-flex;">
-      <div class="input-box">
-        <label style="font-size: 15px;">Technician: </label>
+  <form action="" method="GET">
+    <div style="display: inline-flex;">
+    <div class="input-box">
+      <label style="font-size: 15px;">Technician: </label>
         <?php if (isset($_SESSION["username"])) ?>
         <input type="text" name="technician" id="technician" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>
-       <br/>
-        <label style="font-size: 15px;">Assistant: </label>
-  
-        <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto" name="assistant" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['assistant']?>">  </option>
-                     <?php
-        include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here 
+        
+      <br/>
+      
+      <label> Did you bring assistant with you? <input type="checkbox" name="showAssistant" value="showAssistant"></label>
+      
+      <br/>
+      
+    <div class="showAssistant AddAssisstant">
 
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
-        }	
-    ?></select>
+      <label style="font-size: 15px;">Assistant 1: </label>
+      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto1" name="Ass_1" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['Ass_1']?>">  </option>
+          <?php
+              include "dbconnect.php";  // Using database connection file here
+              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+              echo"<option></option>";
+              while($data = mysqli_fetch_array($records))
+                {
+                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
+                }
+          ?>
+      </select>
+      <input type="hidden" name="Ass_1" id='Ass_1' value="<?php if(isset($_GET['Ass_1'])){echo $_GET['Ass_1'];} ?>" onchange="GetAssistant(this.value)" readonly>
 
-    <input type="hidden" name="assistant" id='assistant' value="<?php if(isset($_GET['assistant'])){echo $_GET['assistant'];} ?>" onchange="GetAssistant(this.value)" readonly>
+      <br/>
+
+      <label style="font-size: 15px;">Assistant 2: </label>
+      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto2" name="Ass_2" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['Ass_2']?>">  </option>
+          <?php
+              include "dbconnect.php";  // Using database connection file here
+              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+              echo"<option></option>";
+              while($data = mysqli_fetch_array($records))
+                {
+                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
+                }
+          ?>
+      </select>
+      <input type="hidden" name="Ass_2" id='Ass_2' value="<?php if(isset($_GET['Ass_2'])){echo $_GET['Ass_2'];} ?>" onchange="GetAssistant(this.value)" readonly>
+
+      <br/>
+
+      <label style="font-size: 15px;">Assistant 3: </label>
+      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto3" name="Ass_3" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['Ass_3']?>">  </option>
+          <?php
+              include "dbconnect.php";  // Using database connection file here
+              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here 
+              echo"<option></option>";
+              while($data = mysqli_fetch_array($records))
+                {
+                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
+                }
+          ?>
+      </select>
+      <input type="hidden" name="Ass_3" id='Ass_3' value="<?php if(isset($_GET['Ass_3'])){echo $_GET['Ass_3'];} ?>" onchange="GetAssistant(this.value)" readonly>
+
+      <br/>
+      
+      <label style="font-size: 15px;">Assistant 4: </label>
+      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto4" name="Ass_4" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['Ass_4']?>">  </option>
+          <?php
+              include "dbconnect.php";  // Using database connection file here
+              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+              echo"<option></option>";
+              while($data = mysqli_fetch_array($records))
+                {
+                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
+                }
+          ?>
+      </select>
+      <input type="hidden" name="Ass_4" id='Ass_4' value="<?php if(isset($_GET['Ass_4'])){echo $_GET['Ass_3'];} ?>" onchange="GetAssistant(this.value)" readonly>
     
-    <input type="hidden" name="today_date" id='today_date' value="<?php echo $date = date('Y-m-d'); ?>" readonly>
+    </div>
 
-  
-      </div>
-      </div>
-      
-      <div>
-        <div><input type="button" onclick="submitFormrest();" class="buttonbiru" style="width: fit-content; margin-top: 19px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" value="Save" />
-         <button style="width: fit-content; margin-top: -4px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" type="submit" class="btn btn-primary">Search</button>
-        <p class="control"><b id="message"></b></p>
-      </div></div>
-      
+    <input type="hidden" name="today_date" id='today_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
+
+    </div>
+    </div>
+    
+    <div>
+      <div><input type="button" onclick="submitFormrest();" class="buttonbiru" style="width: fit-content; margin-top: 19px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" value="Save" />
+      <p class="control"><b id="message"></b></p>
+    </div>
+    </div>
   </form>
-  </div>
+</div>
+<!-- save technician and assistant name -->
 
-  <!-- save technician and assistant name -->
+ <!-- Script to hide assistant class -->
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $('input[type="checkbox"]').click(function() {
+            var inputValue = $(this).attr("value");
+            $("." + inputValue).toggle();
+            });
+            });
+    </script>
+    <!-- Script to hide assistant class -->
 
-  <!-- script to save technician and assistant name -->
+<!-- script to save technician and assistant name -->
   <script type="text/javascript">
       function submitFormrest()
         {
           var technician = $('input[name=technician]').val();
-          var assistant = $('input[name=assistant]').val();
+          var Ass_1 = $('input[name=Ass_1]').val();
+          var Ass_2 = $('input[name=Ass_2]').val();
+          var Ass_3 = $('input[name=Ass_3]').val();
+          var Ass_4 = $('input[name=Ass_4]').val();
           var today_date = $('input[name=today_date]').val();
 
           if(technician!='' || technician=='',
-              assistant!='' || assistant=='',
-              today_date!='' || today_date=='')
+                  Ass_1!='' || Ass_1=='',
+                  Ass_2!='' || Ass_2=='',
+                  Ass_3!='' || Ass_3=='',
+                  Ass_4!='' || Ass_4=='',
+             today_date!='' || today_date=='')
              
              {
-               var formData = {technician: technician, assistant: assistant,  today_date: today_date};
+              var formData = {technician: technician,
+                                   Ass_1: Ass_1,
+                                   Ass_2: Ass_2,
+                                   Ass_3: Ass_3,
+                                   Ass_4: Ass_4,  
+                              today_date: today_date};
                                 
                                 $.ajax({
                                   url: "techresthourindex.php", 
@@ -188,137 +266,276 @@
   </script>
 <!-- script to save technician and assistant name -->
 
-<!-- SEARCH TO DISPLAY REST HOUR IN AND OUT -->
-
-
-
-      <?php 
-        $con = mysqli_connect("localhost","root","","nwmsystem");
-
-        if(isset($_GET['technician'])) {
-                                     
-          $technician = $_GET['technician'];
-          $assistant = $_GET['assistant'];
-
-          $query = "SELECT * FROM technician_resthour WHERE technician='$technician' AND assistant='$assistant' ORDER BY resthour_id DESC LIMIT 1";
-          $query_run = mysqli_query($con, $query);
-
-          if(mysqli_num_rows($query_run) > 0){
-
-           foreach($query_run as $row)
-
-              { ?>
-
-                    <div class="column" >
-			<p class="column-title" id="technician" >Rest Hour</p>
-      <hr>
-<div class="cards">
-  <div class="card" style=" position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
-        <input type="hidden" name="resthour_id" class="resthour_id" value="<?= $row['resthour_id']; ?>">
-
-
-                <div style=" position: static; font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
+<!-- DISPLAY REST HOUR IN AND OUT -->
+    <?php
+        include 'dbconnect.php';
+        $results = $conn->query("SELECT * FROM technician_resthour WHERE technician= '{$_SESSION['username']}' AND today_date = '{$_SESSION['storeDate']}' ORDER BY resthour_id DESC");
+        while($row = $results->fetch_assoc()) {
+    ?>
+    
+  <div class="column" >
+  <p class="column-title" id="technician" >Rest Hour</p>
+  <hr>
+  <div class="cards">
+    <div class="card" style=" position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
+    <input type="hidden" name="resthour_id" class="resthour_id" value="<?= $row['resthour_id']; ?>">
+    
+    <!-- technician -->
+    <div style=" position: static; font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
     <label style="position: static; font-weight: 600; font-size: 20px;"><?= $row['technician']; ?></label>
     <div style=" position: static; width: fit-content;" class="input-group mb-3">
     <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
-    <button class="buttonbiru" onclick="tech_outs()" style="position: static; width: fit-content;" type="button">OUT</button>
+      <button class="buttonbiru" onclick="tech_outs()" style="position: static; width: fit-content;" type="button">OUT</button>
     </div>
-        
+    
     <script type="text/javascript">
-      function tech_outs()
-        {
-          $.ajax({url:"techresthourtime.php", success:function(result)
-            {
-              $("#tech_out").val(result);
-                        }
-                    })
-                }
+        function tech_outs()
+          {
+            $.ajax({url:"techresthourtime.php", success:function(result)
+              {
+                $("#tech_out").val(result);
+              }
+            })
+          }
     </script>
+
     </div>
-        
+    
     <div style="position: static; width: fit-content;" class="input-group mb-3">
     <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="tech_in" value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
-    <button class="buttonbiru" onclick="tech_ins()" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
+      <button class="buttonbiru" onclick="tech_ins()" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
     </div>
-        
+    
     <script type="text/javascript">
-      function tech_ins()
-        {
-          $.ajax({url:"techresthourtime.php", success:function(result)
-        {
-          $("#tech_in").val(result);
-        }
-          })
-                }
+        function tech_ins()
+          {
+            $.ajax({url:"techresthourtime.php", success:function(result)
+              {
+                $("#tech_in").val(result);
+              }
+            })
+          }
     </script>
-    </div>
 
-    <label style=" position: static; font-weight: 600; font-size: 20px;"><?= $row['assistant']; ?></label>
-    <div style="position: static; width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" style="position: static;" class="form-control" id="ass_out" name="ass_out" value="<?= $row['ass_out']; ?>" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-    <button class="buttonbiru" onclick="ass_outs()" type="button" style="position: static; width: fit-content;">OUT</button>
     </div>
-        
+    <!-- technician -->
+    
+    <label> Show Assistant? <input type="checkbox" name="showAssistantRest" value="showAssistantRest"></label>
+
+    <div class="showAssistantRest showAssRestHour">
+
+    <!-- Assistant 1 -->
+    <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 1:<?= $row['Ass_1']; ?></label>
+    <div style="position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="Ass1_out" name="Ass1_out" value="<?= $row['Ass1_out']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="buttonbiru" onclick="Ass1_outs()" type="button" style="position: static; width: fit-content;">OUT</button>
+    </div>
+    
     <script type="text/javascript">
-      function ass_outs()
-        {
-          $.ajax({url:"techresthourtime.php", success:function(result)
-        {
-          $("#ass_out").val(result);
-        }
-          })
-                }
+        function Ass1_outs()
+          {
+            $.ajax({url:"techresthourtime.php", success:function(result)
+              {
+                $("#Ass1_out").val(result);
+              }
+            })
+          }
     </script>
+
+    </div>
+    
+    <div style=" position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="Ass1_in" name="Ass1_in" value="<?= $row['Ass1_in']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="buttonbiru" onclick="Ass1_ins()" style="position: static; width: fit-content; padding-left: 60px;" type="button">IN</button>
+    </div>
+    
+    <script type="text/javascript">
+        function Ass1_ins()
+          {
+            $.ajax({url:"techresthourtime.php", success:function(result)
+              {
+                $("#Ass1_in").val(result);
+              }
+            })
+          }
+    </script>
+    
+    </div>
+    
+    <!-- Assistant 2 -->
+    <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 2:<?= $row['Ass_2']; ?></label>
+    <div style="position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="Ass2_out" name="Ass2_out" value="<?= $row['Ass2_out']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="buttonbiru" onclick="Ass2_outs()" type="button" style="position: static; width: fit-content;">OUT</button>
+    </div>
+    
+    <script type="text/javascript">
+        function Ass2_outs()
+          {
+            $.ajax({url:"techresthourtime.php", success:function(result)
+              {
+                $("#Ass2_out").val(result);
+              }
+            })
+          }
+    </script>
+    
+    </div>
+    
+    <div style=" position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="Ass2_in" name="Ass2_in" value="<?= $row['Ass2_in']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="buttonbiru" onclick="Ass2_ins()" style="position: static; width: fit-content; padding-left: 60px;" type="button">IN</button>
+    </div>
+    
+    <script type="text/javascript">
+        function Ass2_ins()
+          {
+            $.ajax({url:"techresthourtime.php", success:function(result)
+              {
+                $("#Ass2_in").val(result);
+              }
+            })
+          }
+    </script>
+    
+    </div>
+    
+    <!-- Assistant 3 -->
+    <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 3:<?= $row['Ass_3']; ?></label>
+    <div style="position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="Ass3_out" name="Ass3_out" value="<?= $row['Ass3_out']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="buttonbiru" onclick="Ass3_outs()" type="button" style="position: static; width: fit-content;">OUT</button>
+    </div>
+    
+    <script type="text/javascript">
+        function Ass3_outs()
+            {
+              $.ajax({url:"techresthourtime.php", success:function(result)
+                {
+                  $("#Ass3_out").val(result);
+                }
+              })
+            }
+    </script>
+    
     </div>
  
     <div style=" position: static; width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" style="position: static;" class="form-control" id="ass_in" name="ass_in" value="<?= $row['ass_in']; ?>" aria-describedby="basic-addon2">
+    <input readonly type="text" style="position: static;" class="form-control" id="Ass3_in" name="Ass3_in" value="<?= $row['Ass3_in']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
-    <button class="buttonbiru" onclick="ass_ins()" style="position: static; width: fit-content; padding-left: 60px;" type="button">IN</button>
+      <button class="buttonbiru" onclick="Ass3_ins()" style="position: static; width: fit-content; padding-left: 60px;" type="button">IN</button>
     </div>
         
     <script type="text/javascript">
-      function ass_ins()
+      function Ass3_ins()
         {
           $.ajax({url:"techresthourtime.php", success:function(result)
         {
-          $("#ass_in").val(result);
+          $("#Ass3_in").val(result);
         }
           })
               }
     </script>
+
+    </div>
+    
+    <!-- Assistant 4 -->
+    <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 4:<?= $row['Ass_4']; ?></label>
+    <div style="position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="Ass4_out" name="Ass4_out" value="<?= $row['Ass4_out']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="buttonbiru" onclick="Ass4_outs()" type="button" style="position: static; width: fit-content;">OUT</button>
+    </div>
+    
+    <script type="text/javascript">
+        function Ass4_outs()
+          {
+            $.ajax({url:"techresthourtime.php", success:function(result)
+              {
+                $("#Ass4_out").val(result);
+              }
+            })
+          }
+    </script>
+    
+    </div>
+ 
+    <div style=" position: static; width: fit-content;" class="input-group mb-3">
+    <input readonly type="text" style="position: static;" class="form-control" id="Ass4_in" name="Ass4_in" value="<?= $row['Ass4_in']; ?>" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="buttonbiru" onclick="Ass4_ins()" style="position: static; width: fit-content; padding-left: 60px;" type="button">IN</button>
+    </div>
+    
+    <script type="text/javascript">
+        function Ass4_ins()
+          {
+            $.ajax({url:"techresthourtime.php", success:function(result)
+              {
+                $("#Ass4_in").val(result);
+              }
+            })
+          }
+    </script>
+    
+    </div>
+
     </div>
     
     <p class="control"><b id="message-update"></b></p>
     <div style="position: static; width: fit-content;" class="updateBtn">
     <div><input type="button" onclick="updateForm();" class="buttonbiru" style="position: static; margin-bottom: 20px; height: 39px; padding-left: 36px; font-size: 15px;" value="Update" /></div>
-    </div></div>
+    </div>
+  
+    </div>
     </form>
-    
+
+    <!-- Script to save IN and OUT -->
     <script type="text/javascript">
 
       function updateForm()
               {
                 var tech_out = $('input[name=tech_out]').val();
                 var tech_in = $('input[name=tech_in]').val();
-                var ass_out = $('input[name=ass_out]').val();
-                var ass_in = $('input[name=ass_in]').val();
+                var Ass1_out = $('input[name=Ass1_out]').val();
+                var Ass1_in = $('input[name=Ass1_in]').val();
+                var Ass2_out = $('input[name=Ass2_out]').val();
+                var Ass2_in = $('input[name=Ass2_in]').val();
+                var Ass3_out = $('input[name=Ass3_out]').val();
+                var Ass3_in = $('input[name=Ass3_in]').val();
+                var Ass4_out = $('input[name=Ass4_out]').val();
+                var Ass4_in = $('input[name=Ass4_in]').val();
                 var resthour_id = $('input[name=resthour_id]').val();
                 
                 if(tech_out!='' || tech_out=='', 
                     tech_in!='' || tech_in=='', 
-                    ass_out!='' || ass_out=='',
-                     ass_in!='' || ass_in=='',
+                   Ass1_out!='' || Ass1_out=='',
+                    Ass1_in!='' || Ass1_in=='',
+                   Ass2_out!='' || Ass2_out=='',
+                    Ass2_in!='' || Ass2_in=='',
+                   Ass3_out!='' || Ass3_out=='',
+                    Ass3_in!='' || Ass3_in=='',
+                   Ass4_out!='' || Ass4_out=='',
+                    Ass4_in!='' || Ass4_in=='',
                 resthour_id!='' || resthour_id=='')
 
                   {
                     var formData = {tech_out: tech_out,
                                      tech_in: tech_in,
-                                     ass_out: ass_out,
-                                      ass_in: ass_in,
+                                    Ass1_out: Ass1_out,
+                                     Ass1_in: Ass1_in,
+                                    Ass2_out: Ass2_out,
+                                     Ass2_in: Ass2_in,
+                                    Ass3_out: Ass3_out,
+                                     Ass3_in: Ass3_in,
+                                    Ass4_out: Ass4_out,
+                                     Ass4_in: Ass4_in,
                                  resthour_id: resthour_id};
                                     
                     $.ajax({
@@ -338,23 +555,15 @@
                   }
               } 
     </script>
-            <?php
-                    }
-                            }
-                       else
-                                        {
-                                            echo "No Record Found";
-                                        }
-                                    }
-                                   
-                                ?>
+  <!-- Script to save IN and OUT -->
+  
+  <?php } ?>
 
    </div>
    </div>
-   		</div>
+   </div>
 
-
-<!-- SEARCH TO DISPLAY REST HOUR IN AND OUT -->	
+<!-- DISPLAY REST HOUR IN AND OUT -->	
 
 <!--TOP BAR-->
 						
@@ -366,12 +575,28 @@
 <script>
 $(document).ready(function(){
 	
-$("#jobassistantto").on("change",function(){
-   var GetValue=$("#jobassistantto").val();
-   $("#assistant").val(GetValue);
+$("#jobassistantto1").on("change",function(){
+   var GetValue=$("#jobassistantto1").val();
+   $("#Ass_1").val(GetValue);
+});
+
+$("#jobassistantto2").on("change",function(){
+   var GetValue=$("#jobassistantto2").val();
+   $("#Ass_2").val(GetValue);
+});
+
+$("#jobassistantto3").on("change",function(){
+   var GetValue=$("#jobassistantto3").val();
+   $("#Ass_3").val(GetValue);
+});
+
+$("#jobassistantto4").on("change",function(){
+   var GetValue=$("#jobassistantto4").val();
+   $("#Ass_4").val(GetValue);
 });
 
 });
+
 </script>
 
 </body>
