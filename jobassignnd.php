@@ -49,8 +49,8 @@
 
 
 
-<form class="row g-3" action="assignleaderindex.php" method="post">
-
+<!-- <form class="row g-3" action="assignleaderindex.php" method="post"> -->
+ <form class="row g-3" id="assigntechnician_form" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
 
@@ -83,7 +83,7 @@
                      <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' OR staff_position = 'General Worker' ORDER BY staffregister_id ASC");  // Use select query here 
-
+        echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
             echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']." " . $data['tech_avai']."</option>";  // displaying data in option menu
@@ -101,7 +101,7 @@
                      <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' OR staff_position = 'General Worker' ORDER BY staffregister_id ASC");  // Use select query here 
-
+        echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
             echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']." " . $data['tech_avai']."</option>";  // displaying data in option menu
@@ -120,7 +120,7 @@
                      <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' OR staff_position = 'General Worker' ORDER BY staffregister_id ASC");  // Use select query here 
-
+        echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
             echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']." " . $data['tech_avai']."</option>";  // displaying data in option menu
@@ -139,7 +139,7 @@
                      <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' OR staff_position = 'General Worker' ORDER BY staffregister_id ASC");  // Use select query here 
-
+        echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
             echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']." " . $data['tech_avai']."</option>";  // displaying data in option menu
@@ -156,7 +156,9 @@
 <div class="col align-self-end" style="margin-top: 41px;" >         		 
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-         <button type="submit" id="submit" name="updateassign" class="btn btn-primary">Update</button>	
+          <p class="control"><b id="assigntodotechmessage"></b></p>	 
+         <!-- <button type="submit" id="submit" name="updateassign" class="btn btn-primary">Update</button>	 -->
+        <input type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 </div>		 
     </form>
@@ -283,6 +285,28 @@ $("#jobassistantto4").on("change",function(){
 			}
 		}
 	</script>
+
+    <script>
+    $(document).ready(function () {
+        $('#updateassign').click(function () {
+            var data = $('#assigntechnician_form').serialize() + '&updateassign=updateassign';
+            $.ajax({
+                url: 'assignleaderindex.php',
+                type: 'post',
+                data: data,
+                success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#assigntodotechmessage').html('<span style="color: green">Update Saved!</span>');
+                        else
+                          $('#assigntodotechmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+                      }
+            });
+        });
+    });
+</script>
 
 
 
