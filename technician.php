@@ -146,6 +146,7 @@ if(!isset($_SESSION['username']))
 				<div class="dropdown1">
 				<a class="nav1-links"><i class="iconify" data-icon="mdi:calendar-clock" style="font-size:37px;"></i></a>
 						<div class="dropdown-content1">
+							<a href="techattendance.php">Attendance</a>
 							<a href="techresthour.php">Rest Hour</a>
 							<a href="techreportoff.php">Report Off</a>
 						</div>

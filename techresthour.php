@@ -77,6 +77,10 @@ $_SESSION['storeDate'] = $today_date;
 .showAssRestHour{
   display: none;
 }
+
+.OFF {
+  color: red;
+}
 </style>
 
 <body>
@@ -111,96 +115,22 @@ $_SESSION['storeDate'] = $today_date;
 	  <i class="material-icons">check_circle</i>
 	  <span class="nav__text">Complete</span>
   </a>
-	</nav>
 	
-<!-- save technician and assistant name -->
+  </nav>
+	
+<!--save technician name and date-->
 <div class="container">
 <div class="column" >
 <p class="column-title" id="technician" >Technician & Assistant In Charge</p>
-  <form action="" method="GET">
+  <form action="" method="POST">
     <div style="display: inline-flex;">
     <div class="input-box">
       <label style="font-size: 15px;">Technician: </label>
         <?php if (isset($_SESSION["username"])) ?>
-        <input type="text" name="technician" id="technician" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>
-        
-      <br/>
-      
-      <label> Did you bring assistant with you? <input type="checkbox" name="showAssistant" value="showAssistant"></label>
-      
-      <br/>
-      
-    <div class="showAssistant AddAssisstant">
-
-      <label style="font-size: 15px;">Assistant 1: </label>
-      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto1" name="Ass_1" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['Ass_1']?>">  </option>
-          <?php
-              include "dbconnect.php";  // Using database connection file here
-              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
-              echo"<option></option>";
-              while($data = mysqli_fetch_array($records))
-                {
-                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
-                }
-          ?>
-      </select>
-      <input type="hidden" name="Ass_1" id='Ass_1' value="<?php if(isset($_GET['Ass_1'])){echo $_GET['Ass_1'];} ?>" onchange="GetAssistant(this.value)" readonly>
-
-      <br/>
-
-      <label style="font-size: 15px;">Assistant 2: </label>
-      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto2" name="Ass_2" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['Ass_2']?>">  </option>
-          <?php
-              include "dbconnect.php";  // Using database connection file here
-              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
-              echo"<option></option>";
-              while($data = mysqli_fetch_array($records))
-                {
-                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
-                }
-          ?>
-      </select>
-      <input type="hidden" name="Ass_2" id='Ass_2' value="<?php if(isset($_GET['Ass_2'])){echo $_GET['Ass_2'];} ?>" onchange="GetAssistant(this.value)" readonly>
-
-      <br/>
-
-      <label style="font-size: 15px;">Assistant 3: </label>
-      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto3" name="Ass_3" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['Ass_3']?>">  </option>
-          <?php
-              include "dbconnect.php";  // Using database connection file here
-              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here 
-              echo"<option></option>";
-              while($data = mysqli_fetch_array($records))
-                {
-                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
-                }
-          ?>
-      </select>
-      <input type="hidden" name="Ass_3" id='Ass_3' value="<?php if(isset($_GET['Ass_3'])){echo $_GET['Ass_3'];} ?>" onchange="GetAssistant(this.value)" readonly>
-
-      <br/>
-      
-      <label style="font-size: 15px;">Assistant 4: </label>
-      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 105px; outline: none; font-size: 15px;" id="jobassistantto4" name="Ass_4" onchange="GetAssistant(this.value)"> <option value="<?php echo $row['Ass_4']?>">  </option>
-          <?php
-              include "dbconnect.php";  // Using database connection file here
-              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
-              echo"<option></option>";
-              while($data = mysqli_fetch_array($records))
-                {
-                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
-                }
-          ?>
-      </select>
-      <input type="hidden" name="Ass_4" id='Ass_4' value="<?php if(isset($_GET['Ass_4'])){echo $_GET['Ass_3'];} ?>" onchange="GetAssistant(this.value)" readonly>
-    
-    </div>
-
-    <input type="hidden" name="today_date" id='today_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
-
+        <input type="text" name="technician" id="technician" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>  
+        <input type="hidden" name="today_date" id='today_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
     </div>
     </div>
-    
     <div>
       <div><input type="button" onclick="submitFormrest();" class="buttonbiru" style="width: fit-content; margin-top: 19px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" value="Save" />
       <p class="control"><b id="message"></b></p>
@@ -208,43 +138,20 @@ $_SESSION['storeDate'] = $today_date;
     </div>
   </form>
 </div>
-<!-- save technician and assistant name -->
-
- <!-- Script to hide assistant class -->
- <script type="text/javascript">
-    $(document).ready(function() {
-        $('input[type="checkbox"]').click(function() {
-            var inputValue = $(this).attr("value");
-            $("." + inputValue).toggle();
-            });
-            });
-    </script>
-    <!-- Script to hide assistant class -->
+<!--save technician name and date-->
 
 <!-- script to save technician and assistant name -->
   <script type="text/javascript">
       function submitFormrest()
         {
           var technician = $('input[name=technician]').val();
-          var Ass_1 = $('input[name=Ass_1]').val();
-          var Ass_2 = $('input[name=Ass_2]').val();
-          var Ass_3 = $('input[name=Ass_3]').val();
-          var Ass_4 = $('input[name=Ass_4]').val();
           var today_date = $('input[name=today_date]').val();
 
           if(technician!='' || technician=='',
-                  Ass_1!='' || Ass_1=='',
-                  Ass_2!='' || Ass_2=='',
-                  Ass_3!='' || Ass_3=='',
-                  Ass_4!='' || Ass_4=='',
              today_date!='' || today_date=='')
              
              {
               var formData = {technician: technician,
-                                   Ass_1: Ass_1,
-                                   Ass_2: Ass_2,
-                                   Ass_3: Ass_3,
-                                   Ass_4: Ass_4,  
                               today_date: today_date};
                                 
                                 $.ajax({
@@ -320,14 +227,37 @@ $_SESSION['storeDate'] = $today_date;
     </script>
 
     </div>
-    <!-- technician -->
     
-    <label> Show Assistant? <input type="checkbox" name="showAssistantRest" value="showAssistantRest"></label>
+    <label> Did you bring assistant with you? <input type="checkbox" name="showAssistantRest" value="showAssistantRest"></label>
+
+     <!-- Script to show assistant class -->
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $('input[type="checkbox"]').click(function() {
+            var inputValue = $(this).attr("value");
+            $("." + inputValue).toggle();
+          });
+        });
+      </script>
+     <!-- Script to show assistant class -->
 
     <div class="showAssistantRest showAssRestHour">
 
     <!-- Assistant 1 -->
-    <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 1:<?= $row['Ass_1']; ?></label>
+    <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 1: </label>
+    <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 145px; outline: none; font-size: 17px;" id="jobassistantto1" name="Ass_1" onchange="GetAssistant(this.value)"><option value=" "><?php echo $row['Ass_1']?></option>
+        <?php
+            include "dbconnect.php";  // Using database connection file here
+            $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+            echo "<option></option>";
+            while($data = mysqli_fetch_array($records))
+              {
+                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. " " . $data['tech_avai']."</option>";  // displaying data in option menu
+              }
+        ?>
+    </select>
+    <input type="hidden" name="Ass_1" id='Ass_1' value="<?php echo $row['Ass_1']?>" onchange="GetAssistant(this.value)" readonly>
+    
     <div style="position: static; width: fit-content;" class="input-group mb-3">
     <input readonly type="text" style="position: static;" class="form-control" id="Ass1_out" name="Ass1_out" value="<?= $row['Ass1_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
@@ -367,7 +297,20 @@ $_SESSION['storeDate'] = $today_date;
     </div>
     
     <!-- Assistant 2 -->
-    <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 2:<?= $row['Ass_2']; ?></label>
+    <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 2: </label>
+      <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 145px; outline: none; font-size: 17px;" id="jobassistantto2" name="Ass_2" onchange="GetAssistant(this.value)"><option value=" "><?php echo $row['Ass_2']?></option>
+          <?php
+              include "dbconnect.php";  // Using database connection file here
+              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+              echo"<option></option>";
+              while($data = mysqli_fetch_array($records))
+                {
+                  echo "<option value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
+                }
+          ?>
+      </select>
+      <input type="hidden" name="Ass_2" id='Ass_2' value="<?php echo $row['Ass_2']?>" onchange="GetAssistant(this.value)" readonly>
+
     <div style="position: static; width: fit-content;" class="input-group mb-3">
     <input readonly type="text" style="position: static;" class="form-control" id="Ass2_out" name="Ass2_out" value="<?= $row['Ass2_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
@@ -408,6 +351,19 @@ $_SESSION['storeDate'] = $today_date;
     
     <!-- Assistant 3 -->
     <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 3:<?= $row['Ass_3']; ?></label>
+    <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 145px; outline: none; font-size: 17px;" id="jobassistantto3" name="Ass_3" onchange="GetAssistant(this.value)"> <option value=" "><?php echo $row['Ass_3']?></option>
+        <?php
+            include "dbconnect.php";  // Using database connection file here
+            $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+            echo "<option></option>";
+            while($data = mysqli_fetch_array($records))
+              {
+                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'> " .$data['username']. " " . $data['tech_avai']."</option>";  // displaying data in option menu
+              }
+        ?>
+    </select>
+    <input type="hidden" name="Ass_3" id='Ass_3' value="<?php echo $row['Ass_3']?>" onchange="GetAssistant(this.value)" readonly>
+
     <div style="position: static; width: fit-content;" class="input-group mb-3">
     <input readonly type="text" style="position: static;" class="form-control" id="Ass3_out" name="Ass3_out" value="<?= $row['Ass3_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
@@ -448,6 +404,19 @@ $_SESSION['storeDate'] = $today_date;
     
     <!-- Assistant 4 -->
     <label style=" position: static; font-weight: 600; font-size: 20px;">Assistant 4:<?= $row['Ass_4']; ?></label>
+    <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 145px; outline: none; font-size: 17px;" id="jobassistantto4" name="Ass_4" onchange="GetAssistant(this.value)"> <option value=" "><?php echo $row['Ass_4']?></option>
+        <?php
+            include "dbconnect.php";  // Using database connection file here
+            $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+            echo "<option></option>";
+            while($data = mysqli_fetch_array($records))
+              {
+                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'> " .$data['username']. " " . $data['tech_avai']."</option>";  // displaying data in option menu
+              }
+        ?>
+    </select>
+    <input type="hidden" name="Ass_4" id='Ass_4' value="<?php echo $row['Ass_4']?>" onchange="GetAssistant(this.value)" readonly>
+
     <div style="position: static; width: fit-content;" class="input-group mb-3">
     <input readonly type="text" style="position: static;" class="form-control" id="Ass4_out" name="Ass4_out" value="<?= $row['Ass4_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
@@ -503,24 +472,32 @@ $_SESSION['storeDate'] = $today_date;
               {
                 var tech_out = $('input[name=tech_out]').val();
                 var tech_in = $('input[name=tech_in]').val();
+                var Ass_1 = $('input[name=Ass_1]').val();
                 var Ass1_out = $('input[name=Ass1_out]').val();
                 var Ass1_in = $('input[name=Ass1_in]').val();
+                var Ass_2 = $('input[name=Ass_2]').val();
                 var Ass2_out = $('input[name=Ass2_out]').val();
                 var Ass2_in = $('input[name=Ass2_in]').val();
+                var Ass_3 = $('input[name=Ass_3]').val();
                 var Ass3_out = $('input[name=Ass3_out]').val();
                 var Ass3_in = $('input[name=Ass3_in]').val();
+                var Ass_4 = $('input[name=Ass_4]').val();
                 var Ass4_out = $('input[name=Ass4_out]').val();
                 var Ass4_in = $('input[name=Ass4_in]').val();
                 var resthour_id = $('input[name=resthour_id]').val();
                 
                 if(tech_out!='' || tech_out=='', 
-                    tech_in!='' || tech_in=='', 
+                    tech_in!='' || tech_in=='',
+                      Ass_1!='' || Ass_1=='', 
                    Ass1_out!='' || Ass1_out=='',
                     Ass1_in!='' || Ass1_in=='',
+                      Ass_2!='' || Ass_2=='', 
                    Ass2_out!='' || Ass2_out=='',
                     Ass2_in!='' || Ass2_in=='',
+                      Ass_3!='' || Ass_3=='', 
                    Ass3_out!='' || Ass3_out=='',
                     Ass3_in!='' || Ass3_in=='',
+                      Ass_4!='' || Ass_4=='', 
                    Ass4_out!='' || Ass4_out=='',
                     Ass4_in!='' || Ass4_in=='',
                 resthour_id!='' || resthour_id=='')
@@ -528,12 +505,16 @@ $_SESSION['storeDate'] = $today_date;
                   {
                     var formData = {tech_out: tech_out,
                                      tech_in: tech_in,
+                                       Ass_1: Ass_1,
                                     Ass1_out: Ass1_out,
                                      Ass1_in: Ass1_in,
+                                       Ass_2: Ass_2,
                                     Ass2_out: Ass2_out,
                                      Ass2_in: Ass2_in,
+                                       Ass_3: Ass_3,
                                     Ass3_out: Ass3_out,
                                      Ass3_in: Ass3_in,
+                                       Ass_4: Ass_4,
                                     Ass4_out: Ass4_out,
                                      Ass4_in: Ass4_in,
                                  resthour_id: resthour_id};
@@ -596,7 +577,6 @@ $("#jobassistantto4").on("change",function(){
 });
 
 });
-
 </script>
 
 </body>
