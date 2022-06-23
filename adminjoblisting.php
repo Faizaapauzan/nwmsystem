@@ -60,6 +60,48 @@ $query = $conn->query("SELECT * FROM job_register");
  }  
  ?> 
 
+   <?php  
+ //Database connectivity  
+ $con=mysqli_connect('localhost','root','','nwmsystem');  
+ $sql=mysqli_query($con,"select * from job_register");  
+ //Get Update id and status  
+ if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant2'])) {  
+      $jobregister_id=$_GET['jobregister_id'];  
+      $Job_assistant2=$_GET['Job_assistant2'];  
+      mysqli_query($con,"update job_register set Job_assistant2='$Job_assistant2' where jobregister_id='$jobregister_id'");  
+      header("location:adminjoblisting.php");  
+      die();  
+ }  
+ ?> 
+
+   <?php  
+ //Database connectivity  
+ $con=mysqli_connect('localhost','root','','nwmsystem');  
+ $sql=mysqli_query($con,"select * from job_register");  
+ //Get Update id and status  
+ if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant3'])) {  
+      $jobregister_id=$_GET['jobregister_id'];  
+      $Job_assistant3=$_GET['Job_assistant3'];  
+      mysqli_query($con,"update job_register set Job_assistant3='$Job_assistant3' where jobregister_id='$jobregister_id'");  
+      header("location:adminjoblisting.php");  
+      die();  
+ }  
+ ?> 
+
+   <?php  
+ //Database connectivity  
+ $con=mysqli_connect('localhost','root','','nwmsystem');  
+ $sql=mysqli_query($con,"select * from job_register");  
+ //Get Update id and status  
+ if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant4'])) {  
+      $jobregister_id=$_GET['jobregister_id'];  
+      $Job_assistant4=$_GET['Job_assistant4'];  
+      mysqli_query($con,"update job_register set Job_assistant4='$Job_assistant4' where jobregister_id='$jobregister_id'");  
+      header("location:adminjoblisting.php");  
+      die();  
+ }  
+ ?> 
+
 
 
 <!DOCTYPE html>
@@ -313,6 +355,38 @@ $query = $conn->query("SELECT * FROM job_register");
         {
             echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
         }	
+    ?></select><br>
+    <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant2_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant2']?> </option>
+                    <?php
+        include "dbconnect.php";  // Using database connection file here
+        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
+        }	
+    ?></select>
+    <br>
+  <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant3_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant3']?> </option>
+                    <?php
+        include "dbconnect.php";  // Using database connection file here
+        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
+        }	
+    ?></select>
+    <br>
+  <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant4_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant4']?> </option>
+                    <?php
+        include "dbconnect.php";  // Using database connection file here
+        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
+        }	
     ?></select></td>
 
     </tr>
@@ -345,6 +419,33 @@ $query = $conn->query("SELECT * FROM job_register");
            window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant="+value;  
       }  
  </script>  
+
+     <script type="text/javascript">  
+      function assistant2_update(value,jobregister_id){  
+           //alert(id);  
+           let url = "adminjoblisting.php";  
+           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant2="+value;  
+      }  
+ </script>  
+
+
+    <script type="text/javascript">  
+      function assistant3_update(value,jobregister_id){  
+           //alert(id);  
+           let url = "adminjoblisting.php";  
+           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant3="+value;  
+      }  
+ </script>  
+
+
+    <script type="text/javascript">  
+      function assistant4_update(value,jobregister_id){  
+           //alert(id);  
+           let url = "adminjoblisting.php";  
+           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant4="+value;  
+      }  
+ </script>  
+
 
 <script type="text/javascript">
 $(document).ready( function () {
@@ -676,7 +777,7 @@ $(document).ready( function () {
             });
 
         </script>
-
+        
         <script type='text/javascript'>
             $(document).ready(function () {
             // $("th").click(function() {

@@ -38,15 +38,13 @@
      <form id="assignupdate_form" method="post" style="display: flex; flex-flow: wrap;">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
-
-
    <div class="input-box">
             <label for="job_assign" class="job_assign">Job Assign to:</label>
              <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
                      <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
-
+ echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
             echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']." </option>";  // displaying data in option menu
@@ -69,7 +67,7 @@
                      <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here 
-
+            echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
             echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']." " . $data['tech_avai']."</option>";  // displaying data in option menu
@@ -285,8 +283,12 @@ $("#jobassistantto4").on("change",function(){
                         console.log(res);
                         if(res.success == true)
                           $('#assignadminmessage').html('<span style="color: green">Update Saved!</span>');
+                          
                         else
+                        
                           $('#assignadminmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+
+                          
                       }
             });
         });

@@ -1,6 +1,30 @@
 <?php session_start(); ?>
 
+
 <!DOCTYPE html>
+<html>
+
+<head>
+    
+    <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Select2 CSS --> 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+
+    <!-- jQuery --> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+    <!-- Select2 JS --> 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <!--Boxicons link -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
 
 <style>
     .OFF{
@@ -9,6 +33,7 @@
 </style>
 
 <body>
+    
 <?php
     $connection = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($connection, 'nwmsystem');
@@ -25,7 +50,7 @@
                 ?>
 
 
- <form action="homeindex.php" method="post" style="display: flex; flex-flow: wrap;">
+    <form action="homeindex.php" method="post" style="display: flex; flex-flow: wrap;">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
      <div class="input-box">
@@ -55,40 +80,56 @@
 
         <div class="input-box">
             <label for="">Customer Name</label>
-            <input type="text" class="customer_name" name="customer_name" value="<?php echo $row['customer_name']?>">
-        </div>
+         <select id="custModel" onchange="GetCustomer(this.value)"> <option value=""> <?php echo $row['customer_name']?> </option>
+   <?php
+        include "dbconnect.php";  // Using database connection file here
+        $records = mysqli_query($connection, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here 
+
+        while($data = mysqli_fetch_array($records))
+        {
+             echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";  // displaying data in option menu
+        }	
+    ?>  
+    </select> 
+    <input type="hidden" id="cust" class="form-control" name="customer_id" onchange="GetCustomer(this.value)" readonly >  
+    <input type="hidden" id="customer_code" class="form-control" name="customer_code" value="<?php echo $row['customer_code']?>" readonly >   
+    <input type="hidden" name="customer_name" id="customer_name" class="form-control" value="<?php echo $row['customer_name']?>">
+
+    </div>
 
         <div class="input-box">
             <label for="">Customer Grade</label>
-            <input type="text" class="customer_grade" name="customer_grade" value="<?php echo $row['customer_grade']?>"> 
+            <input type="text" name="customer_grade" id="customer_grade" class="form-control" value="<?php echo $row['customer_grade']?>">
+
         </div>
        
         <div class="input-box">
             <label for="">Customer PIC</label>
-            <input type="text" class="customer_PIC" name="customer_PIC" value="<?php echo $row['customer_PIC']?>">
+            <input type="text" name="customer_PIC" id="customer_PIC" class="form-control" value="<?php echo $row['customer_PIC']?>">
         </div>
 
          <div class="input-box-address" style="width: 100%;">
             <label for="">Customer Address</label>
-            <input type="text" style="width: 100%;" class="cust_address1" name="cust_address1" value="<?php echo $row['cust_address1']?>">
-            <input type="text" class="cust_address2" name="cust_address2" value="<?php echo $row['cust_address2']?>">
-            <input type="text" class="cust_address3" name="cust_address3" value="<?php echo $row['cust_address3']?>">
+            <input type="text" style="width: 100%;" name="cust_address1" id="cust_address1" class="form-control" value="<?php echo $row['cust_address1']?>">
+            <input type="text" name="cust_address2" id="cust_address2" class="form-control" value="<?php echo $row['cust_address2']?>">
+            <input type="text" name="cust_address3" id="cust_address3" class="form-control" value="<?php echo $row['cust_address3']?>">
+
             <br/><br/>
         </div>
 
         <div class="input-box">
             <label for="">Contact Number 1</label>
-            <input type="text" class="cust_phone1" name="cust_phone1" value="<?php echo $row['cust_phone1']?>">
+            <input type="text" name="cust_phone1" id="cust_phone1" class="form-control" value="<?php echo $row['cust_phone1']?>">
         </div>
 
         <div class="input-box">
             <label for="">Contact Number 2</label>
-            <input type="text" class="cust_phone2" name="cust_phone2" value="<?php echo $row['cust_phone2']?>">
+            <input type="text" name="cust_phone2" id="cust_phone2" class="form-control" value="<?php echo $row['cust_phone2']?>">
         </div>
 
         <div class="input-box-address" style="width: 100%;">
             <label for="">Machine Name</label>
-            <input type="text" style="width: 100%;" class="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
+            <input type="text" style="width: 100%;" class="machine_name" class="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
         </div>
         
           
@@ -156,39 +197,82 @@
               <?php
             } ?>
 
-<script>
+                    <script>
+        $(document).ready(function(){
+            
+            // Initialize select2
+            $("#custModel").select2();
+
+            // Read selected option
+            // $('#but_read').click(function(){
+            //     var customer_code = $('#ddlModel option:selected').text();
+            //     var customer_id = $('#ddlModel').val();
+           
+
+            // });
+        });
+        </script>
+
+        <script>
 $(document).ready(function(){
 	
-$("#jobassignto").on("change",function(){
-   var GetValue=$("#jobassignto").val();
-   $("#jobassign").val(GetValue);
+$("#custModel").on("change",function(){
+   var GetValue=$("#custModel").val();
+   $("#cust").val(GetValue);
 });
 
 });
+
 </script>
 
 <script>
-$(document).ready(function(){
-	
-$("#jobassistantto").on("change",function(){
-   var GetValue=$("#jobassistantto").val();
-   $("#assistant").val(GetValue);
+$(function() {
+    $("#save_cust").click(function(e) {
+        e.preventDefault();
+        var customer_code = $("#customer_code").val();
+		var dataString = 'customer_code=' + customer_code; 
+        if(customer_code =='')
+        {   $('.success').fadeOut(200).hide();
+            $('.error').fadeIn(200).show();
+        }
+        else
+        {
+            $.ajax({
+                type: "POST",				
+                url: "insertcustomer.php",
+				data: dataString,
+                success: function(data) {
+                 $('#form').fadeOut(200).hide();
+                 $('.success').fadeIn(200).show();
+                 $('.error').fadeOut(200).hide();
+                 $('#custModel').append($('<option>', {
+                    value: data.id,
+                    text: customer_code
+    }));
+}
+            });
+        }
+      
+    });
 });
 
-});
-</script>
+</script> 
 
 <script>
 		// onkeyup event will occur when the user
 		// release the key and calls the function
 		// assigned to this event
-		function GetJobAss(str) {
+		function GetCustomer(str) {
 			if (str.length == 0) {
-				document.getElementById("username").value = "";
-                document.getElementById("technician_rank").value = "";
-                 document.getElementById("staff_position").value = "";
-		
-               
+                document.getElementById("customer_code").value = "";
+				document.getElementById("customer_name").value = "";
+				document.getElementById("customer_grade").value = "";
+                document.getElementById("customer_PIC").value = "";
+				document.getElementById("cust_phone1").value = "";
+                document.getElementById("cust_phone2").value = "";
+                document.getElementById("cust_address1").value = "";
+                document.getElementById("cust_address2").value = "";
+                document.getElementById("cust_address3").value = "";
 				return;
 			}
 			else {
@@ -212,27 +296,61 @@ $("#jobassistantto").on("change",function(){
 						// received to first name input field
 						
 						document.getElementById
-							("username").value = myObj[0];
+							("customer_code").value = myObj[0];
 						
 						// Assign the value received to
 						// last name input field
+                        document.getElementById
+							("customer_name").value = myObj[1];
 						document.getElementById(
-							"technician_rank").value = myObj[1];
-
+							"customer_grade").value = myObj[2];
                             document.getElementById(
-							"staff_position").value = myObj[2];
-                            
+							"customer_PIC").value = myObj[3];
+                            document.getElementById(
+							"cust_phone1").value = myObj[4];
+                            document.getElementById(
+							"cust_phone2").value = myObj[5];
+                              document.getElementById(
+							"cust_address1").value = myObj[6];
+                              document.getElementById(
+							"cust_address2").value = myObj[7];
+                              document.getElementById(
+							"cust_address3").value = myObj[8];
 					}
 				};
 
 				// xhttp.open("GET", "filename", true);
-				xmlhttp.open("GET", "fetchtechnicianrank.php?staffregister_id=" + str, true);
+				xmlhttp.open("GET", "fetchcustomer.php?customer_id=" + str, true);
 				
 				// Sends the request to the server
 				xmlhttp.send();
 			}
 		}
 	</script>
+
+
+<script>
+$(document).ready(function(){
+	
+$("#jobassignto").on("change",function(){
+   var GetValue=$("#jobassignto").val();
+   $("#jobassign").val(GetValue);
+});
+
+});
+</script>
+
+<script>
+$(document).ready(function(){
+	
+$("#jobassistantto").on("change",function(){
+   var GetValue=$("#jobassistantto").val();
+   $("#assistant").val(GetValue);
+});
+
+});
+</script>
+
 
     <!-- <script>
 
