@@ -1886,28 +1886,28 @@ if(!isset($_SESSION['username']))
                 include 'dbconnect.php';
                                 
                 $results = $conn->query("SELECT jobregister_id, job_order_number, job_priority, job_description, customer_name, machine_type, job_status, reason FROM job_register WHERE
-                        (job_assign = 'Isk' AND job_status = '' AND job_cancel = ''
+                        (job_assign = 'ISKANDAR' AND job_status = '' AND job_cancel = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Doing' AND job_cancel = ''
+                        job_assign = 'ISKANDAR' AND job_status = 'Doing' AND job_cancel = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Ready' AND job_cancel = ''
+                        job_assign = 'ISKANDAR' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Pending' AND job_cancel = ''
+                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Incomplete' AND job_cancel = '')
+                        job_assign = 'ISKANDAR' AND job_status = 'Incomplete' AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
                     $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Isk' AND job_status = '' AND job_cancel = ''
+                    job_assign = 'ISKANDAR' AND job_status = '' AND job_cancel = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Doing' AND job_cancel = ''
+                        job_assign = 'ISKANDAR' AND job_status = 'Doing' AND job_cancel = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Ready' AND job_cancel = ''
+                        job_assign = 'ISKANDAR' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Pending' AND job_cancel = ''
+                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'Isk' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                        job_assign = 'ISKANDAR' AND job_status = 'Incomplete' AND job_cancel = '' ";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1915,7 +1915,7 @@ if(!isset($_SESSION['username']))
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
 
-                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Isk'");
+                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='ISKANDAR'");
                     while($data = mysqli_fetch_array($records))
                         {
                             echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
