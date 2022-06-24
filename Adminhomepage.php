@@ -40,6 +40,14 @@ if(!isset($_SESSION['username']))
     <!-- <link href="css/machine.css"rel="stylesheet" /> -->
        <link href="css/adminboard.css"rel="stylesheet" />
         <link href="css/admin.css"rel="stylesheet" />
+         <!-- Select2 CSS --> 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+
+    <!-- jQuery --> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+    <!-- Select2 JS --> 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <!-- Boxiocns CDN Link -->
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
@@ -5992,29 +6000,14 @@ if(!isset($_SESSION['username']))
 </div>
 </div>
 
+                    <script>
+        $(document).ready(function(){
+            
+            // Initialize select2
+            $("#custModel").select2();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        });
+        </script>
 
 
 </section>
