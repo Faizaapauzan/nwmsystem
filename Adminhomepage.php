@@ -1303,15 +1303,15 @@ if(!isset($_SESSION['username']))
 
 
                     $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
+                    job_assign = 'Amir' AND job_status = '' AND job_cancel = ''
                     OR
-                    job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel = ''
+                    job_assign = 'Amir' AND job_status = 'Doing' AND job_cancel = ''
                     OR
-                    job_assign = 'Hamir' AND job_status = 'Ready' AND job_cancel = ''
+                    job_assign = 'Amir' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel = ''
+                    job_assign = 'Amir' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Hamir' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                    job_assign = 'Amir' AND job_status = 'Incomplete' AND job_cancel = '' ";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
