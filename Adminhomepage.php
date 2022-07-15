@@ -40,14 +40,6 @@ if(!isset($_SESSION['username']))
     <!-- <link href="css/machine.css"rel="stylesheet" /> -->
        <link href="css/adminboard.css"rel="stylesheet" />
         <link href="css/admin.css"rel="stylesheet" />
-         <!-- Select2 CSS --> 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
-
-    <!-- jQuery --> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-
-    <!-- Select2 JS --> 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <!-- Boxiocns CDN Link -->
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
@@ -1283,7 +1275,7 @@ if(!isset($_SESSION['username']))
 
 <!-- END HAFIZ -->
 
-<!-- Amir -->
+<!-- HAMIR -->
 
             <div class="" >
 			<div class="row">
@@ -1311,15 +1303,15 @@ if(!isset($_SESSION['username']))
 
 
                     $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Amir' AND job_status = '' AND job_cancel = ''
+                    job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
                     OR
-                    job_assign = 'Amir' AND job_status = 'Doing' AND job_cancel = ''
+                    job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel = ''
                     OR
-                    job_assign = 'Amir' AND job_status = 'Ready' AND job_cancel = ''
+                    job_assign = 'Hamir' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Amir' AND job_status = 'Pending' AND job_cancel = ''
+                    job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Amir' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                    job_assign = 'Hamir' AND job_status = 'Incomplete' AND job_cancel = '' ";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1327,7 +1319,7 @@ if(!isset($_SESSION['username']))
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
                     
-                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Amir'");
+                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Hamir'");
                     while($data = mysqli_fetch_array($records))
                         {
                             echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
@@ -1336,7 +1328,7 @@ if(!isset($_SESSION['username']))
                     while($row = $results->fetch_assoc()) {
             ?>
 
-                <div class="Amir" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Amir"  ondblclick="document.getElementById('doubleClick-Amir').style.display='block'">
+                <div class="Hamir" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hamir"  ondblclick="document.getElementById('doubleClick-Hamir').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -1351,23 +1343,23 @@ if(!isset($_SESSION['username']))
                 </div>
                 </div>
 
-    <!--Double click Job Info (Amir) -->
-    <div id="doubleClick-Amir" class="modal">
-    <div class="tabAmir">
+    <!--Double click Job Info (Hamir) -->
+    <div id="doubleClick-Hamir" class="modal">
+    <div class="tabHamir">
 
-        <input type="radio" name="tabDoingAmir" id="tabDoingAmir1" checked="checked">
-        <label for="tabDoingAmir1" class="tabHeadingAmir"> Job Info </label>
-        <div class="tab" id=AmirJobInfoTab>
-        <div class="contentAmirJobInfo" style="margin-top: -27px; margin-left: -22px;">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Amir').style.display='none'">&times</div>
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir1" checked="checked">
+        <label for="tabDoingHamir1" class="tabHeadingHamir"> Job Info </label>
+        <div class="tab" id=HamirJobInfoTab>
+        <div class="contentHamirJobInfo" style="margin-top: -27px; margin-left: -22px;">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="homeindex.php" method="post">
-        <div class="Amir-details">
+        <div class="hamir-details">
 
         </div></form></div></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('body').on('click','.Amir',function(){ 
+            $('body').on('click','.Hamir',function(){ 
             var jobregister_id = $(this).data('id');
 
             // AJAX request
@@ -1378,9 +1370,9 @@ if(!isset($_SESSION['username']))
             data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
-            $('.Amir-details').html(response);
+            $('.hamir-details').html(response);
             // Display Modal
-            $('#doubleClick-Amir').modal('show');
+            $('#doubleClick-Hamir').modal('show');
                         }
                     });
                 });
@@ -1389,18 +1381,18 @@ if(!isset($_SESSION['username']))
         </script>
 
          <!-- Double click Job Assign -->
-        <input type="radio" name="tabDoingAmir" id="tabDoingAmir3">
-        <label for="tabDoingAmir3" class="tabHeadingAmir">Job Assign</label>
-        <div class="tab" id="AmirJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Amir').style.display='none'">&times</div>
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir3">
+        <label for="tabDoingHamir3" class="tabHeadingHamir">Job Assign</label>
+        <div class="tab" id="HamirJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="jobassignADMIN.php" method="post">
-        <div class="Amir-assign">
+        <div class="hamir-assign">
 
         </div></form></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('body').on('click','.Amir',function(){ 
+            $('body').on('click','.Hamir',function(){ 
             var jobregister_id = $(this).data('id');
 
             // AJAX request
@@ -1411,9 +1403,9 @@ if(!isset($_SESSION['username']))
             data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
-            $('.Amir-assign').html(response);
+            $('.hamir-assign').html(response);
             // Display Modal
-            $('#doubleClick-Amir').modal('show');
+            $('#doubleClick-Hamir').modal('show');
                         }
                     });
                 });
@@ -1424,18 +1416,18 @@ if(!isset($_SESSION['username']))
 
 
         <!--Double click Update-->
-        <input type="radio" name="tabDoingAmir" id="tabDoingAmir2">
-        <label for="tabDoingAmir2" class="tabHeadingAmir">Update</label>
-        <div class="tab" id="AmirJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Amir').style.display='none'">&times</div>
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir2">
+        <label for="tabDoingHamir2" class="tabHeadingHamir">Update</label>
+        <div class="tab" id="HamirJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="ajaxtechupdateadmin.php" method="post">
-        <div class="Amir-update">
+        <div class="hamir-update">
 
         </div></form></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('body').on('click','.Amir',function(){ 
+            $('body').on('click','.Hamir',function(){ 
             var jobregister_id = $(this).data('id');
 
             // AJAX request
@@ -1446,9 +1438,9 @@ if(!isset($_SESSION['username']))
             data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
-            $('.Amir-update').html(response);
+            $('.hamir-update').html(response);
             // Display Modal
-            $('#doubleClick-Amir').modal('show');
+            $('#doubleClick-Hamir').modal('show');
                         }
                     });
                 });
@@ -1458,18 +1450,18 @@ if(!isset($_SESSION['username']))
 
        
         <!--Double click Accessories -->
-        <input type="radio" name="tabDoingAmir" id="tabDoingAmir4">
-        <label for="tabDoingAmir4" class="tabHeadingAmir">Accessories</label>
-        <div class="tab" id="AmirJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Amir').style.display='none'">&times</div>
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir4">
+        <label for="tabDoingHamir4" class="tabHeadingHamir">Accessories</label>
+        <div class="tab" id="HamirJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="ajaxtabaccessories.php" method="post">
-        <div class="Amir-accessories">
+        <div class="hamir-accessories">
 
         </div></form></div>
 
         <script type='text/javascript'>
             $(document).ready(function () {
-            $('body').on('click','.Amir',function(){ 
+            $('body').on('click','.Hamir',function(){ 
             var jobregister_id = $(this).data('id');
 
             // AJAX request
@@ -1480,9 +1472,9 @@ if(!isset($_SESSION['username']))
             data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
-            $('.Amir-accessories').html(response);
+            $('.hamir-accessories').html(response);
             // Display Modal
-            $('#doubleClick-Amir').modal('show');
+            $('#doubleClick-Hamir').modal('show');
                         }
                     });
                 });
@@ -1491,18 +1483,18 @@ if(!isset($_SESSION['username']))
         </script>
 
         <!--Double click Photo-->
-        <input type="radio" name="tabDoingAmir" id="tabDoingAmir5">
-        <label for="tabDoingAmir5" class="tabHeadingAmir">Photo</label>
-        <div class="tab" id="AmirJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Amir').style.display='none'">&times</div>
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir5">
+        <label for="tabDoingHamir5" class="tabHeadingHamir">Photo</label>
+        <div class="tab" id="HamirJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="Amir-photo">
+        <div class="hamir-photo">
 
         </div></form></div>
 
           <script type='text/javascript'>
             $(document).ready(function () {
-            $('body').on('click','.Amir',function(){ 
+            $('body').on('click','.Hamir',function(){ 
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
@@ -1511,9 +1503,9 @@ if(!isset($_SESSION['username']))
             data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
-            $('.Amir-photo').html(response);
+            $('.hamir-photo').html(response);
             // Display Modal
-            $('#doubleClick-Amir').modal('show');
+            $('#doubleClick-Hamir').modal('show');
                 }
                     });
                  });
@@ -1522,18 +1514,18 @@ if(!isset($_SESSION['username']))
         </script>
 
             <!--Double click Photo-->
-        <input type="radio" name="tabDoingAmir" id="tabDoingAmir7">
-        <label for="tabDoingAmir7" class="tabHeadingAmir">Video</label>
-        <div class="tab" id="AmirJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Amir').style.display='none'">&times</div>
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir7">
+        <label for="tabDoingHamir7" class="tabHeadingHamir">Video</label>
+        <div class="tab" id="HamirJobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="ajaxtechvideoupdt.php" method="post">
-        <div class="Amir-video">
+        <div class="hamir-video">
 
         </div></form></div>
 
           <script type='text/javascript'>
             $(document).ready(function () {
-            $('body').on('click','.Amir',function(){ 
+            $('body').on('click','.Hamir',function(){ 
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
@@ -1542,9 +1534,9 @@ if(!isset($_SESSION['username']))
             data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
-            $('.Amir-video').html(response);
+            $('.hamir-video').html(response);
             // Display Modal
-            $('#doubleClick-Amir').modal('show');
+            $('#doubleClick-Hamir').modal('show');
                 }
                     });
                  });
@@ -1554,12 +1546,12 @@ if(!isset($_SESSION['username']))
 
 
                 <!-- Double click Report -->
-        <input type="radio" name="tabDoingAmir" id="tabDoingAmir6">
-        <label for="tabDoingAmir6" class="tabHeadingAmir"> Report </label>
+        <input type="radio" name="tabDoingHamir" id="tabDoingHamir6">
+        <label for="tabDoingHamir6" class="tabHeadingHamir"> Report </label>
         <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Amir').style.display='none'">&times</div>
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
         <form action="ajaxreportadmin.php" method="post">
-        <div class="Amir-report">
+        <div class="hamir-report">
 
         </div></form></div>
 
@@ -1568,7 +1560,7 @@ if(!isset($_SESSION['username']))
 
         <script type='text/javascript'>
             $(document).ready(function() {
-            $('body').on('click','.Amir',function(){ 
+            $('body').on('click','.Hamir',function(){ 
             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
@@ -1577,9 +1569,9 @@ if(!isset($_SESSION['username']))
             data: {jobregister_id: jobregister_id},
             success: function(response) {
             // Add response in Modal body
-            $('.Amir-report').html(response);
+            $('.hamir-report').html(response);
             // Display Modal
-            $('#doubleClick-Amir').modal('show');
+            $('#doubleClick-Hamir').modal('show');
                      }
                     });
                 });
@@ -1587,7 +1579,7 @@ if(!isset($_SESSION['username']))
         </script>
 
 
-        <!-- END OF Amir -->
+        <!-- END OF HAMIR -->
 
         <!-- HWA -->
                 
@@ -6000,14 +5992,29 @@ if(!isset($_SESSION['username']))
 </div>
 </div>
 
-                    <script>
-        $(document).ready(function(){
-            
-            // Initialize select2
-            $("#custModel").select2();
 
-        });
-        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </section>
