@@ -158,7 +158,7 @@ $_SESSION['storeDate'] = $att_date;
                                     var res = JSON.parse(response);
                                     console.log(res);
                                     if(res.success == true)
-                                    $('#message').html('<span style="color: green">Update Saved!</span>');
+                                    location.reload();
                                     else
                                     $('#message').html('<span style="color: red">Update Cannot Be Saved</span>');
                                   }

@@ -163,7 +163,7 @@ $_SESSION['storeDate'] = $today_date;
                                     var res = JSON.parse(response);
                                     console.log(res);
                                     if(res.success == true)
-                                    $('#message').html('<span style="color: green">Rest Hour Saved!</span>');
+                                    location.reload();
                                     else
                                     $('#message').html('<span style="color: red">Rest Hour Cannot Be Saved</span>');
                                   }
