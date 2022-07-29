@@ -18,6 +18,7 @@ include 'dbconnect.php';
     $technician_rank = $_POST['technician_rank'];
     $username = $_POST['username'];
     $password= $_POST['password'];
+    $password=password_hash($password, PASSWORD_DEFAULT);
     $staffregisterlastmodify_by = $_POST['staffregisterlastmodify_by'];
 
      $query = "UPDATE staff_register SET 
