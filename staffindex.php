@@ -21,7 +21,7 @@ include 'dbconnect.php';
       	$staffregister_id  = $_POST['staffregister_id'];
 		$username = $_POST['username'];
 		$password = $_POST['password'];
-		$password=password_hash($password, PASSWORD_DEFAULT);
+		$password=password_hash($password, PASSWORD_BCRYPT);
 		$staff_fullname = $_POST['staff_fullname'];
 		$employee_id   = $_POST['employee_id'];
 		$staff_phone  = $_POST['staff_phone'];

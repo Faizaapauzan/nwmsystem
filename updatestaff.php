@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <?php
     $connection = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($connection, 'nwmsystem');
@@ -91,8 +93,8 @@
                                     <input type="text" name="password" id="password" class="form-control" value="<?php echo $row['password'] ?>">
                                 </div>
 
-                                <?php if (isset($_SESSION["username"])) ?>
-                                <input type="hidden" name="staffregisterlastmodify_by" id="staffregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+                                <?php if (isset($_SESSION["username"])) { ; } ?>
+                                    <input type="hidden" name="staffregisterlastmodify_by" id="staffregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
 
                                 <button type="submit" name="update" class="btn btn-primary"> Update Data </button>
                                 </form>
