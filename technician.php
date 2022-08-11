@@ -263,8 +263,9 @@ if(!isset($_SESSION['username']))
 												<li>".$row['machine_name']."</li>
 												<li>".$row['machine_type']."</li>
 												<li>".$row['serialnumber']."</li>
+												<p style='color:red;'>".$row['reason']."</p>
 											</ul>
-											<div class='status'  id='doingStatus'>
+											<div class='status'  id='incompleteStatus'>
 												".$row['job_status']."
 											</div>
 											</div>
@@ -353,8 +354,9 @@ if(!isset($_SESSION['username']))
 												<li>".$row['machine_name']."</li>
 												<li>".$row['machine_type']."</li>
 												<li>".$row['serialnumber']."</li>
+												<p style='color:red;'>".$row['reason']."</p>
 											</ul>
-											<div class='status'  id='doingStatus'>
+											<div class='status'  id='pendingStatus'>
 												".$row['job_status']."
 											</div>
 											</div>
@@ -724,7 +726,7 @@ if(!isset($_SESSION['username']))
 												<li>".$row['machine_type']."</li>
 												<li>".$row['serialnumber']."</li>
 											</ul>
-											<div class='status'  id='doingStatus'>
+											<div class='status'  id='completedStatus'>
 												".$row['job_status']."
 											</div>
 											</div>
