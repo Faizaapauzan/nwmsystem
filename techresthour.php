@@ -190,7 +190,7 @@ $_SESSION['storeDate'] = $today_date;
     <!-- technician -->
     <div style=" position: static; font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
     <label style="position: static; font-weight: 600; font-size: 20px;"><?= $row['technician']; ?></label>
-    <div style=" position: static; width: fit-content;" class="input-group mb-3">
+    <div style="position: static; width: fit-content;" class="input-group mb-3">
     <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="buttonbiru" onclick="tech_outs()" style="position: static; width: fit-content;" type="button">OUT</button>
@@ -547,12 +547,11 @@ $_SESSION['storeDate'] = $today_date;
 <!-- DISPLAY REST HOUR IN AND OUT -->	
 
 <!--TOP BAR-->
-						
-						<div class="line" style="background-color: #181148;"></div>
-							<br>
-						<div class="modal-body p-0">
+  
+  <div class="line" style="background-color: #181148;"></div>
+  <br>
+  <div class="modal-body p-0">
 					
-
 <script>
 $(document).ready(function(){
 	

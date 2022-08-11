@@ -10,10 +10,6 @@ if(isset($_POST['technician_departure']) && $_POST['technician_departure']!='' |
     &&
    isset($_POST['technician_leaving']) && $_POST['technician_leaving']!='' || $_POST['technician_leaving']==''
     &&
-   isset($_POST['latitude']) && $_POST['latitude']!='' || $_POST['latitude']=='' 
-    &&
-   isset($_POST['longitude']) && $_POST['longitude']!='' || $_POST['longitude']==''
-    &&
    isset($_POST['jobregisterlastmodify_by']) && $_POST['jobregisterlastmodify_by']!='' || $_POST['jobregisterlastmodify_by']==''
     &&
    isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']=='')
@@ -24,8 +20,6 @@ if(isset($_POST['technician_departure']) && $_POST['technician_departure']!='' |
                        technician_departure ='".addslashes($_POST['technician_departure'])."',
                        technician_arrival ='".addslashes($_POST['technician_arrival'])."',
                        technician_leaving ='".addslashes($_POST['technician_leaving'])."',
-                       latitude ='".addslashes($_POST['latitude'])."',
-                       longitude ='".addslashes($_POST['longitude'])."',
                        jobregisterlastmodify_by ='".addslashes($_POST['jobregisterlastmodify_by'])."'
                 WHERE  jobregister_id ='".addslashes($_POST['jobregister_id'])."' ";
         
