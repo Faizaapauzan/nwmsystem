@@ -131,8 +131,6 @@ if(!isset($_SESSION['username']))
     border-radius: 0.25rem;	
 }
 
-/* Collapse */
-
 /* Main Feature */
 .navbar {
   margin-top: 20px;

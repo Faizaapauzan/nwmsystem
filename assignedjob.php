@@ -66,6 +66,40 @@ session_start();
 	position: static;
 }
 
+/* Main Feature */
+.navbar {
+  margin-top: 20px;
+  background-color: #ddd;
+  overflow: hidden;
+  max-height: 1800px;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height 0.3s;
+}
+
+/* Other */
+ 
+.navbar-toggle {
+  background-color: #D2D2CF;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.nav {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 </style>
 
 <body>
@@ -102,147 +136,99 @@ session_start();
   </a>
 	</nav>
 	
-<div class="container">	
-
-<div class="example" style="text-align: end; padding-bottom: 10px;" >
-    <input type="text" id="search">
-    <input type="button"  id="button" onmousedown="doSearch(document.getElementById('search').value)" value="Find">
-</div>	
-
-    <div class="column">
-        <p class="column-title" id="joblisting"><b>Todo</b></p>
-		<?php            
-								include 'dbconnect.php';
-								$results = $conn->query("SELECT
-								jobregister_id, job_order_number, job_assign , job_priority, job_name, customer_name, 
-								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason, staff_position, job_cancel
-								FROM
-								job_register
-								WHERE
-								job_assign ='AIZAT' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='BOON' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='FAIZAN' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='FAUZIN' AND  job_status = '' AND job_cancel=''
-								Or
-								job_assign ='HAFIZ' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='HAMIR' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='HWA' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='ISK' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='IZAAN' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='JOHN' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='JUN JIE' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='WILL' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='SAHELE' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='SALAM' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='SAZALY' AND  job_status = '' AND job_cancel=''
-								OR 
-								job_assign ='TECK' AND  job_status = '' AND job_cancel=''
-								ORDER BY jobregisterlastmodify_at
-								DESC LIMIT 50");
-
-								while($row = $results->fetch_assoc()) {             
-							?>
-			
-			<div class="cards">
-				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
-				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
-					<ul class="b" id="draged">
-						<strong text-align="center"><?php echo $row['job_priority']?></strong>
-						<li><?php echo $row['job_order_number']?></li>
-						<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-						<li><?php echo $row['job_description']?></li>
-						<li><?php echo $row['machine_name']?></li>
-						<li><?php echo $row['machine_type']?></li>
-						<li><?php echo $row['serialnumber']?></li>
-					</ul>
-					<div class="status" style="font-family: sans-serif;">
-					<strong><?php echo $row['job_assign']?></strong>
-				</div>
-			</div>
-		</div>
-		<?php } ?>
-                    </div>
+	<div class="container">
+		<div class="example" style="text-align: end; padding-bottom: 10px;">
+		<input type="text" id="search">
+		<input type="button"  id="button" onmousedown="doSearch(document.getElementById('search').value)" value="Find">
+	</div>
+	
+	<div class="column">
+		<p class="column-title" id="joblisting"><b>Todo</b></p>
+			<?php
+				include 'dbconnect.php';
+				
+				$query = "SELECT * FROM job_register
+				WHERE
+				job_assign !='Storekeeper' AND  job_status = '' AND job_cancel='' AND accessories_required =''
+				OR
+				job_assign !='Storekeeper' AND  job_status = '' AND job_cancel='' AND accessories_required ='No'
+				ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
+				
+				$result = mysqli_query($conn, $query);
+				
+				$customer_name = '';
+				
+				while ($row = mysqli_fetch_assoc($result)){
+					// only show artist when it's an other artist then the previous one
+					if ($row['customer_name'] != $customer_name){
+						echo "<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>";
+						$customer_name = $row['customer_name'];
+					}
 					
-					
-    <div class="column">
-        <p class="column-title" id="joblisting"><b>Doing</b></p>
-		<?php            
-								include 'dbconnect.php';
-								$results = $conn->query("SELECT
-								jobregister_id, job_order_number, job_priority, job_name, customer_name, job_assign, 
-								customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, reason
-								FROM
-								job_register
-								WHERE
-								job_assign ='AIZAT' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='BOON' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='FAIZAN' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='FAUZIN' AND  job_status = 'Doing' AND job_cancel=''
-								Or
-								job_assign ='HAFIZ' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='HAMIR' AND  job_status = '' AND job_cancel=''
-								OR
-								job_assign ='HWA' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='ISK' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='IZAAN' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='JOHN' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='JUN JIE' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='WILL' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='SAHELE' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='SALAM' AND  job_status = 'Doing' AND job_cancel=''
-								OR
-								job_assign ='SAZALY' AND  job_status = 'Doing' AND job_cancel=''
-								OR 
-								job_assign ='TECK' AND  job_status = 'Doing' AND job_cancel=''
-								ORDER BY jobregisterlastmodify_at
-								DESC LIMIT 50");
-
-								while($row = $results->fetch_assoc()) {             
-							?>
+					echo "<div class='cards'>
+						  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#mymodal'>
+						  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
+						  <ul class='b' id='draged'>
+						  	<strong text-align='center'>".$row['job_priority']."</strong>
+							<li>".$row['job_order_number']."</li>
+							<li>".$row['job_description']."</li>
+							<li>".$row['machine_name']."</li>
+							<li>".$row['machine_type']."</li>
+							<li>".$row['serialnumber']."</li>
+						  </ul>
+						  <div class='status' style='font-family: sans-serif;'>
+						  <strong>".$row['job_assign']."</strong>
+						  </div>
+						  </div>
+						  </div>";
+					}
+			?>
 			
-			<div class="cards">
-				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
-				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
-					<ul class="b" id="draged">
-						<strong text-align="center"><?php echo $row['job_priority']?></strong>
-						<li><?php echo $row['job_order_number']?></li>
-						<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-						<li><?php echo $row['job_description']?></li>
-						<li><?php echo $row['machine_name']?></li>
-						<li><?php echo $row['machine_type']?></li>
-						<li><?php echo $row['serialnumber']?></li>
-					</ul>
-					<div class="status" style="font-family: sans-serif;">
-					<strong><?php echo $row['job_assign']?></strong>
-				</div>
-			</div>
 		</div>
-		<?php } ?>
-                    </div>
+		
+		<div class="column">
+			<p class="column-title" id="joblisting"><b>Doing</b></p>
+				<?php
+					include 'dbconnect.php';
+					
+					$query = "SELECT * FROM job_register
+					WHERE
+					job_assign !='Storekeeper' AND  job_status = 'Doing' AND job_cancel='' AND accessories_required =''
+					OR
+					job_assign !='Storekeeper' AND  job_status = 'Doing' AND job_cancel='' AND accessories_required ='No'
+					ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
+					
+					$result = mysqli_query($conn, $query);
+					
+					$customer_name = '';
+					
+					while ($row = mysqli_fetch_assoc($result)){
+						// only show artist when it's an other artist then the previous one
+						if ($row['customer_name'] != $customer_name){
+							echo "<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>";
+							$customer_name = $row['customer_name'];
+						}
+						
+						echo "<div class='cards'>
+							  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#mymodal'>
+							  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
+							  <ul class='b' id='draged'>
+							  	<strong text-align='center'>".$row['job_priority']."</strong>
+								<li>".$row['job_order_number']."</li>
+								<li>".$row['job_description']."</li>
+								<li>".$row['machine_name']."</li>
+								<li>".$row['machine_type']."</li>
+								<li>".$row['serialnumber']."</li>
+							  </ul>
+							  <div class='status' style='font-family: sans-serif;'>
+							  	<strong>".$row['job_assign']."</strong>
+							  </div>
+							  </div>
+							  </div>";
+						}
+				?>
+				
+			</div>
 	
  <!--VIEW BUTTON MODAL AJAX-->
 	
