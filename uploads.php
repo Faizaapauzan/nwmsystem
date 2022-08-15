@@ -39,7 +39,6 @@ $database = "nwmsystem";
 
                          $query = "INSERT INTO `technician_photoupdate`(`jobregister_id`, `file_name`,`description`) VALUES ('$jobregister_id','$newFile','$description')";
 
-                        // $query  = "INSERT INTO photo(file_name) VALUES('$newFile')";
                         mysqli_query($con, $query);
                     }
                 }

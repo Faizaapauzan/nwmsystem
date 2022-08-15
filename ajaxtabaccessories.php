@@ -18,24 +18,7 @@ session_start();
 <meta charset="UTF-8">
 
 <link rel="stylesheet" type="text/css" href="css/tab.css"/>
-
-<!-- <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script> -->
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<!-- <script src="popper.js"></script>   -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-
-<!-- Select2 JS --> 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -55,19 +38,13 @@ z-index: 1000000;
   position: absolute;
 }
 
-
 </style>
 <body>
 		
  <form id="adminacc_form" method="post">
  <div class="input-boxAccessories" id="input_fields_wrapAccessories">
-  
-<!-- <div id="accessoriesmessage" class="alert"></div> -->
 <div>
-
 <form class="form-inline" id="frm-add-data" action="javascript:void(0)">
-
-
       <?php
 include 'dbconnect.php';
 
@@ -92,7 +69,6 @@ include 'dbconnect.php';
         }
  ?>
 
-
  <?php
 //include connection file 
 include_once("dbconnect.php");
@@ -107,14 +83,13 @@ include_once("dbconnect.php");
 ?>
  
 <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -18px;" id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table" width="60%" cellspacing="0">
-    <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
    <thead>
       <tr>
         <th>No</th>
-         <th>Code</th>
-         <th>Name</th>
-         <th>UOM</th>
-         <th>Quantity</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>UOM</th>
+        <th>Quantity</th>
       </tr>
    </thead>
   
@@ -133,17 +108,15 @@ include_once("dbconnect.php");
 </tbody>
 </table>
 
-<!-- <button onclick="javascript:void(0);" class="add_button" title="Add field">Add</button> -->
-
 <a href="javascript:void(0);" class="add_button" title="Add field" type="button">Click Here to Add Accessories</a>
 	
 </form>
 
 </div>  
+
  <div class="updateBtn">
 <p class="control"><b id="accessoriesmessage"></b></p>
 <input type="button" id="update_acc" name="update_acc" value="Update" />
-<!-- <button type="submit" name="save" value="update">Update</button> -->
 </form></div>   
 
 <script>
@@ -159,7 +132,7 @@ include_once("dbconnect.php");
                         var res = JSON.parse(response);
                         console.log(res);
                         if(res.success == true)
-                          $('#accessoriesmessage').html('<span style="color: green">Update Saved!</span>');
+                          $('#accessoriesmessage').html('<span style="color: green">Update Success</span>');
                         else
                           $('#accessoriesmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
                       }
@@ -291,9 +264,6 @@ if (accessories_id != '') {
             dataType:"json",  
             success:function(result){  
               
-                // $(this).parents('.model').find('[name="accessories_id[]"]').val(accessories_id);
-                // $(this).parents('.model').find('[name="accessories_code[]"]').val(result.accessories_code);
-                // $(this).parents('.model').find('[name="accessories_name[]"]').val(result.accessories_name);
                 model.find(".accessories_id").val(accessories_id);
                 model.find(".accessories_code").val(result.accessories_code);
                 model.find(".accessories_name").val(result.accessories_name);
@@ -389,7 +359,6 @@ if (accessories_id != '') {
 </script>
 
 
-
 <script>
 
     $(document).ready(function () {
@@ -400,24 +369,6 @@ if (accessories_id != '') {
 
   </script>
 
-  <script>
-
-    $(document).ready(function(){
- 
-  // Initialize select2
-  $("#select_box").select2();
-
-  // Read selected option
-  $('#update_acc').click(function(){
-    var accessories_id = $('#select_box option:selected').text();
-    var accessories_code = $('#select_box').val();
-
-    $('#results').html("id : " + accessories_id + ", name : " + accessories_code);
-
-  });
-});
-
-    </script>
 
 
 

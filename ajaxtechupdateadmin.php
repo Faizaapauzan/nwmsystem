@@ -4,12 +4,7 @@ session_start();
 
 <!DOCTYPE html>
 <head>
-<!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/></script> 
 <link href="css/ajaxtechupdate.css"rel="stylesheet" />
-
-
 </head>
 
 <?php
@@ -85,12 +80,6 @@ session_start();
                 </script>
                 </div>
               </div>
-                <div class="input-boxLocation" id="inputLocationBox">
-                <label for="Location" class="details">Location</label>
-                <div class="add_field_button1"><i class='bx bx-compass' onclick="getLocation()"></i></div>
-                <textarea style="width: 290px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
-                <textarea style="width: 290px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
-              </div>
 
               <?php if (isset($_SESSION["username"])) ?>
               <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
@@ -102,26 +91,6 @@ session_start();
               <!-- <button type="submit" id="submit" name="update" class="btn btn-primary"> Update  </button> -->
             </div>           
 </form>
-
-<script>
-    var x = document.getElementById("latitude");
-    var y = document.getElementById("longitude");
-    console.log(x , y);
-       function getLocation() {
-         if (navigator.geolocation) {
-           navigator.geolocation.getCurrentPosition(showPosition);
-         } else {
-           x.innerHTML = "Geolocation is not supported by this browser.";
-            y.innerHTML = "Geolocation is not supported by this browser.";
-         }
-       }
-
-       function showPosition(position) {
-        x.innerHTML = position.coords.latitude;
-        y.innerHTML = position.coords.longitude;
-       }
-
-       </script>
 
 <script>
     $(document).ready(function () {

@@ -14,15 +14,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-	<!-- <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'> -->
     <title>NWM Technician Photo Update</title>
-
 	<link href="css/ajaxtechphtoupdt.css" rel="stylesheet"/>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 
 </head>
@@ -41,15 +35,6 @@
       width: 50%;
       height: 50%;
     }
-
-    /* #ImageRow {
-      margin-right: 20px;
-      margin-left: 40px;
-      display: flex; 
-      width: 200px; 
-      height: 200px;
-
-    } */
 
     
 form .upload-report .input-box {
@@ -143,54 +128,6 @@ form .upload-report label.details {
  
    
 </form>
-
-<script type="text/javascript">
-        $(document).ready(function(){
-
-            function previewImages() {
-
-                var $preview = $('#previewBefore').empty();
-                if (this.files) $.each(this.files, readAndPreview);
-
-                function readAndPreview(i, file) {
-                
-                var reader = new FileReader();
-
-                $(reader).on("load", function() {
-                  $preview.append($("<img/>", {src:this.result, height:100}));
-                });
-
-                reader.readAsDataURL(file);
-                
-              }
-
-            }
-
-            $('#multipleFile').on("change", previewImages);
-
-            $("#submitForm").on("submit", function(e){
-                e.preventDefault();
-                $.ajax({
-                    url  :"uploads.php",
-                    type :"POST",
-                    cache:false,
-                    contentType : false, // you can also use multipart/form-data replace of false
-                    processData : false,
-                    data: new FormData(this),
-                    success: function(response)
-                      {
-                        var res = JSON.parse(response);
-                        console.log(res);
-                        if(res.success == true)
-                          $('#messageImagebefore').html('<span style="color: green">Image Uploaded!</span>');
-                        else
-                          $('#messageImagebefore').html('<span style="color: red">Image cannot be Upload</span>');
-                      $("#multipleFile").val("");
-                    }
-                });
-            });
-        });
-    </script>
 <br/>
 
 <!-- AFTER -->
@@ -249,88 +186,5 @@ form .upload-report label.details {
         
 </form>
     
-<script>
-  $(document).ready(function(){
- // Delete 
- $('.deleted').click(function(){
-   var el = this;
-   // Delete id
-   var deletedid = $(this).data('id');
-   var confirmalert = confirm("Are you sure?");
-   if (confirmalert == true) {
-      // AJAX Request
-      $.ajax({
-        url: 'techphoto_delete.php',
-        type: 'POST',
-        data: { id:deletedid },
-        success: function(response){
-
-          if(response == 1){
-	    // Remove row from HTML Table
-	    // $(el).closest('td').css('background','tomato');
-	    $(el).closest('tr').fadeOut(800,function(){
-	       $(this).remove();
-	    });
-          }else{
-	    alert('Invalid ID.');
-          }
-
-        }
-      });
-   }
-
- });
-
-});
-
-</script>
-<script type="text/javascript">
-        $(document).ready(function(){
-
-            function previewImages() {
-
-                var $preview = $('#previewAfter').empty();
-                if (this.files) $.each(this.files, readAndPreview);
-
-                function readAndPreview(i, file) {
-                
-                var reader = new FileReader();
-
-                $(reader).on("load", function() {
-                  $preview.append($("<img/>", {src:this.result, height:100}));
-                });
-
-                reader.readAsDataURL(file);
-                
-              }
-
-            }
-
-            $('#multipleAfter').on("change", previewImages);
-
-            $("#submitAfterForm").on("submit", function(e){
-                e.preventDefault();
-                $.ajax({
-                    url  :"uploads.php",
-                    type :"POST",
-                    cache:false,
-                    contentType : false, // you can also use multipart/form-data replace of false
-                    processData : false,
-                    data: new FormData(this),
-                    success: function(response)
-                      {
-                        var res = JSON.parse(response);
-                        console.log(res);
-                        if(res.success == true)
-                          $('#messageImageAfter').html('<span style="color: green">Image Uploaded!</span>');
-                        else
-                          $('#messageImageAfter').html('<span style="color: red">Image cannot be Upload</span>');
-                      $("#multipleAfter").val("");
-                    }
-                });
-            });
-        });
-    </script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

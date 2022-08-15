@@ -27,30 +27,33 @@ if(!isset($_SESSION['username']))
 ?>
 
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
+    <!-- To refresh every 10 seconds -->
+    <!-- <meta http-equiv="refresh" content = "10" /> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Admin Homepage</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
-    <link rel="stylesheet" href="style.css">
     <link href="css/homepage.css"rel="stylesheet" />
+      <link href="css/style.css"rel="stylesheet" />
     <link href="css/adminhomepage.css"rel="stylesheet" />
-    <!-- <link href="css/machine.css"rel="stylesheet" /> -->
-       <link href="css/adminboard.css"rel="stylesheet" />
-        <link href="css/admin.css"rel="stylesheet" />
-    <!-- Boxiocns CDN Link -->
+    <link href="css/adminboard.css"rel="stylesheet" />
+    <link href="css/admin.css"rel="stylesheet" />
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>  
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
    </head>
 <style>
 
@@ -275,7 +278,7 @@ if(!isset($_SESSION['username']))
     <nav>
                 <div class="home-content">
 
-                      <i class='bx bx-menu' ></i>
+                      <i class='bx bx-menu'></i>
 
                 <ul class="main-nav" id="js-menu">
 				<div class="dropdown1">
@@ -386,9 +389,9 @@ if(!isset($_SESSION['username']))
                     <input type="radio" name="tabDoing" id="tabDoingOne" checked="checked">
                     <label for="tabDoingOne" class="tabHeading">Job Info</label>
                     <div class="tab" id=jobInfoTabs>
-                        <div class="TechJobInfoTab">
-                            <div class="contentTechJobInfo">
-                                <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                    <div class="TechJobInfoTab">
+                    <div class="contentTechJobInfo">
+                    <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none';">&times</div>
                                 <form action="homeindex.php" method="post">
                                     <div class="tech-details">
 
@@ -426,7 +429,7 @@ if(!isset($_SESSION['username']))
                         <div class="TechJobInfoTab">
                             <div class="contentTechJobInfo">
                                 <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
-                                <form action="jobassignADMIN" method="post">
+                                <form action="jobassignADMIN.php" method="post">
                                     <div class="assign-details">
 
                                     </div>
@@ -566,9 +569,7 @@ if(!isset($_SESSION['username']))
                     <input type="radio" name="tabDoingStore" id="tabDoingStore1" checked="checked">
                     <label for="tabDoingStore1" class="tabHeadingStore"> Job Info </label>
                     <div class="tab" id="StoreJobInfoTab">
-                        <div class="contentStoreJobInfo" style="padding-left: 66px;
-    margin-left: -89px;
-    margin-top: -47px;">
+                        <div class="contentStoreJobInfo" style="padding-left: 66px; margin-left: -89px; margin-top: -47px;">
                             <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                             <form action="homeindex.php" method="post">
                                 <div class="store-details">
@@ -598,7 +599,7 @@ if(!isset($_SESSION['username']))
                             });
                         </script>
 
-            <!-- Storekeeper Accessories Tab -->
+             <!-- Storekeeper Accessories Tab -->
             
                     <input type="radio" name="tabDoingStore" id="tabDoingStore2">
                     <label for="tabDoingStore2" class="tabHeadingStore"> Accessories </label>
@@ -670,12 +671,6 @@ if(!isset($_SESSION['username']))
 
         <!-- Storekeeper -->
 
-
-
-
-
-
- 
          <!-- BOON -->
 
         <div class="box" id="myModal">
@@ -1133,7 +1128,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-,
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz4">
         <label for="tabDoingHafiz4" class="tabHeadingHafiz">Accessories</label>
@@ -5465,7 +5459,7 @@ if(!isset($_SESSION['username']))
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxhomepending.php',
+                                        url: 'ajaxhome.php',
                                         type: 'post',
                                         data: { jobregister_id: jobregister_id },
                                         success: function (response) {
@@ -5754,7 +5748,7 @@ if(!isset($_SESSION['username']))
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxhome.php',
+                                        url: 'ajaxhomeincomplete.php',
                                         type: 'post',
                                         data: { jobregister_id: jobregister_id },
                                         success: function (response) {
@@ -5985,8 +5979,6 @@ if(!isset($_SESSION['username']))
 </div>
 </div>
 
-</section>
-
   <script>
   let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -6002,6 +5994,7 @@ if(!isset($_SESSION['username']))
     sidebar.classList.toggle("close");
   });
   </script>
+
 
 </section>
 
