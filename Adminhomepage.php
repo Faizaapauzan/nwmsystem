@@ -5980,42 +5980,10 @@ if(!isset($_SESSION['username']))
         <!-- Incomplete Popup Modal -->
 
         <!-- Incomplete -->					
-					
-				
-					
+        	
 			</div>
-
-
-
-
-
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </section>
 
@@ -6034,18 +6002,6 @@ if(!isset($_SESSION['username']))
     sidebar.classList.toggle("close");
   });
   </script>
-
-
-        
-
-
-
-
-
-
-
-
-
 
 </section>
 
