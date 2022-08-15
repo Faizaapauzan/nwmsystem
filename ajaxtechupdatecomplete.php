@@ -5,8 +5,6 @@ session_start();
 <!DOCTYPE html>
 <head>
 <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 	<link href="css/ajaxtechupdate.css"rel="stylesheet" />
   
 </script> 
@@ -53,12 +51,7 @@ session_start();
     
                 </div>
               </div>
-                <div class="input-boxLocation" id="inputLocationBox">
-                <label for="Location" class="details">Location</label>
-                <div class="add_field_button1"></div>
-                <textarea readonly style="width: 290px; height: 40px; resize: none; border-color: #081d45;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
-                <textarea readonly style="width: 290px; height: 40px; resize: none; border-color: #081d45;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
-              </div>
+     
               
 
                

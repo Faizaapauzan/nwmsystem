@@ -48,16 +48,17 @@ session_start();
 
  <form action="ajaxtechupdate.php" method="post">
 
-    <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+    <input type="hidden" name="jobregister_id" id="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
 <label>Departure Time</label>
 <div class="input-group mb-3">
   <input readonly type="text" class="form-control" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>" aria-describedby="basic-addon2">
+  <input type="hidden" name="job_status" value="Doing">
   <div class="input-group-append">
-    <button class="buttonbiru" onclick="test1()" type="button">Departure</button>
+    <button id="update_techstatus" name="update_techstatus" class="buttonbiru update" onclick="doSomething();doSomethingElse();" type="button">Departure</button>
   </div>
               <script type="text/javascript">
-              function test1()
+              function doSomething()
                 {
                   $.ajax({url:"departureTime.php", success:function(result)
                     {
@@ -65,7 +66,41 @@ session_start();
                     }
                   })
                 }
+
+                
                 </script>
+
+
+
+              <script type="text/javascript">
+
+        function doSomethingElse()
+          {
+            var job_status = $('input[name=job_status]').val();
+            var jobregister_id = $('input[name=jobregister_id]').val();
+            
+            if(job_status!='' || job_status=='',
+               jobregister_id!='' || jobregister_id=='')
+
+              {
+                var formData = {job_status: job_status,
+                            jobregister_id: jobregister_id};
+                                
+                $.ajax({
+                        url: "changeStatus.php", 
+                        type: 'POST', 
+                        data: formData, 
+                        success: function(response)
+                  {
+                    var res = JSON.parse(response);
+                    console.log(res);
+                    
+                  }
+                });
+              }
+          } 
+    </script>
+     
 </div>
 
 <label>Arrival Time</label>
@@ -195,7 +230,8 @@ session_start();
                   }
               } 
         </script>
-     
+
+       
            <?php
         }
     }

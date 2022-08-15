@@ -10,14 +10,11 @@ session_start();
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/tab.css"rel="stylesheet" />
 <link href="css/ajaxstoreupdateADMIN.css"rel="stylesheet" />
 </head>
 
 <body>
-<!-- <div class="container" style="padding:50px 250px;"> -->
 
 <?php
 //include connection file 
@@ -77,7 +74,6 @@ include_once("dbconnect.php");
 <div class="btn-box">
 <p class="control"><b id="storemsg"></b></p>
 <input type="button" id="update_store" name="update_store" value="Update" />
-<!-- <button type="submit" id="submit" name="updating" class="btn btn-primary"> Update Data </button> -->
 </form></div> 
 
 

@@ -1,6 +1,30 @@
 <?php
-session_start(); ?>
+ session_start();
+ // cek apakah yang mengakses halaman ini sudah login
+ if($_SESSION['staff_position']=="" ){
+  header("location:index.php?error");
+ }
 
+if(!isset($_SESSION['username']))
+	{	
+    header("location:index.php?error");
+	}
+
+    elseif($_SESSION['staff_position']== 'Admin')
+	{
+
+	}
+
+        elseif($_SESSION['staff_position']== 'Manager')
+	{
+	}
+
+  else
+	{
+			header("location:index.php?error");
+	}
+
+?>
 <?php 
  
 // Include pagination library file 
@@ -30,8 +54,6 @@ $query = $conn->query("SELECT * FROM job_register");
 ?>
 
 
-
-
  <?php  
  //Database connectivity  
  $con=mysqli_connect('localhost','root','','nwmsystem');  
@@ -46,63 +68,6 @@ $query = $conn->query("SELECT * FROM job_register");
  }  
  ?> 
 
-  <?php  
- //Database connectivity  
- $con=mysqli_connect('localhost','root','','nwmsystem');  
- $sql=mysqli_query($con,"select * from job_register");  
- //Get Update id and status  
- if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant'])) {  
-      $jobregister_id=$_GET['jobregister_id'];  
-      $Job_assistant=$_GET['Job_assistant'];  
-      mysqli_query($con,"update job_register set Job_assistant='$Job_assistant' where jobregister_id='$jobregister_id'");  
-      header("location:adminjoblisting.php");  
-      die();  
- }  
- ?> 
-
-   <?php  
- //Database connectivity  
- $con=mysqli_connect('localhost','root','','nwmsystem');  
- $sql=mysqli_query($con,"select * from job_register");  
- //Get Update id and status  
- if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant2'])) {  
-      $jobregister_id=$_GET['jobregister_id'];  
-      $Job_assistant2=$_GET['Job_assistant2'];  
-      mysqli_query($con,"update job_register set Job_assistant2='$Job_assistant2' where jobregister_id='$jobregister_id'");  
-      header("location:adminjoblisting.php");  
-      die();  
- }  
- ?> 
-
-   <?php  
- //Database connectivity  
- $con=mysqli_connect('localhost','root','','nwmsystem');  
- $sql=mysqli_query($con,"select * from job_register");  
- //Get Update id and status  
- if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant3'])) {  
-      $jobregister_id=$_GET['jobregister_id'];  
-      $Job_assistant3=$_GET['Job_assistant3'];  
-      mysqli_query($con,"update job_register set Job_assistant3='$Job_assistant3' where jobregister_id='$jobregister_id'");  
-      header("location:adminjoblisting.php");  
-      die();  
- }  
- ?> 
-
-   <?php  
- //Database connectivity  
- $con=mysqli_connect('localhost','root','','nwmsystem');  
- $sql=mysqli_query($con,"select * from job_register");  
- //Get Update id and status  
- if (isset($_GET['jobregister_id']) && isset($_GET['Job_assistant4'])) {  
-      $jobregister_id=$_GET['jobregister_id'];  
-      $Job_assistant4=$_GET['Job_assistant4'];  
-      mysqli_query($con,"update job_register set Job_assistant4='$Job_assistant4' where jobregister_id='$jobregister_id'");  
-      header("location:adminjoblisting.php");  
-      die();  
- }  
- ?> 
-
-
 
 <!DOCTYPE html>
 <head>
@@ -113,21 +78,18 @@ $query = $conn->query("SELECT * FROM job_register");
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <link href="css/adminjoblistinghomepage.css" rel="stylesheet" />
     <link href="css/adminjoblisting.css" rel="stylesheet" />
- <link href="css/bootstrap.min.css" rel="stylesheet">
-   <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/> -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
 
-   <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/> -->
-
-   <!-- Script -->
-   
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<!-- Script -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<!-- <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script> -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>	
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -136,10 +98,7 @@ $query = $conn->query("SELECT * FROM job_register");
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-
 </head>
-
-
 
 <body>
 
@@ -318,7 +277,6 @@ $query = $conn->query("SELECT * FROM job_register");
     <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Name</td>
     <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Machine Code</td>
     <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Assign</td>
-    <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Assistant</td>
     </tr>
 </thead>
 <tbody>
@@ -346,49 +304,6 @@ $query = $conn->query("SELECT * FROM job_register");
             echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
     ?></select></td>
-        <td id="<?php echo $row["job_status"]; ?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant']?> </option>
-                    <?php
-        include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
-
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
-        }	
-    ?></select><br>
-    <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant2_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant2']?> </option>
-                    <?php
-        include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
-
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
-        }	
-    ?></select>
-    <br>
-  <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant3_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant3']?> </option>
-                    <?php
-        include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
-
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
-        }	
-    ?></select>
-    <br>
-  <select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 110px; outline: none; font-size: 13px;" onchange="assistant4_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"> <option value=""> <?php echo $row['Job_assistant4']?> </option>
-                    <?php
-        include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE staff_position = 'Technician' ORDER BY staffregister_id ASC");  // Use select query here 
-
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['staff_position']."</option>";  // displaying data in option menu
-        }	
-    ?></select></td>
-
     </tr>
  <?php 
                 } 
@@ -412,39 +327,6 @@ $query = $conn->query("SELECT * FROM job_register");
       }  
  </script>  
 
-    <script type="text/javascript">  
-      function assistant_update(value,jobregister_id){  
-           //alert(id);  
-           let url = "adminjoblisting.php";  
-           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant="+value;  
-      }  
- </script>  
-
-     <script type="text/javascript">  
-      function assistant2_update(value,jobregister_id){  
-           //alert(id);  
-           let url = "adminjoblisting.php";  
-           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant2="+value;  
-      }  
- </script>  
-
-
-    <script type="text/javascript">  
-      function assistant3_update(value,jobregister_id){  
-           //alert(id);  
-           let url = "adminjoblisting.php";  
-           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant3="+value;  
-      }  
- </script>  
-
-
-    <script type="text/javascript">  
-      function assistant4_update(value,jobregister_id){  
-           //alert(id);  
-           let url = "adminjoblisting.php";  
-           window.location.href= url+"?jobregister_id="+jobregister_id+"&Job_assistant4="+value;  
-      }  
- </script>  
 
 
 <script type="text/javascript">
@@ -476,7 +358,7 @@ $(document).ready( function () {
 
             // AJAX request
             $.ajax({
-            url: 'ajaxhomepending.php',
+            url: 'ajaxhome.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -522,7 +404,7 @@ $(document).ready( function () {
 
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhomeincomplete.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
@@ -634,6 +516,179 @@ $(document).ready( function () {
             });
 
         </script>
+
+           <!--Double click for Assistant-->
+
+        <input type="radio" name="tabDoingInfo" id="tabDoingInfo3">
+        <label for="tabDoingInfo3" class="tabHeadingInfo">Assistants</label>
+        <div class="tab" id="JobInfoTab">
+        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-info').style.display='none'">&times</div>
+        <form method="post">
+        <div class="info-assistant">
+
+        </div></form></div>
+
+         <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Pending',function(){
+            // $('.JobInfo').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'jobassignADMIN.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-assistant').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show'); 
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Doing',function(){
+            // $('.JobInfo').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'jobassignADMIN.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-assistant').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show'); 
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Incomplete',function(){
+            // $('.JobInfo').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'jobassignADMIN.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-assistant').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show'); 
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Ready',function(){
+            // $('.JobInfo').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'jobassignADMIN.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-assistant').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show'); 
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Not Ready',function(){
+            // $('.JobInfo').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'jobassignADMIN.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-assistant').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show'); 
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.Completed',function(){
+            // $('.JobInfo').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'jobassignst-completed.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-assistant').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show'); 
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+                <script type='text/javascript'>
+            $(document).ready(function () {
+            $('body').on('click','.JobInfo',function(){
+            // $('.JobInfo').click(function () {
+            var jobregister_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+            url: 'jobassignADMIN.php',
+            type: 'post',
+            data: { jobregister_id: jobregister_id },
+            success: function (response) {
+            // Add response in Modal body
+            $('.info-assistant').html(response);
+            // Display Modal
+            $('#doubleClick-info').modal('show'); 
+                        }
+                    });
+                });
+            });
+
+        </script>
+
 
 
         <!--Double click Update-->
