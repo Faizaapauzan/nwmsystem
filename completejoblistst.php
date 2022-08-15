@@ -65,6 +65,39 @@ session_start();
 	position: static;
 }
 
+/* Main Feature */
+.navbar {
+  margin-top: 20px;
+  background-color: #ddd;
+  overflow: hidden;
+  max-height: 1800px;
+  -webkit-transition: max-height 0.3s; 
+  -moz-transition: max-height 0.3s; 
+  -ms-transition: max-height 0.3s; 
+  -o-transition: max-height 0.3s; 
+  transition: max-height 0.3s;
+}
+
+/* Other */
+ 
+.navbar-toggle {
+  background-color: #D2D2CF;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.nav {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
 </style>
 
@@ -113,34 +146,42 @@ session_start();
     <div class="column">
         <p class="column-title" id="joblisting"><b>Completed</b></p>
 		<?php
-                include 'dbconnect.php';
-                $results = $conn->query("SELECT
-                jobregister_id, job_order_number, job_priority, job_name, customer_name,
-				customer_grade, job_status, job_description, machine_name, machine_type, serialnumber, staff_position, job_assign
-                FROM job_register WHERE
-                (job_status = 'Completed')
-                ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-                while($row = $results->fetch_assoc()) {
-            ?>
-			
-			<div class="cards">
-				<div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#mymodal">
-				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
-					<ul class="b" id="draged">
-						<strong text-align="center"><?php echo $row['job_priority']?></strong>
-						<li><?php echo $row['job_order_number']?></li>
-						<li><?php echo $row['customer_name']?>  [<?php echo $row['customer_grade']?>] </li>
-						<li><?php echo $row['job_description']?></li>
-						<li><?php echo $row['machine_name']?></li>
-						<li><?php echo $row['machine_type']?></li>
-						<li><?php echo $row['serialnumber']?></li>
-					</ul>
-					<div class="status" style="font-family: sans-serif;">
-					<strong><?php echo $row['job_assign']?></strong>
-				</div>
-			</div>
-		</div>
-		<?php } ?>
+include 'dbconnect.php';
+
+$query = "SELECT * FROM job_register 
+WHERE job_status = 'Completed' AND job_cancel = ''
+ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
+
+$result = mysqli_query($conn, $query);
+
+$customer_name = '';
+while ($row = mysqli_fetch_assoc($result)){
+    // only show artist when it's an other artist then the previous one
+    if ($row['customer_name'] != $customer_name){
+        echo "<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>";
+        $customer_name = $row['customer_name'];
+    }
+    echo "<div class='cards'>
+    <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#mymodal'>
+    <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
+    <ul class='b' id='draged'>
+            <strong text-align='center'>".$row['job_priority']."</strong>
+            <li>".$row['job_order_number']."</li>
+            <li>".$row['job_description']."</li>
+            <li>".$row['machine_name']."</li>
+            <li>".$row['machine_type']."</li>
+            <li>".$row['serialnumber']."</li>
+        </ul>
+        <div class='status' style='font-family: sans-serif;'>
+        <strong>".$row['job_assign']."</strong>
+    </div>
+    </div>
+    </div>";
+    }
+?>
+
+
+
                     </div>
 	
 	

@@ -64,15 +64,6 @@
 <div class="input-group mb-3">
   <input readonly type="text" class="form-control" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
 </div>
-
-<label for="Location" class="details">Location</label>
-  <div class="input-boxLocation" id="inputLocationBox">
-            
-                <div class="add_field_button1"></div>
-                <textarea style="width: 210px; height: 40px; resize: none;" name="latitude" id="latitude" rows="2" cols="10" placeholder="Latitude"><?php echo $row['latitude'] ?></textarea>
-                <textarea style="width: 210px; height: 40px; resize: none;" name="longitude" id="longitude" rows="2" cols="10" placeholder="Longitude"><?php echo $row['longitude'] ?></textarea>
-				
-                </div>
     
     <p class="control"><b id="message"></b></p>
     <div class="updateBtn">

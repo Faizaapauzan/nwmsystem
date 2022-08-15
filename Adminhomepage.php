@@ -5974,15 +5974,8 @@ if(!isset($_SESSION['username']))
         <!-- Incomplete Popup Modal -->
 
         <!-- Incomplete -->					
-					
-				
-					
+        	
 			</div>
-
-
-
-
-
 </div>
 </div>
 
