@@ -10,18 +10,21 @@ if(isset($_POST['technician_departure']) && $_POST['technician_departure']!='' |
     &&
    isset($_POST['technician_leaving']) && $_POST['technician_leaving']!='' || $_POST['technician_leaving']==''
     &&
-   isset($_POST['jobregisterlastmodify_by']) && $_POST['jobregisterlastmodify_by']!='' || $_POST['jobregisterlastmodify_by']==''
+   isset($_POST['tech_out']) && $_POST['tech_out']!='' || $_POST['tech_out']==''
     &&
-   isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']=='')
-
+   isset($_POST['tech_in']) && $_POST['tech_in']!='' || $_POST['tech_in']==''
+    &&
+   isset($_POST['jobupdate_id']) && $_POST['jobupdate_id']!='' || $_POST['jobupdate_id']=='')
+   
     {
         
-        $sql = "UPDATE job_register SET
+        $sql = "UPDATE job_update SET
                        technician_departure ='".addslashes($_POST['technician_departure'])."',
                        technician_arrival ='".addslashes($_POST['technician_arrival'])."',
                        technician_leaving ='".addslashes($_POST['technician_leaving'])."',
-                       jobregisterlastmodify_by ='".addslashes($_POST['jobregisterlastmodify_by'])."'
-                WHERE  jobregister_id ='".addslashes($_POST['jobregister_id'])."' ";
+                       tech_out ='".addslashes($_POST['tech_out'])."',
+                       tech_in ='".addslashes($_POST['tech_in'])."'
+                WHERE  jobupdate_id ='".addslashes($_POST['jobupdate_id'])."' ";
         
         if($conn->query($sql))
         {

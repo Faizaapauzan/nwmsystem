@@ -221,17 +221,14 @@ include 'dbconnect.php';
 				});
 					}
 						} 
-      
-			
-							
+      				
  </script>  
 
-    
 	<!--Technician Availability-->
 				
 	<!-- Unavailable Date -->
 	<div class="cards">
-<div class="card" style="position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">			
+		<div class="card" style="position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">			
 	<form action="" method="post" id="off-report">
 
 	<?php if (isset($_SESSION["username"])) ?>
