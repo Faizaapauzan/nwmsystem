@@ -44,10 +44,12 @@
     ?>
     
     <form action="" method="post">
-      
+
       <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
       <input type="hidden" name="tech_name" value="<?php echo $_SESSION['username']; ?>">
+      <input type="hidden" name="job_assign" value="<?php echo $_SESSION['username']; ?>">
       <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
+      <input type="hidden" name="today_date" value="<?php echo $row['today_date'] ?>">
 
       <label>Departure Time</label>
       <div class="input-group mb-3">
@@ -73,13 +75,19 @@
                   function doSomethingElse()
                     {
                       var job_status = $('input[name=job_status]').val();
-                      var jobregister_id = $('input[name=jobregister_id]').val();
+                      var job_assign = $('input[name=job_assign]').val();
+                      var customer_name = $('input[name=customer_name]').val();
+                      var today_date = $('input[name=today_date]').val();
                       
                       if(job_status!='' || job_status=='',
-                     jobregister_id!='' || jobregister_id=='')
+                         job_assign!='' || job_assign=='',
+                      customer_name!='' || customer_name=='',
+                         today_date!='' || today_date=='')
                         {
                           var formData = {job_status: job_status,
-                                      jobregister_id: jobregister_id};
+                                          job_assign: job_assign,
+                                       customer_name: customer_name,
+                                          today_date: today_date};
                           
                           $.ajax({
                                     url: "changeStatus.php",
