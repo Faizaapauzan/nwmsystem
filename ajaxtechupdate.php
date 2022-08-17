@@ -37,7 +37,7 @@
           $query = "SELECT * FROM job_register 
                     WHERE customer_name ='$customer_name'
                     AND job_assign ='{$_SESSION['username']}' 
-                    LIMIT 1";
+                    DESC LIMIT 1";
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
@@ -84,10 +84,10 @@
                       customer_name!='' || customer_name=='',
                          today_date!='' || today_date=='')
                         {
-                          var formData = {job_status: job_status,
-                                          job_assign: job_assign,
-                                       customer_name: customer_name,
-                                          today_date: today_date};
+                          var formData = {job_status:job_status,
+                                          job_assign:job_assign,
+                                       customer_name:customer_name,
+                                          today_date:today_date};
                           
                           $.ajax({
                                     url: "changeStatus.php",
