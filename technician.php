@@ -295,7 +295,7 @@ session_start();
 							
 								echo "<nav id='mainNav'>
 									  <div class='cards'>
-									  <div class='card' id='notYetStatus' data-id='".$row['customer_name']."'  data-toggle='modal' data-target='#myModal'>
+									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."'  data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
