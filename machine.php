@@ -68,6 +68,8 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
+        <!-- Select2 CSS --> 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
    
    <!-- Script -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -77,6 +79,8 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+        <!-- Select2 JS --> 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
@@ -240,6 +244,16 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
 
     </nav>  
 
+    
+    <?php
+        $db = mysqli_connect("localhost","root","","nwmsystem");
+        if(!$db)
+        {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+    ?>
+
+
   <!--Add machine-->
         <div id="popupListAddForm" class="modal">
         <div class="listAddForm">
@@ -248,42 +262,74 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
         <form action="machineindex.php" method="post">
         <div class="listAddForm-details">
 
-        <div class="input-box">
+        
+
+
+        <div class="CodeDropdown">
+            <label for="brand">Machine Brand</label>
+            <select class="form-select" id="brand">
+                <option value=""> Select Machine Brand</option>
+                <?php
+
+                $querydrop = "select * from machine_brand";
+                // $query = mysqli_query($con, $qr);
+                $result = $conn->query($querydrop);
+                if ($result->num_rows > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+
+                ?>
+                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+                <?php
+                    }
+                }
+
+                ?>
+
+            </select>
+            </div>
+
+        <div class="CodeDropdown" style="padding-top: 15px;">
+            <label for="type"> Machine Type</label><br>
+            <select name="type_id" style="width: 400px; height:40px;" class="form-select" id="type">
+                <option value="">Select Machine Type</option>
+                <!-- <option value="Add Machine Type" style="color:darkblue;">Add Machine Type</option> -->
+            </select>
+            <!-- <input type="text" id="machinetype" name="type_id">   -->
+        </div> 
+
+        <div class="CodeDropdown" style="padding-top: 20px;">
+            <label for="sn"> Serial Number </label><br>
+            <select style="width: 400px; height:40px;"  class="form-select" id="serialnumbers" onchange="GetMachine(this.value)">
+                <option value="">Select Serial Number</option>
+                <option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>
+            </select>
+            <input type="text" id="serialnumber" name="serialnumber">  
+        </div> 
+
+        
+        <div class="CodeDropdown" style="padding-top: 20px;">
         <label for="MachineCode" class="details">Machine Code</label>
         <input type="text" id="machine_code" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required> 
         </div>
-
-        <div class="input-box">
+        
+        <div class="CodeDropdown" style="padding-top: 20px;">
         <label for="MachineCode" class="details">Machine Name</label>
         <input type="text" id="machine_name" name="machine_name" placeholder="Enter Machine Name" required>
         </div>
 
-        <div class="input-box">
-        <label for="MachineType" class="details">Machine Type</label>
-        <input type="text" id="MachineType" name="machine_type" placeholder="Enter Machine Type">
-        </div>
 
-        <div class="input-box">
-        <label for="MachineBrand" class="details">Machine Brand</label>
-        <input type="text" id="MachineBrand" name="machine_brand" placeholder="Enter Machine Brand" required>
-        </div>
 
-        <div class="input-box">
-        <label for="SerialNumber" class="details">Serial Number</label>
-        <input type="text" id="SerialNumber" name="serialnumber" placeholder="Enter Machine Serial Number" required>
-        </div>
-
-        <div class="input-box">
+        <div class="CodeDropdown" style="padding-top: 20px;">
         <label for="customerName" class="details">Customer Name</label>
         <input type="text" id="customerName" name="customer_name" placeholder="Enter Customer Name" required>
         </div>
 
-        <div class="input-box">
+        <div class="CodeDropdown" style="padding-top: 20px;">
         <label for="PurchaseDate" class="details">Purchase Date</label>
         <input type="date" id="PurchaseDate" name="purchase_date" placeholder="Enter Machine Purchase Date">
         </div>
 
-        <div class="input-box">
+        <div class="CodeDropdown" style="padding-top: 20px;">
         <label for="MachineDescription" class="details">Machine Description</label>
         <input type="text" id="MachineDescription" name="machine_description" placeholder="Enter Machine Description">
         </div>
@@ -300,6 +346,61 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
         </form></div>
         </div>
         </div>
+
+            <script>
+    $(document).ready(function() {
+
+    $('#serialnumber').hide();
+
+    $("#serialnumbers").change(function() {
+        var val = $(this).val();
+        
+        if (val == 'Add Serial Number') {
+            $('#serialnumber').show();
+        } else {
+            $('#serialnumber').hide();
+        }
+    }).change();
+
+});
+
+            </script>
+
+         <script>
+        $(document).ready(function() {
+            $("#brand").on('change', function() {
+                var brandid = $(this).val();
+
+                $.ajax({
+                    method: "POST",
+                    url: "ajaxData.php",
+                    data: {
+                        id: brandid
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#type").html(data);
+                        $("#serialnumbers").html('<option value="">Select Serial Number</option><option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>');
+
+                    }
+                });
+            });
+       
+        });
+    </script>
+
+    
+       <script>
+        $(document).ready(function(){
+            
+            // Initialize select2
+            $("#type").select2();
+
+        });
+        </script>
+
+
+        
 
         <!--Machine-->
         <div class="machineList">
@@ -459,13 +560,13 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
         <script type='text/javascript'>
             $(document).ready(function() {
             $('body').on('click','.userinfo',function(){ 
-            var userid = $(this).data('machine_id');
+            var machine_id = $(this).data('machine_id');
 
             // AJAX request
             $.ajax({
                 url: 'ajaxmachine.php',
                 type: 'post',
-                data: { userid: userid },
+                data: { machine_id: machine_id },
                 success: function(response) {
                 // Add response in Modal body
                 $('.modal-body').html(response);

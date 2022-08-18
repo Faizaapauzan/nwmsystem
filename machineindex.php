@@ -7,8 +7,7 @@ include 'dbconnect.php';
       
         $machine_code = $_POST['machine_code'];
         $machine_name = $_POST['machine_name'];
-        $machine_type = $_POST['machine_type'];
-        $machine_brand   = $_POST['machine_brand'];
+        $type_id = $_POST['type_id'];
 		$serialnumber = $_POST['serialnumber'];
 		$customer_name = $_POST['customer_name'];
 		$purchase_date = $_POST['purchase_date'];
@@ -17,12 +16,11 @@ include 'dbconnect.php';
 		$machinelistlastmodify_by = $_POST['machinelistlastmodify_by'];
            
 	
-	    $sql = "INSERT INTO machine_list (machine_code, machine_name, machine_type, machine_brand, serialnumber, customer_name, purchase_date, machine_description, machinelistcreated_by, machinelistlastmodify_by)
+	    $sql = "INSERT INTO machine_list (machine_code, machine_name, type_id, serialnumber, customer_name, purchase_date, machine_description, machinelistcreated_by, machinelistlastmodify_by)
 
 	 VALUES ('".addslashes($_POST['machine_code'])."',
         '".addslashes($_POST['machine_name'])."',
-        '".addslashes($_POST['machine_type'])."',
-        '".addslashes($_POST['machine_brand'])."',
+        '".addslashes($_POST['type_id'])."',
         '".addslashes($_POST['serialnumber'])."',
         '".addslashes($_POST['customer_name'])."',
         '".addslashes($_POST['purchase_date'])."',

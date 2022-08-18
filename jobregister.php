@@ -1,6 +1,33 @@
+<?php
+ session_start();
+ // cek apakah yang mengakses halaman ini sudah login
+ if($_SESSION['staff_position']=="" ){
+  header("location:index.php?error");
+ }
+
+if(!isset($_SESSION['username']))
+	{	
+    header("location:index.php?error");
+	}
+
+    elseif($_SESSION['staff_position']== 'Admin')
+	{
+
+	}
+
+        elseif($_SESSION['staff_position']== 'Manager')
+	{
+	}
+
+  else
+	{
+			header("location:index.php?error");
+	}
+
+?>
 
 <?php
-session_start();
+
 $today_date = date("Y.m.d");
 $_SESSION['storeDate'] = $today_date;
 ?>
@@ -376,39 +403,76 @@ include 'dbconnect.php';
                 <div class="contentListAddForm">
                     <form id="machineForm" method="post">
                         <div class="listAddForm-details">
-                            <div class="input-box">
-                                <label for="MachineCode" class="details">Machine Code</label>
-                                <input type="text" id="machineCode" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required><span style='color:red'> **required </span>  
-                               
-                            </div>
-                            <div class="input-box">
-                                <label for="MachineName" class="details">Machine Name</label>
-                                <input type="text" id="machinename" name="machine_name" placeholder="Enter Machine Name" required>
-                            </div>
-                            <div class="input-box">
-                                <label for="MachineType" class="details">Machine Type</label>
-                                <input type="text" id="MachineType" name="machine_type" placeholder="Enter Machine Type" required>
-                            </div>
-                            <div class="input-box">
-                                <label for="MachineBrand" class="details">Machine Brand</label>
-                                <input type="text" id="MachineBrand" name="machine_brand" placeholder="Enter Machine Brand" required>
-                            </div>
                              <div class="input-box">
-                                <label for="SerialNumber" class="details">Serial Number</label>
-                                <input type="text" id="SerialNumber" name="serialnumber" placeholder="Enter Machine Serial Number" required>
-                            </div>
-                             <div class="input-box">
-                                <label for="customerName" class="details">Customer Name</label>
-                                <input type="text" id="customerName" name="customer_name" placeholder="Enter Customer Name" required>
-                            </div>
-                             <div class="input-box">
-                                <label for="PurchaseDate" class="details">Purchase Date</label>
-                                <input type="date" id="PurchaseDate" name="purchase_date" placeholder="Enter Machine Purchase Date">
-                            </div>
-                            <div class="input-box">
-                                <label for="MachineDescription" class="details">Machine Description</label>
-                                <input type="text" id="MachineDescription" name="machine_description" placeholder="Enter Machine Description" required>
-                            </div>
+            <label for="brand">Machine Brand</label><br>
+            <select style="height:40px; width: -webkit-fill-available;" class="form-select" id="brandmachine">
+                <option value=""> Select Machine Brand</option>
+                <?php
+
+                $querydrop = "select * from machine_brand";
+                // $query = mysqli_query($con, $qr);
+                $result = $conn->query($querydrop);
+                if ($result->num_rows > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+
+                ?>
+                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+                <?php
+                    }
+                }
+
+                ?>
+
+            </select>
+            </div>
+
+        <div class="input-box">
+            <label for="type"> Machine Type</label><br>
+            <select style="height:40px; width: -webkit-fill-available;" name="type_id" style="height:40px;" class="form-select" id="typemachine">
+                <option value="">Select Machine Type</option>
+                <!-- <option value="Add Machine Type" style="color:darkblue;">Add Machine Type</option> -->
+            </select>
+            <!-- <input type="text" id="machinetype" name="type_id">   -->
+        </div> 
+
+        <div class="input-box">
+            <label for="sn"> Serial Number </label><br>
+            <select style="height:40px; width: -webkit-fill-available;"  class="form-select" id="serialnumbermachine" onchange="GetMachine(this.value)">
+                <option value="">Select Serial Number</option>
+                <option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>
+            </select>
+            <input type="text" id="snmachine" name="serialnumber">  
+        </div> 
+
+        
+        <div class="input-box" >
+        <label for="MachineCode" class="details">Machine Code</label>
+        <input type="text" id="machinecode" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required> 
+        </div>
+        
+        <div class="input-box">
+        <label for="MachineCode" class="details">Machine Name</label>
+        <input type="text" id="machinename" name="machine_name" placeholder="Enter Machine Name" required>
+        </div>
+
+
+
+        <div class="input-box">
+        <label for="customerName" class="details">Customer Name</label>
+        <input type="text" id="customerName" name="customer_name" placeholder="Enter Customer Name" required>
+        </div>
+
+        <div class="input-box" >
+        <label for="PurchaseDate" class="details">Purchase Date</label>
+        <input type="date" id="PurchaseDate" name="purchase_date" placeholder="Enter Machine Purchase Date">
+        </div>
+
+        <div class="input-box">
+        <label for="MachineDescription" class="details">Machine Description</label>
+        <input type="text" id="MachineDescription" name="machine_description" placeholder="Enter Machine Description">
+        </div>
+
+       
 
                              <?php if (isset($_SESSION["username"])) ?>
                             <input type="hidden" name="machinelistcreated_by" id="machinelistcreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
@@ -418,13 +482,66 @@ include 'dbconnect.php';
 
                         <div class="listAddFormbutton">
                             <p class="control"><b id="mchmesage"></b></p>      
-                            <input class="button is-info is-large" id="save_machine" name="save_machine" type="button" value="Register" />
-                            <input type="button" onclick="document.getElementById('machineAddForm').style.display='none'" value="Cancel" id="cancelbtn">
+                            <input style="padding-left: 23px; padding-top: 5px;" class="button is-info is-large" id="save_machine" name="save_machine" type="button" value="Register" />
+                            <input style="padding-left: 23px; padding-top: 5px;" type="button" onclick="document.getElementById('machineAddForm').style.display='none'" value="Cancel" id="cancelbtn">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
+           <script>
+    $(document).ready(function() {
+
+    $('#snmachine').hide();
+
+    $("#serialnumbermachine").change(function() {
+        var val = $(this).val();
+        
+        if (val == 'Add Serial Number') {
+            $('#snmachine').show();
+        } else {
+            $('#snmachine').hide();
+        }
+    }).change();
+
+});
+
+            </script>
+
+         <script>
+        $(document).ready(function() {
+            $("#brandmachine").on('change', function() {
+                var brandid = $(this).val();
+
+                $.ajax({
+                    method: "POST",
+                    url: "ajaxData.php",
+                    data: {
+                        id: brandid
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#typemachine").html(data);
+                        $("#serialnumbermachine").html('<option value="">Select Serial Number</option><option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>');
+
+                    }
+                });
+            });
+       
+        });
+    </script>
+
+    
+       <script>
+        $(document).ready(function(){
+            
+            // Initialize select2
+            $("#type").select2();
+
+        });
+        </script>
+
 
         <script>
     $(document).ready(function () {
@@ -436,11 +553,10 @@ include 'dbconnect.php';
                 data: data,
                 success: function (response) {
                     $('#mchmesage').text(response);
+                    $('#type_id').text('');
+                    $('#serialnumber').text('');
                     $('#machine_code').text('');
                     $('#machine_name').text('');
-                    $('#machine_type').text('');
-                    $('#machine_brand').text('');
-                    $('#serialnumber').text('');
                     $('#customer_name').text('');
                     $('#purchase_date').text('');
                     $('#machine_description').text('');
@@ -716,50 +832,46 @@ if(!$db)
     <div class="input-box">
      <input type="text" name="job_code" id='jobText' class='form-control' placeholder='Enter Job Code' onchange="GetJob(this.value)" value="" readonly>
     </div></div></div>
-                    <div class="dropdownCode">
-                        <!-- <div class="select"><i class='bx bxs-down-arrow'></i></div> -->
-                        <div class="add"><i class='bx bxs-plus-square' id="btnRegister" onclick="document.getElementById('jobAddForm').style.display='block'"></i></div>
-                    </div>
-                    <span style='color:red'> **required </span> 
-                    <br/>
-                    <br/>
-                    <div class="input-box">
-                        <label for="job_name" class="details">Job Name</label>
-                        <input type="text" id="job_name" name="job_name" placeholder="Enter Job Name" required>
-                    </div>
-                    <div class="input-box">
-                        <label for="JobDescription" class="details">Job Description</label>
-                        <textarea name="job_description" id="job_description" placeholder="Enter Job Description" rows="5" cols="119" required>
-                        </textarea>
-                    </div>
-                    <div class="input-box">
-                        <label for="job_priority" class="details">Job Priority</label>
-                        <input type="text" id="jobPriority" name="job_priority" placeholder="Enter Job Priority">
-                    </div>
-                    <div class="input-box">
-                        <label for="requested_date" class="details">Request Date</label>
-                        <input type="date" id="requestDate" name="requested_date" placeholder="Enter Request Date">
-                    </div>
-                    <div class="input-box">
-                        <label for="delivery_date" class="details">Delivery Date</label>
-                        <input type="date" id="deliveryDate" name="delivery_date" placeholder="Enter Delivery Date">
-                        
+    <div class="dropdownCode">
+    <!-- <div class="select"><i class='bx bxs-down-arrow'></i></div> -->
+    <div class="add"><i class='bx bxs-plus-square' id="btnRegister" onclick="document.getElementById('jobAddForm').style.display='block'"></i></div>
+    </div>
+    <span style='color:red'> **required </span> 
+    <br/><br/>
+    <div class="input-box">
+    <label for="job_name" class="details">Job Name</label>
+    <input type="text" id="job_name" name="job_name" placeholder="Enter Job Name" required>
+    </div>
+    <div class="input-box">
+    <label for="JobDescription" class="details">Job Description</label>
+    <textarea name="job_description" id="job_description" placeholder="Enter Job Description" rows="5" cols="119" required>
+    </textarea>
+    </div>
+    <div class="input-box">
+    <label for="job_priority" class="details">Job Priority</label>
+    <input type="text" id="jobPriority" name="job_priority" placeholder="Enter Job Priority">
+    </div>
+    <div class="input-box">
+    <label for="requested_date" class="details">Request Date</label>
+    <input type="date" id="requestDate" name="requested_date" placeholder="Enter Request Date">
+    </div>
+    <div class="input-box">
+    <label for="delivery_date" class="details">Delivery Date</label>
+    <input type="date" id="deliveryDate" name="delivery_date" placeholder="Enter Delivery Date">
+    </div>
+    <div class="btn-box">
+    <button type="button" id="btnBack2">Back</button>
+    <button type="next" id="btnNext2">Next</button>
+    </div></div>
 
-                    </div>
-                    <div class="btn-box">
-                        <button type="button" id="btnBack2">Back</button>
-                        <button type="next" id="btnNext2">Next</button>
-</div>
-                </div>
-
-                        <script>
+    <script>
         $(document).ready(function(){
             
             // Initialize select2
             $("#jobModel").select2();
 
         });
-        </script>
+    </script>
 
 
 <script>
@@ -876,89 +988,236 @@ $("#jobModel").on("change",function(){
                         <h2>Machine Details</h2>
                     </div>
                     <br/>
- <div class="CodeDropdown">
-    <div class="form-group"><label>Machine Code</label>
-    <br/><br/>
-   <select id="machineModel" onchange="GetMachine(this.value)"> <option value="">-- Select Machine --</option>
-   
-   <?php
-        include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($db, "SELECT machine_code, machine_name, machine_id, customer_name From machine_list ORDER BY machinelistlastmodify_at DESC");  // Use select query here 
 
-        while($data = mysqli_fetch_array($records))
-        {
-            echo "<option value='". $data['machine_id'] ."'>" .$data['machine_code']. "      -      " . $data['machine_name']."  -   " . $data['customer_name']."</option>";  // displaying data in option menu
-        }	
-    ?></select>
-    <div class="input-box">
-    <input type="hidden" name="machine_id" id='machinetext' class='form-control' onchange="GetMachine(this.value)" value="" readonly>
-    </div>
-    <div class="input-box">
-    <input type="text" id="machine_code" name="machine_code" placeholder="Enter Machine Code" readonly>
-    </div>
-    </div></div>
                     <div class="dropdownCode">
                         <!-- <div class="select"><i class='bx bxs-down-arrow'></i></div> -->
-                        <div class="add"><i class='bx bxs-plus-square' id="btnRegister" onclick="document.getElementById('machineAddForm').style.display='block'"></i></div>
-                    </div>
-                    <span style='color:red'> **required </span> 
-                    <br/>
-                    <br/>
-                    <div class="input-box">
-                        <label for="machine_name" class="details">Machine Name</label>
-                        <input type="text" id="machine_name" name="machine_name" placeholder="Enter Machine Name" required>
-                    </div>
-                    <div class="input-box">
-                        <label for="machine_type" class="details">Machine Type</label>
-                        <input type="text" id="machine_type" name="machine_type" placeholder="Enter Machine Type" required>
-                    </div>
-                    <div class="input-box">
-                        <label for="machine_brand" class="details">Machine Brand</label>
-                        <input type="text" id="machine_brand" name="machine_brand" placeholder="Enter Machine Brand" required>
-                    </div>
-                     <div class="input-box">
-                        <label for="serialnumber" class="details">Serial Number</label>
-                        <input type="text" id="serialnumber" name="serialnumber" placeholder="Enter Serial Number" required>
-                    </div>
-                       <div class="input-box">
-                        <label for="MachineDescription" class="details">Machine Description</label>
-                        <textarea name="machine_description" id="machine_description" placeholder="Enter Machine Description" rows="5" cols="119">
-                        </textarea>
-                     <div class="CodeDropdown">
-                        <label for="Accessories Required" class="details">Accessories Required</label><br/>
-                        <select type="text" id="accessories_required" name="accessories_required">
-            <option value=''></option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-        </select>
-                           
+                    <div class="add"><i class='bx bxs-plus-square' id="btnRegister" onclick="document.getElementById('machineAddForm').style.display='block'"></i></div>
                     </div>
 
-                    <?php if (isset($_SESSION["username"])) ?>
-<input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-<input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+            <div class="CodeDropdown">
+            <label for="brand">Machine Brand</label>
+            <select onchange="GetBrand(this.value)" class="form-select" id="brand" required>
+                <option value=""> Select Brand</option>
+                <?php
 
-                   <div class="btn-box">
+                $query = "select * from machine_brand";
+                // $query = mysqli_query($con, $qr);
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+
+                ?>
+                        <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+                <?php
+                    }
+                }
+
+                ?>
+
+            </select>
+             <input type="hidden" id="brand_id" name="brand_id" onchange="GetBrand(this.value)" readonly >  
+              <input type="hidden" id="brandname" name="machine_brand" onchange="GetBrand(this.value)" readonly >  
+        </div>
+
+<script>
+		function GetBrand(str) {
+			if (str.length == 0) {
+                document.getElementById("brand_id").value = "";
+                document.getElementById("brandname").value = "";
+				return;
+			}
+			else {
+
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						var myObj = JSON.parse(this.responseText);
+
+				        document.getElementById
+							("brand_id").value = myObj[0];
+                        document.getElementById
+							("brandname").value = myObj[1];
+            
+					}
+				};
+
+				xmlhttp.open("GET", "fetchbrand.php?brand_id=" + str, true);
+				xmlhttp.send();
+			}
+		}
+	</script>
+
+        <div class="CodeDropdown" style="padding-top: 15px;">
+            <label for="type"> Machine Type</label>
+            <select onchange="GetType(this.value)" class="form-select" id="type" required>
+                <option value="">Select Type</option>
+            </select>
+            <input type="hidden" id="type_id" name="type_id" onchange="GetType(this.value)" readonly >  
+             <input type="hidden" id="type_name" name="machine_type" onchange="GetType(this.value)" readonly >  
+        </div> 
+
+        <script>
+		function GetType(str) {
+			if (str.length == 0) {
+                document.getElementById("type_id").value = "";
+                 document.getElementById("type_name").value = "";
+				return;
+			}
+			else {
+
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						var myObj = JSON.parse(this.responseText);
+
+				        document.getElementById
+							("type_id").value = myObj[0];
+
+                        document.getElementById
+							("type_name").value = myObj[1];
+            
+					}
+				};
+
+				xmlhttp.open("GET", "fetchtype.php?type_id=" + str, true);
+				xmlhttp.send();
+			}
+		}
+	</script>
+
+
+        <div class="CodeDropdown" style="padding-top: 20px;">
+            <label for="sn"> Serial Number </label>
+            <select class="form-select" id="serialnumbers" onchange="GetMachine(this.value)">
+                <option value="">Select Serial Number</option>
+                 <option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>
+            </select>
+             <input type="text" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber">  
+        </div> 
+ 
+                  
+    <div class="input-box" style="padding-top: 10px;">
+    <label for="machine_code" class="details">Machine Code</label>
+    <input type="hidden" id="machine_id" name="machine_id">  
+    <input type="hidden" id="serialnumber" name="serialnumber">  
+    <input type="text" id="machine_code" name="machine_code" placeholder="Enter Machine Code">
+    </div>
+
+    <div class="input-box">
+    <label for="machine_name" class="details">Machine Name</label>
+    <input type="text" id="machine_name" name="machine_name" placeholder="Enter Machine Name">
+    </div>
+           
+    <div class="input-box">
+    <label for="MachineDescription" class="details">Machine Description</label>
+    <textarea name="machine_description" id="machine_description" placeholder="Enter Machine Description" rows="5" cols="119">
+    </textarea>
+
+    <div class="CodeDropdown">
+    <label for="Accessories Required" class="details">Accessories Required</label><br/>
+    <select type="text" id="accessories_required" name="accessories_required">
+    <option value=''></option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+    </select>
+    </div>
+
+    <?php if (isset($_SESSION["username"])) ?>
+    <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+    <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+
+    <div class="btn-box">
  <button type="button" id="btnBack3">Back</button>
  <button type="submit" name="submit" value="register">Register</button>
 
-                    <!-- </form>  -->
     </form>
-        </div>
-        </div>
+    </div></div>
 
         </div>
+        <script>
+        $(document).ready(function() {
+            $("#brand").on('change', function() {
+                var brandid = $(this).val();
 
-                            <script>
+                $.ajax({
+                    method: "POST",
+                    url: "ajaxData.php",
+                    data: {
+                        id: brandid
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#type").html(data);
+                        $("#serialnumbers").html('<option value="">Select Serial Number</option');
+
+                    }
+                });
+            });
+            $("#type").on('change', function() {
+                var typeid = $(this).val();
+                $.ajax({
+                    method: "POST",
+                    url: "ajaxData.php",
+                    data: {
+                        sid: typeid
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#serialnumbers").html(data);
+
+                    }
+
+                });
+            });
+        });
+    </script>
+
+                <script>
+    $(document).ready(function() {
+
+    $('#serialnumber').hide();
+
+    $("#serialnumbers").change(function() {
+        var val = $(this).val();
+        
+        if (val == 'Add Serial Number') {
+            $('#serialnumber').show();
+        } else {
+            $('#serialnumber').hide();
+        }
+    }).change();
+
+});
+
+            </script>
+
+
+       <script>
         $(document).ready(function(){
             
             // Initialize select2
-            $("#machineModel").select2();
+            $("#type").select2();
 
         });
         </script>
 
-                <script>
+        <script>
+        $(document).ready(function(){
+            
+            // Initialize select2
+            $("#serialnumbers").select2();
+
+        });
+        </script>
+
+
+ <script>
 
 $(function() {
     $("#save_machine").click(function(e) {
@@ -992,17 +1251,7 @@ $(function() {
 
 </script>
 
-<script>
-$(document).ready(function(){
-	
-$("#machineModel").on("change",function(){
-   var GetValue=$("#machineModel").val();
-   $("#machinetext").val(GetValue);
-});
 
-});
-
-</script>
 
 <script>
 		// onkeyup event will occur when the user
@@ -1010,11 +1259,10 @@ $("#machineModel").on("change",function(){
 		// assigned to this event
 		function GetMachine(str) {
 			if (str.length == 0) {
+                 document.getElementById("machine_id").value = "";
+                 document.getElementById("serialnumber").value = "";
                 document.getElementById("machine_code").value = "";
 				document.getElementById("machine_name").value = "";
-				document.getElementById("machine_type").value = "";
-                document.getElementById("machine_brand").value = "";
-                document.getElementById("serialnumber").value = "";
                  document.getElementById("machine_description").value = "";
 				return;
 			}
@@ -1038,22 +1286,21 @@ $("#machineModel").on("change",function(){
 						// a variable assign the value
 						// received to first name input field
 						
+                        document.getElementById
+							("machine_id").value = myObj[0];
+
+                            	document.getElementById
+							("serialnumber").value = myObj[1];
                         
 						document.getElementById
-							("machine_code").value = myObj[0];
+							("machine_code").value = myObj[2];
 						
 						// Assign the value received to
 						// last name input field
                         document.getElementById
-							("machine_name").value = myObj[1];
-						document.getElementById(
-							"machine_type").value = myObj[2];
+							("machine_name").value = myObj[3];
                             document.getElementById(
-							"machine_brand").value = myObj[3];
-                            document.getElementById(
-							"serialnumber").value = myObj[4];
-                            document.getElementById(
-							"machine_description").value = myObj[5];
+							"machine_description").value = myObj[4];
                            
 					}
 				};
