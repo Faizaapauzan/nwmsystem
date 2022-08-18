@@ -37,7 +37,7 @@
           $query = "SELECT * FROM job_register 
                     WHERE customer_name ='$customer_name'
                     AND job_assign ='{$_SESSION['username']}' 
-                    DESC LIMIT 1";
+                    ORDER BY customer_name DESC LIMIT 1";
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
