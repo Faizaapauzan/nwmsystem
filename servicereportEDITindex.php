@@ -16,6 +16,8 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
     &&
    isset($_POST['job_assign']) && $_POST['job_assign']!='' || $_POST['job_assign']==''
     &&
+     isset($_POST['assistants']) && $_POST['assistants']!='' || $_POST['assistants']==''
+    &&
    isset($_POST['technician_arrival']) && $_POST['technician_arrival']!='' || $_POST['technician_arrival']==''
     &&
    isset($_POST['technician_leaving']) && $_POST['technician_leaving']!='' || $_POST['technician_leaving']==''
@@ -48,6 +50,7 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
                        cust_phone1 ='".addslashes($_POST['cust_phone1'])."',
                        job_name ='".addslashes($_POST['job_name'])."',
                        job_assign ='".addslashes($_POST['job_assign'])."',
+                       assistants ='".addslashes($_POST['assistants'])."',
                        technician_arrival ='".addslashes($_POST['technician_arrival'])."',
                        technician_leaving ='".addslashes($_POST['technician_leaving'])."',
                        machine_name ='".addslashes($_POST['machine_name'])."',
