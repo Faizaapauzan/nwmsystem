@@ -49,7 +49,7 @@
       <input type="hidden" name="tech_name" value="<?php echo $_SESSION['username']; ?>">
       <input type="hidden" name="job_assign" value="<?php echo $_SESSION['username']; ?>">
       <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-      <input type="hidden" name="today_date" value="<?php echo $row['today_date'] ?>">
+      <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>">
 
       <label>Departure Time</label>
       <div class="input-group mb-3">
@@ -77,17 +77,17 @@
                       var job_status = $('input[name=job_status]').val();
                       var job_assign = $('input[name=job_assign]').val();
                       var customer_name = $('input[name=customer_name]').val();
-                      var today_date = $('input[name=today_date]').val();
+                      var DateAssign = $('input[name=DateAssign]').val();
                       
                       if(job_status!='' || job_status=='',
                          job_assign!='' || job_assign=='',
                       customer_name!='' || customer_name=='',
-                         today_date!='' || today_date=='')
+                         DateAssign!='' || DateAssign=='')
                         {
                           var formData = {job_status:job_status,
                                           job_assign:job_assign,
                                        customer_name:customer_name,
-                                          today_date:today_date};
+                                          DateAssign:DateAssign};
                           
                           $.ajax({
                                     url: "changeStatus.php",

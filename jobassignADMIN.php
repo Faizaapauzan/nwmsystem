@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start();
+
+?>
+
 
 <!DOCTYPE html>
 
@@ -16,6 +19,8 @@
 </style>
 
 <body>
+
+
 <?php
     $connection = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($connection, 'nwmsystem');
@@ -57,8 +62,15 @@
     <input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>  
       <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>
 </select>
+
+<?php $DateAssign = date("Y.m.d");
+$_SESSION['storeDate'] = $DateAssign; ?>
+
+
+<input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	
    
 <?php if (isset($_SESSION["username"])) { ; } ?>
+
 <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
 <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" />
 <!-- <button style="height: 42px; margin-top: 2px;  border-radius: 5px; width: 145px;" id="technicianassign" name="technicianassign">Update</button> -->
