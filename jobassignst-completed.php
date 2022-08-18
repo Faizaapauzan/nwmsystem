@@ -64,9 +64,22 @@
 </select>  
 </div>
 
+     <?php
+//include connection file 
+include_once("dbconnect.php");
+
+  if (isset($_POST['jobregister_id'])) {
+      $jobregister_id =$_POST['jobregister_id'];
+
+      $sql2 = "SELECT * FROM `assistants` WHERE  jobregister_id ='$jobregister_id'";
+      $queryRecords = mysqli_query($conn, $sql2) or die("Error to fetch Accessories data");
+  }
+  
+?>
+
  <div class="assistants" style="padding-top: 25px;" id="multipselect">
     <label for="Job_assistant">Assistants :</label>
-    <input type="text" id='Job_assistant' class="form-control" value="<?php echo $row['Job_assistant']?>" readonly>      
+    <input type="text" id='assistants' class="form-control" value="<?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?> / <?php endforeach;?>" readonly>      
     <br/>
 </div>
 

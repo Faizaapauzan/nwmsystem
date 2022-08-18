@@ -753,9 +753,7 @@ session_start();
 							<div class="tabs" id="tab13">
 								<h6 class="text-muted">Job Assign</h6>
 							</div>
-							<div class="tabs" id="tab12">
-								<h6 class="text-muted">Update</h6>
-							</div>
+						
 							<div class="tabs" id="tab14">
 								<h6 class="text-muted">Accessories</h6>
 							</div>
@@ -796,7 +794,7 @@ session_start();
 											$('.card-complete').click(function() {
 												var jobregister_id = $(this).data('id-complete');
 												$.ajax({
-													url: 'ajaxtechnician.php',
+													url: 'ajaxtechnician-completed.php',
 													type: 'post',
 													data: {jobregister_id: jobregister_id},
 													success: function(response) {
@@ -838,33 +836,6 @@ session_start();
 									
 								</fieldset>
 								
-								<!--Update Completed-->
-								
-								<fieldset id="tab121">
-									<form action="ajaxtechupdate-completed.php" method="post">
-										<div class="techupdate-details-completed">
-
-										</div>
-									</form>
-									
-									<script type='text/javascript'>
-										$(document).ready(function() {
-											$('.card-complete').click(function() {
-												var jobregister_id = $(this).data('id-complete');
-												$.ajax({
-													url:'ajaxtechupdate-completed.php',
-													type:'post',
-													data:{jobregister_id: jobregister_id},
-													success: function(response) {
-														$('.techupdate-details-completed').html(response);
-														$('#myModal-completed').modal('show');
-													}
-												});
-											});
-										});
-									</script>
-									
-								</fieldset>
 								
 								<!--Accessories Completed-->
 								

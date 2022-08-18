@@ -57,7 +57,11 @@
   <select disabled class="form-control" id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
                      <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
+        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' AND tech_avai = ''
+         OR
+         technician_rank = '2nd Leader' AND tech_avai = ''
+         OR
+         staff_position='storekeeper' AND tech_avai = '' ORDER BY staffregister_id ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {

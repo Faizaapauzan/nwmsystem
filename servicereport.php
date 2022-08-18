@@ -140,26 +140,73 @@
   font-weight: 600;
 }
 
-.try1 {
-  margin: 11px;
-  font-weight: 600;
-  display: inline-block;
-  margin-left: -1px;
-  max-width: 354px;
-}
-
-.try2 {
-  margin: 2px;
-  font-weight: 600;
-  display: inline-block;
-  margin-left: -18px;
-  max-width: 354px;
-}
-
 .try3 {
   margin: -12px;
   font-weight: 600;
   margin-left: 49px;
+}
+
+.rightleft {
+  display: inline-flex;
+
+}
+
+.rightside {
+  margin-left: 30px;
+
+}
+
+    
+.bothside {
+  display: inline-flex;
+}
+
+.infoarea {
+ writing-mode: horizontal-tb !important;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
+    text-rendering: auto;
+    display: inline-block;
+    line-height: 12px;
+    text-align: start;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    overflow:hidden;
+    column-count: initial !important;
+    width: 311px;
+    height: 92px;
+    margin: 19px;
+    padding: 1px 2px;
+    border-width: 1px;
+    resize: none;
+    box-sizing: border-box;
+    border-style: solid;
+}
+
+.problemarea {
+    writing-mode: horizontal-tb !important;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
+    text-rendering: auto;
+    line-height: 12px;
+    display: inline-block;
+    text-align: start;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    overflow:hidden;
+    column-count: initial !important;
+    width: 311px;
+    height: 92px;
+    margin: 19px;
+    padding: 1px 2px;
+    border-width: 1px;
+    resize: none;
+    box-sizing: border-box;
+    border-style: solid;
 }
 
 .extra-info p span {
@@ -212,6 +259,8 @@ footer a {
   margin-left: 226px;
   margin-bottom: 13px;
 }
+
+
 
 footer p {
   padding: 6px;
@@ -285,11 +334,25 @@ tr td:first-child:before {
                 
         if (isset($_POST['jobregister_id'])) {
             $jobregister_id =$_POST['jobregister_id'];
+
             $query = ("SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'");
             $query_run = mysqli_query($connection, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
+
+     <?php
+//include connection file 
+include_once("dbconnect.php");
+
+  if (isset($_POST['jobregister_id'])) {
+      $jobregister_id =$_POST['jobregister_id'];
+
+      $sql2 = "SELECT * FROM `assistants` WHERE  jobregister_id ='$jobregister_id'";
+      $queryRecords = mysqli_query($conn, $sql2) or die("Error to fetch Accessories data");
+  }
+  
+?>
 
     <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
@@ -298,53 +361,23 @@ tr td:first-child:before {
     <div class="row bb pb-3">
     <br/>
     <div class="row extra-info pt-3">
-    <div class="try1">
+      <div class="rightleft">
+    <div class="leftside">
     
     <p><label>Date :</label> <span><input type="text" name="date" value="<?php echo $date = date('d-m-Y'); ?>" class="input"/></span></p>
     <p><label style="position:absolute;">Customer Name :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textarea" contenteditable><?php echo $row['customer_name'] ?></span><input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>" class="input" /></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 2px;" name="job_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['job_name'] ?>"/></span></p>
-    <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?> / <?php echo $row['Job_assistant'] ?>" class="input" /></span></p>
+    <!-- <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?> <?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?><?php endforeach;?>" class="input" id="assistants"/></span></p> -->
+      <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input"/></span></p>
     
+    <p><label style="position:absolute;">Assistants :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 81px;" class="textarea" role="textarea" contenteditable><?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?> / <?php endforeach;?></span><input type="hidden" name="assistants" value="<?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?> / <?php endforeach;?>" class="input" /></p>
+    	 
     <?php } } }?>
 
-    <br/>
-    <p>Problem Description :-</p> 
-    <textarea style="writing-mode: horizontal-tb !important;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: 500;
-    text-rendering: auto;
-    line-height: 12px;
-    display: inline-block;
-    text-align: start;
-    cursor: text;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    overflow:hidden;
-    column-count: initial !important;
-    width: 311px;
-    height: auto;
-    margin: 19px;
-    padding: 1px 2px;
-    border-width: 1px;
-    resize: none;
-    box-sizing: border-box;
-    border-style: solid;" 
-    id="autoresizing" name="Problem_Description" value=""></textarea>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    
-    <script type="text/javascript">
-        $('#autoresizing').on('input', function () {
-        this.style.height = 'auto';
-          
-        this.style.height = 
-                (this.scrollHeight) + 'px';
-        });
-    </script>
- 
     </div>
+
+
 
     <?php
     
@@ -376,7 +409,7 @@ tr td:first-child:before {
 
     <?php } } ?>  
 
-    <div class="try2">
+    <div class="rightside">
     <p><label>Travel Time :</label><span><input type="technician_arrival" name="Travel_Time" class="input" value="<?php echo difftime($DateTime1,$DateTime2)['h']?>   hours <?php echo difftime($DateTime1,$DateTime2)['m']?>  minutes" /></span></p>
 
     <?php
@@ -417,30 +450,30 @@ tr td:first-child:before {
         <br/>
 
     <?php } } ?>
+    
+    <br/></div></div>
 
-    <p>Additional Info :-</p>
-    <textarea style="writing-mode: horizontal-tb !important;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: 500;
-    text-rendering: auto;
-    display: inline-block;
-    line-height: 12px;
-    text-align: start;
-    cursor: text;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    overflow:hidden;
-    column-count: initial !important;
-    width: 311px;
-    height: auto;
-    margin: 19px;
-    padding: 1px 2px;
-    border-width: 1px;
-    resize: none;
-    box-sizing: border-box;
-    border-style: solid;"
-    id="autoresizing_item">
+    <div class="bothside">
+       <div class="problemside">
+      <p>Problem Description :-</p> 
+    <textarea class="problemarea" id="autoresizing" name="Problem_Description" value=""></textarea>
+
+  
+    
+    <script type="text/javascript">
+        $('#autoresizing').on('input', function () {
+        this.style.height = '92px';
+          
+        this.style.height = 
+                (this.scrollHeight) + 'px';
+        });
+    </script>
+ 
+    </div>
+
+           <div class="additionalside">
+     <p>Additional Info :-</p>
+    <textarea name="Submitted_Items" class="infoarea" id="autoresizing_item">
     
     <?php
 
@@ -464,14 +497,16 @@ tr td:first-child:before {
 
      <script type="text/javascript">
         $('#autoresizing_item').on('input', function () {
-            this.style.height = 'auto';
+            this.style.height = '92px';
               
             this.style.height = 
                     (this.scrollHeight) + 'px';
         });
      </script>
 
-    <br/></div>
+ 
+    </div></div>
+
     <br/><br/>
     <div class="try3">
     <p>Report :-</p><textarea name="report" style="writing-mode: horizontal-tb !important;
@@ -565,6 +600,7 @@ tr td:first-child:before {
               var cust_phone1 = $('input[name=cust_phone1]').val();
               var job_name = $('input[name=job_name]').val();
               var job_assign = $('input[name=job_assign]').val();
+              var assistants = $('input[name=assistants]').val();
               var technician_arrival = $('input[name=technician_arrival]').val();
               var technician_leaving = $('input[name=technician_leaving]').val();
               var machine_name = $('input[name=machine_name]').val();
@@ -584,6 +620,7 @@ tr td:first-child:before {
                  cust_phone1!= '' || cust_phone1 == '', 
                  job_name!= '' || job_name == '', 
                  job_assign!= '' || job_assign == '', 
+                 assistants!= '' || assistants == '', 
                  technician_arrival!= '' || technician_arrival == '', 
                  technician_leaving!= '' || technician_leaving == '', 
                  machine_name!= '' || machine_name == '', 
@@ -605,6 +642,7 @@ tr td:first-child:before {
                                     cust_phone1: cust_phone1,
                                     job_name: job_name,
                                     job_assign: job_assign,
+                                    assistants: assistants,
                                     technician_arrival: technician_arrival,
                                     technician_leaving: technician_leaving,
                                     machine_name: machine_name,
