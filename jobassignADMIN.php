@@ -38,7 +38,6 @@
 
 <!-- ASSIGN TECHNICIAN -->
 
-
      <form id="assignupdate_form" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     
@@ -49,11 +48,16 @@
     <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
     <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' OR technician_rank = '2nd Leader' OR staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
+        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE 
+         technician_rank = '1st Leader' AND tech_avai = ''
+         OR
+         technician_rank = '2nd Leader' AND tech_avai = ''
+         OR
+         staff_position='storekeeper' AND tech_avai = '' ORDER BY staffregister_id ASC");  // Use select query here 
         echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']." </option>";  // displaying data in option menu
+            echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']." </option>";  // displaying data in option menu
             // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
     ?>
@@ -65,8 +69,6 @@
 
 <?php $DateAssign = date("Y.m.d");
 $_SESSION['storeDate'] = $DateAssign; ?>
-
-
 <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	
    
 <?php if (isset($_SESSION["username"])) { ; } ?>
