@@ -35,18 +35,16 @@ session_start();
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href="css/technicianmain.css" rel="stylesheet" />
-
     <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-          <!-- Select2 JS --> 
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <!-- Select2 JS --> 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-
 	<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 </head>
 
@@ -181,12 +179,32 @@ session_start();
 					</div>
 				</div>
 			</ul>
+			<div>
+				<?php
+					include 'dbconnect.php';
+					$query = "SELECT * FROM staff_register WHERE username ='{$_SESSION['username']}'";
+					$data = mysqli_query($conn, $query);
+					while ($row = mysqli_fetch_array($data)) {
+				?>
+					<?php
+						if ($row['tech_avai']==1){
+							echo '<p><a href="status.php?staffregister_id='.$row['staffregister_id'].'&tech_avai=0" class="badge badge-danger" style="font-size:20px;">
+									  Unvailable</a></p>';
+						}
+						else {
+							echo '<p><a href="status.php?staffregister_id='.$row['staffregister_id'].'&tech_avai=1" class="badge badge-success" style="font-size:20px;">
+									  Available</a></p>';
+						}
+					?>
+
+				<?php } ?>
+			</div>
 			<div class="ul2">
 				<a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:32px;"></i></a>
 			</div>
 		</div>
 	</nav>
-	
+
 	<nav class="nav">
 		<div class="nav__link nav__link dropdown">
 			<i class="material-icons">list_alt</i>

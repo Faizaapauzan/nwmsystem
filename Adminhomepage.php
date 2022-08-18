@@ -712,10 +712,17 @@ if(!isset($_SESSION['username']))
                 echo  '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
             
-            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Boon'"); 
+            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='BOON'"); 
             while($data = mysqli_fetch_array($records))
                 {
-                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
                 }
     
             while($row = $results->fetch_assoc()) {
@@ -1000,11 +1007,18 @@ if(!isset($_SESSION['username']))
             echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
         }
         
-        $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Hafiz'");
-        while($data = mysqli_fetch_array($records))
-            {
-                echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
-            }
+        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hafiz'"); 
+            while($data = mysqli_fetch_array($records))
+                {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }
 
         while($row = $results->fetch_assoc()) {
         ?>
@@ -1313,10 +1327,18 @@ if(!isset($_SESSION['username']))
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
                     
-                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Hamir'");
+                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Amir'"); 
                     while($data = mysqli_fetch_array($records))
                         {
-                            echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                            if ($data['tech_avai']==1){
+                                    echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                          Off</a></p>';
+                            }
+                            
+                            else {
+                                    echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                          Off</a></p>';
+                                }
                         }
 
                     while($row = $results->fetch_assoc()) {
@@ -1615,11 +1637,18 @@ if(!isset($_SESSION['username']))
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
-                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='HWA' ");  // Use select query here 
+                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hwa'"); 
                 while($data = mysqli_fetch_array($records))
-                    {
-                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying data in option menu
-                    }	
+                {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
 
                 while($row = $results->fetch_assoc()) {
             ?>
@@ -1909,11 +1938,18 @@ if(!isset($_SESSION['username']))
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
 
-                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='ISKANDAR'");
+                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='ISKANDAR'"); 
                     while($data = mysqli_fetch_array($records))
-                        {
-                            echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
-                        }
+                    {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    }	
 
                     while($row = $results->fetch_assoc()) {
                 ?>
@@ -2200,11 +2236,18 @@ if(!isset($_SESSION['username']))
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
-                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='John'");
+                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='John'"); 
                 while($data = mysqli_fetch_array($records))
-                    {
-                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
                     }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
 
                 while($row = $results->fetch_assoc()) {
                 ?>
@@ -2498,11 +2541,18 @@ if(!isset($_SESSION['username']))
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
-                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Jun Jie'");
+                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Jun Jie'"); 
                 while($data = mysqli_fetch_array($records))
-                    {
-                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
                     }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
 
                 while($row = $results->fetch_assoc()) {
                 ?>
@@ -2791,11 +2841,18 @@ if(!isset($_SESSION['username']))
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
                     
-                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Will'");
+                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Will'"); 
                     while($data = mysqli_fetch_array($records))
-                        {
-                            echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
-                        }
+                    {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    }	
 
                     while($row = $results->fetch_assoc()) {
                 ?>
@@ -3084,11 +3141,18 @@ if(!isset($_SESSION['username']))
                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                     }
                     
-                    $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Sahele'");
+                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Sahele'"); 
                     while($data = mysqli_fetch_array($records))
-                        {
-                            echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
-                        }
+                    {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    }	
 
                     while($row = $results->fetch_assoc()) {
                 ?>  
@@ -3373,11 +3437,18 @@ if(!isset($_SESSION['username']))
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
-                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Sazaly'");
+                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Sazaly'"); 
                 while($data = mysqli_fetch_array($records))
-                    {
-                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
                     }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
 
                 while($row = $results->fetch_assoc()) {
                 ?>
@@ -3666,11 +3737,18 @@ if(!isset($_SESSION['username']))
                     echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
-                $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Faizan'");
+                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Faizan'"); 
                 while($data = mysqli_fetch_array($records))
-                    {
-                        echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+                {
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
                     }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
 
                 while($row = $results->fetch_assoc()) {
             ?>
@@ -3958,11 +4036,18 @@ if(!isset($_SESSION['username']))
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
             
-            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Fauzin'");
-            while($data = mysqli_fetch_array($records))
+            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Fauzin'"); 
+                while($data = mysqli_fetch_array($records))
                 {
-                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
-                }
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
 
             while($row = $results->fetch_assoc()) {
             ?>
@@ -4254,11 +4339,18 @@ if(!isset($_SESSION['username']))
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
 
-            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Izaan'");
+            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Izaan'"); 
             while($data = mysqli_fetch_array($records))
-                {
-                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
+            {
+                if ($data['tech_avai']==1){
+                    echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                              Off</a></p>';
                 }
+                else {
+                    echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                              Off</a></p>';
+                }
+            }	
 
             while($row = $results->fetch_assoc()) {
             ?>  
@@ -4548,11 +4640,18 @@ if(!isset($_SESSION['username']))
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
             
-            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Salam'");
-            while($data = mysqli_fetch_array($records))
+            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Salam'"); 
+                while($data = mysqli_fetch_array($records))
                 {
-                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
-                }
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
             
             while($row = $results->fetch_assoc()) {
             ?>
@@ -4845,11 +4944,18 @@ if(!isset($_SESSION['username']))
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
             
-            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Teck'");
-            while($data = mysqli_fetch_array($records))
+            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Teck'"); 
+                while($data = mysqli_fetch_array($records))
                 {
-                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
-                }
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
 
             while($row = $results->fetch_assoc()) {
             ?>
@@ -5141,11 +5247,18 @@ if(!isset($_SESSION['username']))
                 echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
             }
 
-            $records = mysqli_query($conn, "SELECT tech_avai FROM staff_register WHERE username='Aizat'");
-            while($data = mysqli_fetch_array($records))
+            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Aizat'"); 
+                while($data = mysqli_fetch_array($records))
                 {
-                    echo "<h4 style='text-align:right; color:red;'>" . $data['tech_avai']."</h4>";  // displaying OFF status
-                }
+                    if ($data['tech_avai']==1){
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                    else {
+                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                  Off</a></p>';
+                    }
+                }	
 
             while($row = $results->fetch_assoc()) {
             ?>
