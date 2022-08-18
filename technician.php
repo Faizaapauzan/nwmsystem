@@ -241,7 +241,7 @@ session_start();
 						while ($row = mysqli_fetch_assoc($result)) {
 							// only show artist when it's an other artist then the previous one
 							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate' data-idupdate='".$row['jobregister_id']."' data-toggle='modal' data-target='#myModalupdate'>
+								echo "<div class='cardupdate' data-idupdate='".$row['customer_name']."' data-toggle='modal' data-target='#myModalupdate'>
 										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
 									  </div>";
 								$customer_name = $row['customer_name'];
@@ -289,7 +289,7 @@ session_start();
 						while ($row = mysqli_fetch_assoc($result)) {
 							// only show artist when it's an other artist then the previous one
 							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate' data-idupdate='".$row['jobregister_id']."' data-toggle='modal' data-target='#myModalupdate'>
+								echo "<div class='cardupdate' data-idupdate='".$row['customer_name']."' data-toggle='modal' data-target='#myModalupdate'>
 										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
 									  </div>";
 								$customer_name = $row['customer_name'];
@@ -336,7 +336,7 @@ session_start();
 						while ($row = mysqli_fetch_assoc($result)) {
 							// only show artist when it's an other artist then the previous one
 							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate' data-idupdate='".$row['jobregister_id']."' data-toggle='modal' data-target='#myModalupdate'>
+								echo "<div class='cardupdate' data-idupdate='".$row['customer_name']."' data-toggle='modal' data-target='#myModalupdate'>
 										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
 									  </div>";
 								$customer_name = $row['customer_name'];
@@ -392,12 +392,12 @@ session_start();
 								<script type='text/javascript'>
 									$(document).ready(function() {
 										$('.cardupdate').click(function() {
-											var jobregister_id = $(this).data('idupdate');
+											var customer_name = $(this).data('idupdate');
 											// AJAX request
 											$.ajax({
 												url:'ajaxtechupdate.php',
 												type:'post',
-												data:{jobregister_id: jobregister_id},
+												data:{customer_name: customer_name},
 												success: function(response) {
 													// Add response in Modal body
 													$('.techupdate-details').html(response);
