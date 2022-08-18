@@ -124,32 +124,79 @@
             <input type="text" name="cust_phone2" id="cust_phone2" class="form-control" value="<?php echo $row['cust_phone2']?>">
         </div>
 
-        <div class="input-box-address" style="width: 100%;">
+        <!-- <div class="input-box-address" style="width: 100%;">
             <label for="">Machine Name</label>
             <input type="text" style="width: 100%;" class="machine_name" class="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
         </div>
-        
+         -->
           
-        <div class="input-box">
-            <label for="">Machine Type</label>
-            <input type="text" class="machine_type" name="machine_type" value="<?php echo $row['machine_type']?>">
-        </div>
-
-         <div class="input-box">
-            <label for="">Machine Serial Number</label>
-            <input type="text" class="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">
-        </div>
-
-        <div class="input-box">
+    
+        <!-- <div class="input-box">
             <label for="">Machine Brand</label>
             <input type="text" class="machine_brand" name="machine_brand" value="<?php echo $row['machine_brand']?>">
-        </div>
+        </div> -->
+
+        <div class="CodeDropdown" style="padding-left: 19px;">
+            <label for="brand">Machine Brand</label><br>
+            <select style="height: 43px; width: 308px;" onchange="GetBrand(this.value)" class="form-select" id="brand" required>
+                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
+            </select>
+             <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" onchange="GetBrand(this.value)" readonly >  
+            </div>
+
+                <!-- <div class="input-box">
+            <label for="">Machine Type</label>
+            <input type="text" class="machine_type" name="machine_type" value="<?php echo $row['machine_type']?>">
+        </div> -->
+
+         <div class="CodeDropdown" style="padding-left: 30px;">
+            <label for="type"> Machine Type</label><br>
+            <select style="height: 43px; width: 319px;" onchange="GetType(this.value)" class="form-select" id="type" required>
+                <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
+            </select>
+            <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" onchange="GetType(this.value)" readonly >  
+        </div> 
+
+                    <!-- <div class="input-box">
+            <label for="">Machine Serial Number</label>
+            <input type="text" class="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">
+        </div> -->
+
+            <div class="CodeDropdown" style="padding-left: 23px;">
+            <label for="sn"> Serial Number </label><br>
+            <select style="width: 300px; height: 43px;" id="serialnumbers" onchange="GetMachines(this.value)">
+                <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
+                <option value="Add Serial Number" style="color:blue;">Add Serial Number</option>
+                <?php
+
+                $query = "select * from machine_list";
+                // $query = mysqli_query($con, $qr);
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) {
+                    while ($rows = mysqli_fetch_assoc($result)) {
+
+                ?>
+                       
+                <option value="<?php echo $rows['machine_id']; ?>"><?php echo $rows['serialnumber']; ?></option>
+                <?php
+                    }
+                }
+
+                ?>
+            </select>
+
+   
+            <input type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>">  
+            <input type="text" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
+            <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
+            <input type="hidden" style="width: 100%;" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
         
 
-        <div class="input-box">
+        </div>
+        <div class="input-box" style="padding-left: 35px;">
             <label for="accessories_required"  class="accessories_required">Accessories Required</label>
             <select id="accessories_required" name="accessories_required">
-                <option value='' <?php if ($row['accessories_required'] == '') {
+            <option value='' <?php if ($row['accessories_required'] == '') {
                     echo "SELECTED";
                 } ?>></option>
                 <option value="Yes" <?php if ($row['accessories_required'] == "Yes") {
@@ -161,7 +208,6 @@
             </select>
         </div>
 
- 
         <div class="input-box">
             <label for="">Job Description</label>
             <textarea name="job_description" class="job_description" rows="3" cols="100" style="width: 300px; height: 63px;"><?php echo $row['job_description']?></textarea>
@@ -177,7 +223,7 @@
                     echo "SELECTED";
                 } ?>>YES</option>
             </select>
-        </div>
+            </div>
           <input type="hidden" class="job_status" name="job_status" value="<?php echo $row['job_status']?>">
 
          <?php if (isset($_SESSION["username"])) { ; } ?>
@@ -193,6 +239,73 @@
 
               <?php
             } ?>
+
+    <script>
+    $(document).ready(function() {
+
+    $('#serialnumber').hide();
+
+    $("#serialnumbers").change(function() {
+        var val = $(this).val();
+        
+        if (val == 'Add Serial Number') {
+            $('#serialnumber').show();
+        } else {
+            $('#serialnumber').hide();
+        }
+    }).change();
+
+});
+
+            </script>
+
+             <script>
+        $(document).ready(function() {
+            $("#brand").on('change', function() {
+                var brandid = $(this).val();
+
+                $.ajax({
+                    method: "POST",
+                    url: "ajaxData.php",
+                    data: {
+                        id: brandid
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#type").html(data);
+                        $("#serialnumbers").html('<option value="">Select Serial Number</option');
+
+                    }
+                });
+            });
+            $("#type").on('change', function() {
+                var typeid = $(this).val();
+                $.ajax({
+                    method: "POST",
+                    url: "ajaxData.php",
+                    data: {
+                        sid: typeid
+                    },
+                    datatype: "html",
+                    success: function(data) {
+                        $("#serialnumbers").html(data);
+
+                    }
+
+                });
+            });
+        });
+    </script>
+
+                        <script>
+        $(document).ready(function(){
+            
+            // Initialize select2
+            $("#serialnumbers").select2();
+
+        });
+        </script>
+
 
                     <script>
         $(document).ready(function(){
@@ -215,38 +328,6 @@ $("#custModel").on("change",function(){
 
 </script>
 
-<script>
-$(function() {
-    $("#save_cust").click(function(e) {
-        e.preventDefault();
-        var customer_code = $("#customer_code").val();
-		var dataString = 'customer_code=' + customer_code; 
-        if(customer_code =='')
-        {   $('.success').fadeOut(200).hide();
-            $('.error').fadeIn(200).show();
-        }
-        else
-        {
-            $.ajax({
-                type: "POST",				
-                url: "insertcustomer.php",
-				data: dataString,
-                success: function(data) {
-                 $('#form').fadeOut(200).hide();
-                 $('.success').fadeIn(200).show();
-                 $('.error').fadeOut(200).hide();
-                 $('#custModel').append($('<option>', {
-                    value: data.id,
-                    text: customer_code
-    }));
-}
-            });
-        }
-      
-    });
-});
-
-</script> 
 
 <script>
 		// onkeyup event will occur when the user
@@ -318,62 +399,68 @@ $(function() {
 		}
 	</script>
 
+    <script>
+		// onkeyup event will occur when the user
+		// release the key and calls the function
+		// assigned to this event
+		function GetMachines(str) {
+			if (str.length == 0) {
+                 document.getElementById("machine_id").value = "";
+                 document.getElementById("serialnumber").value = "";
+                document.getElementById("machine_code").value = "";
+				document.getElementById("machine_name").value = "";
+                 document.getElementById("machine_description").value = "";
+				return;
+			}
+			else {
 
-<script>
-$(document).ready(function(){
-	
-$("#jobassignto").on("change",function(){
-   var GetValue=$("#jobassignto").val();
-   $("#jobassign").val(GetValue);
-});
+				// Creates a new XMLHttpRequest object
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
 
-});
-</script>
+					// Defines a function to be called when
+					// the readyState property changes
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						// Typical action to be performed
+						// when the document is ready
+						var myObj = JSON.parse(this.responseText);
 
-<script>
-$(document).ready(function(){
-	
-$("#jobassistantto").on("change",function(){
-   var GetValue=$("#jobassistantto").val();
-   $("#assistant").val(GetValue);
-});
+						// Returns the response data as a
+						// string and store this array in
+						// a variable assign the value
+						// received to first name input field
+						
+                        document.getElementById
+							("machine_id").value = myObj[0];
 
-});
-</script>
+                            	document.getElementById
+							("serialnumber").value = myObj[1];
+                        
+						document.getElementById
+							("machine_code").value = myObj[2];
+						
+						// Assign the value received to
+						// last name input field
+                        document.getElementById
+							("machine_name").value = myObj[3];
+                            document.getElementById(
+							"machine_description").value = myObj[4];
+                           
+					}
+				};
 
-
-    <!-- <script>
-
-        $.fn.textWidth = function(text, font) {
-    
-    if (!$.fn.textWidth.fakeEl) $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
-    
-    $.fn.textWidth.fakeEl.text(text || this.val() || this.text() || this.attr('placeholder')).css('font', font || this.css('font'));
-    
-    return $.fn.textWidth.fakeEl.width();
-};
-
-$('.width-dynamic').on('input', function() {
-    var inputWidth = $(this).textWidth();
-    $(this).css({
-        width: inputWidth
-    })
-}).trigger('input');
-
-
-function inputWidth(elem, minW, maxW) {
-    elem = $(this);
-    console.log(elem)
-}
-
-var targetElem = $('.width-dynamic');
-
-inputWidth(targetElem);
-
-        </script> -->
+				// xhttp.open("GET", "filename", true);
+				xmlhttp.open("GET", "fetchmachine.php?machine_id=" + str, true);
+				
+				// Sends the request to the server
+				xmlhttp.send();
+			}
+		}
+	</script>
 
 
-
-        </body></html>
+    </body></html>
 
         

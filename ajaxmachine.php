@@ -30,9 +30,19 @@
 <?php
 include "dbconnect.php";
 
-$userid = $_POST['userid'];
+$machine_id = $_POST['machine_id'];
 
-$sql = "SELECT * FROM machine_list WHERE machine_id=" . $userid;
+// SELECT ft.id, pr.product_name, pr.unit_price from firsttable as ft join product as pr on ft.product_id = pr.product_id;
+// $sql = "SELECT * FROM machine_list as ml JOIN machine_type as mt ON ml.type_id = mt.type_id WHERE machine_id=" . $machine_id;
+// $sql = "SELECT * FROM machine_list WHERE machine_id=" . $machine_id;
+
+
+$sql = "SELECT * 
+    FROM machine_list
+    JOIN machine_type ON machine_list.type_id=machine_type.type_id
+    JOIN machine_brand ON machine_type.brand_id=machine_brand.brand_id
+    WHERE machine_list.machine_id = $machine_id";
+
 $result = $conn->query($sql);
 
 $response = "<table id='ajax' width='100%'>";
@@ -40,8 +50,8 @@ while ($row = $result->fetch_assoc()) {
     $machine_id = $row['machine_id'];
     $machine_code = $row['machine_code'];
     $machine_name = $row['machine_name'];
-    $machine_type = $row['machine_type'];
-    $machine_brand = $row['machine_brand'];
+    $type_name = $row['type_name'];
+    $brandname = $row['brandname'];
     $serialnumber = $row['serialnumber'];
     $customer_name = $row['customer_name'];
     $purchase_date = $row['purchase_date'];
@@ -64,11 +74,11 @@ while ($row = $result->fetch_assoc()) {
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Machine Type : </td><td>" .  $machine_type . "</td>";
+    $response .= "<td>Machine Type : </td><td>" .  $type_name . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";
-    $response .= "<td>Machine Brand : </td><td>" . $machine_brand . "</td>";
+    $response .= "<td>Machine Brand : </td><td>" . $brandname . "</td>";
     $response .= "</tr>";
 
     $response .= "<tr>";

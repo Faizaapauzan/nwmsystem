@@ -37,7 +37,7 @@
      <form id="assignupdate_form" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     
-    <label for="job_assign" class="job_assign">Job Assign to:</label><br/>
+    <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br/>
     <p class="control"><b id="assignupdateadminmessage"></b></p>
    <div class="input-box" style="display:flex; width: 541px">
 
@@ -131,7 +131,7 @@ include_once("dbconnect.php");
   }
   
 ?>
-<label style="color: green" for="assistant">Select Assistant :</label>
+<label style="color: blue" for="assistant">Select Assistant :</label>
 <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -11px;" class="table" width="60%" cellspacing="0">
    <thead>
       <tr>
@@ -151,7 +151,7 @@ include_once("dbconnect.php");
 </table>
 
     <div class="input-box" style="width: 432px;">
-    <select name="assistant[]" class="form-control multiple-assistant" multiple="multiple" style="height: auto;">
+    <select name="assistant[]" class="form-control multiple-assistant" multiple="multiple" style="height: auto; margin-left: -19px;">
 		
         <?php
 
@@ -192,11 +192,11 @@ $(".multiple-assistant").select2({
 
 </script>
 </div>
-<div class="col align-self-end">         		 
+<div class="buttonUpdate" style="display: flex;flex-direction: row-reverse;">         		 
 <?php if (isset($_SESSION["username"])) { ; } ?>
 <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
 <p class="control"><b id="assignadminmessage"></b></p>	 
-<input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: -1px;padding-left: 2px;width: 100px;margin-left: 13px;border-radius: 9px;" id="updateassign" name="updateassign" value="Update" />
+<input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update" />
         
 </div>		 
     </form>
