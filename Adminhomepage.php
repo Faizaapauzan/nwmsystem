@@ -30,6 +30,7 @@ if(!isset($_SESSION['username']))
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
+
     <!-- To refresh every 10 seconds -->
     <!-- <meta http-equiv="refresh" content = "10" /> -->
 
@@ -135,53 +136,52 @@ if(!isset($_SESSION['username']))
     </style>
 
    
-<body>
-  <div class="sidebar close">
+    <body>
+
+    <div class="sidebar close">
     <div class="logo-details">
-	    <img src="neo.png" height="65" width="75"></img>
-      <span class="logo_name">NWM SYSTEM</span>
+	<img src="neo.png" height="65" width="75"></img>
+    <span class="logo_name">NWM SYSTEM</span>
     </div>
 
     <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
 
     <ul class="nav-links">
 
-      <li>
-        <a href="jobregister.php">
-          <i class='bx bx-registered' ></i>
-          <span class="link_name">Register Job</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-        </ul>
-      </li>
+    <li>
+    <a href="jobregister.php">
+    <i class='bx bx-registered' ></i>
+    <span class="link_name">Register Job</span>
+    </a>
+    <ul class="sub-menu blank">
+    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
+    </ul>
+    </li>
 
-      <li>
-        <div class="iocn-link">
-          <a href="accessoriesregister.php">
-            <i class='bx bx-spreadsheet' ></i>
-            <span class="link_name">Job Accessories</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="accessoriesregister.php">Job Accessories</a></li>
-        </ul>
-      </li>
+    <li>
+    <div class="iocn-link">
+    <a href="accessoriesregister.php">
+    <i class='bx bx-spreadsheet' ></i>
+    <span class="link_name">Job Accessories</span>
+    </a></div>
+    <ul class="sub-menu blank">
+    <li><a class="link_name" href="accessoriesregister.php">Job Accessories</a></li>
+    </ul>
+    </li>
 
-      <li>
-        <div class="iocn-link">
-          <a href="staff.php">
-            <i class='bx bx-id-card' ></i>
-            <span class="link_name">Staff</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="staff.php">Staff</a></li>
-        </ul>
-      </li>
+    <li>
+    <div class="iocn-link">
+    <a href="staff.php">
+    <i class='bx bx-id-card' ></i>
+    <span class="link_name">Staff</span>
+    </a></div>
+    <ul class="sub-menu blank">
+    <li><a class="link_name" href="staff.php">Staff</a></li>
+    </ul>
+    </li>
 
-      <li>
-        <a href="technicianlist.php">
+    <li>
+    <a href="technicianlist.php">
           <i class='fa fa-users' ></i>
           <span class="link_name">Technician</span>
         </a>
@@ -672,7 +672,7 @@ if(!isset($_SESSION['username']))
 
         <div class="box" id="myModal">
         <div class="left-side" >
-        <div class="box_topic">Boon</div>
+        <div class="box_topic" style="margin-right: 173px;">Boon</div>
         
         
         <?php
@@ -706,7 +706,7 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo  '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                echo  '<h4>Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='BOON'"); 
@@ -970,7 +970,7 @@ if(!isset($_SESSION['username']))
 
         <div class="box" id="myModal">
         <div class="left-side">
-        <div class="box_topic">Hafiz</div>
+        <div class="box_topic" style="margin-right: 182px;">Hafiz</div>
                             
         <?php
         include 'dbconnect.php';
@@ -1002,7 +1002,7 @@ if(!isset($_SESSION['username']))
         $numRow_run = mysqli_query ($conn,$numRow);
         if ($row_Total = mysqli_num_rows($numRow_run))
         {
-            echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+            echo '<h4>Total Job: '.$row_Total.' </h4>';
         }
         
         $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hafiz'"); 
@@ -1286,7 +1286,7 @@ if(!isset($_SESSION['username']))
 			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
-            <div class="box_topic">Amir</div>
+            <div class="box_topic" style="margin-right: 178px;">Amir</div>
                             
             <?php
                     include 'dbconnect.php';
@@ -1319,7 +1319,7 @@ if(!isset($_SESSION['username']))
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                        echo '<h4>Total Job: '.$row_Total.' </h4>';
                     }
                     
                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Amir'"); 
@@ -1595,7 +1595,7 @@ if(!isset($_SESSION['username']))
                 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic">Hwa</div>
+            <div class="box_topic" style="margin-right: 181px;">Hwa</div>
                         
             <?php
             include 'dbconnect.php';
@@ -1628,7 +1628,7 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                    echo '<h4>Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hwa'"); 
@@ -1897,7 +1897,7 @@ if(!isset($_SESSION['username']))
             <!-- ISK -->
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic">Iskandar</div>
+                <div class="box_topic" style="margin-right: 145px;">Iskandar</div>
                             
                 <?php
                 include 'dbconnect.php';
@@ -1929,7 +1929,7 @@ if(!isset($_SESSION['username']))
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                        echo '<h4>Total Job: '.$row_Total.' </h4>';
                     }
 
                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='ISKANDAR'"); 
@@ -2195,7 +2195,7 @@ if(!isset($_SESSION['username']))
 
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic">John</div>
+                <div class="box_topic" style="margin-right: 177px;">John</div>
                         
                 <?php
                 include 'dbconnect.php';
@@ -2227,7 +2227,7 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                    echo '<h4>Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='John'"); 
@@ -2362,7 +2362,6 @@ if(!isset($_SESSION['username']))
 
         </script>
 
-       
 
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingJohn" id="tabDoingJohn4">
@@ -2501,7 +2500,7 @@ if(!isset($_SESSION['username']))
 			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
-            <div class="box_topic">Jun Jie</div>
+            <div class="box_topic" style="margin-right: 161px;">Jun Jie</div>
                             
             <?php
                 include 'dbconnect.php';                
@@ -2532,7 +2531,7 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                    echo '<h4>Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Jun Jie'"); 
@@ -2800,7 +2799,7 @@ if(!isset($_SESSION['username']))
                 
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic">Razwill</div>
+                <div class="box_topic" style="margin-right: 163px;">Razwill</div>
                             
                 <?php
                     include 'dbconnect.php';
@@ -2832,7 +2831,7 @@ if(!isset($_SESSION['username']))
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                        echo '<h4>Total Job: '.$row_Total.' </h4>';
                     }
                     
                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Will'"); 
@@ -3101,7 +3100,7 @@ if(!isset($_SESSION['username']))
 
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic">Sahele</div>
+                <div class="box_topic" style="margin-right: 164px;">Sahele</div>
                             
                 <?php
                     include 'dbconnect.php';
@@ -3132,7 +3131,7 @@ if(!isset($_SESSION['username']))
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                        echo '<h4>Total Job: '.$row_Total.' </h4>';
                     }
                     
                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Sahele'"); 
@@ -3397,7 +3396,7 @@ if(!isset($_SESSION['username']))
 
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic">Sazaly</div>
+                <div class="box_topic" style="margin-right: 166px;">Sazaly</div>
                             
                 <?php
                  include 'dbconnect.php';
@@ -3428,7 +3427,7 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                    echo '<h4>Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Sazaly'"); 
@@ -3697,7 +3696,7 @@ if(!isset($_SESSION['username']))
 			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
-            <div class="box_topic">Faizan</div>
+            <div class="box_topic" style="margin-right: 165px;">Faizan</div>
                             
             <?php
             include 'dbconnect.php';
@@ -3728,7 +3727,7 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                    echo '<h4>Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Faizan'"); 
@@ -3996,7 +3995,7 @@ if(!isset($_SESSION['username']))
                 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic">Fauzin</div>
+            <div class="box_topic" style="margin-right: 167px;">Fauzin</div>
                             
             <?php
             include 'dbconnect.php';
@@ -4027,7 +4026,7 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                echo '<h4>Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Fauzin'"); 
@@ -4298,7 +4297,7 @@ if(!isset($_SESSION['username']))
 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic">Izaan</div>
+            <div class="box_topic" style="margin-right: 176px;">Izaan</div>
                             
             <?php
             include 'dbconnect.php';
@@ -4330,7 +4329,7 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                echo '<h4>Total Job: '.$row_Total.' </h4>';
             }
 
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Izaan'"); 
@@ -4599,7 +4598,7 @@ if(!isset($_SESSION['username']))
 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic">Salam</div>
+            <div class="box_topic" style="margin-right: 168px;">Salam</div>
                             
             <?php
             include 'dbconnect.php';
@@ -4631,7 +4630,7 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                echo '<h4>Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Salam'"); 
@@ -4903,7 +4902,7 @@ if(!isset($_SESSION['username']))
 			<div class="row">
                 <div class="box" id="myModal">
             <div class="left-side">
-            <div class="box_topic">Teck</div>
+            <div class="box_topic" style="margin-right: 183px;">Teck</div>
                             
             <?php
             include 'dbconnect.php';
@@ -4935,7 +4934,7 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                echo '<h4>Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Teck'"); 
@@ -5206,7 +5205,7 @@ if(!isset($_SESSION['username']))
 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic">Aizat</div>
+            <div class="box_topic" style="margin-right: 181px;">Aizat</div>
                             
             <?php
             include 'dbconnect.php';
@@ -5238,7 +5237,7 @@ if(!isset($_SESSION['username']))
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
+                echo '<h4>Total Job: '.$row_Total.' </h4>';
             }
 
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Aizat'"); 
@@ -5308,7 +5307,7 @@ if(!isset($_SESSION['username']))
             });
         </script>
 
-                 <!-- Double click Job Assign -->
+        <!-- Double click Job Assign -->
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat3">
         <label for="tabDoingAizat3" class="tabHeadingAizat"> Job Assign </label>
         <div class="tab">
@@ -5373,7 +5372,7 @@ if(!isset($_SESSION['username']))
 
 
 
-<!--Double click Accessories -->
+        <!--Double click Accessories -->
 
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat4">
         <label for="tabDoingAizat4" class="tabHeadingAizat"> Accessories </label>
@@ -5404,7 +5403,7 @@ if(!isset($_SESSION['username']))
             });
         </script>
 
-<!--Double click Photo-->
+        <!--Double click Photo-->
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat5">
         <label for="tabDoingAizat5" class="tabHeadingAizat"> Photo </label>
         <div class="tab">
@@ -5435,7 +5434,7 @@ if(!isset($_SESSION['username']))
                 });
         </script>
 
-<!--Double click Video-->
+        <!--Double click Video-->
         <input type="radio" name="tabDoingAizat" id="tabDoingAizat7">
         <label for="tabDoingAizat7" class="tabHeadingAizat"> Video </label>
         <div class="tab">

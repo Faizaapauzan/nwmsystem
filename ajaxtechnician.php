@@ -109,15 +109,10 @@ session_start();
     <input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone1']?>" style="background-color: white;" readonly>
 	<input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone2']?>" style="background-color: white;" readonly>
   </div>   
-  
-  <!-- <div class="col-md-6">
-    <label for="machinename" class="form-label">Machine Name</label>
-    <input type="text" class="form-control" id="machinename" value="<?php echo $row['machine_name']?>" style="background-color: white;" readonly>
-  </div>  -->
-  
+   
         <div class="CodeDropdown" style="padding-left: 17px;">
             <label for="brand">Machine Brand</label><br>
-            <select style="height: 33px; width: 200px; border-radius: 4px;" id="brand" required>
+            <select disabled style="height: 33px; width: 200px; border-radius: 4px;" id="brand" required>
                 <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
             </select>
              <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" readonly >  
@@ -125,7 +120,7 @@ session_start();
 
            <div class="CodeDropdown" style="padding-left: 31px;">
             <label for="type"> Machine Type</label><br>
-            <select style="height: 33px; width: 200px; border-radius: 4px;" class="form-select" id="type" required>
+            <select disabled style="height: 33px; width: 200px; border-radius: 4px;" class="form-select" id="type" required>
                 <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
             </select>
             <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" readonly >  
@@ -134,7 +129,7 @@ session_start();
 
             <div class="CodeDropdown" style="padding-left: 18px;padding-top: 9px;">
             <label for="sn"> Machine Serial Number </label><br>
-            <select style="width: 300px; height: 43px;" id="serialnumbers" onchange="GetMachineT(this.value)">
+            <select style="width: 300px; height: 43px;" id="serialnumbers" onchange="GetMachine(this.value)">
                 <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
                 <option value="Add Serial Number" style="color:mediumblue;">Add Serial Number</option>
                 <?php
@@ -282,7 +277,7 @@ session_start();
 		// onkeyup event will occur when the user
 		// release the key and calls the function
 		// assigned to this event
-		function GetMachineT(str) {
+		function GetMachine(str) {
 			if (str.length == 0) {
                  document.getElementById("machine_id").value = "";
                  document.getElementById("serialnumber").value = "";

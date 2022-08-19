@@ -48,122 +48,6 @@ session_start();
 	<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 </head>
 
-<style>
-
-.dropdown-content1 {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
-
-.dropdown-content1 a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  padding-right: 7px;
-}
-
-.dropdown-content1 a:hover {background-color: #f1f1f1}
-
-.dropdown1:hover .dropdown-content1 {
-  display: block;
-}
-
-.dropdown1:hover .dropbtn1 {
-  color:#1565c0;
-}
-
-.dropbtn1{
-	border:none
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: auto;
-  padding-left: 20px;
-  bottom: 55px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  padding-right: 7px;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
-  color:whitesmoke;
-}
-
-#notYetStatus{
-	position: static;
-}
-
-.card-complete{
-	position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1pxsolidrgba(0,0,0,.125);
-    border-radius: 0.25rem;	
-}
-
-/* Main Feature */
-.navbar {
-  margin-top: 20px;
-  background-color: #ddd;
-  overflow: hidden;
-  max-height: 1800px;
-  -webkit-transition: max-height 0.3s; 
-  -moz-transition: max-height 0.3s; 
-  -ms-transition: max-height 0.3s; 
-  -o-transition: max-height 0.3s; 
-  transition: max-height 0.3s;
-}
-
-/* Other */
- 
-.navbar-toggle {
-  background-color: #D2D2CF;
-  color: black;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.nav {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-</style>
 
 <body>
 	
@@ -238,7 +122,7 @@ session_start();
 	
 	<!--TODO-->
 		<div class="container">
-			<div style="text-align: center; font-size: 35px; font-weight: bold;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
+			<div style="text-align: center; font-size: 35px; font-weight: bold; margin-top: -29px;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
 			<div class="column" >
 				<p class="column-title"id="doing" >Todo</p>
 					<?php
