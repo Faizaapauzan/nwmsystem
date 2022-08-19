@@ -49,15 +49,15 @@
     <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE 
-         technician_rank = '1st Leader' AND tech_avai = ''
+         technician_rank = '1st Leader' AND tech_avai = '0'
          OR
-         technician_rank = '2nd Leader' AND tech_avai = ''
+         technician_rank = '2nd Leader' AND tech_avai = '0'
          OR
-         staff_position='storekeeper' AND tech_avai = '' ORDER BY staffregister_id ASC");  // Use select query here 
+         staff_position='storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here 
         echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']." </option>";  // displaying data in option menu
+            echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";  // displaying data in option menu
             // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
     ?>
