@@ -52,7 +52,7 @@
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
     
-    <form action="" method="post">
+    <form style="margin-left: 20px;" action="" method="post">
 
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
       <input type="hidden" name="storeDate" value="<?php echo $row['storeDate'] ?>">
@@ -112,9 +112,92 @@
                         }
                     } 
               </script>
+<<<<<<< HEAD
               
             </div>
           </div>
+=======
+      
+        </div>
+        
+        <div class="updateBtn">
+          <p style="margin-left: -26px;margin-top: -35px;" class="control"><b id="message"></b></p>
+          <input type="button" id="update_tech" name="update_tech" onclick="submitForm();" style="margin-top: -30px; width: 101px; height: 38px; margin-left: 16px; padding-left: 20px;" value="Update"/>
+        </div>
+      
+    </form>
+              <!-- insert departure input into database -->
+              <script type="text/javascript">
+                 function submitForm()
+                   {
+                    var storeDate = $('input[name=storeDate]').val();
+                    var tech_name = $('input[name=tech_name]').val();
+                    var customer_name = $('input[name=customer_name]').val();
+                    var technician_departure = $('input[name=technician_departure]').val();
+                    
+                    if
+                      (storeDate!='' || storeDate=='',
+                       tech_name!='' || tech_name=='', 
+                   customer_name!='' || customer_name=='', 
+            technician_departure!='' || technician_departure=='')
+                         
+                         {
+                          var formData = {storeDate:storeDate,
+                                          tech_name:tech_name,
+                                      customer_name:customer_name,
+                               technician_departure:technician_departure};
+                      
+                    $.ajax({
+                              url:'techupdateindex.php',
+                              type:'POST',
+                              data: formData,
+                              success: function(response)
+                                {
+                                  var res = JSON.parse(response);
+                                  console.log(res);
+                                  if(res.success == true)
+                                  $('#message').html('<span style="color: green">Update Saved!</span>');
+                                  else
+                                  $('#message').html('<span style="color: red">Data Cannot Be Saved</span>');
+                                }
+                              });
+                                }
+                   } 
+              </script>
+    
+    <?php } } } ?>
+
+    <!-- To show travel time and rest hour -->
+    <?php
+        include 'dbconnect.php';
+        if (isset($_POST['customer_name']) && isset($_POST['job_assign'])) { 
+          $customer_name =$_POST['customer_name'];
+          $job_assign =$_POST['job_assign'];
+          $query = "SELECT * FROM job_update 
+                    WHERE customer_name ='$customer_name'
+                    AND tech_name ='$job_assign'
+                    AND storeDate ='{$_SESSION['storeDate']}' ORDER BY jobupdate_id DESC LIMIT 1";
+          $query_run = mysqli_query($conn, $query);
+          if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
+    
+    <form action="" method="post" style="margin-left: 20px;">
+
+      <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
+      <label><?php echo $row['tech_name'] ?></label><br>
+      <label><?php echo $row['storeDate'] ?></label><br>
+      <label><?php echo $row['customer_name'] ?></label><br>
+
+      <br>
+      
+      <div class="input-box-departure">
+        <label for="">Departure Time</label>
+        <div class="technician-time">
+          <input type="text" class="technician_departure" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>">
+        </div>
+      </div>
+>>>>>>> e887982314a28b4a5af0640c68861c2537a82e6a
       
       <div class="input-box-arrival">
         <label for="">Arrival Time</label>
@@ -191,8 +274,8 @@
       </div>
       
       <div class="updateBtn">
-        <p class="control"><b id="messageupdate"></b></p>
-        <input type="button" id="update_tech" name="update_tech" onclick="jobupdate();" value="Update" />
+        <p style="margin-left: -26px;margin-top: -3px;" class="control"><b id="messageupdate"></b></p>
+        <input type="button" id="update_tech" name="update_tech" onclick="jobupdate();" style="width: 101px; height: 38px; margin-left: -2px; padding-left: 20px;" value="Update" />
       </div>
     
     </form>

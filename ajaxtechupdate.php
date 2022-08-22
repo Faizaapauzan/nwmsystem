@@ -160,7 +160,7 @@
           $query = "SELECT * FROM job_update 
                     WHERE customer_name ='$customer_name'
                     AND tech_name ='{$_SESSION['username']}'
-                    AND storeDate ='{$_SESSION['storeDate']}'";
+                    AND storeDate ='{$_SESSION['storeDate']}' ORDER BY jobupdate_id DESC LIMIT 1";
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
