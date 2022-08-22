@@ -58,7 +58,7 @@
       <!-- <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>"> -->
 
       <label><?php echo $row['tech_name'] ?></label><br>
-      <label><?php echo $_SESSION['storeDate']; ?></label><br>
+      <label><?php echo $row['storeDate'] ?></label><br>
       <label><?php echo $row['customer_name'] ?></label><br>
 
       <br>

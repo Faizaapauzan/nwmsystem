@@ -19,7 +19,7 @@
 		<td><?php echo $fetch['job_assign']?></td>
         <td><?php echo $fetch['today_date']?></td>
         <td><div class='jobTypeUpdateDeleteBtn'>
-        <button data-jobregister_id="<?php echo $fetch["jobregister_id"]; ?>" class='userinfo' id='btnView' data-target="doubleClick-completed"  onclick="document.getElementById('doubleClick-completed').style.display='block'">Details</button>
+        <button data-jobregister_id="<?php echo $fetch["jobregister_id"]; ?>" data-customer_name="<?php echo $fetch["customer_name"]; ?>" data-job_assign="<?php echo $fetch['job_assign'];?>" data-requested_date="<?php echo $fetch['requested_date'];?>" class='userinfo' id='btnView' data-target="doubleClick-completed"  onclick="document.getElementById('doubleClick-completed').style.display='block'">Details</button>
         </div>
         </td>
 		
@@ -47,7 +47,7 @@
         <td><?php echo $fetch['today_date']?></td>
         <td>
             <div class='jobTypeUpdateDeleteBtn'>
-            <button data-jobregister_id="<?php echo $fetch["jobregister_id"]; ?>" class='userinfo' id='btnView' data-target="doubleClick-completed"  onclick="document.getElementById('doubleClick-completed').style.display='block'">Details</button>
+            <button data-jobregister_id="<?php echo $fetch["jobregister_id"]; ?>" data-customer_name="<?php echo $fetch["customer_name"]; ?>" data-job_assign="<?php echo $fetch['job_assign'];?>" data-requested_date="<?php echo $fetch['requested_date'];?>" class='userinfo' id='btnView' data-target="doubleClick-completed"  onclick="document.getElementById('doubleClick-completed').style.display='block'">Details</button>
             </div>
         </td>
 	</tr>
@@ -106,13 +106,16 @@
         <script type='text/javascript'>
             $(document).ready(function () {
             $('.userinfo').click(function () {
-            var jobregister_id = $(this).data('jobregister_id');
-
+            var customer_name = $(this).data('customer_name');
+            var job_assign = $(this).data('job_assign');
+            var requested_date = $(this).data('requested_date');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdatecomplete.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+            data: {customer_name:customer_name,
+                      job_assign:job_assign,
+                  requested_date:requested_date},
             success: function (response) {
             // Add response in Modal body
             $('.completed-update').html(response);
