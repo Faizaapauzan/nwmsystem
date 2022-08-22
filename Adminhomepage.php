@@ -706,7 +706,7 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo  '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                echo  '<h4  style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='BOON'"); 

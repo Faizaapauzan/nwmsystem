@@ -51,7 +51,7 @@
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
     
-    <form action="" method="post">
+    <form action="" method="post" style="margin-left: 20px;">
 
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
       <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
@@ -159,9 +159,9 @@
       
       <div class="input-box-out">
         <label for="">Rest Hour</label>
-        <div class="technician-time">
+        <div class="out-time" style="display: flex; align-items: baseline;">
           <input type="text" class="technician_leaving" name="tech_out" id="tech_out" value="<?= $row['tech_out']; ?>">
-          <input type="button" value="OUT" onclick="tech_outs()">
+          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="OUT" onclick="tech_outs()">
           
               <script type="text/javascript">
                   function tech_outs()
@@ -173,9 +173,10 @@
                       })
                     }
               </script>
-              
+        </div>
+        <div class="in-time" style="display: flex; align-items: baseline;">  
           <input type="text" class="technician_leaving" name="tech_in" id="tech_in" value="<?= $row['tech_in']; ?>">
-          <input type="button" value="IN" onclick="tech_ins()">
+          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="IN" onclick="tech_ins()">
           
               <script type="text/javascript">
                   function tech_ins()
@@ -191,9 +192,10 @@
         </div>
       </div>
       
+      <p class="control"><b id="messageupdate"></b></p>
       <div class="updateBtn">
-        <p class="control"><b id="messageupdate"></b></p>
-        <input type="button" id="update_tech" name="update_tech" onclick="jobupdate();" value="Update" />
+        
+        <input style="height: 36px; margin-left: 20px; margin-right: 43px; font-size: 15px;" type="button" id="update_tech" name="update_tech" onclick="jobupdate();" value="Update" />
       </div>
     
     </form>
