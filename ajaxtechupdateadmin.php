@@ -54,7 +54,7 @@
     <form action="" method="post">
 
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
-      <input type="hidden" name="storeDate" value="<?php echo $row['storeDate'] ?>">
+      <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
       <!-- <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>"> -->
 
       <label><?php echo $row['tech_name'] ?></label><br>
