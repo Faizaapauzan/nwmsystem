@@ -1,7 +1,7 @@
 <?php
     session_start();
-    $showDate = date("d.m.Y");
-    $_SESSION['storeDate'] = $showDate;
+    $storeDate = date("d.m.Y");
+    $_SESSION['storeDate'] = $storeDate;
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +31,7 @@
       <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
       <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
       <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
-      <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>">
-
+      
     <?php } } } ?>
 
     <!-- To update travel time and rest hour -->
@@ -56,6 +55,8 @@
 
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
       <input type="hidden" name="storeDate" value="<?php echo $row['storeDate'] ?>">
+      <!-- <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>"> -->
+
       <label><?php echo $row['tech_name'] ?></label><br>
       <label><?php echo $_SESSION['storeDate']; ?></label><br>
       <label><?php echo $row['customer_name'] ?></label><br>
@@ -205,7 +206,7 @@
                   var technician_leaving = $('input[name=technician_leaving]').val();
                   var tech_out = $('input[name=tech_out]').val();
                   var tech_in = $('input[name=tech_in]').val();
-                  var storeDate = $('input[name=storeDates]').val();
+                  var storeDate = $('input[name=storeDate]').val();
                   var jobupdate_id = $('input[name=jobupdate_id]').val();
                   
                   if
