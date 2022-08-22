@@ -31,8 +31,7 @@
       <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
       <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
       <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
-      <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>">
-
+      
     <?php } } } ?>
 
     <!-- To update travel time and rest hour -->
@@ -52,10 +51,12 @@
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
     
-    <form action="" method="post">
+    <form action="" method="post" style="margin-left: 20px;">
 
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
-      <input type="hidden" name="storeDate" value="<?php echo $row['storeDate'] ?>">
+      <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
+      <!-- <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>"> -->
+
       <label><?php echo $row['tech_name'] ?></label><br>
       <label><?php echo $_SESSION['storeDate']; ?></label><br>
       <label><?php echo $row['customer_name'] ?></label><br>
@@ -160,7 +161,7 @@
         <label for="">Rest Hour</label>
         <div class="out-time" style="display: flex; align-items: baseline;">
           <input type="text" class="technician_leaving" name="tech_out" id="tech_out" value="<?= $row['tech_out']; ?>">
-          <input style="background-color: #1a0845;color: white;width: 214px;" type="button" value="OUT" onclick="tech_outs()">
+          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="OUT" onclick="tech_outs()">
           
               <script type="text/javascript">
                   function tech_outs()
@@ -172,10 +173,10 @@
                       })
                     }
               </script>
-              </div>
-           <div class="in-time" style="display: flex; align-items: baseline;">   
+        </div>
+        <div class="in-time" style="display: flex; align-items: baseline;">  
           <input type="text" class="technician_leaving" name="tech_in" id="tech_in" value="<?= $row['tech_in']; ?>">
-          <input style="background-color: #1a0845;color: white;width: 214px;" type="button" value="IN" onclick="tech_ins()">
+          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="IN" onclick="tech_ins()">
           
               <script type="text/javascript">
                   function tech_ins()
@@ -191,9 +192,10 @@
         </div>
       </div>
       
+      <p class="control"><b id="messageupdate"></b></p>
       <div class="updateBtn">
-        <p style="margin-left: -26px;margin-top: -3px;" class="control"><b id="messageupdate"></b></p>
-        <input type="button" id="update_tech" name="update_tech" onclick="jobupdate();" style="width: 101px; height: 38px; margin-left: -2px; padding-left: 20px;" value="Update" />
+        
+        <input style="height: 36px; margin-left: 20px; margin-right: 43px; font-size: 15px;" type="button" id="update_tech" name="update_tech" onclick="jobupdate();" value="Update" />
       </div>
     
     </form>
@@ -210,18 +212,22 @@
                   var jobupdate_id = $('input[name=jobupdate_id]').val();
                   
                   if
-                      (technician_arrival!='' || technician_arrival=='',
-                       technician_leaving!='' || technician_leaving=='', 
-                                 tech_out!='' || tech_out=='', 
-                                  tech_in!='' || tech_in=='',
-                             jobupdate_id!='' || jobupdate_id=='')
+                      (technician_departure!='' || technician_departure=='',
+                         technician_arrival!='' || technician_arrival=='',
+                         technician_leaving!='' || technician_leaving=='', 
+                                   tech_out!='' || tech_out=='', 
+                                    tech_in!='' || tech_in=='',
+                                  storeDate!='' || storeDate=='',
+                               jobupdate_id!='' || jobupdate_id=='')
                              
                              {
-                              var formData = {technician_arrival:technician_arrival,
-                                              technician_leaving:technician_leaving,
-                                                        tech_out:tech_out,
-                                                         tech_in:tech_in,
-                                                    jobupdate_id:jobupdate_id};
+                              var formData = {technician_departure:technician_departure,
+                                                technician_arrival:technician_arrival,
+                                                technician_leaving:technician_leaving,
+                                                          tech_out:tech_out,
+                                                           tech_in:tech_in,
+                                                         storeDate:storeDate,
+                                                      jobupdate_id:jobupdate_id};
                               $.ajax({
                                       url:'jobupdate.php',
                                       type:'POST',

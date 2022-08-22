@@ -71,7 +71,7 @@
   
   <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-    <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" />
+    <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" onclick="keep();" />
     <!-- <button style="height: 42px; margin-top: 2px;  border-radius: 5px; width: 145px;" id="technicianassign" name="technicianassign">Update</button> -->
     </div>
   </form>
@@ -97,6 +97,36 @@
       });
       });
   </script>
+
+  <!-- Save customer name and requested date into job update table -->
+<script type="text/javascript">
+    function keep()
+      {
+        var tech_name = $('input[name=job_assign]').val();
+        var customer_name = $('input[name=customer_name]').val();
+        var requested_date = $('input[name=requested_date]').val();
+        
+            if(tech_name!='' || tech_name=='',
+           customer_name!='' || customer_name=='',
+          requested_date!='' || requested_date=='')
+            {
+              var formData = {tech_name:tech_name,
+                          customer_name:customer_name,
+                         requested_date:requested_date};
+                    
+              $.ajax({  
+                        url: "savecustname.php",
+                        type: 'POST',
+                        data: formData,
+                        success: function(response)
+                          {
+                            var res = JSON.parse(response);
+                                      console.log(res);
+                          }
+                      });
+            }
+      } 
+</script>
 
 <!-- ASSIGN TECHNICIAN -->
 
@@ -186,7 +216,7 @@
   <?php if (isset($_SESSION["username"])) { ; } ?>
 <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
 <p class="control"><b id="assignadminmessage"></b></p>	 
-<input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update" onclick="keep();"/>
+<input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>
         
 </div>		 
     </form>

@@ -672,7 +672,7 @@ if(!isset($_SESSION['username']))
 
         <div class="box" id="myModal">
         <div class="left-side" >
-        <div class="box_topic" style="margin-right: 173px;">Boon</div>
+        <div class="box_topic">Boon</div>
         
         
         <?php
@@ -706,18 +706,18 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo  '<h4>Total Job: '.$row_Total.' </h4>';
+                echo  '<h4  style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='BOON'"); 
             while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }
@@ -973,7 +973,7 @@ if(!isset($_SESSION['username']))
 
         <div class="box" id="myModal">
         <div class="left-side">
-        <div class="box_topic" style="margin-right: 182px;">Hafiz</div>
+        <div class="box_topic">Hafiz</div>
                             
         <?php
         include 'dbconnect.php';
@@ -1005,18 +1005,18 @@ if(!isset($_SESSION['username']))
         $numRow_run = mysqli_query ($conn,$numRow);
         if ($row_Total = mysqli_num_rows($numRow_run))
         {
-            echo '<h4>Total Job: '.$row_Total.' </h4>';
+            echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
         }
         
         $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hafiz'"); 
             while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }
@@ -1292,7 +1292,7 @@ if(!isset($_SESSION['username']))
 			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 178px;">Amir</div>
+            <div class="box_topic">Amir</div>
                             
             <?php
                     include 'dbconnect.php';
@@ -1325,19 +1325,19 @@ if(!isset($_SESSION['username']))
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4>Total Job: '.$row_Total.' </h4>';
+                        echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                     }
                     
                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Amir'"); 
                     while($data = mysqli_fetch_array($records))
                         {
                             if ($data['tech_avai']==1){
-                                    echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                                    echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                           Off</a></p>';
                             }
                             
                             else {
-                                    echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                                    echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                           Off</a></p>';
                                 }
                         }
@@ -1604,7 +1604,7 @@ if(!isset($_SESSION['username']))
                 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 181px;">Hwa</div>
+            <div class="box_topic">Hwa</div>
                         
             <?php
             include 'dbconnect.php';
@@ -1637,18 +1637,18 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total Job: '.$row_Total.' </h4>';
+                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hwa'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
@@ -1909,7 +1909,7 @@ if(!isset($_SESSION['username']))
             <!-- ISK -->
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic" style="margin-right: 145px;">Iskandar</div>
+                <div class="box_topic">Iskandar</div>
                             
                 <?php
                 include 'dbconnect.php';
@@ -1941,18 +1941,18 @@ if(!isset($_SESSION['username']))
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4>Total Job: '.$row_Total.' </h4>';
+                        echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                     }
 
                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='ISKANDAR'"); 
                     while($data = mysqli_fetch_array($records))
                     {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     }	
@@ -2210,7 +2210,7 @@ if(!isset($_SESSION['username']))
 
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic" style="margin-right: 177px;">John</div>
+                <div class="box_topic">John</div>
                         
                 <?php
                 include 'dbconnect.php';
@@ -2242,18 +2242,18 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total Job: '.$row_Total.' </h4>';
+                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='John'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
@@ -2518,7 +2518,7 @@ if(!isset($_SESSION['username']))
 			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 161px;">Jun Jie</div>
+            <div class="box_topic">Jun Jie</div>
                             
             <?php
                 include 'dbconnect.php';                
@@ -2549,18 +2549,18 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total Job: '.$row_Total.' </h4>';
+                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Jun Jie'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
@@ -2820,7 +2820,7 @@ if(!isset($_SESSION['username']))
                 
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic" style="margin-right: 163px;">Razwill</div>
+                <div class="box_topic">Razwill</div>
                             
                 <?php
                     include 'dbconnect.php';
@@ -2852,18 +2852,18 @@ if(!isset($_SESSION['username']))
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4>Total Job: '.$row_Total.' </h4>';
+                        echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                     }
                     
                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Will'"); 
                     while($data = mysqli_fetch_array($records))
                     {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     }	
@@ -3124,7 +3124,7 @@ if(!isset($_SESSION['username']))
 
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic" style="margin-right: 164px;">Sahele</div>
+                <div class="box_topic">Sahele</div>
                             
                 <?php
                     include 'dbconnect.php';
@@ -3155,18 +3155,18 @@ if(!isset($_SESSION['username']))
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
                     {
-                        echo '<h4>Total Job: '.$row_Total.' </h4>';
+                        echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                     }
                     
                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Sahele'"); 
                     while($data = mysqli_fetch_array($records))
                     {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     }	
@@ -3423,7 +3423,7 @@ if(!isset($_SESSION['username']))
 
                 <div class="box">
                 <div class="left-side">
-                <div class="box_topic" style="margin-right: 166px;">Sazaly</div>
+                <div class="box_topic">Sazaly</div>
                             
                 <?php
                  include 'dbconnect.php';
@@ -3454,18 +3454,18 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total Job: '.$row_Total.' </h4>';
+                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Sazaly'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
@@ -3726,7 +3726,7 @@ if(!isset($_SESSION['username']))
 			<div class="row">
             <div class="box" id="myModal">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 165px;">Faizan</div>
+            <div class="box_topic">Faizan</div>
                             
             <?php
             include 'dbconnect.php';
@@ -3757,18 +3757,18 @@ if(!isset($_SESSION['username']))
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
                 {
-                    echo '<h4>Total Job: '.$row_Total.' </h4>';
+                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                 }
                 
                 $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Faizan'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
@@ -4028,7 +4028,7 @@ if(!isset($_SESSION['username']))
                 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 167px;">Fauzin</div>
+            <div class="box_topic">Fauzin</div>
                             
             <?php
             include 'dbconnect.php';
@@ -4059,18 +4059,18 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total Job: '.$row_Total.' </h4>';
+                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Fauzin'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
@@ -4333,7 +4333,7 @@ if(!isset($_SESSION['username']))
 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 176px;">Izaan</div>
+            <div class="box_topic">Izaan</div>
                             
             <?php
             include 'dbconnect.php';
@@ -4365,18 +4365,18 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total Job: '.$row_Total.' </h4>';
+                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
             }
 
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Izaan'"); 
             while($data = mysqli_fetch_array($records))
             {
                 if ($data['tech_avai']==1){
-                    echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                    echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                               Off</a></p>';
                 }
                 else {
-                    echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                    echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                               Off</a></p>';
                 }
             }	
@@ -4637,7 +4637,7 @@ if(!isset($_SESSION['username']))
 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 168px;">Salam</div>
+            <div class="box_topic">Salam</div>
                             
             <?php
             include 'dbconnect.php';
@@ -4669,18 +4669,18 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total Job: '.$row_Total.' </h4>';
+                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Salam'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
@@ -4944,7 +4944,7 @@ if(!isset($_SESSION['username']))
 			<div class="row">
                 <div class="box" id="myModal">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 183px;">Teck</div>
+            <div class="box_topic">Teck</div>
                             
             <?php
             include 'dbconnect.php';
@@ -4976,18 +4976,18 @@ if(!isset($_SESSION['username']))
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total Job: '.$row_Total.' </h4>';
+                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
             }
             
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Teck'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
@@ -5250,7 +5250,7 @@ if(!isset($_SESSION['username']))
 
             <div class="box">
             <div class="left-side">
-            <div class="box_topic" style="margin-right: 181px;">Aizat</div>
+            <div class="box_topic">Aizat</div>
                             
             <?php
             include 'dbconnect.php';
@@ -5282,18 +5282,18 @@ if(!isset($_SESSION['username']))
 
             if ($row_Total = mysqli_num_rows($numRow_run))
             {
-                echo '<h4>Total Job: '.$row_Total.' </h4>';
+                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
             }
 
             $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Aizat'"); 
                 while($data = mysqli_fetch_array($records))
                 {
                     if ($data['tech_avai']==1){
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                     else {
-                        echo '<p><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
+                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
                                   Off</a></p>';
                     }
                 }	
