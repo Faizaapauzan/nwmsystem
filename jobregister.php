@@ -51,7 +51,7 @@ include 'dbconnect.php';
 	<link href="css/machine.css" rel="stylesheet" />
     <link href="css/adminhomepage.css"rel="stylesheet" />
     <link href="css/jobregister.css" rel="stylesheet" />
-    <script src="js/home.js" type="text/javascript" defer></script>
+    <!-- <script src="js/home.js" type="text/javascript" defer></script> -->
     <script src="js/form-validation.js"></script>  
     <script src="js/job-register-validation.js" type="text/javascript" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -245,64 +245,66 @@ include 'dbconnect.php';
  <!--Add Customer Modal -->
 
         <div id="popupListAddForm" class="modal">
-            <div class="listAddForm">
-                <div class="title">Customer Registration</div>
-                <div class="contentListAddForm">
-                   <form id="user_form" method="post">
-                        <div class="listAddForm-details">
+        <div class="listAddForm">
+        <div class="title">Customer Registration</div>
+        <div class="contentListAddForm">
+        <form id="user_form" method="post">
+        <div class="listAddForm-details">
 
-                        <?php if (isset($_SESSION["username"])) ?>
-                          
-                        
+        <?php if (isset($_SESSION["username"])) ?>            
                            
-                            <div class="input-box">
-                                <label for="customerCode" class="details">Customer Code</label>
-                                <input type="text" id="customerCode" name="customer_code" onkeyup="checkcustomer_codelAvailability()" value="" class="form-control" placeholder="Enter Customer Code" required><span style='color:red'> **required </span> 
-                                <span id="customer_code-availability-status"></span>
-                            </div>
-                            <div class="input-box">
-                                <label for="customerName" class="details">Customer Name</label>
-                                <input type="text" id="customername" name="customer_name" placeholder="Enter Customer Name" required>
-                            </div>
-                            <div class="input-box">
-                                <label for="address" class="details">Customer Address</label>
-                                <input type="text" id="address1" name="cust_address1" placeholder="Enter Address 1" required>
-                            </div>
-                             <div class="input-box">
-                                <input type="text" id="address2" name="cust_address2" placeholder="Address 2">
-                            </div>
-                             <div class="input-box">
-                                <input type="text" id="address3" name="cust_address3" placeholder="Address 3">
-                            </div>
-                            <div class="input-box">
-                                <label for="customerGrade" class="details">Customer Grade</label>
-                                <input type="text" id="customergrade" name="customer_grade" placeholder="Enter Customer Grade" required>
-                            </div>
-                            <div class="input-box">
-                                <label for="customerPIC" class="details">Customer PIC</label>
-                                <input type="text" id="customerPIC" name="customer_PIC" placeholder="Enter Customer PIC" required>
-                            </div>
-                             <div class="input-box">
-                                <label for="customerPhone" class="details">Phone 1</label>
-                                <input type="text" id="phone1" name="cust_phone1" placeholder="Enter Customer Phone" required>
-                            </div>
-                             <div class="input-box">
-                                <label for="customerPhone" class="details">Phone 2</label>
-                                <input type="text" id="phone2" name="cust_phone2" placeholder="Enter Customer Phone">
-                            </div>
-                             <input type="hidden" name="customercreated_by" id="customercreatedby" value="<?php echo $_SESSION["username"] ?>" readonly>
-                            <input type="hidden" name="customerlasmodify_by" id="customerlasmodifyby" value="<?php echo $_SESSION["username"] ?>" readonly>
-                        </div>
-
-                        <div class="listAddFormbutton">
-                        <p class="control"><b id="mesg"></b></p>
-                        <input type="button" id="save_cust" name="save_cust"  value="Register" />
-                        <input type="button" onclick="document.getElementById('popupListAddForm').style.display='none'" value="Cancel" id="cancelbtn">
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="input-box">
+        <label for="customerCode" class="details">Customer Code</label>
+        <input type="text" id="customerCode" name="customer_code" onkeyup="checkcustomer_codelAvailability()" value="" class="form-control" placeholder="Enter Customer Code" required><span style='color:red'> **required </span> 
+        <span id="customer_code-availability-status"></span>
         </div>
+
+        <div class="input-box">
+        <label for="customerName" class="details">Customer Name</label>
+        <input type="text" id="customername" name="customer_name" placeholder="Enter Customer Name" required>
+        </div>
+
+        <div class="input-box">
+        <label for="address" class="details">Customer Address</label>
+        <input type="text" id="address1" name="cust_address1" placeholder="Enter Address 1" required>
+        </div>
+        <div class="input-box">
+        <input type="text" id="address2" name="cust_address2" placeholder="Address 2">
+        </div>
+        <div class="input-box">
+        <input type="text" id="address3" name="cust_address3" placeholder="Address 3">
+        </div>
+
+        <div class="input-box">
+        <label for="customerGrade" class="details">Customer Grade</label>
+        <input type="text" id="customergrade" name="customer_grade" placeholder="Enter Customer Grade" required>
+        </div>
+
+        <div class="input-box">
+        <label for="customerPIC" class="details">Customer PIC</label>
+        <input type="text" id="customerPIC" name="customer_PIC" placeholder="Enter Customer PIC" required>
+        </div>
+
+        <div class="input-box">
+        <label for="customerPhone" class="details">Phone 1</label>
+        <input type="text" id="phone1" name="cust_phone1" placeholder="Enter Customer Phone" required>
+        </div>
+
+        <div class="input-box">
+        <label for="customerPhone" class="details">Phone 2</label>
+        <input type="text" id="phone2" name="cust_phone2" placeholder="Enter Customer Phone">
+        </div>
+
+        <input type="hidden" name="customercreated_by" id="customercreatedby" value="<?php echo $_SESSION["username"] ?>" readonly>
+        <input type="hidden" name="customerlasmodify_by" id="customerlasmodifyby" value="<?php echo $_SESSION["username"] ?>" readonly>
+        </div>
+
+        <div class="listAddFormbutton">
+        <p class="control"><b style="color: green" id="mesg"></b></p>
+        <input style="padding-left: 25px; height: auto;" type="button" id="save_cust" name="save_cust"  value="Register" />
+        <input style="padding-left: 25px; height: auto;" type="button" onclick="document.getElementById('popupListAddForm').style.display='none'" value="Cancel" id="cancelbtn">
+        </div>
+        </form></div></div></div>
 
         
 <script>
@@ -331,47 +333,48 @@ include 'dbconnect.php';
         });
     });
 </script>
- <!--Finish Add Customer -->
+    <!--Finish Add Customer -->
         
- <!--Add Job Modal-->
+    <!--Add Job Modal-->
 
-        <div id="jobAddForm" class="modal">
-            <div class="listAddForm">
-                <div class="title">Add Job</div>
-                <div class="contentListAddForm">
-                     <form id="jobForm" method="post">
-                        <div class="listAddForm-details">
-                            <div class="input-box">
-                                <label for="JobCode" class="details">Job Code</label>
-                                <input type="text" id="job_code" name="job_code" onkeyup="checkJobCodelAvailability()" value="" class="form-control" placeholder="Enter Job Code" required><span style='color:red'> **required </span>  
-                                <span id="job_code-availability-status"></span>  
-                            </div>
-                            <div class="input-box">
-                                <label for="JobName" class="details">Job Name</label>
-                                <input type="text" id="JobName" name="job_name" placeholder="Enter Job Name" required>
-                            </div>
-                            <div class="input-box">
-                                <label for="JobDescription" class="details">Job Description</label>
-                                <input type="text" id="JobDescription" name="job_description" placeholder="Enter Job Description">
-                            </div>
+    <div id="jobAddForm" class="modal">
+    <div class="listAddForm">
+    <div class="title">Add Job</div>
+    <div class="contentListAddForm">
+    <form id="jobForm" method="post">
+    <div class="listAddForm-details">
 
-                            <?php if (isset($_SESSION["username"])) ?>
-                            <input type="hidden" name="jobtypecreated_by" id="jobtypecreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-                            <input type="hidden" name="jobtypelastmodify_by" id="jobtypelastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-                        </div>
+    <div class="input-box">
+    <label for="JobCode" class="details">Job Code</label>
+    <input type="text" id="job_code" name="job_code" onkeyup="checkJobCodelAvailability()" value="" class="form-control" placeholder="Enter Job Code" required><span style='color:red'> **required </span>  
+    <span id="job_code-availability-status"></span>  
+    </div>
 
-                        <div class="listAddFormbutton">
-                        <p class="control"><b id="mesage"></b></p>
-                        <input class="button is-info is-large" id="save_job" name="save_job" type="button" value="Register" />                    
-                           <input type="button" onclick="document.getElementById('jobAddForm').style.display='none'" value="Cancel" id="cancelbtn">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div> 
+    <div class="input-box">
+    <label for="JobName" class="details">Job Name</label>
+    <input type="text" id="JobName" name="job_name" placeholder="Enter Job Name" required>
+    </div>
+
+    <div class="input-box">
+    <label for="JobDescription" class="details">Job Description</label>
+    <input type="text" id="JobDescription" name="job_description" placeholder="Enter Job Description">
+    </div>
+
+    <?php if (isset($_SESSION["username"])) ?>
+    <input type="hidden" name="jobtypecreated_by" id="jobtypecreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+    <input type="hidden" name="jobtypelastmodify_by" id="jobtypelastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+    </div>
+
+    <div class="listAddFormbutton">
+    <p class="control"><b id="mesage" style="color: green;"></b></p>
+    <input style="padding-left: 25px; height: auto;" id="save_job" name="save_job" type="button" value="Register" />                    
+    <input style="padding-left: 25px; height: auto;" type="button" onclick="document.getElementById('jobAddForm').style.display='none'" value="Cancel" id="cancelbtn">
+    </div>
+
+    </form></div></div></div> 
 
 
-<script>
+    <script>
     $(document).ready(function () {
         $('#save_job').click(function () {
             var data = $('#jobForm').serialize() + '&save_job=save_job';
@@ -392,7 +395,8 @@ include 'dbconnect.php';
             });
         });
     });
-</script>
+    </script>
+
 <!--Finish Add Job -->
 
         
@@ -454,8 +458,6 @@ include 'dbconnect.php';
         <label for="MachineCode" class="details">Machine Name</label>
         <input type="text" id="machinename" name="machine_name" placeholder="Enter Machine Name" required>
         </div>
-
-
 
         <div class="input-box">
         <label for="customerName" class="details">Customer Name</label>
@@ -660,13 +662,6 @@ include 'dbconnect.php';
             // Initialize select2
             $("#ddlModel").select2();
 
-            // Read selected option
-            // $('#but_read').click(function(){
-            //     var customer_code = $('#ddlModel option:selected').text();
-            //     var customer_id = $('#ddlModel').val();
-           
-
-            // });
         });
         </script>
 
@@ -1105,12 +1100,11 @@ $("#jobModel").on("change",function(){
     <div class="input-box" style="padding-top: 10px;">
     <label for="machine_code" class="details">Machine Code</label>
     <input type="hidden" id="machine_id" name="machine_id">  
-    <input type="hidden" id="serialnumber" name="serialnumber">  
     <input type="text" id="machine_code" name="machine_code" placeholder="Enter Machine Code">
     </div>
 
     <div class="input-box">
-    <label for="machine_name" class="details">Machine Name</label>
+    <label for="" class="details">Machine Name</label>
     <input type="text" id="machine_name" name="machine_name" placeholder="Enter Machine Name">
     </div>
            
@@ -1259,11 +1253,11 @@ $(function() {
 		// assigned to this event
 		function GetMachine(str) {
 			if (str.length == 0) {
-                 document.getElementById("machine_id").value = "";
-                 document.getElementById("serialnumber").value = "";
+                document.getElementById("machine_id").value = "";
+                document.getElementById("serialnumber").value = "";
                 document.getElementById("machine_code").value = "";
 				document.getElementById("machine_name").value = "";
-                 document.getElementById("machine_description").value = "";
+                document.getElementById("machine_description").value = "";
 				return;
 			}
 			else {
@@ -1356,19 +1350,7 @@ $(function() {
             progress.style.width = "50%";
         }
 
-        btnNext3.onclick = function() {
-			window.scrollTo(0,0)
-            jobInfo3.style.left = "-1300px";
-            jobInfo4.style.left = "40px";
-            progress.style.width = "100%";
-        }
 
-        btnBack4.onclick = function() {
-			window.scrollTo(0,0)
-            jobInfo3.style.left = "40px";
-            jobInfo4.style.left = "1300px";
-            progress.style.width = "75%";
-        }
     </script>
 
     <script>
@@ -1435,8 +1417,6 @@ $(function() {
   });
   </script>	
 	
-<script src="js/upload photo.js"></script>
 
 </body>
-
 </html>

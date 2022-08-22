@@ -124,30 +124,14 @@
             <input type="text" name="cust_phone2" id="cust_phone2" class="form-control" value="<?php echo $row['cust_phone2']?>">
         </div>
 
-        <!-- <div class="input-box-address" style="width: 100%;">
-            <label for="">Machine Name</label>
-            <input type="text" style="width: 100%;" class="machine_name" class="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
-        </div>
-         -->
-          
-    
-        <!-- <div class="input-box">
-            <label for="">Machine Brand</label>
-            <input type="text" class="machine_brand" name="machine_brand" value="<?php echo $row['machine_brand']?>">
-        </div> -->
-
         <div class="CodeDropdown" style="padding-left: 19px;">
             <label for="brand">Machine Brand</label><br>
             <select style="height: 43px; width: 308px;" onchange="GetBrand(this.value)" class="form-select" id="brand" required>
                 <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
             </select>
              <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" onchange="GetBrand(this.value)" readonly >  
-            </div>
+        </div>
 
-                <!-- <div class="input-box">
-            <label for="">Machine Type</label>
-            <input type="text" class="machine_type" name="machine_type" value="<?php echo $row['machine_type']?>">
-        </div> -->
 
          <div class="CodeDropdown" style="padding-left: 30px;">
             <label for="type"> Machine Type</label><br>
@@ -156,11 +140,6 @@
             </select>
             <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" onchange="GetType(this.value)" readonly >  
         </div> 
-
-                    <!-- <div class="input-box">
-            <label for="">Machine Serial Number</label>
-            <input type="text" class="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">
-        </div> -->
 
             <div class="CodeDropdown" style="padding-left: 23px;">
             <label for="sn"> Serial Number </label><br>
@@ -224,6 +203,7 @@
                 } ?>>YES</option>
             </select>
             </div>
+
           <input type="hidden" class="job_status" name="job_status" value="<?php echo $row['job_status']?>">
 
          <?php if (isset($_SESSION["username"])) { ; } ?>
@@ -255,9 +235,9 @@
         }
     }).change();
 
-});
+        });
 
-            </script>
+    </script>
 
              <script>
         $(document).ready(function() {

@@ -58,11 +58,11 @@
          OR
          technician_rank = '2nd Leader' AND tech_avai = '0'
          OR
-         staff_position='storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here 
+         staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']."</option>";  // displaying data in option menu
+            echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
             // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
     ?>
@@ -71,6 +71,13 @@
 <input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>  
 <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>      
 </select>  
+
+ <?php
+      $DateAssign = date("Y.m.d");
+      $_SESSION['storeDate'] = $DateAssign; ?>
+    
+    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	
+    
 		 
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
@@ -91,7 +98,7 @@
                         var res = JSON.parse(response);
                         console.log(res);
                         if(res.success == true)
-                          $('#assignupdatetechnicianmessage').html('<span style="color: green">Technician Assign!</span>');
+                          $('#assignupdatetechnicianmessage').html('<span style="color: green">Job Assigned!</span>');
                         else
                           $('#assignupdatetechnicianmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
                       }

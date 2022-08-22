@@ -288,7 +288,7 @@ $query = $conn->query("SELECT * FROM job_register");
      
     <tr>
       <td id="<?php echo $row["job_status"]; ?>"><?php echo $i; ?></td>
-        <td id="<?php echo $row["job_status"]; ?>" data-id="<?php echo $row['jobregister_id'];?>" class = '<?php echo $row["job_status"]; ?>' onClick="document.getElementById('doubleClick-info').style.display='block'"><p style="cursor:pointer; text-decoration: underline; text-align: left; padding-left: 40px; height: 34px; font-weight: 400;" data-id="<?php echo $row['jobregister_id'];?>" class = 'JobInfo'><?php echo $row["job_order_number"]; ?></p></td>
+        <td id="<?php echo $row["job_status"]; ?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" class = '<?php echo $row["job_status"]; ?>' onClick="document.getElementById('doubleClick-info').style.display='block'"><p style="cursor:pointer; text-decoration: underline; text-align: left; padding-left: 40px; height: 34px; font-weight: 400;" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" class = 'JobInfo'><?php echo $row["job_order_number"]; ?></p></td>
         <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["job_priority"]; ?></td>
         <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["job_status"]; ?></td>
         <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["customer_name"]; ?></td>
@@ -708,13 +708,15 @@ $(document).ready( function () {
         <script type='text/javascript'>
             $(document).ready(function () {
              $('body').on('click','.Pending',function(){
-            var jobregister_id = $(this).data('id');
+            var customer_name = $(this).data('idupdate');
+            var job_assign = $(this).data('idlagi');
+            var requested_date = $(this).data('idagain');
 
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+            data: { customer_name:customer_name, job_assign:job_assign, requested_date:requested_date},
             success: function (response) {
             // Add response in Modal body
             $('.info-update').html(response);
@@ -727,16 +729,18 @@ $(document).ready( function () {
 
         </script>
 
-        <script type='text/javascript'>
+         <script type='text/javascript'>
             $(document).ready(function () {
              $('body').on('click','.Doing',function(){
-            var jobregister_id = $(this).data('id');
+            var customer_name = $(this).data('idupdate');
+            var job_assign = $(this).data('idlagi');
+            var requested_date = $(this).data('idagain');
 
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+            data: { customer_name:customer_name,job_assign:job_assign, requested_date:requested_date},
             success: function (response) {
             // Add response in Modal body
             $('.info-update').html(response);
@@ -748,17 +752,20 @@ $(document).ready( function () {
             });
 
         </script>
+
 
         <script type='text/javascript'>
             $(document).ready(function () {
              $('body').on('click','.Incomplete',function(){
-            var jobregister_id = $(this).data('id');
+            var customer_name = $(this).data('idupdate');
+            var job_assign = $(this).data('idlagi');
+            var requested_date = $(this).data('idagain');
 
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+            data: { customer_name:customer_name, ob_assign:job_assign, requested_date:requested_date},
             success: function (response) {
             // Add response in Modal body
             $('.info-update').html(response);
@@ -771,16 +778,19 @@ $(document).ready( function () {
 
         </script>
 
-        <script type='text/javascript'>
+ <script type='text/javascript'>
             $(document).ready(function () {
              $('body').on('click','.Ready',function(){
-            var jobregister_id = $(this).data('id');
+            
+            var customer_name = $(this).data('idupdate');
+            var job_assign = $(this).data('idlagi');
+            var requested_date = $(this).data('idagain');
 
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+            data: { customer_name:customer_name,job_assign:job_assign, requested_date:requested_date},
             success: function (response) {
             // Add response in Modal body
             $('.info-update').html(response);
@@ -792,17 +802,20 @@ $(document).ready( function () {
             });
 
         </script>
+
 
         <script type='text/javascript'>
             $(document).ready(function () {
              $('body').on('click','.Not Ready',function(){
-            var jobregister_id = $(this).data('id');
+            var customer_name = $(this).data('idupdate');
+            var job_assign = $(this).data('idlagi');
+            var requested_date = $(this).data('idagain');
 
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+            data: { customer_name:customer_name,job_assign:job_assign, requested_date:requested_date},
             success: function (response) {
             // Add response in Modal body
             $('.info-update').html(response);
@@ -814,6 +827,7 @@ $(document).ready( function () {
             });
 
         </script>
+
 
         <script type='text/javascript'>
             $(document).ready(function () {
@@ -839,15 +853,16 @@ $(document).ready( function () {
         
         <script type='text/javascript'>
             $(document).ready(function () {
-            // $("th").click(function() {
              $('body').on('click','.JobInfo',function(){
-            var jobregister_id = $(this).data('id');
+            var customer_name = $(this).data('idupdate');
+            var job_assign = $(this).data('idlagi');
+            var requested_date = $(this).data('idagain');
 
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+            data: { customer_name:customer_name,job_assign:job_assign, requested_date:requested_date},
             success: function (response) {
             // Add response in Modal body
             $('.info-update').html(response);
