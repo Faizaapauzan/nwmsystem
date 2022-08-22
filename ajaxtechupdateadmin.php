@@ -55,7 +55,10 @@
 
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
       <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
-      <!-- <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>"> -->
+
+      <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
+      <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
+      <input type="hidden" name="job_assign" value="<?php echo $row['tech_name'] ?>">
 
       <label><?php echo $row['tech_name'] ?></label><br>
       <label><?php echo $row['storeDate'] ?></label><br>
@@ -88,17 +91,17 @@
                       var job_status = $('input[name=job_status]').val();
                       var job_assign = $('input[name=job_assign]').val();
                       var customer_name = $('input[name=customer_name]').val();
-                      var DateAssign = $('input[name=DateAssign]').val();
+                      var requested_date = $('input[name=requested_date]').val();
                       
                       if(job_status!='' || job_status=='',
                          job_assign!='' || job_assign=='',
                       customer_name!='' || customer_name=='',
-                         DateAssign!='' || DateAssign=='')
+                     requested_date!='' || requested_date=='')
                         {
                           var formData = {job_status:job_status,
                                           job_assign:job_assign,
                                        customer_name:customer_name,
-                                          DateAssign:DateAssign};
+                                       requested_date:requested_date};
                           
                           $.ajax({
                                     url: "changeStatus.php",

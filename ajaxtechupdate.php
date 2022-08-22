@@ -28,15 +28,15 @@
 
 <body>
   
-  <div>
-    <!-- To update company name, date and technician name into job info table -->
     <?php
         include 'dbconnect.php';
-        if (isset($_POST['customer_name'])) { 
+        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) { 
           $customer_name =$_POST['customer_name'];
-          $query = "SELECT * FROM job_register 
+          $requested_date =$_POST['requested_date'];
+          $query = "SELECT * FROM job_update 
                     WHERE customer_name ='$customer_name'
-                    AND job_assign ='{$_SESSION['username']}' 
+                    AND tech_name ='{$_SESSION['username']}' 
+                    AND requested_date ='$requested_date'
                     ORDER BY customer_name DESC LIMIT 1";
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
@@ -45,15 +45,22 @@
     
     <form action="" method="post">
 
+      <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
       <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
-      <input type="hidden" name="tech_name" value="<?php echo $_SESSION['username']; ?>">
-      <input type="hidden" name="job_assign" value="<?php echo $_SESSION['username']; ?>">
+
+      <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
       <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-      <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>">
+      <input type="hidden" name="job_assign" value="<?php echo $row['tech_name'] ?>">
+
+      <label><?php echo $row['tech_name'] ?></label><br>
+      <label><?php echo $row['storeDate'] ?></label><br>
+      <label><?php echo $row['customer_name'] ?></label><br>
+
+      <br>
 
       <label>Departure Time</label>
       <div class="input-group mb-3">
-        <input readonly type="text" class="form-control" id="Departure" name="technician_departure" aria-describedby="basic-addon2">
+        <input readonly type="text" class="form-control" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
         <input type="hidden" name="job_status" value="Doing">
         <div class="input-group-append">
           <button id="update_techstatus" name="update_techstatus" class="buttonbiru update" onclick="doSomething();doSomethingElse();" type="button">Departure</button>
@@ -77,17 +84,17 @@
                       var job_status = $('input[name=job_status]').val();
                       var job_assign = $('input[name=job_assign]').val();
                       var customer_name = $('input[name=customer_name]').val();
-                      var DateAssign = $('input[name=DateAssign]').val();
+                      var requested_date = $('input[name=requested_date]').val();
                       
                       if(job_status!='' || job_status=='',
                          job_assign!='' || job_assign=='',
                       customer_name!='' || customer_name=='',
-                         DateAssign!='' || DateAssign=='')
+                     requested_date!='' || requested_date=='')
                         {
                           var formData = {job_status:job_status,
                                           job_assign:job_assign,
                                        customer_name:customer_name,
-                                          DateAssign:DateAssign};
+                                       requested_date:requested_date};
                           
                           $.ajax({
                                     url: "changeStatus.php",
@@ -103,81 +110,6 @@
                     } 
               </script>
       
-      </div>
-
-      <p class="control"><b id="message"></b></p>
-      <div style="text-align: end;" class="updateBtn">
-        <button style="width: fit-content;" type="button" id="update_tech" name="update_tech" value="Update" class="buttonbiru" onclick="submitForm();">Update</button>
-      </div>     
-      
-    </form>
-              <!-- insert departure input into database -->
-              <script type="text/javascript">
-                 function submitForm()
-                   {
-                    var storeDate = $('input[name=storeDate]').val();
-                    var tech_name = $('input[name=tech_name]').val();
-                    var customer_name = $('input[name=customer_name]').val();
-                    var technician_departure = $('input[name=technician_departure]').val();
-                    
-                    if
-                      (storeDate!='' || storeDate=='',
-                       tech_name!='' || tech_name=='', 
-                   customer_name!='' || customer_name=='', 
-            technician_departure!='' || technician_departure=='')
-                         
-                         {
-                          var formData = {storeDate:storeDate,
-                                          tech_name:tech_name,
-                                      customer_name:customer_name,
-                               technician_departure:technician_departure};
-                      
-                    $.ajax({
-                              url:'techupdateindex.php',
-                              type:'POST',
-                              data: formData,
-                              success: function(response)
-                                {
-                                  var res = JSON.parse(response);
-                                  console.log(res);
-                                  if(res.success == true)
-                                  $('#message').html('<span style="color: green">Update Saved!</span>');
-                                  else
-                                  $('#message').html('<span style="color: red">Data Cannot Be Saved</span>');
-                                }
-                              });
-                                }
-                   } 
-              </script>
-    
-    <?php } } } ?>
-
-    <!-- To show travel time and rest hour -->
-    <?php
-        include 'dbconnect.php';
-        if (isset($_POST['customer_name'])) { 
-          $customer_name =$_POST['customer_name'];
-          $query = "SELECT * FROM job_update 
-                    WHERE customer_name ='$customer_name'
-                    AND tech_name ='{$_SESSION['username']}'
-                    AND storeDate ='{$_SESSION['storeDate']}' ORDER BY jobupdate_id DESC LIMIT 1";
-          $query_run = mysqli_query($conn, $query);
-          if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-    ?>
-    
-    <form action="" method="post">
-
-      <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
-      <label><?php echo $row['tech_name'] ?></label><br>
-      <label><?php echo $row['storeDate'] ?></label><br>
-      <label><?php echo $row['customer_name'] ?></label><br>
-
-      <br>
-
-      <label>Departure Time</label>
-      <div class="input-group mb-3">
-        <input readonly type="text" class="form-control" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>" aria-describedby="basic-addon2">
       </div>
       
       <label>Arrival Time</label>
@@ -267,25 +199,31 @@
           <script type="text/javascript">
               function jobupdate()
                 {
+                  var technician_departure = $('input[name=technician_departure]').val();
                   var technician_arrival = $('input[name=technician_arrival]').val();
                   var technician_leaving = $('input[name=technician_leaving]').val();
                   var tech_out = $('input[name=tech_out]').val();
                   var tech_in = $('input[name=tech_in]').val();
+                  var storeDate = $('input[name=storeDate]').val();
                   var jobupdate_id = $('input[name=jobupdate_id]').val();
                   
                   if
-                      (technician_arrival!='' || technician_arrival=='',
-                       technician_leaving!='' || technician_leaving=='', 
-                                 tech_out!='' || tech_out=='', 
-                                  tech_in!='' || tech_in=='',
-                             jobupdate_id!='' || jobupdate_id=='')
+                      (technician_departure!='' || technician_departure=='',
+                         technician_arrival!='' || technician_arrival=='',
+                         technician_leaving!='' || technician_leaving=='', 
+                                   tech_out!='' || tech_out=='', 
+                                    tech_in!='' || tech_in=='',
+                                  storeDate!='' || storeDate=='',
+                               jobupdate_id!='' || jobupdate_id=='')
                              
                              {
-                              var formData = {technician_arrival:technician_arrival,
-                                              technician_leaving:technician_leaving,
-                                                        tech_out:tech_out,
-                                                         tech_in:tech_in,
-                                                    jobupdate_id:jobupdate_id};
+                              var formData = {technician_departure:technician_departure,
+                                                technician_arrival:technician_arrival,
+                                                technician_leaving:technician_leaving,
+                                                          tech_out:tech_out,
+                                                           tech_in:tech_in,
+                                                         storeDate:storeDate,
+                                                      jobupdate_id:jobupdate_id};
                               $.ajax({
                                       url:'jobupdate.php',
                                       type:'POST',
