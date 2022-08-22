@@ -1,7 +1,7 @@
 <?php
     session_start();
-    $showDate = date("d.m.Y");
-    $_SESSION['storeDate'] = $showDate;
+    $storeDate = date("d.m.Y");
+    $_SESSION['storeDate'] = $storeDate;
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +32,35 @@
       <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
       <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
       <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>">
+
+    <?php } } } ?>
+
+    <!-- To update travel time and rest hour -->
+    <?php
+        include 'dbconnect.php';
+        if (isset($_POST['customer_name']) && isset($_POST['job_assign']) && isset($_POST['requested_date'])) { 
+          $customer_name =$_POST['customer_name'];
+          $job_assign =$_POST['job_assign'];
+          $requested_date =$_POST['requested_date'];
+          $query = "SELECT * FROM job_update 
+                    WHERE customer_name ='$customer_name'
+                    AND tech_name ='$job_assign'
+                    AND requested_date ='$requested_date'
+                    ORDER BY customer_name DESC LIMIT 1";
+          $query_run = mysqli_query($conn, $query);
+          if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
+    
+    <form action="" method="post">
+
+      <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
+      <input type="hidden" name="storeDate" value="<?php echo $row['storeDate'] ?>">
+      <label><?php echo $row['tech_name'] ?></label><br>
+      <label><?php echo $_SESSION['storeDate']; ?></label><br>
+      <label><?php echo $row['customer_name'] ?></label><br>
+
+      <br>
       
       <div class="input-box-departure">
         <label for="">Departure Time</label>
@@ -177,7 +206,7 @@
                   var technician_leaving = $('input[name=technician_leaving]').val();
                   var tech_out = $('input[name=tech_out]').val();
                   var tech_in = $('input[name=tech_in]').val();
-                  var storeDate = $('input[name=storeDates]').val();
+                  var storeDate = $('input[name=storeDate]').val();
                   var jobupdate_id = $('input[name=jobupdate_id]').val();
                   
                   if
