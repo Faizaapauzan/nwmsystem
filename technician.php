@@ -132,7 +132,7 @@ session_start();
 						WHERE
 						job_assign ='{$_SESSION['username']}' AND  job_status = '' AND job_cancel = ''
 						OR
-						job_assign ='{$_SESSION['username']}' AND  job_status = 'Incomplete' AND job_cancel = ''
+						job_assign ='{$_SESSION['username']}' AND  job_status = 'Pending' AND job_cancel = ''
 						OR
 						job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready' AND job_cancel = ''
 						ORDER BY jobregisterlastmodify_at

@@ -184,7 +184,10 @@
   <select name="assistant[]" class="form-control multiple-assistant" multiple="multiple" style="height: auto; margin-left: -19px;">
       
       <?php
-           $query = "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' OR staff_position = 'General Worker' ORDER BY staffregister_id ASC";
+           $query = "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE 
+         staff_position = 'Technician' AND tech_avai = '0'
+         OR
+         staff_position = 'General Worker' AND tech_avai = '0' ORDER BY staffregister_id ASC";
            $query_run = mysqli_query($con, $query);
            if(mysqli_num_rows($query_run) > 0)
             {

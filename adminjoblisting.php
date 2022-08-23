@@ -836,7 +836,7 @@ $(document).ready( function () {
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdatecomplete.php',
+            url: 'ajaxtechupdate-completed.php',
             type: 'post',
             data: { jobregister_id: jobregister_id },
             success: function (response) {
