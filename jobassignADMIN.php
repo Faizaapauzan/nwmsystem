@@ -40,7 +40,7 @@
     <div class="input-box" style="display:flex; width: 541px">
     
     <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
-    
+      
       <?php
         include "dbconnect.php";  // Using database connection file here
         $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE 
@@ -63,7 +63,7 @@
     <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>
   </select>
   
-  <?php
+    <?php
       $DateAssign = date("Y.m.d");
       $_SESSION['storeDate'] = $DateAssign; ?>
     
@@ -98,21 +98,24 @@
       });
   </script>
 
-  <!-- Save customer name and requested date into job update table -->
+<!-- Save customer name and requested date into job update table -->
 <script type="text/javascript">
     function keep()
       {
         var tech_name = $('input[name=job_assign]').val();
         var customer_name = $('input[name=customer_name]').val();
         var requested_date = $('input[name=requested_date]').val();
+        var jobregister_id = $('input[name=jobregister_id]').val();
         
             if(tech_name!='' || tech_name=='',
            customer_name!='' || customer_name=='',
-          requested_date!='' || requested_date=='')
+          requested_date!='' || requested_date=='',
+          jobregister_id!='' || jobregister_id=='')
             {
               var formData = {tech_name:tech_name,
                           customer_name:customer_name,
-                         requested_date:requested_date};
+                         requested_date:requested_date,
+                         jobregister_id:jobregister_id};
                     
               $.ajax({  
                         url: "savecustname.php",
@@ -219,8 +222,7 @@
   <?php if (isset($_SESSION["username"])) { ; } ?>
 <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
 <p class="control"><b id="assignadminmessage"></b></p>	 
-<input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>
-        
+<input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>      
 </div>		 
     </form>
 	<br>
@@ -228,7 +230,6 @@
         }
     }
     ?>
-
               <?php
             } ?>
 
@@ -259,13 +260,11 @@
 </script>
 
 <script>
-$(document).ready(function(){
-	
+$(document).ready(function(){	
 $("#jobassignto").on("change",function(){
    var GetValue=$("#jobassignto").val();
    $("#jobassign").val(GetValue);
 });
-
 });
 </script>
 
@@ -298,14 +297,9 @@ $("#jobassignto").on("change",function(){
         }
       });
    }
-
  });
-
 });
-
 </script>
-
-
 
 <script>
 		// onkeyup event will occur when the user
@@ -316,8 +310,6 @@ $("#jobassignto").on("change",function(){
 				document.getElementById("username").value = "";
                 document.getElementById("technician_rank").value = "";
                  document.getElementById("staff_position").value = "";
-		
-               
 				return;
 			}
 			else {
@@ -363,7 +355,7 @@ $("#jobassignto").on("change",function(){
 		}
 	</script>
 
-
-</body></html>
+</body>
+</html>
 
         
