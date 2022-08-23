@@ -228,7 +228,7 @@ while ($row = mysqli_fetch_assoc($result)){
 							// AJAX request
         
 							$.ajax({
-							url: 'ajaxtechleader.php',
+							url: 'ajaxtechnician.php',
 							type: 'post',
 							data: {jobregister_id: jobregister_id},
 							success: function(response) {

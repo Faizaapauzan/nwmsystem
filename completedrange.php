@@ -128,37 +128,6 @@
 
         </script>
 
-        <!-- Double click Remarks
-        <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted3">
-        <label for="tabDoingCompleted3" class="tabHeadingComplete">Remarks</label>
-        <div class="tabC" id="completedJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-        <form action="" method="post">
-        <div class="completed-remark">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('.userinfo').click(function () {
-            var jobregister_id = $(this).data('jobregister_id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxremarkscomplete.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.completed-remark').html(response);
-            // Display Modal
-            $('#doubleClick-completed').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script> -->
-
         <!--Double click Accessories -->
         <input type="radio" name="tabDoingCompleted" id="tabDoingCompleted4">
         <label for="tabDoingCompleted4" class="tabHeadingComplete">Accessories</label>

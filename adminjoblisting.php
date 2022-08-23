@@ -832,13 +832,15 @@ $(document).ready( function () {
         <script type='text/javascript'>
             $(document).ready(function () {
              $('body').on('click','.Completed',function(){
-            var jobregister_id = $(this).data('id');
+           var customer_name = $(this).data('idupdate');
+            var job_assign = $(this).data('idlagi');
+            var requested_date = $(this).data('idagain');
 
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate-completed.php',
+            url: 'ajaxtechupdatecomplete.php',
             type: 'post',
-            data: { jobregister_id: jobregister_id },
+             data: { customer_name:customer_name,job_assign:job_assign, requested_date:requested_date},
             success: function (response) {
             // Add response in Modal body
             $('.info-update').html(response);
