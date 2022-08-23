@@ -688,9 +688,7 @@ if(!isset($_SESSION['username']))
                 OR
                 job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel = '' 
                 OR
-                job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = '' 
-                OR
-                job_assign = 'Boon' AND job_status = 'Incomplete' AND job_cancel = '' )
+                job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = '')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
@@ -702,9 +700,7 @@ if(!isset($_SESSION['username']))
                 OR
                 job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel = ''
                 OR
-                job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = ''               
-                OR
-                job_assign = 'Boon' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = ''";
             
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -988,9 +984,7 @@ if(!isset($_SESSION['username']))
                 OR
                 job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel = '' 
                 OR
-                job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = '' 
-                OR
-                job_assign = 'Hafiz' AND job_status = 'Incomplete' AND job_cancel = '' )
+                job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = '')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
@@ -1001,9 +995,7 @@ if(!isset($_SESSION['username']))
                 OR
                 job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel = ''
                 OR
-                job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = ''
-                OR
-                job_assign = 'Hafiz' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = ''";
         
         $numRow_run = mysqli_query ($conn,$numRow);
         if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1307,9 +1299,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Amir' AND job_status = 'Ready' AND job_cancel = '' 
                     OR 
-                    job_assign = 'Amir' AND job_status = 'Pending' AND job_cancel = '' 
-                    OR
-                    job_assign = 'Amir' AND job_status = 'Incomplete' AND job_cancel = '')
+                    job_assign = 'Amir' AND job_status = 'Pending' AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -1321,9 +1311,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Amir' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Amir' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Amir' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                    job_assign = 'Amir' AND job_status = 'Pending' AND job_cancel = ''";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1619,9 +1607,7 @@ if(!isset($_SESSION['username']))
                 OR
                 job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel = ''
                 OR
-                job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel = ''
-                OR
-                job_assign = 'Hwa' AND job_status = 'Incomplete' AND job_cancel = '')
+                job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel = '')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
@@ -1633,9 +1619,7 @@ if(!isset($_SESSION['username']))
                 OR
                 job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel = ''
                 OR
-                job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel = ''
-                OR
-                job_assign = 'Hwa' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel = '' ";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1924,9 +1908,7 @@ if(!isset($_SESSION['username']))
                         OR
                         job_assign = 'ISKANDAR' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'ISKANDAR' AND job_status = 'Incomplete' AND job_cancel = '')
+                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
@@ -1937,9 +1919,7 @@ if(!isset($_SESSION['username']))
                         OR
                         job_assign = 'ISKANDAR' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'ISKANDAR' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = '' ";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2225,9 +2205,7 @@ if(!isset($_SESSION['username']))
                         OR
                         job_assign = 'John' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'John' AND job_status = 'Incomplete' AND job_cancel = '')
+                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
@@ -2238,9 +2216,7 @@ if(!isset($_SESSION['username']))
                         OR
                         job_assign = 'John' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'John' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel = ''";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2532,9 +2508,7 @@ if(!isset($_SESSION['username']))
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'Jun Jie' AND job_status = 'Incomplete' AND job_cancel = '')
+                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
@@ -2545,9 +2519,7 @@ if(!isset($_SESSION['username']))
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'Jun Jie' AND job_status = 'Incomplete' AND job_cancel = ''";
+                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel = ''";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2834,9 +2806,7 @@ if(!isset($_SESSION['username']))
                             OR
                             job_assign = 'Will' AND job_status = 'Ready' AND job_cancel = ''
                             OR
-                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel = ''
-                            OR
-                            job_assign = 'Will' AND job_status = 'Incomplete' AND job_cancel = '')
+                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel = '')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
 
@@ -2848,9 +2818,7 @@ if(!isset($_SESSION['username']))
                             OR
                             job_assign = 'Will' AND job_status = 'Ready' AND job_cancel = ''
                             OR
-                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel = ''
-                            OR
-                            job_assign = 'Will' AND job_status = 'Incomplete' AND job_cancel = ''";
+                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel = ''";
                     $numRow_run = mysqli_query ($conn,$numRow);
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3138,9 +3106,7 @@ if(!isset($_SESSION['username']))
                             OR
                             job_assign = 'Sahele' AND job_status = 'Ready' AND job_cancel = ''
                             OR
-                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel = ''
-                            OR
-                            job_assign = 'Sahele' AND job_status = 'Incomplete' AND job_cancel = '')
+                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel = '')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
 
@@ -3151,9 +3117,7 @@ if(!isset($_SESSION['username']))
                             OR
                             job_assign = 'Sahele' AND job_status = 'Ready' AND job_cancel = ''
                             OR
-                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel = ''
-                            OR
-                            job_assign = 'Sahele' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel = ''";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3437,9 +3401,7 @@ if(!isset($_SESSION['username']))
                          OR
                         job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Incomplete' AND job_cancel = '')
+                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
@@ -3450,9 +3412,7 @@ if(!isset($_SESSION['username']))
                          OR
                         job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel = ''
                         OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3740,9 +3700,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Incomplete' AND job_cancel = '')
+                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -3753,9 +3711,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -4042,9 +3998,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Incomplete' AND job_cancel = '')
+                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -4055,9 +4009,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel = ''
                     OR 
-                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Incomplete' AND job_cancel = '' ";
+                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''";
             
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -4348,9 +4300,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Incomplete' AND job_cancel = '')
+                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -4361,9 +4311,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Incomplete' AND job_cancel = ''";
+                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''";
             
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -4652,9 +4600,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Salam' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Salam' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Incomplete' AND job_cancel = '')
+                    job_assign = 'Salam' AND job_status = 'Pending' AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -4665,9 +4611,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Salam' AND job_status = 'Ready'
                     OR
-                    job_assign = 'Salam' AND job_status = 'Pending'
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Incomplete'";
+                    job_assign = 'Salam' AND job_status = 'Pending'";
             
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -4959,9 +4903,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Incomplete' AND job_cancel = '')
+                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -4972,9 +4914,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Incomplete' AND job_cancel = ''";
+                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''";
             
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -5265,9 +5205,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel = ''
                     OR
-                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Incomplete' AND job_cancel = '')
+                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -5278,9 +5216,7 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Aizat' AND job_status = 'Ready'
                     OR
-                    job_assign = 'Aizat' AND job_status = 'Pending'
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Incomplete'";
+                    job_assign = 'Aizat' AND job_status = 'Pending'";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))

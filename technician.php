@@ -270,9 +270,8 @@ session_start();
 				<div role="document" class="modal-dialog">
 					<div style="padding-bottom: 26px;" class="modal-content">
 					<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-						<div class="tabs" id="tab02">
-							<h6 class="text-muted">Update</h6>
-						</div>
+							<h6 class="font-weight-bold">Update</h6>
+
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" style="font-size:20px;"></i></button>
 						<!--TOP BAR-->
 						<div class="line">
@@ -282,7 +281,7 @@ session_start();
 						<br>
 						
 						<div class="modal-body p-0">
-							<fieldset class="show" id="tab021">
+						
 								<form action="ajaxtechupdate.php" method="post">
 									<div class="techupdate-details">
 
@@ -309,8 +308,6 @@ session_start();
 										});
 									});
 								</script>
-
-							</fieldset>
 						</div>
 					</div>
 					</div>
@@ -632,9 +629,7 @@ session_start();
 				<div role="document" class="modal-dialog">
 					<div style="padding-bottom: 26px;" class="modal-content">
 					<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-						<div class="tabs" id="tab02">
-							<h6 class="text-muted">Update</h6>
-						</div>
+							<h6 class="font-weight-bold">Update</h6>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" style="font-size:20px;"></i></button>
 						<!--TOP BAR-->
 						<div class="line">
@@ -644,7 +639,6 @@ session_start();
 						<br>
 						
 						<div class="modal-body p-0">
-							<fieldset class="show" id="tab021">
 								<form action="ajaxtechupdate.php" method="post">
 									<div class="techupdate-details-completed">
 
@@ -672,7 +666,6 @@ session_start();
 									});
 								</script>
 
-							</fieldset>
 						</div>
 					</div>
 					</div>
@@ -684,7 +677,7 @@ session_start();
 				<div role="document" class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-							<div class="tabs active" id="tab11">
+							<div class="tabs" id="tab11">
 								<h6 class="font-weight-bold">Job Info</h6>
 							</div>
 							<div class="tabs" id="tab13">
@@ -719,7 +712,7 @@ session_start();
 
 								<!--Job Info Completed-->
 
-								<fieldset class="show" id="tab111">
+								<fieldset id="tab111">
 									<form action="" method="post">
 										<div class="tech-details-completed">
 

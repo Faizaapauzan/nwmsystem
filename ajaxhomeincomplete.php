@@ -174,16 +174,6 @@ $("#jobassignto").on("change",function(){
 });
 </script>
 
-<script>
-$(document).ready(function(){
-	
-$("#jobassistantto").on("change",function(){
-   var GetValue=$("#jobassistantto").val();
-   $("#assistant").val(GetValue);
-});
-
-});
-</script>
 
 <script>
 		// onkeyup event will occur when the user
@@ -268,8 +258,6 @@ function submitFormDuplicate()
    var serialnumber = $('input[name=serialnumber]').val();
    var machine_brand = $('input[name=machine_brand]').val();
    var accessories_required = $('select[name=accessories_required]').val();
-   var job_assign = $('input[name=job_assign]').val();
-   var Job_assistant = $('input[name=Job_assistant]').val();
    var job_cancel = $('select[name=job_cancel]').val();
    var job_status = $('select[name=job_status]').val();
    var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
@@ -299,8 +287,6 @@ function submitFormDuplicate()
        serialnumber!='' || serialnumber=='',
        machine_brand!='' || machine_brand=='',
        accessories_required!='' || accessories_required=='', 
-       job_assign!='' || job_assign=='', 
-       Job_assistant!='' || Job_assistant=='',
        job_cancel!='' || job_cancel=='',
        job_status!='' || job_status=='',
        jobregistercreated_by!='' || jobregistercreated_by=='',
@@ -331,8 +317,6 @@ function submitFormDuplicate()
                         serialnumber: serialnumber,
                         machine_brand: machine_brand,
                         accessories_required: accessories_required,
-                        job_assign: job_assign,
-                        Job_assistant: Job_assistant,
                         job_cancel: job_cancel,
                         job_status: job_status,
                         jobregistercreated_by: jobregistercreated_by,

@@ -78,8 +78,8 @@ session_start();
   </div>   
   
   <div class="col-md-6">
-    <label for="customername" class="form-label">Customer Name</label>
-    <input type="text" class="form-control" id="customername" value="<?php echo $row['customer_name']?>" style="background-color: white;" readonly>
+    <label for="customerpic" class="form-label">Customer PIC</label>
+    <input type="text" class="form-control" id="customerpic" value="<?php echo $row['customer_PIC']?>" style="background-color: white;" readonly>
   </div> 
 
   <div class="col-md-6">
@@ -98,23 +98,29 @@ session_start();
 	<input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address2']?>" style="background-color: white;" readonly>
     <input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address3']?>" style="background-color: white;" readonly>
   </div> 
-
-  <div class="col-md-6">
-    <label for="customerpic" class="form-label">Customer PIC</label>
-    <input type="text" class="form-control" id="customerpic" value="<?php echo $row['customer_PIC']?>" style="background-color: white;" readonly>
+  <div class="col-md-12">
+    <label for="customername" class="form-label">Customer Name</label>
+    <input type="text" class="form-control" id="customername" value="<?php echo $row['customer_name']?>" style="background-color: white;" readonly>
   </div> 
+
 
   <div class="col-md-6">
     <label for="contactnumber" class="form-label">Contact Number</label>
     <input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone1']?>" style="background-color: white;" readonly>
+  </div>   
+
+    <div class="col-md-6">
+    <label for="contactnumber" class="form-label"></label>
 	<input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone2']?>" style="background-color: white;" readonly>
   </div>   
+   
    
         <div class="CodeDropdown" style="padding-left: 17px;">
             <label for="brand">Machine Brand</label><br>
             <select disabled style="height: 33px; width: 200px; border-radius: 4px;" id="brand" required>
                 <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
             </select>
+             <input type="hidden" id="brand_id" name="brand_id" value="<?php echo $row['brand_id']?>" readonly >  
              <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" readonly >  
             </div>
 
@@ -123,6 +129,7 @@ session_start();
             <select disabled style="height: 33px; width: 200px; border-radius: 4px;" class="form-select" id="type" required>
                 <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
             </select>
+             <input type="hidden" id="type_id" name="type_id" value="<?php echo $row['type_id']?>" readonly >  
             <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" readonly >  
         </div> 
 
@@ -133,19 +140,43 @@ session_start();
                 <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
                 <option value="Add Serial Number" style="color:mediumblue;">Add Serial Number</option>
                 <?php
-                	include 'dbconnect.php';
-                $query = "select * from machine_list";
-                // $query = mysqli_query($con, $qr);
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                    while ($rows = mysqli_fetch_assoc($result)) {
+include "dbconnect.php";
 
-                ?>
+$type_id =$_GET['type_id'];
+
+    // $query = "SELECT * FROM machine_list WHERE type_id ='$type_id'";
+
+    $query = "SELECT * FROM job_register JOIN machine_list ON job_register.type_id=machine_list.type_id
+        WHERE job_register.type_id = $type_id";
+
+
+    // $query = "SELECT *
+//     FROM machine_list
+//     JOIN machine_type ON machine_list.type_id=machine_type.type_id
+//     JOIN machine_brand ON machine_type.brand_id=machine_brand.brand_id
+//     WHERE machine_list.machine_id = $machine_id";
+
+    // $query = "SELECT * FROM job_register
+            //     JOIN job_register ON machine_list.type_id=job_register.type_id
+            //     JOIN machine_type ON machine_list.type_id=machine_type.type_id
+
+            //     WHERE job_register.type_id = $type_id";
+
+
+    // $query = "SELECT * FROM machine_list
+                //     WHERE type_id ='$type_id' AND type_name ='$machine_type'
+                //     AND brand_id ='$brand_id' AND brandname ='$machine_brand'";
+
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while ($rows = mysqli_fetch_assoc($result)) {
+            ?>
                        
                 <option value="<?php echo $rows['machine_id']; ?>"><?php echo $rows['serialnumber']; ?></option>
                 <?php
-                    }
-                }
+        }
+    
+}
 
                 ?>
             </select>
@@ -154,8 +185,11 @@ session_start();
             <input type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>">  
             <input type="text" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
             <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
-            <input type="hidden" style="width: 100%;" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
-        
+
+             <div class="col-md-12" style="margin-left: -16px;margin-top: 11px;">
+    <label for="" class="form-label">Machine Name</label>
+    <input type="text" class="form-control" id="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 425px;">
+    </div> 
 
         </div> 
           <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
@@ -226,44 +260,7 @@ session_start();
 
             </script>
 
-             <script>
-        $(document).ready(function() {
-            $("#brand").on('change', function() {
-                var brandid = $(this).val();
-
-                $.ajax({
-                    method: "POST",
-                    url: "ajaxData.php",
-                    data: {
-                        id: brandid
-                    },
-                    datatype: "html",
-                    success: function(data) {
-                        $("#type").html(data);
-                        $("#serialnumbers").html('<option value="">Select Serial Number</option');
-
-                    }
-                });
-            });
-            $("#type").on('change', function() {
-                var typeid = $(this).val();
-                $.ajax({
-                    method: "POST",
-                    url: "ajaxData.php",
-                    data: {
-                        sid: typeid
-                    },
-                    datatype: "html",
-                    success: function(data) {
-                        $("#serialnumbers").html(data);
-
-                    }
-
-                });
-            });
-        });
-    </script>
-
+         
         <script>
         $(document).ready(function(){
             
