@@ -7,19 +7,9 @@
 <head>
     
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <!-- jQuery --> 
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  -->
-
-  <!-- Script -->
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-   
-    <!-- Select2 JS --> 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <!--Boxicons link -->
+  
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+
 </head>
 
 
@@ -169,7 +159,7 @@
             <input type="text" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
             <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
             <input type="hidden" style="width: 100%;" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
-        
+      
 
         </div>
         <div class="input-box" style="padding-left: 35px;">
@@ -310,9 +300,7 @@ $("#custModel").on("change",function(){
 
 
 <script>
-		// onkeyup event will occur when the user
-		// release the key and calls the function
-		// assigned to this event
+
 		function GetCustomer(str) {
 			if (str.length == 0) {
                 document.getElementById("customer_code").value = "";
@@ -328,90 +316,61 @@ $("#custModel").on("change",function(){
 			}
 			else {
 
-				// Creates a new XMLHttpRequest object
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function () {
 
-					// Defines a function to be called when
-					// the readyState property changes
 					if (this.readyState == 4 &&
 							this.status == 200) {
 						
-						// Typical action to be performed
-						// when the document is ready
 						var myObj = JSON.parse(this.responseText);
-
-						// Returns the response data as a
-						// string and store this array in
-						// a variable assign the value
-						// received to first name input field
 						
 						document.getElementById
 							("customer_code").value = myObj[0];
-						
-						// Assign the value received to
-						// last name input field
                         document.getElementById
 							("customer_name").value = myObj[1];
 						document.getElementById(
 							"customer_grade").value = myObj[2];
-                            document.getElementById(
+                        document.getElementById(
 							"customer_PIC").value = myObj[3];
-                            document.getElementById(
+                        document.getElementById(
 							"cust_phone1").value = myObj[4];
-                            document.getElementById(
+                        document.getElementById(
 							"cust_phone2").value = myObj[5];
-                              document.getElementById(
+                        document.getElementById(
 							"cust_address1").value = myObj[6];
-                              document.getElementById(
+                        document.getElementById(
 							"cust_address2").value = myObj[7];
-                              document.getElementById(
+                        document.getElementById(
 							"cust_address3").value = myObj[8];
 					}
 				};
 
-				// xhttp.open("GET", "filename", true);
 				xmlhttp.open("GET", "fetchcustomer.php?customer_id=" + str, true);
-				
-				// Sends the request to the server
 				xmlhttp.send();
 			}
 		}
 	</script>
 
     <script>
-		// onkeyup event will occur when the user
-		// release the key and calls the function
-		// assigned to this event
+
 		function GetMachines(str) {
 			if (str.length == 0) {
-                 document.getElementById("machine_id").value = "";
-                 document.getElementById("serialnumber").value = "";
+                document.getElementById("machine_id").value = "";
+                document.getElementById("serialnumber").value = "";
                 document.getElementById("machine_code").value = "";
 				document.getElementById("machine_name").value = "";
-                 document.getElementById("machine_description").value = "";
 				return;
 			}
 			else {
 
-				// Creates a new XMLHttpRequest object
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function () {
 
-					// Defines a function to be called when
-					// the readyState property changes
 					if (this.readyState == 4 &&
 							this.status == 200) {
 						
-						// Typical action to be performed
-						// when the document is ready
 						var myObj = JSON.parse(this.responseText);
-
-						// Returns the response data as a
-						// string and store this array in
-						// a variable assign the value
-						// received to first name input field
-						
+	
                         document.getElementById
 							("machine_id").value = myObj[0];
 
@@ -421,20 +380,15 @@ $("#custModel").on("change",function(){
 						document.getElementById
 							("machine_code").value = myObj[2];
 						
-						// Assign the value received to
-						// last name input field
                         document.getElementById
 							("machine_name").value = myObj[3];
-                            document.getElementById(
-							"machine_description").value = myObj[4];
+    
+                            
                            
 					}
 				};
 
-				// xhttp.open("GET", "filename", true);
 				xmlhttp.open("GET", "fetchmachine.php?machine_id=" + str, true);
-				
-				// Sends the request to the server
 				xmlhttp.send();
 			}
 		}
