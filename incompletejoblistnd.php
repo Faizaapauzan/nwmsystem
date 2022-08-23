@@ -157,6 +157,11 @@ session_start();
 			
 			$customer_name = '';
 			while ($row = mysqli_fetch_assoc($result)){
+
+				   $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
+              	   $updatedate = substr($jobregisterlastmodify_at,0,10);
+				   $row['updatedate'] = $updatedate;
+
 				// only show artist when it's an other artist then the previous one
 				if ($row['customer_name'] != $customer_name){
 					echo "<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>";
@@ -164,33 +169,30 @@ session_start();
 				}
 				
 				echo "<div class='cards'>
-    <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#mymodal'>
-    <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
-    <ul class='b' id='draged'>
-            <strong text-align='center'>".$row['job_priority']."</strong>
-            <li>".$row['job_order_number']."</li>
-            <li>".$row['job_description']."</li>
-            <li>".$row['machine_name']."</li>
-            <li>".$row['machine_type']."</li>
-            <li>".$row['serialnumber']."</li>
-            <strong text-align='center' style='color:red'>".$row['reason']."</strong>
-        </ul>
-        <div class='status' style='font-family: sans-serif;'>
-        <strong>".$row['job_assign']."</strong>
-    </div>
-    </div>
-    </div>";
-    }
-?>
-
-
-
+					  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#mymodal'>
+					  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
+					  <ul class='b' id='draged'>
+					  	<strong text-align='center'>".$row['job_priority']."</strong>
+						<li>".$row['job_order_number']."</li>
+						<li>".$row['job_description']."</li>
+						<li>".$row['machine_name']."</li>
+						<li>".$row['machine_type']."</li>
+						<li>".$row['serialnumber']."</li>
+						<strong text-align='center' style='color:red'>".$row['reason']."</strong>
+					  </ul>
+        			  <div class='status' style='font-family: sans-serif;'>
+        			  <strong>".$row['job_assign']."</strong>
+					  <br>
+					  <strong>".$row['updatedate']."</strong>
+    				  </div>
+    				  </div>
+    				  </div>";
+    			}
+		?>
                     </div>
-	
-	
+
  <!--VIEW BUTTON MODAL AJAX-->
 	
-
         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
             <div role="document" class="modal-dialog">
                 <div class="modal-content">

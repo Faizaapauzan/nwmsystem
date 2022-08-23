@@ -1,8 +1,4 @@
-<?php
-
-	session_start();
-
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html>
@@ -23,13 +19,13 @@
 <body>
 
     <?php
-    if(isset($_GET['error'])==true){
+        if(isset($_GET['error'])==true){
         echo'<font color="#FF0000"><p align="center">Wrong Username or Password</p></font>';
-    }
-    
+        }
     ?>
         
     <div class="container" id="container">
+
         <div class="form-container sign-in-container">
             <form action="dblogin.php" method="post">
                 <img src="image/login.png" alt="user icon" width="100" height="100">
@@ -52,7 +48,6 @@
                 <label for="log_in_at"></label>
                 <input type="hidden" id="now()" name="log_in_at">
                 <button input class="btn btn-primary btn-user btn-block" type="submit" name="submit" value="Sign In">Sign In</button>
-				
             </form>
         </div>
 
@@ -60,18 +55,17 @@
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <h1>Welcome!</h1><br>
-
                     <button class="ghost" id="signIn">Sign In</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <h1>NWM Management System</h1>
                     Sign in to continue access page.<br><br>
-
-
                 </div>
             </div>
         </div>
+
     </div>
-    </body>
+    
+</body>
 </html>
 

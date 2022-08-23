@@ -59,7 +59,6 @@ session_start();
 					<div class="dropdown-content1">
 						<a href="techattendance.php">Attendance</a>
 						<a href="techresthour.php">Rest Hour</a>
-						<a href="techreportoff.php">Report Off</a>
 					</div>
 				</div>
 			</ul>

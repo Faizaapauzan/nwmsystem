@@ -155,6 +155,11 @@ session_start();
 
 			$customer_name = '';
 			while ($row = mysqli_fetch_assoc($result)){
+
+				   $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
+              	   $updatedate = substr($jobregisterlastmodify_at,0,10);
+				   $row['updatedate'] = $updatedate;
+
     		// only show artist when it's an other artist then the previous one
     		if ($row['customer_name'] != $customer_name){
         	echo "<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>";
@@ -175,6 +180,8 @@ session_start();
 				  </ul>
 				  <div class='status' style='font-family: sans-serif;'>
 				  <strong>".$row['job_assign']."</strong>
+				  <br>
+				  <strong>".$row['updatedate']."</strong>
 				  </div>
 				  </div>
 				  </div>";
