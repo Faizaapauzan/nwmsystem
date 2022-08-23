@@ -599,7 +599,7 @@ session_start();
 						while ($row = mysqli_fetch_assoc($result)) {
 							// only show artist when it's an other artist then the previous one
 							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate-complete' data-idupdate-complete='".$row['customer_name']."' data-toggle='modal' data-target='#myModal-completed-update'>
+								echo "<div class='cardupdate-complete' data-idupdate-complete='".$row['customer_name']."' data-requested_date-complete='".$row['requested_date']."' data-toggle='modal' data-target='#myModal-completed-update'>
 										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
 							  		 </div>";
 								$customer_name = $row['customer_name'];
@@ -657,11 +657,12 @@ session_start();
 									$(document).ready(function() {
 										$('.cardupdate-complete').click(function() {
 											var customer_name = $(this).data('idupdate-complete');
+											var requested_date = $(this).data('requested_date-complete');
 											// AJAX request
 											$.ajax({
 												url:'ajaxtechupdate-completed.php',
 												type:'post',
-												data:{customer_name: customer_name},
+												data:{customer_name: customer_name, requested_date: requested_date},
 												success: function(response) {
 													// Add response in Modal body
 													$('.techupdate-details-completed').html(response);
