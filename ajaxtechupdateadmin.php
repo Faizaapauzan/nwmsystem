@@ -51,14 +51,15 @@
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
     
-    <form action="" method="post" style="margin-left: 20px;">
+    <form id="formStatus" action="" method="post" style="margin-left: 20px;">
+
+    <input type="hidden" name="job_status" value="Doing">
+    <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
+      <input type="hidden" name="job_assign" value="<?php echo $row['tech_name'] ?>">
+      <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
 
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
       <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
-
-      <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
-      <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-      <input type="hidden" name="job_assign" value="<?php echo $row['tech_name'] ?>">
 
       <label><?php echo $row['tech_name'] ?></label><br>
       <label><?php echo $row['storeDate'] ?></label><br>
@@ -70,8 +71,8 @@
         <label for="">Departure Time</label>
         <div class="technician-time">
           <input type="text" class="technician_departure" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure']?>">
-          <input type="hidden" name="job_status" value="Doing">
-          <input type="button" value="Departure" onclick="doSomething();doSomethingElse();">
+          
+          <input type="button" id="status" value="Departure" onclick="doSomething();">
           
               <script type="text/javascript">
                   function doSomething()
@@ -83,39 +84,27 @@
                       })
                     }
               </script>
+
+               <script>
+    $(document).ready(function () {
+        $('#status').click(function () {
+            var data = $('#formStatus').serialize() + '&status=status';
+            $.ajax({
+                url: 'changeStatus.php',
+                type: 'post',
+                data: data,
+                success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                       
+                      }
+            });
+        });
+    });
+</script>
               
-              <!-- change job status to doing -->
-              <script type="text/javascript">
-                  function doSomethingElse()
-                    {
-                      var job_status = $('input[name=job_status]').val();
-                      var job_assign = $('input[name=job_assign]').val();
-                      var customer_name = $('input[name=customer_name]').val();
-                      var requested_date = $('input[name=requested_date]').val();
-                      
-                      if(job_status!='' || job_status=='',
-                         job_assign!='' || job_assign=='',
-                      customer_name!='' || customer_name=='',
-                     requested_date!='' || requested_date=='')
-                        {
-                          var formData = {job_status:job_status,
-                                          job_assign:job_assign,
-                                       customer_name:customer_name,
-                                       requested_date:requested_date};
-                          
-                          $.ajax({
-                                    url: "changeStatus.php",
-                                    type: 'POST',
-                                    data: formData,
-                                    success: function(response)
-                                      {
-                                        var res = JSON.parse(response);
-                                        console.log(res);
-                                      }
-                                  });
-                        }
-                    } 
-              </script>
+            
               
             </div>
           </div>

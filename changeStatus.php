@@ -19,7 +19,6 @@ if(isset($_POST['job_status']) && $_POST['job_status']!='' || $_POST['job_status
                       
                  WHERE customer_name='".addslashes($_POST['customer_name'])."'
                  AND job_assign='".addslashes($_POST['job_assign'])."'
-                 AND customer_name='".addslashes($_POST['customer_name'])."'
                  AND requested_date='".addslashes($_POST['requested_date'])."'";
         
         if($conn->query($sql))
