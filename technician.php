@@ -157,8 +157,8 @@ session_start();
 											<strong text-align='center'>".$row['job_priority']."</strong>
 											<li>".$row['job_order_number']."</li>
 											<li>".$row['job_description']."</li>
-											<li>".$row['machine_name']."</li>
 											<li>".$row['machine_type']."</li>
+											<li>".$row['machine_name']."</li>
 											<li>".$row['serialnumber']."</li>
 											<p style='color:red;'>".$row['reason']."</p>
 										</ul>
@@ -206,8 +206,8 @@ session_start();
 											<strong text-align='center'>".$row['job_priority']."</strong>
 											<li>".$row['job_order_number']."</li>
 											<li>".$row['job_description']."</li>
-											<li>".$row['machine_name']."</li>
 											<li>".$row['machine_type']."</li>
+											<li>".$row['machine_name']."</li>
 											<li>".$row['serialnumber']."</li>
 										</ul>
 										<div class='status'  id='doingStatus'>
@@ -252,8 +252,8 @@ session_start();
 											<strong text-align='center'>".$row['job_priority']."</strong>
 											<li>".$row['job_order_number']."</li>
 											<li>".$row['job_description']."</li>
-											<li>".$row['machine_name']."</li>
 											<li>".$row['machine_type']."</li>
+											<li>".$row['machine_name']."</li>
 											<li>".$row['serialnumber']."</li>
 											<p style='color:red;'>".$row['reason']."</p>
 										</ul>
@@ -614,8 +614,8 @@ session_start();
 											<strong text-align='center'>".$row['job_priority']."</strong>
 											<li>".$row['job_order_number']."</li>
 											<li>".$row['job_description']."</li>
-											<li>".$row['machine_name']."</li>
 											<li>".$row['machine_type']."</li>
+											<li>".$row['machine_name']."</li>
 											<li>".$row['serialnumber']."</li>
 										</ul>
 									  <div class='status'  id='completedStatus'>
