@@ -133,6 +133,12 @@ session_start();
             <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" readonly >  
         </div> 
 
+        
+             <div class="col-md-12" style="margin-left: -16px;margin-top: 11px;">
+    <label for="" class="form-label">Machine Name</label>
+    <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 425px;">
+    </div> 
+
 
             <div class="CodeDropdown" style="padding-left: 18px;padding-top: 9px;">
             <label for="sn"> Machine Serial Number </label><br>
@@ -143,13 +149,12 @@ session_start();
                 <?php
                     include 'dbconnect.php';
 
-                    if (isset($_POST['customer_name']) && isset($_POST['type_id'])) {
+                    if (isset($_POST['type_id'])) {
                       $customer_name =$_POST['customer_name'];
                       $type_id =$_POST['type_id'];
             
                       $query = ("SELECT * FROM machine_list 
-                                 WHERE customer_name ='$customer_name'
-                                 AND type_id ='$type_id'");
+                                 WHERE type_id ='$type_id'");
 
                       $query_run = mysqli_query($conn, $query);
                       while ($row = mysqli_fetch_array($query_run)) {
@@ -166,10 +171,6 @@ session_start();
             <input type="text" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
             <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
 
-             <div class="col-md-12" style="margin-left: -16px;margin-top: 11px;">
-    <label for="" class="form-label">Machine Name</label>
-    <input type="text" class="form-control" id="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 425px;">
-    </div> 
 
         </div> 
           <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>

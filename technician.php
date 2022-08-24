@@ -147,7 +147,7 @@ session_start();
 							}
 							    echo "<nav id='mainNav'>
 								      <div class='cards'>
-									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-customer_name='".$row['customer_name']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
+									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
@@ -196,7 +196,7 @@ session_start();
 							
 								echo "<nav id='mainNav'>
 									  <div class='cards' style='display: flex; align-items: stretch;''>
-									  <div style='width: 90%;' class='card' id='notYetStatus' data-id='".$row['jobregister_id']."'  data-toggle='modal' data-target='#myModal'>
+									  <div style='width: 90%;' class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
@@ -211,7 +211,7 @@ session_start();
 											".$row['job_status']."
 										</div>
 									  </div>
-									  <div class='card' data-id='".$row['jobregister_id']."'  data-toggle='modal' data-target='#myModal'>
+									  <div class='cardsupport' data-id='".$row['jobregister_id']."'  data-toggle='modal' data-target='#myModalsupport'>
 									  <button type='button' style='background-color: firebrick;color: #f8f9fa;' class='btn btn-light text-left font-weight-bold font-color-black'>SUPPORT</button>
 									  </div>
 									  </nav>";
@@ -244,7 +244,7 @@ session_start();
 							}						
 								echo "<nav id='mainNav'>
 								      <div class='cards'>
-									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#myModal'>
+									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
@@ -265,6 +265,55 @@ session_start();
 						}
 					?>
 			</div>
+
+				<!-- Support Modal -->
+			<div id="myModalsupport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
+				<div role="document" class="modal-dialog">
+					<div style="padding-bottom: 26px;" class="modal-content">
+					<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
+							<h6 class="font-weight-bold">Support</h6>
+
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" style="font-size:20px;"></i></button>
+						<!--TOP BAR-->
+						<div class="line">
+
+						</div>
+						
+						<br>
+						
+						<div class="modal-body p-0">
+						
+								<form action="ajaxtechniciansupport.php" method="post">
+									<div class="techsupport-details">
+
+									</div>
+								</form>
+								
+								<script type='text/javascript'>
+									$(document).ready(function() {
+										$('.cardsupport').click(function() {
+											var jobregister_id = $(this).data('id');
+											// AJAX request
+											$.ajax({
+												url:'ajaxtechniciansupport.php',
+												type:'post',
+												data: {jobregister_id: jobregister_id},
+												success: function(response) {
+													// Add response in Modal body
+													$('.techsupport-details').html(response);
+													// Display Modal
+													$('#myModalsupport').modal('show');
+												}
+											});
+										});
+									});
+								</script>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+
 			
 			<!-- Update Modal -->
 			<div id="myModalupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
@@ -370,14 +419,12 @@ session_start();
 									$(document).ready(function() {
 										$('.card').click(function() {
 											var jobregister_id = $(this).data('id');
-											var customer_name = $(this).data('customer_name');
 											var type_id = $(this).data('type_id');
 											// AJAX request
 											$.ajax({
 												url: 'ajaxtechnician.php',
 												type: 'post',
 												data: {jobregister_id: jobregister_id,
-														customer_name: customer_name,
 															  type_id: type_id},
 												success: function(response) {
 													// Add response in Modal body
