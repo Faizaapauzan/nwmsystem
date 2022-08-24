@@ -195,8 +195,8 @@ session_start();
 							}
 							
 								echo "<nav id='mainNav'>
-									  <div class='cards'>
-									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."'  data-toggle='modal' data-target='#myModal'>
+									  <div class='cards' style='display: flex; align-items: stretch;''>
+									  <div style='width: 90%;' class='card' id='notYetStatus' data-id='".$row['jobregister_id']."'  data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
@@ -211,6 +211,8 @@ session_start();
 											".$row['job_status']."
 										</div>
 									  </div>
+									  <div class='card' data-id='".$row['jobregister_id']."'  data-toggle='modal' data-target='#myModal'>
+									  <button type='button' style='background-color: firebrick;color: #f8f9fa;' class='btn btn-light text-left font-weight-bold font-color-black'>SUPPORT</button>
 									  </div>
 									  </nav>";
 						}
