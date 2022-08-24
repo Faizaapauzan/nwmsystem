@@ -139,46 +139,26 @@ session_start();
             <select style="width: 300px; height: 43px;" id="serialnumbers" onchange="GetMachine(this.value)">
                 <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
                 <option value="Add Serial Number" style="color:mediumblue;">Add Serial Number</option>
+                
                 <?php
-include "dbconnect.php";
+                    include 'dbconnect.php';
 
-$type_id =$_GET['type_id'];
+                    if (isset($_POST['customer_name']) && isset($_POST['type_id'])) {
+                      $customer_name =$_POST['customer_name'];
+                      $type_id =$_POST['type_id'];
+            
+                      $query = ("SELECT * FROM machine_list 
+                                 WHERE customer_name ='$customer_name'
+                                 AND type_id ='$type_id'");
 
-    // $query = "SELECT * FROM machine_list WHERE type_id ='$type_id'";
-
-    $query = "SELECT * FROM job_register JOIN machine_list ON job_register.type_id=machine_list.type_id
-        WHERE job_register.type_id = $type_id";
-
-
-    // $query = "SELECT *
-//     FROM machine_list
-//     JOIN machine_type ON machine_list.type_id=machine_type.type_id
-//     JOIN machine_brand ON machine_type.brand_id=machine_brand.brand_id
-//     WHERE machine_list.machine_id = $machine_id";
-
-    // $query = "SELECT * FROM job_register
-            //     JOIN job_register ON machine_list.type_id=job_register.type_id
-            //     JOIN machine_type ON machine_list.type_id=machine_type.type_id
-
-            //     WHERE job_register.type_id = $type_id";
-
-
-    // $query = "SELECT * FROM machine_list
-                //     WHERE type_id ='$type_id' AND type_name ='$machine_type'
-                //     AND brand_id ='$brand_id' AND brandname ='$machine_brand'";
-
-    $result = $conn->query($query);
-    if ($result->num_rows > 0) {
-        while ($rows = mysqli_fetch_assoc($result)) {
-            ?>
-                       
-                <option value="<?php echo $rows['machine_id']; ?>"><?php echo $rows['serialnumber']; ?></option>
-                <?php
-        }
-    
-}
-
+                      $query_run = mysqli_query($conn, $query);
+                      while ($row = mysqli_fetch_array($query_run)) {
                 ?>
+
+                <option value="<?php echo $row['machine_id']; ?>"><?php echo $row['serialnumber']; ?></option>
+
+                <?php } } ?>
+
             </select>
 
    
