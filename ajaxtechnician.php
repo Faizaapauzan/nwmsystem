@@ -143,13 +143,12 @@ session_start();
                 <?php
                     include 'dbconnect.php';
 
-                    if (isset($_POST['customer_name']) && isset($_POST['type_id'])) {
+                    if (isset($_POST['type_id'])) {
                       $customer_name =$_POST['customer_name'];
                       $type_id =$_POST['type_id'];
             
                       $query = ("SELECT * FROM machine_list 
-                                 WHERE customer_name ='$customer_name'
-                                 AND type_id ='$type_id'");
+                                 WHERE type_id ='$type_id'");
 
                       $query_run = mysqli_query($conn, $query);
                       while ($row = mysqli_fetch_array($query_run)) {
