@@ -183,7 +183,7 @@ session_start();
 				  	<li>".$row['serialnumber']."</li>
 				  	<strong text-align='center' style='color:red'>".$row['reason']."</strong>
 				  </ul>
-				  <div class='status' style='font-family: sans-serif;'>
+				  <div class='timestamp' style='font-family: sans-serif;'>
 				  <strong>".$row['job_assign']."</strong>
 				  <br>
 				  <strong>".$row['updatedate']."</strong>
@@ -239,7 +239,7 @@ session_start();
 							// AJAX request
         
 							$.ajax({
-							url: 'ajaxtechleader.php',
+							url: 'ajaxtechnician.php',
 							type: 'post',
 							data: {jobregister_id: jobregister_id},
 							success: function(response) {

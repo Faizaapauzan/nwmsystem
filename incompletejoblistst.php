@@ -179,7 +179,7 @@ while ($row = mysqli_fetch_assoc($result)){
             <li>".$row['serialnumber']."</li>
             <strong text-align='center' style='color:red'>".$row['reason']."</strong>
         </ul>
-        <div class='status' style='font-family: sans-serif;'>
+        <div class='timestamp' style='font-family: sans-serif;'>
         <strong>".$row['job_assign']."</strong>
 					  <br>
 					  <strong>".$row['updatedate']."</strong>

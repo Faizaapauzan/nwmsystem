@@ -130,7 +130,7 @@ include_once("dbconnect.php");
 </div>  
 <p class="control"><b id="acctechmessage"></b></p>
 <div style="text-align: end;" class="updateBtn">
-<button type="button" style="width: fit-content;" id="update_acc" name="update_acc" value="Update" class="buttonbiru"  >Update</button>
+<button type="button" style="padding-left: 25px;width: 95px;" id="update_acc" name="update_acc" value="Update" class="buttonbiru"  >Update</button>
 </div>
 </form> 
 

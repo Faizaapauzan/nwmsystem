@@ -738,7 +738,7 @@ session_start();
 				<div role="document" class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-							<div class="tabs" id="tab11">
+							<div class="tabs active" id="tab11">
 								<h6 class="font-weight-bold">Job Info</h6>
 							</div>
 							<div class="tabs" id="tab13">
@@ -773,7 +773,7 @@ session_start();
 
 								<!--Job Info Completed-->
 
-								<fieldset id="tab111">
+								<fieldset class="show" id="tab111">
 									<form action="" method="post">
 										<div class="tech-details-completed">
 

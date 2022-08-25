@@ -137,14 +137,19 @@
                 <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
                 <option value="Add Serial Number" style="color:blue;">Add Serial Number</option>
                 <?php
+                    include 'dbconnect.php';
 
-                $query = "select * from machine_list";
-                // $query = mysqli_query($con, $qr);
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                    while ($rows = mysqli_fetch_assoc($result)) {
+                    if (isset($_POST['type_id'])) {
+                      $customer_name =$_POST['customer_name'];
+                      $type_id =$_POST['type_id'];
+            
+                      $query = ("SELECT * FROM machine_list 
+                                 WHERE type_id ='$type_id'");
 
+                      $query_run = mysqli_query($conn, $query);
+                      while ($rows = mysqli_fetch_array($query_run)) {
                 ?>
+
                        
                 <option value="<?php echo $rows['machine_id']; ?>"><?php echo $rows['serialnumber']; ?></option>
                 <?php

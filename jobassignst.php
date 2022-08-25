@@ -47,6 +47,8 @@
 <!-- <form class="row g-3" action="assignleaderindex.php" method="post"> -->
 <form class="form" id="assigntechnician_form" method="post">
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+<input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
+  <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
 
     <label for="job_assign">Job Assign To :</label>
     <p class="control"><b id="assignupdatetechnicianmessage"></b></p>	 
@@ -81,7 +83,7 @@
 		 
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-        <input type="button" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" />
+        <input style="border:none; background-color: #081d45;" type="button" onclick="saveJobUpdate();" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" />
 </div>
  </form>
 
@@ -107,6 +109,39 @@
     });
 </script>
 
+<!-- Save customer name and requested date into job update table -->
+<script type="text/javascript">
+    function saveJobUpdate()
+      {
+        var tech_name = $('input[name=job_assign]').val();
+        var customer_name = $('input[name=customer_name]').val();
+        var requested_date = $('input[name=requested_date]').val();
+        var jobregister_id = $('input[name=jobregister_id]').val();
+        
+            if(tech_name!='' || tech_name=='',
+           customer_name!='' || customer_name=='',
+          requested_date!='' || requested_date=='',
+          jobregister_id!='' || jobregister_id=='')
+            {
+              var formData = {tech_name:tech_name,
+                          customer_name:customer_name,
+                         requested_date:requested_date,
+                         jobregister_id:jobregister_id};
+                    
+              $.ajax({  
+                        url: "savecustname.php",
+                        type: 'POST',
+                        data: formData,
+                        success: function(response)
+                          {
+                            var res = JSON.parse(response);
+                                      console.log(res);
+                          }
+                      });
+            }
+      } 
+</script>
+
 
 
  <form class="form" id="assignassistant_form" method="post">
@@ -121,13 +156,13 @@
 
     $jobregister_id =$_POST['jobregister_id'];
 
-    $fetchquery = "SELECT staffregister_id FROM assistants WHERE jobregister_id='$jobregister_id' ";
+    $fetchquery = "SELECT username FROM assistants WHERE jobregister_id='$jobregister_id' ";
     $fetchquery_run = mysqli_query($con, $fetchquery);
     $JobAssistant = [];
 
      foreach($fetchquery_run as $fetchrow)
      {
-        $JobAssistant[] = $fetchrow['staffregister_id'];
+        $JobAssistant[] = $fetchrow['username'];
      }
 }
  ?>
@@ -211,13 +246,14 @@ $(".multiple-select").select2({
 
 </script>
 </div>
-<div class="col align-self-end">         		 
+<div style="margin-left: 365px;margin-top: 20px;" class="updateBtn">          		 
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-          <p class="control"><b id="assigntechnicianmessage"></b></p>	 
+        
         <input style="margin-left: -13px; border:none; background-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
-         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-</div>		 
+     
+</div>	
+  <p class="control"><b id="assigntechnicianmessage"></b></p>	 	 
     </form>
 	<br>
   <?php

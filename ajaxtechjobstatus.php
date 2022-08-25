@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 
 <?php
 
@@ -57,7 +61,7 @@ display:none;
 
 <div class="form-group">
 <label for="exampleFormControlSelect2">Job Status</label>
-    <select type="text" id="job_status" name="job_status" onchange="myFunction()">
+    <select style="width: 203px;" class="form-control" type="text" id="job_status" name="job_status" onchange="myFunction()">
         <option value='' <?php if($row['job_status'] == '') { echo "SELECTED"; } ?>></option>
         <option value="Doing" <?php if($row['job_status'] == "Doing") { echo "SELECTED"; } ?>>Doing</option>
         <option value="Pending" <?php if($row['job_status'] == "Pending") { echo "SELECTED"; } ?>>Pending</option>
@@ -95,7 +99,7 @@ function myFunction() {
 
 <p class="control"><b id="messagestatus"></b></p>
 <div style="text-align: end;" class="btn-box">
-<button type="button" id="update_techstatus" name="update_techstatus" value="Update" style="width: fit-content;" class="buttonbiru" onclick="submitFormstatus();">Update</button>
+<button type="button" id="update_techstatus" name="update_techstatus" value="Update" style="width: 103px;padding-left: 29px;" class="buttonbiru" onclick="submitFormstatus();">Update</button>
 <br><br>
 </form>
 
@@ -128,7 +132,7 @@ function myFunction() {
                     var res = JSON.parse(response);
                     console.log(res);
                     if(res.success == true)
-                      $('#messagestatus').html('<span style="color: black">Update Saved!</span>');
+                      $('#messagestatus').html('<span style="color: green">Update Saved!</span>');
                     else
                       $('#messagestatus').html('<span style="color: red">Data Cannot Be Saved</span>');
                   }
