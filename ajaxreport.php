@@ -43,7 +43,7 @@
         $date = date('d-m-Y');
     ?>
     
-    <table id="date_grid" align="center" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
+    <table id="date_grid" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
         
     <p class="controls"><b id="msgdate"></b></p>
@@ -53,7 +53,7 @@
             <td style="display:none;"></td>
             <td><label>Service Report Date :</label><?php echo $date; ?></td>
             <td><button class="userinfo btn btn-success" type="button" data-id='<?php echo $res['jobregister_id']; ?>' data-custname='<?php echo $res['customer_name']; ?>'>NEW</button></td>
-            <td><button class="useredit btn btn-success" type="button" style="background:#081d45;" data-id2='<?php echo $res['jobregister_id']; ?>'>EDIT</button></td>
+            <td><button class="useredit btn btn-success" type="button" style="background:#081d45;border: #081d45;" data-id2='<?php echo $res['jobregister_id']; ?>'>EDIT</button></td>
             </tr>
         <?php endforeach;?>
     </tbody>

@@ -58,7 +58,7 @@ display:none;
 
 <div class="form-group">
 <label for="exampleFormControlSelect2">Job Status</label>
-    <select type="text" id="job_status" name="job_status" onchange="myFunction()">
+    <select disabled style="width: 203px;" class="form-control" type="text" id="job_status" name="job_status">
         <option value='' <?php if($row['job_status'] == '') { echo "SELECTED"; } ?>></option>
         <option value="Doing" <?php if($row['job_status'] == "Doing") { echo "SELECTED"; } ?>>Doing</option>
         <option value="Pending" <?php if($row['job_status'] == "Pending") { echo "SELECTED"; } ?>>Pending</option>
@@ -76,17 +76,6 @@ display:none;
 </div>
 </div>
 
-<script type="text/javascript">
-function myFunction() {
-  var x = document.getElementById("job_status").value;
-  if(x == 'Pending' || x == 'Incomplete'){
-    document.getElementById("reason").style.display = 'block';
-  }
-  else {
-    document.getElementById("reason").style.display = 'none';
-  }
-}
-</script>
 
 <!--PENDING & INCOMPLETE END REASON-->
 

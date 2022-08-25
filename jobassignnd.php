@@ -65,7 +65,7 @@
 
         while($data = mysqli_fetch_array($records))
         {
-            echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']."</option>";  // displaying data in option menu
+            echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']."</option>";  // displaying data in option menu
             // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
         }	
     ?>
@@ -76,7 +76,7 @@
 </select>  
 </div>
 
- <div class="assistants" style="padding-top: 25px;" id="multipselect">
+ <div class="assistants" id="multipselect">
  <?php
   $con = mysqli_connect("localhost","root","","nwmsystem");
 
@@ -85,13 +85,13 @@
 
     $jobregister_id =$_POST['jobregister_id'];
 
-    $fetchquery = "SELECT staffregister_id FROM assistants WHERE jobregister_id='$jobregister_id' ";
+    $fetchquery = "SELECT username FROM assistants WHERE jobregister_id='$jobregister_id' ";
     $fetchquery_run = mysqli_query($con, $fetchquery);
     $JobAssistant = [];
 
      foreach($fetchquery_run as $fetchrow)
      {
-        $JobAssistant[] = $fetchrow['staffregister_id'];
+        $JobAssistant[] = $fetchrow['username'];
      }
 }
  ?>
@@ -111,7 +111,7 @@ include_once("dbconnect.php");
   }
   
 ?>
-  <label style="color: green" for="assistant">Select Assistant :</label>
+<label style="color: #081d45" for="assistant">Select Assistant :</label>
 <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -18px;" class="table" width="60%" cellspacing="0">
    <thead>
       <tr>
@@ -173,13 +173,14 @@ $(".multiple-select").select2({
 
 </script>
 </div>
-<div class="col align-self-end">         		 
+<div style="margin-left: 365px;margin-top: 20px;" class="updateBtn">       		 
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-          <p class="control"><b id="assigntodotechmessage"></b></p>	 
-        <input style="margin-left: -13px; border:none; background-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
-         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-</div>		 
+          
+        <input style="margin-left: -7px; border:none;background-color: #081d45;border-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
+         <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> -->
+</div>	
+<p class="control" style="margin-top: -29px;"><b id="assigntodotechmessage"></b></p>	 	 
     </form>
 	<br>
   <?php

@@ -87,7 +87,7 @@ include_once("dbconnect.php");
 <div class="col align-self-end">         		 
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+   
 </div>		 
     </form>
 	<br>

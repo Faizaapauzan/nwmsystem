@@ -36,7 +36,7 @@
     <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
     
     <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br/>
-    <p class="control"><b id="assignupdateadminmessage"></b></p>
+    <p style="margin-left: 20px;margin-top: 1px;margin-bottom: 11px;" class="control"><b id="assignupdateadminmessage"></b></p>
     <div class="input-box" style="display:flex; width: 541px">
     
     <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
@@ -89,7 +89,7 @@
                       var res = JSON.parse(response);
                       console.log(res);
                       if(res.success == true)
-                      $('#assignupdateadminmessage').html('<span style="color: green">Technician Assign!</span>');
+                      $('#assignupdateadminmessage').html('<span style="color: green">Job Assigned!</span>');
                       else
                       $('#assignupdateadminmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
                     }
@@ -144,12 +144,12 @@
 
       if (isset($_POST['jobregister_id'])) {
       $jobregister_id =$_POST['jobregister_id'];
-      $fetchquery = "SELECT staffregister_id FROM assistants WHERE jobregister_id='$jobregister_id' ";
+      $fetchquery = "SELECT username FROM assistants WHERE jobregister_id='$jobregister_id' ";
       $fetchquery_run = mysqli_query($con, $fetchquery);
       $JobAssistant = [];
       foreach($fetchquery_run as $fetchrow)
         {
-          $JobAssistant[] = $fetchrow['staffregister_id'];
+          $JobAssistant[] = $fetchrow['username'];
         }
       }
  ?>

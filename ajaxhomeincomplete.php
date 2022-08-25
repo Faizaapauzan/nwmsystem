@@ -139,7 +139,7 @@
         <label for="exampleFormControlSelect2">Job Status</label>
         <select type="text" id="job_status" name="job_status">
             <option value='' <?php if($row['job_status'] == '') { echo "SELECTED"; } ?>></option>
-            <option value="Incomplete" <?php if($row['job_status'] == "Incomplete") { echo "SELECTED"; } ?>>Incomplete</option>
+            
             <option value="Completed" <?php if($row['job_status'] == "Completed") { echo "SELECTED"; } ?>>Completed</option>
         </select>
         </div>

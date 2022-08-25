@@ -129,7 +129,7 @@ session_start();
             </div> 
 
 
-            <div class="CodeDropdown" style="padding-left: 18px;padding-top: 9px;">
+            <div class="CodeDropdown" style="padding-left: 18px;padding-top: 9px;margin-bottom: 24px;">
             <label for="sn"> Machine Serial Number </label><br>
             <select disabled style="width: 300px; height: 43px;" id="serialnumbers">
             <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
