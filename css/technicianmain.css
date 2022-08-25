@@ -186,6 +186,7 @@ body {
   margin-left: auto;
   font-family: "Times New Roman", Times, serif;
   margin-bottom: 2px;
+  color: #22304d;
 }
 
 .timestamp {
@@ -221,7 +222,7 @@ body {
   width: 84px;
 }
 
-#support {
+#Support {
   background: #22304d;
   color: #f0f0f0;
 }
