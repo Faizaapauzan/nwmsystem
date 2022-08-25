@@ -33,6 +33,24 @@
         if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) { 
           $customer_name =$_POST['customer_name'];
           $requested_date =$_POST['requested_date'];
+          $query = "SELECT * FROM job_register 
+                    WHERE customer_name ='$customer_name'
+                    AND job_assign ='{$_SESSION['username']}' 
+                    AND requested_date ='$requested_date'";
+          $query_run = mysqli_query($conn, $query);
+          if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
+
+        <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+
+    <?php } } } ?>
+
+    <?php
+        include 'dbconnect.php';
+        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) { 
+          $customer_name =$_POST['customer_name'];
+          $requested_date =$_POST['requested_date'];
           $query = "SELECT * FROM job_update 
                     WHERE customer_name ='$customer_name'
                     AND tech_name ='{$_SESSION['username']}' 
@@ -199,6 +217,7 @@
           <script type="text/javascript">
               function jobupdate()
                 {
+                  var jobregister_id = $('input[name=jobregister_id]').val();
                   var technician_departure = $('input[name=technician_departure]').val();
                   var technician_arrival = $('input[name=technician_arrival]').val();
                   var technician_leaving = $('input[name=technician_leaving]').val();
@@ -208,22 +227,24 @@
                   var jobupdate_id = $('input[name=jobupdate_id]').val();
                   
                   if
-                      (technician_departure!='' || technician_departure=='',
-                         technician_arrival!='' || technician_arrival=='',
-                         technician_leaving!='' || technician_leaving=='', 
-                                   tech_out!='' || tech_out=='', 
-                                    tech_in!='' || tech_in=='',
-                                  storeDate!='' || storeDate=='',
-                               jobupdate_id!='' || jobupdate_id=='')
+                      (jobregister_id!='' || jobregister_id=='',
+                 technician_departure!='' || technician_departure=='',
+                   technician_arrival!='' || technician_arrival=='',
+                   technician_leaving!='' || technician_leaving=='', 
+                             tech_out!='' || tech_out=='', 
+                              tech_in!='' || tech_in=='',
+                            storeDate!='' || storeDate=='',
+                         jobupdate_id!='' || jobupdate_id=='')
                              
                              {
-                              var formData = {technician_departure:technician_departure,
-                                                technician_arrival:technician_arrival,
-                                                technician_leaving:technician_leaving,
-                                                          tech_out:tech_out,
-                                                           tech_in:tech_in,
-                                                         storeDate:storeDate,
-                                                      jobupdate_id:jobupdate_id};
+                              var formData = {jobregister_id:jobregister_id,
+                                        technician_departure:technician_departure,
+                                          technician_arrival:technician_arrival,
+                                          technician_leaving:technician_leaving,
+                                                    tech_out:tech_out,
+                                                     tech_in:tech_in,
+                                                   storeDate:storeDate,
+                                                jobupdate_id:jobupdate_id};
                               $.ajax({
                                       url:'jobupdate.php',
                                       type:'POST',

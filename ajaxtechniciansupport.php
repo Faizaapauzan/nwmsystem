@@ -279,7 +279,8 @@
             var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
             var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
             
-            if(technician_rank!='' || technician_rank=='',
+            if(
+               technician_rank!='' || technician_rank=='',
                staff_position!='' || staff_position=='',
                support!='' || support=='',
                today_date!='' || today_date=='',  
@@ -370,36 +371,35 @@
 
     <!-- Save customer name and requested date into job update table -->
     <script type="text/javascript">
-        function keep()
+    function keep()
+      {
+        var tech_name = $('input[name=job_assign]').val();
+        var customer_name = $('input[name=customer_name]').val();
+        var requested_date = $('input[name=requested_date]').val();
+        var jobregister_id = $('input[name=jobregister_id]').val();
+        
+            if(tech_name!='' || tech_name=='',
+           customer_name!='' || customer_name=='',
+          requested_date!='' || requested_date=='',
+          jobregister_id!='' || jobregister_id=='')
             {
-                var tech_name = $('input[name=job_assign]').val();
-                var customer_name = $('input[name=customer_name]').val();
-                var requested_date = $('input[name=requested_date]').val();
-                var jobregister_id = $('input[name=jobregister_id]').val();
-                
-                if(tech_name!='' || tech_name=='',
-                   customer_name!='' || customer_name=='',
-                   requested_date!='' || requested_date=='',
-                   jobregister_id!='' || jobregister_id=='')
-                   
-                   {
-                    var formData = {tech_name:tech_name,
-                                    customer_name:customer_name,
-                                    requested_date:requested_date,
-                                    jobregister_id:jobregister_id};
+              var formData = {tech_name:tech_name,
+                          customer_name:customer_name,
+                         requested_date:requested_date,
+                         jobregister_id:jobregister_id};
                     
-                    $.ajax({
-                            url: "savecustname.php",
-                            type: 'POST',
-                            data: formData,
-                            success: function(response)
-                            {
-                                var res = JSON.parse(response);
-                                          console.log(res);
-                            }
-                          });
-                    }
-            } 
+              $.ajax({  
+                        url: "savecustname.php",
+                        type: 'POST',
+                        data: formData,
+                        success: function(response)
+                          {
+                            var res = JSON.parse(response);
+                                      console.log(res);
+                          }
+                      });
+            }
+      } 
     </script>
 
 </body>
