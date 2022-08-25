@@ -8,6 +8,10 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
     &&
    isset($_POST['staff_position']) && $_POST['staff_position']!='' || $_POST['staff_position']==''
     &&
+   isset($_POST['support']) && $_POST['support']!='' || $_POST['support']==''
+    &&
+   isset($_POST['today_date']) && $_POST['today_date']!='' || $_POST['today_date']==''
+    &&
    isset($_POST['job_priority']) && $_POST['job_priority']!='' || $_POST['job_priority']==''
     &&
    isset($_POST['job_order_number']) && $_POST['job_order_number']!='' || $_POST['job_order_number']==''
@@ -70,7 +74,7 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
 
     {
         
-        $sql = "INSERT INTO job_register (technician_rank, staff_position, job_priority, job_order_number,
+        $sql = "INSERT INTO job_register (technician_rank, staff_position, support, today_date, job_priority, job_order_number,
                                            job_name, job_code, job_description, requested_date, delivery_date, 
                                            customer_name, customer_code, customer_grade, cust_address1, cust_address2, 
                                            cust_address3, customer_PIC, cust_phone1, cust_phone2, machine_id,
@@ -78,6 +82,8 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
                        
                        VALUES ('".addslashes($_POST['technician_rank'])."',
                                '".addslashes($_POST['staff_position'])."',
+                               '".addslashes($_POST['support'])."',
+                               '".addslashes($_POST['today_date'])."',
                                '".addslashes($_POST['job_priority'])."',
                                '".addslashes($_POST['job_order_number'])."',
                                '".addslashes($_POST['job_name'])."',

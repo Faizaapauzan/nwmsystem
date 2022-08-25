@@ -169,21 +169,40 @@ body {
   border-radius: 6px;
   font-size: 15px;
   padding: 2px 5px 2px 5px;
-  width: max-content;
+  width: 66px;
   text-align: center;
   font-weight: bold;
   font-family: "Times New Roman", Times, serif;
   margin-left: auto;
 }
 
+.supports {
+  border-radius: 6px;
+  font-size: 15px;
+  padding: 2px 5px 2px 5px;
+  width: max-content;
+  text-align: center;
+  font-weight: bold;
+  margin-left: auto;
+  font-family: "Times New Roman", Times, serif;
+  margin-bottom: 2px;
+}
+
+.timestamp {
+  border-radius: 6px;
+  font-size: 15px;
+  padding: 2px 5px 2px 5px;
+  width: max-content;
+  text-align: center;
+  font-weight: bold;
+  margin-left: auto;
+  font-family: "Times New Roman", Times, serif;
+  margin-bottom: 2px;
+}
+
 #toDoStatus {
   background: rgb(236, 236, 212);
   color: rgb(133, 141, 22);
-}
-
-#incompleteStatus {
-  background: rgb(236, 212, 212);
-  color: rgb(124, 19, 19);
 }
 
 #doingStatus {
@@ -199,6 +218,12 @@ body {
 #completedStatus {
   background: rgb(214, 237, 226);
   color: rgb(19, 133, 78);
+  width: 84px;
+}
+
+#Support {
+  background: #22304d;
+  color: #f0f0f0;
 }
 
 fieldset {

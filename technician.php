@@ -159,8 +159,8 @@ session_start();
 											<li>".$row['serialnumber']."</li>
 											<p style='color:red;'>".$row['reason']."</p>
 										</ul>
-										<div class='status'  id='incompleteStatus'>
-											".$row['job_status']."
+										<div class='supports'  id='support'>
+											".$row['support']."
 										</div>
 										</div>
 										</div>
@@ -207,11 +207,14 @@ session_start();
 											<li>".$row['machine_name']."</li>
 											<li>".$row['serialnumber']."</li>
 										</ul>
+										<div class='supports'  id='support'>
+											".$row['support']."
+										</div>
 										<div class='status'  id='doingStatus'>
 											".$row['job_status']."
 										</div>
 									  </div>
-									  <div class='cardsupport' data-id='".$row['jobregister_id']."'  data-toggle='modal' data-target='#myModalsupport'>
+									  <div class='cardsupport' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#myModalsupport'>
 									  <button type='button' style='background-color: firebrick;color: #f8f9fa;' class='btn btn-light text-left font-weight-bold font-color-black'>SUPPORT</button>
 									  </div>
 									  </nav>";
@@ -256,6 +259,9 @@ session_start();
 											<li>".$row['serialnumber']."</li>
 											<p style='color:red;'>".$row['reason']."</p>
 										</ul>
+										<div class='supports'  id='support'>
+											".$row['support']."
+										</div>
 										<div class='status'  id='pendingStatus'>
 											".$row['job_status']."
 										</div>
@@ -665,6 +671,9 @@ session_start();
 											<li>".$row['machine_name']."</li>
 											<li>".$row['serialnumber']."</li>
 										</ul>
+									  <div class='supports'  id='support'>
+									  	".$row['support']."
+									  </div>
 									  <div class='status'  id='completedStatus'>
 									  	".$row['job_status']."
 									  </div>
