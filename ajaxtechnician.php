@@ -99,7 +99,7 @@ session_start();
   <input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone1']?>" style="background-color: white;" readonly>
   </div>   
 
-  <div class="col-md-6">
+  <div class="col-md-6" style="margin-top: 4px;">
   <label for="contactnumber" class="form-label"></label>
 	<input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone2']?>" style="background-color: white;" readonly>
   </div>   

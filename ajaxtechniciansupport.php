@@ -151,7 +151,7 @@
         while($data = mysqli_fetch_array($records))
         {
             echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";  // displaying data in option menu
-            // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+            
         }	
     ?>
 
@@ -168,15 +168,6 @@
         ?>
     
         <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>
-    </div>
-    
-    <div class="col-md-6">
-    <label for="exampleFormControlSelect2">Job Status</label>
-    <select class="form-control" type="text" id="job_status" name="job_status">
-    <option value='' <?php if($row['job_status'] == '') { echo "SELECTED"; } ?>></option>
-    <option value="Incomplete" <?php if($row['job_status'] == "Incomplete") { echo "SELECTED"; } ?>>Incomplete</option>
-    <option value="Completed" <?php if($row['job_status'] == "Completed") { echo "SELECTED"; } ?>>Completed</option>
-    </select>
     </div>
     
     <div style="margin-left: 365px;margin-top: 20px;" class="updateBtn">
@@ -198,9 +189,6 @@
     </script>
     
     <script>
-        // onkeyup event will occur when the user
-		// release the key and calls the function
-		// assigned to this event
 		function GetJobAss(str) {
             if (str.length == 0) {
                 document.getElementById("username").value = "";
@@ -210,24 +198,13 @@
             }
             
             else {
-                // Creates a new XMLHttpRequest object
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function () {
-                    // Defines a function to be called when
-					// the readyState property changes
 					if (this.readyState == 4 &&
                     this.status == 200) {
-                        // Typical action to be performed
-						// when the document is ready
 						var myObj = JSON.parse(this.responseText);
-						// Returns the response data as a
-						// string and store this array in
-						// a variable assign the value
-						// received to first name input field
                         document.getElementById
                         ("username").value = myObj[0];
-						// Assign the value received to
-						// last name input field
                         document.getElementById(
                             "technician_rank").value = myObj[1];
                         document.getElementById(
@@ -235,9 +212,7 @@
 					}
 				};
                 
-                // xhttp.open("GET", "filename", true);
                 xmlhttp.open("GET", "fetchtechnicianrank.php?staffregister_id=" + str, true);
-                // Sends the request to the server
                 xmlhttp.send();
 			}
 		}
@@ -277,7 +252,6 @@
             var accessories_required = $('select[name=accessories_required]').val();
             var DateAssign = $('input[name=DateAssign]').val();
             var job_assign = $('input[name=job_assign]').val();
-            var job_status = $('select[name=job_status]').val();
             var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
             var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
             
@@ -313,7 +287,6 @@
                accessories_required!='' || accessories_required=='', 
                DateAssign!='' || DateAssign=='',
                job_assign!='' || job_assign=='',
-               job_status!='' || job_status=='',
                jobregistercreated_by!='' || jobregistercreated_by=='',
                jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='')
                 
@@ -349,7 +322,6 @@
                                 accessories_required: accessories_required,
                                 DateAssign: DateAssign,
                                 job_assign: job_assign,
-                                job_status: job_status,
                                 jobregistercreated_by: jobregistercreated_by,
                                 jobregisterlastmodify_by: jobregisterlastmodify_by};
                 

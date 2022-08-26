@@ -236,7 +236,7 @@ session_start();
 							// AJAX request
         
 							$.ajax({
-							url: 'ajaxtechnician.php',
+							url: 'ajaxtechnician-completed.php',
 							type: 'post',
 							data: {jobregister_id: jobregister_id},
 							success: function(response) {
@@ -251,10 +251,7 @@ session_start();
 							</script>	
 
 							
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-							</div>					
-
+				
 	
 					
 						</fieldset>

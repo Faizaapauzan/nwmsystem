@@ -9,7 +9,7 @@ session_start();
 
 <head>
 
-	<title>Job Listing</title>
+	<title>Pending List</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -225,7 +225,7 @@ session_start();
 							// AJAX request
         
 							$.ajax({
-							url: 'ajaxtechnonleader.php',
+							url: 'ajaxtechnician-completed.php',
 							type: 'post',
 							data: {jobregister_id: jobregister_id},
 							success: function(response) {
@@ -239,9 +239,7 @@ session_start();
 				});
 							</script>	
 
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-							</div>					
+										
 
 						</fieldset>
 					</div>

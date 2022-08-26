@@ -147,7 +147,7 @@
  <form class="form" id="assignassistant_form" method="post">
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
- <div class="assistants" style="padding-top: 25px;" id="multipselect">
+ <div class="assistants" style="padding-top: 20px;" id="multipselect">
  <?php
   $con = mysqli_connect("localhost","root","","nwmsystem");
 
@@ -182,7 +182,7 @@ include_once("dbconnect.php");
   }
   
 ?>
-<label style="color: green" for="assistant">Select Assistant :</label>
+<label style="color: #22304d;" for="assistant">Select Assistant :</label>
 <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -31px;" class="table" width="60%" cellspacing="0">
    <thead>
       <tr>
