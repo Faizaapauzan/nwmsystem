@@ -6,6 +6,8 @@ $response = array('success' => false);
 
 if(isset($_POST['tech_name']) && $_POST['tech_name']!='' || $_POST['tech_name']==''
     &&
+    isset($_POST['support']) && $_POST['support']!='' || $_POST['support']==''
+    &&
    isset($_POST['customer_name']) && $_POST['customer_name']!='' || $_POST['customer_name']==''
     &&
    isset($_POST['requested_date']) && $_POST['requested_date']!='' || $_POST['requested_date']==''
@@ -14,8 +16,9 @@ if(isset($_POST['tech_name']) && $_POST['tech_name']!='' || $_POST['tech_name']=
 
     {
         
-        $sql ="INSERT INTO job_update (tech_name, customer_name, requested_date, jobregister_id)
+        $sql ="INSERT INTO job_update (tech_name, support, customer_name, requested_date, jobregister_id)
                       VALUES ('".addslashes($_POST['tech_name'])."',
+                              '".addslashes($_POST['support'])."',
                               '".addslashes($_POST['customer_name'])."',
                               '".addslashes($_POST['requested_date'])."',
                               '".addslashes($_POST['jobregister_id'])."')";
