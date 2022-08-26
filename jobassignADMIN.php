@@ -55,15 +55,17 @@
     <input type="hidden" name="job_assign" id='username' value="<?php echo $row['job_assign']?>">
     <input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>  
     <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>
-  </select>
+  
+    </select>
   
     <?php
       $DateAssign = date("Y.m.d");
-      $_SESSION['storeDate'] = $DateAssign; ?>
+      $_SESSION['storeDate'] = $DateAssign; 
+    ?>
     
     <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	
   
-  <?php if (isset($_SESSION["username"])) { ; } ?>
+    <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
     <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" onclick="keep();" />
     <!-- <button style="height: 42px; margin-top: 2px;  border-radius: 5px; width: 145px;" id="technicianassign" name="technicianassign">Update</button> -->
@@ -92,7 +94,7 @@
       });
   </script>
 
-<!-- Save customer name and requested date into job update table -->
+<!-- Save into job update table -->
 <script type="text/javascript">
     function keep()
       {
@@ -130,7 +132,13 @@
 <!-- ASSIGN ASSISTANT -->
 
 <form class="form" id="adminassistant_form" method="post" style="margin-left: 20px;">
+
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+
+<input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
+<input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
+<input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
+
 <div class="assistants" id="multipleassist">
   
   <?php
@@ -146,7 +154,7 @@
           $JobAssistant[] = $fetchrow['username'];
         }
       }
- ?>
+  ?>
  
  <br/>
  
@@ -191,7 +199,7 @@
               foreach ($query_run as $rowstaff){
       ?>
   
-  <option value="<?php echo $rowstaff["username"]; ?>"><?php echo $rowstaff["username"]; ?></option>
+    <option value="<?php echo $rowstaff["username"]; ?>"><?php echo $rowstaff["username"]; ?></option>
       
       <?php } }
           else
@@ -213,12 +221,12 @@
 </div>
 
 <div class="buttonUpdate" style="display: flex;flex-direction: row-reverse;">
-  <?php if (isset($_SESSION["username"])) { ; } ?>
+<?php if (isset($_SESSION["username"])) { ; } ?>
 <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
 <p class="control"><b id="assignadminmessage"></b></p>	 
 <input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>      
 </div>		 
-    </form>
+</form>
 	<br>
   <?php
         }

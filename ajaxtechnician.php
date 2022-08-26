@@ -156,7 +156,7 @@ session_start();
   <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
         
   <div style="margin-left: 376px;margin-top: 20px;" class="updateBtn">       
-  <input type="button" style="color: white;background-color: #081d45;border-color: #081d45;margin-bottom: 20px;" class="btn btn-primary" id="updatetechnician" name="updatetechnician" value="Update" />
+  <input type="button" style="color: white;background-color: #081d45;border-color: #081d45;margin-bottom: 20px;" class="btn btn-primary" id="updatetechnician" name="updatetechnician" onclick="updtMchn();" value="Update" />
   </div> 
         
   <p class="control" style="margin-left: 20px; margin-top: -28px;"><b id="updatetechnicianmessage"></b></p>
@@ -187,8 +187,37 @@ session_start();
         });
     });
   </script>
+  
+  <!-- Update machine name in assistant table -->
+  <script type="text/javascript">
+      function updtMchn()
+        {
+          var jobregister_id = $('input[name=jobregister_id]').val();
+          var machine_name = $('input[name=machine_name]').val();
+          
+            if(
+              jobregister_id!='' || jobregister_id=='',
+                machine_name!='' || machine_name=='')
+                
+                {
+                  var formData = {jobregister_id:jobregister_id,
+                                    machine_name:machine_name};
+                  
+                  $.ajax({
+                            url:"machineassistant.php",
+                            type:'POST',
+                            data: formData,
+                            success: function(response)
+                              {
+                                var res = JSON.parse(response);
+                                          console.log(res);
+                              }
+                          });
+                }
+        } 
+  </script>
 
-<!-- ADD INPUT SERIAL NUMBER -->
+  <!-- ADD INPUT SERIAL NUMBER -->
     <script>
     $(document).ready(function() {
     $('#serialnumber').hide();
@@ -259,7 +288,6 @@ session_start();
 			}
 		}
 	</script>
-
 
 </body>
 </html>
