@@ -252,7 +252,7 @@ session_start();
         document.getElementById("serialnumber").value = "";
         document.getElementById("machine_code").value = "";
 				document.getElementById("machine_name").value = "";
-        document.getElementById("machine_description").value = "";
+
 				return;
 			}
 			else {
@@ -277,8 +277,7 @@ session_start();
             document.getElementById
 							("machine_name").value = myObj[3];
 
-            document.getElementById(
-							"machine_description").value = myObj[4];
+
                            
 					}
 				};

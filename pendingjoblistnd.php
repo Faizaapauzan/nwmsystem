@@ -253,7 +253,7 @@ session_start();
 	
 
 	<script src="https://kit.fontawesome.com/7b6b55bad0.js" crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+	<!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->
 	
 </body>
 </html>
