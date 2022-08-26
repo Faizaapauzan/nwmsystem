@@ -175,7 +175,7 @@ while ($row = mysqli_fetch_assoc($result)){
             <li>".$row['machine_type']."</li>
             <li>".$row['serialnumber']."</li>
         </ul>
-        <div class='status' style='font-family: sans-serif;'>
+        <div class='timestamp' style='font-family: sans-serif;'>
         <strong>".$row['job_assign']."</strong>
 				  <br>
 				  <strong>".$row['updatedate']."</strong>
@@ -247,9 +247,7 @@ while ($row = mysqli_fetch_assoc($result)){
 				});
 							</script>	
 
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-							</div>					
+		
 
 						</fieldset>
 

@@ -133,7 +133,7 @@
     <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
     <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
     
-    <div class="assistants" style="padding-top: 25px;" id="multipselect">
+    <div class="assistants" style="padding-top: 20px;" id="multipselect">
         
         <?php
             $con = mysqli_connect("localhost","root","","nwmsystem");
@@ -162,7 +162,7 @@
             }
         ?>
         
-        <label style="color: green" for="assistant">Select Assistant :</label>
+        <label style="color: #22304d;" for="assistant">Select Assistant :</label>
         <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -31px;" class="table" width="60%" cellspacing="0">
         <thead>
           <tr>
@@ -182,7 +182,7 @@
         </table>
         
         <select name="assistant[]" class="form-control multiple-select" multiple="multiple">
-          
+		        
           <?php
               $query = "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register 
                         WHERE staff_position = 'Technician' AND tech_avai = '0'
