@@ -239,7 +239,7 @@ session_start();
 							// AJAX request
         
 							$.ajax({
-							url: 'ajaxtechnician.php',
+							url: 'ajaxtechnician-completed.php',
 							type: 'post',
 							data: {jobregister_id: jobregister_id},
 							success: function(response) {

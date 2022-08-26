@@ -176,7 +176,7 @@ session_start();
             }
             
             echo "<div class='cards'>
-            <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#mymodal'>
+            <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#mymodal'>
             <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
             <ul class='b' id='draged'>
                 <strong text-align='center'>".$row['job_priority']."</strong>
@@ -186,7 +186,7 @@ session_start();
                 <li>".$row['machine_type']."</li>
                 <li>".$row['serialnumber']."</li>
             </ul>
-            <div class='status' style='font-family: sans-serif;'>
+            <div class='timestamp' style='font-family: sans-serif;'>
                 <strong>".$row['job_assign']."</strong>
             </div>
             </div>
@@ -234,13 +234,14 @@ session_start();
 							$(document).ready(function() {
 							$('.card').click(function() {
 							var jobregister_id = $(this).data('id');
+							var type_id = $(this).data('type_id');
         
 							// AJAX request
         
 							$.ajax({
-							url: 'ajaxtechnician.php',
+							url: 'ajaxtechnician-completed.php',
 							type: 'post',
-							data: {jobregister_id: jobregister_id},
+							data: {jobregister_id: jobregister_id,type_id: type_id},
 							success: function(response) {
 							// Add response in Modal body
 							$('.tech-details').html(response);
