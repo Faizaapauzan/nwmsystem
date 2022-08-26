@@ -335,18 +335,6 @@ tr td:first-child:before {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
 
-    <?php
-        //include connection file 
-        include_once("dbconnect.php");
-
-        if (isset($_POST['jobregister_id'])) {
-          $jobregister_id =$_POST['jobregister_id'];
-          
-          $sql2 = "SELECT * FROM `assistants` WHERE  jobregister_id ='$jobregister_id'";
-          $queryRecords = mysqli_query($conn, $sql2) or die("Error to fetch Accessories data");
-        }
-    ?>
-
     <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     <input type="hidden" id="storeDate" name="storeDate" value="<?php echo $date = date('Y-m-d'); ?>">
     
@@ -362,12 +350,49 @@ tr td:first-child:before {
     <p><label style="position:absolute;">Customer Name :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 130px;" class="textarea" role="textarea" contenteditable><?php echo $row['customer_name'] ?></span><input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>" class="input" /></p>
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 2px;" name="job_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['job_name'] ?>"/></span></p>
-    <!-- <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?> <?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?><?php endforeach;?>" class="input" id="assistants"/></span></p> -->
-    <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input"/></span></p>
-    <p><label style="position:absolute;">Assistants :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 81px;" class="textarea" role="textarea" contenteditable><?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?> / <?php endforeach;?></span><input type="hidden" name="assistants" value="<?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?> / <?php endforeach;?>" class="input" /></p>
-    	 
+
     <?php } } }?>
 
+    <?php
+        include_once("dbconnect.php");
+                
+        if (isset($_POST['customer_name']) && isset($_POST['machine_name']) && isset($_POST['requested_date'])) {
+            $customer_name =$_POST['customer_name'];
+            $machine_name =$_POST['machine_name'];
+            $requested_date =$_POST['requested_date'];
+
+            $query = ("SELECT * FROM job_register 
+                                WHERE customer_name='$customer_name'
+                                AND machine_name='$machine_name'
+                                AND requested_date='$requested_date'");
+            $query_run = mysqli_query($conn, $query);
+            if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
+
+    <p><label>Service Engineer :</label><span><input type="text" name="job_assign" value="<?php foreach($query_run as $res) :?><?php echo $res['job_assign'] ?> / <?php endforeach;?>" class="input"/></span></p>
+
+    <?php } } }?>
+
+    <?php
+        //include connection file 
+        include_once("dbconnect.php");
+
+        if (isset($_POST['customer_name']) && isset($_POST['machine_name']) && isset($_POST['requested_date'])) {
+            $customer_name =$_POST['customer_name'];
+            $machine_name =$_POST['machine_name'];
+            $requested_date =$_POST['requested_date'];
+          
+          $sql2 = "SELECT * FROM `assistants` 
+                   WHERE customer_name='$customer_name'
+                   AND machine_name='$machine_name'
+                   AND requested_date='$requested_date'";
+          $queryRecords = mysqli_query($conn, $sql2) or die("Error to fetch Accessories data");
+        }
+    ?>
+
+    <p><label style="position:absolute;">Assistants :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 81px;" class="textarea" role="textarea" contenteditable><?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?> / <?php endforeach;?></span><input type="hidden" name="assistants" value="<?php foreach($queryRecords as $res) :?><?php echo $res['username'] ?> / <?php endforeach;?>" class="input" /></p>
+    	 
     </div>
 
     <?php
@@ -475,21 +500,75 @@ tr td:first-child:before {
 
         include 'dbconnect.php';
         $results = $conn->query("SELECT * FROM job_update 
-        WHERE tech_name ='{$_SESSION['username']}'
-        AND storeDate ='{$_SESSION['storeDate']}'
+        WHERE requested_date='$requested_date'
         AND customer_name ='$customer_name'
+        AND support =''
         AND tech_out IS NOT NULL 
         AND TRIM(tech_out) <> ''");
+        
         while($row = $results->fetch_assoc()) {
 
           $tech_out = $row['tech_out'];
           $tech_in = $row['tech_in'];
     ?>
 
-    <?php echo "Rest Time: ". $tech_out." - ".$tech_in." "?>
+    <?php echo "Rest Time: ".$tech_out." - ".$tech_in." "?>
     
     <?php } ?>
 
+    <?php
+        include_once("dbconnect.php");
+                
+        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) {
+            $customer_name =$_POST['customer_name'];
+            $requested_date =$_POST['requested_date'];
+            
+            $results = $conn->query("SELECT * FROM job_update
+                                     WHERE customer_name ='$customer_name'
+                                     AND requested_date='$requested_date'
+                                     AND support='support'
+                                     AND technician_arrival IS NOT NULL
+                                     AND TRIM(technician_arrival) <> ''");
+            
+            while($row = $results->fetch_assoc()) {
+              $technician_arrival = $row['technician_arrival'];
+              $technician_leaving = $row['technician_leaving'];
+              $arrival = substr($technician_arrival,11);
+              $leaving = substr($technician_leaving,11); 
+              $tech_name = $row['tech_name'];
+    ?>
+
+    <?php echo " ".$tech_name."  
+     Start: ".$arrival."  
+     End: ".$leaving." "
+    ?>
+    
+    <?php } } ?>
+
+    <?php
+        include_once("dbconnect.php");
+                
+        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) {
+            $customer_name =$_POST['customer_name'];
+            $requested_date =$_POST['requested_date'];
+            
+            $results = $conn->query("SELECT * FROM job_update
+                                     WHERE customer_name ='$customer_name'
+                                     AND requested_date='$requested_date'
+                                     AND support='support'
+                                     AND tech_out IS NOT NULL
+                                     AND TRIM(tech_out) <> ''");
+            
+            while($row = $results->fetch_assoc()) {
+              $tech_out = $row['tech_out'];
+              $tech_in = $row['tech_in'];
+              $tech_name = $row['tech_name'];
+    ?>
+
+    <?php echo " ".$tech_name." Rest Time: ".$tech_out." - ".$tech_in." "?>
+    
+    <?php } } ?>
+    
     </textarea>
 
      <script type="text/javascript">
