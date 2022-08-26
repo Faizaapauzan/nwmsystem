@@ -98,7 +98,7 @@
 
     <div class="CodeDropdown" style="padding-left: 17px;">
     <label for="brand">Machine Brand</label><br>
-    <select disabled style="height: 33px; width: 200px; border-radius: 4px;" id="brand" required>
+    <select disabled style="color: black; height: 33px; width: 200px; border-radius: 4px;" id="brand" required>
     <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
     </select>
     <input type="hidden" id="brand_id" name="brand_id" value="<?php echo $row['brand_id']?>" readonly >  
@@ -107,7 +107,7 @@
 
     <div class="CodeDropdown" style="padding-left: 31px;">
     <label for="type"> Machine Type</label><br>
-    <select disabled style="height: 33px; width: 200px; border-radius: 4px;" class="form-select" id="type" required>
+    <select disabled style="color: black; height: 33px; width: 200px; border-radius: 4px;" class="form-select" id="type" required>
     <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
     </select>
     <input type="hidden" id="type_id" name="type_id" value="<?php echo $row['type_id']?>" readonly >  
