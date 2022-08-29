@@ -44,12 +44,12 @@
     <button type="button" style="background-color: #081d45; border-color: #081d45; color: white; padding: 7px 44px; margin: 8px 0; border: none; width: 100%; margin: auto; border-radius: 4px;" onclick="buttonClick();">Click</button>
     <script>
         var i = 0;
-        var jobordernumber = document.getElementById('job_order_number');
+        var jobordernumber = document.getElementById('job_order_number').value;
         
         function buttonClick() 
             {
                 i++;
-                document.getElementById('job_order_number').value = jobordernumber.value+'-'+i;
+                document.getElementById('job_order_number').value = jobordernumber+'-'+i;
             }
     </script>  
     </div>
