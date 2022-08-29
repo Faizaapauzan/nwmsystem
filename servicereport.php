@@ -520,13 +520,15 @@ tr td:first-child:before {
     <?php
         include_once("dbconnect.php");
                 
-        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) {
+        if (isset($_POST['customer_name']) && isset($_POST['requested_date']) && isset($_POST['machine_name'])) {
             $customer_name =$_POST['customer_name'];
             $requested_date =$_POST['requested_date'];
+            $machine_name =$_POST['machine_name'];
             
             $results = $conn->query("SELECT * FROM job_update
                                      WHERE customer_name ='$customer_name'
                                      AND requested_date='$requested_date'
+                                     AND machine_name='$machine_name'
                                      AND support='support'
                                      AND technician_arrival IS NOT NULL
                                      AND TRIM(technician_arrival) <> ''");
@@ -549,13 +551,15 @@ tr td:first-child:before {
     <?php
         include_once("dbconnect.php");
                 
-        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) {
+        if (isset($_POST['customer_name']) && isset($_POST['requested_date']) && isset($_POST['machine_name'])) {
             $customer_name =$_POST['customer_name'];
             $requested_date =$_POST['requested_date'];
+            $machine_name =$_POST['machine_name'];
             
             $results = $conn->query("SELECT * FROM job_update
                                      WHERE customer_name ='$customer_name'
                                      AND requested_date='$requested_date'
+                                     AND machine_name='$machine_name'
                                      AND support='support'
                                      AND tech_out IS NOT NULL
                                      AND TRIM(tech_out) <> ''");

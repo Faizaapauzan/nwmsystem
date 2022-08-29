@@ -52,7 +52,12 @@
             <tr data-row-id="<?php echo $res['jobregister_id'];?>">
             <td style="display:none;"></td>
             <td><label>Service Report Date :</label><?php echo $date; ?></td>
-            <td><button class="userinfo btn btn-success" type="button" data-id='<?php echo $res['jobregister_id']; ?>' data-custname='<?php echo $res['customer_name']; ?>' data-machine_name='<?php echo $res['machine_name']; ?>' data-requested_date='<?php echo $res['requested_date']; ?>'>NEW</button></td>
+            <td><button class="userinfo btn btn-success" type="button" 
+                        data-id='<?php echo $res['jobregister_id']; ?>' 
+                        data-custname='<?php echo $res['customer_name']; ?>' 
+                        data-machine_name='<?php echo $res['machine_name']; ?>' 
+                        data-requested_date='<?php echo $res['requested_date']; ?>'
+                        data-support='<?php echo $res['support']; ?>'>NEW</button></td>
             <td><button class="useredit btn btn-success" type="button" style="background:#081d45;border: #081d45;" data-id2='<?php echo $res['jobregister_id']; ?>'>EDIT</button></td>
             </tr>
         <?php endforeach;?>
@@ -67,13 +72,15 @@
                 var customer_name = $(this).data('custname');
                 var machine_name = $(this).data('machine_name');
                 var requested_date = $(this).data('requested_date');
+                var support = $(this).data('support');
             $.ajax({
                     url: 'servicereport.php',
                     type: 'post',
-                    data: {jobregister_id: jobregister_id, 
+                    data: {jobregister_id:jobregister_id, 
                             customer_name:customer_name,
                              machine_name:machine_name,
-                           requested_date:requested_date},
+                           requested_date:requested_date,
+                                  support:support},
                     success: function(data) {
                         var win = window.open('servicereport.php');
                         win.document.write(data);

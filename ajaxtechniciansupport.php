@@ -350,18 +350,21 @@
         var tech_name = $('input[name=job_assign]').val();
         var support = $('input[name=support]').val();
         var customer_name = $('input[name=customer_name]').val();
+        var machine_name = $('input[name=machine_name]').val();
         var requested_date = $('input[name=requested_date]').val();
         var jobregister_id = $('input[name=jobregister_id]').val();
         
             if(tech_name!='' || tech_name=='',
                  support!='' || support=='',
            customer_name!='' || customer_name=='',
+            machine_name!='' || machine_name=='',
           requested_date!='' || requested_date=='',
           jobregister_id!='' || jobregister_id=='')
             {
               var formData = {tech_name:tech_name,
                                 support:support,
                           customer_name:customer_name,
+                          machine_name:machine_name,
                          requested_date:requested_date,
                          jobregister_id:jobregister_id};
                     
