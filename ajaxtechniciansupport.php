@@ -32,14 +32,27 @@
     <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
     
-   <div class="col-md-6">
+    <div class="col-md-6">
     <label for="jobpriority" class="form-label">Job Priority</label>
     <input type="text" name="job_priority" class="form-control" value="<?php echo $row['job_priority']?>" style="background-color: white;" readonly>
-  </div>
+    </div>
 
     <div class="col-md-6">
     <label for="jobordernumber" class="form-label">Job Order Number</label>
-    <input type="text" class="form-control" name="job_order_number" value="<?php echo $row['job_order_number']?>" style="background-color: white;">
+    <input type="text" class="form-control" name="job_order_number" id="job_order_number" value="<?php echo $row['job_order_number']?>" style="background-color: white;" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+    <button type="button" style="background-color: #081d45; border-color: #081d45; color: white; padding: 7px 44px; margin: 8px 0; border: none; width: 100%; margin: auto; border-radius: 4px;" onclick="buttonClick();">Click</button>
+    <script>
+        var i = 0;
+        var jobordernumber = document.getElementById('job_order_number');
+        
+        function buttonClick() 
+            {
+                i++;
+                document.getElementById('job_order_number').value = jobordernumber.value+'-'+i;
+            }
+    </script>  
+    </div>
     </div>
 
     <div class="col-md-6">
