@@ -39,9 +39,9 @@
 
     <div class="col-md-6">
     <label for="jobordernumber" class="form-label">Job Order Number</label>
-    <input type="text" class="form-control" name="job_order_number" id="job_order_number" value="<?php echo $row['job_order_number']?>" style="background-color: white;" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-    <button type="button" style="background-color: #081d45; border-color: #081d45; color: white; padding: 7px 44px; margin: 8px 0; border: none; width: 100%; margin: auto; border-radius: 4px;" onclick="buttonClick();">Click</button>
+     <div style="display: flex;">
+       <input type="text" class="form-control" name="job_order_number" id="job_order_number" value="<?php echo $row['job_order_number']?>" style="background-color: white;" aria-describedby="basic-addon2">
+    <button type="button" style="border-radius: 2px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px;" onclick="buttonClick();">Click</button>
     <script>
         var i = 0;
         var jobordernumber = document.getElementById('job_order_number').value;
