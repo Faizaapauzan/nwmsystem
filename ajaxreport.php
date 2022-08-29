@@ -57,7 +57,7 @@
                         data-custname='<?php echo $res['customer_name']; ?>' 
                         data-machine_name='<?php echo $res['machine_name']; ?>' 
                         data-requested_date='<?php echo $res['requested_date']; ?>'
-                        data-support='<?php echo $res['support']; ?>'>NEW</button></td>
+                        data-job_assign='<?php echo $res['job_assign']; ?>'>NEW</button></td>
             <td><button class="useredit btn btn-success" type="button" style="background:#081d45;border: #081d45;" data-id2='<?php echo $res['jobregister_id']; ?>'>EDIT</button></td>
             </tr>
         <?php endforeach;?>
@@ -72,7 +72,7 @@
                 var customer_name = $(this).data('custname');
                 var machine_name = $(this).data('machine_name');
                 var requested_date = $(this).data('requested_date');
-                var support = $(this).data('support');
+                var job_assign = $(this).data('job_assign');
             $.ajax({
                     url: 'servicereport.php',
                     type: 'post',
@@ -80,7 +80,7 @@
                             customer_name:customer_name,
                              machine_name:machine_name,
                            requested_date:requested_date,
-                                  support:support},
+                               job_assign:job_assign},
                     success: function(data) {
                         var win = window.open('servicereport.php');
                         win.document.write(data);

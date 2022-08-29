@@ -497,14 +497,21 @@ tr td:first-child:before {
     <textarea name="Submitted_Items" class="infoarea" id="textarea-container">
     
     <?php
-
         include 'dbconnect.php';
-        $results = $conn->query("SELECT * FROM job_update 
-        WHERE requested_date='$requested_date'
-        AND customer_name ='$customer_name'
-        AND support =''
-        AND tech_out IS NOT NULL 
-        AND TRIM(tech_out) <> ''");
+
+        if (isset($_POST['customer_name']) && isset($_POST['requested_date']) && isset($_POST['machine_name']) && isset($_POST['job_assign'])) {
+            $customer_name =$_POST['customer_name'];
+            $requested_date =$_POST['requested_date'];
+            $machine_name =$_POST['machine_name'];
+            $job_assign =$_POST['job_assign'];
+            
+            $results = $conn->query("SELECT * FROM job_update 
+            WHERE requested_date='$requested_date'
+            AND customer_name ='$customer_name'
+            AND tech_name ='$job_assign'
+            AND support =''
+            AND tech_out IS NOT NULL 
+            AND TRIM(tech_out) <> ''");
         
         while($row = $results->fetch_assoc()) {
 
@@ -514,7 +521,7 @@ tr td:first-child:before {
 
     <?php echo "Rest Time: ".$tech_out." - ".$tech_in." "?>
     
-    <?php } ?>
+    <?php } } ?>
 
     <?php
         include_once("dbconnect.php");
