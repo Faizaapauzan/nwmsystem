@@ -13,7 +13,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <!-- Custom Style -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
 
@@ -371,7 +370,7 @@ tr td:first-child:before {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
 
-    <p><label>Service Engineer :</label><span><input type="text" name="job_assign" value="<?php foreach($query_run as $res) :?><?php echo $res['job_assign'] ?> / <?php endforeach;?>" class="input"/></span></p>
+    <p><label style="position:absolute;">Service Engineer :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 127px;" ><input type="text" name="job_assign" value="<?php foreach($query_run as $res) :?><?php echo $res['job_assign'] ?> / <?php endforeach;?>" class="input"/></span></p>
 
     <?php } } }?>
 
@@ -495,7 +494,7 @@ tr td:first-child:before {
 
     <div class="additionalside">
     <p>Additional Info :-</p>
-    <textarea name="Submitted_Items" class="infoarea" id="autoresizing_item">
+    <textarea name="Submitted_Items" class="infoarea" id="textarea-container">
     
     <?php
 
@@ -576,14 +575,23 @@ tr td:first-child:before {
     
     </textarea>
 
-     <script type="text/javascript">
-        $('#autoresizing_item').on('input', function () {
-            this.style.height = '92px';
-              
-            this.style.height = 
-                    (this.scrollHeight) + 'px';
-        });
-     </script>
+
+<script type="text/javascript">
+var $textArea = $("#textarea-container");
+
+// Re-size to fit initial content.
+resizeTextArea($textArea);
+
+// Remove this binding if you don't want to re-size on typing.
+$textArea.off("keyup.textarea").on("keyup.textarea", function() {
+    resizeTextArea($(this));
+});
+
+function resizeTextArea($element) {
+    $element.height($element[0].scrollHeight);
+}
+  </script>
+     
 
     </div></div>
 
