@@ -57,7 +57,7 @@
     <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
       <input type="hidden" name="job_assign" value="<?php echo $row['tech_name'] ?>">
       <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
-
+ <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
       <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
 
@@ -195,6 +195,7 @@
           <script type="text/javascript">
               function jobupdate()
                 {
+                  var jobregister_id = $('input[name=jobregister_id]').val();
                   var technician_departure = $('input[name=technician_departure]').val();
                   var technician_arrival = $('input[name=technician_arrival]').val();
                   var technician_leaving = $('input[name=technician_leaving]').val();
@@ -204,7 +205,8 @@
                   var jobupdate_id = $('input[name=jobupdate_id]').val();
                   
                   if
-                      (technician_departure!='' || technician_departure=='',
+                      (jobregister_id!='' || jobregister_id=='',
+                      technician_departure!='' || technician_departure=='',
                          technician_arrival!='' || technician_arrival=='',
                          technician_leaving!='' || technician_leaving=='', 
                                    tech_out!='' || tech_out=='', 
@@ -213,7 +215,8 @@
                                jobupdate_id!='' || jobupdate_id=='')
                              
                              {
-                              var formData = {technician_departure:technician_departure,
+                              var formData = {jobregister_id:jobregister_id,
+                                technician_departure:technician_departure,
                                                 technician_arrival:technician_arrival,
                                                 technician_leaving:technician_leaving,
                                                           tech_out:tech_out,
