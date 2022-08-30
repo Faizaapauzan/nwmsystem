@@ -37,7 +37,7 @@
     <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
     <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
     
-    <div class="assign">
+    <div class="assign" style="width: fit-content;">
       <label for="job_assign">Job Assign To :</label>
       <select disabled class="form-control" id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
       
@@ -64,7 +64,7 @@
 <!-- ASSIGN TECHNICIAN -->
 
 <!-- ASSIGN ASSISTANT -->
-    <div class="assistants" id="multipselect">
+    <div class="assistants" id="multipselect" style="width: 70%;">
       
       <?php
           $con = mysqli_connect("localhost","root","","nwmsystem");
