@@ -171,7 +171,7 @@ $_SESSION['storeDate'] = $att_date;
 <!-- DISPLAY IN AND OUT -->
     <?php
         include 'dbconnect.php';
-        $results = $conn->query("SELECT * FROM tech_attendance WHERE techname= '{$_SESSION['username']}' AND att_date = '{$_SESSION['storeDate']}' ORDER BY attID DESC");
+        $results = $conn->query("SELECT * FROM tech_attendance WHERE techname= '{$_SESSION['username']}' AND att_date = '{$_SESSION['storeDate']}' ORDER BY attID DESC LIMIT 1");
         while($row = $results->fetch_assoc()) {
     ?>
   
