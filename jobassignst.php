@@ -217,7 +217,7 @@
         
     </div>
     
-    <div style="margin-left: 365px;margin-top: 20px;" class="updateBtn">
+    <div style="margin-left: 255px;margin-top: 20px;" class="updateBtn">
     <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
     <input style="margin-left: -13px; border:none; background-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
