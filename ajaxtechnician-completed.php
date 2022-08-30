@@ -42,80 +42,80 @@ session_start();
 <form id="technicianupdate_form" method="post" class="row g-3">
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
   
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;">
   <label for="jobpriority" class="form-label">Job Priority</label>
   <input type="text" class="form-control" id="jobpriority" value="<?php echo $row['job_priority']?>" style="background-color: white;" readonly>
   </div>
   
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;">
   <label for="jobordernumber" class="form-label">Job Order Number</label>
   <input type="text" class="form-control" id="jobordernumber" value="<?php echo $row['job_order_number']?>" style="background-color: white;" readonly>
   </div>
   
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;">
   <label for="jobname" class="form-label">Job Name</label>
   <input type="text" class="form-control" id="jobname" value="<?php echo $row['job_name']?>" style="background-color: white;" readonly>
   </div> 
   
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;">
   <label for="jobdescription" class="form-label">Job Description</label>
   <input type="text" class="form-control" id="jobdescription" value="<?php echo $row['job_description']?>" style="background-color: white;" readonly>
   </div> 
   
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;">
   <label for="requesteddate" class="form-label">Requested Date</label>
   <input type="date" class="form-control" id="requesteddate" value="<?php echo $row['requested_date']?>" style="background-color: white;" readonly>
   </div>   
   
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;"> 
   <label for="deliverydate" class="form-label">Delivery Date</label>
   <input type="date" class="form-control" id="deliverydate" value="<?php echo $row['delivery_date']?>" style="background-color: white;" readonly>
   </div>   
   
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;">
   <label for="customerpic" class="form-label">Customer PIC</label>
   <input type="text" class="form-control" id="customerpic" value="<?php echo $row['customer_PIC']?>" style="background-color: white;" readonly>
   </div> 
 
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;">
   <label for="customergrade" class="form-label">Customer Grade</label>
   <input type="text" class="form-control" id="customergrade" value="<?php echo $row['customer_grade']?>" style="background-color: white;" readonly>
   </div> 
 
-  <div class="col-md-12">
+  <div class="col-md-12" style="width: 70%;">
   <label for="customeraddress" class="form-label">Customer Address</label>
   <input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address1']?>" style="background-color: white;" readonly>
 	<input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address2']?>" style="background-color: white;" readonly>
   <input type="text" class="form-control" id="customeraddress" value="<?php echo $row['cust_address3']?>" style="background-color: white;" readonly>
   </div> 
 
-  <div class="col-md-12">
+  <div class="col-md-12" style="width: 70%;">
   <label for="customername" class="form-label">Customer Name</label>
   <input type="text" class="form-control" id="customername" value="<?php echo $row['customer_name']?>" style="background-color: white;" readonly>
   </div> 
 
-  <div class="col-md-6">
+  <div class="col-md-6" style="width: 70%;">
   <label for="contactnumber" class="form-label">Contact Number</label>
   <input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone1']?>" style="background-color: white;" readonly>
   </div>   
 
-  <div class="col-md-6" style="margin-top: 23px;">
+  <div class="col-md-6" style="margin-top: 23px;width: 70%;">
   <label for="contactnumber" class="form-label"></label>
 	<input type="text" class="form-control" id="contactnumber" value="<?php echo $row['cust_phone2']?>" style="background-color: white;" readonly>
   </div>   
    
-  <div class="CodeDropdown" style="padding-left: 17px;">
+  <div class="col-md-6" style="width: 70%;">
   <label for="brand" class="form-label">Machine Brand</label><br>
-  <select disabled style="color: black; height: 33px; width: 200px; border-radius: 4px;" id="brand" required>
+  <select disabled style="color: black; height: 33px; width: 135px; border-radius: 4px;" id="brand" required>
   <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
   </select>
   <input type="hidden" id="brand_id" name="brand_id" value="<?php echo $row['brand_id']?>" readonly >  
   <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" readonly >  
   </div>
 
-  <div class="CodeDropdown" style="padding-left: 31px;">
+ <div class="col-md-6" style="margin-top: 23px;width: 70%;">
   <label for="type" class="form-label"> Machine Type</label><br>
-  <select disabled style="color: black; height: 33px; width: 200px; border-radius: 4px;" class="form-select" id="type" required>
+  <select disabled style="color: black; height: 33px; width: 162px; border-radius: 4px;" class="form-select" id="type" required>
   <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
   </select>
   <input type="hidden" id="type_id" name="type_id" value="<?php echo $row['type_id']?>" readonly >  
@@ -124,10 +124,10 @@ session_start();
     
   <div class="col-md-12" style="margin-top: 11px;">
   <label for="" class="form-label">Machine Name</label>
-  <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 425px;" readonly>
+  <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 331px;" readonly>
   </div> 
 
-  <div class="CodeDropdown" style="padding-left: 18px;padding-top: 9px;margin-bottom: 20px; color: black;">
+  <div class="CodeDropdown" style="width: 70%; padding-left: 18px;padding-top: 9px;margin-bottom: 20px; color: black;">
   <label for="sn" class="form-label"> Machine Serial Number </label><br>
   <select disabled style="color: black; width: 300px; height: 43px;" id="serialnumbers" onchange="GetMachine(this.value)">
   <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
