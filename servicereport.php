@@ -400,11 +400,13 @@ tr td:first-child:before {
                 
         if (isset($_POST['customer_name'])) {
           $customer_name =$_POST['customer_name'];
+          $requested_date =$_POST['requested_date'];
           
           $query = ("SELECT * FROM job_update
                      WHERE tech_name ='{$_SESSION['username']}'
-                     AND storeDate ='{$_SESSION['storeDate']}'
-                     AND customer_name ='$customer_name' ");
+                     AND requested_date='$requested_date'
+                     AND customer_name ='$customer_name'
+                     ORDER BY requested_date DESC LIMIT 1");
 
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
@@ -437,11 +439,13 @@ tr td:first-child:before {
 
         if (isset($_POST['customer_name'])) {
             $customer_name =$_POST['customer_name'];
+            $requested_date =$_POST['requested_date'];
             
             $query = ("SELECT * FROM job_update 
                        WHERE tech_name ='{$_SESSION['username']}'
-                       AND storeDate ='{$_SESSION['storeDate']}'
-                       AND customer_name ='$customer_name'");
+                       AND  requested_date='$requested_date'
+                       AND customer_name ='$customer_name' 
+                       ORDER BY requested_date DESC LIMIT 1");
 
             $query_run = mysqli_query($conn, $query);
             while ($row = mysqli_fetch_array($query_run)) {
