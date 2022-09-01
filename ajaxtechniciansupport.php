@@ -129,7 +129,7 @@
 
     <div class="col-md-12" style="background-color: white;width: 331px;">
     <label for="" class="form-label">Machine Name</label>
-    <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 331px;">
+    <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;">
     <input type="hidden" name="machine_code" value="<?php echo $row['machine_code']?>">
     <input type="hidden" name="machine_id" value="<?php echo $row['machine_id']?>">
     </div> 
@@ -183,10 +183,10 @@
         <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>
     </div>
     
-    <div style="margin-left: 270px;margin-top: 20px;" class="updateBtn">
-     <button type="button" id="duplicate" style="background-color: #081d45; border-color: #081d45;" class="btn btn-primary" name="duplicate" value="duplicate" onclick="submitFormSupport();keep();">Request</button>
+    <div style="margin-left: 236px;margin-top: 20px;" class="updateBtn">
+     <button type="button" id="duplicate" style="background-color: #081d45;border-color: #081d45;margin-left: -218px;" class="btn btn-primary" name="duplicate" value="duplicate" onclick="submitFormSupport();keep();">Request</button>
     </div>
-    <p style="margin-top: -35px;margin-left: 14px;" class="control"><b id="messageSupport"></b></p>
+    <p style="margin-top: 19px;margin-left: 14px;" class="control"><b id="messageSupport"></b></p>
     </form>
     
     <?php } } ?>
