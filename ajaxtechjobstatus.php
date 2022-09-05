@@ -61,7 +61,7 @@ display:none;
 
 <div class="form-group">
 <label for="exampleFormControlSelect2">Job Status</label>
-    <select style="width: 203px;" class="form-control" type="text" id="job_status" name="job_status" onchange="myFunction()">
+    <select class="form-control" type="text" id="job_status" name="job_status" onchange="myFunction()">
         <option value='' <?php if($row['job_status'] == '') { echo "SELECTED"; } ?>></option>
         <option value="Doing" <?php if($row['job_status'] == "Doing") { echo "SELECTED"; } ?>>Doing</option>
         <option value="Pending" <?php if($row['job_status'] == "Pending") { echo "SELECTED"; } ?>>Pending</option>
@@ -98,7 +98,7 @@ function myFunction() {
 <!-- <button type="submit" id="button" name="update" class="button">Update Job Status</button> -->
 
 <p class="control"><b id="messagestatus"></b></p>
-<div style="text-align: end;" class="btn-box">
+<div class="btn-box">
 <button type="button" id="update_techstatus" name="update_techstatus" value="Update" style="width: 103px;padding-left: 29px;" class="buttonbiru" onclick="submitFormstatus();">Update</button>
 <br><br>
 </form>

@@ -106,7 +106,7 @@ session_start();
    
   <div class="col-md-6" style="width: 70%;">
   <label for="brand" class="form-label">Machine Brand</label><br>
-  <select disabled style="color: black; height: 33px; width: 135px; border-radius: 4px;" id="brand" required>
+  <select disabled style="color: black; height: 33px; width: 205px; border-radius: 4px;" id="brand" required>
   <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
   </select>
   <input type="hidden" id="brand_id" name="brand_id" value="<?php echo $row['brand_id']?>" readonly >  
@@ -115,7 +115,7 @@ session_start();
 
 <div class="col-md-6" style="margin-top: 4px;width: 70%;">
   <label for="type" class="form-label"> Machine Type</label><br>
-  <select disabled style="color: black; height: 33px; width: 162px; border-radius: 4px;" class="form-select" id="type" required>
+  <select disabled style="color: black; height: 33px; width: 203px; border-radius: 4px;" class="form-select" id="type" required>
   <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
   </select>
   <input type="hidden" id="type_id" name="type_id" value="<?php echo $row['type_id']?>" readonly >  
@@ -124,7 +124,7 @@ session_start();
     
   <div class="col-md-12" style="margin-top: 11px;">
   <label for="" class="form-label">Machine Name</label>
-  <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 331px;">
+  <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 302px;">
   </div> 
 
   <div class="CodeDropdown" style="padding-left: 18px;padding-top: 9px;width: 70%;">
@@ -155,11 +155,11 @@ session_start();
 
   <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
         
-  <div style="margin-left: 270px;margin-top: 20px;" class="updateBtn">       
+  <div style="margin-left: 22px;margin-top: 22px;margin-bottom: -25px;margin-right: 60px;" class="updateBtn">       
   <input type="button" style="color: white;background-color: #081d45;border-color: #081d45;margin-bottom: 20px;" class="btn btn-primary" id="updatetechnician" name="updatetechnician" onclick="updtMchn();" value="Update" />
   </div> 
         
-  <p class="control" style="margin-left: 20px; margin-top: -28px;"><b id="updatetechnicianmessage"></b></p>
+  <p class="control" style="margin-left: -43px;margin-top: 29px;"><b id="updatetechnicianmessage"></b></p>
   </form>
             
   <?php } ?>

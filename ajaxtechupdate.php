@@ -76,12 +76,19 @@
 
       <br>
 
+           <?php
+     date_default_timezone_set("Asia/Kuala_Lumpur");
+        $ArrivalDateTime = date('d-m-Y g:i A');
+        $_SESSION['arrivaltime'] = $ArrivalDateTime; 
+    ?>
+
       <label>Departure Time</label>
+      <input type="hidden" name="technician_departure" value="<?php echo $_SESSION["arrivaltime"] ?>">
       <div class="input-group mb-3">
-        <input readonly type="text" class="form-control" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
+        <input readonly type="text" class="form-control" id="Departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
         <input type="hidden" name="job_status" value="Doing">
         <div class="input-group-append">
-          <button id="update_techstatus" name="update_techstatus" class="buttonbiru update" onclick="doSomething();doSomethingElse();" type="button">Departure</button>
+          <button id="update_techstatus" name="update_techstatus" class="buttonbiru update" onclick="doSomething();doSomethingElse();departureTechnician();" type="button">Departure</button>
         </div>
       
               <script type="text/javascript">
@@ -127,18 +134,48 @@
                         }
                     } 
               </script>
+
+                    <script type="text/javascript">
+
+                  function departureTechnician()
+                    {
+                      var technician_departure = $('input[name=technician_departure]').val();
+                      var jobupdate_id = $('input[name=jobupdate_id]').val();
+                      
+                      
+                      if(technician_departure!='' || technician_departure=='',
+                         jobupdate_id!='' || jobupdate_id=='')
+                        {
+                          var formData = {technician_departure:technician_departure,
+                                          jobupdate_id:jobupdate_id};
+                          
+                          $.ajax({
+                                    url: "departureupdate.php",
+                                    type: 'POST',
+                                    data: formData,
+                                    success: function(response)
+                                      {
+                                        var res = JSON.parse(response);
+                                        console.log(res);
+                                      }
+                                  });
+                        }
+                    } 
+              </script>
       
       </div>
-      
+
+
       <label>Arrival Time</label>
+      <input type="hidden" name="technician_arrival" value="<?php echo $_SESSION["arrivaltime"] ?>">
       <div class="input-group mb-3">
-        <input readonly type="text" class="form-control" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button style="padding-left: 64px;" class="buttonbiru" onclick="test2()" type="button">Arrival</button>
+      <input readonly type="text" class="form-control" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+      <button style="padding-left: 64px;" id="arrivaltechnician" class="buttonbiru" onclick="ArrivalTime();arrivalTechnician();" type="button">Arrival</button>
         </div>
-              
-              <script type="text/javascript">
-                  function test2()
+
+           <script type="text/javascript">
+                  function ArrivalTime()
                     {
                       $.ajax({url:"departureTime.php", success:function(result)
                         {
@@ -147,14 +184,48 @@
                       })
                     }
               </script>
+
+
+         <script type="text/javascript">
+
+                  function arrivalTechnician()
+                    {
+                      var technician_arrival = $('input[name=technician_arrival]').val();
+                      var jobupdate_id = $('input[name=jobupdate_id]').val();
+                      
+                      
+                      if(technician_arrival!='' || technician_arrival=='',
+                         jobupdate_id!='' || jobupdate_id=='')
+                        {
+                          var formData = {technician_arrival:technician_arrival,
+                                          jobupdate_id:jobupdate_id};
+                          
+                          $.ajax({
+                                    url: "arrivalupdate.php",
+                                    type: 'POST',
+                                    data: formData,
+                                    success: function(response)
+                                      {
+                                        var res = JSON.parse(response);
+                                        console.log(res);
+                                      }
+                                  });
+                        }
+                    } 
+              </script>
+
+             
+
             
       </div>
       
       <label>Leaving Time</label>
+      <input type="hidden" name="technician_leaving" value="<?php echo $_SESSION["arrivaltime"] ?>">
       <div class="input-group mb-3">
-        <input readonly type="text" class="form-control" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
+        <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
+        <input readonly type="text" class="form-control" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <button style="padding-left: 51px;" class="buttonbiru" onclick="test3()" type="button">Leaving</button>
+          <button style="padding-left: 51px;" class="buttonbiru" onclick="test3();leavingTechnician();" type="button">Leaving</button>
         </div>
               
               <script type="text/javascript">
@@ -167,13 +238,49 @@
                     })
                   }
               </script>
+
+                            <script type="text/javascript">
+                  function leavingTechnician()
+                    {
+                      var technician_leaving = $('input[name=technician_leaving]').val();
+                      var jobupdate_id = $('input[name=jobupdate_id]').val();
+                      
+                      
+                      if(technician_leaving!='' || technician_leaving=='',
+                         jobupdate_id!='' || jobupdate_id=='')
+                        {
+                          var formData = {technician_leaving:technician_leaving,
+                                          jobupdate_id:jobupdate_id};
+                          
+                          $.ajax({
+                                    url: "leavingupdate.php",
+                                    type: 'POST',
+                                    data: formData,
+                                    success: function(response)
+                                      {
+                                        var res = JSON.parse(response);
+                                        console.log(res);
+                                      }
+                                  });
+                        }
+                    } 
+              </script>
+
+
       </div>
+
+                 <?php
+     date_default_timezone_set("Asia/Kuala_Lumpur");
+        $RestTime = date('g:i A');
+        $_SESSION['resttime'] = $RestTime; 
+    ?>
       
       <label>Rest Hour</label>
+      <input type="hidden" name="tech_out" value="<?php echo $_SESSION["resttime"] ?>">
       <div class="input-group mb-3">
-        <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
+        <input readonly type="text" style="position: static;" class="form-control" id="tech_out"  value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <button class="buttonbiru" onclick="tech_outs()" style="position: static; width: fit-content;" type="button">OUT</button>
+          <button class="buttonbiru" onclick="tech_outs();RestOut();" style="position: static; width: fit-content;" type="button">OUT</button>
         </div>
               
               <script type="text/javascript">
@@ -186,13 +293,41 @@
                       })
                     }
               </script>
+
+                <script type="text/javascript">
+                  function RestOut()
+                    {
+                      var tech_out = $('input[name=tech_out]').val();
+                      var jobupdate_id = $('input[name=jobupdate_id]').val();
+                      
+                      
+                      if(tech_out!='' || tech_out=='',
+                         jobupdate_id!='' || jobupdate_id=='')
+                        {
+                          var formData = {tech_out:tech_out,
+                                          jobupdate_id:jobupdate_id};
+                          
+                          $.ajax({
+                                    url: "techoutupdate.php",
+                                    type: 'POST',
+                                    data: formData,
+                                    success: function(response)
+                                      {
+                                        var res = JSON.parse(response);
+                                        console.log(res);
+                                      }
+                                  });
+                        }
+                    } 
+              </script>
         
       </div>
       
       <div class="input-group mb-3">
-        <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="tech_in" value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
+        <input type="hidden" name="tech_in" value="<?php echo $_SESSION["resttime"] ?>">
+        <input readonly type="text" style="position: static;" class="form-control" id="tech_in"  value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <button class="buttonbiru" onclick="tech_ins()" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
+          <button class="buttonbiru" onclick="tech_ins(); RestIn();" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
         </div>
               
               <script type="text/javascript">
@@ -204,64 +339,44 @@
                         }
                       })
                     }
+
+                      function RestIn()
+                    {
+                      var tech_in = $('input[name=tech_in]').val();
+                      var jobupdate_id = $('input[name=jobupdate_id]').val();
+                      
+                      
+                      if(tech_in!='' || tech_in=='',
+                         jobupdate_id!='' || jobupdate_id=='')
+                        {
+                          var formData = {tech_in:tech_in,
+                                          jobupdate_id:jobupdate_id};
+                          
+                          $.ajax({
+                                    url: "techinupdate.php",
+                                    type: 'POST',
+                                    data: formData,
+                                    success: function(response)
+                                      {
+                                        var res = JSON.parse(response);
+                                        console.log(res);
+                                      }
+                                  });
+                        }
+                    } 
               </script>
+
+
         
       </div>
       
-      <p class="control"><b id="messageupdate"></b></p>
+      <!-- <p class="control"><b id="messageupdate"></b></p>
       <div style="text-align: end;" class="updateBtn">
         <button style="width: fit-content;" type="button" id="update_tech" name="update_tech" value="Update" class="buttonbiru" onclick="jobupdate();">Update</button>
-      </div>
+      </div> -->
     </form>
           
-          <script type="text/javascript">
-              function jobupdate()
-                {
-                  var jobregister_id = $('input[name=jobregister_id]').val();
-                  var technician_departure = $('input[name=technician_departure]').val();
-                  var technician_arrival = $('input[name=technician_arrival]').val();
-                  var technician_leaving = $('input[name=technician_leaving]').val();
-                  var tech_out = $('input[name=tech_out]').val();
-                  var tech_in = $('input[name=tech_in]').val();
-                  var storeDate = $('input[name=storeDate]').val();
-                  var jobupdate_id = $('input[name=jobupdate_id]').val();
-                  
-                  if
-                      (jobregister_id!='' || jobregister_id=='',
-                 technician_departure!='' || technician_departure=='',
-                   technician_arrival!='' || technician_arrival=='',
-                   technician_leaving!='' || technician_leaving=='', 
-                             tech_out!='' || tech_out=='', 
-                              tech_in!='' || tech_in=='',
-                            storeDate!='' || storeDate=='',
-                         jobupdate_id!='' || jobupdate_id=='')
-                             
-                             {
-                              var formData = {jobregister_id:jobregister_id,
-                                        technician_departure:technician_departure,
-                                          technician_arrival:technician_arrival,
-                                          technician_leaving:technician_leaving,
-                                                    tech_out:tech_out,
-                                                     tech_in:tech_in,
-                                                   storeDate:storeDate,
-                                                jobupdate_id:jobupdate_id};
-                              $.ajax({
-                                      url:'jobupdate.php',
-                                      type:'POST',
-                                      data: formData,
-                                      success: function(response)
-                                        {
-                                          var res = JSON.parse(response);
-                                          console.log(res);
-                                          if(res.success == true)
-                                          $('#messageupdate').html('<span style="color: green">Update Saved!</span>');
-                                          else
-                                          $('#messageupdate').html('<span style="color: red">Data Cannot Be Saved</span>');
-                                        }
-                                    });
-                             }
-                } 
-          </script>
+
     
     <?php } } } ?>
 

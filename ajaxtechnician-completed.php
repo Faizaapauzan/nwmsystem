@@ -106,25 +106,25 @@ session_start();
    
   <div class="col-md-6" style="width: 70%;">
   <label for="brand" class="form-label">Machine Brand</label><br>
-  <select disabled style="color: black; height: 33px; width: 135px; border-radius: 4px;" id="brand" required>
+  <select disabled style="color: black; height: 33px; width: 200px; border-radius: 4px;" id="brand" required>
   <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
   </select>
   <input type="hidden" id="brand_id" name="brand_id" value="<?php echo $row['brand_id']?>" readonly >  
   <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" readonly >  
   </div>
 
- <div class="col-md-6" style="margin-top: 23px;width: 70%;">
+ <div class="col-md-6" style="width: 70%;">
   <label for="type" class="form-label"> Machine Type</label><br>
-  <select disabled style="color: black; height: 33px; width: 162px; border-radius: 4px;" class="form-select" id="type" required>
+  <select disabled style="color: black; height: 33px; width: 198px; border-radius: 4px;" class="form-select" id="type" required>
   <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
   </select>
   <input type="hidden" id="type_id" name="type_id" value="<?php echo $row['type_id']?>" readonly >  
   <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" readonly >  
   </div> 
     
-  <div class="col-md-12" style="margin-top: 11px;">
+  <div class="col-md-12">
   <label for="" class="form-label">Machine Name</label>
-  <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 331px;" readonly>
+  <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;" readonly>
   </div> 
 
   <div class="CodeDropdown" style="width: 70%; padding-left: 18px;padding-top: 9px;margin-bottom: 20px; color: black;">

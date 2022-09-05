@@ -33,7 +33,7 @@
     
     <label for="job_assign">Job Assign To :</label>
     <p class="control"><b id="assignupdatetechnicianmessage"></b></p>
-    <div class="assign" style="display:flex; width: fit-content;">
+    <div class="assign" style="display:flex;">
     <select class="form-control" id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
     
       <?php
@@ -133,7 +133,7 @@
     <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
     <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
     
-    <div class="assistants" style="padding-top: 20px;width: 70%;" id="multipselect">
+    <div class="assistants" style="padding-top: 20px;" id="multipselect">
         
         <?php
             $con = mysqli_connect("localhost","root","","nwmsystem");
@@ -220,7 +220,7 @@
     <div style="margin-left: 255px;margin-top: 20px;" class="updateBtn">
     <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-    <input style="margin-left: -13px; border:none; background-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
+    <input style="margin-left: -255px; border:none; background-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
     </div>
     
     <p class="control"><b id="assigntechnicianmessage"></b></p>	 	 
