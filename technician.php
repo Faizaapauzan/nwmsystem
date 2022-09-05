@@ -215,7 +215,7 @@ session_start();
 										</div>
 									  </div>
 									  <div class='cardsupport' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#myModalsupport'>
-									  <button type='button' style='background-color: firebrick;color: #f8f9fa;' class='btn btn-light text-left font-weight-bold font-color-black'>SUPPORT</button>
+									  <button type='button' style='background-color: firebrick;color: #f8f9fa; height: -webkit-fill-available;'' class='btn btn-light text-left font-weight-bold font-color-black'>SUPPORT</button>
 									  </div>
 									  </nav>";
 						}
