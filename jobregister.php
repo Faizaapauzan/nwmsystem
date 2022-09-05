@@ -846,9 +846,14 @@ if(!$db)
     <label for="job_priority" class="details">Job Priority</label>
     <input type="text" id="jobPriority" name="job_priority" placeholder="Enter Job Priority">
     </div>
+            <?php
+            $DateRequest = date("Y/m/d");
+            $_SESSION['requestDate'] = $DateRequest; 
+        ?>
+
     <div class="input-box">
     <label for="requested_date" class="details">Request Date</label>
-    <input type="date" id="requestDate" name="requested_date" placeholder="Enter Request Date">
+    <input readonly type="text" id="requestDate" name="requested_date" value="<?php echo $_SESSION["requestDate"] ?>" placeholder="Enter Request Date">
     </div>
     <div class="input-box">
     <label for="delivery_date" class="details">Delivery Date</label>

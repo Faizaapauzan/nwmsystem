@@ -61,6 +61,21 @@ if(!isset($_SESSION['username']))
    </head>
 <style>
 
+
+.supports {
+    border-radius: 6px;
+    font-size: 15px;
+    width: max-content;
+    text-align: center;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    margin-bottom: 2px;
+    color: #22304d;
+    margin: unset;
+    margin-top: auto;
+
+}
+
 .dropdown-content1 {
   display: none;
   position: absolute;
@@ -375,7 +390,9 @@ if(!isset($_SESSION['username']))
 										<li><?php echo $row['job_status']?></li>
                                         <strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
 										</ul>
+                                         <div class='supports' id='support'> <?php echo $row['support']?></div>
 								</div>
+                                
                             <?php } ?>             
 							
                         </div>
@@ -734,8 +751,11 @@ if(!isset($_SESSION['username']))
         <li><?php echo $row['customer_name']?></li>
         <li><?php echo $row['machine_type']?></li>
         <li><?php echo $row['job_description']?></li>
-        <li><?php echo $row['job_status']?></li>
+        <li><?php echo $row['job_status']?></li>      
+        
         </ul>
+        <div class='supports' id='support'> <?php echo $row['support']?></div>
+        
         </div>
         <?php } ?>
         </div>
@@ -1032,6 +1052,7 @@ if(!isset($_SESSION['username']))
         <li><?php echo $row['job_description']?></li>
         <li><?php echo $row['job_status']?></li>
         </ul>
+         <div class='supports' id='support'> <?php echo $row['support']?></div>
         </div>
         <?php } ?>
         </div>
@@ -1351,6 +1372,7 @@ if(!isset($_SESSION['username']))
                 <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
+                <div class='supports' id='support'> <?php echo $row['support']?></div>
                 </div>
                 <?php } ?>
                 </div>
@@ -1658,6 +1680,7 @@ if(!isset($_SESSION['username']))
             <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
+            <div class='supports' id='support'> <?php echo $row['support']?></div>
             </div>
             <?php } ?>
             </div>
@@ -1958,6 +1981,7 @@ if(!isset($_SESSION['username']))
                 <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
+                <div class='supports' id='support'> <?php echo $row['support']?></div>
                 </div>
                 <?php } ?>
                 </div>
@@ -2257,6 +2281,7 @@ if(!isset($_SESSION['username']))
                 <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
+                <div class='supports' id='support'> <?php echo $row['support']?></div>
                 </div>
                 <?php } ?>
                 </div>
@@ -2560,6 +2585,7 @@ if(!isset($_SESSION['username']))
                 <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
+                <div class='supports' id='support'> <?php echo $row['support']?></div>
                 </div>
                 <?php } ?>
                 </div>
@@ -2860,6 +2886,7 @@ if(!isset($_SESSION['username']))
                 <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
+                <div class='supports' id='support'> <?php echo $row['support']?></div>
                 </div>
                 <?php } ?>
                 </div>
@@ -3160,6 +3187,7 @@ if(!isset($_SESSION['username']))
                 <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
+                <div class='supports' id='support'> <?php echo $row['support']?></div>
                 </div>
                 <?php } ?>
                 </div>
@@ -3455,6 +3483,7 @@ if(!isset($_SESSION['username']))
                 <li><?php echo $row['job_description']?></li>
                 <li><?php echo $row['job_status']?></li>
                 </ul>
+                <div class='supports' id='support'> <?php echo $row['support']?></div>
                 </div>
                 <?php } ?>
                 </div>
@@ -3754,6 +3783,7 @@ if(!isset($_SESSION['username']))
             <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
+            <div class='supports' id='support'> <?php echo $row['support']?></div>
             </div>
             <?php } ?>
             </div>
@@ -4052,6 +4082,7 @@ if(!isset($_SESSION['username']))
             <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
+            <div class='supports' id='support'> <?php echo $row['support']?></div>
             </div>
             <?php } ?>
             </div>
@@ -4354,6 +4385,7 @@ if(!isset($_SESSION['username']))
             <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
+            <div class='supports' id='support'> <?php echo $row['support']?></div>
             </div>
             <?php } ?>
             </div>
@@ -4656,6 +4688,7 @@ if(!isset($_SESSION['username']))
             <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
+            <div class='supports' id='support'> <?php echo $row['support']?></div>
             </div>
             <?php } ?>
             </div>
@@ -4959,6 +4992,7 @@ if(!isset($_SESSION['username']))
             <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
+            <div class='supports' id='support'> <?php echo $row['support']?></div>
             </div>
             <?php } ?>
             </div>
@@ -5262,7 +5296,7 @@ if(!isset($_SESSION['username']))
             <li><?php echo $row['job_description']?></li>
             <li><?php echo $row['job_status']?></li>
             </ul>
-
+            <div class='supports' id='support'> <?php echo $row['support']?></div>
             </div>
             <?php } ?>
             </div>
@@ -5412,7 +5446,6 @@ if(!isset($_SESSION['username']))
         <div class="Aizat-photo-details">
 
         </div></form></div>
-
       
         <script type='text/javascript'>
             $(document).ready(function() {
