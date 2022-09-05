@@ -156,7 +156,7 @@ session_start();
   <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
         
   <div style="margin-left: 22px;margin-top: 22px;margin-bottom: -25px;margin-right: 60px;" class="updateBtn">       
-  <input type="button" style="color: white;background-color: #081d45;border-color: #081d45;margin-bottom: 20px;" class="btn btn-primary" id="updatetechnician" name="updatetechnician" onclick="updtMchn();" value="Update" />
+  <input type="button" style="color: white;background-color: #081d45;border-color: #081d45;margin-bottom: 20px;" class="btn btn-primary" id="updatetechnician" name="updatetechnician" onclick="updtMchn();updtMchnUpdt();" value="Update" />
   </div> 
         
   <p class="control" style="margin-left: -43px;margin-top: 29px;"><b id="updatetechnicianmessage"></b></p>
@@ -190,7 +190,7 @@ session_start();
   
   <!-- Update machine name in assistant table -->
   <script type="text/javascript">
-      function updtMchn()
+      function updtMchnUpdt()
         {
           var jobregister_id = $('input[name=jobregister_id]').val();
           var machine_name = $('input[name=machine_name]').val();
@@ -205,6 +205,35 @@ session_start();
                   
                   $.ajax({
                             url:"machineassistant.php",
+                            type:'POST',
+                            data: formData,
+                            success: function(response)
+                              {
+                                var res = JSON.parse(response);
+                                          console.log(res);
+                              }
+                          });
+                }
+        } 
+  </script>
+
+  <!-- Update machine name in assistant table -->
+  <script type="text/javascript">
+      function updtMchn()
+        {
+          var jobregister_id = $('input[name=jobregister_id]').val();
+          var machine_name = $('input[name=machine_name]').val();
+          
+            if(
+              jobregister_id!='' || jobregister_id=='',
+                machine_name!='' || machine_name=='')
+                
+                {
+                  var formData = {jobregister_id:jobregister_id,
+                                    machine_name:machine_name};
+                  
+                  $.ajax({
+                            url:"machineupdate.php",
                             type:'POST',
                             data: formData,
                             success: function(response)

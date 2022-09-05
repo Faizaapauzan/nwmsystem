@@ -29,6 +29,7 @@
     <input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
     <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
     <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
+    <input type="hidden" name="support" class="support" value="<?php echo $row['support'] ?>">
     
     <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br/>
     <p style="margin-left: 20px;margin-top: 1px;margin-bottom: 11px;" class="control"><b id="assignupdateadminmessage"></b></p>
@@ -104,18 +105,21 @@
         var requested_date = $('input[name=requested_date]').val();
         var jobregister_id = $('input[name=jobregister_id]').val();
         var machine_name = $('input[name=machine_name]').val();
+        var support = $('input[name=support]').val();
         
             if(tech_name!='' || tech_name=='',
            customer_name!='' || customer_name=='',
           requested_date!='' || requested_date=='',
           jobregister_id!='' || jobregister_id=='',
-            machine_name!='' || machine_name=='')
+            machine_name!='' || machine_name=='',
+                 support!='' || support=='')
             {
               var formData = {tech_name:tech_name,
                           customer_name:customer_name,
                          requested_date:requested_date,
                          jobregister_id:jobregister_id,
-                           machine_name:machine_name};
+                           machine_name:machine_name,
+                                support:support};
                     
               $.ajax({  
                         url: "savecustname.php",

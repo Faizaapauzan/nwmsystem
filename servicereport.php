@@ -539,7 +539,7 @@ tr td:first-child:before {
                                      WHERE customer_name ='$customer_name'
                                      AND requested_date='$requested_date'
                                      AND machine_name='$machine_name'
-                                     AND support='support'
+                                     AND support != ''
                                      AND technician_arrival != ''");
             
             while($row = $results->fetch_assoc()) {
@@ -569,7 +569,7 @@ tr td:first-child:before {
                                      WHERE customer_name ='$customer_name'
                                      AND requested_date='$requested_date'
                                      AND machine_name='$machine_name'
-                                     AND support='support'
+                                     AND support != ''
                                      AND tech_out != ''");
             
             while($row = $results->fetch_assoc()) {
