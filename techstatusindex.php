@@ -4,7 +4,13 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['job_status']) && $_POST['job_status']!='' || $_POST['job_status']==''
+if(isset($_POST['machine_name']) && $_POST['machine_name']!='' || $_POST['machine_name']==''
+    &&
+   isset($_POST['customer_name']) && $_POST['customer_name']!='' || $_POST['customer_name']==''
+    &&
+   isset($_POST['requested_date']) && $_POST['requested_date']!='' || $_POST['requested_date']==''
+    &&
+   isset($_POST['job_status']) && $_POST['job_status']!='' || $_POST['job_status']==''
     &&
    isset($_POST['reason']) && $_POST['reason']!='' || $_POST['reason']==''
     &&
@@ -18,7 +24,10 @@ if(isset($_POST['job_status']) && $_POST['job_status']!='' || $_POST['job_status
                        job_status ='".addslashes($_POST['job_status'])."',
                        reason ='".addslashes($_POST['reason'])."',
                        jobregisterlastmodify_by ='".addslashes($_POST['jobregisterlastmodify_by'])."' 
-                 WHERE jobregister_id='".addslashes($_POST['jobregister_id'])."'";
+
+                WHERE machine_name='".addslashes($_POST['machine_name'])."'
+                 AND customer_name='".addslashes($_POST['customer_name'])."'
+                 AND requested_date='".addslashes($_POST['requested_date'])."'";
         
         if($conn->query($sql))
         {
