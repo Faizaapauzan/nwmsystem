@@ -26,7 +26,7 @@
 
    <!-- hidden input -->
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-    <input type="hidden" name="support" class="support" value="Support">
+    <input type="hidden" name="support" class="support" value="Support For <?php echo $row['job_assign'] ?>">
     <input type="hidden" name="today_date" class="today_date" value="<?php echo $_SESSION["storeDate"] ?>">
     <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>

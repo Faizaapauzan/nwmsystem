@@ -79,7 +79,6 @@ session_start();
 									  Available</a></p>';
 						}
 					?>
-
 				<?php } ?>
 			</div>
 			<div class="ul2">

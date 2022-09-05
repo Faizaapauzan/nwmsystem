@@ -540,8 +540,7 @@ tr td:first-child:before {
                                      AND requested_date='$requested_date'
                                      AND machine_name='$machine_name'
                                      AND support='support'
-                                     AND technician_arrival IS NOT NULL
-                                     AND TRIM(technician_arrival) <> ''");
+                                     AND technician_arrival != ''");
             
             while($row = $results->fetch_assoc()) {
               $technician_arrival = $row['technician_arrival'];
@@ -571,8 +570,7 @@ tr td:first-child:before {
                                      AND requested_date='$requested_date'
                                      AND machine_name='$machine_name'
                                      AND support='support'
-                                     AND tech_out IS NOT NULL
-                                     AND TRIM(tech_out) <> ''");
+                                     AND tech_out != ''");
             
             while($row = $results->fetch_assoc()) {
               $tech_out = $row['tech_out'];
