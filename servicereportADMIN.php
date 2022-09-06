@@ -378,19 +378,26 @@ tr td:first-child:before {
     <p>Additional Info :-</p>
     <textarea name="Submitted_Items" class="infoarea" id="autoresizing_item"><?php echo $row['Submitted_Items'] ?></textarea>
 
-     <script type="text/javascript">
-        $('#autoresizing_item').on('input', function () {
-        this.style.height = '92px';
-              
-        this.style.height = 
-          (this.scrollHeight) + 'px';
-        });
-     </script>
 
  
     </div></div>
 
+<script type="text/javascript">
+var $textArea = $("#autoresizing_item");
 
+// Re-size to fit initial content.
+resizeTextArea($textArea);
+
+// Remove this binding if you don't want to re-size on typing.
+$textArea.off("keyup.textarea").on("keyup.textarea", function() {
+    resizeTextArea($(this));
+});
+
+function resizeTextArea($element) {
+    $element.height($element[0].scrollHeight);
+}
+  </script>
+     
     <br/><br/>
     <div class="try3">
 
