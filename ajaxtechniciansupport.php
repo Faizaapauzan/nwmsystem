@@ -150,7 +150,7 @@
 
     <div class="col-md-6" style="width: 70%;">
     <label for="job_cancel"  class="job_cancel">Assign To:</label>
-    <select id="jobassignto" class="form-control" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> Select Technician </option>
+    <select id="jobassignto" class="form-control" name="job_assign" onchange="GetJobAss(this.value)">
       
     <?php
         include "dbconnect.php";  // Using database connection file here
@@ -169,9 +169,9 @@
     ?>
 
             <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
-            <input type="hidden" name="job_assign" id='username' value="<?php echo $row['job_assign']?>">
-            <input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>  
-            <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>
+            <input type="hidden" name="job_assign" id='username'>
+            <input type="hidden" name="technician_rank" id='technician_rank' readonly>  
+            <input type="hidden" name="staff_position" id='staff_position' readonly>
         
           </select>
         
