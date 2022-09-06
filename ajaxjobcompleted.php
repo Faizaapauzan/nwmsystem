@@ -35,10 +35,10 @@ include "dbconnect.php";
 $jobregister_id =$_POST['jobregister_id'];
 
 
-$sql = "SELECT * FROM job_register JOIN servicereport ON job_register.jobregister_id=servicereport.jobregister_id
-        WHERE job_register.jobregister_id = $jobregister_id";
+// $sql = "SELECT * FROM job_register JOIN servicereport ON job_register.jobregister_id=servicereport.jobregister_id
+//         WHERE job_register.jobregister_id = $jobregister_id";
 
-// $sql = "SELECT * FROM job_register WHERE jobregister_id=" . $jobregister_id;
+$sql = "SELECT * FROM job_register WHERE jobregister_id=" . $jobregister_id;
 
 $result = $conn->query($sql);
 
@@ -62,7 +62,7 @@ while ($row = $result->fetch_assoc()) {
     $cust_address3 = $row['cust_address3'];
     $machine_type = $row['machine_type'];
     $machine_brand = $row['machine_brand'];
-    $assistants = $row['assistants'];     
+    // $assistants = $row['assistants'];     
     $job_description = $row['job_description'];
     $machine_name = $row['machine_name'];
     $jobregistercreated_by = $row['jobregistercreated_by'];
@@ -123,9 +123,9 @@ while ($row = $result->fetch_assoc()) {
     $response .= "<td>Job Assign : </td><td>" .  $job_assign . "</td>";
     $response .= "</tr>";
 
-    $response .= "<tr>";
-    $response .= "<td>Assistant : </td><td>" . $assistants . "</td>";
-    $response .= "</tr>";
+    // $response .= "<tr>";
+    // $response .= "<td>Assistant : </td><td>" . $assistants . "</td>";
+    // $response .= "</tr>";
 
     $response .= "<tr>";
     $response .= "<td>Job Description : </td><td>" . $job_description . "</td>";
