@@ -64,8 +64,7 @@
     <form action="" method="post">
 
       <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
-      <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
-
+      
       <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
       <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
       <input type="hidden" name="job_assign" value="<?php echo $row['tech_name'] ?>">
@@ -77,15 +76,16 @@
       <br>
 
            <?php
-     date_default_timezone_set("Asia/Kuala_Lumpur");
-        $ArrivalDateTime = date('d-m-Y g:i A');
-        $_SESSION['arrivaltime'] = $ArrivalDateTime; 
-    ?>
+                date_default_timezone_set("Asia/Kuala_Lumpur");
+                $ArrivalDateTime = date('d-m-Y g:i A');
+                $_SESSION['arrivaltime'] = $ArrivalDateTime; 
+           ?>
 
       <label>Departure Time</label>
       <input type="hidden" name="technician_departure" value="<?php echo $_SESSION["arrivaltime"] ?>">
       <div class="input-group mb-3">
         <input readonly type="text" class="form-control" id="Departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
+        <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
         <input type="hidden" name="job_status" value="Doing">
         <div class="input-group-append">
           <button id="update_techstatus" name="update_techstatus" class="buttonbiru update" onclick="doSomething();doSomethingElse();departureTechnician();" type="button">Departure</button>
@@ -140,13 +140,16 @@
                   function departureTechnician()
                     {
                       var technician_departure = $('input[name=technician_departure]').val();
+                      var storeDate = $('input[name=storeDate]').val();
                       var jobupdate_id = $('input[name=jobupdate_id]').val();
                       
                       
                       if(technician_departure!='' || technician_departure=='',
+                         storeDate!='' || storeDate=='',
                          jobupdate_id!='' || jobupdate_id=='')
                         {
                           var formData = {technician_departure:technician_departure,
+                                          storeDate:storeDate,
                                           jobupdate_id:jobupdate_id};
                           
                           $.ajax({
