@@ -28,7 +28,20 @@
 
         <div class="input-box">
             <label for="">Job Order Number</label>
-            <input type="text" class="job_order_number" name="job_order_number" value="<?php echo $row['job_order_number']?>">
+            <div style="display: flex;">
+            <input type="text" class="job_order_number" name="job_order_number" id="job_order_number" value="<?php echo $row['job_order_number']?>">
+            <button type="button" style="border-radius: 5px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px; width:auto" onclick="buttonClick();">Click</button>
+                <script>
+                        var i = 0;
+                        var jobordernumber = document.getElementById('job_order_number').value;
+        
+                        function buttonClick()
+                            {
+                                i++;
+                                document.getElementById('job_order_number').value = jobordernumber+'-'+i;
+                            }
+                </script> 
+            </div> 
         </div>
         
         <div class="input-box">
