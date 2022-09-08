@@ -150,6 +150,7 @@ session_start();
   <?php } } ?>
   </select>
   <input type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>" onchange="GetMachine(this.value)">  
+    <input type="hidden" class="form-control" id="NameMachine" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 302px;">
   <input type="hidden" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
   <input type="hidden" id="CodeMachine" name="machine_code" value="<?php echo $row['machine_code']?>">
   </div> 
