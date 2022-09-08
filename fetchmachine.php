@@ -11,7 +11,7 @@ if ($machine_id !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($con, "SELECT machine_id, serialnumber, machine_code, machine_name, machine_description, customer_name FROM machine_list WHERE machine_id='$machine_id'");
+	$query = mysqli_query($con, "SELECT * FROM machine_list WHERE machine_id='$machine_id'");
 
 	$row = mysqli_fetch_array($query);
 

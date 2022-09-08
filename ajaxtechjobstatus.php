@@ -60,7 +60,7 @@ display:none;
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
 <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-<input type="hidden" name="machine_name" value="<?php echo $row['machine_name'] ?>">
+<input type="hidden" name="machine_id" value="<?php echo $row['machine_id'] ?>">
 
 <div class="form-group">
 <label for="exampleFormControlSelect2">Job Status</label>
@@ -112,7 +112,7 @@ function myFunction() {
           {
             var requested_date = $('input[name=requested_date]').val();
             var customer_name = $('input[name=customer_name]').val();
-            var machine_name = $('input[name=machine_name]').val();
+            var machine_id = $('input[name=machine_id]').val();
             var job_status = $('select[name=job_status]').val();
             var reason = $('input[name=reason]').val();
             var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
@@ -120,7 +120,7 @@ function myFunction() {
             
             if(requested_date!='' || requested_date=='',
                customer_name!='' || customer_name=='',
-               machine_name!='' || machine_name=='',
+               machine_id!='' || machine_id=='',
                job_status!='' || job_status=='',
                reason!='' || reason=='',
                jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='',
@@ -129,7 +129,7 @@ function myFunction() {
               {
                 var formData = {requested_date: requested_date,
                   customer_name: customer_name,
-                  machine_name: machine_name,
+                  machine_id: machine_id,
                   job_status: job_status,
                   reason: reason,
                   jobregisterlastmodify_by: jobregisterlastmodify_by,

@@ -4,7 +4,7 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['machine_name']) && $_POST['machine_name']!='' || $_POST['machine_name']==''
+if(isset($_POST['machine_id']) && $_POST['machine_id']!='' || $_POST['machine_id']==''
     &&
    isset($_POST['customer_name']) && $_POST['customer_name']!='' || $_POST['customer_name']==''
     &&
@@ -25,7 +25,7 @@ if(isset($_POST['machine_name']) && $_POST['machine_name']!='' || $_POST['machin
                        reason ='".addslashes($_POST['reason'])."',
                        jobregisterlastmodify_by ='".addslashes($_POST['jobregisterlastmodify_by'])."' 
 
-                WHERE machine_name='".addslashes($_POST['machine_name'])."'
+                WHERE machine_id='".addslashes($_POST['machine_id'])."'
                  AND customer_name='".addslashes($_POST['customer_name'])."'
                  AND requested_date='".addslashes($_POST['requested_date'])."'";
         
