@@ -181,9 +181,9 @@ session_start();
                 <li>".$row['machine_type']."</li>
                 <li>".$row['serialnumber']."</li>
             </ul>
-            <div class='status' style='font-family: sans-serif;'>
-                <strong>".$row['job_assign']."</strong>
-            </div>
+            <div class='supports'  id='support'>
+				".$row['support']."
+			</div>
             </div>
             </div>";
             }

@@ -180,6 +180,8 @@ session_start();
 						</ul>
 					  <div class='timestamp' style='font-family: sans-serif;'>
 					  <strong>".$row['job_assign']."</strong>
+					  <br>
+					  <strong>".$row['support']."</strong>
 					  </div>
 					  </div>
 					  </div>";
@@ -225,6 +227,8 @@ session_start();
 							<li>".$row['serialnumber']."</li>
 						  </ul>
 						  <div class='timestamp' style='font-family: sans-serif;'>
+						  <strong>".$row['support']."</strong>
+        				  <br>
 						  <strong>".$row['job_assign']."</strong>
 						  </div>
 						  </div>

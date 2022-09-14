@@ -182,6 +182,8 @@ session_start();
 				  <strong>".$row['job_assign']."</strong>
 				  <br>
 				  <strong>".$row['updatedate']."</strong>
+				  <br>
+        		  <strong>".$row['support']."</strong>
 				  </div>
 				  </div>
 				  </div>";

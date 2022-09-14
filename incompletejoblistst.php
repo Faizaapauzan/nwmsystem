@@ -181,8 +181,10 @@ while ($row = mysqli_fetch_assoc($result)){
         </ul>
         <div class='timestamp' style='font-family: sans-serif;'>
         <strong>".$row['job_assign']."</strong>
-					  <br>
-					  <strong>".$row['updatedate']."</strong>
+				<br>
+				<strong>".$row['updatedate']."</strong>
+        <br>
+        <strong>".$row['support']."</strong>
     </div>
     </div>
     </div>";
