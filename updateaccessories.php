@@ -38,7 +38,7 @@ session_start();
                                     <input type="text" name="accessories_uom" id="accessories_uom" class="form-control" value="<?php echo $row['accessories_uom'] ?>">
                                 </div>
                                 <div class="input-box">
-                                    <label for=""> Accessories Group </label>
+                                    <label for=""> Accessories Brand </label>
                                     <input type="text" name="accessories_brand" id="accessories_brand" class="form-control" value="<?php echo $row['accessories_brand'] ?>">
                                 </div>
                                 <div class="input-box">

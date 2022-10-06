@@ -20,6 +20,7 @@ include 'dbconnect.php';
 	$accessories_code = $_POST['accessories_code'];
     $accessories_name = $_POST['accessories_name'];
     $accessories_uom = $_POST['accessories_uom'];
+    $accessories_brand = $_POST['accessories_brand'];
     $accessories_description = $_POST['accessories_description'];
     $accessorieslistcreated_by = $_POST['accessorieslistcreated_by'];
     $accessorieslistlasmodify_by = $_POST['accessorieslistlasmodify_by'];
@@ -41,7 +42,7 @@ include 'dbconnect.php';
                 // Upload file to server
                 if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
                     // Image db insert sql
-                    $insertValuesSQL .= "('".$accessories_code."','".$accessories_name."','".$accessories_uom."','".$accessories_description."','".$fileName."','".$accessorieslistcreated_by."','".$accessorieslistlasmodify_by."'),";
+                    $insertValuesSQL .= "('".$accessories_code."','".$accessories_name."','".$accessories_uom."','".$accessories_brand."','".$accessories_description."','".$fileName."','".$accessorieslistcreated_by."','".$accessorieslistlasmodify_by."'),";
                 }else{
                     $errorUpload .= $_FILES['files']['name'][$key].', ';
                 }
@@ -53,7 +54,7 @@ include 'dbconnect.php';
         if(!empty($insertValuesSQL)){
             $insertValuesSQL = trim($insertValuesSQL,',');
             // Insert image file name into database
-            $insert = $conn->query("INSERT INTO accessories_list (accessories_code, accessories_name, accessories_uom, accessories_description,file_name, accessorieslistcreated_by, accessorieslistlasmodify_by ) VALUES $insertValuesSQL");
+            $insert = $conn->query("INSERT INTO accessories_list (accessories_code, accessories_name, accessories_uom, accessories_brand, accessories_description,file_name, accessorieslistcreated_by, accessorieslistlasmodify_by ) VALUES $insertValuesSQL");
             if($insert){
                 $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
                 $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
