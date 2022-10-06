@@ -401,10 +401,10 @@ tr td:first-child:before {
         if (isset($_POST['customer_name'])) {
           $customer_name =$_POST['customer_name'];
           $requested_date =$_POST['requested_date'];
+         
           
           $query = ("SELECT * FROM job_update
-                     WHERE tech_name ='{$_SESSION['username']}'
-                     AND requested_date='$requested_date'
+                     WHERE requested_date='$requested_date'
                      AND customer_name ='$customer_name'
                      ORDER BY requested_date DESC LIMIT 1");
 
@@ -437,14 +437,14 @@ tr td:first-child:before {
     <?php
         include 'dbconnect.php';
 
-        if (isset($_POST['customer_name'])) {
+         if (isset($_POST['customer_name'])) {
             $customer_name =$_POST['customer_name'];
             $requested_date =$_POST['requested_date'];
+       
             
             
             $query = ("SELECT * FROM job_update 
-                       WHERE tech_name ='{$_SESSION['username']}'
-                       AND  requested_date='$requested_date'
+                       WHERE requested_date='$requested_date'
                        AND customer_name ='$customer_name' 
                        ORDER BY requested_date DESC LIMIT 1");
 

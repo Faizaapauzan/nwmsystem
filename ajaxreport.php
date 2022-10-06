@@ -77,10 +77,10 @@
                     url: 'servicereport.php',
                     type: 'post',
                     data: {jobregister_id:jobregister_id, 
-                            customer_name:customer_name,
-                             machine_name:machine_name,
-                           requested_date:requested_date,
-                               job_assign:job_assign},
+                        customer_name:customer_name,
+                        machine_name:machine_name,
+                        requested_date:requested_date,
+                        job_assign:job_assign},
                     success: function(data) {
                         var win = window.open('servicereport.php');
                         win.document.write(data);

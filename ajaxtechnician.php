@@ -132,7 +132,7 @@ session_start();
   <label for="sn" class="form-label"> Machine Serial Number </label><br>
   <select style="width: 300px; height: 43px;" id="serialnumbers" onchange="GetMachine(this.value)">
   <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
-  <option value="Add Serial Number" style="color:mediumblue;">Add Serial Number</option>
+  <!-- <option value="Add Serial Number" style="color:mediumblue;">Add Serial Number</option> -->
                 
   <?php include 'dbconnect.php';
 
@@ -149,10 +149,10 @@ session_start();
   <option value="<?php echo $rows['machine_id']; ?>"><?php echo $rows['serialnumber']; ?></option>
   <?php } } ?>
   </select>
-  <input type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>" onchange="GetMachine(this.value)">  
-    <input type="hidden" class="form-control" id="NameMachine" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 302px;">
-  <input type="hidden" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
-  <input type="hidden" id="CodeMachine" name="machine_code" value="<?php echo $row['machine_code']?>">
+  <input readonly type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>" onchange="GetMachine(this.value)">  
+  <input readonly type="hidden" class="form-control" id="NameMachine" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 302px;">
+  <input readonly type="hidden" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
+  <input readonly type="hidden" id="CodeMachine" name="machine_code" value="<?php echo $row['machine_code']?>">
   </div> 
 
   <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
@@ -251,7 +251,7 @@ session_start();
   </script>
 
   <!-- ADD INPUT SERIAL NUMBER -->
-    <script>
+    <!-- <script>
     $(document).ready(function() {
     $('#serialnumber').hide();
     $("#serialnumbers").change(function() {
@@ -264,7 +264,7 @@ session_start();
     }).change();
 
         });
-    </script>
+    </script> -->
 
     <!-- SEARCH DROPDOWN SERIAL NUMBER -->
  

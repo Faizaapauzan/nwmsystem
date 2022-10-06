@@ -297,11 +297,12 @@ $query = $conn->query("SELECT * FROM job_register");
         <td id="<?php echo $row["job_status"]; ?>"><select style="border-color: #081d45; border-radius: 5px; padding-left: 25px; border: 1px solid #ccc; border-bottom-width: 2px; padding: 0 15px 0 15px; height: 25px; width: 105px; outline: none; font-size: 13px;" onchange="status_update(this.options[this.selectedIndex].value,'<?php echo $row['jobregister_id'] ?>')"><option value=""> <?php echo $row['job_assign']?> </option>  
                                <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE technician_rank = '1st Leader' AND tech_avai = ''
+        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank FROM staff_register WHERE 
+        technician_rank = '1st Leader' AND tech_avai = '0'
          OR
-         technician_rank = '2nd Leader' AND tech_avai = ''
+         technician_rank = '2nd Leader' AND tech_avai = '0'
          OR
-         staff_position='storekeeper' AND tech_avai = '' ORDER BY staffregister_id ASC");  // Use select query here 
+         staff_position='storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {

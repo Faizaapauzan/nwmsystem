@@ -1,13 +1,13 @@
 <?php session_start(); ?>
 
-<?php
-        include 'dbconnect.php';
+    <?php
+        //include connection file 
+        include_once("dbconnect.php");
         if (isset($_POST['jobregister_id'])) {
-          $jobregister_id =$_POST['jobregister_id'];
-          $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-          $query_run = mysqli_query($conn, $query);
-          if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
+        $jobregister_id =$_POST['jobregister_id'];
+        $sql = "SELECT * FROM `job_register` WHERE  jobregister_id ='$jobregister_id'";
+        $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
+        }
     ?>
 
     <?php
@@ -109,22 +109,38 @@ form .submit-date label.details {
     <div class="input-group-append" style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
    
     </form>
+      <?php foreach($queryRecords as $res) :?>
   	<form id="view_form" method="post">
     <div style="display:flex;">
-    <button  style="padding: 8px 44px; border-radius: 4px;" class="userinfo" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>New</button></n>
-    <button  style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" class="useredit" type="button" data-id='<?php echo $row['jobregister_id']; ?>'>Edit</button>
+    <button  style="padding: 8px 44px; border-radius: 4px;" class="userinfo" type="button" 
+      data-id='<?php echo $res['jobregister_id']; ?>' 
+      data-custname='<?php echo $res['customer_name']; ?>' 
+      data-machine_name='<?php echo $res['machine_name']; ?>' 
+      data-requested_date='<?php echo $res['requested_date']; ?>'
+      data-job_assign='<?php echo $res['job_assign']; ?>'>New</button></n>
+    <button style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" class="useredit" type="button" data-id2='<?php echo $res['jobregister_id']; ?>'>Edit</button>
     </div>  
     </form>
+    <?php endforeach;?>
     </div>
 
+    <!-- FOR NEW SERVICE REPORT-->	
     <script type='text/javascript'>
         $(document).ready(function(){
         $('.userinfo').click(function(){
         var jobregister_id = $(this).data('id');
+        var customer_name = $(this).data('custname');
+        var machine_name = $(this).data('machine_name');
+        var requested_date = $(this).data('requested_date');
+        var job_assign = $(this).data('job_assign');
         $.ajax({
-            url: 'servicereport.php',
+            url: 'servicereportajaxadmin.php',
             type: 'post',
-            data: {jobregister_id: jobregister_id},
+            data: {jobregister_id:jobregister_id, 
+                  customer_name:customer_name,
+                  machine_name:machine_name,
+                  requested_date:requested_date,
+                  job_assign:job_assign},
             success: function(data){
             var win = window.open('servicereport.php');
             win.document.write(data);
@@ -133,12 +149,13 @@ form .submit-date label.details {
                 });
             });
     </script>
+    <!-- FOR NEW SERVICE REPORT-->	
 
     <!-- FOR EDIT SERVICE REPORT-->	
     <script type='text/javascript'>
         $(document).ready(function(){
         $('.useredit').click(function(){
-        var jobregister_id = $(this).data('id');
+        var jobregister_id = $(this).data('id2');
         $.ajax({
             url: 'servicereportEDIT.php',
             type: 'post',
@@ -153,11 +170,7 @@ form .submit-date label.details {
     </script>
     <!-- FOR EDIT SERVICE REPORT-->	
 
-    <?php
-    }
-  }
-}
-?>
+
 </div>
 
 </body>

@@ -7,7 +7,6 @@
 <head>
     
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-  
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -135,7 +134,7 @@
             <label for="sn"> Serial Number </label><br>
             <select style="width: 300px; height: 43px;" id="serialnumbers" onchange="GetMachines(this.value)">
                 <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
-                <option value="Add Serial Number" style="color:blue;">Add Serial Number</option>
+                <!-- <option value="Add Serial Number" style="color:blue;">Add Serial Number</option> -->
                 <?php
                     include 'dbconnect.php';
 
@@ -161,7 +160,7 @@
 
    
             <input type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>">  
-            <input type="text" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
+            <input type="hidden" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
             <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
             <input type="hidden" style="width: 100%;" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
       
@@ -215,7 +214,7 @@
               <?php
             } ?>
 
-    <script>
+    <!-- <script>
     $(document).ready(function() {
 
     $('#serialnumber').hide();
@@ -232,7 +231,7 @@
 
         });
 
-    </script>
+    </script> -->
 
              <script>
         $(document).ready(function() {

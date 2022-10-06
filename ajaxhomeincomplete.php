@@ -108,6 +108,7 @@
          <div class="input-box">
             <label for="">Machine Serial Number</label>
             <input type="text" class="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">
+            <input type="hidden" class="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>">
         </div>
 
         <div class="input-box">
@@ -269,6 +270,7 @@ function submitFormDuplicate()
    var machine_code = $('input[name=machine_code]').val();
    var machine_type = $('input[name=machine_type]').val();
    var serialnumber = $('input[name=serialnumber]').val();
+    var machine_id = $('input[name=machine_id]').val();
    var machine_brand = $('input[name=machine_brand]').val();
    var accessories_required = $('select[name=accessories_required]').val();
    var job_cancel = $('select[name=job_cancel]').val();
@@ -298,6 +300,7 @@ function submitFormDuplicate()
        machine_code!='' || machine_code=='',  
        machine_type!='' || machine_type=='',
        serialnumber!='' || serialnumber=='',
+       machine_id!='' || machine_id=='',
        machine_brand!='' || machine_brand=='',
        accessories_required!='' || accessories_required=='', 
        job_cancel!='' || job_cancel=='',
@@ -328,6 +331,7 @@ function submitFormDuplicate()
                         machine_code: machine_code,
                         machine_type: machine_type,
                         serialnumber: serialnumber,
+                        machine_id: machine_id,
                         machine_brand: machine_brand,
                         accessories_required: accessories_required,
                         job_cancel: job_cancel,

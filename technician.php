@@ -62,7 +62,9 @@ session_start();
 					</div>
 				</div>
 			</ul>
-			<div>
+
+			<!-- AVAILABLE UNAVAILABLE BUTTON -->
+			<!-- <div>
 				<?php
 					include 'dbconnect.php';
 					$query = "SELECT * FROM staff_register WHERE username ='{$_SESSION['username']}'";
@@ -80,7 +82,8 @@ session_start();
 						}
 					?>
 				<?php } ?>
-			</div>
+			</div> -->
+			<!-- AVAILABLE UNAVAILABLE BUTTON -->
 			<div class="ul2">
 				<a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:32px;"></i></a>
 			</div>
