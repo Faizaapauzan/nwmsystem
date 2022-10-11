@@ -21,7 +21,7 @@ include 'dbconnect.php';
       	$staffregister_id  = $_POST['staffregister_id'];
 		$username = $_POST['username'];
 		$password = $_POST['password'];
-		$password=password_hash($password, PASSWORD_BCRYPT);
+		$hash = password_hash($password, PASSWORD_BCRYPT);
 		$staff_fullname = $_POST['staff_fullname'];
 		$employee_id   = $_POST['employee_id'];
 		$staff_phone  = $_POST['staff_phone'];
@@ -38,7 +38,7 @@ include 'dbconnect.php';
 	 staffregistercreated_by, staffregisterlastmodify_by)
 					
   VALUES ('".addslashes($_POST['username'])."',
-        '".addslashes($_POST['password'])."',
+        '$hash',
         '".addslashes($_POST['staff_fullname'])."',
         '".addslashes($_POST['employee_id'])."',
         '".addslashes($_POST['staff_phone'])."',
