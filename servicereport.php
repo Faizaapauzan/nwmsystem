@@ -472,7 +472,7 @@ tr td:first-child:before {
             $jobregister_id =$_POST['jobregister_id'];
             
             $results = $conn->query("SELECT * FROM job_register 
-            WHERE jobregister_id='$jobregister_id' AND support =''");
+            WHERE jobregister_id='$jobregister_id' AND support ='' AND tech_out !=''");
         
         while($row = $results->fetch_assoc()) {
 
