@@ -30,13 +30,11 @@
   
     <?php
         include 'dbconnect.php';
-        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) { 
-          $customer_name =$_POST['customer_name'];
-          $requested_date =$_POST['requested_date'];
+        if (isset($_POST['jobregister_id'])) { 
+          $jobregister_id =$_POST['jobregister_id'];
+       
           $query = "SELECT * FROM job_register 
-                    WHERE customer_name ='$customer_name'
-                    AND job_assign ='{$_SESSION['username']}' 
-                    AND requested_date ='$requested_date'";
+                    WHERE jobregister_id ='$jobregister_id'";
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
@@ -48,14 +46,11 @@
 
     <?php
         include 'dbconnect.php';
-        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) { 
-          $customer_name =$_POST['customer_name'];
-          $requested_date =$_POST['requested_date'];
-          $query = "SELECT * FROM job_update 
-                    WHERE customer_name ='$customer_name'
-                    AND tech_name ='{$_SESSION['username']}' 
-                    AND requested_date ='$requested_date'
-                    ORDER BY customer_name DESC LIMIT 1";
+         if (isset($_POST['jobregister_id'])) { 
+          $jobregister_id =$_POST['jobregister_id'];
+      
+          $query = "SELECT * FROM job_register 
+                    WHERE jobregister_id ='$jobregister_id'";
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
@@ -63,14 +58,12 @@
     
     <form action="" method="post">
 
-      <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
-      
+        
       <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
       <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-      <input type="hidden" name="job_assign" value="<?php echo $row['tech_name'] ?>">
+      <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
 
-      <label><?php echo $row['tech_name'] ?></label><br>
-      <label><?php echo $row['storeDate'] ?></label><br>
+      <label><?php echo $row['job_assign'] ?></label><br>
       <label><?php echo $row['customer_name'] ?></label><br>
 
       <br>
@@ -85,7 +78,6 @@
       <input type="hidden" name="technician_departure" value="<?php echo $_SESSION["arrivaltime"] ?>">
       <div class="input-group mb-3">
         <input readonly type="text" class="form-control" id="Departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
-        <input type="hidden" name="storeDate" value="<?php echo $_SESSION['storeDate']; ?>">
         <input type="hidden" name="job_status" value="Doing">
         <div class="input-group-append">
           <button id="update_techstatus" name="update_techstatus" class="buttonbiru update" onclick="doSomething();doSomethingElse();departureTechnician();" type="button">Departure</button>
@@ -225,7 +217,7 @@
       <label>Leaving Time</label>
       <input type="hidden" name="technician_leaving" value="<?php echo $_SESSION["arrivaltime"] ?>">
       <div class="input-group mb-3">
-        <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
+        <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
         <input readonly type="text" class="form-control" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button style="padding-left: 51px;" class="buttonbiru" onclick="test3();leavingTechnician();" type="button">Leaving</button>
