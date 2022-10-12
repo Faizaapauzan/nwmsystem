@@ -113,11 +113,7 @@ form .submit-date label.details {
   	<form id="view_form" method="post">
     <div style="display:flex;">
     <button  style="padding: 8px 44px; border-radius: 4px;" class="userinfo" type="button" 
-      data-id='<?php echo $res['jobregister_id']; ?>' 
-      data-custname='<?php echo $res['customer_name']; ?>' 
-      data-machine_name='<?php echo $res['machine_name']; ?>' 
-      data-requested_date='<?php echo $res['requested_date']; ?>'
-      data-job_assign='<?php echo $res['job_assign']; ?>'>New</button></n>
+      data-id='<?php echo $res['jobregister_id']; ?>'>New</button></n>
     <button style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" class="useredit" type="button" data-id2='<?php echo $res['jobregister_id']; ?>'>Edit</button>
     </div>  
     </form>
@@ -129,18 +125,11 @@ form .submit-date label.details {
         $(document).ready(function(){
         $('.userinfo').click(function(){
         var jobregister_id = $(this).data('id');
-        var customer_name = $(this).data('custname');
-        var machine_name = $(this).data('machine_name');
-        var requested_date = $(this).data('requested_date');
-        var job_assign = $(this).data('job_assign');
+
         $.ajax({
             url: 'servicereportajaxadmin.php',
             type: 'post',
-            data: {jobregister_id:jobregister_id, 
-                  customer_name:customer_name,
-                  machine_name:machine_name,
-                  requested_date:requested_date,
-                  job_assign:job_assign},
+            data: {jobregister_id:jobregister_id},
             success: function(data){
             var win = window.open('servicereport.php');
             win.document.write(data);

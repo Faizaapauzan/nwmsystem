@@ -26,11 +26,7 @@
 
   <form id="assignupdate_form" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-    <input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
-    <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
-    <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
-    <input type="hidden" name="support" class="support" value="<?php echo $row['support'] ?>">
-    
+   
     <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br/>
     <p style="margin-left: 20px;margin-top: 1px;margin-bottom: 11px;" class="control"><b id="assignupdateadminmessage"></b></p>
     <div class="input-box" style="display:flex; width: 541px">
@@ -60,19 +56,18 @@
   
     </select>
   
-    <?php
+    <!-- <?php
       $DateAssign = date("Y.m.d");
       $_SESSION['storeDate'] = $DateAssign; 
-    ?>
+    ?> -->
     
-    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	
+    <!-- <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	 -->
   
     <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-    <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" onclick="keep();" />
-    <!-- <button style="height: 42px; margin-top: 2px;  border-radius: 5px; width: 145px;" id="technicianassign" name="technicianassign">Update</button> -->
+    <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update"/>
     </div>
-  </form>
+    </form>
   
   <script>
       $(document).ready(function () {
@@ -95,46 +90,6 @@
       });
       });
   </script>
-
-<!-- Save into job update table -->
-<script type="text/javascript">
-    function keep()
-      {
-        var tech_name = $('input[name=job_assign]').val();
-        var customer_name = $('input[name=customer_name]').val();
-        var requested_date = $('input[name=requested_date]').val();
-        var jobregister_id = $('input[name=jobregister_id]').val();
-        var machine_name = $('input[name=machine_name]').val();
-        var support = $('input[name=support]').val();
-        
-            if(tech_name!='' || tech_name=='',
-           customer_name!='' || customer_name=='',
-          requested_date!='' || requested_date=='',
-          jobregister_id!='' || jobregister_id=='',
-            machine_name!='' || machine_name=='',
-                 support!='' || support=='')
-            {
-              var formData = {tech_name:tech_name,
-                          customer_name:customer_name,
-                         requested_date:requested_date,
-                         jobregister_id:jobregister_id,
-                           machine_name:machine_name,
-                                support:support};
-                    
-              $.ajax({  
-                        url: "savecustname.php",
-                        type: 'POST',
-                        data: formData,
-                        success: function(response)
-                          {
-                            var res = JSON.parse(response);
-                                      console.log(res);
-                          }
-                      });
-            }
-      } 
-</script>
-
 <!-- ASSIGN TECHNICIAN -->
 
 <!-- ASSIGN ASSISTANT -->
@@ -142,10 +97,6 @@
 <form class="form" id="adminassistant_form" method="post" style="margin-left: 20px;">
 
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-
-<input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
-<input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
-<input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
 
 <div class="assistants" id="multipleassist">
   

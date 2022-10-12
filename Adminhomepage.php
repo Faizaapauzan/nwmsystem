@@ -743,7 +743,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
         ?>
 
-        <div class="Boon" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Boon"  ondblclick="document.getElementById('doubleClick-Boon').style.display='block'">
+        <div class="Boon" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Boon"  ondblclick="document.getElementById('doubleClick-Boon').style.display='block'">
         <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
         <ul class="b" id="draged">
         <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -841,16 +841,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Boon',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+             var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.boon-update').html(response);
@@ -907,7 +903,7 @@ if(!isset($_SESSION['username']))
     <script type='text/javascript'>
         $(document).ready(function () {
         $('body').on('click','.Boon',function(){ 
-        var jobregister_id = $(this).data('idupdate');
+        var jobregister_id = $(this).data('id');
         // AJAX request
         $.ajax({
         url: 'ajaxtechphtoupdt.php',
@@ -1042,7 +1038,7 @@ if(!isset($_SESSION['username']))
         while($row = $results->fetch_assoc()) {
         ?>
                             
-        <div class="Hafiz" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Hafiz"  ondblclick="document.getElementById('doubleClick-Hafiz').style.display='block'">
+        <div class="Hafiz" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hafiz"  ondblclick="document.getElementById('doubleClick-Hafiz').style.display='block'">
         <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
         <ul class="b" id="draged">
         <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -1144,16 +1140,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Hafiz',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.hafiz-update').html(response);
@@ -1362,7 +1354,7 @@ if(!isset($_SESSION['username']))
                     while($row = $results->fetch_assoc()) {
             ?>
 
-                <div class="Hamir" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Hamir"  ondblclick="document.getElementById('doubleClick-Hamir').style.display='block'">
+                <div class="Hamir" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hamir"  ondblclick="document.getElementById('doubleClick-Hamir').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -1463,16 +1455,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Hamir',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.hamir-update').html(response);
@@ -1592,7 +1580,7 @@ if(!isset($_SESSION['username']))
 
         </div></form></div>
 
-              <!-- div for doubleclick and tabs -->
+        <!-- div for doubleclick and tabs -->
         </div></div>
 
         <script type='text/javascript'>
@@ -1670,7 +1658,7 @@ if(!isset($_SESSION['username']))
                 while($row = $results->fetch_assoc()) {
             ?>
 
-            <div class="Hwa" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Hwa"  ondblclick="document.getElementById('doubleClick-Hwa').style.display='block'">
+            <div class="Hwa" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hwa"  ondblclick="document.getElementById('doubleClick-Hwa').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -1768,16 +1756,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Hwa',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.hwa-update').html(response);
@@ -1971,7 +1955,7 @@ if(!isset($_SESSION['username']))
                     while($row = $results->fetch_assoc()) {
                 ?>
 
-                <div class="Isk" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Isk" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" ondblclick="document.getElementById('doubleClick-Isk').style.display='block'">
+                <div class="Isk" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Isk" ondblclick="document.getElementById('doubleClick-Isk').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -2070,16 +2054,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Isk',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.isk-update').html(response);
@@ -2271,7 +2251,7 @@ if(!isset($_SESSION['username']))
                 while($row = $results->fetch_assoc()) {
                 ?>
 
-                <div class="John" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-John" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" ondblclick="document.getElementById('doubleClick-John').style.display='block'">
+                <div class="John" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-John" ondblclick="document.getElementById('doubleClick-John').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -2369,16 +2349,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.John',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.john-update').html(response);
@@ -2575,7 +2551,7 @@ if(!isset($_SESSION['username']))
                 while($row = $results->fetch_assoc()) {
                 ?>
 
-                <div class="JunJie" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-JunJie" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" ondblclick="document.getElementById('doubleClick-JunJie').style.display='block'">
+                <div class="JunJie" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-JunJie" ondblclick="document.getElementById('doubleClick-JunJie').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -2674,16 +2650,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.JunJie',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.junjie-update').html(response);
@@ -2876,7 +2848,7 @@ if(!isset($_SESSION['username']))
                     while($row = $results->fetch_assoc()) {
                 ?>
 
-                <div class="Razwill" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Razwill" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" ondblclick="document.getElementById('doubleClick-Razwill').style.display='block'">
+                <div class="Razwill" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Razwill" ondblclick="document.getElementById('doubleClick-Razwill').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -2975,16 +2947,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Razwill',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.razwill-update').html(response);
@@ -3177,7 +3145,7 @@ if(!isset($_SESSION['username']))
                     while($row = $results->fetch_assoc()) {
                 ?>  
                         
-                <div class="Sahele" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>"data-target="doubleClick-Sahele"  ondblclick="document.getElementById('doubleClick-Sahele').style.display='block'">
+                <div class="Sahele" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Sahele"  ondblclick="document.getElementById('doubleClick-Sahele').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -3273,16 +3241,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Sahele',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.sahele-update').html(response);
@@ -3473,7 +3437,7 @@ if(!isset($_SESSION['username']))
                 while($row = $results->fetch_assoc()) {
                 ?>
                         
-                <div class="Sazaly" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Sazaly"  ondblclick="document.getElementById('doubleClick-Sazaly').style.display='block'">
+                <div class="Sazaly" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Sazaly"  ondblclick="document.getElementById('doubleClick-Sazaly').style.display='block'">
                 <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                 <ul class="b" id="draged">
                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -3573,16 +3537,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Sazaly',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.sazaly-update').html(response);
@@ -3773,7 +3733,7 @@ if(!isset($_SESSION['username']))
                 while($row = $results->fetch_assoc()) {
             ?>
                         
-            <div class="Faizan" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Faizan"  ondblclick="document.getElementById('doubleClick-Faizan').style.display='block'">
+            <div class="Faizan" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Faizan"  ondblclick="document.getElementById('doubleClick-Faizan').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -3870,16 +3830,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Faizan',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.faizan-update').html(response);
@@ -4072,7 +4028,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>
 
-            <div class="Fauzin" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Fauzin"  ondblclick="document.getElementById('doubleClick-Fauzin').style.display='block'">
+            <div class="Fauzin" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" ondblclick="document.getElementById('doubleClick-Fauzin').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -4171,16 +4127,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Fauzin',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.fauzin-update').html(response);
@@ -4375,7 +4327,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>  
                         
-            <div class="Izaan" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Izaan"  ondblclick="document.getElementById('doubleClick-Izaan').style.display='block'">
+            <div class="Izaan" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Izaan"  ondblclick="document.getElementById('doubleClick-Izaan').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -4411,7 +4363,6 @@ if(!isset($_SESSION['username']))
             $('body').on('click','.Izaan',function(){ 
             var jobregister_id = $(this).data('id');
             var type_id = $(this).data('type_id');
-
 
             // AJAX request
             $.ajax({
@@ -4475,16 +4426,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Izaan',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.izaan-update').html(response);
@@ -4678,7 +4625,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>
                         
-            <div class="Salam" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Salam" ondblclick="document.getElementById('doubleClick-Salam').style.display='block'">
+            <div class="Salam" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Salam" ondblclick="document.getElementById('doubleClick-Salam').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -4776,16 +4723,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Salam',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.salam-update').html(response);
@@ -4982,7 +4925,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>
 
-            <div class="Teck" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Teck"  ondblclick="document.getElementById('doubleClick-Teck').style.display='block'">
+            <div class="Teck" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Teck"  ondblclick="document.getElementById('doubleClick-Teck').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -5081,16 +5024,12 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function () {
             $('body').on('click','.Teck',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
             // AJAX request
             $.ajax({
             url: 'ajaxtechupdateadmin.php',
             type: 'post',
-            data: {customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: { jobregister_id: jobregister_id },
             success: function (response) {
             // Add response in Modal body
             $('.teck-update').html(response);
@@ -5286,7 +5225,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>
 
-            <div class="Aizat" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Aizat" ondblclick="document.getElementById('doubleClick-Aizat').style.display='block'">
+            <div class="Aizat" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Aizat" ondblclick="document.getElementById('doubleClick-Aizat').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -5383,16 +5322,13 @@ if(!isset($_SESSION['username']))
         <script type='text/javascript'>
             $(document).ready(function() {
             $('body').on('click','.Aizat',function(){ 
-            var customer_name = $(this).data('idupdate');
-            var job_assign = $(this).data('idlagi');
-            var requested_date = $(this).data('idagain');
+            var jobregister_id = $(this).data('id');
+
             // AJAX request     
             $.ajax({
             url:'ajaxtechupdateadmin.php',
             type:'post',
-            data:{customer_name:customer_name,
-                      job_assign:job_assign,
-                  requested_date:requested_date},
+            data: {jobregister_id: jobregister_id},
             success: function(response) {
               // Add response in Modal body
               $('.Aizattechupdate-details').html(response);
@@ -5559,7 +5495,7 @@ if(!isset($_SESSION['username']))
                                 while($row = $results->fetch_assoc()) {
                             ?>
 
-								<div class="Pending" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Pending"  ondblclick="document.getElementById('doubleClick-Pending').style.display='block'">
+								<div class="Pending" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Pending"  ondblclick="document.getElementById('doubleClick-Pending').style.display='block'">
 									<input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
 									<ul class="b" id="draged">
 									<strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -5661,16 +5597,12 @@ if(!isset($_SESSION['username']))
                         <script type='text/javascript'>
                             $(document).ready(function () {
                                 $('.Pending').click(function () {
-                                    var customer_name = $(this).data('idupdate');
-                                    var job_assign = $(this).data('idlagi');
-                                    var requested_date = $(this).data('idagain');
+                                    var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
                                         url: 'ajaxtechupdateadmin.php',
                                         type: 'post',
-                                        data: {customer_name:customer_name,
-                                                  job_assign:job_assign,
-                                              requested_date:requested_date},
+                                        data: { jobregister_id: jobregister_id },
                                         success: function (response) {
                                             // Add response in Modal body
                                             $('.pending-update').html(response);
@@ -5848,7 +5780,7 @@ if(!isset($_SESSION['username']))
                                 while($row = $results->fetch_assoc()) {
                             ?>
                         
-									<div class="Incomplete" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" data-target="doubleClick-Incomplete"  ondblclick="document.getElementById('doubleClick-Incomplete').style.display='block'">
+									<div class="Incomplete" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Incomplete" ondblclick="document.getElementById('doubleClick-Incomplete').style.display='block'">
 										<input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
 										<ul class="b" id="draged">
 											<strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -5955,16 +5887,12 @@ if(!isset($_SESSION['username']))
                         <script type='text/javascript'>
                             $(document).ready(function () {
                                 $('.Incomplete').click(function () {
-                                    var customer_name = $(this).data('idupdate');
-                                    var job_assign = $(this).data('idlagi');
-                                    var requested_date = $(this).data('idagain');
+                                    var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
                                         url: 'ajaxtechupdateadmin.php',
                                         type: 'post',
-                                        data: {customer_name:customer_name,
-                                                  job_assign:job_assign,
-                                              requested_date:requested_date},
+                                        data: { jobregister_id: jobregister_id },
                                         success: function (response) {
                                             // Add response in Modal body
                                             $('.incomplete-update').html(response);
