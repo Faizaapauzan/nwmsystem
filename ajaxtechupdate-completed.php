@@ -23,26 +23,21 @@
 <body>
 
     <!-- To show travel time and rest hour -->
-    <?php
+   <?php
         include 'dbconnect.php';
-        if (isset($_POST['customer_name']) && isset($_POST['requested_date'])) { 
-          $customer_name =$_POST['customer_name'];
-          $requested_date =$_POST['requested_date'];
-          $query = "SELECT * FROM job_update 
-                    WHERE customer_name ='$customer_name'
-                    AND tech_name ='{$_SESSION['username']}' 
-                    AND requested_date ='$requested_date'
-                    ORDER BY customer_name DESC LIMIT 1";
+        if (isset($_POST['jobregister_id'])) { 
+          $jobregister_id =$_POST['jobregister_id'];
+       
+          $query = "SELECT * FROM job_register 
+                    WHERE jobregister_id ='$jobregister_id'";
           $query_run = mysqli_query($conn, $query);
           if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
-    
     <form action="" method="post">
 
-      <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
-      <label><?php echo $row['tech_name'] ?></label><br>
-      <label><?php echo $row['storeDate'] ?></label><br>
+      <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+      <label><?php echo $row['job_assign'] ?></label><br>
       <label><?php echo $row['customer_name'] ?></label><br>
 
       <br>

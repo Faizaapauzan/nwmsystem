@@ -190,7 +190,7 @@ session_start();
 						while ($row = mysqli_fetch_assoc($result)) {
 							// only show artist when it's an other artist then the previous one
 							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate' data-idupdate='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-toggle='modal' data-target='#myModalupdate'>
+								echo "<div class='cardupdate'>
 										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
 									  </div>";
 								$customer_name = $row['customer_name'];
@@ -242,14 +242,14 @@ session_start();
 						while ($row = mysqli_fetch_assoc($result)) {
 							// only show artist when it's an other artist then the previous one
 							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate' data-idupdate='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-toggle='modal' data-target='#myModalupdate'>
+								echo "<div class='cardupdate'>
 										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
 									  </div>";
 								$customer_name = $row['customer_name'];
 							}						
 								echo "<nav id='mainNav'>
 								      <div class='cards'>
-									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
+									  <div class='card' id='notYetStatus' data-idupdate='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
@@ -323,54 +323,7 @@ session_start();
 			</div>
 
 			
-			<!-- Update Modal -->
-			<div id="myModalupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
-				<div role="document" class="modal-dialog">
-					<div style="padding-bottom: 26px;" class="modal-content">
-					<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-							<h6 class="font-weight-bold">Update</h6>
-
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" style="font-size:20px;"></i></button>
-						<!--TOP BAR-->
-						<div class="line">
-
-						</div>
-						
-						<br>
-						
-						<div class="modal-body p-0">
-						
-								<form action="ajaxtechupdate.php" method="post">
-									<div class="techupdate-details">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.cardupdate').click(function() {
-											var customer_name = $(this).data('idupdate');
-											var requested_date = $(this).data('requested_date');
-											// AJAX request
-											$.ajax({
-												url:'ajaxtechupdate.php',
-												type:'post',
-												data:{customer_name: customer_name, requested_date: requested_date},
-												success: function(response) {
-													// Add response in Modal body
-													$('.techupdate-details').html(response);
-													// Display Modal
-													$('#myModalupdate').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
+		
 			
 			<!-- Job info modal -->
 			<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
@@ -378,7 +331,11 @@ session_start();
 					<div style="padding-bottom: 26px;" class="modal-content">
 					<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
 						<div class="tabs active" id="tab01">
-							<h6 class="font-weight-bold">Job Info</h6>
+						<h6 class="font-weight-bold">Update</h6>
+						</div>
+
+						<div class="tabs" id="tab02">
+							<h6 class="text-muted">Job Info</h6>
 						</div>
 						
 						<div class="tabs" id="tab03">
@@ -415,8 +372,39 @@ session_start();
 						<div class="line"></div>
 							<br>
 						<div class="modal-body p-0">
-							<!--JOB INFO-->
+							<!--JOB UPDATE-->
 							<fieldset class="show" id="tab011">
+								<form action="ajaxtechupdate.php" method="post">
+									<div class="techupdate-details">
+
+									</div>
+								</form>
+								
+								<script type='text/javascript'>
+									$(document).ready(function() {
+										$('.card').click(function() {
+											var jobregister_id = $(this).data('id');
+											
+											// AJAX request
+											$.ajax({
+												url:'ajaxtechupdate.php',
+												type:'post',
+												data:{jobregister_id: jobregister_id},
+												success: function(response) {
+													// Add response in Modal body
+													$('.techupdate-details').html(response);
+													// Display Modal
+													$('#myModal').modal('show');
+												}
+											});
+										});
+									});
+								</script>
+							</fieldset>
+
+							<!--Job info-->
+							
+							<fieldset id="tab021">
 								<form action="" method="post">
 									<div class="tech-details">
 
@@ -446,6 +434,8 @@ session_start();
 								</script>
 
 							</fieldset>
+							
+
 							
 							<!--Job assign-->
 							
@@ -654,7 +644,7 @@ session_start();
 						while ($row = mysqli_fetch_assoc($result)) {
 							// only show artist when it's an other artist then the previous one
 							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate-complete' data-idupdate-complete='".$row['customer_name']."' data-requested_date-complete='".$row['requested_date']."' data-toggle='modal' data-target='#myModal-completed-update'>
+								echo "<div class='cardupdate-complete'>
 										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
 							  		 </div>";
 								$customer_name = $row['customer_name'];
@@ -687,53 +677,7 @@ session_start();
 			</div>
 		</div>
 
-		<!-- Completed Update Modal -->
-		<div id="myModal-completed-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
-				<div role="document" class="modal-dialog">
-					<div style="padding-bottom: 26px;" class="modal-content">
-					<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-							<h6 class="font-weight-bold">Update</h6>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" style="font-size:20px;"></i></button>
-						<!--TOP BAR-->
-						<div class="line">
-
-						</div>
-						
-						<br>
-						
-						<div class="modal-body p-0">
-								<form action="ajaxtechupdate.php" method="post">
-									<div class="techupdate-details-completed">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.cardupdate-complete').click(function() {
-											var customer_name = $(this).data('idupdate-complete');
-											var requested_date = $(this).data('requested_date-complete');
-											// AJAX request
-											$.ajax({
-												url:'ajaxtechupdate-completed.php',
-												type:'post',
-												data:{customer_name: customer_name, requested_date: requested_date},
-												success: function(response) {
-													// Add response in Modal body
-													$('.techupdate-details-completed').html(response);
-													// Display Modal
-													$('#myModal-completed-update').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
+		
 	
 			<!-- Completed modal -->
 			<div id="myModal-completed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
@@ -741,8 +685,13 @@ session_start();
 					<div class="modal-content">
 						<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
 							<div class="tabs active" id="tab11">
-								<h6 class="font-weight-bold">Job Info</h6>
+								<h6 class="font-weight-bold">Update</h6>
 							</div>
+
+							<div class="tabs" id="tab12">
+								<h6 class="text-muted">Job Info</h6>
+							</div>
+
 							<div class="tabs" id="tab13">
 								<h6 class="text-muted">Job Assign</h6>
 							</div>
@@ -776,6 +725,36 @@ session_start();
 								<!--Job Info Completed-->
 
 								<fieldset class="show" id="tab111">
+									<form action="ajaxtechupdate.php" method="post">
+									<div class="techupdate-details-completed">
+
+									</div>
+								</form>
+								
+								<script type='text/javascript'>
+									$(document).ready(function() {
+										$('.card-complete').click(function() {
+											var jobregister_id = $(this).data('id-complete');
+											// AJAX request
+											$.ajax({
+												url:'ajaxtechupdate-completed.php',
+												type:'post',
+											data: {jobregister_id: jobregister_id},
+												success: function(response) {
+													// Add response in Modal body
+													$('.techupdate-details-completed').html(response);
+													// Display Modal
+													$('#myModal-completed').modal('show');
+												}
+											});
+										});
+									});
+								</script>
+								</fieldset>
+
+								<!--Job assign-->
+								
+								<fieldset id="tab121">
 									<form action="" method="post">
 										<div class="tech-details-completed">
 
@@ -798,8 +777,9 @@ session_start();
 											});
 										});
 									</script>
-									
 								</fieldset>
+								
+
 								
 								<!--Job assign-->
 								
