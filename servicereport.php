@@ -1,7 +1,7 @@
 <?php
     session_start();
     $showDate = date("d.m.Y");
-    $_SESSION['storeDate'] = $showDate;
+    $_SESSION['today_date'] = $showDate;
 ?>
 
 <!doctype html>
@@ -336,7 +336,7 @@ tr td:first-child:before {
     ?>
 
     <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-    <input type="hidden" id="storeDate" name="storeDate" value="<?php echo $date = date('Y-m-d'); ?>">
+    <input type="hidden" id="today_date" name="today_date" value="<?php echo $date = date('Y-m-d'); ?>">
     
     <section class="store-user mt-5">
     <div class="col-10">
@@ -395,69 +395,31 @@ tr td:first-child:before {
     	 
     </div>
 
-    <?php
-        include_once("dbconnect.php");
-                
-        if (isset($_POST['customer_name'])) {
-          $customer_name =$_POST['customer_name'];
-          $requested_date =$_POST['requested_date'];
-          
-          $query = ("SELECT * FROM job_update
-                     WHERE tech_name ='{$_SESSION['username']}'
-                     AND requested_date='$requested_date'
-                     AND customer_name ='$customer_name'
-                     ORDER BY requested_date DESC LIMIT 1");
-
-          $query_run = mysqli_query($conn, $query);
-          if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-              $DateTime1 = $row['technician_departure'];
-              $DateTime2   = $row['technician_arrival'];
-              
-          if (!function_exists('difftime')) {
-            function difftime($date1, $date2) {
-              $dif=array();
-              $first = strtotime($date1);
-              $second = strtotime($date2);
-              $datediff = abs($first - $second);
-              $dif['s'] = floor($datediff);
-              $dif['m'] = floor($datediff/(60) % 60 ); //minute
-              $dif['h'] = floor($datediff/(60*60)); //hour
-              
-              return $dif;
-            }
-          }
-    ?>
-
-    <?php } } } ?>  
-
     <div class="rightside">
-    <p><label>Travel Time :</label><span><input type="technician_arrival" name="Travel_Time" class="input" value="<?php echo difftime($DateTime1,$DateTime2)['h']?> hours <?php echo difftime($DateTime1,$DateTime2)['m']?> minutes" /></span></p>
-
+   
     <?php
         include 'dbconnect.php';
 
-        if (isset($_POST['customer_name'])) {
-            $customer_name =$_POST['customer_name'];
-            $requested_date =$_POST['requested_date'];
+        if (isset($_POST['jobregister_id'])) {
             
+            $jobregister_id =$_POST['jobregister_id'];
             
-            $query = ("SELECT * FROM job_update 
-                       WHERE tech_name ='{$_SESSION['username']}'
-                       AND  requested_date='$requested_date'
-                       AND customer_name ='$customer_name' 
-                       ORDER BY requested_date DESC LIMIT 1");
+            $query = ("SELECT * FROM job_register 
+                       WHERE jobregister_id='$jobregister_id'");
 
             $query_run = mysqli_query($conn, $query);
             while ($row = mysqli_fetch_array($query_run)) {
+              $technician_departure = $row['technician_departure'];
               $technician_arrival = $row['technician_arrival'];
               $technician_leaving = $row['technician_leaving'];
+              $departure = substr($technician_departure,11);
               $arrival = substr($technician_arrival,11);
               $leaving = substr($technician_leaving,11); 
     ?>
 
-    <p><label>Start : </label> <span><input type="text" name="technician_arrival" value="<?php echo $arrival ?>" class="input" /></span></p>
-    <p><label>End : </label><span><input type="text" name="technician_leaving" value="<?php echo $leaving ?>" class="input" /></span></p>
+        <p><label>Departure time :</label><span><input type="technician_departure" name="technician_departure" class="input" value="<?php echo $departure?>"/></span></p>
+        <p><label>Time at site : </label> <span><input type="text" name="technician_arrival" value="<?php echo $arrival ?>" class="input" /></span></p>
+        <p><label>Return time : </label><span><input type="text" name="technician_leaving" value="<?php echo $leaving ?>" class="input" /></span></p>
     
     <?php } } ?>
 
@@ -479,6 +441,7 @@ tr td:first-child:before {
 
     <?php } } ?>
     
+
     <br/></div></div>
 
     <div class="bothside">
@@ -504,19 +467,12 @@ tr td:first-child:before {
     <?php
         include 'dbconnect.php';
 
-        if (isset($_POST['customer_name']) && isset($_POST['requested_date']) && isset($_POST['machine_name']) && isset($_POST['job_assign'])) {
-            $customer_name =$_POST['customer_name'];
-            $requested_date =$_POST['requested_date'];
-            $machine_name =$_POST['machine_name'];
-            $job_assign =$_POST['job_assign'];
+        if (isset($_POST['jobregister_id'])) {
+          
+            $jobregister_id =$_POST['jobregister_id'];
             
-            $results = $conn->query("SELECT * FROM job_update 
-            WHERE requested_date='$requested_date'
-            AND customer_name ='$customer_name'
-            AND tech_name ='$job_assign'
-            AND support =''
-            AND tech_out IS NOT NULL 
-            AND TRIM(tech_out) <> ''");
+            $results = $conn->query("SELECT * FROM job_register 
+            WHERE jobregister_id='$jobregister_id' AND support =''");
         
         while($row = $results->fetch_assoc()) {
 
@@ -536,7 +492,7 @@ tr td:first-child:before {
             $requested_date =$_POST['requested_date'];
             $machine_name =$_POST['machine_name'];
             
-            $results = $conn->query("SELECT * FROM job_update
+            $results = $conn->query("SELECT * FROM job_register
                                      WHERE customer_name ='$customer_name'
                                      AND requested_date='$requested_date'
                                      AND machine_name='$machine_name'
@@ -548,7 +504,7 @@ tr td:first-child:before {
               $technician_leaving = $row['technician_leaving'];
               $arrival = substr($technician_arrival,11);
               $leaving = substr($technician_leaving,11); 
-              $tech_name = $row['tech_name'];
+              $tech_name = $row['job_assign'];
     ?>
 
     <?php echo " ".$tech_name."  
@@ -566,7 +522,7 @@ tr td:first-child:before {
             $requested_date =$_POST['requested_date'];
             $machine_name =$_POST['machine_name'];
             
-            $results = $conn->query("SELECT * FROM job_update
+            $results = $conn->query("SELECT * FROM job_register
                                      WHERE customer_name ='$customer_name'
                                      AND requested_date='$requested_date'
                                      AND machine_name='$machine_name'
@@ -576,7 +532,7 @@ tr td:first-child:before {
             while($row = $results->fetch_assoc()) {
               $tech_out = $row['tech_out'];
               $tech_in = $row['tech_in'];
-              $tech_name = $row['tech_name'];
+              $tech_name = $row['job_assign'];
     ?>
 
     <?php echo " ".$tech_name." Rest Time: ".$tech_out." - ".$tech_in." "?>
@@ -584,7 +540,6 @@ tr td:first-child:before {
     <?php } } ?>
     
     </textarea>
-
 
 <script type="text/javascript">
 var $textArea = $("#textarea-container");
@@ -600,14 +555,14 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
 function resizeTextArea($element) {
     $element.height($element[0].scrollHeight);
 }
-  </script>
-     
-
+</script>
+    
     </div></div>
 
     <br/><br/>
     <div class="try3">
-    <p>Report :-</p><textarea name="report" style="writing-mode: horizontal-tb !important;
+    <p>Report :-</p>
+    <textarea name="report" style="writing-mode: horizontal-tb !important;
     font-family: Arial;
     text-rendering: auto;
     text-align: start;
@@ -620,7 +575,8 @@ function resizeTextArea($element) {
     margin: 19px;
     padding: 1px 2px;
     border-width: 0px;
-    resize: none;"></textarea>
+    resize: none;">
+    </textarea>
     </div>
     
     <?php 
@@ -650,7 +606,7 @@ function resizeTextArea($element) {
           <td><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 0px;" class="textarea" role="textbox" contenteditable><?php echo $row['accessories_name'] ?></span></td>
           <td><input type="text" style="font-size: 15px; border: none; text-align:center;" class="accessories_uom" name="accessories_uom" value="<?php echo $res['accessories_uom']; ?>" /></td>
           <td><input readonly type="text" style="font-size: 15px; border: none; text-align:center;" class="accessories_quantity" name="accessories_quantity" value="<?php echo $res['accessories_quantity']; ?>" /></td>
-        </tr>
+          </tr>
         <?php endforeach; ?>
       </tbody>
       </table>
@@ -692,13 +648,14 @@ function resizeTextArea($element) {
         function submitForm()
             {
               var jobregister_id = $('input[name=jobregister_id]').val();
-              var storeDate = $('input[name=storeDate]').val();
+              var today_date = $('input[name=today_date]').val();
               var date = $('input[name=date]').val();
               var customer_name = $('input[name=customer_name]').val();
               var cust_phone1 = $('input[name=cust_phone1]').val();
               var job_name = $('input[name=job_name]').val();
               var job_assign = $('input[name=job_assign]').val();
               var assistants = $('input[name=assistants]').val();
+              var technician_departure = $('input[name=technician_departure]').val();
               var technician_arrival = $('input[name=technician_arrival]').val();
               var technician_leaving = $('input[name=technician_leaving]').val();
               var machine_name = $('input[name=machine_name]').val();
@@ -708,18 +665,18 @@ function resizeTextArea($element) {
               var report = $('textarea[name=report]').val();
               var cust = $('input[name=cust]').val();
               var custphone = $('input[name=custphone]').val();
-              var Travel_Time = $('input[name=Travel_Time]').val();
               var Submitted_Items = $('textarea[name=Submitted_Items]').val();
               var Problem_Description = $('textarea[name=Problem_Description]').val();
              
               if(jobregister_id!= '' || jobregister_id == '',
-                 storeDate!= '' || storeDate == '',
+                 today_date!= '' || today_date == '',
                  date!= '' || date == '', 
                  customer_name!= '' || customer_name == '', 
                  cust_phone1!= '' || cust_phone1 == '', 
                  job_name!= '' || job_name == '', 
                  job_assign!= '' || job_assign == '', 
-                 assistants!= '' || assistants == '', 
+                 assistants!= '' || assistants == '',
+                 technician_departure!= '' || technician_departure == '',  
                  technician_arrival!= '' || technician_arrival == '', 
                  technician_leaving!= '' || technician_leaving == '', 
                  machine_name!= '' || machine_name == '', 
@@ -729,20 +686,20 @@ function resizeTextArea($element) {
                  report!= '' || report == '', 
                  cust!= '' || cust == '', 
                  custphone!= '' || custphone == '', 
-                 Travel_Time!= '' || Travel_Time == '', 
                  Submitted_Items!= '' || Submitted_Items == '', 
                  Problem_Description!= '' || Problem_Description == '')
                  
                  {
 
                     var formData = {jobregister_id: jobregister_id,
-                                    storeDate: storeDate,
+                                    today_date: today_date,
                                     date: date,
                                     customer_name: customer_name,
                                     cust_phone1: cust_phone1,
                                     job_name: job_name,
                                     job_assign: job_assign,
                                     assistants: assistants,
+                                    technician_departure: technician_departure,
                                     technician_arrival: technician_arrival,
                                     technician_leaving: technician_leaving,
                                     machine_name: machine_name,
@@ -752,7 +709,6 @@ function resizeTextArea($element) {
                                     report: report,
                                     cust: cust,
                                     custphone: custphone,
-                                    Travel_Time: Travel_Time,
                                     Submitted_Items: Submitted_Items,
                                     Problem_Description: Problem_Description};
                                     

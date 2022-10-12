@@ -36,7 +36,7 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
     &&
    isset($_POST['custphone']) && $_POST['custphone']!='' || $_POST['custphone']==''
     &&
-   isset($_POST['Travel_Time']) && $_POST['Travel_Time']!='' || $_POST['Travel_Time']=='' 
+   isset($_POST['technician_departure']) && $_POST['technician_departure']!='' || $_POST['technician_departure']=='' 
     &&
    isset($_POST['Submitted_Items']) && $_POST['Submitted_Items']!='' || $_POST['Submitted_Items']==''
     &&
@@ -60,7 +60,7 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
                        report ='".addslashes($_POST['report'])."',
                        cust ='".addslashes($_POST['cust'])."',
                        custphone ='".addslashes($_POST['custphone'])."',
-                       Travel_Time ='".addslashes($_POST['Travel_Time'])."',
+                       technician_departure ='".addslashes($_POST['technician_departure'])."',
                        Submitted_Items ='".addslashes($_POST['Submitted_Items'])."',
                        Problem_Description ='".addslashes($_POST['Problem_Description'])."'
                 WHERE  jobregister_id ='".addslashes($_POST['jobregister_id'])."' ";

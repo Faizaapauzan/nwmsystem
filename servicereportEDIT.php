@@ -343,12 +343,12 @@ tr td:first-child:before {
     <p><label>Contact No :</label><span><input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1'] ?>" class="input" /></span></p>
     <p><label>Service Type :</label><span><input type="text" style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 2px;" name="job_name" class="textarea" role="textbox" contenteditable value="<?php echo $row['job_name'] ?>"/></span></p>
     <p><label>Service Engineer :</label> <span><input type="text" name="job_assign" value="<?php echo $row['job_assign'] ?>" class="input" /></span></p>
-   <p><label style="position:absolute;">Assistants :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 81px;" class="textarea" role="textarea" contenteditable><?php echo $row['assistants'] ?></span><input type="hidden" name="assistants" value="<?php echo $row['assistants'] ?>" class="input" /></p>
+    <p><label style="position:absolute;">Assistants :</label><span style="font-size: 13px; width: 207px; height:13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 81px;" class="textarea" role="textarea" contenteditable><?php echo $row['assistants'] ?></span><input type="hidden" name="assistants" value="<?php echo $row['assistants'] ?>" class="input" /></p>
     	 
     </div>
 
     <div class="rightside">
-    <p><label>Travel Time :</label><span><input type="technician_arrival" name="Travel_Time" class="input" value="<?php echo $row['Travel_Time'] ?>" /></span></p>
+    <p><label>Departure time :</label><span><input type="technician_departure" name="technician_departure" class="input" value="<?php echo $row['technician_departure'] ?>" /></span></p>
     <p><label>Time At  Site :</label> <span><input type="text" name="technician_arrival" value="<?php echo $row['technician_arrival'] ?>" class="input" /></span></p>
     <p><label>Return Time :</label><span><input type="text" name="technician_leaving" value="<?php echo $row['technician_leaving'] ?>" class="input" /></span></p>
     <p><label style="position:absolute;">Machine Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" class="textarea" role="textarea" contenteditable><?php echo $row['machine_name'] ?></span><input type="hidden" name="machine_name" value="<?php echo $row['machine_name'] ?>" class="input" /></p>
@@ -497,7 +497,7 @@ tr td:first-child:before {
                 var report = $('textarea[name=report]').val();
                 var cust = $('input[name=cust]').val();
                 var custphone = $('input[name=custphone]').val();
-                var Travel_Time = $('input[name=Travel_Time]').val();
+                var technician_departure = $('input[name=technician_departure]').val();
                 var Submitted_Items = $('textarea[name=Submitted_Items]').val();
                 var Problem_Description = $('textarea[name=Problem_Description]').val();
 
