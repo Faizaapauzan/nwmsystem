@@ -10,53 +10,21 @@
     <!-- To open ajax -->
     <?php
         include 'dbconnect.php';
-        if (isset($_POST['customer_name']) && isset($_POST['job_assign']) && isset($_POST['requested_date'])) { 
-          $customer_name =$_POST['customer_name'];
-          $job_assign =$_POST['job_assign'];
-          $requested_date =$_POST['requested_date'];
-          $query = "SELECT * FROM job_register 
-                    WHERE customer_name ='$customer_name'
-                    AND job_assign ='$job_assign'
-                    AND requested_date ='$requested_date'
-                    ORDER BY customer_name DESC LIMIT 1";
+        if (isset($_POST['jobregister_id'])) { 
+
+          $jobregister_id =$_POST['jobregister_id'];
+          
+          $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
           $query_run = mysqli_query($conn, $query);
-          if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
+          if ($query_run)
+            {
+              while ($row = mysqli_fetch_array($query_run))
+              {
     ?>
 
-      <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-      <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
-      <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
-      
-    <?php } } } ?>
-
-    <!-- To update travel time and rest hour -->
-    <?php
-        include 'dbconnect.php';
-        if (isset($_POST['customer_name']) && isset($_POST['job_assign']) && isset($_POST['requested_date'])) { 
-          $customer_name =$_POST['customer_name'];
-          $job_assign =$_POST['job_assign'];
-          $requested_date =$_POST['requested_date'];
-          $query = "SELECT * FROM job_update 
-                    WHERE customer_name ='$customer_name'
-                    AND tech_name ='$job_assign'
-                    AND requested_date ='$requested_date'
-                    ORDER BY customer_name DESC LIMIT 1";
-          $query_run = mysqli_query($conn, $query);
-          if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
-    ?>
+    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     
     <form action="" method="post">
-
-      <input type="hidden" name="jobupdate_id" value="<?php echo $row['jobupdate_id'] ?>">
-     
-      <label><?php echo $row['tech_name'] ?></label><br>
-      <label><?php echo $row['storeDate'] ?></label><br>
-      <label><?php echo $row['customer_name'] ?></label><br>
-
-      <br>
-      
       <div class="input-box-departure">
         <label for="">Departure Time</label>
         <div class="technician-time">
@@ -85,7 +53,7 @@
           <input type="text" class="technician_leaving" name="tech_in" id="tech_in" value="<?= $row['tech_in']; ?>">
         </div>
       </div>
-      
+    
     </form>
           
     <?php } } } ?>
