@@ -6,20 +6,14 @@ $response = array('success' => false);
 
 if(isset($_POST['job_status']) && $_POST['job_status']!='' || $_POST['job_status']==''
     &&
-   isset($_POST['job_assign']) && $_POST['job_assign']!='' || $_POST['job_assign']==''
-    &&
-   isset($_POST['customer_name']) && $_POST['customer_name']!='' || $_POST['customer_name']==''
-    &&
-   isset($_POST['requested_date']) && $_POST['requested_date']!='' || $_POST['requested_date']=='')
+   isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']=='')
 
     {
         
         $sql = "UPDATE job_register SET 
                        job_status ='".addslashes($_POST['job_status'])."'
                       
-                 WHERE customer_name='".addslashes($_POST['customer_name'])."'
-                 AND job_assign='".addslashes($_POST['job_assign'])."'
-                 AND requested_date='".addslashes($_POST['requested_date'])."'";
+                 WHERE jobregister_id='".addslashes($_POST['jobregister_id'])."'";
         
         if($conn->query($sql))
         {

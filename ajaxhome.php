@@ -214,26 +214,9 @@
               <?php
             } ?>
 
-    <!-- <script>
-    $(document).ready(function() {
 
-    $('#serialnumber').hide();
 
-    $("#serialnumbers").change(function() {
-        var val = $(this).val();
-        
-        if (val == 'Add Serial Number') {
-            $('#serialnumber').show();
-        } else {
-            $('#serialnumber').hide();
-        }
-    }).change();
-
-        });
-
-    </script> -->
-
-             <script>
+        <script>
         $(document).ready(function() {
             $("#brand").on('change', function() {
                 var brandid = $(this).val();

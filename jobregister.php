@@ -1303,10 +1303,9 @@ $("#jobModel").on("change",function(){
         <div class="CodeDropdown" style="padding-top: 20px;">
             <label for="sn"> Serial Number </label>
             <select class="form-select" id="NumberSiriSelect" onchange="GetMachine(this.value)">
-                <option value="">Select Serial Number</option>
-                 <option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>
+                <option value="">Select Serial Number</option>    
             </select>
-             <input type="text" style="width: 300px; height: 33px;" id="NumberSiriInput" name="serialnumber">  
+             <input type="hidden" style="width: 300px; height: 33px;" id="NumberSiriInput" name="serialnumber">  
         </div> 
  
                   
@@ -1361,7 +1360,7 @@ $("#jobModel").on("change",function(){
                     datatype: "html",
                     success: function(data) {
                         $("#JenisMachine").html(data);
-                        $("#NumberSiriSelect").html('<option value="">Select Serial Number</option');
+                        $("#NumberSiriSelect").html('<option value="">Select Serial Number</option>');
 
                     }
                 });
@@ -1385,7 +1384,7 @@ $("#jobModel").on("change",function(){
         });
     </script>
 
-                <script>
+                <!-- <script>
     $(document).ready(function() {
 
     $('#NumberSiriInput').hide();
@@ -1402,7 +1401,7 @@ $("#jobModel").on("change",function(){
 
 });
 
-            </script>
+            </script> -->
 
 
        <script>
