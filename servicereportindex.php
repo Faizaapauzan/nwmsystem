@@ -6,6 +6,8 @@ $response = array('success' => false);
 
 if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']==''
     &&
+   isset($_POST['today_date']) && $_POST['today_date']!='' || $_POST['today_date']==''
+    &&
    isset($_POST['date']) && $_POST['date']!='' || $_POST['date']==''
     &&
    isset($_POST['customer_name']) && $_POST['customer_name']!='' || $_POST['customer_name']==''
@@ -17,6 +19,8 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
    isset($_POST['job_assign']) && $_POST['job_assign']!='' || $_POST['job_assign']==''
     &&
     isset($_POST['assistants']) && $_POST['assistants']!='' || $_POST['assistants']==''
+    &&
+   isset($_POST['technician_departure']) && $_POST['technician_departure']!='' || $_POST['technician_departure']==''
     &&
    isset($_POST['technician_arrival']) && $_POST['technician_arrival']!='' || $_POST['technician_arrival']==''
     &&
@@ -36,24 +40,24 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
     &&
    isset($_POST['custphone']) && $_POST['custphone']!='' || $_POST['custphone']==''
     &&
-   isset($_POST['technician_departure']) && $_POST['technician_departure']!='' || $_POST['technician_departure']==''
-    &&
    isset($_POST['Submitted_Items']) && $_POST['Submitted_Items']!='' || $_POST['Submitted_Items']==''
     &&
    isset($_POST['Problem_Description']) && $_POST['Problem_Description']!='' || $_POST['Problem_Description']=='')
 
     {
         
-        $sql = "INSERT INTO servicereport ( jobregister_id, date, customer_name, cust_phone1, job_name, job_assign, assistants, technician_arrival, technician_leaving, machine_name, serialnumber,
-                                           srvcreportnumber, Issue_By, report, cust, custphone, technician_departure, Submitted_Items, Problem_Description) 
+        $sql = "INSERT INTO servicereport ( jobregister_id, today_date, date, customer_name, cust_phone1, job_name, job_assign, assistants, technician_departure, technician_arrival, technician_leaving, machine_name, serialnumber,
+                                           srvcreportnumber, Issue_By, report, cust, custphone, Submitted_Items, Problem_Description) 
                        
                        VALUES ('".addslashes($_POST['jobregister_id'])."',
+                               '".addslashes($_POST['today_date'])."',
                                '".addslashes($_POST['date'])."',
                                '".addslashes($_POST['customer_name'])."',
                                '".addslashes($_POST['cust_phone1'])."',
                                '".addslashes($_POST['job_name'])."',
                                '".addslashes($_POST['job_assign'])."',
                                '".addslashes($_POST['assistants'])."',
+                               '".addslashes($_POST['technician_departure'])."',
                                '".addslashes($_POST['technician_arrival'])."',
                                '".addslashes($_POST['technician_leaving'])."',
                                '".addslashes($_POST['machine_name'])."',
@@ -63,7 +67,6 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
                                '".addslashes($_POST['report'])."',
                                '".addslashes($_POST['cust'])."',
                                '".addslashes($_POST['custphone'])."',
-                               '".addslashes($_POST['technician_departure'])."',
                                '".addslashes($_POST['Submitted_Items'])."',
                                '".addslashes($_POST['Problem_Description'])."')";
         
