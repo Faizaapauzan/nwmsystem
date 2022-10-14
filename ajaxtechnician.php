@@ -190,66 +190,6 @@ session_start();
     });
   </script>
 
-
-  
-  <!-- Update machine name in assistant table -->
-  <script type="text/javascript">
-      function updtMchnUpdt()
-        {
-          var jobregister_id = $('input[name=jobregister_id]').val();
-          var machine_name = $('input[name=machine_name]').val();
-          
-            if(
-              jobregister_id!='' || jobregister_id=='',
-                machine_name!='' || machine_name=='')
-                
-                {
-                  var formData = {jobregister_id:jobregister_id,
-                                    machine_name:machine_name};
-                  
-                  $.ajax({
-                            url:"machineassistant.php",
-                            type:'POST',
-                            data: formData,
-                            success: function(response)
-                              {
-                                var res = JSON.parse(response);
-                                          console.log(res);
-                              }
-                          });
-                }
-        } 
-  </script>
-
-  <!-- Update machine name in assistant table -->
-  <script type="text/javascript">
-      function updtMchn()
-        {
-          var jobregister_id = $('input[name=jobregister_id]').val();
-          var machine_name = $('input[name=machine_name]').val();
-          
-            if(
-              jobregister_id!='' || jobregister_id=='',
-                machine_name!='' || machine_name=='')
-                
-                {
-                  var formData = {jobregister_id:jobregister_id,
-                                    machine_name:machine_name};
-                  
-                  $.ajax({
-                            url:"machineupdate.php",
-                            type:'POST',
-                            data: formData,
-                            success: function(response)
-                              {
-                                var res = JSON.parse(response);
-                                          console.log(res);
-                              }
-                          });
-                }
-        } 
-  </script>
-
   <!-- ADD INPUT SERIAL NUMBER -->
     <!-- <script>
     $(document).ready(function() {
