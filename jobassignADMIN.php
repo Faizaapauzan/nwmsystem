@@ -56,12 +56,12 @@
   
     </select>
   
-    <!-- <?php
+    <?php
       $DateAssign = date("Y.m.d");
       $_SESSION['storeDate'] = $DateAssign; 
-    ?> -->
+    ?> 
     
-    <!-- <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	 -->
+    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	
   
     <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 

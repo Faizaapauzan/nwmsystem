@@ -378,15 +378,11 @@ tr td:first-child:before {
         //include connection file 
         include_once("dbconnect.php");
 
-        if (isset($_POST['customer_name']) && isset($_POST['machine_name']) && isset($_POST['requested_date'])) {
-            $customer_name =$_POST['customer_name'];
-            $machine_name =$_POST['machine_name'];
-            $requested_date =$_POST['requested_date'];
+       if (isset($_POST['jobregister_id'])) {
+             $jobregister_id =$_POST['jobregister_id'];
           
           $sql2 = "SELECT * FROM `assistants` 
-                   WHERE customer_name='$customer_name'
-                   AND machine_name='$machine_name'
-                   AND requested_date='$requested_date'";
+                   WHERE jobregister_id='$jobregister_id'";
           $queryRecords = mysqli_query($conn, $sql2) or die("Error to fetch Accessories data");
         }
     ?>
