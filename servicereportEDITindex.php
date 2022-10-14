@@ -4,7 +4,9 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']==''
+if(isset($_POST['servicereport_id']) && $_POST['servicereport_id']!='' || $_POST['servicereport_id']==''
+    &&
+    isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jobregister_id']==''
     &&
    isset($_POST['date']) && $_POST['date']!='' || $_POST['date']==''
     &&
@@ -63,7 +65,7 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
                        technician_departure ='".addslashes($_POST['technician_departure'])."',
                        Submitted_Items ='".addslashes($_POST['Submitted_Items'])."',
                        Problem_Description ='".addslashes($_POST['Problem_Description'])."'
-                WHERE  jobregister_id ='".addslashes($_POST['jobregister_id'])."' ";
+                WHERE  servicereport_id ='".addslashes($_POST['servicereport_id'])."' ";
         
         if($conn->query($sql))
         {

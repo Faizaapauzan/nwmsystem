@@ -317,11 +317,10 @@ tr td:first-child:before {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
 
-
-   
     <form action="servicereportEDIT.php" method="post">
 
     <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+    <input type="hidden" id="servicereport_id" name="servicereport_id" value="<?php echo $row['servicereport_id'] ?>">
     
     <div class="SRno">Service Report No:<input type="text" name="srvcreportnumber" id="numbreport" value="<?php echo $row['srvcreportnumber'] ?>" class="serviceno" /></div></center>
     
@@ -481,6 +480,7 @@ tr td:first-child:before {
         <script type="text/javascript">
             function submitFormEdit()
               { 
+                var servicereport_id = $('input[name=servicereport_id]').val();
                 var jobregister_id = $('input[name=jobregister_id]').val();
                 var date = $('input[name=date]').val();
                 var customer_name = $('input[name=customer_name]').val();
@@ -501,7 +501,8 @@ tr td:first-child:before {
                 var Submitted_Items = $('textarea[name=Submitted_Items]').val();
                 var Problem_Description = $('textarea[name=Problem_Description]').val();
 
-                if (jobregister_id!= '' || jobregister_id == '',
+                if (servicereport_id!= '' || servicereport_id == '',
+                    jobregister_id!= '' || jobregister_id == '',
                     date!= '' || date == '',
                     customer_name!= '' || customer_name == '', 
                     cust_phone1!= '' || cust_phone1 == '', 
@@ -517,12 +518,13 @@ tr td:first-child:before {
                     report!= '' || report == '', 
                     cust!= '' || cust == '', 
                     custphone!= '' || custphone == '', 
-                    Travel_Time!= '' || Travel_Time == '', 
+                    technician_departure!= '' || technician_departure == '', 
                     Submitted_Items!= '' || Submitted_Items == '', 
                     Problem_Description!= '' || Problem_Description == '')
 
                   {
-                    var formData = {jobregister_id: jobregister_id,
+                    var formData = {servicereport_id: servicereport_id,
+                                    jobregister_id: jobregister_id,
                                     date: date,
                                     customer_name: customer_name,
                                     cust_phone1: cust_phone1,
@@ -538,7 +540,7 @@ tr td:first-child:before {
                                     report: report,
                                     cust: cust,
                                     custphone: custphone,
-                                    Travel_Time: Travel_Time,
+                                    technician_departure: technician_departure,
                                     Submitted_Items: Submitted_Items,
                                     Problem_Description: Problem_Description};
                                     
