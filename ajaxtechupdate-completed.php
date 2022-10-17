@@ -47,12 +47,12 @@
         <input readonly type="text" class="form-control" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure'] ?>" aria-describedby="basic-addon2">
       </div>
       
-      <label>Arrival Time</label>
+      <label>Time at site</label>
       <div class="input-group mb-3">
         <input readonly type="text" class="form-control" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
       </div>
       
-      <label>Leaving Time</label>
+      <label>Return time</label>
       <div class="input-group mb-3">
         <input readonly type="text" class="form-control" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
       </div>

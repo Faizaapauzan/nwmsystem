@@ -97,7 +97,7 @@
           </div>
       
       <div class="input-box-arrival">
-        <label for="">Arrival Time</label>
+        <label for="">Time at site</label>
         <div class="technician-time">
           <input type="text" class="technician_arrival" name="technician_arrival" id="arrival" value="<?php echo $row['technician_arrival']?>">
           <input type="button" value="Arrival" onclick="test2()">
@@ -117,7 +117,7 @@
       </div>
       
       <div class="input-box-leaving">
-        <label for="">Leaving Time</label>
+        <label for="">Return time</label>
         <div class="technician-time">
           <input type="text" class="technician_leaving" name="technician_leaving" id="leaving" value="<?php echo $row['technician_leaving']?>">
           <input type="button" value="Leaving" onclick="test3()">

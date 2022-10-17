@@ -42,7 +42,7 @@
             $_SESSION['arrivaltime'] = $ArrivalDateTime; 
         ?>
 
-    <label>Departure Time</label>
+    <label>Departure time</label>
     <input type="hidden" name="technician_departure" value="<?php echo $_SESSION["arrivaltime"] ?>">
     <div class="input-group mb-3">
       <input readonly type="text" class="form-control" id="Departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
@@ -125,7 +125,7 @@
       
     </div>
     
-    <label>Arrival Time</label>
+    <label>Time at site</label>
     <input type="hidden" name="technician_arrival" value="<?php echo $_SESSION["arrivaltime"] ?>">
     <div class="input-group mb-3">
       <input readonly type="text" class="form-control" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
@@ -173,7 +173,7 @@
 
     </div>
     
-    <label>Leaving Time</label>
+    <label>Return time</label>
     <input type="hidden" name="technician_leaving" value="<?php echo $_SESSION["arrivaltime"] ?>">
     <div class="input-group mb-3">
       <input readonly type="text" class="form-control" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
