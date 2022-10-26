@@ -40,18 +40,17 @@
                                     <label for=""> <h2>Job Ability</h2> </label></div>
                                     <div class="row" style="margin-right: -22px; margin-left: -6px;"> 
                                     <div class="col"> 
-                                <input type="checkbox" id="ability" name="job_ability[]" value="WIRING" <?php if(in_array("WIRING", $ability1)) { echo "checked"; } ?>><label for="WIRING"> WIRING </label></div>
-                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="PNEUMATIC" <?php if(in_array("PNEUMATIC", $ability1)) { echo "checked"; } ?>><label for="PNEUMATIC"> PNEUMATIC</label></div>
-                                  <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="MECHANIC" <?php if(in_array("MECHANIC", $ability1)) { echo "checked"; } ?>><label for="MECHANIC"> MECHANIC</label></div>
-                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="GLUEPOT" <?php if(in_array("GLUEPOT", $ability1)) { echo "checked"; } ?>><label for="GLUEPOT"> GLUEPOT </label></div>
-                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="PANEL SAW MAC" <?php if(in_array("PANEL SAW MAC", $ability1)) { echo "checked"; } ?>><label for="PANELSAWMAC"> PANEL SAW MAC </label></div>
-                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="EDGE BANDING MAC" <?php if(in_array("EDGE BANDING MAC", $ability1)) { echo "checked"; } ?>><label for="EDGEBANDINGMAC"> EDGE BANDING MAC </label><br></div>
-                                <div class="col">  <input type="checkbox" id="ability" name="job_ability[]" value="JESH" <?php if(in_array("JESH", $ability1)) { echo "checked"; } ?>><label for="JESH"> JESH </label></div>
+                                <input type="checkbox" id="ability" name="job_ability[]" value="Wiring" <?php if(in_array("Wiring", $ability1)) { echo "checked"; } ?>><label for="WIRING"> Wiring </label></div>
+                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="Pneumatic" <?php if(in_array("Pneumatic", $ability1)) { echo "checked"; } ?>><label for="PNEUMATIC"> Pneumatic</label></div>
+                                  <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="Mechanic" <?php if(in_array("Mechanic", $ability1)) { echo "checked"; } ?>><label for="MECHANIC"> Mechanic</label></div>
+                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="Gluepot" <?php if(in_array("Gluepot", $ability1)) { echo "checked"; } ?>><label for="GLUEPOT"> Gluepot </label></div>
+                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="Panel Saw" <?php if(in_array("Panel Saw", $ability1)) { echo "checked"; } ?>><label for="PANELSAWMAC"> Panel Saw </label></div>
+                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="Edge Banding" <?php if(in_array("Edge Banding", $ability1)) { echo "checked"; } ?>><label for="EDGEBANDINGMAC"> Edge Banding </label><br></div>
+                                <div class="col">  <input type="checkbox" id="ability" name="job_ability[]" value="Jesh" <?php if(in_array("Jesh", $ability1)) { echo "checked"; } ?>><label for="JESH"> Jesh </label></div>
                                 <div class="col">  <input type="checkbox" id="ability" name="job_ability[]" value="CNC" <?php if(in_array("CNC", $ability1)) { echo "checked"; } ?>><label for="CNC"> CNC </label></div>
-                                  <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="FINGER JOINT" <?php if(in_array("FINGER JOINT", $ability1)) { echo "checked"; } ?>><label for="FINGER JOINT"> FINGER JOINT </label></div>
+                                  <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="Finger Joint" <?php if(in_array("Finger Joint", $ability1)) { echo "checked"; } ?>><label for="FINGER JOINT"> Finger Joint </label></div>
                                   <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="UV" <?php if(in_array("UV", $ability1)) { echo "checked"; } ?>><label for="UV"> UV </label></div>
-                                <div class="col">  <input type="checkbox" id="ability" name="job_ability[]" value="LOADING / UNLOADING" <?php if(in_array("LOADING / UNLOADING", $ability1)) { echo "checked"; } ?>><label for="LOADINGUNLOADING"> LOADING / UNLOADING </label></div>
-                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="OTHERS" <?php if(in_array("OTHERS", $ability1)) { echo "checked"; } ?>><label for="OTHERS"> OTHERS </label></div>
+                                <div class="col">  <input type="checkbox" id="ability" name="job_ability[]" value="Loading / Unloading" <?php if(in_array("Loading / Unloading", $ability1)) { echo "checked"; } ?>><label for="LOADINGUNLOADING"> Loading / Unloading </label></div>
                                 <!-- <div class="col">  <input type="checkbox" id="vehicle2" name="job_ability[]" value="Car"><label for="vehicle2"> MAC </label></div> -->
                                 </fieldset>
                                 
@@ -75,11 +74,8 @@
         $query_run = mysqli_query($connection, $query);
     }
 
-                        // $query = "UPDATE staff_register SET staff_fullname='$staff_fullname', employee_id='$employee_id', technician_rank='$technician_rank', job_ability='$job_ability' WHERE staffregister_id='$staffregister_id'";
-                        // $query_run = mysqli_query($connection, $query);
-
                         if ($query_run) {
-                            header("location:technicianlist.php");
+                            header("Location:".$_SERVER["HTTP_REFERER"]);
                         } else {
                             echo '<script> alert("Data Not Updated"); </script>';
                         }
@@ -91,7 +87,7 @@
         <?php
         }
     } else {
-        // echo '<script> alert("No Record Found"); </script>';
+
         ?>
         
     <?php
