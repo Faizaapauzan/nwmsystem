@@ -28,27 +28,20 @@ if($cek > 0) {
 
   }
   
-  else if($data['staff_position']=="Manager" AND password_verify($password, $data['password'])){
-
-  $_SESSION['username'] = $username;
-  $_SESSION['staff_position'] = "Manager";
-  
-  header("location:Adminhomepage.php");
- }
  
- else if($data['staff_position']=="Technician" AND $data['technician_rank']=="1st Leader" AND password_verify($password, $data['password'])){
+ else if($data['staff_position']=="Leader" AND $data['technician_rank']=="1st Leader" AND password_verify($password, $data['password'])){
 
   $_SESSION['username'] = $username;
-  $_SESSION['staff_position'] = "Technician";
+  $_SESSION['staff_position'] = "Leader";
   $_SESSION['technician_rank'] = "1st Leader"; 
   
   header("location:technician.php");
  }
  
- else if($data['staff_position']=="Technician" AND $data['technician_rank']=="2nd Leader" AND password_verify($password, $data['password'])){
+ else if($data['staff_position']=="Leader" AND $data['technician_rank']=="2nd Leader" AND password_verify($password, $data['password'])){
 	
   $_SESSION['username'] = $username;
-  $_SESSION['staff_position'] = "Technician";
+  $_SESSION['staff_position'] = "Leader";
   $_SESSION['technician_rank'] = "2nd Leader"; 
   
   header("location:technician.php");	

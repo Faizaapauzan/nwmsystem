@@ -10,7 +10,7 @@ session_start();
 		header("location:index.php?error");
 	}
 	
-	elseif($_SESSION['staff_position']== 'Technician')
+	elseif($_SESSION['staff_position']== 'Leader')
 	{
 
 	}
@@ -54,14 +54,23 @@ session_start();
 	<nav class="navbar1">
 		<div class="wrapper">
 			<ul class="main-nav" id="js-menu">
+				<div class="icons" style="flex: auto; display: inline-flex;">
 				<div class="dropdown1">
 					<a class="nav1-links"><i class="iconify" data-icon="mdi:calendar-clock" style="font-size:37px;"></i></a>
 					<div class="dropdown-content1">
 						<a href="techattendance.php">Attendance</a>
 						<a href="techresthour.php">Rest Hour</a>
 					</div>
-				</div>
+					</div>
+	
+					<div class="icon2">
+					<a href="jobregistertechnician.php" style="color:black;padding: 7px;"><i class="iconify" data-icon="mdi:application-import" style="font-size:34px;"></i></a>
+					</div>
+					</div>
+				
+
 			</ul>
+			
 
 			<!-- AVAILABLE UNAVAILABLE BUTTON -->
 			<!-- <div>
@@ -87,6 +96,7 @@ session_start();
 			<div class="ul2">
 				<a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:32px;"></i></a>
 			</div>
+
 		</div>
 	</nav>
 

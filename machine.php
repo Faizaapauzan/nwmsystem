@@ -252,8 +252,6 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
         }
     ?>
 
-
-
   <!--Add machine-->
     <div id="doubleClick-machine" class="modal">
     <div class="tabs">
@@ -418,14 +416,14 @@ $("#branddrop").on("change",function(){
     <select name="type_id" style="width: 400px; height:40px;" class="form-select" id="type">
     <option value="">Select Machine Type</option>
     </select></div> 
-    <!-- <input type="text" id="type_id" name="type_id">   -->
+
     <div class="CodeDropdown" style="padding-top: 20px;">
     <label for="sn"> Serial Number </label><br>
-    <select style="width: 400px; height:40px;"  class="form-select" id="serialnumbers" onchange="GetMachine(this.value)">
+    <!-- <select style="width: 400px; height:40px;"  class="form-select" id="serialnumbers" onchange="GetMachine(this.value)">
     <option value="">Select Serial Number</option>
     <option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>
-    </select>
-    <input type="text" id="serialnumber" name="serialnumber">  
+    </select> -->
+    <input type="text" id="serialnumber" name="serialnumber" placeholder="Enter Machine Serial Number">  
     </div> 
  
     <div class="CodeDropdown" style="padding-top: 20px;">
@@ -520,7 +518,7 @@ $("#branddrop").on("change",function(){
 		}
 	</script>
 
-            <script>
+            <!-- <script>
     $(document).ready(function() {
 
     $('#serialnumber').hide();
@@ -537,7 +535,7 @@ $("#branddrop").on("change",function(){
 
 });
 
-            </script>
+            </script> -->
 
          <script>
         $(document).ready(function() {
@@ -631,15 +629,12 @@ $("#branddrop").on("change",function(){
         });
         </script>
 
-
-     
+   
 
 </div></div>						
 
 
-        
-
-        <!--Machine-->
+        <!--START MACHINE LIST-->
         <div class="machineList">
         <h1>Machine List</h1>
         <div class="addMachineBtn">

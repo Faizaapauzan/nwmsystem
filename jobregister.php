@@ -215,21 +215,16 @@ include 'dbconnect.php';
 
     <!--Home navigation-->
     <section class="home-section">
-
-		
+	
     <nav>
-                <div class="home-content">
-                      <i class='bx bx-menu' ></i>
-                          <a>
-						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                          </a>
-
-                 </div>
-
+    <div class="home-content">
+    <i class='bx bx-menu' ></i>
+    <a>
+	<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
+    </a>
+    </div>
     </nav>
 	
-
-
 <!--Job Register-->
 
         <div class="jobRegisterContainer">
@@ -238,9 +233,7 @@ include 'dbconnect.php';
                 <div class="step-col"><small>Customer</small></div>
                 <div class="step-col"><small> Job </small></div>
                 <div class="step-col"><small>Machine</small></div>
-              
-      
-            </div>
+        </div>
 
  <!--Add Customer Modal -->
 
@@ -307,7 +300,7 @@ include 'dbconnect.php';
         </form></div></div></div>
 
         
-<script>
+    <script>
     $(document).ready(function () {
         $('#save_cust').click(function () {
             var data = $('#user_form').serialize() + '&save_cust=save_cust';
@@ -584,12 +577,12 @@ $("#branddrop").on("change",function(){
     <input type="text" id="machine_name" name="machine_name" placeholder="Enter Machine Name" required>
     </div>
 
- <div class="CodeDropdown" style="padding-top: 15px;">
+    <div class="CodeDropdown" style="padding-top: 15px;">
     <label for="type"> Customer Name</label><br>
     <select name="customer_id" style="width: 400px; height:40px;" class="form-select" id="NamaCustomer" onchange="GetCustName(this.value)">
     <option value=""> Select Customer</option>
     <?php
-     $querycust = "select * from customer_list";
+    $querycust = "select * from customer_list";
     $result = $conn->query($querycust);
       if ($result->num_rows > 0) {
        while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -948,16 +941,8 @@ $("#ddlModel").on("change",function(){
 						// when the document is ready
 						var myObj = JSON.parse(this.responseText);
 
-						// Returns the response data as a
-						// string and store this array in
-						// a variable assign the value
-						// received to first name input field
-						
 						document.getElementById
 							("customer_code").value = myObj[0];
-						
-						// Assign the value received to
-						// last name input field
                         document.getElementById
 							("customer_name").value = myObj[1];
 						document.getElementById(
@@ -1031,11 +1016,12 @@ if(!$db)
                      }	
                      ?>  
   </select>
+
     <div class="input-box">
      <input type="text" name="job_code" id='jobText' class='form-control' placeholder='Enter Job Code' onchange="GetJob(this.value)" value="" readonly>
     </div></div></div>
     <div class="dropdownCode">
-    <!-- <div class="select"><i class='bx bxs-down-arrow'></i></div> -->
+
     <div class="add"><i class='bx bxs-plus-square' id="btnRegister" onclick="document.getElementById('jobAddForm').style.display='block'"></i></div>
     </div>
     <span style='color:red'> **required </span> 
@@ -1060,8 +1046,8 @@ if(!$db)
 
     <div class="input-box">
     <label for="requested_date" class="details">Request Date</label>
-    <input type="date" id="requestDate" name="requested_date" placeholder="Enter Request Date">
-    <!-- <input readonly type="text" id="requestDate" name="requested_date" value="<?php echo $_SESSION["requestDate"] ?>" placeholder="Enter Request Date"> -->
+    <input type="date" id="requestDate" name="requested_date" placeholder="Enter Request Date" require>
+     <span style='color:red'> **required </span> 
     </div>
     <div class="input-box">
     <label for="delivery_date" class="details">Delivery Date</label>
@@ -1384,24 +1370,6 @@ $("#jobModel").on("change",function(){
         });
     </script>
 
-                <!-- <script>
-    $(document).ready(function() {
-
-    $('#NumberSiriInput').hide();
-
-    $("#NumberSiriSelect").change(function() {
-        var val = $(this).val();
-        
-        if (val == 'Add Serial Number') {
-            $('#NumberSiriInput').show();
-        } else {
-            $('#NumberSiriInput').hide();
-        }
-    }).change();
-
-});
-
-            </script> -->
 
 
        <script>
@@ -1454,11 +1422,6 @@ $("#jobModel").on("change",function(){
 						// when the document is ready
 						var myObj = JSON.parse(this.responseText);
 
-						// Returns the response data as a
-						// string and store this array in
-						// a variable assign the value
-						// received to first name input field
-						
                         document.getElementById
 							("IdMachine").value = myObj[0];
 

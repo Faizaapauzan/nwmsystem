@@ -116,7 +116,7 @@
         <div class="CodeDropdown" style="padding-left: 19px;">
             <label for="brand">Machine Brand</label><br>
             <select style="height: 43px; width: 308px;" onchange="GetBrand(this.value)" class="form-select" id="brand" required>
-                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
+            <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
             </select>
              <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" onchange="GetBrand(this.value)" readonly >  
         </div>
@@ -124,7 +124,7 @@
 
          <div class="CodeDropdown" style="padding-left: 30px;">
             <label for="type"> Machine Type</label><br>
-            <select style="height: 43px; width: 319px;" onchange="GetType(this.value)" class="form-select" id="type" required>
+            <select style="height: 43px; width: 298px;" onchange="GetType(this.value)" class="form-select" id="type" required>
                 <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
             </select>
             <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" onchange="GetType(this.value)" readonly >  
@@ -162,11 +162,8 @@
             <input type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>">  
             <input type="hidden" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
             <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
-            <input type="hidden" style="width: 100%;" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
-      
-
-        </div>
-        <div class="input-box" style="padding-left: 35px;">
+               </div>
+             <div class="input-box" style="margin-left: 20px;">
             <label for="accessories_required"  class="accessories_required">Accessories Required</label>
             <select id="accessories_required" name="accessories_required">
             <option value='' <?php if ($row['accessories_required'] == '') {
@@ -180,13 +177,18 @@
                 } ?>>No</option>
             </select>
         </div>
+            
+            <div class="input-box-address" style="width: 100%;padding-left: 20px;">
+            <label for="">Machine Name</label>
+            <input type="text" style="width: 652px;" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
+            </div>
 
-        <div class="input-box">
+        <div class="input-box" style="margin-left: 9px;">
             <label for="">Job Description</label>
             <textarea name="job_description" class="job_description" rows="3" cols="100" style="width: 300px; height: 63px;"><?php echo $row['job_description']?></textarea>
         </div>
 
-        <div class="input-box">
+        <div class="input-box" style="padding-left: 10px;">
             <label for="job_cancel"  class="job_cancel">Cancel Job:</label>
             <select id="job_cancel" name="job_cancel">
                 <option value='' <?php if ($row['job_cancel'] == '') {

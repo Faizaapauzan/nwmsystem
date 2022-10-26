@@ -150,9 +150,14 @@ session_start();
   <?php } } ?>
   </select>
   <input readonly type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>" onchange="GetMachine(this.value)">  
-  <input readonly type="hidden" class="form-control" id="NameMachine" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 302px;">
   <input readonly type="hidden" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
   <input readonly type="hidden" id="CodeMachine" name="machine_code" value="<?php echo $row['machine_code']?>">
+  </div> 
+
+   <div class="col-md-12" style="background-color: white;width: 331px;">
+  <label for="machinename" class="form-label">Machine Name</label>
+  <input type="text" class="form-control" id="NameMachine" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 302px;">
+
   </div> 
 
   <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>

@@ -3,8 +3,6 @@ session_start();
 
 ?>
 
-
-
 <?php
     $connection = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($connection, 'nwmsystem');
@@ -16,8 +14,6 @@ session_start();
     JOIN machine_type ON machine_list.type_id=machine_type.type_id
     JOIN machine_brand ON machine_type.brand_id=machine_brand.brand_id
     WHERE machine_list.machine_id = $machine_id";
-
-    //  $query = "SELECT * FROM machine_list WHERE machine_id='$machine_id'";
 
     $query_run = mysqli_query($connection, $query);
 
@@ -40,26 +36,18 @@ session_start();
     <div class="input-box">
     <label for="brand">Machine Brand</label><br>
     <select class="form-select" id="brandupdate" required>
-     <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+    <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
         <?php
 
-                $querydrop = "select * from machine_brand";
-                // $query = mysqli_query($con, $qr);
-                $result = $connection->query($querydrop);
-                if ($result->num_rows > 0) {
-                    while ($rows = mysqli_fetch_assoc($result)) {
+        $querydrop = "select * from machine_brand";
+        $result = $connection->query($querydrop);
+        if ($result->num_rows > 0) {
+         while ($rows = mysqli_fetch_assoc($result)) { ?>
 
-                ?>
-
-                <option value="<?php echo $rows['brand_id']; ?>"><?php echo $rows['brandname']; ?></option>
-                <?php
-                    }
-                }
-
-                ?>
+    <option value="<?php echo $rows['brand_id']; ?>"><?php echo $rows['brandname']; ?></option>
+    <?php } } ?>
 
     </select>
-
     </div>
 
     <div class="input-box">
@@ -67,18 +55,16 @@ session_start();
     <select class="form-select" id="typeupdate" required>
     <option value="<?php echo $row['type_id']; ?>"><?php echo $row['type_name']; ?></option>
     </select>
-
     </div>
 
     <div class="input-box">
     <label for="">Serial Number</label>
     <select  class="form-select" id="snupdate" onchange="GetMachineUpd(this.value)">
     <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
-    <option value="Add Serial Number" style="color:blue;">Add Serial Number</option>
+  
     <?php
 
                 $query = "select * from machine_list";
-                // $query = mysqli_query($con, $qr);
                 $result = $connection->query($query);
                 if ($result->num_rows > 0) {
                     while ($rowm = mysqli_fetch_assoc($result)) {
@@ -133,24 +119,7 @@ session_start();
      <button type="submit" name="update" class="btn btn-primary"> Update Data </button>
      </div></form></div></div>
 
-    <script>
-    $(document).ready(function() {
-
-    $('#serialnumberupd').hide();
-
-    $("#snupdate").change(function() {
-        var val = $(this).val();
-        
-        if (val == 'Add Serial Number') {
-            $('#serialnumberupd').show();
-        } else {
-            $('#serialnumberupd').hide();
-        }
-    }).change();
-
-});
-
-            </script>
+   
 
              <script>
         $(document).ready(function() {
@@ -206,12 +175,12 @@ session_start();
 		// assigned to this event
 		function GetMachineUpd(str) {
 			if (str.length == 0) {
-                 document.getElementById("machineId").value = "";
-                 document.getElementById("SerialNumber").value = "";
+                document.getElementById("machineId").value = "";
+                document.getElementById("SerialNumber").value = "";
                 document.getElementById("machineCode").value = "";
 				document.getElementById("machineName").value = "";
-                 document.getElementById("machineDescription").value = "";
-                 document.getElementById("customerName").value = "";
+                document.getElementById("machineDescription").value = "";
+                document.getElementById("customerName").value = "";
 				return;
 			}
 			else {
