@@ -22,6 +22,7 @@ include 'dbconnect.php';
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$hash = password_hash($password, PASSWORD_BCRYPT);
+		$tech_avai = $_POST['tech_avai'];
 		$staff_fullname = $_POST['staff_fullname'];
 		$employee_id   = $_POST['employee_id'];
 		$staff_phone  = $_POST['staff_phone'];
@@ -33,13 +34,14 @@ include 'dbconnect.php';
 		$staffregistercreated_by = $_POST['staffregistercreated_by'];
 		$staffregisterlastmodify_by = $_POST['staffregisterlastmodify_by'];
 
- $sql = "INSERT INTO staff_register (username, password, staff_fullname, employee_id,
+ $sql = "INSERT INTO staff_register (username, password, tech_avai, staff_fullname, employee_id,
      staff_phone, staff_email, staff_department, staff_position, staff_group, technician_rank,
 	 staffregistercreated_by, staffregisterlastmodify_by)
 					
   VALUES ('".addslashes($_POST['username'])."',
         '$hash',
-        '".addslashes($_POST['staff_fullname'])."',
+        '".addslashes($_POST['tech_avai'])."',
+		'".addslashes($_POST['staff_fullname'])."',
         '".addslashes($_POST['employee_id'])."',
         '".addslashes($_POST['staff_phone'])."',
         '".addslashes($_POST['staff_email'])."',
