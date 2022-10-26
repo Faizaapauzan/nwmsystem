@@ -41,9 +41,8 @@
                                     <div class="row" style="margin-right: -22px; margin-left: -6px;"> 
                                     <div class="col"> 
                                 <input type="checkbox" id="ability" name="job_ability[]" value="WIRING" <?php if(in_array("WIRING", $ability1)) { echo "checked"; } ?>><label for="WIRING"> WIRING </label></div>
-                                 <div class="col"> 
-                                 <input type="checkbox" id="ability" name="job_ability[]" value="PNEUMATIC" <?php if(in_array("PNEUMATIC", $ability1)) { echo "checked"; } ?>><label for="PNEUMATIC"> PNEUMATIC</label></div>
-                                 <input type="checkbox" id="ability" name="job_ability[]" value="MECHANIC" <?php if(in_array("MECHANIC", $ability1)) { echo "checked"; } ?>><label for="MECHANIC"> MECHANIC</label></div>
+                                 <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="PNEUMATIC" <?php if(in_array("PNEUMATIC", $ability1)) { echo "checked"; } ?>><label for="PNEUMATIC"> PNEUMATIC</label></div>
+                                  <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="MECHANIC" <?php if(in_array("MECHANIC", $ability1)) { echo "checked"; } ?>><label for="MECHANIC"> MECHANIC</label></div>
                                  <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="GLUEPOT" <?php if(in_array("GLUEPOT", $ability1)) { echo "checked"; } ?>><label for="GLUEPOT"> GLUEPOT </label></div>
                                  <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="PANEL SAW MAC" <?php if(in_array("PANEL SAW MAC", $ability1)) { echo "checked"; } ?>><label for="PANELSAWMAC"> PANEL SAW MAC </label></div>
                                  <div class="col"> <input type="checkbox" id="ability" name="job_ability[]" value="EDGE BANDING MAC" <?php if(in_array("EDGE BANDING MAC", $ability1)) { echo "checked"; } ?>><label for="EDGEBANDINGMAC"> EDGE BANDING MAC </label><br></div>
