@@ -10,19 +10,19 @@ if ($staffregister_id !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($con, "SELECT username, technician_rank, staff_position FROM staff_register WHERE staffregister_id='$staffregister_id'");
+	$query = mysqli_query($con, "SELECT username, technician_rank, staff_group FROM staff_register WHERE staffregister_id='$staffregister_id'");
 
 	$row = mysqli_fetch_array($query);
 
 	// Get the first name
     $username = $row["username"];
 	$technician_rank = $row["technician_rank"];
-    $staff_position = $row["staff_position"];
+    $staff_group = $row["staff_group"];
 
 }
 
 // Store it in a array
-$result = array("$username" , "$technician_rank", "$staff_position");
+$result = array("$username" , "$technician_rank", "$staff_group");
 
 // Send in JSON encoded form
 $myJSON = json_encode($result);

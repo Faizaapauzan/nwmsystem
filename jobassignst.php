@@ -39,11 +39,11 @@
     
       <?php
           include "dbconnect.php";  // Using database connection file here
-          $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' AND tech_avai = '0'
+          $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_group, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' AND tech_avai = '0'
           OR
           technician_rank = '2nd Leader' AND tech_avai = '0'
           OR
-          staff_position='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
+          staff_group='storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
           while($data = mysqli_fetch_array($records))
             {
               echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
@@ -54,7 +54,7 @@
       <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
       <input type="hidden" name="job_assign" id='username' value="<?php echo $row['job_assign']?>">
       <input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>
-      <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>      
+      <input type="hidden" name="staff_group" id='staff_group' value="<?php echo $row['staff_group']?>" readonly>      
     
     </select>
     
@@ -151,10 +151,8 @@
         <select name="assistant[]" class="form-control multiple-select" multiple="multiple">
 		        
           <?php
-              $query = "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register 
-                        WHERE staff_position = 'Technician' AND tech_avai = '0'
-                        OR
-                        staff_position = 'General Worker' AND tech_avai = '0' ORDER BY staffregister_id ASC";
+              $query = "SELECT staffregister_id, username, staff_group, technician_rank, tech_avai FROM staff_register 
+                        WHERE staff_group = 'Technician' AND tech_avai = '0' ORDER BY staffregister_id ASC";
               $query_run = mysqli_query($con, $query);
               if(mysqli_num_rows($query_run) > 0)
                 {
@@ -249,7 +247,7 @@
         if (str.length == 0) {
           document.getElementById("username").value = "";
           document.getElementById("technician_rank").value = "";
-          document.getElementById("staff_position").value = "";
+          document.getElementById("staff_group").value = "";
           return;
         }
         
@@ -274,7 +272,7 @@
               document.getElementById(
                 "technician_rank").value = myObj[1];
                 document.getElementById(
-                "staff_position").value = myObj[2];
+                "staff_group").value = myObj[2];
               }
             };
             // xhttp.open("GET", "filename", true);
