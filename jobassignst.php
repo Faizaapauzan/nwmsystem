@@ -46,7 +46,8 @@
           staff_position='Storekeeper' ORDER BY staffregister_id ASC");  // Use select query here 
           while($data = mysqli_fetch_array($records))
             {
-              echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>"; 
+              echo "<option class='" . $data['tech_avai']."' value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+              // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
             }	
       ?>
       
@@ -236,6 +237,50 @@
           }
         });
       });
+  </script>
+  
+  <script>
+      // onkeyup event will occur when the user
+		  // release the key and calls the function
+		  // assigned to this event
+		  function GetJobAss(str) {
+        if (str.length == 0) {
+          document.getElementById("username").value = "";
+          document.getElementById("technician_rank").value = "";
+          document.getElementById("staff_position").value = "";
+          return;
+        }
+        
+        else {
+          // Creates a new XMLHttpRequest object
+				  var xmlhttp = new XMLHttpRequest();
+				  xmlhttp.onreadystatechange = function () {
+            // Defines a function to be called when
+					  // the readyState property changes
+            if (this.readyState == 4 && this.status == 200) {
+              // Typical action to be performed
+						  // when the document is ready
+              var myObj = JSON.parse(this.responseText);
+              // Returns the response data as a
+						  // string and store this array in
+						  // a variable assign the value
+						  // received to first name input field
+              document.getElementById
+              ("username").value = myObj[0];
+              // Assign the value received to
+              // last name input field
+              document.getElementById(
+                "technician_rank").value = myObj[1];
+                document.getElementById(
+                "staff_position").value = myObj[2];
+              }
+            };
+            // xhttp.open("GET", "filename", true);
+            xmlhttp.open("GET", "fetchtechnicianrank.php?staffregister_id=" + str, true);
+            // Sends the request to the server
+            xmlhttp.send();
+          }
+        }
   </script>
   
   <script>
