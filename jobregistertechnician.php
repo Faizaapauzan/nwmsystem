@@ -408,6 +408,15 @@ $("#jobModel").on("change",function(){
 		}
 	</script>
 
+<?php
+
+$today_date = date("Y.m.d");
+$_SESSION['storeDate'] = $today_date;
+?>
+
+<input readonly type="hidden" id="requestDate" name="requested_date" value="<?php echo $_SESSION["storeDate"] ?>">
+
+
     <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>

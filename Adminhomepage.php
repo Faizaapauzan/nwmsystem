@@ -1230,27 +1230,27 @@ if(!isset($_SESSION['username']))
                     <!-- Hamir -->
                     <div class="box" id="myModal">
                         <div class="left-side">
-                            <div class="box_topic">Amir</div>
+                            <div class="box_topic">Hamir</div>
                                 
                                     <?php
                                         include 'dbconnect.php';
                                         $results = $conn->query("SELECT * FROM job_register WHERE
-                                                                (job_assign = 'Amir' AND job_status = '' AND job_cancel = ''
+                                                                (job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
                                                                     OR
-                                                                 job_assign = 'Amir' AND job_status = 'Doing' AND job_cancel = ''
+                                                                 job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel = ''
                                                                     OR
-                                                                 job_assign = 'Amir' AND job_status = 'Ready' AND job_cancel = ''
+                                                                 job_assign = 'Hamir' AND job_status = 'Ready' AND job_cancel = ''
                                                                     OR
-                                                                 job_assign = 'Amir' AND job_status = 'Pending' AND job_cancel = '')
+                                                                 job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel = '')
                                                                  ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                         $numRow = "SELECT * FROM `job_register`WHERE
-                                                            job_assign = 'Amir' AND job_status = '' AND job_cancel = ''
+                                                            job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
                                                                 OR
-                                                            job_assign = 'Amir' AND job_status = 'Doing' AND job_cancel = ''
+                                                            job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel = ''
                                                                 OR
-                                                            job_assign = 'Amir' AND job_status = 'Ready' AND job_cancel = ''
+                                                            job_assign = 'Hamir' AND job_status = 'Ready' AND job_cancel = ''
                                                                 OR
-                                                            job_assign = 'Amir' AND job_status = 'Pending' AND job_cancel = ''";
+                                                            job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel = ''";
                                         $numRow_run = mysqli_query ($conn,$numRow);
                                         if ($row_Total = mysqli_num_rows($numRow_run)) {
                                             echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
