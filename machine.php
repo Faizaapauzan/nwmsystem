@@ -438,7 +438,7 @@ $("#branddrop").on("change",function(){
 
  <div class="CodeDropdown" style="padding-top: 15px;">
     <label for="type"> Customer Name</label><br>
-    <select name="customer_id" style="width: 400px; height:40px;" class="form-select" id="customername" onchange="GetCustName(this.value)">
+    <select style="width: 400px; height:40px;" class="form-select" id="customername" onchange="GetCustName(this.value)">
     <option value=""> Select Customer</option>
     <?php
      $querycust = "select * from customer_list";
@@ -568,7 +568,6 @@ $("#branddrop").on("change",function(){
              var machine_code = $('input[name=machine_code]').val();
              var machine_name = $('input[name=machine_name]').val();
              var customer_name = $('input[name=customer_name]').val();
-             var customer_id = $('select[name=customer_id]').val();
              var purchase_date = $('input[name=purchase_date]').val();
              var machine_description = $('input[name=machine_description]').val();
              var machinelistcreated_by = $('input[name=machinelistcreated_by]').val();
@@ -580,7 +579,6 @@ $("#branddrop").on("change",function(){
                machine_code!='' || machine_code=='',
                machine_name!='' || machine_name=='',
                customer_name!='' || customer_name=='',
-               customer_id!='' || customer_id=='',
                purchase_date!='' || purchase_date=='',
                machine_description!='' || machine_description=='',
                machinelistcreated_by!='' || machinelistcreated_by=='',
@@ -593,7 +591,6 @@ $("#branddrop").on("change",function(){
                   machine_code: machine_code,
                   machine_name: machine_name,
                   customer_name: customer_name,
-                   customer_id: customer_id,
                   purchase_date: purchase_date,
                   machine_description: machine_description,
                   machinelistcreated_by: machinelistcreated_by,
