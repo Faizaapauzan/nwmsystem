@@ -291,8 +291,8 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
         <label for="department" class="details">Department</label>
         <select id="department" name="staff_department">
                   <option value=""></option>
-        <option value="Management">Maintenance</option>
-        <option value="Maintenance">Management</option>
+        <option value="Management">Management</option>
+        <option value="Maintenance">Maintenance</option>
         <option value="Store">Store</option>
        
         </select>
@@ -302,9 +302,9 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
         <label for="position" class="details">Position</label>
         <select id="position" name="staff_position">
  <option value=""></option>
-        <option value="Admin">Leader</option>
-        <option value="Manager">Assistant Leader</option>
-        <option value="Technician">Admin</option>
+        <option value="Leader">Leader</option>
+        <option value="Assistant Leader">Assistant Leader</option>
+        <option value="Admin">Admin</option>
         <option value="Storekeeper">Storekeeper</option>
         </select>
         </div>
@@ -321,7 +321,7 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
 
         <div class="input-box">
         <label for="techGroup" class="details">Technician Group</label>
-        <select id="techGroup" name="technician_rank">
+        <select id="techGroup" name="technician_group">
         <option value=""></option>
         <option value="1st Leader">1st Leader</option>
         <option value="2nd Leader">2nd Leader</option>

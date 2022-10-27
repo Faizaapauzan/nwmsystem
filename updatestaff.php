@@ -56,9 +56,9 @@
                                 <div class="input-box">
                                     <label for="position">Position</label>
                                     <select type="text" id="staff_position" name="staff_position" value="<?php echo $row['staff_position'] ?>">
+            <option value="Leader" <?php if($row['staff_position'] == "Leader") { echo "SELECTED"; } ?>>Leader</option>
+            <option value="Assistant Leader" <?php if($row['staff_position'] == "Assistant Leader") { echo "SELECTED"; } ?>>Assistant Leader</option>
             <option value="Admin" <?php if($row['staff_position'] == "Admin") { echo "SELECTED"; } ?>>Admin</option>
-            <option value="Manager" <?php if($row['staff_position'] == "Manager") { echo "SELECTED"; } ?>>Manager</option>
-            <option value="Technician" <?php if($row['staff_position'] == "Technician") { echo "SELECTED"; } ?>>Technician</option>
             <option value="Storekeeper" <?php if($row['staff_position'] == "Storekeeper") { echo "SELECTED"; } ?>>Storekeeper</option>
                                     </select>
                                 </div>
@@ -68,13 +68,24 @@
                                     <select type="text" id="staff_group" name="staff_group" value="<?php echo $row['staff_group'] ?>">
             <option value="" <?php if($row['staff_group'] == "") { echo "SELECTED"; } ?>></option>
             <option value="Management" <?php if($row['staff_group'] == "Management") { echo "SELECTED"; } ?>>Management</option>
-            <option value="Service" <?php if($row['staff_group'] == "Service") { echo "SELECTED"; } ?>>Service</option>
+            <option value="Technician" <?php if($row['staff_group'] == "Technician") { echo "SELECTED"; } ?>>Technician</option>
             <option value="Storekeeper" <?php if($row['staff_group'] == "Storekeeper") { echo "SELECTED"; } ?>>Storekeeper</option>
                                     </select>
                                 </div>
 
-                                       <div class="input-box">
+                                                                       <div class="input-box">
         <label for="techGroup" class="details">Technician Group</label>
+        <select id="techGroup" name="technician_group" value="<?php echo $row['technician_group'] ?>">
+        <option value='' <?php if ($row['technician_group'] == '') { echo "SELECTED"; } ?>></option>
+        <option value="1st Leader" <?php if ($row['technician_group'] == "1st Leader") { echo "SELECTED"; } ?>>1st Leader</option>
+        <option value="2nd Leader" <?php if ($row['technician_group'] == "2nd Leader") { echo "SELECTED";} ?>>2nd Leader</option>
+        <option value="Assistant Leader" <?php if ($row['technician_group'] == "Assistant Leader") { echo "SELECTED"; } ?>>Assistant Leader</option>
+        </select>
+        </div> 
+
+
+        <div class="input-box">
+        <label for="techGroup" class="details">Technician Rank</label>
         <select id="techGroup" name="technician_rank" value="<?php echo $row['technician_rank'] ?>">
         <option value='' <?php if ($row['technician_rank'] == '') { echo "SELECTED"; } ?>></option>
         <option value="1st Leader" <?php if ($row['technician_rank'] == "1st Leader") { echo "SELECTED"; } ?>>1st Leader</option>

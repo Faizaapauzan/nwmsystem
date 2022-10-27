@@ -30,12 +30,13 @@ include 'dbconnect.php';
 		$staff_department  = $_POST['staff_department'];
 		$staff_position = $_POST['staff_position'];
 		$staff_group  = $_POST['staff_group'];
+		  $technician_group = $_POST['technician_group'];
 		$technician_rank = $_POST['technician_rank'];
 		$staffregistercreated_by = $_POST['staffregistercreated_by'];
 		$staffregisterlastmodify_by = $_POST['staffregisterlastmodify_by'];
 
  $sql = "INSERT INTO staff_register (username, password, tech_avai, staff_fullname, employee_id,
-     staff_phone, staff_email, staff_department, staff_position, staff_group, technician_rank,
+     staff_phone, staff_email, staff_department, staff_position, staff_group, technician_group, technician_rank,
 	 staffregistercreated_by, staffregisterlastmodify_by)
 					
   VALUES ('".addslashes($_POST['username'])."',
@@ -48,6 +49,7 @@ include 'dbconnect.php';
         '".addslashes($_POST['staff_department'])."',
         '".addslashes($_POST['staff_position'])."',
         '".addslashes($_POST['staff_group'])."',
+		'".addslashes($_POST['technician_group'])."',
         '".addslashes($_POST['technician_rank'])."',
 		'".addslashes($_POST['staffregistercreated_by'])."',
 		'".addslashes($_POST['staffregisterlastmodify_by'])."')";
