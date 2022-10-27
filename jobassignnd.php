@@ -43,11 +43,11 @@
       
           <?php
               include "dbconnect.php";  // Using database connection file here
-              $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_group, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' AND tech_avai = '0'
+              $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE technician_rank = '1st Leader' AND tech_avai = '0'
               OR
               technician_rank = '2nd Leader' AND tech_avai = '0'
               OR
-              staff_group='storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here
+              staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here
               while($data = mysqli_fetch_array($records))
                 {
                   echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." " . $data['tech_avai']."</option>";  // displaying data in option menu
@@ -58,7 +58,7 @@
           <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
           <input type="hidden" name="job_assign" id='username' value="<?php echo $row['job_assign']?>">
           <input type="hidden" name="technician_rank" id='technician_rank' value="<?php echo $row['technician_rank']?>" readonly>  
-          <input type="hidden" name="staff_group" id='staff_group' value="<?php echo $row['staff_group']?>" readonly>      
+          <input type="hidden" name="staff_position" id='staff_position' value="<?php echo $row['staff_position']?>" readonly>      
           </select>  
     </div>
 <!-- ASSIGN TECHNICIAN -->
@@ -213,7 +213,7 @@
 			if (str.length == 0) {
 				document.getElementById("username").value = "";
                 document.getElementById("technician_rank").value = "";
-                 document.getElementById("staff_group").value = "";
+                 document.getElementById("staff_position").value = "";
                  return;
         }
         
@@ -238,7 +238,7 @@
               document.getElementById(
                 "technician_rank").value = myObj[1];
               document.getElementById(
-                "staff_group").value = myObj[2];
+                "staff_position").value = myObj[2];
               }
             };
             // xhttp.open("GET", "filename", true);

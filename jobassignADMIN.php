@@ -40,7 +40,7 @@
          OR
          technician_rank = '2nd Leader' AND tech_avai = '0'
          OR
-         staff_position='storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here 
+         staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here 
         echo "<option></option>";
         while($data = mysqli_fetch_array($records))
         {
