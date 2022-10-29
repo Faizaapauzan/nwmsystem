@@ -312,7 +312,7 @@ tr td:first-child:before {
     </div>
 
     <?php
-        $connection = mysqli_connect("localhost", "root", "");
+        $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
         $db = mysqli_select_db($connection, 'nwmsystem');
                 
         if (isset($_POST['servicereport_id'])) {
@@ -469,7 +469,7 @@ function resizeTextArea($element) {
     </section>
     <br/>
     <?php
-        $connection = mysqli_connect("localhost", "root", "");
+        $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
         $db = mysqli_select_db($connection, 'nwmsystem');
                 
         if (isset($_POST['servicereport_id'])) {

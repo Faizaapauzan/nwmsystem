@@ -5,7 +5,7 @@ $brand_id = $_REQUEST['brand_id'];
 // $machine_code = $_REQUEST['machine_code'];
 
 // Database connection
-$con = mysqli_connect("localhost", "root", "", "nwmsystem");
+$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
 
 if ($brand_id !== "") {
 	

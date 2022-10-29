@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "nwmsystem");
+$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
 
 // Get the user id
 // $machine_id = $_REQUEST['machine_id'];

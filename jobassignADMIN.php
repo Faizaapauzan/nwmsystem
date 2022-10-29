@@ -9,7 +9,7 @@
 <body>
 
 <?php
-    $connection = mysqli_connect("localhost", "root", "");
+    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
     $db = mysqli_select_db($connection, 'nwmsystem');
 
     if (isset($_POST['jobregister_id'])) {
