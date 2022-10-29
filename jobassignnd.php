@@ -67,7 +67,7 @@
     <div class="assistants" id="multipselect">
       
       <?php
-          $con = mysqli_connect("localhost","root","","nwmsystem");
+          $con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
           if (isset($_POST['jobregister_id'])) {
             $jobregister_id =$_POST['jobregister_id'];
             

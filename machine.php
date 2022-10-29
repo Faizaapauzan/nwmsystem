@@ -245,7 +245,7 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
 
     
     <?php
-        $db = mysqli_connect("localhost","root","","nwmsystem");
+        $db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
         if(!$db)
         {
             die("Connection failed: " . mysqli_connect_error());

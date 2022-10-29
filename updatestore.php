@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost","root","","nwmsystem");
+$con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
 
 if(isset($_POST['update_store']))
 {
