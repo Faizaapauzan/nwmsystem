@@ -248,11 +248,11 @@ $_SESSION['storeDate'] = $today_date;
     <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 145px; outline: none; font-size: 17px;" id="jobassistantto1" name="Ass_1" onchange="GetAssistant(this.value)"><option value=" "><?php echo $row['Ass_1']?></option>
         <?php
             include "dbconnect.php";  // Using database connection file here
-            $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+            $records = mysqli_query($conn, "SELECT staff_position, staffregister_id, username, staff_group, tech_avai FROM staff_register WHERE staff_group = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
             echo "<option></option>";
             while($data = mysqli_fetch_array($records))
               {
-                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. " " . $data['tech_avai']."</option>";  // displaying data in option menu
+                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'>" .$data['username']. "</option>";  // displaying data in option menu
               }
         ?>
     </select>
@@ -301,7 +301,7 @@ $_SESSION['storeDate'] = $today_date;
       <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 145px; outline: none; font-size: 17px;" id="jobassistantto2" name="Ass_2" onchange="GetAssistant(this.value)"><option value=" "><?php echo $row['Ass_2']?></option>
           <?php
               include "dbconnect.php";  // Using database connection file here
-              $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+              $records = mysqli_query($conn, "SELECT staff_position, staffregister_id, username, staff_group FROM staff_register WHERE staff_group = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
               echo"<option></option>";
               while($data = mysqli_fetch_array($records))
                 {
@@ -354,11 +354,11 @@ $_SESSION['storeDate'] = $today_date;
     <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 145px; outline: none; font-size: 17px;" id="jobassistantto3" name="Ass_3" onchange="GetAssistant(this.value)"> <option value=" "><?php echo $row['Ass_3']?></option>
         <?php
             include "dbconnect.php";  // Using database connection file here
-            $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+            $records = mysqli_query($conn, "SELECT staff_position, staffregister_id, username, staff_group, tech_avai FROM staff_register WHERE staff_group = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
             echo "<option></option>";
             while($data = mysqli_fetch_array($records))
               {
-                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'> " .$data['username']. " " . $data['tech_avai']."</option>";  // displaying data in option menu
+                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'> " .$data['username']. "</option>";  // displaying data in option menu
               }
         ?>
     </select>
@@ -407,11 +407,11 @@ $_SESSION['storeDate'] = $today_date;
     <select style="border-color: #081d45; border-radius: 5px; border: 1px solid #ccc; border-bottom-width: 2px; width: 145px; outline: none; font-size: 17px;" id="jobassistantto4" name="Ass_4" onchange="GetAssistant(this.value)"> <option value=" "><?php echo $row['Ass_4']?></option>
         <?php
             include "dbconnect.php";  // Using database connection file here
-            $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, tech_avai FROM staff_register WHERE staff_position = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
+            $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, staff_group, tech_avai FROM staff_register WHERE staff_group = 'technician' ORDER BY staffregister_id ASC");  // Use select query here
             echo "<option></option>";
             while($data = mysqli_fetch_array($records))
               {
-                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'> " .$data['username']. " " . $data['tech_avai']."</option>";  // displaying data in option menu
+                echo "<option class='" . $data['tech_avai']."' value='". $data['username'] ."'> " .$data['username']. "</option>";  // displaying data in option menu
               }
         ?>
     </select>
