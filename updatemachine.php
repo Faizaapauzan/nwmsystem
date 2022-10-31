@@ -130,14 +130,9 @@ include 'dbconnect.php';
 
 
 
-    <input type="hidden" id="custname" name="customer_name" onchange="GetCustomerName(this.value)">
+    <input type="hidden" id="custname" name="customer_name" onchange="GetCustomerName(this.value)" value="<?php echo $row['customer_name']?>">
 
 
-<!-- 
-    <div class="input-box">
-    <label for="" class="details"></label>
-    <input type="hidden" id="" name="" class="form-control" value="">
-    </div> -->
 
     <div class="input-box">
     <label for="">Machine Description</label>
