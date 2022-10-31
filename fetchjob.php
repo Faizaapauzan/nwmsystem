@@ -4,13 +4,13 @@
 $job_code = $_REQUEST['job_code'];
 
 // Database connection
-$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
+include 'dbconnect.php';
 
 if ($job_code !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($con, "SELECT job_name, job_description FROM jobtype_list WHERE job_code='$job_code'");
+	$query = mysqli_query($conn, "SELECT job_name, job_description FROM jobtype_list WHERE job_code='$job_code'");
 
 	$row = mysqli_fetch_array($query);
 

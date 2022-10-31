@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
+include 'dbconnect.php';
 
 if(isset($_POST['save']))
 {
@@ -22,7 +22,7 @@ if(isset($_POST['save']))
       
 
     $query = "INSERT INTO `job_accessories`(`jobregister_id`, `accessories_id`, `accessories_code`,`accessories_name`,`accessories_uom`, `accessories_quantity`) VALUES ('$jobregister_id','$s_accessories_id','$s_accessories_code','$s_accessories_name','$s_accessories_uom','$s_accessories_quantity')";
-    $query_run = mysqli_query($con, $query);
+    $query_run = mysqli_query($conn, $query);
 
     }
 
@@ -33,7 +33,7 @@ if(isset($_POST['save']))
     else
     {
      echo "ERROR: Hush! Sorry $query. "
-            . mysqli_error($con);
+            . mysqli_error($conn);
     }
 }
 ?>

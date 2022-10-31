@@ -9,15 +9,14 @@
 <body>
 
 <?php
-    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-    $db = mysqli_select_db($connection, 'nwmsystem');
+include 'dbconnect.php';
 
     if (isset($_POST['jobregister_id'])) {
         $jobregister_id =$_POST['jobregister_id'];
 
         $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
     
-        $query_run = mysqli_query($connection, $query);
+        $query_run = mysqli_query($conn, $query);
         if ($query_run) {
         while ($row = mysqli_fetch_array($query_run)) {
 ?>
@@ -35,7 +34,7 @@
       
       <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE 
+        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE 
          technician_rank = '1st Leader' AND tech_avai = '0'
          OR
          technician_rank = '2nd Leader' AND tech_avai = '0'
@@ -101,12 +100,12 @@
 <div class="assistants" id="multipleassist">
   
   <?php
-      $con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
+     include 'dbconnect.php';
 
       if (isset($_POST['jobregister_id'])) {
       $jobregister_id =$_POST['jobregister_id'];
       $fetchquery = "SELECT username FROM assistants WHERE jobregister_id='$jobregister_id' ";
-      $fetchquery_run = mysqli_query($con, $fetchquery);
+      $fetchquery_run = mysqli_query($conn, $fetchquery);
       $JobAssistant = [];
       foreach($fetchquery_run as $fetchrow)
         {
@@ -150,7 +149,7 @@
       <?php
            $query = "SELECT staffregister_id, username, staff_group, technician_rank, tech_avai FROM staff_register 
                         WHERE staff_group = 'Technician' AND tech_avai = '0' ORDER BY staffregister_id ASC";
-           $query_run = mysqli_query($con, $query);
+           $query_run = mysqli_query($conn, $query);
            if(mysqli_num_rows($query_run) > 0)
             {
               foreach ($query_run as $rowstaff){

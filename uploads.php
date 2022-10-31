@@ -1,13 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "nwmsystem";
 
-    $con = mysqli_connect($servername, $username,$password,$database);
+    include 'dbconnect.php';
 
-    if ($con->connect_error) {
-        die("Connection failed". $con->connect_error);
+    if ($conn->connect_error) {
+        die("Connection failed". $conn->connect_error);
     }
 
         $response = array('success' => false);
@@ -39,7 +35,7 @@ $database = "nwmsystem";
 
                          $query = "INSERT INTO `technician_photoupdate`(`jobregister_id`, `file_name`,`description`) VALUES ('$jobregister_id','$newFile','$description')";
 
-                        mysqli_query($con, $query);
+                        mysqli_query($conn, $query);
                     }
                 }
             }

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost", "Ithink", "iThink3399*");
+include 'dbconnect.php';
 
 $response = array('success' => false);
 
@@ -28,13 +28,13 @@ if(isset($_POST['update_acc']))
     $s_accessories_uom = $accessories_uom[$index];
     $s_accessories_quantity = $accessories_quantity[$index];
 
-    $jobregister_id = mysqli_insert_id($con);
+    $jobregister_id = mysqli_insert_id($conn);
 
     //  $query = "INSERT INTO `job_accessories`(`jobregister_id`, `accessories_id`, `accessories_code`,`accessories_name`, `accessories_quantity`) values('$jobregister_id','$s_accessories_id','$s_accessories_code','$s_accessories_name','$s_accessories_quantity', (SELECT jobregister_id FROM job_register WHERE jobregister_id  = '$jobregister_id'))";
     
    $sql = "INSERT INTO `job_accessories`(`jobregister_id`, `accessories_id`, `accessories_code`,`accessories_name`,`accessories_uom`, `accessories_quantity`) VALUES ('$jobid','$s_accessories_id','$s_accessories_code','$s_accessories_name','$s_accessories_uom','$s_accessories_quantity')";
     //  $query = "INSERT INTO `job_accessories`(`accessories_id`, `accessories_code`,`accessories_name`, `accessories_quantity`) VALUES ('$s_accessories_id','$s_accessories_code','$s_accessories_name','$s_accessories_quantity')";
-   $query=mysqli_query($con,$sql) or die(mysqli_error($con));
+   $query=mysqli_query($conn,$sql) or die(mysqli_error($conn));
 
 
     }

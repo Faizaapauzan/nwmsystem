@@ -312,13 +312,12 @@ tr td:first-child:before {
     </div>
 
     <?php
-        $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-        $db = mysqli_select_db($connection, 'nwmsystem');
+        include 'dbconnect.php';
                 
         if (isset($_POST['servicereport_id'])) {
             $servicereport_id =$_POST['servicereport_id'];
             $query = ("SELECT * FROM servicereport WHERE servicereport_id='$servicereport_id'");
-            $query_run = mysqli_query($connection, $query);
+            $query_run = mysqli_query($conn, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
@@ -469,13 +468,12 @@ function resizeTextArea($element) {
     </section>
     <br/>
     <?php
-        $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-        $db = mysqli_select_db($connection, 'nwmsystem');
+       include 'dbconnect.php';
                 
         if (isset($_POST['servicereport_id'])) {
             $servicereport_id =$_POST['servicereport_id'];
             $query = ("SELECT * FROM servicereport WHERE servicereport_id ='$servicereport_id'");
-            $query_run = mysqli_query($connection, $query);
+            $query_run = mysqli_query($conn, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>

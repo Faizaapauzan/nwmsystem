@@ -12,10 +12,10 @@ session_start();
 <?php
 if(isset($_POST["accessories_id"]))
 {
- $connect = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
+include 'dbconnect.php';
  $output = '';
  $query = "SELECT * FROM accessories_list WHERE accessories_id='".$_POST["accessories_id"]."'";
- $result = mysqli_query($connect, $query);
+ $result = mysqli_query($conn, $query);
  while($row = mysqli_fetch_array($result))
  {
   $output = '

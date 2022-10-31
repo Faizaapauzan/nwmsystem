@@ -5,15 +5,14 @@
 <body>
 
 <?php
-    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-    $db = mysqli_select_db($connection, 'nwmsystem');
+include 'dbconnect.php';
 
     if (isset($_POST['jobregister_id'])) {
         $jobregister_id =$_POST['jobregister_id'];
 
         $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
     
-        $query_run = mysqli_query($connection, $query);
+        $query_run = mysqli_query($conn, $query);
         if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
                 ?>

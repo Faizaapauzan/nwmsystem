@@ -1,11 +1,10 @@
     <?php
-    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-    $db = mysqli_select_db($connection, 'nwmsystem');
+    include 'dbconnect.php';
 
     $customer_id = $_POST['customer_id'];
 
     $query = "SELECT * FROM customer_list WHERE customer_id='$customer_id' ";
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
         while ($row = mysqli_fetch_array($query_run)) {
@@ -31,7 +30,7 @@
     $customer_id = $_POST['customer_id'];
 
     $query = "DELETE FROM customer_list WHERE customer_id='$customer_id'";
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($conn, $query);
 
     if($query_run)
     {

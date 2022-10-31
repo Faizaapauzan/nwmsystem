@@ -1,21 +1,14 @@
 <?php
-$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
-
-// Get the user id
-// $machine_id = $_REQUEST['machine_id'];
-// $machine_code = $_REQUEST['machine_code'];
-
-// Database connection
+include 'dbconnect.php';
 
 
-// if ($machine_id !== "") {
 
 if (isset($_GET['machine_id'])) {
     $machine_id =$_GET['machine_id'];
 
     $query = ("SELECT * FROM machine_list WHERE machine_id='$machine_id'");
 
-    $result = $con->query($query);
+    $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
         // Get the first name

@@ -5,13 +5,13 @@ $machine_id = $_REQUEST['machine_id'];
 // $machine_code = $_REQUEST['machine_code'];
 
 // Database connection
-$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
+include 'dbconnect.php';
 
 if ($machine_id !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($con, "SELECT * FROM machine_list WHERE machine_id='$machine_id'");
+	$query = mysqli_query($conn, "SELECT * FROM machine_list WHERE machine_id='$machine_id'");
 
 	$row = mysqli_fetch_array($query);
 

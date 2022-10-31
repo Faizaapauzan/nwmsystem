@@ -1,6 +1,5 @@
 <?php
-$connection = mysqli_connect("localhost","root","");
-$db = mysqli_select_db($connection, 'nwmsystem');
+include 'dbconnect.php';
 
     if(isset($_POST['update']))
     {   
@@ -24,7 +23,7 @@ $db = mysqli_select_db($connection, 'nwmsystem');
 
 
         $query = "UPDATE job_register SET job_priority='$job_priority', job_order_number='$job_order_number', job_name='$job_name', job_status='$job_status', job_description='$job_description', requested_date='$requested_date', delivery_date='$delivery_date', customer_name='$customer_name', customer_grade='$customer_grade', customer_address='$customer_address', customer_PIC='$customer_PIC', customer_phone='$customer_phone', machine_name='$machine_name', machine_type='$machine_type', machine_brand='$machine_brand' WHERE jobregister_id='$jobregister_id'  ";
-        $query_run = mysqli_query($connection, $query);
+        $query_run = mysqli_query($conn, $query);
 
         if($query_run)
         {

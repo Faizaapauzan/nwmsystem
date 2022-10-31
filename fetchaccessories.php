@@ -4,7 +4,7 @@
 $accessories_id = $_POST['accessories_id'];
 
 // Database connection
-$conn = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
+include 'dbconnect.php';
 
 if ($accessories_id !== "") {
     $query = "SELECT accessories_code, accessories_name FROM accessories_list WHERE accessories_id='$accessories_id'";

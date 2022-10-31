@@ -9,15 +9,14 @@
     
     <?php
         
-        $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-        $db = mysqli_select_db($connection, 'nwmsystem');
+       include 'dbconnect.php';
         
         if (isset($_POST['jobregister_id'])) {
         $jobregister_id =$_POST['jobregister_id'];
         
         $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
         
-        $query_run = mysqli_query($connection, $query);
+        $query_run = mysqli_query($conn, $query);
         if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
@@ -154,7 +153,7 @@
       
     <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE 
+        $records = mysqli_query($conn, "SELECT staffregister_id, username, staff_position, technician_rank, tech_avai FROM staff_register WHERE 
          technician_rank = '1st Leader' AND tech_avai = '0'
          OR
          technician_rank = '2nd Leader' AND tech_avai = '0'
@@ -180,7 +179,7 @@
             $_SESSION['storeDate'] = $DateAssign; 
         ?>
     
-        <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>
+    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>
     </div>
     
     <div style="margin-left: 236px;margin-top: 20px;" class="updateBtn">

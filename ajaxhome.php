@@ -21,8 +21,8 @@
 <body>
     
 <?php
-    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-    $db = mysqli_select_db($connection, 'nwmsystem');
+
+    include 'dbconnect.php';
 
     if (isset($_POST['jobregister_id'])) {
         $jobregister_id =$_POST['jobregister_id'];
@@ -30,7 +30,7 @@
 
         $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
     
-        $query_run = mysqli_query($connection, $query);
+        $query_run = mysqli_query($conn, $query);
         if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
                 ?>
@@ -69,7 +69,7 @@
          <select id="custModel" onchange="GetCustomer(this.value)"> <option value=""> <?php echo $row['customer_name']?> </option>
    <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($connection, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here 
+        $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {

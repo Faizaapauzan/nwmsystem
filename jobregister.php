@@ -776,11 +776,7 @@ $("#branddrop").on("change",function(){
 <!--Job Info 1 Customer-->
 
     <?php
-        $db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
-        if(!$db)
-        {
-            die("Connection failed: " . mysqli_connect_error());
-        }
+       include 'dbconnect.php';
     ?>
 
     <form action="jobregisterindex.php" method="post">
@@ -796,7 +792,7 @@ $("#branddrop").on("change",function(){
     <select id="ddlModel" onchange="GetDetail(this.value)"> <option value="">--  Select Customer --</option>
    <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($db, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here 
+        $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {
@@ -974,11 +970,7 @@ $("#ddlModel").on("change",function(){
 <!--Job Info 2 Job-->
 
 <?php
-$db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
-if(!$db)
-{
-    die("Connection failed: " . mysqli_connect_error());
-}
+include 'dbconnect.php';
 ?>
 
         <div id="jobInfo2">
@@ -1008,7 +1000,7 @@ if(!$db)
     <br/><br/>
     <select id="jobModel" onchange="GetJob(this.value)"> <option value="">-- Select Job --</option>
                     <?php include "dbconnect.php";  // Using database connection file here
-                    $records = mysqli_query($db, "SELECT job_code, job_name From jobtype_list ORDER BY jobtypelastmodify_at DESC");  // Use select query here 
+                    $records = mysqli_query($conn, "SELECT job_code, job_name From jobtype_list ORDER BY jobtypelastmodify_at DESC");  // Use select query here 
 
                     while($data = mysqli_fetch_array($records))
                      {
@@ -1170,11 +1162,7 @@ $("#jobModel").on("change",function(){
 <!--Job Info 3 Machine-->
 
     <?php
-        $db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
-        if(!$db)
-        {
-            die("Connection failed: " . mysqli_connect_error());
-        }
+include 'dbconnect.php';
     ?>
 
                 <div id="jobInfo3">
@@ -1195,7 +1183,6 @@ $("#jobModel").on("change",function(){
             <?php
 
                 $query = "select * from machine_brand";
-                // $query = mysqli_query($con, $qr);
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
