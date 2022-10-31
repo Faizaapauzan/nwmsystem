@@ -4,7 +4,7 @@ session_start();
 ?>
 
 <?php
-    $connection = mysqli_connect("localhost", "root", "");
+    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
     $db = mysqli_select_db($connection, 'nwmsystem');
 
     $machine_id = $_POST['machine_id'];

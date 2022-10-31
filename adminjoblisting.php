@@ -56,7 +56,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = ''");
 
  <?php  
  //Database connectivity  
- $con=mysqli_connect('localhost','root','','nwmsystem');  
+ $con=mysqli_connect("localhost", "Ithink", "iThink3399*");  
  $sql=mysqli_query($con,"select * from job_register");  
  //Get Update id and status  
  if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {  

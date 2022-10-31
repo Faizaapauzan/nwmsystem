@@ -1,5 +1,5 @@
     <?php
-    $connection = mysqli_connect("localhost", "root", "");
+    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
     $db = mysqli_select_db($connection, 'nwmsystem');
 
     $customer_id = $_POST['customer_id'];

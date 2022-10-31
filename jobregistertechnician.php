@@ -82,7 +82,7 @@ $_SESSION['storeDate'] = $att_date;
 <!--Job Info 1 Customer-->
 
     <?php
-        $db = mysqli_connect("localhost","root","","nwmsystem");
+        $db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
         if(!$db)
         {
             die("Connection failed: " . mysqli_connect_error());

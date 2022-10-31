@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","nwmsystem");
+$con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
 
     if (isset($_POST['submit-date'])) {
 

@@ -4,7 +4,7 @@
 $job_order_number = $_REQUEST['job_order_number'];
 
 // Database connection
-$con = mysqli_connect("localhost", "root", "", "nwmsystem");
+$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
 
 if ($job_order_number !== "") {
 	

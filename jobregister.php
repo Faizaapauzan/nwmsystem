@@ -776,7 +776,7 @@ $("#branddrop").on("change",function(){
 <!--Job Info 1 Customer-->
 
     <?php
-        $db = mysqli_connect("localhost","root","","nwmsystem");
+        $db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
         if(!$db)
         {
             die("Connection failed: " . mysqli_connect_error());
@@ -974,7 +974,7 @@ $("#ddlModel").on("change",function(){
 <!--Job Info 2 Job-->
 
 <?php
-$db = mysqli_connect("localhost","root","","nwmsystem");
+$db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
 if(!$db)
 {
     die("Connection failed: " . mysqli_connect_error());
@@ -1170,7 +1170,7 @@ $("#jobModel").on("change",function(){
 <!--Job Info 3 Machine-->
 
     <?php
-        $db = mysqli_connect("localhost","root","","nwmsystem");
+        $db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
         if(!$db)
         {
             die("Connection failed: " . mysqli_connect_error());

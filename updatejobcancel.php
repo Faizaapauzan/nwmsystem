@@ -4,7 +4,7 @@ session_start();
 ?>    
 
     <?php
-    $connection = mysqli_connect("localhost", "root", "");
+    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
     $db = mysqli_select_db($connection, 'nwmsystem');
 
     $jobregister_id = $_POST['jobregister_id'];

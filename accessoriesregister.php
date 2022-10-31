@@ -278,7 +278,7 @@ include 'dbconnect.php';
 <!--Choose Job-->
 
     <?php
-        $db = mysqli_connect("localhost","root","","nwmsystem");
+        $db = mysqli_connect("localhost", "Ithink", "iThink3399*");
         if(!$db)
         {
             die("Connection failed: " . mysqli_connect_error());

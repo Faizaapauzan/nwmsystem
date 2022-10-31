@@ -15,7 +15,7 @@
 <body>
   
   <?php
-      $connection = mysqli_connect("localhost", "root", "");
+      $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
       $db = mysqli_select_db($connection, 'nwmsystem');
       
       if (isset($_POST['jobregister_id'])) {
@@ -103,7 +103,7 @@
     <div class="assistants" style="padding-top: 20px;" id="multipselect">
         
         <?php
-            $con = mysqli_connect("localhost","root","","nwmsystem");
+            $con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
             if (isset($_POST['jobregister_id'])) {
               $jobregister_id =$_POST['jobregister_id'];
               $fetchquery = "SELECT username FROM assistants WHERE jobregister_id='$jobregister_id' ";

@@ -246,7 +246,7 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
 
       <!--Add Staff -->
                          <?php
-    $connection = mysqli_connect("localhost", "root", "");
+    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
     $db = mysqli_select_db($connection, 'nwmsystem');
 
         $sql = "SELECT * FROM staff_register";

@@ -4,7 +4,7 @@
 $job_code = $_REQUEST['job_code'];
 
 // Database connection
-$con = mysqli_connect("localhost", "root", "", "nwmsystem");
+$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
 
 if ($job_code !== "") {
 	
