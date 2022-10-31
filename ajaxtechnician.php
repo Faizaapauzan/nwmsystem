@@ -40,6 +40,7 @@ include 'dbconnect.php';
 <body>
 <form id="technicianupdate_form" method="post" class="row g-3">
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+<input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
   
   <div class="col-md-6" style="width: 70%;">
   <label for="jobpriority" class="form-label">Job Priority</label>
@@ -139,7 +140,7 @@ include 'dbconnect.php';
         $customer_name =$_POST['customer_name'];
         $type_id =$_POST['type_id'];
             
-        $query = ("SELECT * FROM machine_list WHERE type_id ='$type_id'");
+        $query = ("SELECT * FROM machine_list WHERE type_id ='$type_id' AND customer_name ='$customer_name'");
 
         $query_run = mysqli_query($conn, $query);
           while ($rows = mysqli_fetch_array($query_run)) {

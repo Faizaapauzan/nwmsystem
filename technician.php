@@ -159,7 +159,7 @@ session_start();
 							}
 							    echo "<nav id='mainNav'>
 								      <div class='cards'>
-									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
+									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-customer_name='".$row['customer_name']."' data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
@@ -208,7 +208,7 @@ session_start();
 							
 								echo "<nav id='mainNav'>
 									  <div class='cards' style='display: flex; align-items: stretch;''>
-									  <div style='width: 90%;' class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
+									  <div style='width: 90%;' class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-customer_name='".$row['customer_name']."' data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
@@ -259,7 +259,7 @@ session_start();
 							}						
 								echo "<nav id='mainNav'>
 								      <div class='cards'>
-									  <div class='card' id='notYetStatus' data-idupdate='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
+									  <div class='card' id='notYetStatus' data-idupdate='".$row['customer_name']."' data-type_id ='".$row['type_id']."' data-customer_name='".$row['customer_name']."' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>
@@ -426,12 +426,14 @@ session_start();
 										$('.card').click(function() {
 											var jobregister_id = $(this).data('id');
 											var type_id = $(this).data('type_id');
+											var customer_name = $(this).data('customer_name');
 											// AJAX request
 											$.ajax({
 												url: 'ajaxtechnician.php',
 												type: 'post',
 												data: {jobregister_id: jobregister_id,
-															  type_id: type_id},
+															  type_id: type_id,
+															  customer_name: customer_name},
 												success: function(response) {
 													// Add response in Modal body
 													$('.tech-details').html(response);
