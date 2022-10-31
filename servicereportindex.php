@@ -28,7 +28,7 @@ if(isset($_POST['jobregister_id']) && $_POST['jobregister_id']!='' || $_POST['jo
     &&
    isset($_POST['machine_name']) && $_POST['machine_name']!='' || $_POST['machine_name']==''
     &&
-   isset($_POST['serialnumber']) && $_POST['serialnumber']!='' || $_POST['serialnumber']==''
+   isset($_POST['serialnumber']) && $_POST['serialnumber']!=''
     &&
    isset($_POST['srvcreportnumber']) && $_POST['srvcreportnumber']!=''
     &&
