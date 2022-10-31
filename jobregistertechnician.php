@@ -247,7 +247,6 @@ $("#ddlModel").on("change",function(){
 
     <input type="hidden" id="job_description" name="job_description" placeholder="Enter Job Description">
     <input type="hidden" id="requestDate" name="requested_date" placeholder="Enter Request Date">
-    <input type="hidden" id="deliveryDate" name="delivery_date" placeholder="Enter Delivery Date">
  
     </div>
 
