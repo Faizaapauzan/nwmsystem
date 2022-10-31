@@ -4099,7 +4099,7 @@ if(!isset($_SESSION['username']))
                     DESC LIMIT 50");
 
             $numRow = "SELECT * FROM `job_register`WHERE 
-            j       ob_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
+            job_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
                     OR
                     job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
                     OR
