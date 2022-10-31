@@ -35,7 +35,7 @@ require_once 'dbconnect.php';
 
 
 // Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register"); 
+$query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register WHERE job_cancel = ''"); 
 $result  = $query->fetch_assoc(); 
 $rowCount= $result['rowNum']; 
  
@@ -49,7 +49,7 @@ $pagConfig = array(
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM job_register"); 
+$query = $conn->query("SELECT * FROM job_register WHERE job_cancel = ''"); 
  
 ?>
 

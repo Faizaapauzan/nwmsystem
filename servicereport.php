@@ -361,6 +361,7 @@ tr td:first-child:before {
             $machine_name =$_POST['machine_name'];
             $requested_date =$_POST['requested_date'];
 
+
             $query = ("SELECT * FROM job_register 
                                 WHERE customer_name='$customer_name'
                                 AND machine_name='$machine_name'
@@ -430,7 +431,7 @@ tr td:first-child:before {
         while($row = mysqli_fetch_assoc($result)) {
     ?>
 
-        <p><label style="position:absolute;">Machine Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" class="textarea" role="textarea" contenteditable="true"><?php echo $row['machine_name'] ?></span><input type="text" name="machine_name" value="<?php echo $row['machine_name'] ?>" class="input" /></p>
+        <p><label style="position:absolute;">Machine Name :</label><span style="font-size: 13px; max-width: 207px; height: 13px; font-family: Arial; border-width: 0px; resize: none; overflow: hidden; margin-left: 118px;" class="textarea" role="textarea" contenteditable="true"><?php echo $row['machine_name'] ?></span><input type="hidden" name="machine_name" value="<?php echo $row['machine_name'] ?>" class="input" /></p>
         <p><label>Serial Number :</label><span><input type="text" name="serialnumber" value="<?php echo $row['serialnumber'] ?>" class="input"/></span></p>
         
         <br/>
