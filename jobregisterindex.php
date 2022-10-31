@@ -38,11 +38,11 @@ include 'dbconnect.php';
 			$machine_id = !empty($machine_id) ? "'$machine_id'" : "NULL";
 		}
            
-	$sql = "INSERT INTO job_register (jobregister_id, job_code, job_name, job_order_number, job_description, customer_code,
+	$sql = "INSERT INTO job_register (job_code, job_name, job_order_number, job_description, customer_code,
      customer_name, customer_grade, job_priority, requested_date, delivery_date, customer_PIC,
 	 cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, machine_id, machine_code, machine_name, machine_brand, brand_id, machine_type, type_id, serialnumber, accessories_required, jobregistercreated_by, jobregisterlastmodify_by)
 
-VALUES ('default','".addslashes($_POST['job_code'])."',
+VALUES ('".addslashes($_POST['job_code'])."',
     	'".addslashes($_POST['job_name'])."',
         '".addslashes($_POST['job_order_number'])."',
         '".addslashes($_POST['job_description'])."',
