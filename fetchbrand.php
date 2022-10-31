@@ -5,13 +5,13 @@ $brand_id = $_REQUEST['brand_id'];
 // $machine_code = $_REQUEST['machine_code'];
 
 // Database connection
-$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
+include 'dbconnect.php';
 
 if ($brand_id !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($con, "SELECT brand_id, brandname FROM machine_brand WHERE brand_id='$brand_id'");
+	$query = mysqli_query($conn, "SELECT brand_id, brandname FROM machine_brand WHERE brand_id='$brand_id'");
 
 	$row = mysqli_fetch_array($query);
 

@@ -82,11 +82,7 @@ $_SESSION['storeDate'] = $att_date;
 <!--Job Info 1 Customer-->
 
     <?php
-        $db = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
-        if(!$db)
-        {
-            die("Connection failed: " . mysqli_connect_error());
-        }
+include 'dbconnect.php';
     ?>
 
     <form action="jobtechnicianindex.php" method="post">
@@ -100,7 +96,7 @@ $_SESSION['storeDate'] = $att_date;
     <select id="ddlModel" onchange="GetDetail(this.value)"> <option value="">--  Select Customer --</option>
     <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($db, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here 
+        $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {
@@ -234,7 +230,7 @@ $("#ddlModel").on("change",function(){
     <br/>
     <select id="jobModel" onchange="GetJob(this.value)"> <option value="">-- Select Job --</option>
                     <?php include "dbconnect.php";  // Using database connection file here
-                    $records = mysqli_query($db, "SELECT job_code, job_name From jobtype_list ORDER BY jobtypelastmodify_at DESC");  // Use select query here 
+                    $records = mysqli_query($conn, "SELECT job_code, job_name From jobtype_list ORDER BY jobtypelastmodify_at DESC");  // Use select query here 
 
                     while($data = mysqli_fetch_array($records))
                      {

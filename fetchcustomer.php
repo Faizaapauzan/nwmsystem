@@ -5,13 +5,13 @@ $customer_id = $_REQUEST['customer_id'];
 // $customer_code = $_REQUEST['customer_code'];
 
 // Database connection
-$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
+include 'dbconnect.php';
 
 if ($customer_id !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($con, "SELECT customer_code, customer_name, customer_grade, customer_PIC,
+	$query = mysqli_query($conn, "SELECT customer_code, customer_name, customer_grade, customer_PIC,
      cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3 FROM customer_list WHERE customer_id='$customer_id'");
 
 	$row = mysqli_fetch_array($query);

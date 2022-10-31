@@ -4,13 +4,12 @@ session_start();
 ?>
 
 <?php
-    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-    $db = mysqli_select_db($connection, 'nwmsystem');
+include 'dbconnect.php';
 
     $accessories_id = $_POST['accessories_id'];
 
     $query = "SELECT * FROM accessories_list WHERE accessories_id='$accessories_id' ";
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
         while ($row = mysqli_fetch_array($query_run)) {

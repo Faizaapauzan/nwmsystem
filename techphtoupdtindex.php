@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
+include 'dbconnect.php';
 
 if (isset($_POST['update'])) {
 
@@ -41,7 +41,7 @@ if (isset($_POST['update'])) {
         }  
     
             $query = "INSERT INTO `technician_photoupdate`(`jobregister_id`, `file_name`,`description`) VALUES ('$jobregister_id','$fileName','$filedescription')";
-            $query_run = mysqli_query($con, $query);
+            $query_run = mysqli_query($conn, $query);
 
             // mysqli_query($con, $query);
      

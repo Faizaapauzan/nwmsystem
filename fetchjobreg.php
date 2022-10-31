@@ -4,13 +4,13 @@
 $job_order_number = $_REQUEST['job_order_number'];
 
 // Database connection
-$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
+include 'dbconnect.php';
 
 if ($job_order_number !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($con, "SELECT job_description, jobregister_id FROM job_register WHERE job_order_number='$job_order_number'");
+	$query = mysqli_query($conn, "SELECT job_description, jobregister_id FROM job_register WHERE job_order_number='$job_order_number'");
 
 	$row = mysqli_fetch_array($query);
 

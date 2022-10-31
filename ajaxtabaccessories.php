@@ -5,11 +5,7 @@ session_start();
 
 
  <?php
-        $db = mysqli_connect("localhost", "Ithink", "iThink3399*");
-        if(!$db)
-        {
-            die("Connection failed: " . mysqli_connect_error());
-        }
+include 'dbconnect.php';
     ?>
 
 
@@ -317,7 +313,7 @@ if (accessories_id != '') {
  
  <select style="width: 90%;"  id="select_box" class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
 <?php include "dbconnect.php";  // Using database connection file here
-                    $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
+                    $records = mysqli_query($conn, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
 
                     while($data = mysqli_fetch_array($records))
                      {

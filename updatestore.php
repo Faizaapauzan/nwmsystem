@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
+include 'dbconnect.php';
 
 if(isset($_POST['update_store']))
 {
@@ -12,7 +12,7 @@ foreach($_POST['accessories_status'] as $accessories_id => $accessories_status) 
    $sql = "UPDATE job_accessories SET accessories_status ='$accessories_status' WHERE jobregister_id='$jobregister_id' AND accessories_id='$accessories_id' ";
    
 
-    $query=mysqli_query($con,$sql) or die(mysqli_error($con));
+    $query=mysqli_query($conn,$sql) or die(mysqli_error($conn));
 
     }
 

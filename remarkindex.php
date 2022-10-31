@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
+include 'dbconnect.php';
 
 $response = array('success' => false);
 
@@ -25,7 +25,7 @@ if(isset($_POST['update_remark']))
 
 
 
-    $query=mysqli_query($con,$sql) or die(mysqli_error($con));
+    $query=mysqli_query($conn,$sql) or die(mysqli_error($conn));
 
     }
 

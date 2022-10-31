@@ -246,12 +246,11 @@ $query = $conn->query("SELECT * FROM staff_register ORDER BY staffregister_id AS
 
       <!--Add Staff -->
                          <?php
-    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-    $db = mysqli_select_db($connection, 'nwmsystem');
+include 'dbconnect.php';
 
         $sql = "SELECT * FROM staff_register";
     
-        $query_run = mysqli_query($connection, $sql);
+        $query_run = mysqli_query($conn, $sql);
         if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
                 ?>

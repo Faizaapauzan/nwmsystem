@@ -5,13 +5,13 @@ $type_id = $_REQUEST['type_id'];
 // $machine_code = $_REQUEST['machine_code'];
 
 // Database connection
-$con = mysqli_connect("localhost", "Ithink", "iThink3399*", "nwmsystem");
+include 'dbconnect.php';
 
 if ($type_id !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($con, "SELECT type_id, type_name FROM machine_type WHERE type_id='$type_id'");
+	$query = mysqli_query($conn, "SELECT type_id, type_name FROM machine_type WHERE type_id='$type_id'");
 
 	$row = mysqli_fetch_array($query);
 

@@ -4,8 +4,7 @@ session_start();
 ?>
 
 <?php
-    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-    $db = mysqli_select_db($connection, 'nwmsystem');
+include 'dbconnect.php';
 
     $machine_id = $_POST['machine_id'];
 
@@ -15,7 +14,7 @@ session_start();
     JOIN machine_brand ON machine_type.brand_id=machine_brand.brand_id
     WHERE machine_list.machine_id = $machine_id";
 
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
         while ($row = mysqli_fetch_array($query_run)) {
@@ -40,7 +39,7 @@ session_start();
         <?php
 
         $querydrop = "select * from machine_brand";
-        $result = $connection->query($querydrop);
+        $result = $conn->query($querydrop);
         if ($result->num_rows > 0) {
          while ($rows = mysqli_fetch_assoc($result)) { ?>
 

@@ -1,13 +1,12 @@
 <?php session_start(); ?>
 
 <?php
-    $connection = mysqli_connect("localhost", "Ithink", "iThink3399*");
-    $db = mysqli_select_db($connection, 'nwmsystem');
+include 'dbconnect.php';
 
     $staffregister_id = $_POST['staffregister_id'];
 
     $query = "SELECT * FROM staff_register WHERE staffregister_id='$staffregister_id' ";
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
         while ($row = mysqli_fetch_array($query_run)) {

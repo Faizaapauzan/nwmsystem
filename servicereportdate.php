@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
+include 'dbconnect.php';
 
     if (isset($_POST['submit-date'])) {
 
@@ -9,10 +9,8 @@ $con = mysqli_connect("localhost","Ithink","iThink3399*","nwmsystem");
         $srvcreportdate = $_POST['srvcreportdate'];
         
         $sql = "UPDATE job_register SET srvcreportdate ='$srvcreportdate' WHERE jobregister_id='$jobregister_id'";
-
-        // $sql = "INSERT INTO servicereport (jobregister_id, srvcreportdate) VALUES ('$jobregister_id', '$srvcreportdate')";
         
-        $query=mysqli_query($con,$sql) or die(mysqli_error($con));
+        $query=mysqli_query($conn,$sql) or die(mysqli_error($conn));
         
         if($query)
         

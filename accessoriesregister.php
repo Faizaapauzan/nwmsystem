@@ -276,13 +276,9 @@ include 'dbconnect.php';
 <!--Finish add accessories -->
 
 <!--Choose Job-->
+<?php 
 
-    <?php
-        $db = mysqli_connect("localhost", "Ithink", "iThink3399*");
-        if(!$db)
-        {
-            die("Connection failed: " . mysqli_connect_error());
-        }
+include 'dbconnect.php';
     ?>
 
     <form action="quantityindex.php" method="post">
@@ -298,7 +294,7 @@ include 'dbconnect.php';
                      <select id="jobaccessories" onchange="GetJobReg(this.value)"> <option value="">-- Select Job Registered --</option>
                      <?php
         include "dbconnect.php";  // Using database connection file here
-        $records = mysqli_query($db, "SELECT job_order_number, job_name From job_register ORDER BY job_order_number DESC");  // Use select query here 
+        $records = mysqli_query($conn, "SELECT job_order_number, job_name From job_register ORDER BY job_order_number DESC");  // Use select query here 
 
         while($data = mysqli_fetch_array($records))
         {
@@ -328,7 +324,7 @@ include 'dbconnect.php';
 			<div class="model">
                 <select class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
 <?php include "dbconnect.php";  // Using database connection file here
-                    $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
+                    $records = mysqli_query($conn, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
 
                     while($data = mysqli_fetch_array($records))
                      {
@@ -411,7 +407,7 @@ if (accessories_id != '') {
         <div class="model">
  <select class="accessoriesModel" name="accessoriesModel[]"> <option value=""> Select Accessories Code </option>
 <?php include "dbconnect.php";  // Using database connection file here
-                    $records = mysqli_query($db, "SELECT accessories_code, accessories_name, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
+                    $records = mysqli_query($conn, "SELECT accessories_code, accessories_name, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here 
 
                     while($data = mysqli_fetch_array($records))
                      {

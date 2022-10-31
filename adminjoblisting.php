@@ -56,13 +56,13 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = ''");
 
  <?php  
  //Database connectivity  
- $con=mysqli_connect("localhost", "Ithink", "iThink3399*");  
- $sql=mysqli_query($con,"select * from job_register");  
+include 'dbconnect.php';
+
  //Get Update id and status  
  if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {  
       $jobregister_id=$_GET['jobregister_id'];  
       $job_assign=$_GET['job_assign'];  
-      mysqli_query($con,"update job_register set job_assign='$job_assign' where jobregister_id='$jobregister_id'");  
+      mysqli_query($conn,"update job_register set job_assign='$job_assign' where jobregister_id='$jobregister_id'");  
       header("location:adminjoblisting.php");  
       die();  
  }  
