@@ -313,20 +313,36 @@ if(!isset($_SESSION['username']))
                             <?php
                                 include 'dbconnect.php';
                                 $results = $conn->query("SELECT * FROM job_register WHERE
-                                                        (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
+                                                        (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                            OR
+                                                         accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
+                                                            OR
+                                                         accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                                                             OR
                                                          accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
                                                             OR
+                                                         staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
+                                                            OR
                                                          staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL
+                                                            OR
+                                                         job_assign = '' AND job_status = 'Ready' AND job_cancel = ''
                                                             OR
                                                          job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)
                                                         ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                 $numRow = "SELECT * FROM job_register WHERE
-                                                    (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
+                                                    (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                        OR
+                                                     accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
+                                                        OR
+                                                     accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                                                         OR
                                                      accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
                                                         OR
+                                                     staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
+                                                        OR
                                                      staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL
+                                                        OR
+                                                     job_assign = '' AND job_status = 'Ready' AND job_cancel = ''
                                                         OR
                                                      job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)";
                                 $numRow_run = mysqli_query ($conn,$numRow);
@@ -483,28 +499,50 @@ if(!isset($_SESSION['username']))
                             <?php
                                 include 'dbconnect.php';
                                 $results = $conn->query("SELECT * FROM job_register WHERE
-                                                        (accessories_required = 'Yes' AND job_status IS NULL AND job_cancel IS NULL
+                                                        (accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
+                                                            OR
+                                                         accessories_required = 'Yes' AND job_status IS NULL AND job_cancel IS NULL
+                                                            OR
+                                                         staff_position = 'Storekeeper' AND job_status = '' AND job_cancel = ''
                                                             OR
                                                          staff_position = 'Storekeeper' AND job_status IS NULL AND job_cancel IS NULL
                                                             OR
+                                                         accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel = ''
+                                                            OR
                                                          accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel IS NULL
+                                                            OR
+                                                         staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel = ''
                                                             OR
                                                          staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel IS NULL
                                                             OR
+                                                         staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel = ''
+                                                            OR
                                                          staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel IS NULL
+                                                            OR
+                                                         staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel = ''
                                                             OR
                                                          staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel IS NULL)
                                                          ORDER BY jobregisterlastmodify_at DESC LIMIT 50");	 
                                 $numRow = "SELECT * FROM job_register WHERE
-                                                   (accessories_required = 'Yes' AND job_status IS NULL AND job_cancel IS NULL
+                                                   (accessories_required = 'Yes' AND job_status = '' AND job_cancel = ''
+                                                        OR
+                                                    accessories_required = 'Yes' AND job_status IS NULL AND job_cancel IS NULL
+                                                        OR
+                                                    staff_position = 'Storekeeper' AND job_status = '' AND job_cancel = ''
                                                         OR
                                                     staff_position = 'Storekeeper' AND job_status IS NULL AND job_cancel IS NULL
                                                         OR
+                                                    accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel = ''
+                                                        OR
                                                     accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel IS NULL
+                                                        OR
+                                                    staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel = ''
                                                         OR
                                                     staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel IS NULL
                                                         OR
-                                                    staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel IS NULL
+                                                    staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel = ''
+                                                        OR
+                                                    staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel = ''
                                                         OR
                                                     staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel IS NULL)";
                                 $numRow_run = mysqli_query ($conn,$numRow);
@@ -650,8 +688,7 @@ if(!isset($_SESSION['username']))
                                 
                                 $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending'
                                                          ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-                                $numRow = "SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status
-                                           FROM `job_register`WHERE job_status = 'Pending' ";
+                                $numRow = "SELECT * FROM `job_register`WHERE job_status = 'Pending' ";
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 if ($row_Total = mysqli_num_rows($numRow_run))
                                     {
@@ -935,8 +972,7 @@ if(!isset($_SESSION['username']))
                                 
                                 $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Incomplete'
                                                          ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-                                $numRow = "SELECT jobregister_id, staff_position, job_order_number, job_priority, customer_name, machine_type, job_description, accessories_required, job_status
-                                           FROM job_register WHERE job_status = 'Incomplete'";
+                                $numRow = "SELECT * FROM job_register WHERE job_status = 'Incomplete'";
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 if ($row_Total = mysqli_num_rows($numRow_run))
                                     {
@@ -1235,20 +1271,36 @@ if(!isset($_SESSION['username']))
                                     <?php
                                         include 'dbconnect.php';
                                         $results = $conn->query("SELECT * FROM job_register WHERE
-                                                                (job_assign = 'Hamir' AND job_status IS NULL AND job_cancel IS NULL
+                                                                (job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
+                                                                    OR
+                                                                 job_assign = 'Hamir' AND job_status IS NULL AND job_cancel IS NULL
+                                                                    OR
+                                                                 job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel = ''
                                                                     OR
                                                                  job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel IS NULL
                                                                     OR
+                                                                 job_assign = 'Hamir' AND job_status = 'Ready' AND job_cancel = ''
+                                                                    OR
                                                                  job_assign = 'Hamir' AND job_status = 'Ready' AND job_cancel IS NULL
+                                                                    OR
+                                                                 job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel = ''
                                                                     OR
                                                                  job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel IS NULL)
                                                                  ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                         $numRow = "SELECT * FROM `job_register`WHERE
+                                                            job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
+                                                                OR
                                                             job_assign = 'Hamir' AND job_status IS NULL AND job_cancel IS NULL
+                                                                OR
+                                                            job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel = ''
                                                                 OR
                                                             job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel IS NULL
                                                                 OR
+                                                            job_assign = 'Hamir' AND job_status = 'Ready' AND job_cancel = ''
+                                                                OR
                                                             job_assign = 'Hamir' AND job_status = 'Ready' AND job_cancel IS NULL
+                                                                OR
+                                                            job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel = ''
                                                                 OR
                                                             job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel IS NULL";
                                         $numRow_run = mysqli_query ($conn,$numRow);
@@ -1527,23 +1579,39 @@ if(!isset($_SESSION['username']))
             include 'dbconnect.php';
                                 
             $results = $conn->query("SELECT * FROM job_register WHERE
-                (job_assign = 'Hwa' AND job_status IS NULL AND job_cancel IS NULL
-                OR
-                job_assign = 'Hwa' AND job_status = 'Doing' AND job_cancel IS NULL
-                OR
-                job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel IS NULL
-                OR
+                (job_assign = 'Hwa' AND job_status = '' AND job_cancel = ''
+                    OR
+                 job_assign = 'Hwa' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                 job_assign = 'Hwa' AND job_status = 'Doing' AND job_cancel = ''
+                    OR
+                 job_assign = 'Hwa' AND job_status = 'Doing' AND job_cancel IS NULL
+                    OR
+                 job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
+                 job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel = ''
+                    OR
                 job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel IS NULL)
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
 
                 $numRow = "SELECT * FROM `job_register`WHERE 
+                job_assign = 'Hwa' AND job_status = '' AND job_cancel = ''
+                OR
                 job_assign = 'Hwa' AND job_status IS NULL AND job_cancel IS NULL
+                OR
+                job_assign = 'Hwa' AND job_status = 'Doing' AND job_cancel = ''
                 OR
                 job_assign = 'Hwa' AND job_status = 'Doing' AND job_cancel IS NULL
                 OR
+                job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel = ''
+                OR
                 job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel IS NULL
+                OR
+                job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel = ''
                 OR
                 job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel IS NULL ";
                 
@@ -1825,22 +1893,38 @@ if(!isset($_SESSION['username']))
                 include 'dbconnect.php';
                                 
                 $results = $conn->query("SELECT * FROM job_register WHERE
-                        (job_assign = 'ISKANDAR' AND job_status IS NULL AND job_cancel IS NULL
-                        OR
+                        (job_assign = 'ISKANDAR' AND job_status = '' AND job_cancel = ''
+                            OR
+                        job_assign = 'ISKANDAR' AND job_status IS NULL AND job_cancel IS NULL
+                            OR
+                        job_assign = 'ISKANDAR' AND job_status = 'Doing' AND job_cancel = ''
+                            OR
                         job_assign = 'ISKANDAR' AND job_status = 'Doing' AND job_cancel IS NULL
-                        OR
+                            OR
+                        job_assign = 'ISKANDAR' AND job_status = 'Ready' AND job_cancel = ''
+                            OR
                         job_assign = 'ISKANDAR' AND job_status = 'Ready' AND job_cancel IS NULL
-                        OR
+                            OR
+                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = ''
+                            OR
                         job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel IS NULL)
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
                     $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'ISKANDAR' AND job_status IS NULL AND job_cancel IS NULL
+                        job_assign = 'ISKANDAR' AND job_status = '' AND job_cancel = ''
+                        OR
+                        job_assign = 'ISKANDAR' AND job_status IS NULL AND job_cancel IS NULL
+                        OR
+                        job_assign = 'ISKANDAR' AND job_status = 'Doing' AND job_cancel = ''
                         OR
                         job_assign = 'ISKANDAR' AND job_status = 'Doing' AND job_cancel IS NULL
                         OR
+                        job_assign = 'ISKANDAR' AND job_status = 'Ready' AND job_cancel = ''
+                        OR
                         job_assign = 'ISKANDAR' AND job_status = 'Ready' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = ''
                         OR
                         job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel IS NULL ";
                     
@@ -2121,24 +2205,40 @@ if(!isset($_SESSION['username']))
                 include 'dbconnect.php';
                                 
                 $results = $conn->query("SELECT * FROM job_register WHERE
-                        (job_assign = 'John' AND job_status IS NULL AND job_cancel IS NULL
+                        (job_assign = 'John' AND job_status = '' AND job_cancel = ''
+                        OR
+                        job_assign = 'John' AND job_status IS NULL AND job_cancel IS NULL
+                        OR
+                        job_assign = 'John' AND job_status = 'Doing' AND job_cancel = ''
                         OR
                         job_assign = 'John' AND job_status = 'Doing' AND job_cancel IS NULL
                         OR
+                        job_assign = 'John' AND job_status = 'Ready' AND job_cancel = ''
+                        OR
                         job_assign = 'John' AND job_status = 'Ready' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel = ''
                         OR
                         job_assign = 'John' AND job_status = 'Pending' AND job_cancel IS NULL)
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
                 $numRow = "SELECT * FROM `job_register`WHERE 
-                job_assign = 'John' AND job_status IS NULL AND job_cancel IS NULL
+                        job_assign = 'John' AND job_status = '' AND job_cancel = ''
+                        OR
+                        job_assign = 'John' AND job_status IS NULL AND job_cancel IS NULL
+                        OR
+                        job_assign = 'John' AND job_status = 'Doing' AND job_cancel = ''
                         OR
                         job_assign = 'John' AND job_status = 'Doing' AND job_cancel IS NULL
                         OR
+                        job_assign = 'John' AND job_status = 'Ready' AND job_cancel = ''
+                        OR
                         job_assign = 'John' AND job_status = 'Ready' AND job_cancel IS NULL
                         OR
-                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel IS NULL";
+                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel = ''
+                        OR
+                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel IS NULL ";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2423,24 +2523,40 @@ if(!isset($_SESSION['username']))
             <?php
                 include 'dbconnect.php';                
                 $results = $conn->query("SELECT * FROM job_register WHERE
-                        (job_assign = 'Jun Jie' AND job_status IS NULL AND job_cancel IS NULL
+                        (job_assign = 'Jun Jie' AND job_status = '' AND job_cancel = ''
+                        OR
+                        job_assign = 'Jun Jie' AND job_status IS NULL AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Jun Jie' AND job_status = 'Doing' AND job_cancel = ''
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Doing' AND job_cancel IS NULL
                         OR
+                        job_assign = 'Jun Jie' AND job_status = 'Ready' AND job_cancel = ''
+                        OR
                         job_assign = 'Jun Jie' AND job_status = 'Ready' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel = ''
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel IS NULL)
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
                 $numRow = "SELECT * FROM `job_register`WHERE 
-                job_assign = 'Jun Jie' AND job_status IS NULL AND job_cancel IS NULL
+                        job_assign = 'Jun Jie' AND job_status = '' AND job_cancel = ''
+                        OR
+                        job_assign = 'Jun Jie' AND job_status IS NULL AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Jun Jie' AND job_status = 'Doing' AND job_cancel = ''
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Doing' AND job_cancel IS NULL
                         OR
+                        job_assign = 'Jun Jie' AND job_status = 'Ready' AND job_cancel = ''
+                        OR
                         job_assign = 'Jun Jie' AND job_status = 'Ready' AND job_cancel IS NULL
                         OR
-                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel IS NULL";
+                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel = ''
+                        OR
+                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel IS NULL ";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2719,11 +2835,19 @@ if(!isset($_SESSION['username']))
                 <?php
                     include 'dbconnect.php';
                     $results = $conn->query("SELECT * FROM job_register WHERE
-                            (job_assign = 'Will' AND job_status IS NULL AND job_cancel IS NULL
+                            (job_assign = 'Will' AND job_status = '' AND job_cancel = ''
+                            OR
+                            job_assign = 'Will' AND job_status IS NULL AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Will' AND job_status = 'Doing' AND job_cancel = ''
                             OR
                             job_assign = 'Will' AND job_status = 'Doing' AND job_cancel IS NULL
                             OR
+                            job_assign = 'Will' AND job_status = 'Ready' AND job_cancel = ''
+                            OR
                             job_assign = 'Will' AND job_status = 'Ready' AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel = ''
                             OR
                             job_assign = 'Will' AND job_status = 'Pending' AND job_cancel IS NULL)
                             ORDER BY jobregisterlastmodify_at
@@ -2731,13 +2855,21 @@ if(!isset($_SESSION['username']))
 
 
                     $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Will' AND job_status IS NULL AND job_cancel IS NULL
+                            job_assign = 'Will' AND job_status = '' AND job_cancel = ''
+                            OR
+                            job_assign = 'Will' AND job_status IS NULL AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Will' AND job_status = 'Doing' AND job_cancel = ''
                             OR
                             job_assign = 'Will' AND job_status = 'Doing' AND job_cancel IS NULL
                             OR
+                            job_assign = 'Will' AND job_status = 'Ready' AND job_cancel = ''
+                            OR
                             job_assign = 'Will' AND job_status = 'Ready' AND job_cancel IS NULL
                             OR
-                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel IS NULL";
+                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel = ''
+                            OR
+                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel IS NULL ";
                     $numRow_run = mysqli_query ($conn,$numRow);
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3017,24 +3149,40 @@ if(!isset($_SESSION['username']))
                 <?php
                     include 'dbconnect.php';
                     $results = $conn->query("SELECT * FROM job_register WHERE
-                            (job_assign = 'Sahele' AND job_status IS NULL AND job_cancel IS NULL
+                            (job_assign = 'Sahele' AND job_status = '' AND job_cancel = ''
+                            OR
+                            job_assign = 'Sahele' AND job_status IS NULL AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Sahele' AND job_status = 'Doing' AND job_cancel = ''
                             OR
                             job_assign = 'Sahele' AND job_status = 'Doing' AND job_cancel IS NULL
                             OR
+                            job_assign = 'Sahele' AND job_status = 'Ready' AND job_cancel = ''
+                            OR
                             job_assign = 'Sahele' AND job_status = 'Ready' AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel = ''
                             OR
                             job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel IS NULL)
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
 
                     $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Sahele' AND job_status IS NULL AND job_cancel IS NULL
+                            job_assign = 'Sahele' AND job_status = '' AND job_cancel = ''
+                            OR
+                            job_assign = 'Sahele' AND job_status IS NULL AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Sahele' AND job_status = 'Doing' AND job_cancel = ''
                             OR
                             job_assign = 'Sahele' AND job_status = 'Doing' AND job_cancel IS NULL
                             OR
+                            job_assign = 'Sahele' AND job_status = 'Ready' AND job_cancel = ''
+                            OR
                             job_assign = 'Sahele' AND job_status = 'Ready' AND job_cancel IS NULL
                             OR
-                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel IS NULL";
+                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel = ''
+                            OR
+                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel IS NULL ";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3309,24 +3457,40 @@ if(!isset($_SESSION['username']))
                 <?php
                  include 'dbconnect.php';
                 $results = $conn->query("SELECT * FROM job_register WHERE
-                        (job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL
+                        (job_assign = 'Sazaly' AND job_status = '' AND job_cancel = ''
+                        OR
+                        job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel = ''
                         OR
                         job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel IS NULL
                          OR
+                        job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel = ''
+                        OR
                         job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''
                         OR
                         job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL)
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
                 $numRow = "SELECT * FROM `job_register`WHERE 
-                job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL
+                        job_assign = 'Sazaly' AND job_status = '' AND job_cancel = ''
                         OR
-                        job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel IS NULL
+                        job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel = ''
                          OR
+                         job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel IS NULL
+                         OR
+                        job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel = ''
+                        OR
                         job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel IS NULL
                         OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL";
+                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''
+                        OR
+                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL ";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3605,22 +3769,38 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
             $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL
+                    (job_assign = 'Faizan' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL)
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
                 $numRow = "SELECT * FROM `job_register`WHERE 
-                job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL
+                job_assign = 'Faizan' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL";
                 
@@ -3900,22 +4080,38 @@ if(!isset($_SESSION['username']))
             <?php
             include 'dbconnect.php';
             $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
+                    (job_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL)
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
             $numRow = "SELECT * FROM `job_register`WHERE 
-            job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
+            j       ob_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR 
+                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''
                     OR 
                     job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL";
             
@@ -4199,22 +4395,38 @@ if(!isset($_SESSION['username']))
             include 'dbconnect.php';
                                 
             $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL
+                    (job_assign = 'Izaan' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL)
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
             $numRow = "SELECT * FROM `job_register`WHERE 
-           job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL
+                    job_assign = 'Izaan' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL";
             
@@ -4497,18 +4709,28 @@ if(!isset($_SESSION['username']))
             include 'dbconnect.php';
                                 
             $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Salam' AND job_status IS NULL AND job_cancel IS NULL
+                    (job_assign = 'Salam' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Salam' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Salam' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Salam' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Salam' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Salam' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Salam' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Salam' AND job_status = 'Pending' AND job_cancel IS NULL)
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
             $numRow = "SELECT * FROM `job_register`WHERE 
-            job_assign = 'Salam' AND job_status IS NULL
+                    job_assign = 'Salam' AND job_status = ''
+                    OR
+                    job_assign = 'Salam' AND job_status IS NULL
                     OR
                     job_assign = 'Salam' AND job_status = 'Doing'
                     OR
@@ -4797,22 +5019,38 @@ if(!isset($_SESSION['username']))
             include 'dbconnect.php';
                                 
             $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL
+                    (job_assign = 'Teck' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL)
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
             $numRow = "SELECT * FROM `job_register`WHERE 
-            job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL
+                    job_assign = 'Teck' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL";
             
@@ -5097,18 +5335,28 @@ if(!isset($_SESSION['username']))
             include 'dbconnect.php';
                                 
             $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL
+                    (job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
                     job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = ''
                     OR
                     job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL)
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
             $numRow = "SELECT * FROM `job_register`WHERE 
-            job_assign = 'Aizat' AND job_status IS NULL
+                    job_assign = 'Aizat' AND job_status = ''
+                    OR
+                    job_assign = 'Aizat' AND job_status IS NULL
                     OR
                     job_assign = 'Aizat' AND job_status = 'Doing'
                     OR
@@ -5391,21 +5639,37 @@ if(!isset($_SESSION['username']))
                                 <?php
                                     include 'dbconnect.php';
                                     $results = $conn->query("SELECT * FROM job_register WHERE
-                                                            (job_assign = 'Boon' AND job_status IS NULL AND job_cancel IS NULL
+                                                            (job_assign = 'Boon' AND job_status = '' AND job_cancel = ''
                                                                 OR
-                                                             job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel IS NULL 
+                                                             job_assign = 'Boon' AND job_status IS NULL AND job_cancel IS NULL
+                                                                OR
+                                                             job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel = '' 
+                                                                OR
+                                                             job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel IS NULL
+                                                                OR
+                                                             job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel = ''
                                                                 OR
                                                              job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel IS NULL
+                                                                OR
+                                                             job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = ''
                                                                 OR
                                                              job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL)
                                                             ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                     $numRow = "SELECT * FROM `job_register`WHERE 
+                                                        job_assign = 'Boon' AND job_status = '' AND job_cancel = ''
+                                                            OR
                                                         job_assign = 'Boon' AND job_status IS NULL AND job_cancel IS NULL
+                                                            OR
+                                                        job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel = ''
                                                             OR
                                                         job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel IS NULL
                                                             OR
+                                                        job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel = ''
+                                                            OR
                                                         job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel IS NULL
                                                             OR
+                                                        job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = ''
+                                                        OR
                                                         job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL";
                                     $numRow_run = mysqli_query ($conn,$numRow);
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
@@ -5684,20 +5948,36 @@ if(!isset($_SESSION['username']))
                                 <?php
                                     include 'dbconnect.php';
                                     $results = $conn->query("SELECT * FROM job_register WHERE
-                                                            (job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel IS NULL
+                                                            (job_assign = 'Hafiz' AND job_status = '' AND job_cancel = ''
+                                                                OR
+                                                             job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel IS NULL
+                                                                OR
+                                                             job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel = ''
                                                                 OR
                                                              job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel IS NULL
                                                                 OR
+                                                             job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel = ''
+                                                                OR
                                                              job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel IS NULL
                                                                 OR
+                                                             job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = ''
+                                                             OR
                                                              job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL)
                                                              ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                     $numRow = "SELECT * FROM `job_register`WHERE 
+                                                        job_assign = 'Hafiz' AND job_status = '' AND job_cancel = ''
+                                                            OR
                                                         job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel IS NULL
+                                                            OR
+                                                        job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel = ''
                                                             OR
                                                         job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel IS NULL
                                                             OR
+                                                        job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel = ''
+                                                            OR
                                                         job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel IS NULL
+                                                            OR
+                                                        job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = ''
                                                             OR
                                                         job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL";
                                     $numRow_run = mysqli_query ($conn,$numRow);
