@@ -1,6 +1,5 @@
 <?php
-$connection = mysqli_connect("localhost","root","");
-$db = mysqli_select_db($connection, 'nwmsystem');
+include 'dbconnect.php';
 
     if(isset($_POST['update']))
     {   
@@ -15,7 +14,7 @@ jobregisterlastmodify_by ='$jobregisterlastmodify_by'
 
 WHERE jobregister_id='$jobregister_id'";
 
-$query_run = mysqli_query($connection, $query);
+$query_run = mysqli_query($conn, $query);
 
         {
 

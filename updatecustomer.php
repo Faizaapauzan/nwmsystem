@@ -90,7 +90,7 @@ include 'dbconnect.php';
             customerlasmodify_by ='".addslashes($customerlasmodify_by)."'
 
              WHERE  customer_id ='".addslashes($customer_id)."' ";
-                        $query_run = mysqli_query($connection, $query);
+                        $query_run = mysqli_query($conn, $query);
 
                         if ($query_run) {
                             echo '<script> alert("Data Updated"); </script>';
