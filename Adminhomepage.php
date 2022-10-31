@@ -3834,7 +3834,7 @@ if(!isset($_SESSION['username']))
                 while($row = $results->fetch_assoc()) {
             ?>
                         
-            <div class="Faizan" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Faizan"  ondblclick="document.getElementById('doubleClick-Faizan').style.display='block'">
+            <div class="Faizan" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Faizan"  ondblclick="document.getElementById('doubleClick-Faizan').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -3869,11 +3869,12 @@ if(!isset($_SESSION['username']))
             $('body').on('click','.Faizan',function(){ 
             var jobregister_id = $(this).data('id');
             var type_id = $(this).data('type_id');
+            var customer_name = $(this).data('customer_name');
             // AJAX request
             $.ajax({
             url: 'ajaxhome.php',
             type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id},
+            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
             // Add response in Modal body
             $('.faizan-details').html(response);
@@ -4107,7 +4108,7 @@ if(!isset($_SESSION['username']))
                     DESC LIMIT 50");
 
             $numRow = "SELECT * FROM `job_register`WHERE 
-            j       ob_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
+            job_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
                     OR
                     job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
                     OR
@@ -4145,7 +4146,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>
 
-            <div class="Fauzin" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" ondblclick="document.getElementById('doubleClick-Fauzin').style.display='block'">
+            <div class="Fauzin" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" ondblclick="document.getElementById('doubleClick-Fauzin').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -4181,11 +4182,12 @@ if(!isset($_SESSION['username']))
             $('body').on('click','.Fauzin',function(){ 
             var jobregister_id = $(this).data('id');
             var type_id = $(this).data('type_id');
+            var customer_name = $(this).data('customer_name');
             // AJAX request
             $.ajax({
             url: 'ajaxhome.php',
             type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id},
+            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
             // Add response in Modal body
             $('.fauzin-details').html(response);
@@ -4460,7 +4462,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>  
                         
-            <div class="Izaan" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Izaan"  ondblclick="document.getElementById('doubleClick-Izaan').style.display='block'">
+            <div class="Izaan" data-customer_name="<?php echo $row['customer_name'];?>" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Izaan"  ondblclick="document.getElementById('doubleClick-Izaan').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -4496,12 +4498,13 @@ if(!isset($_SESSION['username']))
             $('body').on('click','.Izaan',function(){ 
             var jobregister_id = $(this).data('id');
             var type_id = $(this).data('type_id');
+            var customer_name = $(this).data('customer_name');
 
             // AJAX request
             $.ajax({
             url: 'ajaxhome.php',
             type: 'post',
-             data: {jobregister_id: jobregister_id, type_id: type_id},
+            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
             // Add response in Modal body
             $('.izaan-details').html(response);
@@ -4707,318 +4710,10 @@ if(!isset($_SESSION['username']))
 
             <!-- END OF IZAAN -->
 
-            <!-- SALAM -->
-
-            <div class="box">
-            <div class="left-side">
-            <div class="box_topic">Salam</div>
-                            
-            <?php
-            include 'dbconnect.php';
-                                
-            $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Salam' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Salam' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Pending' AND job_cancel IS NULL)
-                    ORDER BY jobregisterlastmodify_at
-                    DESC LIMIT 50");
-
-            $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Salam' AND job_status = ''
-                    OR
-                    job_assign = 'Salam' AND job_status IS NULL
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Doing'
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Ready'
-                    OR
-                    job_assign = 'Salam' AND job_status = 'Pending'";
-            
-            $numRow_run = mysqli_query ($conn,$numRow);
-            if ($row_Total = mysqli_num_rows($numRow_run))
-            {
-                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-            }
-            
-            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Salam'"); 
-                while($data = mysqli_fetch_array($records))
-                {
-                    if ($data['tech_avai']==1){
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                    else {
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                }	
-            
-            while($row = $results->fetch_assoc()) {
-            ?>
-                        
-            <div class="Salam" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Salam" ondblclick="document.getElementById('doubleClick-Salam').style.display='block'">
-            <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-            <ul class="b" id="draged">
-            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-            <li><?php echo $row['job_priority']?></li>
-            <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['machine_type']?></li>
-            <li><?php echo $row['job_description']?></li>
-            <li><?php echo $row['job_status']?></li>
-            </ul>
-            <div class='supports' id='support'> <?php echo $row['support']?></div>
-            </div>
-            <?php } ?>
-            </div>
-            </div>               
-            </div>
-
-                           
-        <!--Double click Job Info (Salam) -->
-        <div id="doubleClick-Salam" class="modal">
-        <div class="tabSalam">
-
-        <input type="radio" name="tabDoingSalam" id="tabDoingSalam1" checked="checked">
-        <label for="tabDoingSalam1" class="tabHeadingSalam"> Job Info </label>
-        <div class="tab" id="SalamJobInfoTab">
-        <div class="contentSalamJobInfo" style="margin-top: -27px; margin-left: -22px;">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="homeindex.php" method="post">
-        <div class="salam-details">
-
-        </div></form></div></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Salam',function(){ 
-            var jobregister_id = $(this).data('id');
-            var type_id = $(this).data('type_id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxhome.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id},
-            success: function (response) {
-            // Add response in Modal body
-            $('.salam-details').html(response);
-            // Display Modal
-            $('#doubleClick-Salam').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-             <!-- Double click Job Assign -->
-        <input type="radio" name="tabDoingSalam" id="tabDoingSalam3">
-        <label for="tabDoingSalam3" class="tabHeadingSalam">Job Assign</label>
-        <div class="tab" id="SalamJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="jobassignADMIN.php" method="post">
-        <div class="salam-assign">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Salam',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'jobassignADMIN.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.salam-assign').html(response);
-            // Display Modal
-            $('#doubleClick-Salam').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Update-->
-        <input type="radio" name="tabDoingSalam" id="tabDoingSalam2">
-        <label for="tabDoingSalam2" class="tabHeadingSalam">Update</label>
-        <div class="tab" id="SalamJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxtechupdateadmin.php" method="post">
-        <div class="salam-update">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Salam',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechupdateadmin.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.salam-update').html(response);
-            // Display Modal
-            $('#doubleClick-Salam').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Accessories -->
-        <input type="radio" name="tabDoingSalam" id="tabDoingSalam4">
-        <label for="tabDoingSalam4" class="tabHeadingSalam">Accessories</label>
-        <div class="tab" id="SalamJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxtabaccessories.php" method="post">
-        <div class="salam-accessories">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Salam',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtabaccessories.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.salam-accessories').html(response);
-            // Display Modal
-            $('#doubleClick-Salam').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Photo-->
-        <input type="radio" name="tabDoingSalam" id="tabDoingSalam5">
-        <label for="tabDoingSalam5" class="tabHeadingSalam">Photo</label>
-        <div class="tab" id="SalamJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="salam-photos">
-
-        </div></form></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Salam',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechphtoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.salam-photos').html(response);
-            // Display Modal
-            $('#doubleClick-Salam').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
- <!--Double click Video-->
-
-        <input type="radio" name="tabDoingSalam" id="tabDoingSalam7">
-        <label for="tabDoingSalam7" class="tabHeadingSalam">Video</label>
-        <div class="tab" id="SalamJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxtechvideoupdt.php" method="post">
-        <div class="salam-video">
-
-        </div></form></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Salam',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechvideoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.salam-video').html(response);
-            // Display Modal
-            $('#doubleClick-Salam').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-        
-
-               <!--Double click Report-->
-        <input type="radio" name="tabDoingSalam" id="tabDoingSalam6">
-        <label for="tabDoingSalam6" class="tabHeadingSalam"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Salam').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
-        <div class="salam-report">
-
-        </div></form></div>
-
-        <!-- div for doubleclick and tabs -->
-        </div></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Salam',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreportadmin.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.salam-report').html(response);
-            // Display Modal
-            $('#doubleClick-Salam').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
-            <!-- END OF SALAM -->
-
+          
+    
             <!-- TECK -->
 
-            <div class="" >
-			<div class="row">
                 <div class="box" id="myModal">
             <div class="left-side">
             <div class="box_topic">Teck</div>
@@ -5084,7 +4779,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>
 
-            <div class="Teck" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Teck"  ondblclick="document.getElementById('doubleClick-Teck').style.display='block'">
+            <div class="Teck" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Teck"  ondblclick="document.getElementById('doubleClick-Teck').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -5120,12 +4815,13 @@ if(!isset($_SESSION['username']))
             $('body').on('click','.Teck',function(){ 
             var jobregister_id = $(this).data('id');
             var type_id = $(this).data('type_id');
+            var customer_name = $(this).data('customer_name');
 
             // AJAX request
             $.ajax({
             url: 'ajaxhome.php',
             type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id},
+            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
             // Add response in Modal body
             $('.teck-details').html(response);
@@ -5394,7 +5090,7 @@ if(!isset($_SESSION['username']))
             while($row = $results->fetch_assoc()) {
             ?>
 
-            <div class="Aizat" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Aizat" ondblclick="document.getElementById('doubleClick-Aizat').style.display='block'">
+            <div class="Aizat" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Aizat" ondblclick="document.getElementById('doubleClick-Aizat').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
             <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -5429,12 +5125,13 @@ if(!isset($_SESSION['username']))
             $('body').on('click','.Aizat',function(){ 
             var jobregister_id = $(this).data('id');
             var type_id = $(this).data('type_id');
+            var customer_name = $(this).data('customer_name');
 
             // AJAX request
             $.ajax({
             url: 'ajaxhome.php',
             type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id},
+            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function(response) {
             // Add response in Modal body
             $('.aizat-details').html(response);
@@ -5696,7 +5393,7 @@ if(!isset($_SESSION['username']))
                                     while($row = $results->fetch_assoc()) {
                                 ?>
 
-                            <div class="Boon" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Boon"  ondblclick="document.getElementById('doubleClick-Boon').style.display='block'">
+                            <div class="Boon" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Boon"  ondblclick="document.getElementById('doubleClick-Boon').style.display='block'">
                             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                             <ul class="b" id="draged">
                                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -5735,11 +5432,14 @@ if(!isset($_SESSION['username']))
                                 $('body').on('click','.Boon',function(){
                                     var jobregister_id = $(this).data('id');
                                     var type_id = $(this).data('type_id');
+                                    var customer_name = $(this).data('customer_name');
                                     // AJAX request
                                     $.ajax({
                                         url: 'ajaxhome.php',
                                         type: 'post',
-                                        data: {jobregister_id: jobregister_id, type_id: type_id},
+                                        data: {jobregister_id: jobregister_id,
+															  type_id: type_id,
+															  customer_name: customer_name},
                                         success: function (response) {
                                             // Add response in Modal body
                                             $('.boon-details').html(response);
@@ -6004,7 +5704,7 @@ if(!isset($_SESSION['username']))
                                     while($row = $results->fetch_assoc()) {
                                 ?>
                                 
-                            <div class="Hafiz" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hafiz"  ondblclick="document.getElementById('doubleClick-Hafiz').style.display='block'">
+                            <div class="Hafiz" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hafiz"  ondblclick="document.getElementById('doubleClick-Hafiz').style.display='block'">
                             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                             <ul class="b" id="draged">
                                 <strong text-align="center"><?php echo $row['job_order_number']?></strong>
@@ -6045,11 +5745,14 @@ if(!isset($_SESSION['username']))
                             $('body').on('click','.Hafiz',function(){
                                 var jobregister_id = $(this).data('id');
                                 var type_id = $(this).data('type_id');
+                                var customer_name = $(this).data('customer_name');
                                 // AJAX request
                                 $.ajax({
                                     url: 'ajaxhome.php',
                                     type: 'post',
-                                    data: {jobregister_id: jobregister_id, type_id: type_id},
+                                   data: {jobregister_id: jobregister_id,
+															  type_id: type_id,
+															  customer_name: customer_name},
                                     success: function (response) {
                                         // Add response in Modal body
                                         $('.hafiz-details').html(response);
