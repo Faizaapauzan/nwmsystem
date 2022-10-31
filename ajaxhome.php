@@ -142,8 +142,7 @@
                       $customer_name =$_POST['customer_name'];
                       $type_id =$_POST['type_id'];
             
-                      $query = ("SELECT * FROM machine_list 
-                                 WHERE type_id ='$type_id'");
+                      $query = ("SELECT * FROM machine_list WHERE type_id ='$type_id' AND customer_name ='$customer_name'");
 
                       $query_run = mysqli_query($conn, $query);
                       while ($rows = mysqli_fetch_array($query_run)) {
