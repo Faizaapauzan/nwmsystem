@@ -313,18 +313,20 @@ if(!isset($_SESSION['username']))
                             <?php
                                 include 'dbconnect.php';
                                 $results = $conn->query("SELECT * FROM job_register WHERE
-                                                        (accessories_required = '' AND job_status = 'NULL' AND job_assign = 'NULL' AND job_cancel = 'NULL'
+                                                        (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                            OR
+                                                         accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                                                             OR
                                                          accessories_required = 'NO' AND job_status = 'NULL' AND job_assign = 'NULL' AND job_cancel = 'NULL'
                                                             OR
-                                                         staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = 'NULL'
+                                                         staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
                                                             OR
                                                          job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                                                         ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                 $numRow = "SELECT * FROM job_register WHERE
-                                                    (accessories_required = '' AND job_status = 'NULL' AND job_assign = 'NULL' AND job_cancel = 'NULL'
+                                                    (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                                                         OR
-                                                     accessories_required = 'NO' AND job_status = 'NULL' AND job_assign = 'NULL' AND job_cancel = 'NULL'
+                                                     accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                                                         OR
                                                      staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
                                                         OR
