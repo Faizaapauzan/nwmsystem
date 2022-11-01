@@ -1301,9 +1301,9 @@ include 'dbconnect.php';
     <div class="CodeDropdown">
     <label for="Accessories Required" class="details">Accessories Required</label><br/>
     <select type="text" id="accessories_required" name="accessories_required">
-    <option value=''></option>
-    <option value="Yes">Yes</option>
     <option value="No">No</option>
+    <option value="Yes">Yes</option>
+ 
     </select>
     </div>
 
