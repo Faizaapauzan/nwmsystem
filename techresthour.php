@@ -176,7 +176,7 @@ $_SESSION['storeDate'] = $today_date;
 <!-- DISPLAY REST HOUR IN AND OUT -->
     <?php
         include 'dbconnect.php';
-        $results = $conn->query("SELECT * FROM technician_resthour WHERE technician= '{$_SESSION['username']}' AND today_date = '{$_SESSION['storeDate']}' ORDER BY resthour_id DESC");
+        $results = $conn->query("SELECT * FROM technician_resthour WHERE technician = '{$_SESSION['username']}' AND today_date = '{$_SESSION['storeDate']}' ORDER BY resthour_id DESC");
         while($row = $results->fetch_assoc()) {
     ?>
     

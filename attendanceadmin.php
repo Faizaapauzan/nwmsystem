@@ -1,5 +1,8 @@
 <?php
  session_start();
+$att_date = date("d-m-Y");
+$_SESSION['storeDate'] = $att_date;
+
  // cek apakah yang mengakses halaman ini sudah login
  if($_SESSION['staff_position']=="" ){
   header("location:index.php?error");
@@ -35,7 +38,7 @@ require_once 'dbconnect.php';
  
 
 // Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register WHERE job_cancel = 'YES'"); 
+$query   = $conn->query("SELECT COUNT(*) as rowNum FROM admin_attendace WHERE att_date = '{$_SESSION['storeDate']}'");  
 $result  = $query->fetch_assoc(); 
 $rowCount= $result['rowNum']; 
  
@@ -48,7 +51,7 @@ $pagConfig = array(
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER BY jobregister_id ASC"); 
+$query = $conn->query("SELECT * FROM admin_attendace"); 
 ?>
 
 
@@ -56,18 +59,20 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
 <html>
 
 <head>
-    <meta name="keywords" content="" />
+   <meta name="keywords" content="" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NWM Canceled Job</title>
+    <title>Technician Attendance</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <link href="css/homepage.css" rel="stylesheet" />
     <link href="css/machine.css" rel="stylesheet" />
-    <link href="css/jobcanceled.css" rel="stylesheet" />
-
     <script src="js/number.js" type="text/javascript" defer></script>
+    <script src="js/form-validation.js"></script>
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
+        <!-- Select2 CSS --> 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
    
    <!-- Script -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -77,6 +82,8 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Select2 JS --> 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
@@ -85,10 +92,8 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-
 <body>
 
-            
   <div class="sidebar close">
     <div class="logo-details">
 	    <img src="neo.png" height="65" width="75"></img>
@@ -227,69 +232,67 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
 
 
   </div>
-
+    
     <!--Home navigation-->
     <section class="home-section">
     <nav>
-                <div class="home-content">
-                      <i class='bx bx-menu' ></i>
-                          <a>
-						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                          </a>
-
-                 </div>
-
+    <div class="home-content">
+    <i class='bx bx-menu' ></i>
+    <a>
+	<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
+    </a>
+    </div>
     </nav>  
 
+    <?php
+      include 'dbconnect.php';
+    ?>
 
-        <!--Canceled Job List-->
-
-        <div class="jobTypeList">
-            <h1>Canceled Job List</h1>
-            <div class="addJobTypeBtn">
-            <button class="btn-reset" onclick="document.location='jobcanceled.php'">Refresh</button>
-            </div>
+ 
+        <!--START MACHINE LIST-->
+        <div class="machineList">
+        <h1>Attendance</h1>
+        <div class="addMachineBtn" style="margin-left: 1320px;">
+        <button class="btn-reset" onclick="document.location='attendanceadmin.php'">Refresh</button>
+        </div>
 
         <div class="datalist-wrapper">    
         <div class="col-lg-12" style="border: none;">
 
-        <table class="table table-striped sortable">
-<thead>
+    <table class="table table-striped sortable">
+    <thead>
     <tr>
-    <th>No</th>
-    <th>Job Order Number</th>
-    <th>Customer Name</th>
-    <th>Requested Date</th>
-    <th>Action</th>
-    
-    </tr>
-</thead>
-<tbody>
+    <th>Date</th>
+    <!-- <th>No</th> -->
+    <th>Technician Name</th>
+    <th>Clock In</th>
+    <th>Clock Out</th>
+    <th>Rest In</th>
+    <th>Rest Out</th>
+    </thead>
+
+    <tbody>
     <?php 
             if($query->num_rows > 0){ $i=0; 
                 while($row = $query->fetch_assoc()){ $i++; 
             ?>
      
     <tr>
-        <td><?php echo $i; ?></td>
-        <td><?php echo $row["job_order_number"]; ?></td>
-        <td><?php echo $row["customer_name"]; ?></td>
-        <td><?php echo $row["requested_date"]; ?></td>
-        <td><div class='jobTypeUpdateDeleteBtn'>
-<button data-jobregister_id="<?php echo $row['jobregister_id'];?>" class='userinfo' type='button' id='btnView'>View</button>
-<button data-jobregister_id="<?php echo $row['jobregister_id'];?>" class='updateinfo' type='button' id='btnEdit'>Update</button>
-</div>
-</td>
-       
-
-    </tr>
- <?php 
+        <td><?php echo $row["att_date"]; ?></td>
+        <!-- <td><?php echo $i; ?></td> -->
+        <td><?php echo $row["techname"]; ?></td>
+        <td><?php echo $row["clock_in"]; ?></td>
+        <td><?php echo $row["clock_out"]; ?></td>
+        <td><?php echo $row["tech_out"]; ?></td>
+        <td><?php echo $row["tech_in"]; ?></td> 
+        </tr>
+        <?php 
                 } 
             }else{ 
                 echo '<tr><td colspan="6">No records found...</td></tr>'; 
             } 
             ?>
-</tbody>
+        </tbody>
         </table>
 		
 
@@ -305,88 +308,8 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
 
 </script>
 
-          <!--Update Job Canceled -->
-
-            <div class="modal fade" id="empModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-
-            <div class="jobTypePopup">
-            <div class="contentjobTypePopup">
-            <div class="title">Canceled Job</div>
-            <div class="jobType-details">
-            <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-            </div>         
-            <div class="modal-body">                         
-            </div>
-            </div>
-
-            <script type='text/javascript'>
-                $(document).ready(function() {
-                $('body').on('click','.updateinfo',function(){
-                var jobregister_id = $(this).data('jobregister_id');
-                // AJAX request
-                $.ajax({
-                    url: 'updatejobcancel.php',
-                    type: 'post',
-                    data: { jobregister_id: jobregister_id },
-                    success: function(response) {
-                // Add response in Modal body
-                    $('.modal-body').html(response);
-                // Display Modal
-                    $('#empModal').modal('show');
-                                    }
-                                });
-                            });
-                        });
-            </script>
-
-        <!-- View Modal -->
-       <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="jobTypePopup">
-        <div class="contentjobTypePopup">
-        <div class="title">Canceled Job</div>
-        <div class="jobType-details">
-        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-        </div>            
-        <div class="modal-body">
-        <h5>Canceled Job Info</h5>  
-        </div>
-        </div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.userinfo',function(){           
-            var userid = $(this).data('jobregister_id');
-
-        // AJAX request
-            $.ajax({
-                url: 'ajaxjobcanceled.php',
-                type: 'post',
-                data: { userid: userid },
-                success: function(response) {
-        // Add response in Modal body
-                $('.modal-body').html(response);
-        // Display Modal
-                $('#empModal').modal('show');
-                                    }
-                                });
-                            });
-                        });
-        </script>
-
-
-
-
 
     </section>
-
   <script>
   let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -402,5 +325,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
     sidebar.classList.toggle("close");
   });
   </script>
+
 </body>
+
 </html>

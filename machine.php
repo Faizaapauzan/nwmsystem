@@ -111,17 +111,17 @@ $query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC");
         </ul>
       </li>
 
-      <li>
-        <div class="iocn-link">
-          <a href="accessoriesregister.php">
-            <i class='bx bx-spreadsheet' ></i>
-            <span class="link_name">Job Accessories</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="accessoriesregister.php">Job Accessories</a></li>
-        </ul>
-      </li>
+       <li>
+                <div class="iocn-link">
+                    <a href="attendanceadmin.php">
+                        <i class='bx bx-calendar-check' ></i>
+                        <span class="link_name">Attendance</span>
+                    </a>
+                </div>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
+                </ul>
+            </li>
 
       <li>
         <div class="iocn-link">
