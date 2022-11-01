@@ -14,6 +14,8 @@ include 'dbconnect.php';
     JOIN machine_brand ON machine_type.brand_id=machine_brand.brand_id
     WHERE machine_list.machine_id = $machine_id";
 
+        // $query = "SELECT * FROM machine_list WHERE machine_id = $machine_id";
+
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
@@ -64,7 +66,7 @@ include 'dbconnect.php';
     <?php
 
                 $query = "select * from machine_list";
-                $result = $connection->query($query);
+                $result = $conn->query($query);
                 if ($result->num_rows > 0) {
                     while ($rowm = mysqli_fetch_assoc($result)) {
 
@@ -89,26 +91,48 @@ include 'dbconnect.php';
     <input type="text" id="machineCode" name="machine_code" value="<?php echo $row['machine_code']?>">
     </div>
 
-    <div class="input-box">
+        <div class="input-box">
+    <label for="PurchaseDate" class="details">Purchase Date</label>
+    <input type="date" id="PurchaseDate" name="purchase_date" class="form-control" value="<?php echo $row['purchase_date'] ?>">
+    </div>
+
+    <div class="input-box" style="width: 541px;">
     <label for=""> Machine Name </label>
     <input type="text" style="width: 100%;" id="machineName" name="machine_name" value="<?php echo $row['machine_name']?>">
     </div>
 
   
-    <div class="input-box">
-    <label for="" class="details">Customer Name</label>
-    <input type="text" style="width: 100%;" id="customerName" name="customer_name" value="<?php echo $row['customer_name']?>">
-    </div>
 
-    <div class="input-box">
-    <label for="PurchaseDate" class="details">Purchase Date</label>
-    <input type="date" id="PurchaseDate" name="purchase_date" class="form-control" value="<?php echo $row['purchase_date'] ?>">
-    </div>
 
-    <div class="input-box">
-    <label for="" class="details"></label>
-    <input type="hidden" id="" name="" class="form-control" value="">
-    </div>
+    <div class="input-box" style="width: 541px;">
+
+    <label for="type"> Customer Name</label><br>
+    <select class="form-select" id="customername" onchange="GetCustomerName(this.value)">
+    <option value=""> <?php echo $row['customer_name']?> </option>
+    <?php
+     $querycust = "select * from customer_list";
+    $result = $conn->query($querycust);
+      if ($result->num_rows > 0) {
+       while ($rowc = mysqli_fetch_assoc($result)) { ?>
+    <option value="<?php echo $rowc['customer_id']; ?>"><?php echo $rowc['customer_name']; ?></option>
+    <?php } }  ?>
+
+    </select></div>
+
+           <script>
+        $(document).ready(function(){
+            
+            // Initialize select2
+            $("#customername").select2();
+
+        });
+        </script>
+
+
+
+    <input type="hidden" id="custname" name="customer_name" onchange="GetCustomerName(this.value)" value="<?php echo $row['customer_name']?>">
+
+
 
     <div class="input-box">
     <label for="">Machine Description</label>
@@ -118,7 +142,38 @@ include 'dbconnect.php';
      <button type="submit" name="update" class="btn btn-primary"> Update Data </button>
      </div></form></div></div>
 
-   
+   <script>
+
+		function GetCustomerName(str) {
+			if (str.length == 0) {
+				document.getElementById("custname").value = "";
+               
+				return;
+			}
+			else {
+
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						var myObj = JSON.parse(this.responseText);
+						
+						document.getElementById
+							("custname").value = myObj[0];
+
+                            
+					}
+				};
+
+				// xhttp.open("GET", "filename", true);
+				xmlhttp.open("GET", "fetchcustomername.php?customer_id=" + str, true);
+				
+				// Sends the request to the server
+				xmlhttp.send();
+			}
+		}
+	</script>
 
              <script>
         $(document).ready(function() {

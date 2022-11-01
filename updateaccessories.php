@@ -67,7 +67,7 @@ include 'dbconnect.php';
                         $accessorieslistlasmodify_by = $_POST['accessorieslistlasmodify_by'];
 
                         $query = "UPDATE accessories_list SET accessories_code='$accessories_code', accessories_name='$accessories_name', accessories_uom='$accessories_uom', accessories_brand=' $accessories_brand', accessories_description='$accessories_description', file_name='$file_name', accessorieslistlasmodify_by='$accessorieslistlasmodify_by' WHERE accessories_id='$accessories_id'  ";
-                        $query_run = mysqli_query($connection, $query);
+                        $query_run = mysqli_query($conn, $query);
 
                         if ($query_run) {
                             echo '<script> alert("Data Updated"); </script>';
