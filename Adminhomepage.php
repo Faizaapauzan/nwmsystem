@@ -313,11 +313,19 @@ if(!isset($_SESSION['username']))
                             <?php
                                 include 'dbconnect.php';
                                 $results = $conn->query("SELECT * FROM job_register WHERE
-                                                        (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
+                                                        (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = ''
+                                                            OR
+                                                         accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
+                                                            OR
+                                                         accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = ''
                                                             OR
                                                          accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL
                                                             OR
+                                                         staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = ''
+                                                            OR
                                                          staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL
+                                                            OR
+                                                         job_assign = '' AND job_status = 'Ready' AND job_cancel = ''
                                                             OR
                                                          job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)
                                                         ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
