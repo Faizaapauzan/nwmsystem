@@ -30,7 +30,7 @@ include 'dbconnect.php';
     <p style="margin-left: 20px;margin-top: 1px;margin-bottom: 11px;" class="control"><b id="assignupdateadminmessage"></b></p>
     <div class="input-box" style="display:flex; width: 541px">
     
-    <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
+    <select id="jobassignto" onchange="GetJobAss(this.value)"> <option value=""> <?php echo $row['job_assign']?> </option>
       
       <?php
         include "dbconnect.php";  // Using database connection file here
