@@ -1,7 +1,11 @@
 <?php
     session_start();
-    $storeDate = date("d.m.Y");
+    $storeDate = date("d-m-Y");
     $_SESSION['storeDate'] = $storeDate;
+    
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    $RestTime = date('g:i A');
+    $_SESSION['resttime'] = $RestTime; 
 ?>
 
 <!DOCTYPE html>
@@ -22,10 +26,12 @@
           if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
-    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+
+      <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
       <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
       <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
       <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
+      <input type="hidden" name="today_date" value="<?php echo  $_SESSION['storeDate'] ?>">
       
     <?php } } } ?>
 
@@ -45,9 +51,9 @@
 
     <input type="hidden" name="job_status" value="Doing">
     <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-      <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
-      <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
- <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+    <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
+    <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
+    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
      
       <label><?php echo $row['job_assign'] ?></label><br>
       <label><?php echo $row['customer_name'] ?></label><br>
@@ -140,7 +146,7 @@
         <label for="">Rest Hour</label>
         <div class="out-time" style="display: flex; align-items: baseline;">
           <input type="text" class="technician_leaving" name="tech_out" id="tech_out" value="<?= $row['tech_out']; ?>">
-          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="OUT" onclick="tech_outs()">
+          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="OUT" onclick="tech_outs(); RestOut2()">
           
               <script type="text/javascript">
                   function tech_outs()
@@ -152,10 +158,41 @@
                       })
                     }
               </script>
+
+              <script type="text/javascript">
+                function RestOut2()
+                {
+                  var tech_out = $('input[name=tech_out]').val();
+                  var technician = $('input[name=job_assign]').val();
+                  var today_date = $('input[name=today_date]').val();
+                  
+                  if(tech_out!='' || tech_out=='',
+                  technician!='' || technician=='',
+                  today_date!='' || today_date=='')
+                 
+                 {
+                  var formData = {tech_out:tech_out,
+                                technician:technician,
+                                today_date:today_date};
+                  
+                  $.ajax({
+                            url: "techoutupdate2.php",
+                            type: 'POST',
+                            data: formData,
+                            success: function(response)
+                              {
+                                var res = JSON.parse(response);
+                                console.log(res);
+                              }
+                            });
+                          }
+                        } 
+              </script>
         </div>
-        <div class="in-time" style="display: flex; align-items: baseline;">  
-          <input type="text" class="technician_leaving" name="tech_in" id="tech_in" value="<?= $row['tech_in']; ?>">
-          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="IN" onclick="tech_ins()">
+        <div class="in-time" style="display: flex; align-items: baseline;">
+          <input type="hidden" name="tech_in" value="<?php echo $_SESSION["resttime"] ?>">  
+          <input type="text" class="technician_leaving" id="tech_in" value="<?= $row['tech_in']; ?>">
+          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="IN" onclick="tech_ins(); RestIn2()">
           
               <script type="text/javascript">
                   function tech_ins()
@@ -166,6 +203,36 @@
                         }
                       })
                     }
+              </script>
+
+              <script type="text/javascript">
+                   function RestIn2()
+                  {
+                    var tech_in = $('input[name=tech_in]').val();
+                    var technician = $('input[name=job_assign]').val();
+                    var today_date = $('input[name=today_date]').val();
+                    
+                    if(tech_in!='' || tech_in=='',
+                    technician!='' || technician=='',
+                    today_date!='' || today_date=='')
+                  
+                  {
+                    var formData = {tech_in:tech_in,
+                                 technician:technician,
+                                 today_date:today_date};
+                    
+                    $.ajax({
+                              url: "techinupdate2.php",
+                              type: 'POST',
+                              data: formData,
+                              success: function(response)
+                                {
+                                  var res = JSON.parse(response);
+                                  console.log(res);
+                                }
+                              });
+                            }
+                          } 
               </script>
         
         </div>
