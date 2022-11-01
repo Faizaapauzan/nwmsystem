@@ -44,7 +44,7 @@ include 'dbconnect.php';
         while($data = mysqli_fetch_array($records))
         {
             echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";  // displaying data in option menu
-            // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+
         }	
       ?>
 
