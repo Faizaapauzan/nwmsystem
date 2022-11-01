@@ -23,7 +23,7 @@ include 'dbconnect.php';
 
 <!-- ASSIGN TECHNICIAN -->
 
-  <form id="assignupdate_form" method="post">
+  <form action="assigntechindex.php" id="assignupdate_form" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
    
     <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br/>
@@ -64,31 +64,56 @@ include 'dbconnect.php';
   
     <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-    <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update"/>
-    </div>
+     <button type="submit" name="submitassign" class="btn btn-primary"> Update Data </button>
+    
+    <!-- <input type="button" name="submitassign" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" onclick="submitAssign();" value="Update"/>
+     -->
+  </div>
     </form>
-  
-  <script>
-      $(document).ready(function () {
-      $('#technicianassign').click(function () {
-        var data = $('#assignupdate_form').serialize() + '&technicianassign=technicianassign';
-        $.ajax({
-                  url: 'assigntechindex.php',
-                  type: 'post',
-                  data: data,
-                  success: function(response)
-                    {
-                      var res = JSON.parse(response);
-                      console.log(res);
-                      if(res.success == true)
-                      $('#assignupdateadminmessage').html('<span style="color: green">Job Assigned!</span>');
-                      else
-                      $('#assignupdateadminmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
-                    }
-                });
-      });
-      });
-  </script>
+
+    <!-- script to save technician name -->
+  <!-- <script type="text/javascript">
+      function submitAssign()
+        {
+          var job_assign = $('input[name=job_assign]').val();
+          var technician_rank = $('input[name=technician_rank]').val();
+          var staff_position = $('input[name=staff_position]').val();
+          var DateAssign = $('input[name=DateAssign]').val();
+          var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
+
+          if(job_assign!='' || job_assign=='',
+          technician_rank!='' || technician_rank=='',
+          staff_position!='' || staff_position=='',
+           DateAssign!='' || DateAssign=='',
+             jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='')
+             
+             {
+              var formData = {job_assign: job_assign, 
+                technician_rank: technician_rank, 
+                staff_position: staff_position, 
+                DateAssign: DateAssign, 
+                jobregisterlastmodify_by: jobregisterlastmodify_by};
+                                
+                                $.ajax({
+                                  url: "assigntechindex.php", 
+                                  type: 'POST',
+                                  data: formData,
+                                  success: function(response)
+                                  {
+                                    var res = JSON.parse(response);
+                                    console.log(res);
+                                    if(res.success == true)
+                                     $('#assignupdateadminmessage').html('<span style="color: green">Attendance Saved!</span>');
+                                    else
+                                    $('#assignupdateadminmessage').html('<span style="color: red">Update Cannot Be Saved</span>');
+                                  }
+                                });
+                              }
+                            }
+  </script> -->
+<!-- script to save technician name -->
+
+
 <!-- ASSIGN TECHNICIAN -->
 
 <!-- ASSIGN ASSISTANT -->
