@@ -1,3 +1,9 @@
+<?php
+session_start();
+$today_date = date("d-m-Y");
+$_SESSION['storeDate'] = $today_date;
+?>
+
 <!DOCTYPE html>
 <head>
   <meta name="keywords" content=""/>
@@ -229,10 +235,12 @@
     
     <label>Rest Hour</label>
     <input type="hidden" name="tech_out" value="<?php echo $_SESSION["resttime"] ?>">
+    <input type="hidden" name="technician" value="<?php echo $_SESSION['username'] ?>">
+    <input type="hidden" name="today_date" value="<?php echo $_SESSION['storeDate'] ?>">
     <div class="input-group mb-3">
       <input readonly type="text" style="position: static;" class="form-control" id="tech_out"  value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
       <div class="input-group-append">
-        <button class="buttonbiru" onclick="tech_outs();RestOut();" style="position: static; width: fit-content;" type="button">OUT</button>
+        <button class="buttonbiru" onclick="tech_outs();RestOut();RestOut2();" style="position: static; width: fit-content;" type="button">OUT</button>
       </div>
       
           <script type="text/javascript">
@@ -272,6 +280,36 @@
                           }
                         } 
           </script>
+
+          <script type="text/javascript">
+              function RestOut2()
+                {
+                  var tech_out = $('input[name=tech_out]').val();
+                  var technician = $('input[name=technician]').val();
+                  var today_date = $('input[name=today_date]').val();
+                  
+                  if(tech_out!='' || tech_out=='',
+                  technician!='' || technician=='',
+                  today_date!='' || today_date=='')
+                 
+                 {
+                  var formData = {tech_out:tech_out,
+                                technician:technician,
+                                today_date:today_date};
+                  
+                  $.ajax({
+                            url: "techoutupdate2.php",
+                            type: 'POST',
+                            data: formData,
+                            success: function(response)
+                              {
+                                var res = JSON.parse(response);
+                                console.log(res);
+                              }
+                            });
+                          }
+                        } 
+          </script>
         
     </div>
     
@@ -279,7 +317,7 @@
       <input type="hidden" name="tech_in" value="<?php echo $_SESSION["resttime"] ?>">
       <input readonly type="text" style="position: static;" class="form-control" id="tech_in"  value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
       <div class="input-group-append">
-        <button class="buttonbiru" onclick="tech_ins(); RestIn();" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
+        <button class="buttonbiru" onclick="tech_ins(); RestIn(); RestIn2();" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
       </div>
       
             <script type="text/javascript">
@@ -306,6 +344,34 @@
                     
                     $.ajax({
                               url: "techinupdate.php",
+                              type: 'POST',
+                              data: formData,
+                              success: function(response)
+                                {
+                                  var res = JSON.parse(response);
+                                  console.log(res);
+                                }
+                              });
+                            }
+                          } 
+
+                  function RestIn2()
+                  {
+                    var tech_in = $('input[name=tech_in]').val();
+                    var technician = $('input[name=technician]').val();
+                    var today_date = $('input[name=today_date]').val();
+                    
+                    if(tech_in!='' || tech_in=='',
+                    technician!='' || technician=='',
+                    today_date!='' || today_date=='')
+                  
+                  {
+                    var formData = {tech_in:tech_in,
+                                 technician:technician,
+                                 today_date:today_date};
+                    
+                    $.ajax({
+                              url: "techinupdate2.php",
                               type: 'POST',
                               data: formData,
                               success: function(response)
