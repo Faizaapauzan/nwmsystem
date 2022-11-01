@@ -191,9 +191,10 @@ session_start();
 						
 						$query = "SELECT * FROM job_register
 						WHERE
-						job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing' AND job_cancel IS NULL
-						ORDER BY jobregisterlastmodify_at
-						DESC LIMIT 50";
+						(job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing' AND job_cancel IS NULL)
+						OR
+						(job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing' AND job_cancel = '')
+						ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
 						$result = mysqli_query($conn, $query);
 						
 						$customer_name = '';

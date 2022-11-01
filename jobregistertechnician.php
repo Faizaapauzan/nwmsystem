@@ -123,8 +123,9 @@ include 'dbconnect.php';
 	<input type="hidden" name="cust_phone1" id="cust_phone1" class="form-control" placeholder='Enter Customer Phone'>
 	<input type="hidden" name="cust_phone2" id="cust_phone2" class="form-control" placeholder='Enter Customer Phone'>
 	<input type="hidden" name="cust_address1" id="cust_address1" class="form-control" placeholder='Enter Customer Address'>
-  <input type="hidden" name="cust_address2" id="cust_address2" class="form-control" placeholder='Address 2'>
-  <input type="hidden" name="cust_address3" id="cust_address3" class="form-control" placeholder='Address 3'>
+    <input type="hidden" name="cust_address2" id="cust_address2" class="form-control" placeholder='Address 2'>
+    <input type="hidden" name="cust_address3" id="cust_address3" class="form-control" placeholder='Address 3'>
+    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>">
 	</div>
 
     
