@@ -127,7 +127,7 @@ $_SESSION['storeDate'] = $today_date;
     <div class="input-box">
       <label style="font-size: 15px;">Technician: </label>
         <?php if (isset($_SESSION["username"])) ?>
-        <input type="text" name="techname" id="technician" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>  
+        <input type="text" name="technician" id="technician" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>  
         <input type="hidden" name="today_date" id='today_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
     </div>
     </div>
@@ -144,14 +144,14 @@ $_SESSION['storeDate'] = $today_date;
   <script type="text/javascript">
       function submitFormrest()
         {
-          var techname = $('input[name=techname]').val();
+          var technician = $('input[name=technician]').val();
           var today_date = $('input[name=today_date]').val();
 
-          if(techname!='' || techname=='',
+          if(technician!='' || technician=='',
              today_date!='' || today_date=='')
              
              {
-              var formData = {techname: techname,
+              var formData = {technician: technician,
                               today_date: today_date};
                                 
                                 $.ajax({
@@ -176,7 +176,7 @@ $_SESSION['storeDate'] = $today_date;
 <!-- DISPLAY REST HOUR IN AND OUT -->
     <?php
         include 'dbconnect.php';
-        $results = $conn->query("SELECT * FROM technician_resthour WHERE techname= '{$_SESSION['username']}' AND today_date = '{$_SESSION['storeDate']}' ORDER BY resthour_id DESC");
+        $results = $conn->query("SELECT * FROM technician_resthour WHERE technician = '{$_SESSION['username']}' AND today_date = '{$_SESSION['storeDate']}' ORDER BY resthour_id DESC");
         while($row = $results->fetch_assoc()) {
     ?>
     
@@ -189,7 +189,7 @@ $_SESSION['storeDate'] = $today_date;
     
     <!-- technician -->
     <div style=" position: static; font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['today_date']; ?></div>
-    <label style="position: static; font-weight: 600; font-size: 20px;"><?= $row['techname']; ?></label>
+    <label style="position: static; font-weight: 600; font-size: 20px;"><?= $row['technician']; ?></label>
     <div style="position: static; width: fit-content;" class="input-group mb-3">
     <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
