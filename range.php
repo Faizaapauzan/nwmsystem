@@ -52,7 +52,8 @@
             <div class='jobTypeUpdateDeleteBtn'>
             <button data-id="<?php echo $fetch["jobregister_id"]; ?>" data-id3="<?php echo $fetch["servicereport_id"]; ?>" class='viewinfo' id='btnView' data-target="onClick-View"  onclick="document.getElementById('onClick-View').style.display='block'">View</button>
             <button class="userinfo btn btn-success" type="button" id='btnEdit' data-id='<?php echo $fetch['servicereport_id']; ?>' data-id2='<?php echo $fetch['jobregister_id']; ?>' style="color: #ffffff;">Print</button>
-            </div>
+        <button type="button" class="deletebtn" id='btnDelete' data-id='<?php echo $fetch['servicereport_id']; ?>'>Delete</button>    
+        </div>
         </td>
 	</tr>
   
@@ -128,7 +129,7 @@
                 });
         </script>
 
-        <!-- FOR VIEW SERVICE REPORT-->	
+        <!-- FOR PRINT SERVICE REPORT-->	
 	    <script type='text/javascript'>
         $(document).ready(function(){
         $('.userinfo').click(function(){
@@ -147,6 +148,46 @@
                 });
             });
     </script>
+
+    <!-- FOR DELETE REPORT -->
+  
+
+        <div class="modal fade" id="empModal" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+
+        <div class="MachinePopup">
+        <div class="contentMachinePopup">
+        <div class="title">Delete Report</div>
+        <div class="Machine-details">
+        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
+
+        </div>
+        <div class="modal-body">    
+                          
+        </div></div>
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+            $('body').on('click','.deletebtn',function(){ 
+              var servicereport_id = $(this).data('id');
+
+            // AJAX request
+            $.ajax({
+                url: 'deletereport.php',
+                type: 'post',
+                data: { servicereport_id: servicereport_id },
+                success: function(response) {
+                // Add response in Modal body
+                $('.modal-body').html(response);
+                // Display Modal
+                $('#empModal').modal('show');
+                                    }
+                                });
+                            });
+                        });
+        </script>
+
 
      
  

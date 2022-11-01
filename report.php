@@ -249,7 +249,7 @@ if(!isset($_SESSION['username']))
 					</tr>
 				</thead>
 				<tbody>
-					<?php include'range.php'?>	
+					<?php include 'range.php'?>	
 				</tbody>
 			</table>
 		</div>	
