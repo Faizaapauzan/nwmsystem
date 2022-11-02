@@ -38,7 +38,7 @@ require_once 'dbconnect.php';
  
 
 // Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM admin_attendace WHERE att_date = '{$_SESSION['storeDate']}'");  
+$query   = $conn->query("SELECT COUNT(*) as rowNum FROM tech_update WHERE techupdate_date = '{$_SESSION['storeDate']}'");  
 $result  = $query->fetch_assoc(); 
 $rowCount= $result['rowNum']; 
  
@@ -51,7 +51,7 @@ $pagConfig = array(
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM admin_attendace"); 
+$query = $conn->query("SELECT * FROM tech_update"); 
 ?>
 
 
@@ -278,11 +278,11 @@ $query = $conn->query("SELECT * FROM admin_attendace");
             ?>
      
     <tr>
-        <td><?php echo $row["att_date"]; ?></td>
+        <td><?php echo $row["techupdate_date"]; ?></td>
         <!-- <td><?php echo $i; ?></td> -->
-        <td><?php echo $row["techname"]; ?></td>
-        <td><?php echo $row["clock_in"]; ?></td>
-        <td><?php echo $row["clock_out"]; ?></td>
+        <td><?php echo $row["tech_leader"]; ?></td>
+        <td><?php echo $row["tech_clockin"]; ?></td>
+        <td><?php echo $row["tech_clockout"]; ?></td>
         <td><?php echo $row["tech_out"]; ?></td>
         <td><?php echo $row["tech_in"]; ?></td> 
         </tr>
