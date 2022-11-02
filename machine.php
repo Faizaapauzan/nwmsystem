@@ -394,8 +394,10 @@ $("#branddrop").on("change",function(){
     <form action="" method="post">
     <div class="machine-register">
     <div class="CodeDropdown">
+
+    
     <label for="brand">Machine Brand</label>
-    <select class="form-select" id="brand">
+     <select onchange="GetJenama(this.value)" class="form-select" id="brandMesin" required>
     <option value=""> Select Machine Brand</option>
     <?php
     $querydrop = "select * from machine_brand";
@@ -405,20 +407,90 @@ $("#branddrop").on("change",function(){
     <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
     <?php } }  ?>
 
-    </select></div>
+    </select>
+  <input type="hidden" id="BrandId" name="brand_id" onchange="GetJenama(this.value)" readonly >  
+  <input type="hidden" id="NamaBrand" name="machine_brand" onchange="GetJenama(this.value)" readonly >  
+  </div>
+
+  <script>
+		function GetJenama(str) {
+			if (str.length == 0) {
+                document.getElementById("BrandId").value = "";
+                document.getElementById("NamaBrand").value = "";
+				return;
+			}
+			else {
+
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						var myObj = JSON.parse(this.responseText);
+
+				        document.getElementById
+							("BrandId").value = myObj[0];
+                        document.getElementById
+							("NamaBrand").value = myObj[1];
+            
+					}
+				};
+
+				xmlhttp.open("GET", "fetchbrand.php?brand_id=" + str, true);
+				xmlhttp.send();
+			}
+		}
+	</script>
+
+
+
 
     <div class="CodeDropdown" style="padding-top: 15px;">
     <label for="type"> Machine Type</label><br>
-    <select name="type_id" style="width: 400px; height:40px;" class="form-select" id="type">
+     <select onchange="GetJenis(this.value)" class="form-select" style="width: 400px; height:40px;" id="type" required>
+    <!-- <select name="type_id" style="width: 400px; height:40px;" class="form-select" id="type"> -->
     <option value="">Select Machine Type</option>
-    </select></div> 
+    </select>
+    <input type="hidden" id="IdType" name="type_id" onchange="GetJenis(this.value)" readonly >  
+    <input type="hidden" id="TypeNama" name="machine_type" onchange="GetJenis(this.value)" readonly >  
+    </div> 
+
+      <script>
+		function GetJenis(str) {
+			if (str.length == 0) {
+                document.getElementById("IdType").value = "";
+                 document.getElementById("TypeNama").value = "";
+				return;
+			}
+			else {
+
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						var myObj = JSON.parse(this.responseText);
+
+				        document.getElementById
+							("IdType").value = myObj[0];
+
+                        document.getElementById
+							("TypeNama").value = myObj[1];
+            
+					}
+				};
+
+				xmlhttp.open("GET", "fetchtype.php?type_id=" + str, true);
+				xmlhttp.send();
+			}
+		}
+	</script>
+
 
     <div class="CodeDropdown" style="padding-top: 20px;">
     <label for="sn"> Serial Number </label><br>
-    <!-- <select style="width: 400px; height:40px;"  class="form-select" id="serialnumbers" onchange="GetMachine(this.value)">
-    <option value="">Select Serial Number</option>
-    <option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>
-    </select> -->
     <input type="text" id="serialnumber" name="serialnumber" placeholder="Enter Machine Serial Number">  
     </div> 
  
@@ -535,7 +607,7 @@ $("#branddrop").on("change",function(){
 
          <script>
         $(document).ready(function() {
-            $("#brand").on('change', function() {
+            $("#brandMesin").on('change', function() {
                 var brandid = $(this).val();
 
                 $.ajax({
@@ -559,7 +631,10 @@ $("#branddrop").on("change",function(){
      <script type="text/javascript">
         function submitMachine()
         {
-            var type_id = $('select[name=type_id]').val();
+            var type_id = $('input[name=type_id]').val();
+             var machine_type = $('input[name=machine_type]').val();
+              var brand_id = $('input[name=brand_id]').val();
+               var machine_brand = $('input[name=machine_brand]').val();
             var serialnumber = $('input[name=serialnumber]').val();
              var machine_code = $('input[name=machine_code]').val();
              var machine_name = $('input[name=machine_name]').val();
@@ -571,6 +646,9 @@ $("#branddrop").on("change",function(){
              
             
             if( type_id!='' || type_id=='',
+            machine_type!='' || machine_type=='',
+            brand_id!='' || brand_id=='',
+            machine_brand!='' || machine_brand=='',
                serialnumber!='' || serialnumber=='',
                machine_code!='' || machine_code=='',
                machine_name!='' || machine_name=='',
@@ -583,6 +661,9 @@ $("#branddrop").on("change",function(){
                 
                {
                 var formData = {type_id: type_id,
+                  machine_type: machine_type,
+                  brand_id: brand_id,
+                  machine_brand: machine_brand,
                   serialnumber: serialnumber,
                   machine_code: machine_code,
                   machine_name: machine_name,

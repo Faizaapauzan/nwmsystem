@@ -10,6 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" rel="stylesheet" />
 	  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>	
+
 </head>
 
 <body>
@@ -95,6 +96,7 @@ include 'dbconnect.php';
   <!-- ASSIGN ASSISTANT -->
   <form class="form" id="assignassistant_form" method="post">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+      <input type="hidden" name="ass_date" class="ass_date" value="<?php echo $_SESSION["storeDate"] ?>">
     <input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
     <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
     <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
@@ -147,7 +149,7 @@ include 'dbconnect.php';
         </tbody>
         </table>
         
-        <select name="assistant[]" class="form-control multiple-select" multiple="multiple">
+        <select name="username[]" class="form-control multiple-select" multiple="multiple">
 		        
           <?php
               $query = "SELECT staffregister_id, username, staff_group, technician_rank, tech_avai FROM staff_register 
@@ -304,10 +306,7 @@ include 'dbconnect.php';
     });
   </script>
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

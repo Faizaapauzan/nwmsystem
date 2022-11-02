@@ -36,7 +36,7 @@ include 'dbconnect.php';
 
     <div class="input-box">
     <label for="brand">Machine Brand</label><br>
-    <select class="form-select" id="brandupdate" required>
+     <select onchange="GetBrandUpdate(this.value)" class="form-select" id="brandupdate" required>
     <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
         <?php
 
@@ -49,14 +49,84 @@ include 'dbconnect.php';
     <?php } } ?>
 
     </select>
+
+    <input type="hidden" id="IdUpdateBrand" name="brand_id" onchange="GetBrandUpdate(this.value)" readonly >  
+  <input type="hidden" id="NamaUpdateBrand" name="machine_brand" onchange="GetBrandUpdate(this.value)" readonly >  
+
     </div>
+
+     <script>
+		function GetBrandUpdate(str) {
+			if (str.length == 0) {
+                document.getElementById("IdUpdateBrand").value = "";
+                document.getElementById("NamaUpdateBrand").value = "";
+				return;
+			}
+			else {
+
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						var myObj = JSON.parse(this.responseText);
+
+				        document.getElementById
+							("IdUpdateBrand").value = myObj[0];
+                        document.getElementById
+							("NamaUpdateBrand").value = myObj[1];
+            
+					}
+				};
+
+				xmlhttp.open("GET", "fetchbrand.php?brand_id=" + str, true);
+				xmlhttp.send();
+			}
+		}
+	</script>
+    
 
     <div class="input-box">
     <label for="type"> Machine Type</label><br>
-    <select class="form-select" id="typeupdate" required>
+    <select onchange="GetTypeUpdate(this.value)" class="form-select" id="typeupdate" required>
     <option value="<?php echo $row['type_id']; ?>"><?php echo $row['type_name']; ?></option>
     </select>
+    <input type="hidden" id="IdUpdateType" name="type_id" onchange="GetTypeUpdate(this.value)" readonly >  
+    <input type="hidden" id="TypeUpdateName" name="machine_type" onchange="GetTypeUpdate(this.value)" readonly >  
     </div>
+
+    <script>
+		function GetTypeUpdate(str) {
+			if (str.length == 0) {
+                document.getElementById("IdUpdateType").value = "";
+                 document.getElementById("TypeUpdateName").value = "";
+				return;
+			}
+			else {
+
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function () {
+
+					if (this.readyState == 4 &&
+							this.status == 200) {
+						
+						var myObj = JSON.parse(this.responseText);
+
+				        document.getElementById
+							("IdUpdateType").value = myObj[0];
+
+                        document.getElementById
+							("TypeUpdateName").value = myObj[1];
+            
+					}
+				};
+
+				xmlhttp.open("GET", "fetchtype.php?type_id=" + str, true);
+				xmlhttp.send();
+			}
+		}
+	</script>
 
     <div class="input-box">
     <label for="">Serial Number</label>
