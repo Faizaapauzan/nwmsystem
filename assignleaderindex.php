@@ -1,25 +1,22 @@
-	<?php
-	include 'dbconnect.php';
-	?> 
-	
-
-	<?php
+<?php
+include 'dbconnect.php';
 
     $response = array('success' => false);
 
     if (isset($_POST['updateassign'])) {
 
         $jobregister_id = $_POST['jobregister_id'];
-        $assistant = $_POST['assistant'];
+        $username = $_POST['username'];
+        $ass_date = $_POST['ass_date'];
 
+       $assistantname=implode(",",$username);
+    {
+     
+       $sql = "INSERT INTO assistants (jobregister_id , username , ass_date) VALUES ('$jobregister_id','$assistantname','$ass_date')";
        
-        foreach ($assistant as $assistantlist)
+    
 
-        {
-
-            $sql = "INSERT INTO assistants (jobregister_id , username) VALUES ('$jobregister_id','$assistantlist')";
-
-             if($conn->query($sql))
+ if($conn->query($sql))
         {
             $response['success'] = true;
         }
@@ -32,6 +29,4 @@
 
 echo json_encode($response);
 
-
-  
-	?>
+                    ?>

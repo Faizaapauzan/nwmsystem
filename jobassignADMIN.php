@@ -44,7 +44,7 @@ include 'dbconnect.php';
         while($data = mysqli_fetch_array($records))
         {
             echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";  // displaying data in option menu
-            // echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
+          
         }	
       ?>
 
@@ -96,6 +96,7 @@ include 'dbconnect.php';
 <form class="form" id="adminassistant_form" method="post" style="margin-left: 20px;">
 
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+<input type="hidden" name="ass_date" class="ass_date" value="<?php echo $_SESSION["storeDate"] ?>">
 
 <div class="assistants" id="multipleassist">
   
@@ -144,7 +145,7 @@ include 'dbconnect.php';
 </table>
 
 <div class="input-box" style="width: 432px;">
-  <select name="assistant[]" class="form-control multiple-assistant" multiple="multiple" style="height: auto; margin-left: -19px;">
+  <select name="username[]" class="form-control multiple-assistant" multiple="multiple" style="height: auto; margin-left: -19px;">
       
       <?php
            $query = "SELECT staffregister_id, username, staff_group, technician_rank, tech_avai FROM staff_register 
@@ -179,7 +180,8 @@ include 'dbconnect.php';
 <div class="buttonUpdate" style="display: flex;flex-direction: row-reverse;">
 <?php if (isset($_SESSION["username"])) { ; } ?>
 <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
-<p class="control"><b id="assignadminmessage"></b></p>	 
+<div><p class="control"><b id="assignadminmessage"></b></p></div>
+	 
 <input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>      
 </div>		 
 </form>
@@ -204,11 +206,11 @@ include 'dbconnect.php';
                         var res = JSON.parse(response);
                         console.log(res);
                         if(res.success == true)
-                          $('#assignadminmessage').html('<span style="color: green">Update Saved!</span>');
+                          $('#assignadminmessage').html('<span style="color: green;margin-left: -116px;">Update Saved!</span>');
                           
                         else
                         
-                          $('#assignadminmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+                          $('#assignadminmessage').html('<span style="color: red;margin-left: -116px;">Data Cannot Be Saved</span>');
 
                           
                       }
