@@ -263,8 +263,9 @@ $query = $conn->query("SELECT * FROM tech_update");
     <thead>
     <tr>
     <th>Date</th>
-    <!-- <th>No</th> -->
+    
     <th>Technician Name</th>
+    <th>Assistant</th>
     <th>Clock In</th>
     <th>Clock Out</th>
     <th>Rest In</th>
@@ -279,8 +280,9 @@ $query = $conn->query("SELECT * FROM tech_update");
      
     <tr>
         <td><?php echo $row["techupdate_date"]; ?></td>
-        <!-- <td><?php echo $i; ?></td> -->
+ 
         <td><?php echo $row["tech_leader"]; ?></td>
+               <td><?php echo $row["username"]; ?></td>
         <td><?php echo $row["tech_clockin"]; ?></td>
         <td><?php echo $row["tech_clockout"]; ?></td>
         <td><?php echo $row["tech_out"]; ?></td>
