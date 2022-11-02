@@ -4,18 +4,18 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['clock_out']) && $_POST['clock_out']!='' || $_POST['clock_out']==''
+if(isset($_POST['tech_clockin']) && $_POST['tech_clockin']!='' || $_POST['tech_clockin']==''
     &&
-   isset($_POST['clock_in']) && $_POST['clock_in']!='' || $_POST['clock_in']==''
+   isset($_POST['tech_clockout']) && $_POST['tech_clockout']!='' || $_POST['tech_clockout']==''
     &&
-   isset($_POST['attID']) && $_POST['attID']!='' || $_POST['attID']=='')
+   isset($_POST['techupdate_id']) && $_POST['techupdate_id']!='' || $_POST['techupdate_id']=='')
 
     {
         
-        $sql = "UPDATE tech_attendance SET
-                       clock_out ='".addslashes($_POST['clock_out'])."',
-                       clock_in ='".addslashes($_POST['clock_in'])."'
-                WHERE  attID ='".addslashes($_POST['attID'])."' ";
+        $sql = "UPDATE tech_update SET
+                       tech_clockin ='".addslashes($_POST['tech_clockin'])."',
+                       tech_clockout ='".addslashes($_POST['tech_clockout'])."'
+                WHERE  techupdate_id ='".addslashes($_POST['techupdate_id'])."' ";
         
         if($conn->query($sql))
         {

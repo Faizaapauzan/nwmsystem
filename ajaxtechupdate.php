@@ -285,17 +285,17 @@ $_SESSION['storeDate'] = $today_date;
               function RestOut2()
                 {
                   var tech_out = $('input[name=tech_out]').val();
-                  var technician = $('input[name=technician]').val();
-                  var today_date = $('input[name=today_date]').val();
+                  var tech_leader = $('input[name=technician]').val();
+                  var techupdate_date = $('input[name=today_date]').val();
                   
                   if(tech_out!='' || tech_out=='',
-                  technician!='' || technician=='',
-                  today_date!='' || today_date=='')
+                  tech_leader!='' || tech_leader=='',
+                  techupdate_date!='' || techupdate_date=='')
                  
                  {
                   var formData = {tech_out:tech_out,
-                                technician:technician,
-                                today_date:today_date};
+                    tech_leader:tech_leader,
+                    techupdate_date:techupdate_date};
                   
                   $.ajax({
                             url: "techoutupdate2.php",
@@ -358,17 +358,17 @@ $_SESSION['storeDate'] = $today_date;
                   function RestIn2()
                   {
                     var tech_in = $('input[name=tech_in]').val();
-                    var technician = $('input[name=technician]').val();
-                    var today_date = $('input[name=today_date]').val();
+                    var tech_leader = $('input[name=technician]').val();
+                    var techupdate_date = $('input[name=today_date]').val();
                     
                     if(tech_in!='' || tech_in=='',
-                    technician!='' || technician=='',
-                    today_date!='' || today_date=='')
+                    tech_leader!='' || tech_leader=='',
+                    techupdate_date!='' || techupdate_date=='')
                   
                   {
                     var formData = {tech_in:tech_in,
-                                 technician:technician,
-                                 today_date:today_date};
+                      tech_leader:tech_leader,
+                      techupdate_date:techupdate_date};
                     
                     $.ajax({
                               url: "techinupdate2.php",

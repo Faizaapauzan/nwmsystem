@@ -6,16 +6,16 @@ $response = array('success' => false);
 
 if(isset($_POST['tech_out']) && $_POST['tech_out']!='' || $_POST['tech_out']==''
     &&
-   isset($_POST['technician']) && $_POST['technician']!='' || $_POST['technician']==''
+   isset($_POST['tech_leader']) && $_POST['tech_leader']!='' || $_POST['tech_leader']==''
    &&
-   isset($_POST['today_date']) && $_POST['today_date']!='' || $_POST['today_date']=='')
+   isset($_POST['techupdate_date']) && $_POST['techupdate_date']!='' || $_POST['techupdate_date']=='')
 
     {
-        $sql = "INSERT INTO technician_resthour (tech_out, technician, today_date) 
-                       
-                       VALUES ('".addslashes($_POST['tech_out'])."',
-                               '".addslashes($_POST['technician'])."',
-                               '".addslashes($_POST['today_date'])."')";
+        $sql = "UPDATE tech_update SET 
+                tech_out ='".addslashes($_POST['tech_out'])."'
+       
+                WHERE tech_leader='".addslashes($_POST['tech_leader'])."'
+                AND techupdate_date='".addslashes($_POST['techupdate_date'])."'";
         
         if($conn->query($sql))
         {

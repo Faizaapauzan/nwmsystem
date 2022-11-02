@@ -209,7 +209,7 @@ $_SESSION['storeDate'] = $att_date;
     </div>
     
     <div style="position: static; width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" style="position: static;" class="form-control" id="tech_clockout" name="clock_out" value="<?= $row['tech_clockout']; ?>" aria-describedby="basic-addon2">
+    <input readonly type="text" style="position: static;" class="form-control" id="clock_out" name="tech_clockout" value="<?= $row['tech_clockout']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="buttonbiru" onclick="clock_outs()" style="position: static; width: fit-content;" type="button">OUT</button>
     </div>
@@ -227,7 +227,7 @@ $_SESSION['storeDate'] = $att_date;
 
     </div>
     
-    <p class="control"><b id="message-update"></b></p>
+    <p class="control"><b id="message-update2"></b></p>
     <div style="position: static; width: fit-content;" class="updateBtn">
     <div><input type="button" onclick="submitupdtAtt();" class="buttonbiru" style="width: fit-content; margin-top: 19px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" value="Update" /></div>
     </div>
@@ -241,18 +241,18 @@ $_SESSION['storeDate'] = $att_date;
     <script type="text/javascript">
       function submitupdtAtt()
         {
-          var tech_clockout = $('input[name=tech_clockout]').val();
           var tech_clockin = $('input[name=tech_clockin]').val();
+          var tech_clockout = $('input[name=tech_clockout]').val();
           var techupdate_id = $('input[name=techupdate_id]').val();
 
-          if(clock_out!='' || clock_out=='',
-              clock_in!='' || clock_in=='',
-                 attID!='' || attID=='')
+          if(tech_clockin!='' || tech_clockin=='',
+          tech_clockout!='' || tech_clockout=='',
+              techupdate_id!='' || techupdate_id=='')
              
              {
-              var formData = {clock_out: clock_out, 
-                               clock_in: clock_in,
-                                  attID: attID};
+              var formData = {tech_clockin: tech_clockin, 
+                tech_clockout: tech_clockout,
+                               techupdate_id: techupdate_id};
                                 
                                 $.ajax({
                                   url: "techattendanceupdaterindex.php", 
@@ -263,9 +263,9 @@ $_SESSION['storeDate'] = $att_date;
                                     var res = JSON.parse(response);
                                     console.log(res);
                                     if(res.success == true)
-                                    $('#message-update').html('<span style="color: green">Attendance Saved!</span>');
+                                    $('#message-update2').html('<span style="color: green">Attendance Saved!</span>');
                                     else
-                                    $('#message-update').html('<span style="color: red">Attendance Cannot Be Saved</span>');
+                                    $('#message-update2').html('<span style="color: red">Attendance Cannot Be Saved</span>');
                                   }
                                 });
                               }
