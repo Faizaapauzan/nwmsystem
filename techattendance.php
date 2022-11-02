@@ -122,8 +122,8 @@ $_SESSION['storeDate'] = $att_date;
     <div class="input-box">
       <label style="font-size:15px;">Technician: </label>
         <?php if (isset($_SESSION["username"])) ?>
-        <input type="text" name="techname" id="techname" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>      
-        <input type="hidden" name="att_date" id='att_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
+        <input type="text" name="tech_leader" id="tech_leader" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>      
+        <input type="hidden" name="techupdate_date" id='techupdate_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
     </div>
     </div>
     <div>
@@ -139,15 +139,15 @@ $_SESSION['storeDate'] = $att_date;
   <script type="text/javascript">
       function submitAttname()
         {
-          var techname = $('input[name=techname]').val();
-          var att_date = $('input[name=att_date]').val();
+          var tech_leader = $('input[name=tech_leader]').val();
+          var techupdate_date = $('input[name=techupdate_date]').val();
 
-          if(techname!='' || techname=='',
-             att_date!='' || att_date=='')
+          if(tech_leader!='' || tech_leader=='',
+          techupdate_date!='' || techupdate_date=='')
              
              {
-              var formData = {techname: techname, 
-                              att_date: att_date};
+              var formData = {tech_leader: tech_leader, 
+                techupdate_date: techupdate_date};
                                 
                                 $.ajax({
                                   url: "techattendanceindex.php", 
@@ -171,7 +171,7 @@ $_SESSION['storeDate'] = $att_date;
 <!-- DISPLAY IN AND OUT -->
     <?php
         include 'dbconnect.php';
-        $results = $conn->query("SELECT * FROM tech_attendance WHERE techname= '{$_SESSION['username']}' AND att_date = '{$_SESSION['storeDate']}' ORDER BY attID DESC LIMIT 1");
+        $results = $conn->query("SELECT * FROM tech_update WHERE tech_leader= '{$_SESSION['username']}' AND techupdate_date = '{$_SESSION['storeDate']}' ORDER BY techupdate_id DESC LIMIT 1");
         while($row = $results->fetch_assoc()) {
     ?>
   
@@ -182,15 +182,15 @@ $_SESSION['storeDate'] = $att_date;
   <hr>
   <div class="cards">
     <div class="card" style=" position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
-    <input type="hidden" name="attID" class="resthour_id" value="<?= $row['attID']; ?>">
+    <input type="hidden" name="techupdate_id" class="resthour_id" value="<?= $row['techupdate_id']; ?>">
     
     <!-- technician -->
     <br/>
-    <div style=" position: static; font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['att_date']; ?></div>
-    <label style="position: static; font-weight: 600; font-size: 20px;"><?= $row['techname']; ?></label>
+    <div style=" position: static; font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['techupdate_date']; ?></div>
+    <label style="position: static; font-weight: 600; font-size: 20px;"><?= $row['tech_leader']; ?></label>
     
     <div style=" position: static; width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" style="position: static;" class="form-control" id="clock_in" name="clock_in" value="<?= $row['clock_in']; ?>" aria-describedby="basic-addon2">
+    <input readonly type="text" style="position: static;" class="form-control" id="clock_in" name="tech_clockin" value="<?= $row['tech_clockin']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="buttonbiru" onclick="clock_ins()" style="position: static; width: fit-content; padding-left: 60px;" type="button">IN</button>
     </div>
@@ -209,7 +209,7 @@ $_SESSION['storeDate'] = $att_date;
     </div>
     
     <div style="position: static; width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" style="position: static;" class="form-control" id="clock_out" name="clock_out" value="<?= $row['clock_out']; ?>" aria-describedby="basic-addon2">
+    <input readonly type="text" style="position: static;" class="form-control" id="tech_clockout" name="clock_out" value="<?= $row['tech_clockout']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="buttonbiru" onclick="clock_outs()" style="position: static; width: fit-content;" type="button">OUT</button>
     </div>
@@ -241,9 +241,9 @@ $_SESSION['storeDate'] = $att_date;
     <script type="text/javascript">
       function submitupdtAtt()
         {
-          var clock_out = $('input[name=clock_out]').val();
-          var clock_in = $('input[name=clock_in]').val();
-          var attID = $('input[name=attID]').val();
+          var tech_clockout = $('input[name=tech_clockout]').val();
+          var tech_clockin = $('input[name=tech_clockin]').val();
+          var techupdate_id = $('input[name=techupdate_id]').val();
 
           if(clock_out!='' || clock_out=='',
               clock_in!='' || clock_in=='',

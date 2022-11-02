@@ -40,7 +40,6 @@ include 'dbconnect.php';
 <body>
 <form id="technicianupdate_form" method="post" class="row g-3">
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-<input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
   
   <div class="col-md-6" style="width: 70%;">
   <label for="jobpriority" class="form-label">Job Priority</label>
@@ -106,7 +105,7 @@ include 'dbconnect.php';
    
   <div class="col-md-6" style="width: 70%;">
   <label for="brand" class="form-label">Machine Brand</label><br>
-  <select disabled style="color: black; height: 33px; width: 205px; border-radius: 4px;" id="brand" required>
+  <select disabled style="color: black; height: 33px; width: 135px; border-radius: 4px;" id="brand" required>
   <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
   </select>
   <input type="hidden" id="brand_id" name="brand_id" value="<?php echo $row['brand_id']?>" readonly >  
@@ -115,24 +114,23 @@ include 'dbconnect.php';
 
 <div class="col-md-6" style="margin-top: 4px;width: 70%;">
   <label for="type" class="form-label"> Machine Type</label><br>
-  <select disabled style="color: black; height: 33px; width: 203px; border-radius: 4px;" class="form-select" id="type" required>
+  <select disabled style="color: black; height: 33px; width: 162px; border-radius: 4px;" class="form-select" id="type" required>
   <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
   </select>
   <input type="hidden" id="type_id" name="type_id" value="<?php echo $row['type_id']?>" readonly >  
   <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" readonly >  
   </div> 
-  
-<!--     
+    
   <div class="col-md-12" style="margin-top: 11px;">
   <label for="" class="form-label">Machine Name</label>
-  <input type="text" class="form-control" id="NameMachine" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 302px;">
-  </div>  -->
+  <input type="text" class="form-control" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 331px;">
+  </div> 
 
   <div class="CodeDropdown" style="padding-left: 18px;padding-top: 9px;width: 70%;">
   <label for="sn" class="form-label"> Machine Serial Number </label><br>
   <select style="width: 300px; height: 43px;" id="serialnumbers" onchange="GetMachine(this.value)">
   <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option>
-  <!-- <option value="Add Serial Number" style="color:mediumblue;">Add Serial Number</option> -->
+  <option value="Add Serial Number" style="color:mediumblue;">Add Serial Number</option>
                 
   <?php include 'dbconnect.php';
 
@@ -140,33 +138,27 @@ include 'dbconnect.php';
         $customer_name =$_POST['customer_name'];
         $type_id =$_POST['type_id'];
             
-        $query = ("SELECT * FROM machine_list WHERE type_id ='$type_id' AND customer_name ='$customer_name'");
+        $query = ("SELECT * FROM machine_list WHERE type_id ='$type_id'");
 
         $query_run = mysqli_query($conn, $query);
-          while ($rows = mysqli_fetch_array($query_run)) {
+          while ($row = mysqli_fetch_array($query_run)) {
   ?>
 
-  <option value="<?php echo $rows['machine_id']; ?>"><?php echo $rows['serialnumber']; ?></option>
+  <option value="<?php echo $row['machine_id']; ?>"><?php echo $row['serialnumber']; ?></option>
   <?php } } ?>
   </select>
-  <input readonly type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>" onchange="GetMachine(this.value)">  
-  <input readonly type="hidden" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
-  <input readonly type="hidden" id="CodeMachine" name="machine_code" value="<?php echo $row['machine_code']?>">
-  </div> 
-
-   <div class="col-md-12" style="background-color: white;width: 331px;">
-  <label for="machinename" class="form-label">Machine Name</label>
-  <input type="text" class="form-control" id="NameMachine" name="machine_name" value="<?php echo $row['machine_name']?>" style="background-color: white;width: 302px;">
-
+  <input type="hidden" id="machine_id" name="machine_id" value="<?php echo $row['machine_id']?>">  
+  <input type="text" style="width: 300px; height: 33px;" id="serialnumber" name="serialnumber" value="<?php echo $row['serialnumber']?>">  
+  <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
   </div> 
 
   <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
         
-  <div style="margin-left: 22px;margin-top: 22px;margin-bottom: -25px;margin-right: 60px;" class="updateBtn">       
-  <input type="button" style="color: white;background-color: #081d45;border-color: #081d45;margin-bottom: 20px;" class="btn btn-primary" id="updatetechnician" name="updatetechnician" onclick="updtMchn();updtMchnUpdt();" value="Update" />
+  <div style="margin-left: 270px;margin-top: 20px;" class="updateBtn">       
+  <input type="button" style="color: white;background-color: #081d45;border-color: #081d45;margin-bottom: 20px;" class="btn btn-primary" id="updatetechnician" name="updatetechnician" onclick="updtMchn();" value="Update" />
   </div> 
         
-  <p class="control" style="margin-left: -43px;margin-top: 29px;"><b id="updatetechnicianmessage"></b></p>
+  <p class="control" style="margin-left: 20px; margin-top: -28px;"><b id="updatetechnicianmessage"></b></p>
   </form>
             
   <?php } ?>
@@ -194,9 +186,38 @@ include 'dbconnect.php';
         });
     });
   </script>
+  
+  <!-- Update machine name in assistant table -->
+  <script type="text/javascript">
+      function updtMchn()
+        {
+          var jobregister_id = $('input[name=jobregister_id]').val();
+          var machine_name = $('input[name=machine_name]').val();
+          
+            if(
+              jobregister_id!='' || jobregister_id=='',
+                machine_name!='' || machine_name=='')
+                
+                {
+                  var formData = {jobregister_id:jobregister_id,
+                                    machine_name:machine_name};
+                  
+                  $.ajax({
+                            url:"machineassistant.php",
+                            type:'POST',
+                            data: formData,
+                            success: function(response)
+                              {
+                                var res = JSON.parse(response);
+                                          console.log(res);
+                              }
+                          });
+                }
+        } 
+  </script>
 
   <!-- ADD INPUT SERIAL NUMBER -->
-    <!-- <script>
+    <script>
     $(document).ready(function() {
     $('#serialnumber').hide();
     $("#serialnumbers").change(function() {
@@ -209,7 +230,7 @@ include 'dbconnect.php';
     }).change();
 
         });
-    </script> -->
+    </script>
 
     <!-- SEARCH DROPDOWN SERIAL NUMBER -->
  
@@ -220,28 +241,16 @@ include 'dbconnect.php';
             });
         </script>
 
-        <script>
-$(document).ready(function(){
-	
-$("#serialnumbers").on("change",function(){
-   var GetValue=$("#serialnumbers").val();
-   $("#machine_id").val(GetValue);
-});
-
-});
-
-</script>
-
       <!-- AUTO FETCH MACHINE DETAILS FROM DROPDOWN -->
 
     <script>
 
 		function GetMachine(str) {
 			if (str.length == 0) {
-        		document.getElementById("NameMachine").value = "";
+        document.getElementById("machine_id").value = "";
         document.getElementById("serialnumber").value = "";
-        document.getElementById("CodeMachine").value = "";
-		
+        document.getElementById("machine_code").value = "";
+				document.getElementById("machine_name").value = "";
 
 				return;
 			}
@@ -254,22 +263,25 @@ $("#serialnumbers").on("change",function(){
 
 						var myObj = JSON.parse(this.responseText);
 
-           document.getElementById
-							("NameMachine").value = myObj[0];
+
+            document.getElementById
+							("machine_id").value = myObj[0];
+
             document.getElementById
 							("serialnumber").value = myObj[1];
                         
 						document.getElementById
-							("CodeMachine").value = myObj[2];
+							("machine_code").value = myObj[2];
 		
- 
+            document.getElementById
+							("machine_name").value = myObj[3];
 
 
                            
 					}
 				};
 
-				xmlhttp.open("GET", "fetchmachinename.php?machine_id=" + str, true);
+				xmlhttp.open("GET", "fetchmachine.php?machine_id=" + str, true);
 				xmlhttp.send();
 			}
 		}

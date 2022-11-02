@@ -25,9 +25,7 @@ if(isset($_POST['machine_id']) && $_POST['machine_id']!='' || $_POST['machine_id
                        reason ='".addslashes($_POST['reason'])."',
                        jobregisterlastmodify_by ='".addslashes($_POST['jobregisterlastmodify_by'])."' 
 
-                WHERE machine_id='".addslashes($_POST['machine_id'])."'
-                 AND customer_name='".addslashes($_POST['customer_name'])."'
-                 AND requested_date='".addslashes($_POST['requested_date'])."'";
+                WHERE jobregister_id='".addslashes($_POST['jobregister_id'])."'";
         
         if($conn->query($sql))
         {

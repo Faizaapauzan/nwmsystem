@@ -23,7 +23,7 @@
         $sql = "UPDATE job_register SET
 
            
-            machine_id =$machine_id,
+            machine_id = $machine_id,
             machine_code ='".addslashes($machine_code)."', 
             machine_name ='".addslashes($machine_name)."',
             
@@ -31,7 +31,7 @@
             
             jobregisterlastmodify_by ='".addslashes($jobregisterlastmodify_by)."'
 
-             WHERE  jobregister_id ='".addslashes($jobregister_id)."' ";
+             WHERE jobregister_id ='".addslashes($jobregister_id)."' ";
         
         if($conn->query($sql))
         {

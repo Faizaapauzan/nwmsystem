@@ -56,7 +56,7 @@ include 'dbconnect.php';
     </select>
   
     <?php
-      $DateAssign = date("Y.m.d");
+      $DateAssign = date("d-m-Y");
       $_SESSION['storeDate'] = $DateAssign; 
     ?> 
     
@@ -97,6 +97,7 @@ include 'dbconnect.php';
 
 <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 <input type="hidden" name="ass_date" class="ass_date" value="<?php echo $_SESSION["storeDate"] ?>">
+<input type="hidden" name="techupdate_date" class="techupdate_date" value="<?php echo $_SESSION["storeDate"] ?>">
 
 <div class="assistants" id="multipleassist">
   
@@ -148,7 +149,7 @@ include 'dbconnect.php';
   <select name="username[]" class="form-control multiple-assistant" multiple="multiple" style="height: auto; margin-left: -19px;">
       
       <?php
-           $query = "SELECT staffregister_id, username, staff_group, technician_rank, tech_avai FROM staff_register 
+           $query = "SELECT * FROM staff_register 
                         WHERE staff_group = 'Technician' AND tech_avai = '0' ORDER BY staffregister_id ASC";
            $query_run = mysqli_query($conn, $query);
            if(mysqli_num_rows($query_run) > 0)
@@ -182,7 +183,7 @@ include 'dbconnect.php';
 <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
 <div><p class="control"><b id="assignadminmessage"></b></p></div>
 	 
-<input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>      
+<input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update" onclick="updateASS();"/>      
 </div>		 
 </form>
 	<br>
@@ -199,6 +200,7 @@ include 'dbconnect.php';
             var data = $('#adminassistant_form').serialize() + '&updateassign=updateassign';
             $.ajax({
                 url: 'assignleaderindex.php',
+                
                 type: 'post',
                 data: data,
                 success: function(response)
@@ -219,6 +221,32 @@ include 'dbconnect.php';
     });
 </script>
 
+<script>
+    $(document).ready(function () {
+        $('#updateassign').click(function () {
+            var data = $('#adminassistant_form').serialize() + '&updateassign=updateassign';
+            $.ajax({
+                url: 'assistantupdate.php',
+                
+                type: 'post',
+                data: data,
+                success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#assignadminmessage').html('<span style="color: green;margin-left: -116px;">Update Saved!</span>');
+                          
+                        else
+                        
+                          $('#assignadminmessage').html('<span style="color: red;margin-left: -116px;">Data Cannot Be Saved</span>');
+
+                          
+                      }
+            });
+        });
+    });
+</script>
 <script>
 $(document).ready(function(){	
 $("#jobassignto").on("change",function(){
