@@ -4415,6 +4415,8 @@ if(!isset($_SESSION['username']))
                     OR
                     job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL
                     OR
+                    job_assign = 'Izaan' AND job_status = '' AND job_cancel IS NULL
+                    OR
                     job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel = ''
                     OR
                     job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel IS NULL
