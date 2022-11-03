@@ -1279,6 +1279,8 @@ if(!isset($_SESSION['username']))
                                         $results = $conn->query("SELECT * FROM job_register WHERE
                                                                 (job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
                                                                     OR
+                                                                job_assign = 'Hamir' AND job_status = '' AND job_cancel IS NULL
+                                                                    OR
                                                                  job_assign = 'Hamir' AND job_status IS NULL AND job_cancel IS NULL
                                                                     OR
                                                                  job_assign = 'Hamir' AND job_status = 'Doing' AND job_cancel = ''
@@ -1587,6 +1589,8 @@ if(!isset($_SESSION['username']))
                                 
             $results = $conn->query("SELECT * FROM job_register WHERE
                 (job_assign = 'Hwa' AND job_status = '' AND job_cancel = ''
+                    OR
+                 job_assign = 'Hwa' AND job_status = '' AND job_cancel IS NULL
                     OR
                  job_assign = 'Hwa' AND job_status IS NULL AND job_cancel IS NULL
                     OR
@@ -1903,6 +1907,8 @@ if(!isset($_SESSION['username']))
                 $results = $conn->query("SELECT * FROM job_register WHERE
                         (job_assign = 'ISKANDAR' AND job_status = '' AND job_cancel = ''
                             OR
+                         job_assign = 'ISKANDAR' AND job_status = '' AND job_cancel IS NULL
+                            OR
                         job_assign = 'ISKANDAR' AND job_status IS NULL AND job_cancel IS NULL
                             OR
                         job_assign = 'ISKANDAR' AND job_status = 'Doing' AND job_cancel = ''
@@ -2215,6 +2221,8 @@ if(!isset($_SESSION['username']))
                                 
                 $results = $conn->query("SELECT * FROM job_register WHERE
                         (job_assign = 'John' AND job_status = '' AND job_cancel = ''
+                        OR
+                        job_assign = 'John' AND job_status = '' AND job_cancel IS NULL
                         OR
                         job_assign = 'John' AND job_status IS NULL AND job_cancel IS NULL
                         OR
@@ -2535,6 +2543,8 @@ if(!isset($_SESSION['username']))
                 $results = $conn->query("SELECT * FROM job_register WHERE
                         (job_assign = 'Jun Jie' AND job_status = '' AND job_cancel = ''
                         OR
+                        job_assign = 'Jun Jie' AND job_status = '' AND job_cancel IS NULL
+                        OR
                         job_assign = 'Jun Jie' AND job_status IS NULL AND job_cancel IS NULL
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Doing' AND job_cancel = ''
@@ -2847,6 +2857,8 @@ if(!isset($_SESSION['username']))
                     include 'dbconnect.php';
                     $results = $conn->query("SELECT * FROM job_register WHERE
                             (job_assign = 'Will' AND job_status = '' AND job_cancel = ''
+                            OR
+                            job_assign = 'Will' AND job_status = '' AND job_cancel IS NULL
                             OR
                             job_assign = 'Will' AND job_status IS NULL AND job_cancel IS NULL
                             OR
@@ -3163,6 +3175,8 @@ if(!isset($_SESSION['username']))
                     $results = $conn->query("SELECT * FROM job_register WHERE
                             (job_assign = 'Sahele' AND job_status = '' AND job_cancel = ''
                             OR
+                            job_assign = 'Sahele' AND job_status = '' AND job_cancel IS NULL
+                            OR
                             job_assign = 'Sahele' AND job_status IS NULL AND job_cancel IS NULL
                             OR
                             job_assign = 'Sahele' AND job_status = 'Doing' AND job_cancel = ''
@@ -3471,6 +3485,8 @@ if(!isset($_SESSION['username']))
                  include 'dbconnect.php';
                 $results = $conn->query("SELECT * FROM job_register WHERE
                         (job_assign = 'Sazaly' AND job_status = '' AND job_cancel = ''
+                        OR
+                        job_assign = 'Sazaly' AND job_status = '' AND job_cancel IS NULL
                         OR
                         job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL
                         OR
@@ -3785,6 +3801,8 @@ if(!isset($_SESSION['username']))
             $results = $conn->query("SELECT * FROM job_register WHERE
                     (job_assign = 'Faizan' AND job_status = '' AND job_cancel = ''
                     OR
+                    job_assign = 'Faizan' AND job_status = '' AND job_cancel IS NULL
+                    OR
                     job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL
                     OR
                     job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel = ''
@@ -4096,6 +4114,8 @@ if(!isset($_SESSION['username']))
             include 'dbconnect.php';
             $results = $conn->query("SELECT * FROM job_register WHERE
                     (job_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
+                    OR
+                    job_assign = 'Fauzin' AND job_status = '' AND job_cancel IS NULL
                     OR
                     job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
                     OR
@@ -4732,6 +4752,8 @@ if(!isset($_SESSION['username']))
             $results = $conn->query("SELECT * FROM job_register WHERE
                     (job_assign = 'Teck' AND job_status = '' AND job_cancel = ''
                     OR
+                    job_assign = 'Teck' AND job_status = '' AND job_cancel IS NULL
+                    OR
                     job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL
                     OR
                     job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel = ''
@@ -5049,6 +5071,8 @@ if(!isset($_SESSION['username']))
             $results = $conn->query("SELECT * FROM job_register WHERE
                     (job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
                     OR
+                    job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL
+                    OR
                     job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL
                     OR
                     job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = ''
@@ -5353,6 +5377,8 @@ if(!isset($_SESSION['username']))
                                     include 'dbconnect.php';
                                     $results = $conn->query("SELECT * FROM job_register WHERE
                                                             (job_assign = 'Boon' AND job_status = '' AND job_cancel = ''
+                                                                OR
+                                                                job_assign = 'Boon' AND job_status = '' AND job_cancel IS NULL
                                                                 OR
                                                              job_assign = 'Boon' AND job_status IS NULL AND job_cancel IS NULL
                                                                 OR
@@ -5665,6 +5691,8 @@ if(!isset($_SESSION['username']))
                                     include 'dbconnect.php';
                                     $results = $conn->query("SELECT * FROM job_register WHERE
                                                             (job_assign = 'Hafiz' AND job_status = '' AND job_cancel = ''
+                                                                OR
+                                                                job_assign = 'Hafiz' AND job_status = '' AND job_cancel IS NULL
                                                                 OR
                                                              job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel IS NULL
                                                                 OR
