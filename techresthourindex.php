@@ -4,16 +4,16 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['technician']) && $_POST['technician']!='' || $_POST['technician']==''
+if(isset($_POST['tech_leader']) && $_POST['tech_leader']!='' || $_POST['tech_leader']==''
     &&
-   isset($_POST['today_date']) && $_POST['today_date']!='' || $_POST['today_date']=='')
+   isset($_POST['techupdate_date']) && $_POST['techupdate_date']!='' || $_POST['techupdate_date']=='')
 
     {
         
-        $sql = "INSERT INTO technician_resthour (technician, today_date) 
+        $sql = "INSERT INTO tech_update (tech_leader, techupdate_date) 
                        
-                       VALUES ('".addslashes($_POST['technician'])."',
-                               '".addslashes($_POST['today_date'])."')";
+                       VALUES ('".addslashes($_POST['tech_leader'])."',
+                               '".addslashes($_POST['techupdate_date'])."')";
         
         if($conn->query($sql))
         {
