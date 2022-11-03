@@ -5,7 +5,7 @@ include 'dbconnect.php';
 
 		if (isset($_POST['update'])) {
 
-            $machine_id = $_POST['machine_id'];
+        $machine_id = $_POST['machine_id'];
         $type_id = $_POST['type_id'];
         $machine_type = $_POST['machine_type'];
         $brand_id = $_POST['brand_id'];
@@ -44,6 +44,3 @@ if ($query_run) {
                         }
                     }
                     ?>
-	
-	
-?>
