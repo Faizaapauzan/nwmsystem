@@ -152,6 +152,8 @@ session_start();
 						OR
 						job_assign ='{$_SESSION['username']}' AND  job_status IS NULL AND job_cancel IS NULL
 						OR
+						job_assign ='{$_SESSION['username']}' AND  job_status = '' AND job_cancel IS NULL
+						OR
 						job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready' AND job_cancel IS NULL
 						ORDER BY jobregisterlastmodify_at
 						DESC LIMIT 50";
