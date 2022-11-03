@@ -690,9 +690,11 @@ if(!isset($_SESSION['username']))
                             <?php
                                 include 'dbconnect.php';
                                 
-                                $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending'
+                                $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending' AND job_cancel = '' 
+                                                                                    OR    job_status = 'Pending' AND job_cancel IS NULL
                                                          ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-                                $numRow = "SELECT * FROM `job_register`WHERE job_status = 'Pending' ";
+                                $numRow = "SELECT * FROM `job_register` WHERE job_status = 'Pending' AND job_cancel = '' 
+                                                                        OR    job_status = 'Pending' AND job_cancel IS NULL ";
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 if ($row_Total = mysqli_num_rows($numRow_run))
                                     {
