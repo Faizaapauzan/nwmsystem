@@ -151,6 +151,8 @@ session_start();
 			
 			$query = "SELECT * FROM job_register
 			WHERE job_status = 'Incomplete' AND job_cancel=''
+			OR
+			job_status = 'Incomplete' AND job_cancel IS NULL
 			ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
 			
 			$result = mysqli_query($conn, $query);

@@ -149,6 +149,8 @@ session_start();
 
 			$query = "SELECT * FROM job_register 
 			WHERE job_assign !='Storekeeper' AND job_status = 'Pending' AND job_cancel=''
+			OR
+			job_assign !='Storekeeper' AND job_status = 'Pending' AND job_cancel IS NULL
 			ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
 
 			$result = mysqli_query($conn, $query);
