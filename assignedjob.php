@@ -160,6 +160,8 @@ session_start();
 				job_assign !='Storekeeper' AND job_assign != '' AND  job_status = '' AND job_cancel='' AND accessories_required ='No'
 				OR
 				job_assign !='Storekeeper' AND job_assign != '' AND  job_status IS NULL AND job_cancel IS NULL AND accessories_required IS NULL
+				OR
+				job_assign !='Storekeeper' AND job_assign != '' AND  job_status IS NULL AND job_cancel IS NULL AND accessories_required ='No'
 				ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
 				
 				$result = mysqli_query($conn, $query);
