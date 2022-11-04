@@ -203,7 +203,7 @@
 
          <?php if (isset($_SESSION["username"])) { ; } ?>
          <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-         <button type="submit" id="submit" name="update" class="btn btn-primary">Update</button>
+         <button type="submit" id="submit" name="update" class="btn btn-primary" onclick="updtMchn();">Update</button>
     </form>
             
            
@@ -214,6 +214,36 @@
 
               <?php
             } ?>
+
+
+<!-- Update machine name in assistant table -->
+<script type="text/javascript">
+      function updtMchn()
+        {
+          var jobregister_id = $('input[name=jobregister_id]').val();
+          var machine_name = $('input[name=machine_name]').val();
+          
+            if(
+              jobregister_id!='' || jobregister_id=='',
+                machine_name!='' || machine_name=='')
+                
+                {
+                  var formData = {jobregister_id:jobregister_id,
+                                    machine_name:machine_name};
+                  
+                  $.ajax({
+                            url:"machineassistant.php",
+                            type:'POST',
+                            data: formData,
+                            success: function(response)
+                              {
+                                var res = JSON.parse(response);
+                                          console.log(res);
+                              }
+                          });
+                }
+        } 
+  </script>
 
 
 

@@ -15,6 +15,11 @@
 
 <body>
 
+    <?php
+      $ass_date = date("d-m-Y");
+      $_SESSION['storeDate'] = $ass_date; 
+    ?> 
+
   <!-- ASSIGN TECHNICIAN -->
   <?php
 include 'dbconnect.php';
@@ -32,9 +37,12 @@ include 'dbconnect.php';
   <form class="form" id="assigntechnician_form" method="post">
   <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
   <input type="hidden" name="ass_date" class="ass_date" value="<?php echo $_SESSION["storeDate"] ?>">
-    <input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
-    <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
-    <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
+  <input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
+  <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
+  <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
+  <input type="hidden" name="techupdate_date" value="<?php echo $_SESSION["storeDate"] ?>">
+  <input type="hidden" name="tech_leader" value="<?php echo $row['job_assign'] ?>">
+  <input type="hidden" name="support" class="support" value="<?php echo $row['support'] ?>">
     
     <div class="assign">
       <label for="job_assign">Job Assign To :</label>
@@ -150,7 +158,7 @@ include 'dbconnect.php';
     <div style="margin-left: 255px;margin-top: 20px;" class="updateBtn">
     <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-    <input style="margin-left: -255px; border:none;background-color: #081d45;border-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
+    <input style="margin-left: -255px; border:none;background-color: #081d45;border-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update"/>
     <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> -->
     </div>
     
@@ -264,6 +272,30 @@ include 'dbconnect.php';
         });
     });
   </script>
+
+<script>
+    $(document).ready(function () {
+        $('#updateassign').click(function () {
+            var data = $('#assigntechnician_form').serialize() + '&updateassign=updateassign';
+            $.ajax({
+                url: 'assistantupdate.php',
+                type: 'post',
+                data: data,
+                success: function(response)
+                      {
+                        var res = JSON.parse(response);
+                        console.log(res);
+                        if(res.success == true)
+                          $('#assignadminmessage').html('<span style="color: green;margin-left: -116px;">Update Saved!</span>');
+                          
+                        else
+                        
+                          $('#assignadminmessage').html('<span style="color: red;margin-left: -116px;">Data Cannot Be Saved</span>');
+                      }
+            });
+        });
+    });
+</script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

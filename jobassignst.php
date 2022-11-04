@@ -26,7 +26,7 @@ include 'dbconnect.php';
           while ($row = mysqli_fetch_array($query_run)) {
   ?>
   
-  <form class="form" id="assigntechnician_form" method="post">
+  <form class="form" id="assigntechnician_form" method="post" style="margin-bottom: 50px;">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     <input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
     <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
@@ -93,107 +93,6 @@ include 'dbconnect.php';
               });
          </script>
          
-  <!-- ASSIGN ASSISTANT -->
-  <form class="form" id="assignassistant_form" method="post">
-    <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-      <input type="hidden" name="ass_date" class="ass_date" value="<?php echo $_SESSION["storeDate"] ?>">
-    <input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
-    <input type="hidden" name="machine_name" class="machine_name" value="<?php echo $row['machine_name'] ?>">
-    <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
-    
-    <div class="assistants" style="padding-top: 20px;" id="multipselect">
-        
-        <?php
-           include 'dbconnect.php';
-            if (isset($_POST['jobregister_id'])) {
-              $jobregister_id =$_POST['jobregister_id'];
-              $fetchquery = "SELECT username FROM assistants WHERE jobregister_id='$jobregister_id' ";
-              $fetchquery_run = mysqli_query($conn, $fetchquery);
-              $JobAssistant = [];
-              
-              foreach($fetchquery_run as $fetchrow)
-                {
-                  $JobAssistant[] = $fetchrow['username'];
-                }
-            }
-        ?>
-        
-        <br/>
-        
-        <?php
-            //include connection file
-            include_once("dbconnect.php");
-            if (isset($_POST['jobregister_id'])) {
-              $jobregister_id =$_POST['jobregister_id'];
-              $sql = "SELECT * FROM `assistants` WHERE  jobregister_id ='$jobregister_id'";
-              $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
-            }
-        ?>
-        
-        <label style="color: #22304d;" for="assistant">Select Assistant :</label>
-        <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -31px;" class="table" width="60%" cellspacing="0">
-        <thead>
-          <tr>
-            <th>
-
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach($queryRecords as $res) :?>
-            <tr data-row-id="<?php echo $res['id'];?>">
-            <td><b><?php echo $res['username'];?></b></td>
-            <td><span style="color: red" class='deleteasst' data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
-            </tr>
-          <?php endforeach;?>
-        </tbody>
-        </table>
-        
-        <select name="username[]" class="form-control multiple-select" multiple="multiple">
-		        
-          <?php
-              $query = "SELECT staffregister_id, username, staff_group, technician_rank, tech_avai FROM staff_register 
-                        WHERE staff_group = 'Technician' AND tech_avai = '0'ORDER BY staffregister_id ASC";
-              $query_run = mysqli_query($conn, $query);
-              if(mysqli_num_rows($query_run) > 0)
-                {
-                  foreach ($query_run as $rowstaff){
-          ?>
-          
-          <option value="<?php echo $rowstaff["username"]; ?>"><?php echo $rowstaff["username"]; ?></option>
-          
-          <?php
-              }
-            }
-            else
-              {
-                echo "No Record Found";
-              }
-          ?>
-
-        </select>
-        
-        <script>
-            $("#multipselect").on('change', function () {
-              $(".multiple-select").select2({
-                //maximumSelectionLength: 2
-              });
-            });
-        </script>
-        
-    </div>
-    
-    <div style="margin-left: 255px;margin-top: 20px;" class="updateBtn">
-    <?php if (isset($_SESSION["username"])) { ; } ?>
-    <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-    <input style="margin-left: -255px; border:none; background-color: #081d45;" type="button" class="btn btn-primary" id="updateassign" name="updateassign" value="Update" />
-    </div>
-    
-    <p class="control"><b id="assigntechnicianmessage"></b></p>	 	 
-  </form>
-  
-  <br>
-  
   <?php } } ?>
   
   <?php } ?>
@@ -284,29 +183,6 @@ include 'dbconnect.php';
         }
   </script>
   
-  <script>
-    $(document).ready(function () {
-      $('#updateassign').click(function () {
-        var data = $('#assignassistant_form').serialize() + '&updateassign=updateassign';
-        $.ajax({
-                url: 'assignleaderindex.php',
-                type: 'post',
-                data: data,
-                success: function(response)
-                  {
-                    var res = JSON.parse(response);
-                              console.log(res);
-                    if(res.success == true)
-                    $('#assigntechnicianmessage').html('<span style="color: green">Assistant Saved!</span>');
-                    else
-                    $('#assigntechnicianmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
-                  }
-                });
-      });
-    });
-  </script>
-  
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>

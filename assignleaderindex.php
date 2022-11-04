@@ -7,12 +7,17 @@ include 'dbconnect.php';
 
         $jobregister_id = $_POST['jobregister_id'];
         $username = $_POST['username'];
+        $assistantname=implode(",",$username);
         $ass_date = $_POST['ass_date'];
 
-       $assistantname=implode(",",$username);
+        $customer_name = $_POST['customer_name'];
+        $requested_date = $_POST['requested_date'];
+        $machine_name = $_POST['machine_name'];
+      
     {
      
-       $sql = "INSERT INTO assistants (jobregister_id , username , ass_date) VALUES ('$jobregister_id','$assistantname','$ass_date')";
+       $sql = "INSERT INTO assistants (jobregister_id , username , ass_date, customer_name , requested_date, machine_name) 
+               VALUES ('$jobregister_id','$assistantname','$ass_date', '$customer_name','$requested_date','$machine_name')";
        
     
 
@@ -22,9 +27,6 @@ include 'dbconnect.php';
         }
         
         }
-
-        
-     
     }
 
 echo json_encode($response);
