@@ -92,8 +92,8 @@ include 'dbconnect.php';
     <select onchange="GetTypeUpdate(this.value)" class="form-select" id="typeupdate" required>
     <option value="<?php echo $row['type_id']; ?>"><?php echo $row['type_name']; ?></option>
     </select>
-    <input type="hidden" id="IdUpdateType" name="type_id" onchange="GetTypeUpdate(this.value)" readonly >  
-    <input type="hidden" id="TypeUpdateName" name="machine_type" onchange="GetTypeUpdate(this.value)" readonly >  
+    <input type="hidden" id="IdUpdateType" name="type_id" onchange="GetTypeUpdate(this.value)" readonly value="<?php echo $row['type_id'] ?>">  
+    <input type="hidden" id="TypeUpdateName" name="machine_type" onchange="GetTypeUpdate(this.value)" readonly value="<?php echo $row['machine_type'] ?>">  
     </div>
 
     <script>
