@@ -85,14 +85,14 @@ $_SESSION['storeDate'] = $att_date;
 include 'dbconnect.php';
     ?>
 
-    <form action="jobtechnicianindex.php" method="post">
+    <form action="jobtechnicianindex.php" method="post" onsubmit="return validateForm()" name="JobForm">
         
   <?php if (isset($_SESSION["username"])) ?>
- <input type="hidden" id=" job_assign" class="form-control" name="job_assign" value="<?php echo $_SESSION["username"] ?>" readonly >  
+<input type="hidden" id=" job_assign" class="form-control" name="job_assign" value="<?php echo $_SESSION["username"] ?>" readonly >  
    
     <div class="CodeDropdown">
     <div class="form-group"><label>Select Customer</label>  
-        <br/>
+    <br/>
     <select id="ddlModel" onchange="GetDetail(this.value)"> <option value="">--  Select Customer --</option>
     <?php
         include "dbconnect.php";  // Using database connection file here
@@ -151,6 +151,8 @@ $("#ddlModel").on("change",function(){
 });
 
 </script>
+
+
 
 <script>
 
@@ -211,8 +213,9 @@ $("#ddlModel").on("change",function(){
 	</script>
 
   <label for="job_order_number" class="details" >Job Order Number</label>
+  <p class="control"><b id="alertmessage"></b></p>
 					<div class="technician-time">
-					<input type="text" id="Departure" name="job_order_number" class="technician-time-input" placeholder="Enter Job Order Number">
+					<input type="text" id="Departure" name="job_order_number" class="technician-time-input" placeholder="Enter Job Order Number" require>
 					<button onclick="test();" class="technician-time-botton" type="submit">Get Job Order Number</button>
 					<script type="text/javascript">
                     function test()
@@ -258,6 +261,16 @@ $("#ddlModel").on("change",function(){
 
         });
     </script>
+
+    <script>
+function validateForm() {
+  var x = document.forms["JobForm"]["job_order_number"].value;
+  if (x == "" || x == null) {
+     $('#alertmessage').html('<span style="color: red">Job Order Number be filled out</span>');
+    return false;
+  }
+}
+</script>
 
 
 

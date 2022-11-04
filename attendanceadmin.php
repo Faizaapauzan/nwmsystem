@@ -1,8 +1,5 @@
 <?php
  session_start();
-$att_date = date("d-m-Y");
-$_SESSION['storeDate'] = $att_date;
-
  // cek apakah yang mengakses halaman ini sudah login
  if($_SESSION['staff_position']=="" ){
   header("location:index.php?error");
@@ -38,7 +35,7 @@ require_once 'dbconnect.php';
  
 
 // Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM tech_update WHERE techupdate_date = '{$_SESSION['storeDate']}'");  
+$query   = $conn->query("SELECT COUNT(*) as rowNum FROM tech_update"); 
 $result  = $query->fetch_assoc(); 
 $rowCount= $result['rowNum']; 
  
@@ -51,7 +48,7 @@ $pagConfig = array(
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM tech_update"); 
+$query = $conn->query("SELECT * FROM tech_update ORDER BY techupdate_id DESC"); 
 ?>
 
 
@@ -82,7 +79,7 @@ $query = $conn->query("SELECT * FROM tech_update");
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-    <!-- Select2 JS --> 
+        <!-- Select2 JS --> 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -236,24 +233,28 @@ $query = $conn->query("SELECT * FROM tech_update");
     <!--Home navigation-->
     <section class="home-section">
     <nav>
-    <div class="home-content">
-    <i class='bx bx-menu' ></i>
-    <a>
-	<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-    </a>
-    </div>
+                <div class="home-content">
+                      <i class='bx bx-menu' ></i>
+                          <a>
+						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
+                          </a>
+
+                 </div>
+
     </nav>  
 
-    <?php
-      include 'dbconnect.php';
-    ?>
 
- 
-        <!--START MACHINE LIST-->
+
+  
+</div></div>						
+
+
+        <!--START-->
         <div class="machineList">
         <h1>Attendance</h1>
-        <div class="addMachineBtn" style="margin-left: 1320px;">
-        <button class="btn-reset" onclick="document.location='attendanceadmin.php'">Refresh</button>
+        <div class="addMachineBtn">
+        <button style="background-color: #081d45; padding-left: 54px;" type="button" id="btnRegister" class="todo" data-target="doubleClick-machine"  onclick="document.getElementById('doubleClick-machine').style.display='block'">Add</button>
+        <button class="btn-reset" onclick="document.location='machine.php'">Refresh</button>
         </div>
 
         <div class="datalist-wrapper">    
@@ -262,14 +263,15 @@ $query = $conn->query("SELECT * FROM tech_update");
     <table class="table table-striped sortable">
     <thead>
     <tr>
+    <th>No</th>
     <th>Date</th>
-    
-    <th>Technician Name</th>
+   <th>Technician Name</th>
     <th>Assistant</th>
     <th>Clock In</th>
     <th>Clock Out</th>
-    <th>Rest In</th>
     <th>Rest Out</th>
+    <th>Rest In</th>
+
     </thead>
 
     <tbody>
@@ -279,15 +281,16 @@ $query = $conn->query("SELECT * FROM tech_update");
             ?>
      
     <tr>
+        <td><?php echo $i; ?></td>
         <td><?php echo $row["techupdate_date"]; ?></td>
- 
         <td><?php echo $row["tech_leader"]; ?></td>
-               <td><?php echo $row["username"]; ?></td>
+        <td><?php echo $row["username"]; ?></td>
         <td><?php echo $row["tech_clockin"]; ?></td>
         <td><?php echo $row["tech_clockout"]; ?></td>
         <td><?php echo $row["tech_out"]; ?></td>
         <td><?php echo $row["tech_in"]; ?></td> 
-        </tr>
+
+    </tr>
         <?php 
                 } 
             }else{ 
@@ -309,6 +312,8 @@ $query = $conn->query("SELECT * FROM tech_update");
     });
 
 </script>
+
+       
 
 
     </section>

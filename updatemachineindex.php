@@ -40,8 +40,7 @@ if ($query_run) {
                             echo '<script> alert("Data Updated"); </script>';
                             header("location:machine.php");
                         } else {
-                            echo "ERROR: Hush! Sorry $sql. "
-			. mysqli_error($conn);
+                            echo '<script> alert("Data Not Updated"); </script>';
                         }
                     }
                     ?>

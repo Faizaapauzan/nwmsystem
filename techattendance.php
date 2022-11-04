@@ -128,6 +128,7 @@ $_SESSION['storeDate'] = $att_date;
     </div>
     <div>
       <div><input type="button" onclick="submitAttname();" class="buttonbiru" style="width: fit-content; margin-top: 19px; height: 32px; padding-top: 3px; padding-left: 20px; padding-right: 20px;" value="Save" />
+      <span id="customer_code-availability-status"></span>
       <p class="control"><b id="message"></b></p>
     </div>
     </div>
@@ -158,10 +159,13 @@ $_SESSION['storeDate'] = $att_date;
                                     var res = JSON.parse(response);
                                     console.log(res);
                                     if(res.success == true)
-                                    location.reload();
+                                    location.reload();  
                                     else
                                     $('#message').html('<span style="color: red">Update Cannot Be Saved</span>');
+                                  
+                                    
                                   }
+   
                                 });
                               }
                             }

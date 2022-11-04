@@ -50,8 +50,8 @@ include 'dbconnect.php';
 
     </select>
 
-    <input type="hidden" id="IdUpdateBrand" name="brand_id" onchange="GetBrandUpdate(this.value)" readonly >  
-  <input type="hidden" id="NamaUpdateBrand" name="machine_brand" onchange="GetBrandUpdate(this.value)" readonly >  
+<input type="hidden" id="IdUpdateBrand" name="brand_id" onchange="GetBrandUpdate(this.value)" value="<?php echo $row['brand_id']; ?>" readonly >  
+<input type="hidden" id="NamaUpdateBrand" name="machine_brand" onchange="GetBrandUpdate(this.value)" value="<?php echo $row['brandname']; ?>" readonly >  
 
     </div>
 
@@ -92,8 +92,8 @@ include 'dbconnect.php';
     <select onchange="GetTypeUpdate(this.value)" class="form-select" id="typeupdate" required>
     <option value="<?php echo $row['type_id']; ?>"><?php echo $row['type_name']; ?></option>
     </select>
-    <input type="hidden" id="IdUpdateType" name="type_id" onchange="GetTypeUpdate(this.value)" readonly >  
-    <input type="hidden" id="TypeUpdateName" name="machine_type" onchange="GetTypeUpdate(this.value)" readonly >  
+    <input type="hidden" id="IdUpdateType" name="type_id" onchange="GetTypeUpdate(this.value)" readonly value="<?php echo $row['type_id'] ?>">  
+    <input type="hidden" id="TypeUpdateName" name="machine_type" onchange="GetTypeUpdate(this.value)" readonly value="<?php echo $row['machine_type'] ?>">  
     </div>
 
     <script>
