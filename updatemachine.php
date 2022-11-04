@@ -50,8 +50,8 @@ include 'dbconnect.php';
 
     </select>
 
-<input type="hidden" id="IdUpdateBrand" name="brand_id" onchange="GetBrandUpdate(this.value)" value="<?php echo $rows['brand_id']; ?>" readonly >  
-<input type="hidden" id="NamaUpdateBrand" name="machine_brand" onchange="GetBrandUpdate(this.value)" value="<?php echo $rows['machine_brand']; ?>" readonly >  
+<input type="hidden" id="IdUpdateBrand" name="brand_id" onchange="GetBrandUpdate(this.value)" value="<?php echo $row['brand_id']; ?>" readonly >  
+<input type="hidden" id="NamaUpdateBrand" name="machine_brand" onchange="GetBrandUpdate(this.value)" value="<?php echo $row['brandname']; ?>" readonly >  
 
     </div>
 
