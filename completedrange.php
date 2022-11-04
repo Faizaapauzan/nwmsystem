@@ -12,6 +12,13 @@
 		if($row>0){
 		while($fetch=mysqli_fetch_array($query)){
 ?>
+        <div class="datalist-wrapper">    
+        <div class="col-lg-12" style="border: none;">
+
+         <table class="table table-striped sortable">
+
+    
+
 	<tr>
         <td></td>
 		<td><?php echo $fetch['job_order_number']?></td>
@@ -24,6 +31,9 @@
         </td>
 		
 	</tr>
+    </table>
+	</div>	
+	</div>
 <?php
 			}
 		}else{
@@ -37,6 +47,10 @@
         $query=mysqli_query($conn, "SELECT * FROM job_register WHERE job_status = 'Completed'") or die(mysqli_error($conn));
             while ($fetch=mysqli_fetch_array($query)) {
                 ?>
+
+
+
+
 	<tr>
        
         <td></td>
@@ -57,6 +71,16 @@
             }
         } ?>
 
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('table').DataTable();
+
+    });
+
+</script>
 
                 <!--Double click Completed -->
     <div id="doubleClick-completed" class="modal">

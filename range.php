@@ -13,6 +13,12 @@
 			while($fetch=mysqli_fetch_array($query)){
 ?>
 
+        <div class="datalist-wrapper">    
+        <div class="col-lg-12" style="border: none;">
+
+         <table class="table table-striped sortable">
+
+
 	<tr>
         <td></td>
 		<td><?php echo $fetch['job_order_number']?></td>
@@ -39,10 +45,11 @@
             $query=mysqli_query($conn, "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id") or die(mysqli_error($conn));
             while ($fetch=mysqli_fetch_array($query)) {
                 ?>
+
+
 	<tr>
        
         <td></td>
-        
 		<td><?php echo $fetch['job_order_number'];?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['requested_date']?></td>
@@ -60,6 +67,16 @@
 <?php
             }
         } ?>
+
+
+
+        <script type="text/javascript">
+    $(document).ready(function(){
+        $('table').DataTable();
+
+    });
+
+</script>
 
  <!--Double click Job Info (View Button) -->
     <div id="onClick-View" class="modal">
