@@ -236,7 +236,7 @@ if(!isset($_SESSION['username']))
     <table class="table table-striped sortable">
 		<thead>
 			<tr>
-      <th></th>
+      <th>No</th>
 			<th>Job Order Number</th>
 			<th>Customer Name</th>
 			<th>Job Assign</th>

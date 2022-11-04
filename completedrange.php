@@ -10,6 +10,7 @@
 		
         $row=mysqli_num_rows($query);
 		if($row>0){
+            $i = 1;
 		while($fetch=mysqli_fetch_array($query)){
 ?>
         <div class="datalist-wrapper">    
@@ -20,7 +21,10 @@
     
 
 	<tr>
-        <td></td>
+        <td> <?php
+                    echo $i;
+                    $i++;
+                ?></td>
 		<td><?php echo $fetch['job_order_number']?></td>
 		<td><?php echo $fetch['customer_name']?></td>
 		<td><?php echo $fetch['job_assign']?></td>
@@ -44,16 +48,19 @@
 		}
 	}else{
   
-        $query=mysqli_query($conn, "SELECT * FROM job_register WHERE job_status = 'Completed'") or die(mysqli_error($conn));
-            while ($fetch=mysqli_fetch_array($query)) {
-                ?>
+    $query=mysqli_query($conn, "SELECT * FROM job_register WHERE job_status = 'Completed'") or die(mysqli_error($conn));
+    $row=mysqli_num_rows($query);        
+if ($row>0) {
+    $i = 1;
+    while ($fetch=mysqli_fetch_array($query)) {
+        ?>
 
 
 
 
 	<tr>
        
-        <td></td>
+        <td> <?php echo $i; $i++;?></td>
         
 		<td><?php echo $fetch['job_order_number']?></td>
 		<td><?php echo $fetch['customer_name']?></td>
@@ -68,7 +75,8 @@
   
 
 <?php
-            }
+    }
+}
         } ?>
 
 
