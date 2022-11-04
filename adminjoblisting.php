@@ -49,7 +49,7 @@ $pagConfig = array(
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM job_register WHERE job_cancel = '' OR job_cancel IS NULL"); 
+$query = $conn->query("SELECT * FROM job_register WHERE job_cancel = '' OR job_cancel IS NULL ORDER BY jobregisterlastmodify_at DESC"); 
  
 ?>
 
