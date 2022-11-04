@@ -48,7 +48,7 @@ $pagConfig = array(
 $pagination =  new Pagination($pagConfig); 
  
 // Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM tech_update ORDER BY techupdate_id ASC"); 
+$query = $conn->query("SELECT * FROM tech_update ORDER BY techupdate_id DESC"); 
 ?>
 
 
