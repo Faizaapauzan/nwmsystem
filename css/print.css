@@ -1,14 +1,8 @@
-@page
-{
-  size:A4;
-  margin: 0;
+@page {
+  size: A4;
+  margin: 20px;
 }
-#print-btn
-{
+#print-btn {
   display: none;
   visibility: none;
 }
-
-
-
-

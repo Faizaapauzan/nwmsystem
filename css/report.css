@@ -47,6 +47,23 @@
   cursor: pointer;
 }
 
+.btn-report {
+  padding: 0 15px 0 15px;
+  height: 39px;
+  width: 105px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  border-color: #081d45;
+  background-color: #081d45;
+  color: #fff;
+  margin-left: -176px;
+  cursor: pointer;
+}
+
 /*VIEW*/
 
 .ViewJobInfoTab {

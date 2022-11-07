@@ -229,6 +229,7 @@ if(!isset($_SESSION['username']))
                 <td><input type="date" placeholder="END"  name="date2"/></td>
                 <td><button id="btn_search" name="search" class="btn-search">Search</button></td>
                 <td><button class="btn-reset" onclick="document.location='report.php'">Refresh</button></td>
+                 <td><button class="btn-report">Report</button></td>
                 </tr>
             </table>
 		</form>
@@ -244,7 +245,6 @@ if(!isset($_SESSION['username']))
 						<th>Requested Date</th>
             <th>Report Date</th>
             <th>Service Report Number</th>
-           
 						<th>Action</th>
 					</tr>
 				</thead>
