@@ -3,9 +3,7 @@
     $storeDate = date("d-m-Y");
     $_SESSION['storeDate'] = $storeDate;
     
-    date_default_timezone_set("Asia/Kuala_Lumpur");
-    $RestTime = date('g:i A');
-    $_SESSION['resttime'] = $RestTime; 
+
 ?>
 
 <!DOCTYPE html>
@@ -190,9 +188,8 @@
               </script>
         </div>
         <div class="in-time" style="display: flex; align-items: baseline;">
-          <input type="hidden" name="tech_in" value="<?php echo $_SESSION["resttime"] ?>">  
-          <input type="text" class="technician_leaving" id="tech_in" value="<?= $row['tech_in']; ?>">
-          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="IN" onclick="tech_ins(); RestIn2()">
+          <input type="text" class="technician_leaving" name="tech_in" id="tech_in" value="<?= $row['tech_in']; ?>">
+          <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="IN" onclick="tech_ins();">
           
               <script type="text/javascript">
                   function tech_ins()
@@ -205,43 +202,23 @@
                     }
               </script>
 
-              <script type="text/javascript">
-                   function RestIn2()
-                  {
-                    var tech_in = $('input[name=tech_in]').val();
-                    var technician = $('input[name=job_assign]').val();
-                    var today_date = $('input[name=today_date]').val();
-                    
-                    if(tech_in!='' || tech_in=='',
-                    technician!='' || technician=='',
-                    today_date!='' || today_date=='')
-                  
-                  {
-                    var formData = {tech_in:tech_in,
-                                 technician:technician,
-                                 today_date:today_date};
-                    
-                    $.ajax({
-                              url: "techinupdate2.php",
-                              type: 'POST',
-                              data: formData,
-                              success: function(response)
-                                {
-                                  var res = JSON.parse(response);
-                                  console.log(res);
-                                }
-                              });
-                            }
-                          } 
-              </script>
-        
+             
         </div>
       </div>
-      
+
+      <?php
+          date_default_timezone_set("Asia/Kuala_Lumpur");
+    $RestTime = date('g:i A');
+    $_SESSION['resttime'] = $RestTime; 
+      ?>
+
+      <input type="hidden" name="technician_in" value="<?php echo $_SESSION["resttime"] ?>">  
+        <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>"> 
+        <input type="hidden" name="today_date" value="<?php echo  $_SESSION['storeDate'] ?>">
       <p class="control"><b id="messageupdate"></b></p>
       <div class="updateBtn">
-        
-      <input style="height: 36px; margin-left: 20px; margin-right: 43px; font-size: 15px;" type="button" id="update_time" name="update_time" value="Update" />
+      
+      <input style="height: 36px; margin-left: 20px; margin-right: 43px; font-size: 15px;" type="button" id="update_time" onclick="RestIn2();" name="update_time" value="Update" />
       </div>
     
     </form>
@@ -267,6 +244,39 @@
       });
       });
   </script>
+
+   <script type="text/javascript">
+                   function RestIn2()
+                  {
+                    var technician_in = $('input[name=technician_in]').val();
+                    var technician = $('input[name=job_assign]').val();
+                    var today_date = $('input[name=today_date]').val();
+                    
+                    if(technician_in!='' || technician_in=='',
+                    technician!='' || technician=='',
+                    today_date!='' || today_date=='')
+                  
+                  {
+                    var formData = {technician_in:technician_in,
+                                 technician:technician,
+                                 today_date:today_date};
+                    
+                    $.ajax({
+                              url: "techinupdate2.php",
+                              type: 'POST',
+                              data: formData,
+                              success: function(response)
+                                {
+                                  var res = JSON.parse(response);
+                                  console.log(res);
+                                }
+                              });
+                            }
+                          } 
+              </script>
+        
+
+
     <?php } } } ?>
 
 </body>
