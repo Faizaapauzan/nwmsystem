@@ -315,6 +315,7 @@ $_SESSION['storeDate'] = $today_date;
     
     <div class="input-group mb-3">
       <input type="hidden" name="tech_in" value="<?php echo $_SESSION["resttime"] ?>">
+      <input type="hidden" name="technician_in" value="<?php echo $_SESSION["resttime"] ?>">
       <input readonly type="text" style="position: static;" class="form-control" id="tech_in"  value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
       <div class="input-group-append">
         <button class="buttonbiru" onclick="tech_ins(); RestIn(); RestIn2();" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
@@ -357,16 +358,16 @@ $_SESSION['storeDate'] = $today_date;
 
                   function RestIn2()
                   {
-                    var tech_in = $('input[name=tech_in]').val();
+                    var technician_in = $('input[name=technician_in]').val();
                     var tech_leader = $('input[name=technician]').val();
                     var techupdate_date = $('input[name=today_date]').val();
                     
-                    if(tech_in!='' || tech_in=='',
+                    if(technician_in!='' || technician_in=='',
                     tech_leader!='' || tech_leader=='',
                     techupdate_date!='' || techupdate_date=='')
                   
                   {
-                    var formData = {tech_in:tech_in,
+                    var formData = {technician_in:technician_in,
                       tech_leader:tech_leader,
                       techupdate_date:techupdate_date};
                     

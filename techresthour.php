@@ -210,7 +210,7 @@ $_SESSION['storeDate'] = $today_date;
     </div>
     
     <div style="position: static; width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="tech_in" value="<?= $row['tech_in']; ?>" aria-describedby="basic-addon2">
+    <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="technician_in" value="<?= $row['technician_in']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="buttonbiru" onclick="tech_ins()" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
     </div>
@@ -244,16 +244,16 @@ $_SESSION['storeDate'] = $today_date;
       function updateForm()
               {
                 var tech_out = $('input[name=tech_out]').val();
-                var tech_in = $('input[name=tech_in]').val();
+                var technician_in = $('input[name=technician_in]').val();
                 var techupdate_id  = $('input[name=techupdate_id ]').val();
                 
                 if(tech_out!='' || tech_out=='', 
-                    tech_in!='' || tech_in=='',
+                    technician_in!='' || technician_in=='',
                     techupdate_id !='' || techupdate_id =='')
 
                   {
                     var formData = {tech_out: tech_out,
-                                     tech_in: tech_in,
+                                     technician_in: technician_in,
                                      techupdate_id : techupdate_id };
                                     
                     $.ajax({

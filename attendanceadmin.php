@@ -288,7 +288,7 @@ $query = $conn->query("SELECT * FROM tech_update ORDER BY techupdate_id DESC");
         <td><?php echo $row["tech_clockin"]; ?></td>
         <td><?php echo $row["tech_clockout"]; ?></td>
         <td><?php echo $row["tech_out"]; ?></td>
-        <td><?php echo $row["tech_in"]; ?></td> 
+        <td><?php echo $row["technician_in"]; ?></td> 
 
     </tr>
         <?php 
