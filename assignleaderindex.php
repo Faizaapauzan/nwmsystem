@@ -10,14 +10,14 @@ include 'dbconnect.php';
         $assistantname=implode(",",$username);
         $ass_date = $_POST['ass_date'];
 
-        $customer_name = $_POST['customer_name'];
+        $cust_name = $_POST['cust_name'];
         $requested_date = $_POST['requested_date'];
         $machine_name = $_POST['machine_name'];
       
     {
      
-       $sql = "INSERT INTO assistants (jobregister_id , username , ass_date, customer_name , requested_date, machine_name) 
-               VALUES ('$jobregister_id','$assistantname','$ass_date', '$customer_name','$requested_date','$machine_name')";
+       $sql = "INSERT INTO assistants (jobregister_id , username , ass_date, cust_name , requested_date, machine_name) 
+               VALUES ('$jobregister_id','$assistantname','$ass_date', '$cust_name','$requested_date','$machine_name')";
        
     
 

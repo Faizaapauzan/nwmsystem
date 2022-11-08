@@ -114,8 +114,6 @@ table, th, td {
 
                  $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$date'");
 
-
-
                 if ($query){
                   // output data of each row
                   while ($row = mysqli_fetch_array($query)) {

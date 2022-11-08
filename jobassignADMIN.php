@@ -100,10 +100,9 @@ include 'dbconnect.php';
 <input type="hidden" name="ass_date" value="<?php echo $_SESSION["storeDate"] ?>">
 <input type="hidden" name="techupdate_date" value="<?php echo $_SESSION["storeDate"] ?>">
 <input type="hidden" name="tech_leader" value="<?php echo $row['job_assign'] ?>">
-<input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
+<input type="hidden" name="cust_name" value="<?php echo $row['customer_name'] ?>">
 <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
 <input type="hidden" name="machine_name" value="<?php echo $row['machine_name'] ?>">
-<input type="hidden" name="support" value="<?php echo $row['support'] ?>">
 
 <div class="assistants" id="multipleassist">
   

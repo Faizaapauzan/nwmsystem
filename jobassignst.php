@@ -28,9 +28,6 @@ include 'dbconnect.php';
   
   <form class="form" id="assigntechnician_form" method="post" style="margin-bottom: 50px;">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-    <input type="hidden" name="customer_name" class="customer_name" value="<?php echo $row['customer_name'] ?>">
-    <input type="hidden" name="requested_date" class="requested_date" value="<?php echo $row['requested_date'] ?>">
-    <input type="hidden" name="support" class="support" value="<?php echo $row['support'] ?>">
     
     <label for="job_assign">Job Assign To :</label>
     <p class="control"><b id="assignupdatetechnicianmessage"></b></p>
@@ -59,7 +56,7 @@ include 'dbconnect.php';
     </select>
     
     <?php
-        $DateAssign = date("Y.m.d");
+        $DateAssign = date("d-m-Y");
         $_SESSION['storeDate'] = $DateAssign; 
     ?>
     

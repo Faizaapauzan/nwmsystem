@@ -167,6 +167,8 @@ session_start();
           	job_assign = '' AND job_status = 'Ready' AND job_cancel = ''
 			  OR
           	job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL
+			  OR
+          	job_assign = '' AND job_status IS NULL AND job_cancel IS NULL
           	ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
           
           	$result = mysqli_query($conn, $query);
