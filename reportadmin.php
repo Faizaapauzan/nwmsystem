@@ -36,20 +36,41 @@
   overflow: hidden;
 }
 
-tbody {
-  counter-reset: Serial;   
+#auto {
+  counter-reset: rowNumber;
 }
 
-tr td:first-child:before {
-  counter-increment: Serial;      
-	content: counter(Serial) "."; 
-  padding-left: 5px;
-  padding: 5px;
+#auto tr > td:first-child {
+  counter-increment: rowNumber;
+}
+
+#auto tr td:first-child::before {
+  content: counter(rowNumber);
+  min-width: 1em;
+  margin-right: 0.5em;
 }
 
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+}
+
+.infoarea {
+    writing-mode: horizontal-tb !important;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
+    text-rendering: auto;
+    display: inline-block;
+    line-height: 17px;
+    text-align: start;
+    cursor: text;
+    width: 136px;
+    height: 43px;
+    padding: 1px 2px;
+    border-width: 0px;
+    resize: none;
+
 }
 
 
@@ -59,43 +80,45 @@ table, th, td {
   <div class="text-center">
     <button onclick="window.print();" class="btn btn-primary" id="print-btn" style="margin: 20px;">Print</button>
     </div>
-    
-    
 
     <div class="my-5 page" size="A4">
     <div class="status" style="margin: 20px;">
     Worker Assignment
     <br/>
-    Date : <input type="text" value="<?php echo $date = date('d-m-Y'); ?>">
+    Date : <input type="text" style="border:none;" value="<?php echo $date = date('d-m-Y'); ?>">
     </div>
 
     <div class="remarks-job" style="margin-top: 27px; margin: 20px;">
     Remark - Total Workers:
     <div class="job-update" style="margin-top: 20px; margin: 20px;">
-    <table style="width:100%">
+    <table id="auto" style="width:100%">
 
         <thead style="height: 42px;">
             <th></th>
-            <th style="width: 10%;">Leader</th>
+            <th style="width: 9%;">Leader</th>
             <th style="width: 12%;">Assistant</th>
             <th style="width: 15%;">Place</th>
-            <th style="width: 32%;">Machine</th>
-            <th style="width: 5%;">Departure</th>
-            <th style="width: 5%;">Arrival</th>
-            <th style="width: 5%;">Leaving</th>
-            <th style="width: 5%;">Work Time</th>
-            <th style="width: 5%;">Travel Time</th>
+            <th style="width: 27%;">Machine</th>
+            <th style="width: 7%;">Departure</th>
+            <th style="width: 7%;">Arrival</th>
+            <th style="width: 7%;">Leaving</th>
+            <th style="width: 9%;">Work Time</th>
+            <th style="width: 9%;">Travel Time</th>
         </thead>
 
             <?php
                 include_once 'dbconnect.php';
 
-                $sql = "SELECT * FROM job_register WHERE DateAssign='$date'";
-                $result = mysqli_query($conn, $sql);
+                // $sql = "SELECT * FROM job_register JOIN servicereport ON job_register.jobregister_id=servicereport.jobregister_id
+//         WHERE job_register.jobregister_id = $jobregister_id";
 
-                if ($result){
+                 $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$date'");
+
+
+
+                if ($query){
                   // output data of each row
-                  while ($row = mysqli_fetch_array($result)) {
+                  while ($row = mysqli_fetch_array($query)) {
 
                   $technician_departure =$row['technician_departure'];
                   $technician_arrival =$row['technician_arrival'];
@@ -134,16 +157,16 @@ table, th, td {
                   }
               }
             ?>
-
+<!-- <input type="text" style="height: 43px; width: 136px; border: none;" value=""> -->
         <tbody>
-            <td></td>
+            <td style="text-align: center;"></td>
             <td><?php echo $row["job_assign"]; ?></td>
-            <td></td>
+            <td><textarea class="infoarea" id="textarea-container"><?php echo $row["username"]; ?></textarea></td>
             <td><?php echo $row["customer_name"]; ?></td>
             <td><?php echo $row["machine_type"]; ?> - <?php echo $row["job_name"]; ?></td>
-            <td><?php echo "$departure" ?></td>
-            <td><?php echo "$arrival" ?></td>
-            <td><?php echo "$leaving" ?></td>
+            <td style="text-align: center;"><?php echo "$departure" ?></td>
+            <td style="text-align: center;"><?php echo "$arrival" ?></td>
+            <td style="text-align: center;"><?php echo "$leaving" ?></td>
             <td><?php echo difftime($arrival, $leaving)['h']?>   hours <?php echo difftime($arrival, $leaving)['m']?>  minutes</td>
             <td><?php echo difftime($departure, $arrival)['h']?>   hours <?php echo difftime($departure, $arrival)['m']?>  minutes</td>
             
@@ -153,11 +176,26 @@ table, th, td {
     </table>
        </div>
     </div>
+       <script type="text/javascript">
+var $textArea = $("#textarea-container");
+
+// Re-size to fit initial content.
+resizeTextArea($textArea);
+
+// Remove this binding if you don't want to re-size on typing.
+$textArea.off("keyup.textarea").on("keyup.textarea", function() {
+    resizeTextArea($(this));
+});
+
+// function resizeTextArea($element) {
+//     $element.height($element[0].scrollHeight);
+// }
+</script>
 <div class="remarks-worker" style="margin: 20px;padding-top: 102px;">
     Remark - Workers Attendance
 
     <div class="staff-update" style="margin-top: 50px; margin: 20px;">
-    <table style="width:100%">
+    <table id="auto" style="width:100%">
         <thead style="height: 42px;">
             <th style="width: 3%;"></th>
             <th style="width: 20%;">Leader</th>
@@ -181,13 +219,13 @@ table, th, td {
             ?>
 
         <tbody>
-            <td></td>
+            <td style="text-align: center;"></td>
             <td><?php echo $row["tech_leader"]; ?></td>
             <td><?php echo $row["username"]; ?></td>
-            <td><?php echo $row["tech_clockin"]; ?></td>
-            <td><?php echo $row["tech_clockout"]; ?></td>
-            <td><?php echo $row["tech_out"]; ?></td>
-            <td><?php echo $row["tech_in"]; ?></td>
+            <td style="text-align: center;"><?php echo $row["tech_clockin"]; ?></td>
+            <td style="text-align: center;"><?php echo $row["tech_clockout"]; ?></td>
+            <td style="text-align: center;"><?php echo $row["tech_out"]; ?></td>
+            <td style="text-align: center;"><?php echo $row["technician_in"]; ?></td>
         </tbody>
         <?php } } ?>
     </table>

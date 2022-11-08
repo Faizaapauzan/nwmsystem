@@ -19,6 +19,7 @@ include 'dbconnect.php';
 		$cust_address1 = $_POST['cust_address1'];
 		$cust_address2 = $_POST['cust_address2'];
 		$cust_address3 = $_POST['cust_address3'];
+		$DateAssign = $_POST['DateAssign'];
 		$machine_id = $_POST['machine_id'];
 		$machine_code = $_POST['machine_code'];
 		$machine_name = $_POST['machine_name'];
@@ -38,7 +39,7 @@ include 'dbconnect.php';
            
 	$sql = "INSERT INTO job_register (job_assign, job_code, job_name, job_order_number, job_description, customer_code,
      customer_name, customer_grade, requested_date, customer_PIC,
-	 cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, machine_id, machine_code, machine_name, machine_brand, brand_id, machine_type, type_id, serialnumber, accessories_required, jobregistercreated_by, jobregisterlastmodify_by)
+	 cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, DateAssign, machine_id, machine_code, machine_name, machine_brand, brand_id, machine_type, type_id, serialnumber, accessories_required, jobregistercreated_by, jobregisterlastmodify_by)
 
 VALUES ('".addslashes($_POST['job_assign'])."',
         '".addslashes($_POST['job_code'])."',
@@ -54,7 +55,8 @@ VALUES ('".addslashes($_POST['job_assign'])."',
         '".addslashes($_POST['cust_phone2'])."',
         '".addslashes($_POST['cust_address1'])."',
         '".addslashes($_POST['cust_address2'])."',
-        '".addslashes($_POST['cust_address3'])."', $machine_id,
+        '".addslashes($_POST['cust_address3'])."',
+		 '".addslashes($_POST['DateAssign'])."', $machine_id,
         '".addslashes($_POST['machine_code'])."',
         '".addslashes($_POST['machine_name'])."',
 		'".addslashes($_POST['machine_brand'])."',
