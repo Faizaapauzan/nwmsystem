@@ -82,7 +82,7 @@ table, th, td {
     </div>
 
     <div class="my-5 page" size="A4">
-    <div class="status" style="margin: 20px;">
+    <div class="status" style="margin: 20px;font-weight: bold;">
     Worker Assignment
     <br/>
     Date : <input type="text" style="border:none;" value="<?php echo $date = date('d-m-Y'); ?>">
@@ -109,10 +109,7 @@ table, th, td {
             <?php
                 include_once 'dbconnect.php';
 
-                // $sql = "SELECT * FROM job_register JOIN servicereport ON job_register.jobregister_id=servicereport.jobregister_id
-//         WHERE job_register.jobregister_id = $jobregister_id";
-
-                 $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$date'");
+                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$date'");
 
                 if ($query){
                   // output data of each row
@@ -155,7 +152,7 @@ table, th, td {
                   }
               }
             ?>
-<!-- <input type="text" style="height: 43px; width: 136px; border: none;" value=""> -->
+
         <tbody>
             <td style="text-align: center;"></td>
             <td><?php echo $row["job_assign"]; ?></td>
@@ -165,8 +162,8 @@ table, th, td {
             <td style="text-align: center;"><?php echo "$departure" ?></td>
             <td style="text-align: center;"><?php echo "$arrival" ?></td>
             <td style="text-align: center;"><?php echo "$leaving" ?></td>
-            <td><?php echo difftime($arrival, $leaving)['h']?>   hours <?php echo difftime($arrival, $leaving)['m']?>  minutes</td>
-            <td><?php echo difftime($departure, $arrival)['h']?>   hours <?php echo difftime($departure, $arrival)['m']?>  minutes</td>
+            <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?>   hours <?php echo difftime($arrival, $leaving)['m']?>  minutes</td>
+            <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?>   hours <?php echo difftime($departure, $arrival)['m']?>  minutes</td>
             
         </tbody>
         <?php } } ?>
@@ -190,7 +187,7 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
 // }
 </script>
 <div class="remarks-worker" style="margin: 20px;padding-top: 102px;">
-    Remark - Workers Attendance
+   <b> Remark - Workers Attendance</b>
 
     <div class="staff-update" style="margin-top: 50px; margin: 20px;">
     <table id="auto" style="width:100%">
