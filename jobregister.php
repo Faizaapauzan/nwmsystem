@@ -28,7 +28,7 @@ if(!isset($_SESSION['username']))
 
 <?php
 
-$today_date = date("Y.m.d");
+$today_date = date("d-m-Y");
 $_SESSION['storeDate'] = $today_date;
 ?>
 
@@ -1032,7 +1032,7 @@ include 'dbconnect.php';
     <input type="text" id="jobPriority" name="job_priority" placeholder="Enter Job Priority">
     </div>
             <?php
-            $DateRequest = date("Y/m/d");
+            $DateRequest = date("d-m-Y");
             $_SESSION['requestDate'] = $DateRequest; 
         ?>
 

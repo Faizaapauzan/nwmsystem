@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $showDate = date("d.m.Y");
+    $showDate = date("d-m-Y");
     $_SESSION['today_date'] = $showDate;
 ?>
 

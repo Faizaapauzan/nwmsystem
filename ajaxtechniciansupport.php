@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $today_date = date("Y.m.d");
+    $today_date = date("d-m-Y");
     $_SESSION['storeDate'] = $today_date; 
 ?>
 
@@ -175,7 +175,7 @@
           </select>
         
         <?php
-            $DateAssign = date("Y.m.d");
+            $DateAssign = date("d-m-Y");
             $_SESSION['storeDate'] = $DateAssign; 
         ?>
     

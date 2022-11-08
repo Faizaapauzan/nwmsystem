@@ -418,7 +418,7 @@ $("#jobModel").on("change",function(){
 
 <?php
 
-$today_date = date("Y.m.d");
+$today_date = date("d-m-Y");
 $_SESSION['storeDate'] = $today_date;
 ?>
 
