@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "aadmin";
+$password = "iThink3399*";
 $database = "nwmsystem";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $database);
