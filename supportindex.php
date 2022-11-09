@@ -118,12 +118,6 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
         {
             $response['success'] = true;
         }
-
-        else
-        {
-            $response['error'] = true;
-        }
-
     }
 
 echo json_encode($response);
