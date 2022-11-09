@@ -384,7 +384,7 @@ tr td:first-child:before {
             $requested_date =$_POST['requested_date'];
           
           $sql2 = "SELECT * FROM `assistants` 
-                   WHERE customer_name='$customer_name'
+                   WHERE cust_name='$cust_name'
                    AND machine_name='$machine_name'
                    AND requested_date='$requested_date'";
           $queryRecords = mysqli_query($conn, $sql2) or die("Error to fetch Accessories data");
