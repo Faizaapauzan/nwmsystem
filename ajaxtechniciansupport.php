@@ -21,7 +21,7 @@
             while ($row = mysqli_fetch_array($query_run)) {
     ?>
     
-<form action="supportindex.php" method="post" class="row g-3">
+<form action="supportindex.php" method="post" class="row g-3" id="supportform">
 
    <!-- hidden input -->
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
@@ -229,131 +229,28 @@
 			}
 		}
 	</script>
-    
-    <script type="text/javascript">
-        function submitFormSupport()
-        {
-            var technician_rank = $('input[name=technician_rank]').val();
-            var staff_position = $('input[name=staff_position]').val();
-            var support = $('input[name=support]').val();
-            var today_date = $('input[name=today_date]').val();
-            var job_priority = $('input[name=job_priority]').val();
-            var job_order_number = $('input[name=job_order_number]').val();
-            var job_name = $('input[name=job_name]').val();
-            var job_code = $('input[name=job_code]').val();
-            var job_description = $('input[name=job_description]').val();
-            var requested_date = $('input[name=requested_date]').val();
-            var delivery_date = $('input[name=delivery_date]').val();
-            var customer_name = $('input[name=customer_name]').val();
-            var customer_code = $('input[name=customer_code]').val();
-            var customer_grade = $('input[name=customer_grade]').val();
-            var cust_address1 = $('input[name=cust_address1]').val();
-            var cust_address2 = $('input[name=cust_address2]').val();
-            var cust_address3 = $('input[name=cust_address3]').val();
-            var customer_PIC = $('input[name=customer_PIC]').val();
-            var cust_phone1 = $('input[name=cust_phone1]').val();
-            var cust_phone2 = $('input[name=cust_phone2]').val();
-            var machine_id = $('input[name=machine_id]').val();
-            var machine_name = $('input[name=machine_name]').val();
-            var machine_code = $('input[name=machine_code]').val();
-            var machine_type = $('input[name=machine_type]').val();
-            var type_id = $('input[name=type_id]').val();
-            var serialnumber = $('input[name=serialnumber]').val();
-            var machine_brand = $('input[name=machine_brand]').val();
-            var brand_id = $('input[name=brand_id]').val();
-            var accessories_required = $('select[name=accessories_required]').val();
-            var DateAssign = $('input[name=DateAssign]').val();
-            var job_assign = $('input[name=job_assign]').val();
-            var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
-            var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
-            
-            if(
-               technician_rank!='' || technician_rank=='',
-               staff_position!='' || staff_position=='',
-               support!='' || support=='',
-               today_date!='' || today_date=='',  
-               job_priority!='' || job_priority=='', 
-               job_order_number!='' || job_order_number=='',
-               job_name!='' || job_name=='',
-               job_code!='' || job_code=='',
-               job_description!='' || job_description=='',
-               requested_date!='' || requested_date=='', 
-               delivery_date!='' || delivery_date=='', 
-               customer_name!='' || customer_name=='',
-               customer_code!='' || customer_code=='',  
-               customer_grade!='' || customer_grade=='', 
-               cust_address1!='' || cust_address1=='',
-               cust_address2!='' || cust_address2=='',
-               cust_address3!='' || cust_address3=='',
-               customer_PIC!='' || customer_PIC=='', 
-               cust_phone1!='' || cust_phone1=='', 
-               cust_phone2!='' || cust_phone2=='', 
-               machine_id!='' || machine_id=='',
-               machine_name!='' || machine_name=='',
-               machine_code!='' || machine_code=='',  
-               machine_type!='' || machine_type=='',
-               type_id!='' || type_id=='',
-               serialnumber!='' || serialnumber=='',
-               machine_brand!='' || machine_brand=='',
-               brand_id!='' || brand_id=='',
-               accessories_required!='' || accessories_required=='', 
-               DateAssign!='' || DateAssign=='',
-               job_assign!='' || job_assign=='',
-               jobregistercreated_by!='' || jobregistercreated_by=='',
-               jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='')
-                
-               {
-                var formData = {technician_rank: technician_rank,
-                                staff_position: staff_position,
-                                support: support,
-                                today_date: today_date,
-                                job_priority: job_priority,
-                                job_order_number: job_order_number,
-                                job_name: job_name,
-                                job_code: job_code,
-                                job_description: job_description,
-                                requested_date: requested_date,
-                                delivery_date: delivery_date,
-                                customer_name: customer_name,
-                                customer_code: customer_code,
-                                customer_grade: customer_grade,
-                                cust_address1: cust_address1,
-                                cust_address2: cust_address2,
-                                cust_address3: cust_address3,
-                                customer_PIC: customer_PIC,
-                                cust_phone1: cust_phone1,
-                                cust_phone2: cust_phone2,
-                                machine_id: machine_id,
-                                machine_name: machine_name,
-                                machine_code: machine_code,
-                                machine_type: machine_type,
-                                type_id: type_id,
-                                serialnumber: serialnumber,
-                                machine_brand: machine_brand,
-                                brand_id: brand_id,
-                                accessories_required: accessories_required,
-                                DateAssign: DateAssign,
-                                job_assign: job_assign,
-                                jobregistercreated_by: jobregistercreated_by,
-                                jobregisterlastmodify_by: jobregisterlastmodify_by};
-                
-                $.ajax({
-                        url: "supportindex.php", 
-                        type: 'POST',
-                        data: formData,
-                        success: function(response)
-                        {
-                            var res = JSON.parse(response);
-                            console.log(res);
-                            if(res.success == true)
-                            $('#messageSupport').html('<span style="color: green">Succesfully Request for Support!</span>');
-                            else
-                            $('#messageSupport').html('<span style="color: red">Request for support failed</span>'+ errorThrown);
-                        }
-                    });
-               }
-        } 
-    </script>
 
+<script>
+  $(document).ready(function () {
+    $('#duplicate').click(function () {
+      var data = $('#supportform').serialize() + '&duplicate=duplicate';
+      $.ajax({
+        url: 'supportindex.php',
+        type: 'post',
+        data: data,
+        success: function(response)
+        {
+          var res = JSON.parse(response);
+                    console.log(res);
+                    if(res.success == true)
+                    $('#messageSupport').html('<span style="color: green">Update Saved!</span>');
+                    else
+                    $('#messageSupport').html('<span style="color: red">Data Cannot Be Saved</span>');
+                  }
+                });
+              });
+              });
+</script>
+    
 </body>
 </html>
