@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$username = "aadmin";
+$username = "iThink";
 $password = "iThink3399*";
 $database = "nwmsystem";
 // Create connection
