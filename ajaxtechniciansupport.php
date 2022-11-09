@@ -348,7 +348,7 @@
                             if(res.success == true)
                             $('#messageSupport').html('<span style="color: green">Succesfully Request for Support!</span>');
                             else
-                            $('#messageSupport').html('<span style="color: red">Request for support failed</span>');
+                            $('#messageSupport').html('<span style="color: red">Request for support failed</span>'+ errorThrown);
                         }
                     });
                }
