@@ -246,10 +246,13 @@
                     $('#messageSupport').html('<span style="color: green">Update Saved!</span>');
                     else
                     $('#messageSupport').html('<span style="color: red">Data Cannot Be Saved</span>');
-                  }
-                });
-              });
-              });
+                  },
+         error:function (xhr, textStatus, errorThrown) {
+                console.log('Error in Operation');
+            }
+        });
+    });
+    });
 </script>
     
 </body>
