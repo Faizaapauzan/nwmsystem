@@ -704,8 +704,11 @@ $("#branddrop").on("change",function(){
      <script type="text/javascript">
         function submitMachine()
         {
-            var type_id = $('select[name=type_id]').val();
-            var serialnumber = $('input[name=serialnumber]').val();
+             var type_id = $('select[name=type_id]').val();
+             var machine_type = $('input[name=machine_type]').val();
+             var brand_id = $('input[name=brand_id]').val();
+             var machine_brand = $('input[name=machine_brand]').val();
+             var serialnumber = $('input[name=serialnumber]').val();
              var machine_code = $('input[name=machine_code]').val();
              var machine_name = $('input[name=machine_name]').val();
              var customer_name = $('input[name=customer_name]').val();
@@ -717,6 +720,9 @@ $("#branddrop").on("change",function(){
              
             
             if( type_id!='' || type_id=='',
+                machine_type!='' || machine_type=='',
+                brand_id!='' || brand_id=='',
+                machine_brand!='' || machine_brand=='',
                serialnumber!='' || serialnumber=='',
                machine_code!='' || machine_code=='',
                machine_name!='' || machine_name=='',
@@ -730,15 +736,18 @@ $("#branddrop").on("change",function(){
                 
                {
                 var formData = {type_id: type_id,
+                    machine_type: machine_type,
+                  brand_id: brand_id,
+                  machine_brand: machine_brand,
                   serialnumber: serialnumber,
                   machine_code: machine_code,
                   machine_name: machine_name,
                   customer_name: customer_name,
-                   customer_id: customer_id,
+                  customer_id: customer_id,
                   purchase_date: purchase_date,
                   machine_description: machine_description,
                   machinelistcreated_by: machinelistcreated_by,
-                     machinelistlastmodify_by: machinelistlastmodify_by
+                  machinelistlastmodify_by: machinelistlastmodify_by
                 };
                 
                 $.ajax({
