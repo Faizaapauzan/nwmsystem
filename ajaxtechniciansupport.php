@@ -108,7 +108,7 @@
 	<input type="text" class="form-control" name="cust_phone2" value="<?php echo $row['cust_phone2']?>" style="background-color: white;" readonly>
     </div> 
 
-       <div class="col-md-6" style="width: 70%;">
+    <div class="col-md-6" style="width: 70%;">
     <label for="brand">Machine Brand</label><br>
     <select disabled style="color: black; height: 33px; width: 200px; border-radius: 4px;" id="brand" required>
     <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
@@ -117,7 +117,7 @@
     <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" readonly >  
     </div>
 
-   <div class="col-md-6" style="width: 70%;">
+    <div class="col-md-6" style="width: 70%;">
     <label for="type"> Machine Type</label><br>
     <select disabled style="color: black; height: 33px; width: 200px; border-radius: 4px;" class="form-select" id="type" required>
     <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
@@ -235,6 +235,7 @@
     $('#duplicate').click(function () {
       var data = $('#supportform').serialize() + '&duplicate=duplicate';
       $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
         url: 'supportindex.php',
         type: 'post',
         data: data,
