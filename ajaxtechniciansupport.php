@@ -246,21 +246,14 @@
                     $('#messageSupport').html('<span style="color: green">Update Saved!</span>');
                     else
                     $('#messageSupport').html('<span style="color: red">Data Cannot Be Saved</span>');
-                  },
+        },
         failure: function (jqXHR, textStatus, errorThrown) 
         {
-           
-                      $('#messageSupport').html('<p>status code: '+jqXHR.status+'</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>'+jqXHR.responseText + '</div>');
-                      console.log('jqXHR:');
-                      console.log(jqXHR);
-                      console.log('textStatus:');
-                      console.log(textStatus);
-                      console.log('errorThrown:');
-                      console.log(errorThrown);
-                    }
-                });
-            });
-            });
+            $('#messageSupport').html('<p>status code: '+jqXHR.status+'</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>'+jqXHR.responseText + '</div>');
+        }
+    });
+});
+});
 </script>
     
 </body>
