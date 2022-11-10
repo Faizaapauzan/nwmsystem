@@ -843,147 +843,147 @@
                                         success: function (response) {
                                             // Add response in Modal body
                                             $('.pending-update').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-Pending').modal('show');
-                                }
+                                            // Display Modal
+                                            $('#doubleClick-Pending').modal('show');
+                                        }
+                                    });
+                                });
                             });
-                        });
-                    });
-                </script>
+                        </script>
 
-                <!-- Pending Accessories Tab -->
-                <input type="radio" name="tabDoingPending" id="tabDoingPending4">
-                <label for="tabDoingPending4" class="tabHeadingPending">Accessories</label>
-                <div class="tab" id="PendingJobInfoTab">
-                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                    <form action="ajaxtabaccessories.php" method="post">
-                        <div class="pending-accessories">
+                        <!-- Pending Accessories Tab -->
+                        <input type="radio" name="tabDoingPending" id="tabDoingPending4">
+                        <label for="tabDoingPending4" class="tabHeadingPending">Accessories</label>
+                        <div class="tab" id="PendingJobInfoTab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                            <form action="ajaxtabaccessories.php" method="post">
+                                <div class="pending-accessories">
 
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('.Pending').click(function () {
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'ajaxtabaccessories.php',
-                                type: 'post',
-                                data: { jobregister_id: jobregister_id },
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.pending-accessories').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-Pending').modal('show');
-                                }
+                        
+                        <script type='text/javascript'>
+                            $(document).ready(function () {
+                                $('.Pending').click(function () {
+                                    var jobregister_id = $(this).data('id');
+                                    // AJAX request
+                                    $.ajax({
+                                        url: 'ajaxtabaccessories.php',
+                                        type: 'post',
+                                        data: { jobregister_id: jobregister_id },
+                                        success: function (response) {
+                                            // Add response in Modal body
+                                            $('.pending-accessories').html(response);
+                                            // Display Modal
+                                            $('#doubleClick-Pending').modal('show');
+                                        }
+                                    });
+                                });
                             });
-                        });
-                    });
-                </script>
-                
-                <!-- Pending Photo Tab -->
-                <input type="radio" name="tabDoingPending" id="tabDoingPending5">
-                <label for="tabDoingPending5" class="tabHeadingPending">Photo</label>
-                <div class="tab" id="PendingJobInfoTab">
-                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                    <form action="ajaxtechphtoupdt.php" method="post">
-                        <div class="pending-photos">
+                        </script>
+                        
+                        <!-- Pending Photo Tab -->
+                        <input type="radio" name="tabDoingPending" id="tabDoingPending5">
+                        <label for="tabDoingPending5" class="tabHeadingPending">Photo</label>
+                        <div class="tab" id="PendingJobInfoTab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                            <form action="ajaxtechphtoupdt.php" method="post">
+                                <div class="pending-photos">
 
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('.Pending').click(function () {
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'ajaxtechphtoupdt.php',
-                                type: 'post',
-                                data: { jobregister_id: jobregister_id },
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.pending-photos').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-Pending').modal('show');
-                                }
+                        
+                        <script type='text/javascript'>
+                            $(document).ready(function () {
+                                $('.Pending').click(function () {
+                                    var jobregister_id = $(this).data('id');
+                                    // AJAX request
+                                    $.ajax({
+                                        url: 'ajaxtechphtoupdt.php',
+                                        type: 'post',
+                                        data: { jobregister_id: jobregister_id },
+                                        success: function (response) {
+                                            // Add response in Modal body
+                                            $('.pending-photos').html(response);
+                                            // Display Modal
+                                            $('#doubleClick-Pending').modal('show');
+                                        }
+                                    });
+                                });
                             });
-                        });
-                    });
-                </script>
-                
-                <!-- Pending Video Tab -->
-                <input type="radio" name="tabDoingPending" id="tabDoingPending7">
-                <label for="tabDoingPending7" class="tabHeadingPending">Video</label>
-                <div class="tab" id="PendingJobInfoTab">
-                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                    <form action="ajaxtechvideoupdt.php" method="post">
-                        <div class="pending-video">
+                        </script>
+                        
+                        <!-- Pending Video Tab -->
+                        <input type="radio" name="tabDoingPending" id="tabDoingPending7">
+                        <label for="tabDoingPending7" class="tabHeadingPending">Video</label>
+                        <div class="tab" id="PendingJobInfoTab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                            <form action="ajaxtechvideoupdt.php" method="post">
+                                <div class="pending-video">
 
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('.Pending').click(function () {
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url:'ajaxtechvideoupdt.php',
-                                type:'post',
-                                data: { jobregister_id: jobregister_id },
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.pending-video').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-Pending').modal('show');
-                                }
+                        
+                        <script type='text/javascript'>
+                            $(document).ready(function () {
+                                $('.Pending').click(function () {
+                                    var jobregister_id = $(this).data('id');
+                                    // AJAX request
+                                    $.ajax({
+                                        url:'ajaxtechvideoupdt.php',
+                                        type:'post',
+                                        data: { jobregister_id: jobregister_id },
+                                        success: function (response) {
+                                            // Add response in Modal body
+                                            $('.pending-video').html(response);
+                                            // Display Modal
+                                            $('#doubleClick-Pending').modal('show');
+                                        }
+                                    });
+                                });
                             });
-                        });
-                    });
-                </script>
+                        </script>
+                        
+                        <!-- Pending Report Tab -->
+                        <input type="radio" name="tabDoingPending" id="tabDoingPending6">
+                        <label for="tabDoingPending6" class="tabHeadingPending"> Report </label>
+                        <div class="tab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                            <form action="ajaxreportadmin.php" method="post">
+                                <div class="pending-report">
 
-                <!-- Pending Report Tab -->
-                <input type="radio" name="tabDoingPending" id="tabDoingPending6">
-                <label for="tabDoingPending6" class="tabHeadingPending"> Report </label>
-                <div class="tab">
-                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                    <form action="ajaxreportadmin.php" method="post">
-                        <div class="pending-report">
-
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-
-                <script type='text/javascript'>
-                    $(document).ready(function() {
-                        $('.Pending').click(function() {
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'ajaxreportadmin.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function(response) {
-                                    // Add response in Modal body
-                                    $('.pending-report').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-Pending').modal('show');
-                                }
+                        
+                        <script type='text/javascript'>
+                            $(document).ready(function() {
+                                $('.Pending').click(function() {
+                                    var jobregister_id = $(this).data('id');
+                                    // AJAX request
+                                    $.ajax({
+                                        url: 'ajaxreportadmin.php',
+                                        type: 'post',
+                                        data: {jobregister_id: jobregister_id},
+                                        success: function(response) {
+                                            // Add response in Modal body
+                                            $('.pending-report').html(response);
+                                            // Display Modal
+                                            $('#doubleClick-Pending').modal('show');
+                                        }
+                                    });
+                                });
                             });
-                        });
-                    });
-                </script>
-
+                        </script>
                     </div>
                 </div>
                 <!-- End of Pending Popup Modal -->
                 <!-- End of Pending -->
 
+                <!-- Incomplete -->
                 <div class="box" id="myModal">
                     <div class="box_topic">Incomplete</div>
                             
@@ -1020,9 +1020,9 @@
                             <li><?php echo $row['job_status']?></li>
                             <li><b>Incomplete Reason: </b><?php echo $row['reason']?></li>
                         </ul>
-                    </div>
+                        </div>
                     
-                    <?php } ?>                              
+                            <?php } ?>                              
                               
                 </div>
                 
@@ -1041,7 +1041,7 @@
 
                                 </div>
                             </form>
-                        </div>
+                            </div>
                         </div>
 
                         <script type='text/javascript'>
@@ -1064,19 +1064,18 @@
                             });
                         </script>
 
-                         <!-- Incomplete Job Assign -->
+                        <!-- Incomplete Job Assign Tab -->
+                        <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete3">
+                        <label for="tabDoingIncomplete3" class="tabHeadingIncomplete">Job Assign</label>
+                        <div class="tab" id="IncompleteJobInfoTab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                            <form action="jobassignADMIN.php" method="post">
+                                <div class="incomplete-assign">
 
-                    <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete3">
-                    <label for="tabDoingIncomplete3" class="tabHeadingIncomplete">Job Assign</label>
-                    <div class="tab" id="IncompleteJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                        <form action="jobassignADMIN.php" method="post">
-                            <div class="incomplete-assign">
-
-                            </div>
-                        </form>
-                    </div>
-
+                                </div>
+                            </form>
+                        </div>
+                        
                         <script type='text/javascript'>
                             $(document).ready(function () {
                                 $('.Incomplete').click(function () {
@@ -1095,23 +1094,20 @@
                                     });
                                 });
                             });
-                        </script>						
-							
+                        </script>
+                        
+                        <!-- Incomplete Update Tab -->
+                        <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete2">
+                        <label for="tabDoingIncomplete2" class="tabHeadingIncomplete">Update</label>
+                        <div class="tab" id="IncompleteJobInfoTab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                            <form action="ajaxtechupdateadmin.php" method="post">
+                                <div class="incomplete-update">
 
-
-            <!-- Incomplete Update Tab -->
-
-                    <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete2">
-                    <label for="tabDoingIncomplete2" class="tabHeadingIncomplete">Update</label>
-                    <div class="tab" id="IncompleteJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                        <form action="ajaxtechupdateadmin.php" method="post">
-                            <div class="incomplete-update">
-
-                            </div>
-                        </form>
-                    </div>
-
+                                </div>
+                            </form>
+                        </div>
+                        
                         <script type='text/javascript'>
                             $(document).ready(function () {
                                 $('.Incomplete').click(function () {
@@ -1131,21 +1127,19 @@
                                 });
                             });
                         </script>
+                        
+                        <!-- Incomplete Accessories Tab -->
+                        <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete4">
+                        <label for="tabDoingIncomplete4" class="tabHeadingIncomplete">Accessories</label>
+                        <div class="tab" id="IncompleteJobInfoTab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                            <form action="ajaxtabaccessories.php" method="post">
+                                <div class="incomplete-accessories">
 
-							
-            <!-- Incomplete Accessories Tab -->
-
-                    <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete4">
-                    <label for="tabDoingIncomplete4" class="tabHeadingIncomplete">Accessories</label>
-                    <div class="tab" id="IncompleteJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                        <form action="ajaxtabaccessories.php" method="post">
-                            <div class="incomplete-accessories">
-
-                            </div>
-                        </form>
-                    </div>
-
+                                </div>
+                            </form>
+                        </div>
+                        
                         <script type='text/javascript'>
                             $(document).ready(function () {
                                 $('.Incomplete').click(function () {
@@ -1164,24 +1158,20 @@
                                     });
                                 });
                             });
-                        </script>							
-					
-					
-					
-					
-<!-- Pending MEDIA Tab -->
+                        </script>
+                        
+                        <!-- Pending Photo Tab -->
+                        <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete5">
+                        <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Photo</label>
+                        <div class="tab" id="IncompleteJobInfoTab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                            <form action="ajaxtechphtoupdt.php" method="post">
+                                <div class="incomplete-photos">
 
-                    <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete5">
-                    <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Photo</label>
-                    <div class="tab" id="IncompleteJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                        <form action="ajaxtechphtoupdt.php" method="post">
-                            <div class="incomplete-photos">
-
-                            </div>
-                        </form>
-                    </div>
-
+                                </div>
+                            </form>
+                        </div>
+                        
                         <script type='text/javascript'>
                             $(document).ready(function () {
                                 $('.Incomplete').click(function () {
@@ -1201,21 +1191,19 @@
                                 });
                             });
                         </script>
+                        
+                        <!-- Incomplete VIDEO Tab -->
+                        <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete7">
+                        <label for="tabDoingIncomplete7" class="tabHeadingIncomplete">Video</label>
+                        <div class="tab" id="IncompleteJobInfoTab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                            <form action="ajaxtechvideoupdt.php" method="post">
+                                <div class="incomplete-video">
 
-
-<!-- Incomplete VIDEO Tab -->
-
-                    <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete7">
-                    <label for="tabDoingIncomplete7" class="tabHeadingIncomplete">Video</label>
-                    <div class="tab" id="IncompleteJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                        <form action="ajaxtechvideoupdt.php" method="post">
-                            <div class="incomplete-video">
-
-                            </div>
-                        </form>
-                    </div>
-
+                                </div>
+                            </form>
+                        </div>
+                        
                         <script type='text/javascript'>
                             $(document).ready(function () {
                                 $('.Incomplete').click(function () {
@@ -1235,23 +1223,19 @@
                                 });
                             });
                         </script>
-					
-				
-			
-            <!-- Incomplete Report Tab -->
+                        
+                        <!-- Incomplete Report Tab -->
+                        <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete6">
+                        <label for="tabDoingIncomplete6" class="tabHeadingIncomplete"> Report </label>
+                        <div class="tab">
+                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                            <form action="ajaxreportadmin.php" method="post">
+                                <div class="incomplete-report">
 
-                    <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete6">
-                    <label for="tabDoingIncomplete6" class="tabHeadingIncomplete"> Report </label>
-                    <div class="tab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                        <form action="ajaxreportadmin.php" method="post">
-                            <div class="incomplete-report">
-
-                            </div>
-                        </form>
-                    </div>
-               
-
+                                </div>
+                            </form>
+                        </div>
+                        
                         <script type='text/javascript'>
                             $(document).ready(function() {
                                 $('.Incomplete').click(function() {

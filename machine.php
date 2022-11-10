@@ -671,7 +671,7 @@ $("#branddrop").on("change",function(){
                   purchase_date: purchase_date,
                   machine_description: machine_description,
                   machinelistcreated_by: machinelistcreated_by,
-                     machinelistlastmodify_by: machinelistlastmodify_by
+                   machinelistlastmodify_by: machinelistlastmodify_by
                 };
                 
                 $.ajax({

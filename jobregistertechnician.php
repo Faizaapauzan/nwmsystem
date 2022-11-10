@@ -23,7 +23,7 @@ $_SESSION['storeDate'] = $att_date;
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
 
     <!-- Script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
 
@@ -423,7 +423,6 @@ $_SESSION['storeDate'] = $today_date;
 ?>
 
 <input readonly type="hidden" id="requestDate" name="requested_date" value="<?php echo $_SESSION["storeDate"] ?>">
-
 
     <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
