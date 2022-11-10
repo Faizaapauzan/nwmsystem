@@ -4,7 +4,11 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['tech_clockin']) && $_POST['tech_clockin']!='' || $_POST['tech_clockin']==''
+if(isset($_POST['tech_leader']) && $_POST['tech_leader']!='' || $_POST['tech_leader']==''
+    &&
+    isset($_POST['techupdate_date']) && $_POST['techupdate_date']!='' || $_POST['techupdate_date']==''
+    &&
+    isset($_POST['tech_clockin']) && $_POST['tech_clockin']!='' || $_POST['tech_clockin']==''
     &&
    isset($_POST['tech_clockout']) && $_POST['tech_clockout']!='' || $_POST['tech_clockout']==''
     &&
@@ -15,7 +19,9 @@ if(isset($_POST['tech_clockin']) && $_POST['tech_clockin']!='' || $_POST['tech_c
         $sql = "UPDATE tech_update SET
                        tech_clockin ='".addslashes($_POST['tech_clockin'])."',
                        tech_clockout ='".addslashes($_POST['tech_clockout'])."'
-                WHERE  techupdate_id ='".addslashes($_POST['techupdate_id'])."' ";
+
+                       WHERE tech_leader='".addslashes($_POST['tech_leader'])."'
+                       AND techupdate_date='".addslashes($_POST['techupdate_date'])."'";
         
         if($conn->query($sql))
         {

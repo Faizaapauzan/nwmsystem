@@ -188,6 +188,7 @@ $_SESSION['storeDate'] = $att_date;
   <div class="cards">
     <div class="card" style=" position: static; padding-left: 31px; margin-top: 20px; margin-bottom: 20px;">
     <input type="hidden" name="techupdate_id" class="resthour_id" value="<?= $row['techupdate_id']; ?>">
+    <input type="hidden" name="techupdate_id" class="resthour_id" value="<?= $row['techupdate_id']; ?>">
     
     <!-- technician -->
     <br/>
@@ -246,16 +247,22 @@ $_SESSION['storeDate'] = $att_date;
     <script type="text/javascript">
       function submitupdtAtt()
         {
+          var tech_leader = $('input[name=tech_leader]').val();
+          var techupdate_date = $('input[name=techupdate_date]').val();
           var tech_clockin = $('input[name=tech_clockin]').val();
           var tech_clockout = $('input[name=tech_clockout]').val();
           var techupdate_id = $('input[name=techupdate_id]').val();
 
-          if(tech_clockin!='' || tech_clockin=='',
-          tech_clockout!='' || tech_clockout=='',
+          if(tech_leader!='' || tech_leader=='',
+              techupdate_date!='' || techupdate_date=='',
+              tech_clockin!='' || tech_clockin=='',
+              tech_clockout!='' || tech_clockout=='',
               techupdate_id!='' || techupdate_id=='')
              
              {
-              var formData = {tech_clockin: tech_clockin, 
+              var formData = {tech_leader: tech_leader, 
+                techupdate_date: techupdate_date,
+                tech_clockin: tech_clockin, 
                 tech_clockout: tech_clockout,
                                techupdate_id: techupdate_id};
                                 
