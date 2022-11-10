@@ -4,8 +4,8 @@
 
          $jobregister_id =$_POST['search'];
 
-		$date1 = date("Y-m-d", strtotime($_POST['date1']));
-		$date2 = date("Y-m-d", strtotime($_POST['date2']));
+		$date1 = date("d-m-Y", strtotime($_POST['date1']));
+		$date2 = date("d-m-Y", strtotime($_POST['date2']));
 		$query=mysqli_query($conn, "SELECT * FROM job_register INNER JOIN servicereport ON job_register.jobregister_id = servicereport.jobregister_id WHERE `date` BETWEEN '$date1' AND '$date2'") or die(mysqli_error($conn));
 		
         $row=mysqli_num_rows($query);

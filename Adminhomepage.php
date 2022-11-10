@@ -324,6 +324,8 @@
                                                 (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
                                                     OR
                                                 (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                 OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
                                                     OR
                                                 (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
                                                     OR
@@ -339,21 +341,27 @@
                                               ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
 
                                 $numRow = "SELECT * FROM job_register WHERE
-                                             (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                                                OR
-                                             (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                                                OR
-                                             (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                                                OR
-                                             (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                                                OR
-                                             (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
-                                                OR
-                                             (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
-                                                OR
-                                             (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
-                                                OR
-                                             (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)";
+                                            (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                 OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+                                                    OR
+                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)";
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
                                         echo '<h4 style="text-align:right;">Total Job: '.$row_Total.' </h4>';
@@ -1378,7 +1386,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhome.php',
+                                            url: 'ajaxhometechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
                                             success: function (response) {
@@ -1695,7 +1703,7 @@
             var customer_name = $(this).data('customer_name');
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
              data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -2012,7 +2020,7 @@
 
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -2329,7 +2337,7 @@
             var customer_name = $(this).data('customer_name');
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
              data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -2648,7 +2656,7 @@
 
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
              data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -2965,7 +2973,7 @@
 
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -3279,7 +3287,7 @@
             var customer_name = $(this).data('customer_name');
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -3592,7 +3600,7 @@
             var customer_name = $(this).data('customer_name');
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -3905,7 +3913,7 @@
             var customer_name = $(this).data('customer_name');
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -4220,7 +4228,7 @@
             var customer_name = $(this).data('customer_name');
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -4539,7 +4547,7 @@
 
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -4858,7 +4866,7 @@
 
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function (response) {
@@ -5170,7 +5178,7 @@
 
             // AJAX request
             $.ajax({
-            url: 'ajaxhome.php',
+            url: 'ajaxhometechnician.php',
             type: 'post',
             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
             success: function(response) {
@@ -5478,7 +5486,7 @@
                                     var customer_name = $(this).data('customer_name');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxhome.php',
+                                        url: 'ajaxhometechnician.php',
                                         type: 'post',
                                         data: {jobregister_id: jobregister_id,
 															  type_id: type_id,
@@ -5793,7 +5801,7 @@
                                 var customer_name = $(this).data('customer_name');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'ajaxhome.php',
+                                    url: 'ajaxhometechnician.php',
                                     type: 'post',
                                    data: {jobregister_id: jobregister_id,
 															  type_id: type_id,
