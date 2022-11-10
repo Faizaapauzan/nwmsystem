@@ -29,14 +29,12 @@ if(!isset($_SESSION['username']))
 <?php
 
 $today_date = date("d-m-Y");
-$_SESSION['storeDate'] = $today_date;
+$_SESSION['today_date'] = $today_date;
 ?>
 
 <?php
 include 'dbconnect.php';
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -830,6 +828,7 @@ $("#branddrop").on("change",function(){
     <br/>               
     <div class="form-group"><label>Customer Name</label>
 	<input type="text" name="customer_name" id="customer_name" class="form-control" placeholder='Enter Customer Name'>
+    <input type="hidden" name="today_date" id="today_date" value="<?php echo $_SESSION["today_date"] ?>">
 	</div>
     <br/> 
     <div class="form-group"><label>Customer Grade</label>
