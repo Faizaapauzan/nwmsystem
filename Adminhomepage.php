@@ -5120,7 +5120,7 @@
             <?php
             include 'dbconnect.php';
                                 
-            $results = $conn->query("SELECT * FROM job_register WHERE
+             $results = $conn->query("SELECT * FROM job_register WHERE
                     (job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
                     OR
                     job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL
@@ -5137,14 +5137,12 @@
                     OR
                     job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = '')
+                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL)
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM job_register WHERE
-                    (job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
+            $numRow = "SELECT * FROM `job_register`WHERE 
+                    job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
                     OR
                     job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL
                     OR
@@ -5160,9 +5158,7 @@
                     OR
                     job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = ''";
+                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -5185,7 +5181,6 @@
 
             while($row = $results->fetch_assoc()) {
             ?>
-
             <div class="Aizat" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Aizat" ondblclick="document.getElementById('doubleClick-Aizat').style.display='block'">
             <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
             <ul class="b" id="draged">
