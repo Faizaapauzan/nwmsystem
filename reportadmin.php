@@ -100,9 +100,9 @@ table, th, td {
     <table id="auto" style="width:100%">
 
         <thead style="height: 42px;">
-            <th></th>
-            <th style="width: 9%;">Leader</th>
-            <th style="width: 12%;">Assistant</th>
+            <th style="width: 3%;"></th>
+            <th style="width: 8%;">Leader</th>
+            <th style="width: 10%;">Assistant</th>
             <th style="width: 15%;">Place</th>
             <th style="width: 27%;">Machine</th>
             <th style="width: 7%;">Departure</th>
@@ -118,7 +118,7 @@ table, th, td {
                  if(isset($_GET['DateAssign']))
                                     {
                 $DateAssign = $_GET['DateAssign'];
-                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' ORDER BY job_assign ASC");
+                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' AND job_register.job_cancel = '' OR job_register.DateAssign='$DateAssign' AND job_register.job_cancel IS NULL ORDER BY job_assign ASC");
                 
                       if(mysqli_num_rows($query) > 0)
                                         {

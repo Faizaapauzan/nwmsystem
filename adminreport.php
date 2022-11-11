@@ -210,7 +210,7 @@ table, th, td {
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="reportadmin.php">Admin Report</a></li>
+                     <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
                     <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
 
@@ -226,9 +226,7 @@ table, th, td {
           <li><a class="link_name" href="logout.php">Logout</a></li>
         </ul>
       </li>
-
-
-  </div>
+      </div>
 
 
     <!--Home navigation-->
@@ -241,6 +239,7 @@ table, th, td {
     </nav>  
 	
 
+
 <div class="jobTypeList">
 <h1>Admin Report</h1>
 <body>
@@ -252,15 +251,16 @@ table, th, td {
     <form action="" method="GET">
     <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
     <label for="date" class="details" style="padding-right: 20px;">Date</label>
-    <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width: 301px;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} ?>" class="form-control">
-    <button type="submit" class="btn-biru" style="width: auto;">Submit</button>
+    <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width: 301px;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
+    <button type="submit" class="btn-biru" style="width: auto;">Search</button>
     <button class="btn-biru" style="width: auto;" onclick="document.getElementById('myInput').value = ''">Clear</button>
-    <button class="btn-biru" style="width: auto;" class="printreport" data-id='<?php echo $row['jobregister_id']; ?>'>Print</button>
+    <input type="button" class="btn-biru" style="width: 57px;height: 35px;background: green;border-color: green;color: white;" onclick="window.open('reportadmin.php')" value="Print">
     </div>
 
     <div class="remarks-job" style="margin-top: 27px; margin: 20px;">
     <b>Remark - Total Workers:</b>
     <div class="job-update" style="margin-top: 20px; margin: 20px;">
+
     <table id="auto" style="width:100%">
 
         <thead style="height: 42px;">
@@ -282,7 +282,7 @@ table, th, td {
                  if(isset($_GET['DateAssign']))
                                     {
                 $DateAssign = $_GET['DateAssign'];
-                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' ORDER BY job_assign ASC");
+                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' AND job_register.job_cancel = '' OR job_register.DateAssign='$DateAssign' AND job_register.job_cancel IS NULL ORDER BY job_assign ASC");
                 
                       if(mysqli_num_rows($query) > 0)
                                         {
@@ -339,8 +339,8 @@ table, th, td {
             <td style="text-align: center;"><?php echo "$departure" ?></td>
             <td style="text-align: center;"><?php echo "$arrival" ?></td>
             <td style="text-align: center;"><?php echo "$leaving" ?></td>
-            <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?>   hours <?php echo difftime($arrival, $leaving)['m']?>  minutes</td>
-            <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?>   hours <?php echo difftime($departure, $arrival)['m']?>  minutes</td>
+            <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?> hours <?php echo difftime($arrival, $leaving)['m']?>  minutes</td>
+            <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?> hours <?php echo difftime($departure, $arrival)['m']?>  minutes</td>
             
         </tbody>
     
@@ -434,25 +434,6 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
 
     </div>
 
-        <!-- FOR NEW SERVICE REPORT-->	
-    <script type='text/javascript'>
-        $(document).ready(function(){
-        $('.printreport').click(function(){
-        var jobregister_id = $(this).data('id');
-
-        $.ajax({
-            url: 'reportadmin.php',
-            type: 'post',
-            data: {jobregister_id:jobregister_id},
-            success: function(data){
-            var win = window.open('reportadmin.php');
-            win.document.write(data);
-                        }
-                    });
-                });
-            });
-    </script>
-    <!-- FOR NEW SERVICE REPORT-->	
     
   <script>
   let arrow = document.querySelectorAll(".arrow");
