@@ -5,7 +5,8 @@ include 'dbconnect.php';
 
 		if (isset($_POST['submit'])) {
       
-       $job_code = $_POST['job_code'];
+       	$today_date = $_POST['today_date'];
+		$job_code = $_POST['job_code'];
 		$job_name = $_POST['job_name'];
 		$job_order_number = $_POST['job_order_number'];
 		$job_description = $_POST['job_description'];
@@ -38,11 +39,12 @@ include 'dbconnect.php';
 			$machine_id = !empty($machine_id) ? "'$machine_id'" : "NULL";
 		}
            
-	$sql = "INSERT INTO job_register (job_code, job_name, job_order_number, job_description, customer_code,
+	$sql = "INSERT INTO job_register (today_date, job_code, job_name, job_order_number, job_description, customer_code,
      customer_name, customer_grade, job_priority, requested_date, delivery_date, customer_PIC,
 	 cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, machine_id, machine_code, machine_name, machine_brand, brand_id, machine_type, type_id, serialnumber, accessories_required, jobregistercreated_by, jobregisterlastmodify_by)
 
-VALUES ('".addslashes($_POST['job_code'])."',
+VALUES ('".addslashes($_POST['today_date'])."',
+		'".addslashes($_POST['job_code'])."',
     	'".addslashes($_POST['job_name'])."',
         '".addslashes($_POST['job_order_number'])."',
         '".addslashes($_POST['job_description'])."',

@@ -19,7 +19,7 @@ $response = array('success' => false);
         $sql = "INSERT INTO tech_update (tech_leader, techupdate_date) 
                        
                        VALUES ('".addslashes($_POST['tech_leader'])."',
-                               '".addslashes($_POST['techupdate_date'])."') LIMIT 1";
+                               '".addslashes($_POST['techupdate_date'])."')";
 
         if ($conn->query($sql)) {
             $response['success'] = true;

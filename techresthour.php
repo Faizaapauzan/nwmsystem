@@ -243,16 +243,22 @@ $_SESSION['storeDate'] = $today_date;
 
       function updateForm()
               {
+                var tech_leader = $('input[name=tech_leader]').val();
+                var techupdate_date = $('input[name=techupdate_date]').val();
                 var tech_out = $('input[name=tech_out]').val();
                 var technician_in = $('input[name=technician_in]').val();
                 var techupdate_id  = $('input[name=techupdate_id ]').val();
                 
-                if(tech_out!='' || tech_out=='', 
+                if(tech_leader!='' || tech_leader=='', 
+                    techupdate_date!='' || techupdate_date=='',
+                    tech_out!='' || tech_out=='', 
                     technician_in!='' || technician_in=='',
                     techupdate_id !='' || techupdate_id =='')
 
                   {
-                    var formData = {tech_out: tech_out,
+                    var formData = {tech_leader: tech_leader,
+                                    techupdate_date: techupdate_date,
+                                     tech_out: tech_out,
                                      technician_in: technician_in,
                                      techupdate_id : techupdate_id };
                                     
