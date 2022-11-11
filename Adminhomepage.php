@@ -101,7 +101,7 @@
     
     .dropdown-content a {
         color: black;
-        padding: 12px 16px;
+        padding: 10px 10px;
         text-decoration: none;
         display: block;
         padding-right: 7px;
@@ -238,13 +238,16 @@
                 </ul>
             </li>
             <li>
-                <a href="report.php">
+                <a href="">
                     <i class='bx bxs-report' ></i>
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="report.php">Report</a></li>
+                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
+                    <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
+
+               
             </li>
             <li>
                 <a href="logout.php">
@@ -1294,7 +1297,9 @@
                                                                     OR
                                                                  job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel = ''
                                                                     OR
-                                                                 job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                                 job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel IS NULL
+                                                                 OR
+                                                                job_assign = 'Hamir' AND job_status IS NULL AND job_cancel = '')
                                                                  ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                         $numRow = "SELECT * FROM `job_register`WHERE
                                                             job_assign = 'Hamir' AND job_status = '' AND job_cancel = ''
@@ -1311,7 +1316,9 @@
                                                                 OR
                                                             job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel = ''
                                                                 OR
-                                                            job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel IS NULL";
+                                                            job_assign = 'Hamir' AND job_status = 'Pending' AND job_cancel IS NULL
+                                                            OR
+                                                            job_assign = 'Hamir' AND job_status IS NULL AND job_cancel = ''";
                                         $numRow_run = mysqli_query ($conn,$numRow);
                                         if ($row_Total = mysqli_num_rows($numRow_run)) {
                                             echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
@@ -1605,7 +1612,9 @@
                     OR
                 job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel IS NULL)
+                job_assign = 'Hwa' AND job_status = 'Pending' AND job_cancel IS NULL
+                OR
+                job_assign = 'Hwa' AND job_status IS NULL AND job_cancel = '')
                 ORDER BY jobregisterlastmodify_at
                 DESC LIMIT 50");
 
@@ -1625,7 +1634,9 @@
                 OR
                 job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel = ''
                 OR
-                job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel IS NULL ";
+                job_assign = 'Hwa' AND job_status = 'Ready' AND job_cancel IS NULL
+                OR
+                job_assign = 'Hwa' AND job_status IS NULL AND job_cancel = '' ";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -1922,7 +1933,9 @@
                             OR
                         job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = ''
                             OR
-                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel IS NULL)
+                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'ISKANDAR' AND job_status IS NULL AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
@@ -1941,7 +1954,9 @@
                         OR
                         job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel IS NULL ";
+                        job_assign = 'ISKANDAR' AND job_status = 'Pending' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'ISKANDAR' AND job_status IS NULL AND job_cancel = '' ";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2237,7 +2252,9 @@
                         OR
                         job_assign = 'John' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel IS NULL)
+                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'John' AND job_status IS NULL AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
@@ -2256,7 +2273,9 @@
                         OR
                         job_assign = 'John' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel IS NULL ";
+                        job_assign = 'John' AND job_status = 'Pending' AND job_cancel IS NULL 
+                        OR
+                        job_assign = 'John' AND job_status IS NULL AND job_cancel = ''";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2558,7 +2577,9 @@
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel IS NULL)
+                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Jun Jie' AND job_status IS NULL AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
@@ -2577,7 +2598,9 @@
                         OR
                         job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel IS NULL ";
+                        job_assign = 'Jun Jie' AND job_status = 'Pending' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Jun Jie' AND job_status IS NULL AND job_cancel = '' ";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -2873,7 +2896,9 @@
                             OR
                             job_assign = 'Will' AND job_status = 'Pending' AND job_cancel = ''
                             OR
-                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel IS NULL)
+                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Will' AND job_status IS NULL AND job_cancel = '')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
 
@@ -2893,7 +2918,9 @@
                             OR
                             job_assign = 'Will' AND job_status = 'Pending' AND job_cancel = ''
                             OR
-                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel IS NULL ";
+                            job_assign = 'Will' AND job_status = 'Pending' AND job_cancel IS NULL 
+                            OR
+                            job_assign = 'Will' AND job_status IS NULL AND job_cancel = ''";
                     $numRow_run = mysqli_query ($conn,$numRow);
 
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3190,7 +3217,9 @@
                             OR
                             job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel = ''
                             OR
-                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel IS NULL)
+                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Sahele' AND job_status IS NULL AND job_cancel = '')
                             ORDER BY jobregisterlastmodify_at
                             DESC LIMIT 50");
 
@@ -3209,7 +3238,9 @@
                             OR
                             job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel = ''
                             OR
-                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel IS NULL ";
+                            job_assign = 'Sahele' AND job_status = 'Pending' AND job_cancel IS NULL
+                            OR
+                            job_assign = 'Sahele' AND job_status IS NULL AND job_cancel = '' ";
                     
                     $numRow_run = mysqli_query ($conn,$numRow);
                     if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3501,7 +3532,9 @@
                         OR
                         job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL)
+                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel = '')
                         ORDER BY jobregisterlastmodify_at
                         DESC LIMIT 50");
 
@@ -3520,7 +3553,9 @@
                         OR
                         job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''
                         OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL ";
+                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL
+                        OR
+                        job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel = '' ";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -3816,7 +3851,9 @@
                     OR
                     job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL)
+                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Faizan' AND job_status IS NULL AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -3835,7 +3872,9 @@
                     OR
                     job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL";
+                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL
+                     OR
+                    job_assign = 'Faizan' AND job_status IS NULL AND job_cancel = ''";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 if ($row_Total = mysqli_num_rows($numRow_run))
@@ -4130,7 +4169,9 @@
                     OR
                     job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL)
+                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL
+                     OR
+                    job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -4149,7 +4190,9 @@
                     OR 
                     job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''
                     OR 
-                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL";
+                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel = ''";
             
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -4448,7 +4491,9 @@
                     OR
                     job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL)
+                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Izaan' AND job_status IS NULL AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -4467,7 +4512,9 @@
                     OR
                     job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL";
+                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Izaan' AND job_status IS NULL AND job_cancel = ''";
             
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -4767,7 +4814,9 @@
                     OR
                     job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL)
+                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Teck' AND job_status IS NULL AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
@@ -4786,7 +4835,9 @@
                     OR
                     job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL";
+                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Teck' AND job_status IS NULL AND job_cancel = ''";
             
             $numRow_run = mysqli_query ($conn,$numRow);
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -5086,20 +5137,32 @@
                     OR
                     job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = ''
                     OR
-                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL)
+                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = '')
                     ORDER BY jobregisterlastmodify_at
                     DESC LIMIT 50");
 
-            $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Aizat' AND job_status = ''
+            $numRow = "SELECT * FROM job_register WHERE
+                    (job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
                     OR
-                    job_assign = 'Aizat' AND job_status IS NULL
+                    job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL
                     OR
-                    job_assign = 'Aizat' AND job_status = 'Doing'
+                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL
                     OR
-                    job_assign = 'Aizat' AND job_status = 'Ready'
+                    job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = ''
                     OR
-                    job_assign = 'Aizat' AND job_status = 'Pending'";
+                    job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel = ''
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = ''
+                    OR
+                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL
+                    OR
+                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = ''";
             $numRow_run = mysqli_query ($conn,$numRow);
 
             if ($row_Total = mysqli_num_rows($numRow_run))
@@ -5393,7 +5456,9 @@
                                                                 OR
                                                              job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = ''
                                                                 OR
-                                                             job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                             job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL
+                                                             OR
+                                                            job_assign = 'Boon' AND job_status IS NULL AND job_cancel = '')
                                                             ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                     $numRow = "SELECT * FROM `job_register`WHERE 
                                                         job_assign = 'Boon' AND job_status = '' AND job_cancel = ''
@@ -5410,7 +5475,9 @@
                                                             OR
                                                         job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = ''
                                                         OR
-                                                        job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL";
+                                                        job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL
+                                                        OR
+                                                            job_assign = 'Boon' AND job_status IS NULL AND job_cancel = ''";
                                     $numRow_run = mysqli_query ($conn,$numRow);
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
                                         echo  '<h4  style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
@@ -5707,7 +5774,9 @@
                                                                 OR
                                                              job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = ''
                                                              OR
-                                                             job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                             job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL
+                                                             OR
+                                                            job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel = '')
                                                              ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                     $numRow = "SELECT * FROM `job_register`WHERE 
                                                         job_assign = 'Hafiz' AND job_status = '' AND job_cancel = ''
@@ -5724,7 +5793,9 @@
                                                             OR
                                                         job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = ''
                                                             OR
-                                                        job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL";
+                                                        job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL
+                                                        OR
+                                                        job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel = ''";
                                     $numRow_run = mysqli_query ($conn,$numRow);
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
                                         echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
