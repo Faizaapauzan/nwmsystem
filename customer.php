@@ -211,7 +211,7 @@ $query = $conn->query("SELECT * FROM customer_list ORDER BY customer_id ASC");
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="reportadmin.php">Admin Report</a></li>
+                     <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
                     <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
 

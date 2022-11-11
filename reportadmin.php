@@ -118,7 +118,7 @@ table, th, td {
                  if(isset($_GET['DateAssign']))
                                     {
                 $DateAssign = $_GET['DateAssign'];
-                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' ORDER BY job_assign ASC");
+                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' AND job_register.job_cancel = '' OR job_register.DateAssign='$DateAssign' AND job_register.job_cancel IS NULL ORDER BY job_assign ASC");
                 
                       if(mysqli_num_rows($query) > 0)
                                         {
