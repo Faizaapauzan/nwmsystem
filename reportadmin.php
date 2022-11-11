@@ -100,9 +100,9 @@ table, th, td {
     <table id="auto" style="width:100%">
 
         <thead style="height: 42px;">
-            <th></th>
-            <th style="width: 9%;">Leader</th>
-            <th style="width: 12%;">Assistant</th>
+            <th style="width: 3%;"></th>
+            <th style="width: 8%;">Leader</th>
+            <th style="width: 10%;">Assistant</th>
             <th style="width: 15%;">Place</th>
             <th style="width: 27%;">Machine</th>
             <th style="width: 7%;">Departure</th>
