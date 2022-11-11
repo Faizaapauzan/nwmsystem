@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
 
     <title>Report Admin</title>
@@ -32,7 +32,7 @@
 
 .page[size="A4"] {
   width: 29.7cm;
-  height: 21cm;
+  height: auto;
   overflow: hidden;
 }
 
@@ -85,7 +85,13 @@ table, th, td {
     <div class="status" style="margin: 20px;font-weight: bold;">
     Worker Assignment
     <br/>
-    Date : <input type="text" style="border:none;" value="<?php echo $date = date('d-m-Y'); ?>">
+    </div>
+    <form action="" method="GET">
+    <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
+    <label for="date" class="details" style="padding-right: 20px;">Date</label>
+    <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 24px; width: auto;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} ?>" class="form-control">
+    <button type="submit" class="btn-biru" style="width: auto;">Submit</button>
+    <button class="btn-biru" style="width: auto;" onclick="document.getElementById('myInput').value = ''">Clear</button>
     </div>
 
     <div class="remarks-job" style="margin-top: 27px; margin: 20px;">
@@ -109,11 +115,16 @@ table, th, td {
             <?php
                 include_once 'dbconnect.php';
 
-                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$date'");
+                 if(isset($_GET['DateAssign']))
+                                    {
+                $DateAssign = $_GET['DateAssign'];
+                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' ORDER BY job_assign ASC");
+                
+                      if(mysqli_num_rows($query) > 0)
+                                        {
+                                            foreach($query as $row)
+                                            {
 
-                if ($query){
-                  // output data of each row
-                  while ($row = mysqli_fetch_array($query)) {
 
                   $technician_departure =$row['technician_departure'];
                   $technician_arrival =$row['technician_arrival'];
@@ -151,14 +162,16 @@ table, th, td {
                       return $dif2;
                   }
               }
+
+             
             ?>
 
         <tbody>
             <td style="text-align: center;"></td>
-            <td><?php echo $row["job_assign"]; ?></td>
-            <td><textarea class="infoarea" id="textarea-container"><?php echo $row["username"]; ?></textarea></td>
-            <td><?php echo $row["customer_name"]; ?></td>
-            <td><?php echo $row["machine_type"]; ?> - <?php echo $row["job_name"]; ?></td>
+            <td><?= $row['job_assign']; ?></td>
+            <td><textarea style="border:none; resize:none;" class="infoarea" id="textarea-container"><?= $row['username']; ?></textarea></td>
+            <td><?= $row['customer_name']; ?></td>
+            <td><?= $row['machine_type']; ?> - <?= $row['job_name']; ?></td>
             <td style="text-align: center;"><?php echo "$departure" ?></td>
             <td style="text-align: center;"><?php echo "$arrival" ?></td>
             <td style="text-align: center;"><?php echo "$leaving" ?></td>
@@ -166,7 +179,18 @@ table, th, td {
             <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?>   hours <?php echo difftime($departure, $arrival)['m']?>  minutes</td>
             
         </tbody>
-        <?php } } ?>
+    
+
+         <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo "No Record Found";
+                                        }
+                                    }
+                                   
+                                ?>
 
     </table>
        </div>
@@ -174,19 +198,15 @@ table, th, td {
        <script type="text/javascript">
 var $textArea = $("#textarea-container");
 
-// Re-size to fit initial content.
 resizeTextArea($textArea);
 
-// Remove this binding if you don't want to re-size on typing.
 $textArea.off("keyup.textarea").on("keyup.textarea", function() {
     resizeTextArea($(this));
 });
 
-// function resizeTextArea($element) {
-//     $element.height($element[0].scrollHeight);
-// }
+
 </script>
-<div class="remarks-worker" style="margin: 20px;padding-top: 102px;">
+<div class="remarks-worker" style="margin: 20px;padding-top: 50px;">
    <b> Remark - Workers Attendance</b>
 
     <div class="staff-update" style="margin-top: 50px; margin: 20px;">
@@ -201,16 +221,20 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
             <th style="width: 10%;">Rest In</th>
         </thead>
 
-        
-            <?php
+         <?php
                 include_once 'dbconnect.php';
 
-                $sql = "SELECT * FROM tech_update WHERE techupdate_date='$date'";
+                 if(isset($_GET['DateAssign']))
+                                    {
+                $DateAssign = $_GET['DateAssign'];
+
+                $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
                 $result = mysqli_query($conn, $sql);
 
-                if (mysqli_num_rows($result) > 0) {
-                  // output data of each row
-                while($row = mysqli_fetch_assoc($result)) {
+                if(mysqli_num_rows($result) > 0)
+                                        {
+                                            foreach($result as $row)
+                                            {
             ?>
 
         <tbody>
@@ -222,7 +246,18 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
             <td style="text-align: center;"><?php echo $row["tech_out"]; ?></td>
             <td style="text-align: center;"><?php echo $row["technician_in"]; ?></td>
         </tbody>
-        <?php } } ?>
+
+         <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo "No Record Found";
+                                        }
+                                    }
+                                   
+                                ?>
+
     </table>
         </div>
     </div>

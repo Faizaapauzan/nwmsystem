@@ -47,11 +47,8 @@ if(!isset($_SESSION['username']))
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
@@ -213,7 +210,7 @@ table, th, td {
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
+                    <li><a class="link_name" href="reportadmin.php">Admin Report</a></li>
                     <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
 
@@ -252,11 +249,12 @@ table, th, td {
     <div class="status" style="margin: 20px;font-weight: bold;">
     <h3>Worker Assignment</h3>
     </div>
-
+    <form action="" method="GET">
     <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
     <label for="date" class="details" style="padding-right: 20px;">Date</label>
-    <input type="date" style="height: 36px; width: 301px;" id="date" value="<?php echo $date = date('d-m-Y'); ?>">
-    <button class="btn-biru" style="width: auto;">Submit</button>
+    <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width: 301px;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} ?>" class="form-control">
+    <button type="submit" class="btn-biru" style="width: auto;">Submit</button>
+    <button class="btn-biru" style="width: auto;" onclick="document.getElementById('myInput').value = ''">Clear</button>
     <button class="btn-biru" style="width: auto;" class="printreport" data-id='<?php echo $row['jobregister_id']; ?>'>Print</button>
     </div>
 
@@ -281,11 +279,16 @@ table, th, td {
             <?php
                 include_once 'dbconnect.php';
 
-                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$date'");
+                 if(isset($_GET['DateAssign']))
+                                    {
+                $DateAssign = $_GET['DateAssign'];
+                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' ORDER BY job_assign ASC");
+                
+                      if(mysqli_num_rows($query) > 0)
+                                        {
+                                            foreach($query as $row)
+                                            {
 
-                if ($query){
-                  // output data of each row
-                  while ($row = mysqli_fetch_array($query)) {
 
                   $technician_departure =$row['technician_departure'];
                   $technician_arrival =$row['technician_arrival'];
@@ -323,14 +326,16 @@ table, th, td {
                       return $dif2;
                   }
               }
+
+             
             ?>
 
         <tbody>
             <td style="text-align: center;"></td>
-            <td><?php echo $row["job_assign"]; ?></td>
-            <td><textarea style="border:none;" class="infoarea" id="textarea-container"><?php echo $row["username"]; ?></textarea></td>
-            <td><?php echo $row["customer_name"]; ?></td>
-            <td><?php echo $row["machine_type"]; ?> - <?php echo $row["job_name"]; ?></td>
+            <td><?= $row['job_assign']; ?></td>
+            <td><textarea style="border:none; resize:none;" class="infoarea" id="textarea-container"><?= $row['username']; ?></textarea></td>
+            <td><?= $row['customer_name']; ?></td>
+            <td><?= $row['machine_type']; ?> - <?= $row['job_name']; ?></td>
             <td style="text-align: center;"><?php echo "$departure" ?></td>
             <td style="text-align: center;"><?php echo "$arrival" ?></td>
             <td style="text-align: center;"><?php echo "$leaving" ?></td>
@@ -338,7 +343,18 @@ table, th, td {
             <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?>   hours <?php echo difftime($departure, $arrival)['m']?>  minutes</td>
             
         </tbody>
-        <?php } } ?>
+    
+
+         <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo "No Record Found";
+                                        }
+                                    }
+                                   
+                                ?>
 
     </table>
        </div>
@@ -377,12 +393,17 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
             <?php
                 include_once 'dbconnect.php';
 
-                $sql = "SELECT * FROM tech_update WHERE techupdate_date='$date'";
+                 if(isset($_GET['DateAssign']))
+                                    {
+                $DateAssign = $_GET['DateAssign'];
+
+                $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
                 $result = mysqli_query($conn, $sql);
 
-                if (mysqli_num_rows($result) > 0) {
-                  // output data of each row
-                while($row = mysqli_fetch_assoc($result)) {
+                if(mysqli_num_rows($result) > 0)
+                                        {
+                                            foreach($result as $row)
+                                            {
             ?>
 
         <tbody>
@@ -394,9 +415,21 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
             <td style="text-align: center;"><?php echo $row["tech_out"]; ?></td>
             <td style="text-align: center;"><?php echo $row["technician_in"]; ?></td>
         </tbody>
-        <?php } } ?>
+
+         <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo "No Record Found";
+                                        }
+                                    }
+                                   
+                                ?>
+
     </table>
-        </div>
+    </div>
+    </form>
     </div>
 
     </div>

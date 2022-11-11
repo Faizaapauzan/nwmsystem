@@ -227,7 +227,7 @@ $query = $conn->query("SELECT * FROM accessories_list ORDER BY accessories_id AS
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
+                    <li><a class="link_name" href="reportadmin.php">Admin Report</a></li>
                     <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
 
