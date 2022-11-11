@@ -4,7 +4,9 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['technician_rank']==''
+if(isset($_POST['today_date']) && $_POST['today_date']!='' || $_POST['today_date']==''
+    &&
+    isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['technician_rank']==''
     &&
    isset($_POST['staff_position']) && $_POST['staff_position']!='' || $_POST['staff_position']==''
     &&
@@ -66,13 +68,14 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
 
          $machine_id = !empty($machine_id) ? "'$machine_id'" : "NULL";
         
-        $sql = "INSERT INTO job_register (technician_rank, staff_position, job_priority, support, job_order_number,
+        $sql = "INSERT INTO job_register (today_date, technician_rank, staff_position, job_priority, support, job_order_number,
                                            job_name, job_code, job_description, requested_date, delivery_date, 
                                            customer_name, customer_code, customer_grade, cust_address1, cust_address2, 
                                            cust_address3, customer_PIC, cust_phone1, cust_phone2,
                                            machine_name, machine_code, machine_type, serialnumber, machine_id, machine_brand, accessories_required, job_cancel, jobregistercreated_by, jobregisterlastmodify_by) 
                        
-                       VALUES ('".addslashes($_POST['technician_rank'])."',
+                       VALUES ('".addslashes($_POST['today_date'])."',
+                                '".addslashes($_POST['technician_rank'])."',
                                '".addslashes($_POST['staff_position'])."',
                                '".addslashes($_POST['job_priority'])."',
                                '".addslashes($_POST['support'])."',
