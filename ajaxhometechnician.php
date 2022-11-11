@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+$today_date = date("d-m-Y");
+$_SESSION['today_date'] = $today_date;
+?>
 
 <!DOCTYPE html>
 
@@ -20,6 +23,7 @@ include 'dbconnect.php';
  <form action="homeindex.php" method="post" style="display: contents;">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     <input type="hidden" name="support" class="support" value="Support For <?php echo $row['job_assign'] ?>">
+    <input type="hidden" name="today_date" id="today_date" value="<?php echo $_SESSION["today_date"] ?>">
 
      <div class="input-box">
             <label for="">Job Priority</label>
