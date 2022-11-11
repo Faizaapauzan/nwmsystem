@@ -279,10 +279,10 @@ $_SESSION['storeDate'] = $today_date;
                             });
                           }
                         } 
-          </script>
 
-          <script type="text/javascript">
-              function RestOut2()
+              
+              // function to save time in tech_update table
+                function RestOut2()
                 {
                   var tech_out = $('input[name=tech_out]').val();
                   var tech_leader = $('input[name=technician]').val();
@@ -310,7 +310,7 @@ $_SESSION['storeDate'] = $today_date;
                           }
                         } 
           </script>
-        
+
     </div>
     
     <div class="input-group mb-3">

@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+$today_date = date("d-m-Y");
+$_SESSION['today_date'] = $today_date;
+?>
 
 <!DOCTYPE html>
 
@@ -20,6 +23,7 @@ include 'dbconnect.php';
  <form action="homeindex.php" method="post" style="display: contents;">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     <input type="hidden" name="support" class="support" value="Support For <?php echo $row['job_assign'] ?>">
+    <input type="hidden" name="today_date" id="today_date" value="<?php echo $_SESSION["today_date"] ?>">
 
      <div class="input-box">
             <label for="">Job Priority</label>
@@ -267,7 +271,8 @@ $("#jobassignto").on("change",function(){
 
 function submitFormSupportAdmin()
 
-  {var technician_rank = $('input[name=technician_rank]').val();
+  {var today_date = $('input[name=today_date]').val();
+   var technician_rank = $('input[name=technician_rank]').val();
    var staff_position = $('input[name=staff_position]').val();
    var job_priority = $('input[name=job_priority]').val();
    var support = $('input[name=support]').val();
@@ -297,7 +302,8 @@ function submitFormSupportAdmin()
    var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
    var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
     
-    if(technician_rank!='' || technician_rank=='', 
+    if(today_date!='' || today_date =='', 
+       technician_rank!='' || technician_rank=='', 
        staff_position!='' || staff_position=='', 
        job_priority!='' || job_priority=='', 
        support!='' || support=='', 
@@ -328,7 +334,8 @@ function submitFormSupportAdmin()
        jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='')
 
       {
-        var formData = {technician_rank: technician_rank,
+        var formData = {today_date: today_date,
+                        technician_rank: technician_rank,
                         staff_position: staff_position,
                         job_priority: job_priority,
                          support: support,
