@@ -2,7 +2,18 @@
   size: A4;
   margin: 20px;
 }
+
 #print-btn {
+  display: none;
+  visibility: none;
+}
+
+#submit {
+  display: none;
+  visibility: none;
+}
+
+#clear {
   display: none;
   visibility: none;
 }
