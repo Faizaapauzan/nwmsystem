@@ -188,15 +188,18 @@ include 'dbconnect.php';
         </ul>
       </li>
       
-      <li>
-        <a href="report.php">
-          <i class='bx bxs-report' ></i>
-          <span class="link_name">Report</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="report.php">Report</a></li>
-        </ul>
-      </li>
+       <li>
+                <a href="">
+                    <i class='bx bxs-report' ></i>
+                    <span class="link_name">Report</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
+                    <li><a class="link_name" href="report.php">Service Report</a></li>
+                </ul>
+
+               
+            </li>
 
       <li>
         <a href="logout.php">
