@@ -31,6 +31,7 @@
       <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
       <input type="hidden" name="today_date" value="<?php echo  $_SESSION['storeDate'] ?>">
       
+      
     <?php } } } ?>
 
     <!-- To update travel time and rest hour -->
@@ -143,7 +144,9 @@
       <div class="input-box-out">
         <label for="">Rest Hour</label>
         <div class="out-time" style="display: flex; align-items: baseline;">
+        <input type="hidden" name="techupdate_date" id="techupdate_date" value="<?php echo $_SESSION["storeDate"] ?>">
           <input type="text" class="technician_leaving" name="tech_out" id="tech_out" value="<?= $row['tech_out']; ?>">
+          <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
           <input style="background-color: #1a0845; color: white; width: 216px;" type="button" value="OUT" onclick="tech_outs(); RestOut2()">
           
               <script type="text/javascript">
@@ -161,17 +164,17 @@
                 function RestOut2()
                 {
                   var tech_out = $('input[name=tech_out]').val();
-                  var technician = $('input[name=job_assign]').val();
-                  var today_date = $('input[name=today_date]').val();
+                  var tech_leader = $('input[name=job_assign]').val();
+                  var techupdate_date = $('input[name=techupdate_date]').val();
                   
                   if(tech_out!='' || tech_out=='',
-                  technician!='' || technician=='',
-                  today_date!='' || today_date=='')
+                  tech_leader!='' || tech_leader=='',
+                  techupdate_date!='' || techupdate_date=='')
                  
                  {
                   var formData = {tech_out:tech_out,
-                                technician:technician,
-                                today_date:today_date};
+                    tech_leader:tech_leader,
+                                techupdate_date:techupdate_date};
                   
                   $.ajax({
                             url: "techoutupdate2.php",
@@ -208,8 +211,8 @@
 
       <?php
           date_default_timezone_set("Asia/Kuala_Lumpur");
-    $RestTime = date('g:i A');
-    $_SESSION['resttime'] = $RestTime; 
+          $RestTime = date('g:i A');
+          $_SESSION['resttime'] = $RestTime; 
       ?>
 
       <input type="hidden" name="technician_in" value="<?php echo $_SESSION["resttime"] ?>">  
@@ -218,7 +221,7 @@
       <p class="control"><b id="messageupdate"></b></p>
       <div class="updateBtn">
       
-      <input style="height: 36px; margin-left: 20px; margin-right: 43px; font-size: 15px;" type="button" id="update_time" onclick="RestIn2();" name="update_time" value="Update" />
+      <input style="height: 36px; margin-left: 20px; margin-right: 43px; font-size: 15px;" type="button" id="update_time" onclick="RestIn2();RestOut2();" name="update_time" value="Update" />
       </div>
     
     </form>
@@ -249,17 +252,17 @@
                    function RestIn2()
                   {
                     var technician_in = $('input[name=technician_in]').val();
-                    var technician = $('input[name=job_assign]').val();
-                    var today_date = $('input[name=today_date]').val();
+                    var tech_leader = $('input[name=job_assign]').val();
+                    var techupdate_date = $('input[name=techupdate_date]').val();
                     
                     if(technician_in!='' || technician_in=='',
-                    technician!='' || technician=='',
-                    today_date!='' || today_date=='')
+                    tech_leader!='' || tech_leader=='',
+                    techupdate_date!='' || techupdate_date=='')
                   
                   {
                     var formData = {technician_in:technician_in,
-                                 technician:technician,
-                                 today_date:today_date};
+                      tech_leader:tech_leader,
+                                 techupdate_date:techupdate_date};
                     
                     $.ajax({
                               url: "techinupdate2.php",

@@ -27,8 +27,7 @@ if(!isset($_SESSION['username']))
 ?>
 
 <?php
-
-$today_date = date("d-m-Y");
+$today_date = date("Y-m-d");
 $_SESSION['today_date'] = $today_date;
 ?>
 

@@ -10,12 +10,6 @@
         }
     ?>
 
-    <?php
-// Return current date from the remote server
-$date = date('d-m-Y');
-
-?>
-
 <!DOCTYPE html>
 
 <html lang=”en”>
@@ -104,7 +98,7 @@ form .submit-date label.details {
     <div class="date-form">
     <div class="submit-date" style="padding-left: 20px; padding-right: 25px;">
     <div class="input-box" style="width: 75%; display: flex; align-items: baseline;">
-    <input type="text" id="srvcreportdate" name="srvcreportdate" value="<?php echo $date; ?>" readonly>
+    <input type="text" id="srvcreportdate" name="srvcreportdate" value="<?php $date = date('d-m-Y');?>" readonly>
     
     <div class="input-group-append" style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
    

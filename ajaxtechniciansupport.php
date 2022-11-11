@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $today_date = date("d-m-Y");
+    $today_date = date("Y-m-d");
     $_SESSION['storeDate'] = $today_date; 
 ?>
 

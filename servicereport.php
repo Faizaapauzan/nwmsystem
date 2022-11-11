@@ -1,9 +1,3 @@
-<?php
-    session_start();
-    $showDate = date("d-m-Y");
-    $_SESSION['today_date'] = $showDate;
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -335,8 +329,7 @@ tr td:first-child:before {
     ?>
 
     <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-    <input type="hidden" id="today_date" name="today_date" value="<?php echo $date = date('Y-m-d'); ?>">
-    
+   
     <section class="store-user mt-5">
     <div class="col-10">
     <div class="row bb pb-3">
@@ -472,7 +465,9 @@ tr td:first-child:before {
             $jobregister_id =$_POST['jobregister_id'];
             
             $results = $conn->query("SELECT * FROM job_register 
-            WHERE jobregister_id='$jobregister_id' AND support ='' AND tech_out !=''");
+            WHERE jobregister_id='$jobregister_id' AND support ='' AND tech_out !=''
+            OR
+            jobregister_id='$jobregister_id' AND support IS NULL AND tech_out !=''");
         
         while($row = $results->fetch_assoc()) {
 
@@ -647,7 +642,6 @@ include 'dbconnect.php';
         function submitForm()
             {
               var jobregister_id = $('input[name=jobregister_id]').val();
-              var today_date = $('input[name=today_date]').val();
               var date = $('input[name=date]').val();
               var customer_name = $('input[name=customer_name]').val();
               var cust_phone1 = $('input[name=cust_phone1]').val();
@@ -668,7 +662,6 @@ include 'dbconnect.php';
               var Problem_Description = $('textarea[name=Problem_Description]').val();
              
               if(jobregister_id!= '' || jobregister_id == '',
-                 today_date!= '' || today_date == '',
                  date!= '' || date == '', 
                  customer_name!= '' || customer_name == '', 
                  cust_phone1!= '' || cust_phone1 == '', 
@@ -691,7 +684,6 @@ include 'dbconnect.php';
                  {
 
                     var formData = {jobregister_id: jobregister_id,
-                                    today_date: today_date,
                                     date: date,
                                     customer_name: customer_name,
                                     cust_phone1: cust_phone1,

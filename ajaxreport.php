@@ -37,12 +37,7 @@
         $queryRecords = mysqli_query($conn, $sql) or die("Error to fetch Accessories data");
         }
     ?>
-
-    <?php
-        // Return current date from the remote server
-        $date = date('d-m-Y');
-    ?>
-    
+ 
     <table id="date_grid" class="table table-condensed table-hover table-striped bootgrid-table" width="80%" cellspacing="0">
     <!-- <table id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table"> -->
         
@@ -51,7 +46,7 @@
         <?php foreach($queryRecords as $res) :?>
             <tr data-row-id="<?php echo $res['jobregister_id'];?>">
             <td style="display:none;"></td>
-            <td><label>Service Report Date :</label><?php echo $date; ?></td>
+            <td><label>Service Report Date :</label><?php echo $date = date('d-m-Y');?></td>
             <td><button class="userinfo btn btn-success" type="button" 
                         data-id='<?php echo $res['jobregister_id']; ?>' 
                         data-custname='<?php echo $res['customer_name']; ?>' 

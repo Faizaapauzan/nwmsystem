@@ -1,6 +1,6 @@
 <?php
 session_start();
-$att_date = date("d-m-Y");
+$att_date = date("Y-m-d");
 $_SESSION['storeDate'] = $att_date;
 ?>
  
@@ -124,8 +124,9 @@ $_SESSION['storeDate'] = $att_date;
 	<input type="hidden" name="cust_address1" id="cust_address1" placeholder='Enter Customer Address'>
     <input type="hidden" name="cust_address2" id="cust_address2" placeholder='Address 2'>
     <input type="hidden" name="cust_address3" id="cust_address3" placeholder='Address 3'>
-    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>">
+    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $date = date('d-m-Y'); ?>">
     <input type="hidden" name="today_date" id="today_date" value="<?php echo $_SESSION["storeDate"] ?>">
+    <input type="hidden" name="accessories_required" id="accessories_required" value="No">
 	</div>
 
     
@@ -413,12 +414,6 @@ $("#jobModel").on("change",function(){
 			}
 		}
 	</script>
-
-<?php
-
-$today_date = date("d-m-Y");
-$_SESSION['storeDate'] = $today_date;
-?>
 
 <input readonly type="hidden" id="requestDate" name="requested_date" value="<?php echo $_SESSION["storeDate"] ?>">
 
