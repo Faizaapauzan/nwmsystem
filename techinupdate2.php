@@ -4,7 +4,7 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-if(isset($_POST['technician_out']) && $_POST['technician_out']!='' || $_POST['technician_out']==''
+if(isset($_POST['technician_in']) && $_POST['technician_in']!='' || $_POST['technician_in']==''
     &&
    isset($_POST['tech_leader']) && $_POST['tech_leader']!='' || $_POST['tech_leader']==''
    &&
@@ -12,7 +12,7 @@ if(isset($_POST['technician_out']) && $_POST['technician_out']!='' || $_POST['te
 
     {
         $sql = "UPDATE tech_update SET 
-                technician_out ='".addslashes($_POST['technician_out'])."'
+                technician_in ='".addslashes($_POST['technician_in'])."'
        
                 WHERE tech_leader='".addslashes($_POST['tech_leader'])."'
                 AND techupdate_date='".addslashes($_POST['techupdate_date'])."'";

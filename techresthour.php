@@ -191,7 +191,7 @@ $_SESSION['storeDate'] = $today_date;
     <div style=" position: static; font-size: larger; margin-bottom: 20px; color: darkblue;" class="tarikh">Date: <?= $row['techupdate_date']; ?></div>
     <label style="position: static; font-weight: 600; font-size: 20px;"><?= $row['tech_leader']; ?></label>
     <div style="position: static; width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?= $row['tech_out']; ?>" aria-describedby="basic-addon2">
+    <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="technician_out" value="<?= $row['technician_out']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="buttonbiru" onclick="tech_outs()" style="position: static; width: fit-content;" type="button">OUT</button>
     </div>
@@ -245,20 +245,20 @@ $_SESSION['storeDate'] = $today_date;
               {
                 var tech_leader = $('input[name=tech_leader]').val();
                 var techupdate_date = $('input[name=techupdate_date]').val();
-                var tech_out = $('input[name=tech_out]').val();
+                var technician_out = $('input[name=technician_out]').val();
                 var technician_in = $('input[name=technician_in]').val();
                 var techupdate_id  = $('input[name=techupdate_id ]').val();
                 
                 if(tech_leader!='' || tech_leader=='', 
                     techupdate_date!='' || techupdate_date=='',
-                    tech_out!='' || tech_out=='', 
+                    technician_out!='' || technician_out=='', 
                     technician_in!='' || technician_in=='',
                     techupdate_id !='' || techupdate_id =='')
 
                   {
                     var formData = {tech_leader: tech_leader,
                                     techupdate_date: techupdate_date,
-                                     tech_out: tech_out,
+                                     technician_out: technician_out,
                                      technician_in: technician_in,
                                      techupdate_id : techupdate_id };
                                     

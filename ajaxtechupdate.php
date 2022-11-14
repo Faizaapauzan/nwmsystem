@@ -73,20 +73,15 @@ $_SESSION['storeDate'] = $today_date;
               function doSomethingElse()
                 {
                   var job_status = $('input[name=job_status]').val();
-                  var job_assign = $('input[name=job_assign]').val();
-                  var customer_name = $('input[name=customer_name]').val();
-                  var requested_date = $('input[name=requested_date]').val();
+                  var jobregister_id = $('input[name=jobregister_id]').val();
+             
                   
                   if(job_status!='' || job_status=='',
-                     job_assign!='' || job_assign=='',
-                  customer_name!='' || customer_name=='',
-                 requested_date!='' || requested_date=='')
+                     jobregister_id!='' || jobregister_id=='')
                  
                  {
                   var formData = {job_status:job_status,
-                                  job_assign:job_assign,
-                               customer_name:customer_name,
-                              requested_date:requested_date};
+                                  jobregister_id:jobregister_id};
                               
                               $.ajax({
                                       url: "changeStatus.php",
@@ -235,6 +230,7 @@ $_SESSION['storeDate'] = $today_date;
     
     <label>Rest Hour</label>
     <input type="hidden" name="tech_out" value="<?php echo $_SESSION["resttime"] ?>">
+    <input type="hidden" name="technician_out" value="<?php echo $_SESSION["resttime"] ?>">
     <input type="hidden" name="technician" value="<?php echo $_SESSION['username'] ?>">
     <input type="hidden" name="today_date" value="<?php echo $_SESSION['storeDate'] ?>">
     <div class="input-group mb-3">
@@ -284,16 +280,16 @@ $_SESSION['storeDate'] = $today_date;
               // function to save time in tech_update table
                 function RestOut2()
                 {
-                  var tech_out = $('input[name=tech_out]').val();
+                  var technician_out = $('input[name=technician_out]').val();
                   var tech_leader = $('input[name=technician]').val();
                   var techupdate_date = $('input[name=today_date]').val();
                   
-                  if(tech_out!='' || tech_out=='',
+                  if(technician_out!='' || technician_out=='',
                   tech_leader!='' || tech_leader=='',
                   techupdate_date!='' || techupdate_date=='')
                  
                  {
-                  var formData = {tech_out:tech_out,
+                  var formData = {technician_out:technician_out,
                     tech_leader:tech_leader,
                     techupdate_date:techupdate_date};
                   
