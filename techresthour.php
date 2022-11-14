@@ -126,9 +126,9 @@ $_SESSION['storeDate'] = $today_date;
     <div style="display: inline-flex;">
     <div class="input-box">
       <label style="font-size: 15px;">Technician: </label>
-        <?php if (isset($_SESSION["username"])) ?>
-        <input type="text" name="tech_leader" id="tech_leader" value="<?php if(isset($_SESSION["username"])){echo $_SESSION["username"];} ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>  
-        <input type="hidden" name="techupdate_date" id='techupdate_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
+       <?php if (isset($_SESSION["username"])) ?>
+    <input type="text" name="tech_leader" id="tech_leader" value="<?php echo $_SESSION["username"] ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>
+    <input type="hidden" name="techupdate_date" id='techupdate_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
     </div>
     </div>
     <div>
@@ -210,7 +210,7 @@ $_SESSION['storeDate'] = $today_date;
     </div>
     
     <div style="position: static; width: fit-content;" class="input-group mb-3">
-    <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="technician_in" value="<?= $row['technician_in']; ?>" aria-describedby="basic-addon2">
+    <input readonly type="text" style="position: static;" class="form-control" id="technician_in" name="technician_in" value="<?= $row['technician_in']; ?>" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="buttonbiru" onclick="tech_ins()" style="position: static; width: fit-content; padding-left: 55px;" type="button">IN</button>
     </div>
@@ -220,7 +220,7 @@ $_SESSION['storeDate'] = $today_date;
           {
             $.ajax({url:"techresthourtime.php", success:function(result)
               {
-                $("#tech_in").val(result);
+                $("#technician_in").val(result);
               }
             })
           }

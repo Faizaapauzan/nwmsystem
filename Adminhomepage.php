@@ -1323,7 +1323,7 @@
                                         if ($row_Total = mysqli_num_rows($numRow_run)) {
                                             echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
                                         }
-                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Amir'");
+                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hamir'");
                                         while($data = mysqli_fetch_array($records)) {
                                             if ($data['tech_avai']==1) {
                                                 echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
