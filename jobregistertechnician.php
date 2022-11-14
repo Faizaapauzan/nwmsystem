@@ -324,7 +324,7 @@ $("#jobModel").on("change",function(){
 
   <div class="CodeDropdown">
   <label for="brand">Machine Brand</label>
-  <select onchange="GetBrand(this.value)" class="form-select" id="JenamaMachine" required>
+  <select onchange="GetBrand(this.value)" class="form-select" id="JenamaMachine">
   <option value=""> Select Brand</option>
   <?php
 
@@ -376,7 +376,7 @@ $("#jobModel").on("change",function(){
 
         <div class="CodeDropdown" style="padding-top: 15px;">
             <label for="type"> Machine Type</label>
-            <select onchange="GetType(this.value)" class="form-select" id="JenisMachine" required>
+            <select onchange="GetType(this.value)" class="form-select" id="JenisMachine">
                 <option value="">Select Type</option>
             </select>
             <input type="hidden" id="IdJenis" name="type_id" onchange="GetType(this.value)" readonly >  
