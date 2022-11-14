@@ -28,8 +28,10 @@
 
         <div class="form-container sign-in-container">
             <form action="dblogin.php" method="post">
-                <img src="image/login.png" alt="user icon" width="100" height="100">
-                <h1>Login</h1>
+                  <h3>NWM Management System</h3>
+                    Sign in to continue access page.
+                <img src="image/neowood.png" alt="user icon" width="170" height="100">
+                <!-- <h2>Login</h2> -->
 
                 <label for="login_id"></label>
                 <input type="hidden" id="DEFAULT" name="login_id">
@@ -51,7 +53,7 @@
             </form>
         </div>
 
-        <div class="overlay-container">
+        <!-- <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <h1>Welcome!</h1><br>
@@ -62,7 +64,7 @@
                     Sign in to continue access page.<br><br>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
     

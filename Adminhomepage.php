@@ -5125,6 +5125,8 @@
                     OR
                     job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL
                     OR
+                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = ''
+                    OR
                     job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL
                     OR
                     job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = ''
@@ -5147,6 +5149,8 @@
                     job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL
                     OR
                     job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL
+                     OR
+                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = ''
                     OR
                     job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = ''
                     OR
