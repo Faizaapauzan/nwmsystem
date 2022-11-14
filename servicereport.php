@@ -353,8 +353,7 @@ tr td:first-child:before {
             $machine_name =$_POST['machine_name'];
             $requested_date =$_POST['requested_date'];
 
-
-            $query = ("SELECT * FROM job_register 
+            $query = ("SELECT DISTINCT job_assign FROM job_register 
                                 WHERE customer_name='$customer_name'
                                 AND machine_name='$machine_name'
                                 AND requested_date='$requested_date'");
@@ -376,7 +375,7 @@ tr td:first-child:before {
             $machine_name =$_POST['machine_name'];
             $requested_date =$_POST['requested_date'];
           
-          $sql2 = "SELECT * FROM `assistants` 
+          $sql2 = "SELECT DISTINCT username FROM assistants 
                    WHERE cust_name='$customer_name'
                    AND machine_name='$machine_name'
                    AND requested_date='$requested_date'";
@@ -616,7 +615,7 @@ function resizeTextArea($element) {
     <br/>
     
     <?php
-include 'dbconnect.php';
+        include 'dbconnect.php';
                 
         if (isset($_POST['jobregister_id'])) {
             $jobregister_id =$_POST['jobregister_id'];
