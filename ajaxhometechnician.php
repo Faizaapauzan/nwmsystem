@@ -135,7 +135,7 @@ include 'dbconnect.php';
                 <?php
                     include 'dbconnect.php';
 
-                    if (isset($_POST['type_id'])) {
+                    if (isset($_POST['type_id']) && isset($_POST['customer_name'])) {
                       $customer_name =$_POST['customer_name'];
                       $type_id =$_POST['type_id'];
             
@@ -144,7 +144,6 @@ include 'dbconnect.php';
                       $query_run = mysqli_query($conn, $query);
                       while ($rows = mysqli_fetch_array($query_run)) {
                 ?>
-
                        
                 <option value="<?php echo $rows['machine_id']; ?>"><?php echo $rows['serialnumber']; ?></option>
                 <?php

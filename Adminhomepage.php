@@ -1700,7 +1700,9 @@
             $.ajax({
             url: 'ajaxhometechnician.php',
             type: 'post',
-             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
+             data: {jobregister_id: jobregister_id, 
+                type_id: type_id, 
+                customer_name: customer_name},
             success: function (response) {
             // Add response in Modal body
             $('.hwa-details').html(response);

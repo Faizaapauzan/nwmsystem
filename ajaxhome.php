@@ -138,7 +138,7 @@
                 <?php
                     include 'dbconnect.php';
 
-                    if (isset($_POST['type_id'])) {
+                    if (isset($_POST['type_id']) AND isset($_POST['customer_name'])) {
                       $customer_name =$_POST['customer_name'];
                       $type_id =$_POST['type_id'];
             

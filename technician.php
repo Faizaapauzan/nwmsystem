@@ -160,7 +160,7 @@ session_start();
 						while ($row = mysqli_fetch_assoc($result)) {
 							// only show artist when it's an other artist then the previous one
 							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate' data-idupdate='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-toggle='modal' data-target='#myModalupdate'>
+								echo "<div class='cardupdate' data-id='".$row['jobregister_id']."' data-customer_name='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-toggle='modal' data-target='#myModalupdate'>
 										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
 									  </div>";
 								$customer_name = $row['customer_name'];
@@ -268,7 +268,7 @@ session_start();
 							}						
 								echo "<nav id='mainNav'>
 								      <div class='cards'>
-									  <div class='card' id='notYetStatus' data-idupdate='".$row['customer_name']."' data-type_id ='".$row['type_id']."' data-customer_name='".$row['customer_name']."' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#myModal'>
+									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-customer_name='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-toggle='modal' data-target='#myModal'>
 									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
 									  	<!-- Modal-->
 										<ul class='b' id='draged'>

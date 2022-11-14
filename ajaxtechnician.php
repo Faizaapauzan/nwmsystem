@@ -134,11 +134,11 @@ include 'dbconnect.php';
                 
   <?php include 'dbconnect.php';
 
-    if (isset($_POST['type_id'])) {
+    if (isset($_POST['type_id']) && isset($_POST['customer_name'])) {
         $customer_name =$_POST['customer_name'];
         $type_id =$_POST['type_id'];
             
-        $query = ("SELECT * FROM machine_list WHERE type_id ='$type_id'");
+        $query = ("SELECT * FROM machine_list WHERE type_id ='$type_id' AND customer_name ='$customer_name'");
 
         $query_run = mysqli_query($conn, $query);
           while ($row = mysqli_fetch_array($query_run)) {
