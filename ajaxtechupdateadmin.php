@@ -50,6 +50,7 @@
       <label for="">Departure Time</label>
       <div class="technician-time">
         <input type="text" class="technician_departure" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure']?>">
+        <input type="hidden" name="DateAssign" value="<?php echo $_SESSION['storeDate'] ?>">
         <input type="hidden" name="job_status" value="Doing">
         <input type="button" id="status" value="Departure" onclick="doSomething();">
         
@@ -151,7 +152,7 @@
                   })
                 }
 
-                        function RestOutA()
+                  function RestOutA()
                 {
                   var technician_out = $('input[name=technician_out]').val();
                   var tech_leader = $('input[name=job_assign]').val();

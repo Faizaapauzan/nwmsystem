@@ -173,13 +173,6 @@
             <input type="hidden" name="staff_position" id='staff_position' readonly>
         
           </select>
-        
-        <?php
-            $DateAssign = date("d-m-Y");
-            $_SESSION['storeDate'] = $DateAssign; 
-        ?>
-    
-    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>
     </div>
     
     <div style="margin-left: 236px;margin-top: 20px;" class="updateBtn">
@@ -262,7 +255,6 @@
             var machine_brand = $('input[name=machine_brand]').val();
             var brand_id = $('input[name=brand_id]').val();
             var accessories_required = $('select[name=accessories_required]').val();
-            var DateAssign = $('input[name=DateAssign]').val();
             var job_assign = $('input[name=job_assign]').val();
             var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
             var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
@@ -297,7 +289,6 @@
                machine_brand!='' || machine_brand=='',
                brand_id!='' || brand_id=='',
                accessories_required!='' || accessories_required=='', 
-               DateAssign!='' || DateAssign=='',
                job_assign!='' || job_assign=='',
                jobregistercreated_by!='' || jobregistercreated_by=='',
                jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='')
@@ -332,7 +323,6 @@
                                 machine_brand: machine_brand,
                                 brand_id: brand_id,
                                 accessories_required: accessories_required,
-                                DateAssign: DateAssign,
                                 job_assign: job_assign,
                                 jobregistercreated_by: jobregistercreated_by,
                                 jobregisterlastmodify_by: jobregisterlastmodify_by};

@@ -62,8 +62,6 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
     &&
    isset($_POST['accessories_required']) && $_POST['accessories_required']!='' || $_POST['accessories_required']==''
     &&
-    isset($_POST['DateAssign']) && $_POST['DateAssign']!='' || $_POST['DateAssign']==''
-    &&
    isset($_POST['job_assign']) && $_POST['job_assign']!='' || $_POST['job_assign']==''
     &&
    isset($_POST['jobregistercreated_by']) && $_POST['jobregistercreated_by']!='' || $_POST['jobregistercreated_by']==''
@@ -78,7 +76,7 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
                                            job_name, job_code, job_description, requested_date, delivery_date, 
                                            customer_name, customer_code, customer_grade, cust_address1, cust_address2, 
                                            cust_address3, customer_PIC, cust_phone1, cust_phone2, machine_id,
-                                           machine_name, machine_code, machine_type, type_id, serialnumber, machine_brand, brand_id, accessories_required, DateAssign, job_assign, jobregistercreated_by, jobregisterlastmodify_by) 
+                                           machine_name, machine_code, machine_type, type_id, serialnumber, machine_brand, brand_id, accessories_required, job_assign, jobregistercreated_by, jobregisterlastmodify_by) 
                        
                        VALUES ('".addslashes($_POST['technician_rank'])."',
                                '".addslashes($_POST['staff_position'])."',
@@ -109,7 +107,6 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
                                '".addslashes($_POST['machine_brand'])."',
                                '".addslashes($_POST['brand_id'])."',
                                '".addslashes($_POST['accessories_required'])."',
-                                '".addslashes($_POST['DateAssign'])."',
                                '".addslashes($_POST['job_assign'])."',
                                '".addslashes($_POST['jobregistercreated_by'])."',
                                '".addslashes($_POST['jobregisterlastmodify_by'])."')";

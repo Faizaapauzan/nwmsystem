@@ -23,7 +23,6 @@ include 'dbconnect.php';
  <form action="homeindex.php" method="post" style="display: contents;">
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
     <input type="hidden" name="support" class="support" value="Support For <?php echo $row['job_assign'] ?>">
-    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $date = date('d-m-Y'); ?>">
      <div class="input-box">
             <label for="">Job Priority</label>
             <input type="text" class="job_priority" name="job_priority" value="<?php echo $row['job_priority']?>">
@@ -273,7 +272,6 @@ function submitFormSupportAdmin()
    var staff_position = $('input[name=staff_position]').val();
    var job_priority = $('input[name=job_priority]').val();
    var support = $('input[name=support]').val();
-   var DateAssign = $('input[name=DateAssign]').val();
    var job_order_number = $('input[name=job_order_number]').val();
    var job_name = $('input[name=job_name]').val();
    var job_code = $('input[name=job_code]').val();
@@ -303,8 +301,7 @@ function submitFormSupportAdmin()
     if(technician_rank!='' || technician_rank=='', 
        staff_position!='' || staff_position=='', 
        job_priority!='' || job_priority=='', 
-       support!='' || support=='',
-       DateAssign!='' || DateAssign=='',  
+       support!='' || support=='', 
        job_order_number!='' || job_order_number=='',
        job_name!='' || job_name=='',
        job_code!='' || job_code=='',
@@ -336,7 +333,6 @@ function submitFormSupportAdmin()
                         staff_position: staff_position,
                         job_priority: job_priority,
                         support: support,
-                        DateAssign: DateAssign,
                         job_order_number: job_order_number,
                         job_name: job_name,
                         job_code: job_code,

@@ -55,13 +55,6 @@ include 'dbconnect.php';
   
     </select>
   
-    <?php
-      $DateAssign = date("d-m-Y");
-      $_SESSION['storeDate'] = $DateAssign; 
-    ?> 
-    
-    <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>" readonly>	
-  
     <?php if (isset($_SESSION["username"])) { ; } ?>
     <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>	 
     <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update"/>
