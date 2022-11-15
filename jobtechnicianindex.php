@@ -33,6 +33,7 @@ include 'dbconnect.php';
 
 		{
 			$machine_id = !empty($machine_id) ? "'$machine_id'" : "NULL";
+			$type_id = !empty($type_id) ? "'$type_id'" : "NULL";
 		}
            
 	$sql = "INSERT INTO job_register (job_assign, job_code, job_name, job_order_number, job_description, customer_code,
@@ -59,7 +60,7 @@ VALUES ('".addslashes($_POST['job_assign'])."',
 		'".addslashes($_POST['machine_brand'])."',
 		'".addslashes($_POST['brand_id'])."',
 		'".addslashes($_POST['machine_type'])."',
-		'".addslashes($_POST['type_id'])."',
+		$type_id,
         '".addslashes($_POST['serialnumber'])."',
         '".addslashes($_POST['accessories_required'])."',
         '".addslashes($_POST['jobregistercreated_by'])."',

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$att_date = date("Y-m-d");
+$att_date = date("d-m-Y");
 $_SESSION['storeDate'] = $att_date;
 ?>
  
@@ -14,27 +14,26 @@ $_SESSION['storeDate'] = $att_date;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Job Register</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href="css/technicianmain.css" rel="stylesheet" />
-    
-    <!-- Select2 CSS --> 
+ <!-- Select2 CSS --> 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
 
     <!-- Script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
-	<script src="https://kit.fontawesome.com/7b6b55bad0.js" crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+	  <script src="https://kit.fontawesome.com/7b6b55bad0.js" crossorigin="anonymous"></script>
+	  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-    <!-- Select2 JS --> 
+ <!-- Select2 JS --> 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
@@ -42,11 +41,12 @@ $_SESSION['storeDate'] = $att_date;
 
 
 <body>
-    
-    <nav class="nav">
-        <div class="nav__link nav__link dropdown">
-            <i class="material-icons">list_alt</i>
-            <span class="nav__text">Job Listing</span>
+
+	<nav class="nav">
+	
+	<div class="nav__link nav__link dropdown">
+	  <i class="material-icons">list_alt</i>
+	  <span class="nav__text">Job Listing</span>
 		<div class="dropdown-content">
 			<a href="assignedjob.php">Assigned Job</a>
 			<a href="unassignedjob.php">Unassigned Job</a>
@@ -81,14 +81,15 @@ $_SESSION['storeDate'] = $att_date;
 <div class="column-inside">
 <!--Job Info 1 Customer-->
 
-    <?php include 'dbconnect.php'; ?>
+    <?php
+include 'dbconnect.php';
+    ?>
 
     <form action="jobtechnicianindex.php" method="post" onsubmit="return validateForm()" name="JobForm">
-    
-    
-    <?php if (isset($_SESSION["username"])) ?>
-    
-    <input type="hidden" id=" job_assign" class="form-control" name="job_assign" value="<?php echo $_SESSION["username"] ?>" readonly >  
+        
+  <?php if (isset($_SESSION["username"])) ?>
+<input type="hidden" id=" job_assign" class="form-control" name="job_assign" value="<?php echo $_SESSION["username"] ?>" readonly >  
+   
     <div class="CodeDropdown">
     <div class="form-group"><label>Select Customer</label>  
     <br/>
@@ -103,7 +104,7 @@ $_SESSION['storeDate'] = $att_date;
         }	
     ?>  
     </select>
-    <br/>
+        <br/>
     <div class="input-box">
     <input type="hidden" id="text" class="form-control" name="customer_id" onchange="GetDetail(this.value)" readonly >  
     </div>
@@ -117,13 +118,13 @@ $_SESSION['storeDate'] = $att_date;
 	  <input type="text" name="customer_name" id="customer_name" class="form-control" placeholder='Enter Customer Name'>
 	  </div>
 
-	<input type="hidden" name="customer_grade" id="customer_grade" placeholder='Enter Customer Grade'>
-	<input type="hidden" name="customer_PIC" id="customer_PIC" placeholder='Enter Customer PIC'>
-	<input type="hidden" name="cust_phone1" id="cust_phone1" placeholder='Enter Customer Phone'>
-	<input type="hidden" name="cust_phone2" id="cust_phone2" placeholder='Enter Customer Phone'>
-	<input type="hidden" name="cust_address1" id="cust_address1" placeholder='Enter Customer Address'>
-    <input type="hidden" name="cust_address2" id="cust_address2" placeholder='Address 2'>
-    <input type="hidden" name="cust_address3" id="cust_address3" placeholder='Address 3'>
+	<input type="hidden" name="customer_grade" id="customer_grade" class="form-control" placeholder='Enter Customer Grade'>
+	<input type="hidden" name="customer_PIC" id="customer_PIC" class="form-control" placeholder='Enter Customer PIC'>
+	<input type="hidden" name="cust_phone1" id="cust_phone1" class="form-control" placeholder='Enter Customer Phone'>
+	<input type="hidden" name="cust_phone2" id="cust_phone2" class="form-control" placeholder='Enter Customer Phone'>
+	<input type="hidden" name="cust_address1" id="cust_address1" class="form-control" placeholder='Enter Customer Address'>
+    <input type="hidden" name="cust_address2" id="cust_address2" class="form-control" placeholder='Address 2'>
+    <input type="hidden" name="cust_address3" id="cust_address3" class="form-control" placeholder='Address 3'>
     <input type="hidden" name="today_date" id="today_date" value="<?php echo $_SESSION["storeDate"] ?>">
     <input type="hidden" name="accessories_required" id="accessories_required" value="No">
 	</div>
@@ -151,6 +152,8 @@ $("#ddlModel").on("change",function(){
 });
 
 </script>
+
+
 
 <script>
 
@@ -323,7 +326,7 @@ $("#jobModel").on("change",function(){
 
   <div class="CodeDropdown">
   <label for="brand">Machine Brand</label>
-  <select onchange="GetBrand(this.value)" class="form-select" id="JenamaMachine">
+  <select onchange="GetBrand(this.value)" class="form-select" id="JenamaMachine" required>
   <option value=""> Select Brand</option>
   <?php
 
@@ -414,7 +417,14 @@ $("#jobModel").on("change",function(){
 		}
 	</script>
 
+<?php
+
+$today_date = date("Y.m.d");
+$_SESSION['storeDate'] = $today_date;
+?>
+
 <input readonly type="hidden" id="requestDate" name="requested_date" value="<?php echo $_SESSION["storeDate"] ?>">
+
 
     <?php if (isset($_SESSION["username"])) ?>
     <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
