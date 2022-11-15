@@ -69,8 +69,45 @@ table, th, td {
     height: 43px;
     padding: 1px 2px;
     border-width: 0px;
+    resize: none;    
+}
+
+.differenttime {
+    writing-mode: horizontal-tb !important;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
+    text-rendering: auto;
+    display: inline-block;
+    line-height: 17px;
+    text-align: start;
+    cursor: text;
+    width: 74px;
+    height: 35px;
+    padding: 1px 2px;
+    border-width: 0px;
     resize: none;
 
+    
+}
+
+.assistantarea {
+    writing-mode: horizontal-tb !important;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: 500;
+    text-rendering: auto;
+    display: inline-block;
+    line-height: 17px;
+    text-align: start;
+    cursor: text;
+   width: 136px;
+    height: 27px;
+    padding: 1px 2px;
+    border-width: 0px;
+    resize: none;
+
+    
 }
 
 
@@ -176,7 +213,7 @@ table, th, td {
             <td style="text-align: center;"><?php echo "$arrival" ?></td>
             <td style="text-align: center;"><?php echo "$leaving" ?></td>
             <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?>   hours <?php echo difftime($arrival, $leaving)['m']?>  minutes</td>
-            <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?>   hours <?php echo difftime($departure, $arrival)['m']?>  minutes</td>
+            <td style="text-align: center;"><textarea style="border:none; resize:none; text-align: center;" class="differenttime" id="textarea-container"><?php echo difftime($departure, $arrival)['h']?> hours <?php echo difftime($departure, $arrival)['m']?> minutes</textarea></td>
             
         </tbody>
     
@@ -240,7 +277,7 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
         <tbody>
             <td style="text-align: center;"></td>
             <td><?php echo $row["tech_leader"]; ?></td>
-            <td><?php echo $row["username"]; ?></td>
+            <td><textarea style="border:none; resize:none;" class="assistantarea" id="textarea-container"><?php echo $row["username"]; ?></textarea></td>
             <td style="text-align: center;"><?php echo $row["tech_clockin"]; ?></td>
             <td style="text-align: center;"><?php echo $row["tech_clockout"]; ?></td>
             <td style="text-align: center;"><?php echo $row["technician_out"]; ?></td>
