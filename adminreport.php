@@ -334,10 +334,10 @@ table, th, td {
 
         <tbody>
             <td style="text-align: center;"></td>
-            <td><?= $row['job_assign']; ?></td>
+            <td style="padding-left: 7px;"><?= $row['job_assign']; ?></td>
             <td><textarea style="border:none; resize:none;" class="infoarea" id="textarea-container"><?= $row['username']; ?></textarea></td>
-            <td><?= $row['customer_name']; ?></td>
-            <td><?= $row['machine_type']; ?> - <?= $row['job_name']; ?></td>
+            <td style="padding-left: 7px;"><?= $row['customer_name']; ?></td>
+            <td style="padding-left: 7px;"><?= $row['machine_type']; ?> - <?= $row['job_name']; ?></td>
             <td style="text-align: center;"><?php echo "$departure" ?></td>
             <td style="text-align: center;"><?php echo "$arrival" ?></td>
             <td style="text-align: center;"><?php echo "$leaving" ?></td>
@@ -414,8 +414,8 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
 
         <tbody>
             <td style="text-align: center;"></td>
-            <td><?php echo $row["tech_leader"]; ?></td>
-            <td><?php echo $row["username"]; ?></td>
+            <td style="padding-left: 7px;"><?php echo $row["tech_leader"]; ?></td>
+            <td style="padding-left: 7px;"><?php echo $row["username"]; ?></td>
             <td style="text-align: center;"><?php echo $row["tech_clockin"]; ?></td>
             <td style="text-align: center;"><?php echo $row["tech_clockout"]; ?></td>
             <td style="text-align: center;"><?php echo $row["technician_out"]; ?></td>
