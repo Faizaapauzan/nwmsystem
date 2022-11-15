@@ -1,11 +1,11 @@
 <?php
     session_start();
+
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+
     $storeDate = date("d-m-Y");
     $_SESSION['storeDate'] = $storeDate;
-?>
 
-<?php
-    date_default_timezone_set("Asia/Kuala_Lumpur");
     $RestTime = date('g:i A');
     $_SESSION['resttime'] = $RestTime; 
 ?>

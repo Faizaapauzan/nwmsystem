@@ -1,11 +1,9 @@
 <?php
-session_start();
-?>
-
-<?php
-date_default_timezone_set("Asia/Kuala_Lumpur");
-$att_date = date("d-m-Y");
-$_SESSION['storeDate'] = $att_date;
+    session_start();
+    
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    $att_date = date("d-m-Y");
+    $_SESSION['storeDate'] = $att_date;
 ?>
  
 <!DOCTYPE html>

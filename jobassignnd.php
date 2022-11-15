@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php 
+    session_start();
+
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    
+    $ass_date = date("d-m-Y");
+    $_SESSION['storeDate'] = $ass_date; 
+?>
 
 <!DOCTYPE html>
 
@@ -14,11 +21,6 @@
 </head>
 
 <body>
-
-    <?php
-      $ass_date = date("d-m-Y");
-      $_SESSION['storeDate'] = $ass_date; 
-    ?> 
 
   <!-- ASSIGN TECHNICIAN -->
   <?php
