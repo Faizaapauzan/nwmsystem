@@ -1,13 +1,16 @@
 <?php
     session_start();
+
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+
     $today_date = date("d-m-Y");
     $_SESSION['storeDate'] = $today_date;
-?>
 
-<?php
-    date_default_timezone_set("Asia/Kuala_Lumpur");
     $ArrivalDateTime = date('d-m-Y g:i A');
-    $_SESSION['arrivaltime'] = $ArrivalDateTime; 
+    $_SESSION['arrivaltime'] = $ArrivalDateTime;
+    
+    $RestTime = date('g:i A');
+    $_SESSION['resttime'] = $RestTime; 
 ?>
 
 <!DOCTYPE html>
@@ -30,9 +33,8 @@
   
     <?php
         include 'dbconnect.php';
-        if (isset($_POST['jobregister_id'])) { 
+        if (isset($_POST['jobregister_id'])) {
           $jobregister_id =$_POST['jobregister_id'];
-          
           $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
           $query_run = mysqli_query($conn, $query);
           if ($query_run)
@@ -42,11 +44,12 @@
     ?>
 
     <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+   
+    <form action="" method="post">
+
     <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
     <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
     <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
-
-    <form action="" method="post">
   
     <label>Departure time</label>
     <input type="hidden" name="technician_departure" value="<?php echo $_SESSION["arrivaltime"] ?>">
@@ -230,12 +233,6 @@
           </script>
 
     </div>
-    
-    <?php
-        date_default_timezone_set("Asia/Kuala_Lumpur");
-        $RestTime = date('g:i A');
-        $_SESSION['resttime'] = $RestTime; 
-    ?>
     
     <label>Rest Hour</label>
     <input type="hidden" name="tech_out" value="<?php echo $_SESSION["resttime"] ?>">
