@@ -1,7 +1,13 @@
 <?php
-session_start();
-$today_date = date("d-m-Y");
-$_SESSION['storeDate'] = $today_date;
+    session_start();
+    $today_date = date("d-m-Y");
+    $_SESSION['storeDate'] = $today_date;
+?>
+
+<?php
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    $ArrivalDateTime = date('d-m-Y g:i A');
+    $_SESSION['arrivaltime'] = $ArrivalDateTime; 
 ?>
 
 <!DOCTYPE html>
@@ -41,13 +47,7 @@ $_SESSION['storeDate'] = $today_date;
     <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
 
     <form action="" method="post">
-    
-        <?php
-            date_default_timezone_set("Asia/Kuala_Lumpur");
-            $ArrivalDateTime = date('d-m-Y g:i A');
-            $_SESSION['arrivaltime'] = $ArrivalDateTime; 
-        ?>
-
+  
     <label>Departure time</label>
     <input type="hidden" name="technician_departure" value="<?php echo $_SESSION["arrivaltime"] ?>">
     <div class="input-group mb-3">
@@ -72,16 +72,21 @@ $_SESSION['storeDate'] = $today_date;
           <script type="text/javascript">
               function doSomethingElse()
                 {
+                  var job_assign = $('input[name=job_assign]').val();
+                  var customer_name = $('input[name=customer_name]').val();
+                  var requested_date = $('input[name=requested_date]').val();
                   var job_status = $('input[name=job_status]').val();
-                  var jobregister_id = $('input[name=jobregister_id]').val();
-             
-                  
-                  if(job_status!='' || job_status=='',
-                 jobregister_id!='' || jobregister_id=='')
+                      
+                  if(job_assign!='' || job_assign=='',
+                  customer_name!='' || customer_name=='',
+                 requested_date!='' || requested_date=='',
+                     job_status!='' || job_status=='')
                  
                  {
-                  var formData = {job_status:job_status,
-                              jobregister_id:jobregister_id};
+                  var formData = {job_assign:job_assign,
+                               customer_name:customer_name,
+                              requested_date:requested_date,
+                                  job_status:job_status};
                               
                               $.ajax({
                                       url: "changeStatus.php",

@@ -44,6 +44,10 @@
       ?>
     
     <form id="formStatus" action="" method="post" style="margin-left: 20px;">
+
+    <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
+    <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
+    <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
   
     <!-- Departure Time -->
     <div class="input-box-departure">
