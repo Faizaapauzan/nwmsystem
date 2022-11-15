@@ -10,7 +10,7 @@ if(isset($_POST['job_status']) && $_POST['job_status']!='' || $_POST['job_status
    &&
    isset($_POST['customer_name']) && $_POST['customer_name']!='' || $_POST['customer_name']==''
    &&
-   isset($_POST['requested_date']) && $_POST['jobregister_id']!='' || $_POST['requested_date']=='')
+   isset($_POST['requested_date']) && $_POST['requested_date']!='' || $_POST['requested_date']=='')
 
     {
         
