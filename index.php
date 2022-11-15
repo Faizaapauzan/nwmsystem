@@ -29,7 +29,6 @@
         <div class="form-container sign-in-container">
             <form action="dblogin.php" method="post">
                   <h3>NWM Management System</h3>
-                    Sign in to continue access page.
                 <img src="image/neowood.png" alt="user icon" width="170" height="100">
                 <!-- <h2>Login</h2> -->
 
