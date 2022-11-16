@@ -208,7 +208,7 @@
   <p class="control"><b id="alertmessage"></b></p>
 					<div class="technician-time">
 					<input type="text" id="Departure" name="job_order_number" class="technician-time-input" placeholder="Enter Job Order Number" require>
-					<button onclick="test();" class="technician-time-botton" type="submit">Get Job Order Number</button>
+					<button onclick="test();" class="technician-time-botton" type="submit">Click</button>
 					<script type="text/javascript">
                     function test()
                     {
