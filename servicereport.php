@@ -348,15 +348,10 @@ tr td:first-child:before {
     <?php
         include_once("dbconnect.php");
                 
-        if (isset($_POST['customer_name']) && isset($_POST['machine_name']) && isset($_POST['requested_date'])) {
-            $customer_name =$_POST['customer_name'];
-            $machine_name =$_POST['machine_name'];
-            $requested_date =$_POST['requested_date'];
+        if (isset($_POST['jobregister_id'])) {
+          $jobregister_id =$_POST['jobregister_id'];
 
-            $query = ("SELECT DISTINCT job_assign FROM job_register 
-                                WHERE customer_name='$customer_name'
-                                AND machine_name='$machine_name'
-                                AND requested_date='$requested_date'");
+            $query = ("SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'");
             $query_run = mysqli_query($conn, $query);
             if ($query_run) {
             while ($row = mysqli_fetch_array($query_run)) {
@@ -370,15 +365,10 @@ tr td:first-child:before {
         //include connection file 
         include_once("dbconnect.php");
 
-        if (isset($_POST['customer_name']) && isset($_POST['machine_name']) && isset($_POST['requested_date'])) {
-            $customer_name =$_POST['customer_name'];
-            $machine_name =$_POST['machine_name'];
-            $requested_date =$_POST['requested_date'];
+        if (isset($_POST['jobregister_id'])) {
+          $jobregister_id =$_POST['jobregister_id'];
           
-          $sql2 = "SELECT DISTINCT username FROM assistants 
-                   WHERE cust_name='$customer_name'
-                   AND machine_name='$machine_name'
-                   AND requested_date='$requested_date'";
+          $sql2 ="SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'";
           $queryRecords = mysqli_query($conn, $sql2) or die("Error to fetch Accessories data");
         }
     ?>
