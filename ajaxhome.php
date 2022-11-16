@@ -115,7 +115,7 @@
 
         <div class="CodeDropdown" style="padding-left: 19px;">
             <label for="brand">Machine Brand</label><br>
-            <select style="height: 43px; width: 308px;" onchange="GetBrand(this.value)" class="form-select" id="brand" required>
+            <select style="height: 43px; width: 308px;" onchange="GetBrand(this.value)" class="form-select" id="brand">
             <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['machine_brand']; ?></option>
             </select>
              <input type="hidden" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>" onchange="GetBrand(this.value)" readonly >  
@@ -124,7 +124,7 @@
 
          <div class="CodeDropdown" style="padding-left: 30px;">
             <label for="type"> Machine Type</label><br>
-            <select style="height: 43px; width: 298px;" onchange="GetType(this.value)" class="form-select" id="type" required>
+            <select style="height: 43px; width: 298px;" onchange="GetType(this.value)" class="form-select" id="type">
                 <option value="<?php echo $row['type_id']; ?>"><?php echo $row['machine_type']; ?></option>
             </select>
             <input type="hidden" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>" onchange="GetType(this.value)" readonly >  
