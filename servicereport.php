@@ -368,7 +368,7 @@ tr td:first-child:before {
         if (isset($_POST['jobregister_id'])) {
           $jobregister_id =$_POST['jobregister_id'];
           
-          $sql2 ="SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'";
+          $sql2 ="SELECT * FROM assistants WHERE jobregister_id='$jobregister_id'";
           $queryRecords = mysqli_query($conn, $sql2) or die("Error to fetch Accessories data");
         }
     ?>
