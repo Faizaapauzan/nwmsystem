@@ -343,6 +343,8 @@
                                                 (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                                                     OR
                                                 (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                ((accessories_required = 'NO' job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
                                               ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
 
                                 $numRow = "SELECT * FROM job_register WHERE
