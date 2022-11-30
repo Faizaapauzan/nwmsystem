@@ -308,6 +308,7 @@ include 'dbconnect.php';
         <option value="Assistant Leader">Assistant Leader</option>
         <option value="Admin">Admin</option>
         <option value="Storekeeper">Storekeeper</option>
+        <option value="Storekeeper">Manager</option>
         </select>
         </div>
 
