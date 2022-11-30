@@ -141,7 +141,7 @@ if ($row>0) {
            var jobregister_id = $(this).data('jobregister_id');
             // AJAX request
             $.ajax({
-            url: 'ajaxtechupdate-completed.php',
+            url: 'ajaxtechupdatecomplete.php',
             type: 'post',
              data: {jobregister_id: jobregister_id},
             success: function (response) {
