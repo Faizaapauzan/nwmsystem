@@ -25,7 +25,6 @@ if($cek > 0) {
 	  
 	  $_SESSION['username'] = $username;
 	  header("location:neosaukeong.php");
-
   }
   
  

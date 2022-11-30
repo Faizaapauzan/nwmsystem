@@ -55,10 +55,11 @@ include 'dbconnect.php';
                                 <div class="input-box">
                                     <label for="position">Position</label>
                                     <select type="text" id="staff_position" name="staff_position" value="<?php echo $row['staff_position'] ?>">
-            <option value="Leader" <?php if($row['staff_position'] == "Leader") { echo "SELECTED"; } ?>>Leader</option>
-            <option value="Assistant Leader" <?php if($row['staff_position'] == "Assistant Leader") { echo "SELECTED"; } ?>>Assistant Leader</option>
-            <option value="Admin" <?php if($row['staff_position'] == "Admin") { echo "SELECTED"; } ?>>Admin</option>
-            <option value="Storekeeper" <?php if($row['staff_position'] == "Storekeeper") { echo "SELECTED"; } ?>>Storekeeper</option>
+                                    <option value="Leader" <?php if($row['staff_position'] == "Leader") { echo "SELECTED"; } ?>>Leader</option>
+                                    <option value="Assistant Leader" <?php if($row['staff_position'] == "Assistant Leader") { echo "SELECTED"; } ?>>Assistant Leader</option>
+                                    <option value="Admin" <?php if($row['staff_position'] == "Admin") { echo "SELECTED"; } ?>>Admin</option>
+                                    <option value="Storekeeper" <?php if($row['staff_position'] == "Storekeeper") { echo "SELECTED"; } ?>>Storekeeper</option>
+                                    <option value="Manager" <?php if($row['staff_position'] == "Manager") { echo "SELECTED"; } ?>>Manager</option>
                                     </select>
                                 </div>
                               
