@@ -314,13 +314,10 @@ button {
 
 /*All Add register form (in customer list, machine list, accessories list, jobtype list)*/
 .listAddForm {
-  max-width: 600px;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin: 30px 300px 30px 450px;
+  position: absolute;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
 }
 
 .listAddForm .title {
@@ -1012,16 +1009,6 @@ input[type="datetime-local"] {
   box-sizing: border-box;
 }
 
-.techClose {
-  position: absolute;
-  right: 166px;
-  margin-top: 145px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
 .techClose:hover,
 .techClose:focus {
   color: red;
@@ -1029,21 +1016,8 @@ input[type="datetime-local"] {
 }
 
 .modal .techClose {
-  right: 434px;
-  top: -49px;
-  width: 30px;
-  height: 30px;
-}
-
-/* The Close Button (x) */
-.techClose {
-  position: absolute;
-  right: 166px;
-  margin-top: 135px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
+  top:-53px;
+  right:279px;
 }
 
 .techClose:hover,

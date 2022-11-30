@@ -354,8 +354,8 @@ h1{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem 1rem;
-  margin-right: 3.2rem;
+  padding: 1.2rem 2.3rem;
+  margin-right: -1.5rem;
   cursor: pointer;
   background-color: #fff;
   font-size: 15px;
