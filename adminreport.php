@@ -283,14 +283,12 @@ table, th, td {
                                     {
                 $DateAssign = $_GET['DateAssign'];
 
-                
                 $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' AND job_register.job_cancel = '' OR job_register.DateAssign='$DateAssign' AND job_register.job_cancel IS NULL ORDER BY job_assign ASC, jobregisterlastmodify_at ASC");
                 
-                      if(mysqli_num_rows($query) > 0)
-                                        {
-                                            foreach($query as $row)
-                                            {
-
+                if(mysqli_num_rows($query) > 0)
+                  {
+                    foreach($query as $row)
+                    {
 
                   $technician_departure =$row['technician_departure'];
                   $technician_arrival =$row['technician_arrival'];

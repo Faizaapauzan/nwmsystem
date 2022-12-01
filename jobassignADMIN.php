@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+
+    $today_date = date("d-m-Y");
+    $_SESSION['storeDate'] = $today_date; 
+?>
 
 <!DOCTYPE html>
 <head>

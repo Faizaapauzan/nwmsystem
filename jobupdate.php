@@ -1,9 +1,6 @@
-	<?php
-	include 'dbconnect.php';
-	?> 
-	
+    <?php
 
-	<?php
+    include 'dbconnect.php';
 
     $response = array('success' => false);
 
@@ -31,7 +28,7 @@
         }
     }
 
-echo json_encode($response);
+    echo json_encode($response);
 
 
   

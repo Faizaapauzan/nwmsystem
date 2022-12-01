@@ -65,7 +65,7 @@ include 'dbconnect.php';
             <input type="date" class="delivery_date" name="delivery_date" value="<?php echo $row['delivery_date']?>">
         </div>
 
- <div class="input-box">
+        <div class="input-box">
             <label for="">Customer Name</label>
          <select id="custModel" onchange="GetCustomer(this.value)"> <option value=""> <?php echo $row['customer_name']?> </option>
    <?php
@@ -161,20 +161,14 @@ include 'dbconnect.php';
             <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
                </div>
 
-             <div class="input-box" style="margin-left: 20px;">
+            <div class="input-box" style="margin-left: 20px;">
             <label for="accessories_required"  class="accessories_required">Accessories Required</label>
             <select id="accessories_required" name="accessories_required">
-            <option value='' <?php if ($row['accessories_required'] == '') {
-                    echo "SELECTED";
-                } ?>></option>
-                <option value="Yes" <?php if ($row['accessories_required'] == "Yes") {
-                    echo "SELECTED";
-                } ?>>Yes</option>
-                <option value="No" <?php if ($row['accessories_required'] == "No") {
-                    echo "SELECTED";
-                } ?>>No</option>
+                <option value='' <?php if ($row['accessories_required'] == '') {echo "SELECTED";} ?>></option>
+                <option value="Yes" <?php if ($row['accessories_required'] == "Yes") {echo "SELECTED";} ?>>Yes</option>
+                <option value="No" <?php if ($row['accessories_required'] == "No") {echo "SELECTED";} ?>>No</option>
             </select>
-        </div>
+            </div>
             
             <div class="input-box-address" style="width: 100%;padding-left: 20px;">
             <label for="">Machine Name</label>

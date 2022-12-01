@@ -24,7 +24,7 @@ if($cek > 0) {
   else if($data['username']=="KEONG" AND password_verify($password, $data['password'])){
 	  
 	  $_SESSION['username'] = $username;
-	  header("location:neosaukeong.php");
+	  header("location:NeoSauKeong.php");
   }
   
  

@@ -22,7 +22,6 @@ if ($machine_id !== "") {
 	$machine_name = $row["machine_name"];
 	$machine_description = $row["machine_description"];
 	$customer_name = $row["customer_name"];
-
 }
 
 // Store it in a array
