@@ -1,9 +1,4 @@
-<?php
-session_start();
- if($_SESSION['technician_rank']!="1st Leader"){
-  header("location:completejoblistnd.php");
- }
-?>
+<?php session_start(); ?>
 
 <html lang="en">
 

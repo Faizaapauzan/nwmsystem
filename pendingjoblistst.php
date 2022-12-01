@@ -1,9 +1,4 @@
-<?php
-session_start();
- if($_SESSION['technician_rank']!="1st Leader" ){
-  header("location:pendingjoblistnd.php");
- } 
-?>
+<?php session_start(); ?>
 
 <html lang="en">
 
