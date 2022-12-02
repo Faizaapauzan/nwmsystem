@@ -67,68 +67,65 @@
             <form action="" method="GET">
                 <div class="column-inside">
                     <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
-                <label for="date" class="details" style="padding-right: 4px;">Date</label>
-                <div class="technician-time">
-                    <input type="text" id="myInput" name="DateAssign" class="technician-time-input" placeholder="DD - MM - YYYY" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>">
-                    <button type="submit" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 8px 7px; right:0px; top:1.63px">Search</button>
-                </div>
+                    <label for="date" class="details" style="padding-right: 4px;">Date</label>
+                    <div class="technician-time">
+                        <input type="text" id="myInput" name="DateAssign" class="technician-time-input" placeholder="DD - MM - YYYY" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>">
+                        <button type="submit" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 8px 7px; right:0px; top:1.63px">Search</button>
+                    </div>
                 </div>
                 <div id="wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Leader</th>
-                            <th>Assistant</th>
-                            <th>Clock In</th>
-                            <th>Clock Out</th>
-                            <th>Rest Out</th>
-                            <th>Rest In</th>
-                        </tr>
-                    </thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Leader</th>
+                                <th>Assistant</th>
+                                <th>Clock In</th>
+                                <th>Clock Out</th>
+                                <th>Rest Out</th>
+                                <th>Rest In</th>
+                            </tr>
+                        </thead>
+                                
+                                <?php
+                                    include_once 'dbconnect.php';
+                                    
+                                    if(isset($_GET['DateAssign']))
+                                        {
+                                            $DateAssign = $_GET['DateAssign'];
+                                            
+                                            $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
+                                            $result = mysqli_query($conn, $sql);
+                                            if(mysqli_num_rows($result) > 0)
+                                                {
+                                                    foreach($result as $row)
+                                                    {
+                                    ?>
                 
-                <?php
-                    include_once 'dbconnect.php';
-                    
-                    if(isset($_GET['DateAssign']))
-                        {
-                            $DateAssign = $_GET['DateAssign'];
-                            
-                            $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
-                            $result = mysqli_query($conn, $sql);
-                            if(mysqli_num_rows($result) > 0)
-                                {
-                                    foreach($result as $row)
-                                    {
-                ?>
+                        <tbody>
+                            <tr>
+                                <td data-label="Leader"><?php echo $row["tech_leader"]; ?></td>
+                                <td data-label="Assistant"><?php echo $row["username"]; ?></td>
+                                <td data-label="Clock In"><?php echo $row["tech_clockin"]; ?></td>
+                                <td data-label="Clock Out"><?php echo $row["tech_clockout"]; ?></td>
+                                <td data-label="Rest Out"><?php echo $row["technician_out"]; ?></td>
+                                <td data-label="Rest In"><?php echo $row["technician_in"]; ?></td>
+                            </tr>
+                        </tbody>
                 
-                <tbody class="data-section">
-                    <tr class="ad">
-                        <td data-label="Leader"><?php echo $row["tech_leader"]; ?></td>
-                        <td data-label="Assistant"><?php echo $row["username"]; ?></td>
-                        <td data-label="Clock In"><?php echo $row["tech_clockin"]; ?></td>
-                        <td data-label="Clock Out"><?php echo $row["tech_clockout"]; ?></td>
-                        <td data-label="Rest Out"><?php echo $row["technician_out"]; ?></td>
-                        <td data-label="Rest In"><?php echo $row["technician_in"]; ?></td>
-                    </tr>
-                </tbody>
-                
-                <?php
-                    } }
-                        else
-                        {
-                            echo "No Record Found";
-                        }
-                    }
-                ?>
-
-                </table>
+                                    <?php
+                                        } }
+                                        else
+                                            {
+                                                echo "No Record Found";
+                                            }
+                                        }
+                                    ?>
+                    </table>
                 </div>
                 </div>
-    </form>
-            </div>
-            </div>    
+            </form>
         </div>
     </div>
-   
+    
 </body>
 </html>
