@@ -234,106 +234,90 @@ footer p {
 
 /* responsive table */
 
-* {
-  padding: 0;
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
   margin: 0;
-  box-sizing: border-box;
+  padding: 0;
+  width:max-content;
+  table-layout: fixed;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-:root {
-  font-size: 62.5%;
-  --header-font: 'Open Sans';
-  --data-font: 'Lato';
-  --light-black: rgb(0 0 0 /.8);
+table caption {
+  font-size: 1em;
+  margin: 0.5em 0 0.75em;
 }
 
-.page-title {
-  display: none;
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 0.35em;
 }
 
-/*LIST*/
-.conversion-rate-list {
-  width: 40%;
-  margin: 50px auto;
-
-  list-style: none;
-}
-
-.item {
-  border: 1px solid var(--light-black);
-  padding-bottom: 1.5em;
-
-  border-radius: 6px;
-}
-
-.item + .item {
-  margin-top: 5px;
-}
-
-.platform,
-.name {
-  font-family: var(--header-font), sans-serif;
-  font-size: 2.4rem;
-  font-weight: 500;
+table th,
+table td {
+  padding: 0.625em;
   text-align: center;
-  line-height: 1.75;
 }
 
-.platform {
-  border-bottom: 1px solid var(--light-black);
+table th {
+  letter-spacing: 0.1em;
 }
 
-.name {
-  font-size: 1.8rem;
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
 }
 
-.value {
-  font-family: var(--data-font), sans-serif;
-  font-size: 1.6rem;
-  text-align: center;
+/* general styling */
+body {
+  font-family: "Open Sans", sans-serif;
   line-height: 1.25;
-
-  color: var(--light-black);
-}
-
-/*TABLE*/
-.conversion-rate-table {
-  display: none;
-
-  width: min(50%, 900px);
-  border: 1px solid var(--light-black);
-  margin: 30px auto;
-
-  border-radius: 6px;
-}
-
-.header {
-  border-bottom: 1px solid var(--light-black);
-
-  font-family: var(--header-font), sans-serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.cell {
-  font-family: var(--data-font), sans-serif;
-  font-size: 1.6rem;
-  text-align: center;
-  line-height: 1.5;
-}
-
-.header + .header,
-.cell + .cell {
-  border-left: 1px solid var(--light-black);
-}
-
-@media (min-width: 600px) {
-  .conversion-rate-list {
-      display: none;
-  }
-
-  .conversion-rate-table {
-      display: table;
-  }
 }
