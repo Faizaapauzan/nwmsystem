@@ -29,17 +29,24 @@
 	
 	<nav class="navbar1">
 		<div class="wrapper">
-			<div class="ul2" style="margin-left: auto; display: block;">
-				<a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:32px;"></i></a>
+			<div class="ul2">
+				<a href="NeoSauKeongAttendance.php" class="nav1-links"><i class="iconify" data-icon="mdi:table-clock" style="font-size:41px;"></i></a>
+			</div>
+			<div class="ul2">
+				<a href="logout.php" class="nav1-links"><i class="iconify" data-icon="mdi:logout" style="font-size:36px;"></i></a>
 			</div>
 		</div>
 	</nav>
 	
 	<nav class="nav">
-		<a href="NeoSauKeongAssignedjob.php" class="nav__link">
+		<div class="nav__link nav__link dropdown">
 			<i class="material-icons">list_alt</i>
 			<span class="nav__text">Assigned Job</span>
-		</a>
+			<div class="dropdown-content">
+				<a href="NeoSauKeongTodojob.php">Todo</a>
+				<a href="NeoSauKeongDoingjob.php">Doing</a>
+			</div>
+		</div>
 
 		<a href="NeoSauKeongPendingjob.php" class="nav__link">
 			<i class="material-icons">pending_actions</i>

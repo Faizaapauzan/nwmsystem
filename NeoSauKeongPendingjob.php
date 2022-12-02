@@ -21,53 +21,17 @@
 	<script src="js/search.js" type="text/javascript"></script>
 </head>
 
-<style>
-    
-    #notYetStatus{
-        position: static;
-    }
-    
-    /* Main Feature */
-    .navbar {
-        margin-top: 20px;
-        background-color: #ddd;
-        overflow: hidden;
-        max-height: 1800px;
-        -webkit-transition: max-height 0.3s;
-        -moz-transition: max-height 0.3s;
-        -ms-transition: max-height 0.3s;
-        -o-transition: max-height 0.3s;
-        transition: max-height 0.3s;
-    }
-    
-    .navbar-toggle {
-        background-color: #D2D2CF;
-        color: black;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    
-    .nav {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-</style>
-
 <body>
     
     <nav class="nav">
-		<a href="NeoSauKeongAssignedjob.php" class="nav__link">
+		<div class="nav__link nav__link dropdown">
 			<i class="material-icons">list_alt</i>
 			<span class="nav__text">Assigned Job</span>
-		</a>
+			<div class="dropdown-content">
+				<a href="NeoSauKeongTodojob.php">Todo</a>
+				<a href="NeoSauKeongDoingjob.php">Doing</a>
+			</div>
+		</div>
 
 		<a href="NeoSauKeongPendingjob.php" class="nav__link">
 			<i class="material-icons">pending_actions</i>

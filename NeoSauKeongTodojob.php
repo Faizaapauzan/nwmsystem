@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-    <title>Incomplete Job List</title>
+    <title>Assigned Job</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,6 +20,48 @@
 	<script src="js/testing.js" type="text/javascript"></script>
 	<script src="js/search.js" type="text/javascript"></script>
 </head>
+
+<style>
+
+    #notYetStatus{
+        position: static;
+    }
+    
+    /* Main Feature */
+    .navbar {
+        margin-top: 20px;
+        background-color: #ddd;
+        overflow: hidden;
+        max-height: 1800px;
+        -webkit-transition: max-height 0.3s;
+        -moz-transition: max-height 0.3s;
+        -ms-transition: max-height 0.3s;
+        -o-transition: max-height 0.3s;
+        transition: max-height 0.3s;
+    }
+    
+    /* Other */
+    
+    .navbar-toggle {
+        background-color: #D2D2CF;
+        color: black;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .nav {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+</style>
 
 <body>
     
@@ -54,63 +96,64 @@
 		</a>
 	</nav>
     
-    <div class="container">	
+    <div class="container">
         <div class="example" style="text-align: end; padding-bottom: 10px;">
-        <input type="text" id="search">
-        <input type="button"  id="button" onmousedown="doSearch(document.getElementById('search').value)" value="Find">
-    </div>
+		<input type="text" id="search">
+		<input type="button"  id="button" onmousedown="doSearch(document.getElementById('search').value)" value="Find">
+	</div>
     
+    <!-- Todo -->
     <div class="column">
-        <p class="column-title" id="joblisting"><b>Incomplete</b></p>
-            <?php
+        <p class="column-title" id="joblisting"><b>Todo</b></p>
+			<?php
                 include 'dbconnect.php';
-                
-                $query = "SELECT * FROM job_register WHERE 
-                            (job_status = 'Incomplete' AND job_cancel='')
+				
+				$query ="SELECT * FROM job_register WHERE
+                            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status = '' AND job_cancel='' AND accessories_required ='')
                                 OR
-                            (job_status = 'Incomplete' AND job_cancel IS NULL)
-                          ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
-                
-                $result = mysqli_query($conn, $query);
-                
-                $customer_name = '';
-                
-                while ($row = mysqli_fetch_assoc($result)){
-                    $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
-                    $updatedate = substr($jobregisterlastmodify_at,0,10);
-                    $row['updatedate'] = $updatedate;
-                
-                if ($row['customer_name'] != $customer_name)
+				            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status IS NULL AND job_cancel IS NULL AND accessories_required IS NULL)
+				                OR
+				            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status = '' AND job_cancel='' AND accessories_required ='No')
+				                OR
+				            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status IS NULL AND job_cancel IS NULL AND accessories_required IS NULL)
+				                OR
+				            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status IS NULL AND job_cancel IS NULL AND accessories_required ='No')
+				         ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
+				
+				$result = mysqli_query($conn, $query);
+				
+				$customer_name = '';
+				
+				while ($row = mysqli_fetch_assoc($result)) {
+                    if ($row['customer_name'] != $customer_name)
                     {
                         echo "<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>";
-                        $customer_name = $row['customer_name'];
-                    }
+						$customer_name = $row['customer_name'];
+					}
                     
-                echo "<div class='cards'>
-                        <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#mymodal'>
-                            <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
-                                <ul class='b' id='draged'>
-                                    <strong text-align='center'>".$row['job_priority']."</strong>
-                                    <li>".$row['job_order_number']."</li>
-                                    <li>".$row['job_description']."</li>
-                                    <li>".$row['machine_name']."</li>
-                                    <li>".$row['machine_type']."</li>
-                                    <li>".$row['serialnumber']."</li>
-                                    <strong text-align='center' style='color:red'>".$row['reason']."</strong>
-                                </ul>
-                                <div class='timestamp' style='font-family: sans-serif;'>
-                                    <strong>".$row['job_assign']."</strong>
-                                    <br>
-                                    <strong>".$row['updatedate']."</strong>
-                                    <br>
-                                    <strong>".$row['support']."</strong>
-                                </div>
-                        </div>
-                     </div>";
-                }
-            ?>
-    </div>
-    
+                    echo "<div class='cards'>
+                            <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#mymodal'>
+                                <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
+                                    <ul class='b' id='draged'>
+                                        <strong text-align='center'>".$row['job_priority']."</strong>
+                                        <li>".$row['job_order_number']."</li>
+                                        <li>".$row['job_description']."</li>
+                                        <li>".$row['machine_name']."</li>
+                                        <li>".$row['machine_type']."</li>
+                                        <li>".$row['serialnumber']."</li>
+                                    </ul>
+                                    <div class='timestamp' style='font-family: sans-serif;'>
+                                        <strong>".$row['support']."</strong>
+                                        <br>
+                                        <strong>".$row['job_assign']."</strong>
+                                    </div>
+						    </div>
+						  </div>";
+				}
+			?>
+	</div>
+    <!-- End of Todo -->
+
     <!-- PopUp Modal -->
     <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
         <div role="document" class="modal-dialog">
@@ -129,12 +172,12 @@
                     </button>
                     
                     <div class="line"></div>
-                    <br>
+					<br>
                     <div class="modal-body p-0">
                         
-                        <!-- Job Info -->
+                        <!--JOB INFO-->
                         <fieldset class="show" id="tab011">
-                            <form action="techleaderindex.php" method="post">
+                            <form action="ajaxtechleader.php" method="post">
                                 <div class="tech-details">
 
                                 </div>
@@ -144,11 +187,12 @@
                                 $(document).ready(function() {
                                     $('.card').click(function() {
                                         var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
                                         // AJAX request
                                         $.ajax({
                                             url: 'ajaxtechnician-completed.php',
                                             type: 'post',
-                                            data: {jobregister_id: jobregister_id},
+                                            data: {jobregister_id: jobregister_id,type_id: type_id},
                                             success: function(response) {
                                                 // Add response in Modal body
                                                 $('.tech-details').html(response);
@@ -158,10 +202,10 @@
                                         });
                                     });
                                 });
-							</script>
-                        </fieldset>
-
-                        <!-- Job Assign -->
+							</script>		
+						</fieldset>
+                        
+                        <!--Job Assign-->
                         <fieldset id="tab021">
                             <form action="jobassignst.php" method="post">
                                 <div class="techupdate-details">
@@ -187,7 +231,7 @@
                                         });
                                     });
                                 });
-                            </script>                         
+							</script>                         
                         </fieldset>
 					</div>
 				</div>
@@ -195,6 +239,5 @@
 		</div>
 	</div>
     </div>	
-
 </body>
 </html>

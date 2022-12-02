@@ -66,10 +66,14 @@
 <body>
     
     <nav class="nav">
-		<a href="NeoSauKeongAssignedjob.php" class="nav__link">
+		<div class="nav__link nav__link dropdown">
 			<i class="material-icons">list_alt</i>
 			<span class="nav__text">Assigned Job</span>
-		</a>
+			<div class="dropdown-content">
+				<a href="NeoSauKeongTodojob.php">Todo</a>
+				<a href="NeoSauKeongDoingjob.php">Doing</a>
+			</div>
+		</div>
 
 		<a href="NeoSauKeongPendingjob.php" class="nav__link">
 			<i class="material-icons">pending_actions</i>
@@ -98,58 +102,6 @@
 		<input type="button"  id="button" onmousedown="doSearch(document.getElementById('search').value)" value="Find">
 	</div>
     
-    <!-- Todo -->
-    <div class="column">
-        <p class="column-title" id="joblisting"><b>Todo</b></p>
-			<?php
-                include 'dbconnect.php';
-				
-				$query ="SELECT * FROM job_register WHERE
-                            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status = '' AND job_cancel='' AND accessories_required ='')
-                                OR
-				            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status IS NULL AND job_cancel IS NULL AND accessories_required IS NULL)
-				                OR
-				            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status = '' AND job_cancel='' AND accessories_required ='No')
-				                OR
-				            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status IS NULL AND job_cancel IS NULL AND accessories_required IS NULL)
-				                OR
-				            (job_assign !='Storekeeper' AND job_assign != '' AND  job_status IS NULL AND job_cancel IS NULL AND accessories_required ='No')
-				         ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
-				
-				$result = mysqli_query($conn, $query);
-				
-				$customer_name = '';
-				
-				while ($row = mysqli_fetch_assoc($result)) {
-                    if ($row['customer_name'] != $customer_name)
-                    {
-                        echo "<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>";
-						$customer_name = $row['customer_name'];
-					}
-                    
-                    echo "<div class='cards'>
-                            <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-toggle='modal' data-target='#mymodal'>
-                                <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
-                                    <ul class='b' id='draged'>
-                                        <strong text-align='center'>".$row['job_priority']."</strong>
-                                        <li>".$row['job_order_number']."</li>
-                                        <li>".$row['job_description']."</li>
-                                        <li>".$row['machine_name']."</li>
-                                        <li>".$row['machine_type']."</li>
-                                        <li>".$row['serialnumber']."</li>
-                                    </ul>
-                                    <div class='timestamp' style='font-family: sans-serif;'>
-                                        <strong>".$row['support']."</strong>
-                                        <br>
-                                        <strong>".$row['job_assign']."</strong>
-                                    </div>
-						    </div>
-						  </div>";
-				}
-			?>
-	</div>
-    <!-- End of Todo -->
-
     <!-- Doing -->
     <div class="column">
         <p class="column-title" id="joblisting"><b>Doing</b></p>
