@@ -70,21 +70,20 @@
                 <label for="date" class="details" style="padding-right: 4px;">Date</label>
                 <div class="technician-time">
                     <input type="text" id="myInput" name="DateAssign" class="technician-time-input" placeholder="DD - MM - YYYY" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>">
-                    <input type="button" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 7px 7px; right:57px; top:2px" value="Search"/>
-                    <input type="button" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white; padding: 7px 7px; top:2px" onclick="document.getElementById('myInput').value = ''" value="Clear"/>
+                    <button type="submit" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 7px 7px; right:49px; top:1.63px">Search</button>
+                    <input type="button" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white; padding: 7px 7px; right:2px; top:1.63px" onclick="document.getElementById('myInput').value = ''" value="Clear"/>
                 </div>
                 </div>
                 <div class="remarks-worker" style="margin-right: 10px;">
                 <div class="staff-update" style="margin-top: 50px; margin: 20px;">
                 <table id="auto" style="width:100%">
-                <thead style="height: 42px;">
-                    <th style="width:auto"></th>
-                    <th style="width: auto;">Leader</th>
-                    <th style="width: auto;">Assistant</th>
-                    <th style="width: auto">Clock In</th>
-                    <th style="width: auto;">Clock Out</th>
-                    <th style="width: auto;">Rest Out</th>
-                    <th style="width: auto;">Rest In</th>
+                <thead style="height:auto;">
+                    <th style="width:auto;">Leader</th>
+                    <th style="width:auto;">Assistant</th>
+                    <th style="width:auto">Clock In</th>
+                    <th style="width:auto;">Clock Out</th>
+                    <th style="width:auto;">Rest Out</th>
+                    <th style="width:auto;">Rest In</th>
                 </thead>
                 
                 <?php
@@ -103,7 +102,6 @@
                 ?>
                 
                 <tbody>
-                    <td style="text-align: right;"></td>
                     <td style="text-align: center;"><?php echo $row["tech_leader"]; ?></td>
                     <td style="text-align: center;"><?php echo $row["username"]; ?></td>
                     <td style="text-align: center;"><?php echo $row["tech_clockin"]; ?></td>
