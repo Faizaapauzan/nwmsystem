@@ -232,6 +232,8 @@ footer p {
   display: inline-block;
 }
 
+/* responsive table */
+
 * {
   padding: 0;
   margin: 0;
@@ -251,7 +253,7 @@ footer p {
 
 /*LIST*/
 .conversion-rate-list {
-  width: 80%;
+  width: 40%;
   margin: 50px auto;
 
   list-style: none;
@@ -298,9 +300,9 @@ footer p {
 .conversion-rate-table {
   display: none;
 
-  width: min(80%, 900px);
+  width: min(50%, 900px);
   border: 1px solid var(--light-black);
-  margin: 50px auto;
+  margin: 30px auto;
 
   border-radius: 6px;
 }
@@ -309,9 +311,9 @@ footer p {
   border-bottom: 1px solid var(--light-black);
 
   font-family: var(--header-font), sans-serif;
-  font-size: 2.4rem;
+  font-size: 1.5rem;
   font-weight: 500;
-  line-height: 1.75;
+  line-height: 1.5;
 }
 
 .cell {
