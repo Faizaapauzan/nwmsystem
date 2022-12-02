@@ -63,7 +63,8 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
    isset($_POST['jobregisterlastmodify_by']) && $_POST['jobregisterlastmodify_by']!='' || $_POST['jobregisterlastmodify_by']=='')
 
     {
-        
+        $machine_id = !empty($machine_id) ? "'$machine_id'" : "NULL";
+       
         $sql = "INSERT INTO job_register (technician_rank, staff_position, job_priority, job_order_number,
                                            job_name, job_code, job_description, requested_date, delivery_date, 
                                            customer_name, customer_code, customer_grade, cust_address1, cust_address2, 
@@ -92,7 +93,7 @@ if(isset($_POST['technician_rank']) && $_POST['technician_rank']!='' || $_POST['
                                '".addslashes($_POST['machine_code'])."',
                                '".addslashes($_POST['machine_type'])."',
                                '".addslashes($_POST['serialnumber'])."',
-                                '".addslashes($_POST['machine_id'])."',
+                               $machine_id,
                                '".addslashes($_POST['machine_brand'])."',
                                '".addslashes($_POST['accessories_required'])."',
                                '".addslashes($_POST['job_cancel'])."',
