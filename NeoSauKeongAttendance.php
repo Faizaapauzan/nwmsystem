@@ -69,7 +69,7 @@
                 <div class="column-inside">
                 <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
                 <label for="date" class="details" style="padding-right: 4px;">Date</label>
-                <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width: 301px;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
+                <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width:auto;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
                 <button type="submit" style="width: 57px;height: 35px;background: #081d45;border-color: #081d45;color: white;">Search</button>
                 <button style="width: 57px;height: 35px;background:	#8B0000;border-color: #8B0000;color: white;" onclick="document.getElementById('myInput').value = ''">Clear</button>
                 </div>
