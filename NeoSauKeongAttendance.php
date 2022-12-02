@@ -68,9 +68,11 @@
                 <div class="column-inside">
                 <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
                 <label for="date" class="details" style="padding-right: 4px;">Date</label>
-                <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width:auto;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
-                <button type="submit" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 10px 10px;">Search</button>
-                <button style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white; padding: 10px 10px;" onclick="document.getElementById('myInput').value = ''">Clear</button>
+                <div class="technician-time">
+                    <input type="text" id="myInput" name="DateAssign" class="technician-time-input" placeholder="DD - MM - YYYY" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>">
+                    <input type="button" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 7px 7px; right:57px; top:2px" value="Search"/>
+                    <input type="button" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white; padding: 7px 7px; top:2px" onclick="document.getElementById('myInput').value = ''" value="Clear"/>
+                </div>
                 </div>
                 <div class="remarks-worker" style="margin-right: 10px;">
                 <div class="staff-update" style="margin-top: 50px; margin: 20px;">
