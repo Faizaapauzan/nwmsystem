@@ -77,7 +77,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Leader</th>
+                                <th style="font-weight:bold; background:#B2BEB5">Leader</th>
                                 <th>Assistant</th>
                                 <th>Clock In</th>
                                 <th>Clock Out</th>
@@ -103,7 +103,7 @@
                 
                         <tbody>
                             <tr>
-                                <td data-label="Leader"><?php echo $row["tech_leader"]; ?></td>
+                                <td data-label="Leader" style="font-weight:bold; background:#B2BEB5"><?php echo $row["tech_leader"]; ?></td>
                                 <td data-label="Assistant"><?php echo $row["username"]; ?></td>
                                 <td data-label="Clock In"><?php echo $row["tech_clockin"]; ?></td>
                                 <td data-label="Clock Out"><?php echo $row["tech_clockout"]; ?></td>
@@ -126,6 +126,6 @@
             </form>
         </div>
     </div>
-    
+
 </body>
 </html>

@@ -234,7 +234,7 @@ footer p {
 
 /* responsive tableeeeeeeeeeeeeeeeeeeee */
 
-h1{
+h1 {
   text-align: center;
   margin-bottom: 40px;
 }
@@ -246,7 +246,7 @@ table {
   margin: 0 auto;
   margin-left: auto;
   margin-right: auto;
-  z-index: 1000;
+  z-index: auto;
 }
 
 /* Zebra striping */
@@ -275,7 +275,7 @@ only screen and
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 90%;
+      width: 260px;
 }
 
 /* Hide table headers (but not display: none;, for accessibility) */
@@ -286,22 +286,26 @@ thead tr {
 }
 
 tr {
-      border: 1px solid #f2f2f2;
-  }
+  border: 1px solid #f2f2f2;
+}
 
-  tr + tr{
-      margin-top: 1.5em;
-  }
+tr + tr {
+  margin-top: 1.5em;
+}
 
 td { 
   /* make like a "row" */
   border: none;
   border-bottom: 1px solid #eee; 
   position: relative;
-  padding-left: 45%;
+  padding-left: 50%;
   background-color: #f2f2f2;
   text-align: left; 
   z-index: auto;
+  display:block;
+  border: 1px solid black;
+  border-collapse: separate;
+  border-spacing: 50px;
 }
 
 td:before { 
@@ -312,4 +316,5 @@ td:before {
   width: 100%;
   white-space: nowrap;
 }
+
 }
