@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Attendance And Rest Hour</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
@@ -26,35 +27,6 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@500;700&display=swap" rel="stylesheet">
 </head>
-
-<style>
-    @media screen and (max-width: 600px) {
-        table thead {display: none;}
-        
-        table td {display: flex;}
-        
-        table td::before {
-            content: attr(label);
-            font-weight: bold;
-            width: 120px;
-            min-width: 120px;
-        }
-    }
-</style>
-
-<script type='text/javascript'>
-    window.setMobileTable = function(selector) {
-        // if (window.innerWidth > 600) return false;
-        const tableEl = document.querySelector(selector);
-        const thEls = tableEl.querySelectorAll('thead th');
-        const tdLabels = Array.from(thEls).map(el => el.innerText);
-        tableEl.querySelectorAll('tbody tr').forEach( tr => {
-            Array.from(tr.children).forEach(
-                (td, ndx) =>  td.setAttribute('label', tdLabels[ndx])
-            );
-        });
-    }                         
-</script>
 
 <body>
     
@@ -98,10 +70,11 @@
                 <label for="date" class="details" style="padding-right: 4px;">Date</label>
                 <div class="technician-time">
                     <input type="text" id="myInput" name="DateAssign" class="technician-time-input" placeholder="DD - MM - YYYY" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>">
-                    <button type="submit" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 11px 7px; right:0px; top:1.63px">Search</button>
+                    <button type="submit" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 8px 7px; right:0px; top:1.63px">Search</button>
                 </div>
                 </div>
-                <table class="conversion-rate-table">
+                <div id="wrapper">
+                <table>
                     <thead>
                         <tr>
                             <th>Leader</th>
@@ -130,12 +103,12 @@
                 
                 <tbody class="data-section">
                     <tr class="ad">
-                        <td><?php echo $row["tech_leader"]; ?></td>
-                        <td><?php echo $row["username"]; ?></td>
-                        <td><?php echo $row["tech_clockin"]; ?></td>
-                        <td><?php echo $row["tech_clockout"]; ?></td>
-                        <td><?php echo $row["technician_out"]; ?></td>
-                        <td><?php echo $row["technician_in"]; ?></td>
+                        <td data-label="Leader"><?php echo $row["tech_leader"]; ?></td>
+                        <td data-label="Assistant"><?php echo $row["username"]; ?></td>
+                        <td data-label="Clock In"><?php echo $row["tech_clockin"]; ?></td>
+                        <td data-label="Clock Out"><?php echo $row["tech_clockout"]; ?></td>
+                        <td data-label="Rest Out"><?php echo $row["technician_out"]; ?></td>
+                        <td data-label="Rest In"><?php echo $row["technician_in"]; ?></td>
                     </tr>
                 </tbody>
                 
@@ -149,6 +122,7 @@
                 ?>
 
                 </table>
+                </div>
                 </div>
     </form>
             </div>
