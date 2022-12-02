@@ -70,20 +70,20 @@
                 <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
                 <label for="date" class="details" style="padding-right: 4px;">Date</label>
                 <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width:auto;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
-                <button type="submit" style="width: 57px;height: 35px;background: #081d45;border-color: #081d45;color: white;">Search</button>
-                <button style="width: 57px;height: 35px;background:	#8B0000;border-color: #8B0000;color: white;" onclick="document.getElementById('myInput').value = ''">Clear</button>
+                <button type="submit" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white;">Search</button>
+                <button style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white;" onclick="document.getElementById('myInput').value = ''">Clear</button>
                 </div>
                 <div class="remarks-worker" style="margin-right: 10px;">
                 <div class="staff-update" style="margin-top: 50px; margin: 20px;">
                 <table id="auto" style="width:100%">
                 <thead style="height: 42px;">
-                    <th style="width: 3%;"></th>
-                    <th style="width: 20%;">Leader</th>
-                    <th style="width: 20%;">Assistant</th>
-                    <th style="width: 10%">Clock In</th>
-                    <th style="width: 10%;">Clock Out</th>
-                    <th style="width: 10%;">Rest Out</th>
-                    <th style="width: 10%;">Rest In</th>
+                    <th style="width:auto"></th>
+                    <th style="width: auto;">Leader</th>
+                    <th style="width: auto;">Assistant</th>
+                    <th style="width: auto">Clock In</th>
+                    <th style="width: auto;">Clock Out</th>
+                    <th style="width: auto;">Rest Out</th>
+                    <th style="width: auto;">Rest In</th>
                 </thead>
                 
                 <?php
