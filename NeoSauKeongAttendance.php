@@ -27,6 +27,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@500;700&display=swap" rel="stylesheet">
 </head>
 
+<style>
+    @media screen and (max-width: 600px) {
+        table thead {display: none;}
+        
+        table td {display: flex;}
+        
+        table td::before {
+            content: attr(label);
+            font-weight: bold;
+            width: 120px;
+            min-width: 120px;
+        }
+    }
+</style>
+
+<script type='text/javascript'>
+    window.setMobileTable = function(selector) {
+        // if (window.innerWidth > 600) return false;
+        const tableEl = document.querySelector(selector);
+        const thEls = tableEl.querySelectorAll('thead th');
+        const tdLabels = Array.from(thEls).map(el => el.innerText);
+        tableEl.querySelectorAll('tbody tr').forEach( tr => {
+            Array.from(tr.children).forEach(
+                (td, ndx) =>  td.setAttribute('label', tdLabels[ndx])
+            );
+        });
+    }                         
+</script>
+
 <body>
     
     <nav class="nav">
@@ -69,19 +98,18 @@
                 <label for="date" class="details" style="padding-right: 4px;">Date</label>
                 <div class="technician-time">
                     <input type="text" id="myInput" name="DateAssign" class="technician-time-input" placeholder="DD - MM - YYYY" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>">
-                    <button type="submit" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 7px 7px; right:49px; top:1.63px">Search</button>
-                    <button class="technician-time-botton" style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white; padding: 7px 7px; right:2px; top:1.63px" onclick="document.getElementById('myInput').value = ''">Clear</button>
+                    <button type="submit" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 11px 7px; right:0px; top:1.63px">Search</button>
                 </div>
                 </div>
                 <table class="conversion-rate-table">
-                    <thead class="header-section">
+                    <thead>
                         <tr>
-                            <th scope="col">Leader</th>
-                            <th scope="col">Assistant</th>
-                            <th scope="col">Clock In</th>
-                            <th scope="col">Clock Out</th>
-                            <th scope="col">Rest Out</th>
-                            <th scope="col">Rest In</th>
+                            <th>Leader</th>
+                            <th>Assistant</th>
+                            <th>Clock In</th>
+                            <th>Clock Out</th>
+                            <th>Rest Out</th>
+                            <th>Rest In</th>
                         </tr>
                     </thead>
                 
@@ -102,12 +130,12 @@
                 
                 <tbody class="data-section">
                     <tr class="ad">
-                        <td data-label="Leader"><?php echo $row["tech_leader"]; ?></td>
-                        <td data-label="Assistant"><?php echo $row["username"]; ?></td>
-                        <td data-label="Clock In"><?php echo $row["tech_clockin"]; ?></td>
-                        <td data-label="Clock Out"><?php echo $row["tech_clockout"]; ?></td>
-                        <td data-label="Rest Out"><?php echo $row["technician_out"]; ?></td>
-                        <td data-label="Rest In"><?php echo $row["technician_in"]; ?></td>
+                        <td><?php echo $row["tech_leader"]; ?></td>
+                        <td><?php echo $row["username"]; ?></td>
+                        <td><?php echo $row["tech_clockin"]; ?></td>
+                        <td><?php echo $row["tech_clockout"]; ?></td>
+                        <td><?php echo $row["technician_out"]; ?></td>
+                        <td><?php echo $row["technician_in"]; ?></td>
                     </tr>
                 </tbody>
                 
