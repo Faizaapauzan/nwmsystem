@@ -17,7 +17,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link href="css/bootstrap.min.css" rel="stylesheet"> 
-    <link href="css/report.css" rel="stylesheet" />
     <link href="css/technicianmain.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
@@ -70,8 +69,8 @@
                 <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
                 <label for="date" class="details" style="padding-right: 4px;">Date</label>
                 <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width:auto;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
-                <button type="submit" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white;">Search</button>
-                <button style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white;" onclick="document.getElementById('myInput').value = ''">Clear</button>
+                <button type="submit" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 10px 10px;">Search</button>
+                <button style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white; padding: 10px 10px;" onclick="document.getElementById('myInput').value = ''">Clear</button>
                 </div>
                 <div class="remarks-worker" style="margin-right: 10px;">
                 <div class="staff-update" style="margin-top: 50px; margin: 20px;">
