@@ -71,7 +71,7 @@
                 <div class="technician-time">
                     <input type="text" id="myInput" name="DateAssign" class="technician-time-input" placeholder="DD - MM - YYYY" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>">
                     <button type="submit" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #081d45;border-color: #081d45;color: white; padding: 7px 7px; right:49px; top:1.63px">Search</button>
-                    <input type="button" class="technician-time-botton" style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white; padding: 7px 7px; right:2px; top:1.63px" onclick="document.getElementById('myInput').value = ''" value="Clear"/>
+                    <button class="technician-time-botton" style="width:fit-content; height:fit-content; background: #8B0000;border-color: #8B0000;color: white; padding: 7px 7px; right:2px; top:1.63px" onclick="document.getElementById('myInput').value = ''">Clear</button>
                 </div>
                 </div>
                 <div class="remarks-worker" style="margin-right: 10px;">
