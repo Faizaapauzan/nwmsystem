@@ -275,7 +275,7 @@ only screen and
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 100%;
+      width: 265px;
 }
 
 /* Hide table headers (but not display: none;, for accessibility) */
