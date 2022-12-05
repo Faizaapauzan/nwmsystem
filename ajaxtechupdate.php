@@ -10,7 +10,10 @@
     $_SESSION['arrivaltime'] = $ArrivalDateTime;
     
     $RestTime = date('g:i A');
-    $_SESSION['resttime'] = $RestTime; 
+    $_SESSION['resttime'] = $RestTime;
+    
+    $TimeStamp = date('H:i:s');
+    $_SESSION['timestamp'] = $TimeStamp; 
 ?>
 
 <!DOCTYPE html>
@@ -43,18 +46,16 @@
               {
     ?>
 
-    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-   
     <form action="" method="post">
 
-    <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
-    <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-    <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
+    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
   
     <label>Departure time</label>
     <input type="hidden" name="technician_departure" value="<?php echo $_SESSION["arrivaltime"] ?>">
     <div class="input-group mb-3">
       <input readonly type="text" class="form-control" id="Departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
+      <input type="hidden" name="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>">
+      <input type="hidden" name="departure_timestamp" value="<?php echo $_SESSION["timestamp"] ?>">
       <input type="hidden" name="job_status" value="Doing">
       <div class="input-group-append">
         <button id="update_techstatus" name="update_techstatus" class="buttonbiru update" onclick="doSomething();doSomethingElse();departureTechnician();" type="button">Departure</button>
@@ -75,21 +76,21 @@
           <script type="text/javascript">
               function doSomethingElse()
                 {
-                  var job_assign = $('input[name=job_assign]').val();
-                  var customer_name = $('input[name=customer_name]').val();
-                  var requested_date = $('input[name=requested_date]').val();
+                  var jobregister_id = $('input[name=jobregister_id]').val();
+                  var departure_timestamp = $('input[name=departure_timestamp]').val();
+                  var DateAssign = $('input[name=DateAssign]').val();
                   var job_status = $('input[name=job_status]').val();
                       
-                  if(job_assign!='' || job_assign=='',
-                  customer_name!='' || customer_name=='',
-                 requested_date!='' || requested_date=='',
-                     job_status!='' || job_status=='')
+                  if(departure_timestamp!='' || departure_timestamp=='',
+                          jobregister_id!='' || jobregister_id=='',
+                              DateAssign!='' || DateAssign=='',
+                              job_status!='' || job_status=='')
                  
                  {
-                  var formData = {job_assign:job_assign,
-                               customer_name:customer_name,
-                              requested_date:requested_date,
-                                  job_status:job_status};
+                  var formData = {departure_timestamp:departure_timestamp,
+                                       jobregister_id:jobregister_id,
+                                           DateAssign:DateAssign,
+                                           job_status:job_status};
                               
                               $.ajax({
                                       url: "changeStatus.php",
@@ -136,7 +137,6 @@
     
     <label>Time at site</label>
     <input type="hidden" name="technician_arrival" value="<?php echo $_SESSION["arrivaltime"] ?>">
-    <input type="hidden" name="DateAssign" value="<?php echo $_SESSION["storeDate"] ?>">
     <div class="input-group mb-3">
       <input readonly type="text" class="form-control" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
       <div class="input-group-append">
@@ -158,16 +158,13 @@
               function arrivalTechnician()
                 {
                   var technician_arrival = $('input[name=technician_arrival]').val();
-                  var DateAssign = $('input[name=DateAssign]').val();
                   var jobregister_id = $('input[name=jobregister_id]').val();
                   
                   if(technician_arrival!='' || technician_arrival=='',
-                             DateAssign!='' || DateAssign=='',
                          jobregister_id!='' || jobregister_id=='')
                   
                   {
                     var formData = {technician_arrival:technician_arrival,
-                                            DateAssign:DateAssign,
                                         jobregister_id:jobregister_id};
                     
                     $.ajax({

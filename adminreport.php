@@ -1,30 +1,4 @@
-<?php
- session_start();
- // cek apakah yang mengakses halaman ini sudah login
- if($_SESSION['staff_position']=="" ){
-  header("location:index.php?error");
- }
-
-if(!isset($_SESSION['username']))
-	{	
-    header("location:index.php?error");
-	}
-
-    elseif($_SESSION['staff_position']== 'Admin')
-	{
-
-	}
-
-        elseif($_SESSION['staff_position']== 'Manager')
-	{
-	}
-
-  else
-	{
-			header("location:index.php?error");
-	}
-
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html>
@@ -283,7 +257,7 @@ table, th, td {
                                     {
                 $DateAssign = $_GET['DateAssign'];
 
-                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' AND job_register.job_cancel = '' OR job_register.DateAssign='$DateAssign' AND job_register.job_cancel IS NULL ORDER BY job_assign ASC, jobregisterlastmodify_at ASC");
+                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id WHERE job_register.DateAssign='$DateAssign' AND job_register.job_cancel = '' OR job_register.DateAssign='$DateAssign' AND job_register.job_cancel IS NULL ORDER BY job_assign ASC, departure_timestamp ASC");
                 
                 if(mysqli_num_rows($query) > 0)
                   {
@@ -374,6 +348,7 @@ $textArea.off("keyup.textarea").on("keyup.textarea", function() {
 //     $element.height($element[0].scrollHeight);
 // }
 </script>
+
 <div class="remarks-worker" style="margin: 20px;padding-top: 70px;">
    <b> Remark - Workers Attendance</b>
 

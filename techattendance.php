@@ -1,11 +1,14 @@
 <?php
+
     session_start();
+
+    if (isset($_SESSION["username"]))
     
     date_default_timezone_set("Asia/Kuala_Lumpur");
+
     $att_date = date("d-m-Y");
     $_SESSION['storeDate'] = $att_date;
 
-    if (isset($_SESSION["username"]))
 ?>
  
 <!DOCTYPE html>

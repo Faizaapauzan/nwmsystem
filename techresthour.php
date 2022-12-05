@@ -1,6 +1,8 @@
 <?php
     session_start();
 
+    if (isset($_SESSION["username"]))
+
     date_default_timezone_set("Asia/Kuala_Lumpur");
 
     $today_date = date("d-m-Y");
@@ -129,7 +131,6 @@
     <div style="display: inline-flex;">
     <div class="input-box">
       <label style="font-size: 15px;">Technician: </label>
-       <?php if (isset($_SESSION["username"])) ?>
     <input type="text" name="tech_leader" id="tech_leader" value="<?php echo $_SESSION["username"] ?>" style="border: none; width: 100px; padding-left: 6px; border-radius: 3px; font-size: 15px;" readonly>
     <input type="hidden" name="techupdate_date" id='techupdate_date' value="<?php echo $date = date('d-m-Y'); ?>" readonly>
     </div>

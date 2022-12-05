@@ -7,7 +7,10 @@
     $_SESSION['storeDate'] = $storeDate;
 
     $RestTime = date('g:i A');
-    $_SESSION['resttime'] = $RestTime; 
+    $_SESSION['resttime'] = $RestTime;
+    
+    $TimeStamp = date('H:i:s');
+    $_SESSION['timestamp'] = $TimeStamp; 
 ?>
 
 <!DOCTYPE html>
@@ -45,16 +48,15 @@
     
     <form id="formStatus" action="" method="post" style="margin-left: 20px;">
 
-    <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
-    <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-    <input type="hidden" name="job_assign" value="<?php echo $row['job_assign'] ?>">
-  
+    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+    
     <!-- Departure Time -->
     <div class="input-box-departure">
       <label for="">Departure Time</label>
       <div class="technician-time">
         <input type="text" class="technician_departure" id="Departure" name="technician_departure" value="<?php echo $row['technician_departure']?>">
         <input type="hidden" name="DateAssign" value="<?php echo $_SESSION['storeDate'] ?>">
+        <input type="hidden" name="departure_timestamp" value="<?php echo $_SESSION["timestamp"] ?>">
         <input type="hidden" name="job_status" value="Doing">
         <input type="button" id="status" value="Departure" onclick="doSomething();">
         
@@ -163,13 +165,13 @@
                   var techupdate_date = $('input[name=techupdate_date]').val();
                   
                   if(technician_out!='' || technician_out=='',
-                  tech_leader!='' || tech_leader=='',
-                  techupdate_date!='' || techupdate_date=='')
+                        tech_leader!='' || tech_leader=='',
+                    techupdate_date!='' || techupdate_date=='')
                  
                  {
                   var formData = {technician_out:technician_out,
-                    tech_leader:tech_leader,
-                    techupdate_date:techupdate_date};
+                                     tech_leader:tech_leader,
+                                 techupdate_date:techupdate_date};
                   
                   $.ajax({
                             url: "techoutupdate2.php",
@@ -183,13 +185,9 @@
                             });
                           }
                         } 
-
         </script>
-      
       </div>
       
-
-
       <!-- Rest Hour In -->
       <div class="in-time" style="display: flex; align-items: baseline;">
       <input type="hidden" name="technician_in" value="<?php echo $_SESSION["resttime"] ?>">
@@ -210,33 +208,33 @@
                   })
                 }
 
-                function RestInA()
-                  {
-                    var technician_in = $('input[name=technician_in]').val();
-                    var tech_leader = $('input[name=job_assign]').val();
-                    var techupdate_date = $('input[name=techupdate_date]').val();
+            function RestInA()
+              {
+                var technician_in = $('input[name=technician_in]').val();
+                var tech_leader = $('input[name=job_assign]').val();
+                var techupdate_date = $('input[name=techupdate_date]').val();
+                
+                if(technician_in!='' || technician_in=='',
+                     tech_leader!='' || tech_leader=='',
+                 techupdate_date!='' || techupdate_date=='')
+                 
+                 {
+                  var formData = {technician_in:technician_in,
+                                    tech_leader:tech_leader,
+                                techupdate_date:techupdate_date};
                     
-                    if(technician_in!='' || technician_in=='',
-                    tech_leader!='' || tech_leader=='',
-                    techupdate_date!='' || techupdate_date=='')
-                  
-                  {
-                    var formData = {technician_in:technician_in,
-                      tech_leader:tech_leader,
-                      techupdate_date:techupdate_date};
-                    
-                    $.ajax({
-                              url: "techinupdate2.php",
-                              type: 'POST',
-                              data: formData,
-                              success: function(response)
-                                {
-                                  var res = JSON.parse(response);
-                                  console.log(res);
-                                }
-                              });
-                            }
-                          } 
+                  $.ajax({
+                    url: "techinupdate2.php",
+                    type: 'POST',
+                    data: formData,
+                    success: function(response)
+                     {
+                       var res = JSON.parse(response);
+                       console.log(res);
+                     }
+                  });
+                 }
+              } 
         </script>
 
       </div>
@@ -244,7 +242,6 @@
     
     <p class="control"><b id="techupdateAdmin"></b></p>
     <div class="updateBtn">
-      <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
       <input style="height: 36px; margin-left: 20px; margin-right: 43px; font-size: 15px;" type="button" id="update_time" name="update_time" value="Update" />
     </div>
     </form>

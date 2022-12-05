@@ -1,7 +1,11 @@
-<?php session_start(); ?>
+<?php
+
+    session_start();
+    
+    if (isset($_SESSION["username"]))
+?>
 
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,10 +33,7 @@
     <form method="post">
 
         <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        <input type="hidden" name="requested_date" value="<?php echo $row['requested_date'] ?>">
-        <input type="hidden" name="customer_name" value="<?php echo $row['customer_name'] ?>">
-        <input type="hidden" name="machine_id" value="<?php echo $row['machine_id'] ?>">
-
+    
         <div class="form-group">
             <label for="">Job Status</label><br>
             <select id="job_status" name="job_status" class="form-control" style="width:704px; height:50px; font-size:15px;" onchange="myFunction()">
@@ -55,17 +56,19 @@
         <script type="text/javascript">
             function myFunction() {
                 var x = document.getElementById("job_status").value;
-                if(x == 'Pending' || x == 'Incomplete'){
+                if(x == 'Pending' || x == 'Incomplete')
+                {
                     document.getElementById("reason").style.display = 'block';
                 }
-                else {
+                
+                else
+                {
                     document.getElementById("reason").style.display = 'none';
                 }
             }
         </script>
         <!-- End of Reason for pending & complete-->
         
-        <?php if (isset($_SESSION["username"])) ?>
         <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
         
         <p class="control"><b id="messagestatus"></b></p>
@@ -76,36 +79,26 @@
     
     <script type="text/javascript">
         function submitFormstatus()
-          {
-            var requested_date = $('input[name=requested_date]').val();
-            var customer_name = $('input[name=customer_name]').val();
-            var machine_id = $('input[name=machine_id]').val();
-            var job_status = $('select[name=job_status]').val();
-            var reason = $('input[name=reason]').val();
-            var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
-            var jobregister_id = $('input[name=jobregister_id]').val();
-            
-            if(requested_date!='' || requested_date=='',
-                customer_name!='' || customer_name=='',
-                   machine_id!='' || machine_id=='',
-                   job_status!='' || job_status=='',
-                       reason!='' || reason=='',
-     jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='',
-               jobregister_id!='' || jobregister_id=='')
-                
             {
-                var formData = {requested_date: requested_date,
-                                 customer_name: customer_name,
-                                    machine_id: machine_id,
-                                    job_status: job_status,
-                                        reason: reason,
-                      jobregisterlastmodify_by: jobregisterlastmodify_by,
-                                jobregister_id: jobregister_id};
+                var job_status = $('select[name=job_status]').val();
+                var reason = $('input[name=reason]').val();
+                var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
+                var jobregister_id = $('input[name=jobregister_id]').val();
+                
+                if(jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='',
+                                 job_status!='' || job_status=='',
+                                     reason!='' || reason=='',
+                             jobregister_id!='' || jobregister_id=='')
+                    {
+                        var formData = {jobregisterlastmodify_by: jobregisterlastmodify_by,
+                                                      job_status: job_status,
+                                                          reason: reason,
+                                                  jobregister_id: jobregister_id};
                     
-                $.ajax({
+                    $.ajax({
                         url: "techstatusindex.php", 
-                        type: 'POST', 
-                        data: formData, 
+                        type: 'POST',
+                        data: formData,
                         success: function(response)
                             {
                                 var res = JSON.parse(response);
@@ -117,7 +110,7 @@
                             }
                         });
                     }
-                }
+            }
     </script>
 
     <?php } } } ?>
