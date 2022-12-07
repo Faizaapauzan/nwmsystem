@@ -1,60 +1,28 @@
-<?php
-    
-    session_start();
-
-    // cek apakah yang mengakses halaman ini sudah login
-    if($_SESSION['staff_position']=="" ) 
-    {
-        header("location:index.php?error");
-    }
-    
-    if(!isset($_SESSION['username']))
-    {
-        header("location:index.php?error");
-	}
-
-    elseif($_SESSION['staff_position']== 'Admin')
-	{
-
-    }
-    
-    elseif($_SESSION['staff_position']== 'Manager')
-	{
-
-    }
-    
-    else
-	{
-        header("location:index.php?error");
-	}
-
-?>
+<?php session_start(); ?>
 
 <?php
-    
     // Include pagination library file 
-    include_once 'Pagination.class.php'; 
+    include_once 'Pagination.class.php';
     
-    // Include database configuration file 
-    require_once 'dbconnect.php';
+    // Include database configuration file
+    require_once 'dbconnect.php'; 
     
-    // Count of all records
-    $query = $conn->query("SELECT COUNT(*) as rowNum FROM job_register WHERE job_cancel = '' AND job_status != 'Completed' OR job_cancel IS NULL AND job_status != 'Completed'");
+    // Count of all records 
+    $query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register");
     $result  = $query->fetch_assoc();
     $rowCount= $result['rowNum'];
     
-    // Initialize pagination class 
-    $pagConfig = array('totalRows' => $rowCount,);
+    // Initialize pagination class
+    $pagConfig = array('totalRows' => $rowCount);
     $pagination =  new Pagination($pagConfig);
+    
     // Fetch records based on the limit
     $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = '' AND job_status != 'Completed' OR job_cancel IS NULL AND job_status != 'Completed' ORDER BY jobregisterlastmodify_at DESC"); 
- 
 ?>
-
+ 
 <?php
-    
     //Database connectivity
-    include 'dbconnect.php';
+    require_once 'dbconnect.php';
     
     //Get Update id and status
     if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {
@@ -63,36 +31,33 @@
         mysqli_query($conn,"update job_register set job_assign='$job_assign' where jobregister_id='$jobregister_id'");
         header("location:adminjoblisting.php");
         die();
-    }
-
-?>
+    }  
+?> 
 
 <!DOCTYPE html>
-<head>
-    <meta name="keywords" content=""/>
-    <meta charset="utf-8"/>
+<html lang="en">
+    <meta name="keywords" content="" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NWM Job Listing</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <link href="css/adminjoblistinghomepage.css" rel="stylesheet"/>
-    <link href="css/adminjoblisting.css" rel="stylesheet"/>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
-    <!-- Script -->  
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <link href="css/adminjoblistinghomepage.css" rel="stylesheet" />
+    <link href="css/adminjoblisting.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Script -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>	
+	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -224,8 +189,10 @@
         </ul>
     </div>
     <!-- End of Sidebar Navigation -->
-
+    
+    <!--Home navigation-->
     <section class="home-section">
+        
         <!-- Home button -->
         <nav>
             <div class="home-content">
@@ -245,29 +212,42 @@
             
             <div class="datalist-wrapper">
                 <div class="col-lg-12" style="border: none;">
-                <table id="myTable" class="table table-striped sortable">
+                <table class="table table-striped sortable">
                     <thead>
                         <tr>
-                            <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;" >No</td>
-                            <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Order Number</td>
-                            <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Priority</td>
-                            <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Status</td>
-                            <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Customer Name</td>
-                            <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Name</td>
-                            <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Machine Code</td>
-                            <th style="width: 26.2px; height: 24px; font-weight: 700; font-size: 15px;">Job Assign</td>
+                            <th>No</th>
+                            <th>Job Order Number</th>
+                            <th>Job Priority</th>
+                            <th>Job Status</th>
+                            <th>Customer Name</th>
+                            <th>Job Name</th>
+                            <th>Machine Code</th>
+                            <th>Job Assign</th>
                         </tr>
                     </thead>
                     
                     <tbody>
                             <?php
                                 if($query->num_rows > 0){ $i=0;
-                                    while($row = $query->fetch_assoc()){ $i++;
+                                    while($row = $query->fetch_assoc()){ $i++; 
                             ?>
-                        
                         <tr>
                             <td id="<?php echo $row["job_status"]; ?>"><?php echo $i; ?></td>
-                            <td id="<?php echo $row["job_status"]; ?>" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" class = '<?php echo $row["job_status"]; ?>' onClick="document.getElementById('doubleClick-info').style.display='block'"><p style="cursor:pointer; text-decoration: underline; text-align: left; padding-left: 40px; height: 34px; font-weight: 400;" data-id="<?php echo $row['jobregister_id'];?>" data-idupdate="<?php echo $row['customer_name'];?>" data-idlagi="<?php echo $row['job_assign'];?>" data-idagain="<?php echo $row['requested_date'];?>" class = 'JobInfo'><?php echo $row["job_order_number"]; ?></p></td>
+                            <td id="<?php echo $row["job_status"]; ?>" 
+                                data-id="<?php echo $row['jobregister_id'];?>" 
+                                data-idupdate="<?php echo $row['customer_name'];?>" 
+                                data-idlagi="<?php echo $row['job_assign'];?>" 
+                                data-idagain="<?php echo $row['requested_date'];?>" 
+                                class = '<?php echo $row["job_status"]; ?>' 
+                                onClick="document.getElementById('doubleClick-info').style.display='block'">
+                                <p style="cursor:pointer; text-decoration: underline; text-align: left; padding-left: 40px; height: 34px; font-weight: 400;" 
+                                   data-id="<?php echo $row['jobregister_id'];?>" 
+                                   data-idupdate="<?php echo $row['customer_name'];?>" 
+                                   data-idlagi="<?php echo $row['job_assign'];?>" 
+                                   data-idagain="<?php echo $row['requested_date'];?>" 
+                                   class = 'JobInfo'><?php echo $row["job_order_number"]; ?>
+                                </p>
+                            </td>
                             <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["job_priority"]; ?></td>
                             <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["job_status"]; ?></td>
                             <td id="<?php echo $row["job_status"]; ?>"><?php echo $row["customer_name"]; ?></td>
@@ -285,16 +265,17 @@
                                                                 OR
                                                             technician_rank = '2nd Leader' AND tech_avai = '0'
                                                                 OR
-                                                            staff_position='storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here
+                                                            staff_position='storekeeper' AND tech_avai = '0' 
+                                                         ORDER BY staffregister_id ASC");
                                                         
                                                          while($data = mysqli_fetch_array($records))
                                                             {
                                                                 echo "<option value='". $data['username'] ."'>" .$data['username']. "      -      " . $data['technician_rank']."</option>";  // displaying data in option menu
                                                             }
                                     ?>
-                                </select></td>
+                                </select>
+                            </td>
                         </tr>
-                        
                             <?php 
                                     }
                                 }
@@ -304,23 +285,23 @@
                                     echo '<tr><td colspan="6">No records found...</td></tr>';
                                 }
                             ?>
-                            
                     </tbody>
-                </table>
+                </table>			
                 </div>
             </div>
         </div>
         
         <script type="text/javascript">
-            function status_update(value,jobregister_id){
-                //alert(id);
-                let url = "adminjoblisting.php";
-                window.location.href= url+"?jobregister_id="+jobregister_id+"&job_assign="+value;
-            }
+            function status_update(value,jobregister_id)
+                {
+                    //alert(id);
+                    let url = "adminjoblisting.php";
+                    window.location.href= url+"?jobregister_id="+jobregister_id+"&job_assign="+value;
+                }
         </script>
-
+        
         <script type="text/javascript">
-            $(document).ready( function () {$('#myTable').DataTable();} );
+            $(document).ready(function(){$('table').DataTable();});
         </script>
         
         <!-- Job Listing Pop Up Modal -->
@@ -1568,25 +1549,27 @@
             </div>
         </div>
         <!-- End of Job Listing Pop Up Modal -->
-
     </section>
     
     <script>
         let arrow = document.querySelectorAll(".arrow");
-        for (var i = 0; i < arrow.length; i++)
+        for (var i = 0; i < arrow.length; i++) 
             {
                 arrow[i].addEventListener("click", (e)=>
                     {
-                        let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+                        let arrowParent = e.target.parentElement.parentElement;
                         arrowParent.classList.toggle("showMenu");
-                    }
-                );
+                    });
             }
         
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".bx-menu");
         console.log(sidebarBtn);
-        sidebarBtn.addEventListener("click", ()=>{sidebar.classList.toggle("close");});
+        sidebarBtn.addEventListener("click", ()=> 
+            {
+                sidebar.classList.toggle("close");
+            });
     </script>
 
 </body>
+</html>

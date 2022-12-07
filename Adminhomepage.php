@@ -33,20 +33,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Homepage</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="css/homepage.css"rel="stylesheet" />
     <link href="css/style.css"rel="stylesheet" />
     <link href="css/adminhomepage.css"rel="stylesheet" />
     <link href="css/adminboard.css"rel="stylesheet" />
     <link href="css/admin.css"rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 <style>
 
@@ -1266,12 +1266,11 @@
                                 });
                             });
                         </script>
-
                     </div>
                 </div>
+                <!-- End of Incomplete Popup Modal -->
+                <!-- End of Incomplete -->
             </div>
-            <!-- End of Incomplete Popup Modal -->
-            <!-- End of Incomplete -->
             <!-- End of First row of Admin Board Card -->				
 				
             <!-- Second row of Admin Board Card -->
@@ -2700,10 +2699,10 @@
                             </script>
                         </div>
                     </div>
+                    <!-- End of John PopUp Modal -->
+                    <!-- End of John -->
                 </div>
             </div>
-            <!-- End of John PopUp Modal -->
-            <!-- End of John -->
             <!-- End of Second row of Admin Board Card -->
             
             <!-- Third Row of Admin Board Card -->
@@ -3431,7 +3430,7 @@
                     <div class="box">
                         <div class="left-side">
                             <div class="box_topic">Sahele</div>
-                                    
+                            
                                     <?php
                                         include 'dbconnect.php';
                                         $results = $conn->query
@@ -3783,290 +3782,302 @@
                     </div>
                     <!-- End of Sahele PopUp Modal -->
                     <!-- End of Sahele -->
+                    
+                    <!-- SAZALY -->
+                    <div class="box">
+                        <div class="left-side">
+                            <div class="box_topic">Sazaly</div>
+                                
+                                    <?php
 
-                <!-- SAZALY -->
-                <div class="box">
-                <div class="left-side">
-                <div class="box_topic">Sazaly</div>
-                            
-                <?php
-                 include 'dbconnect.php';
-                $results = $conn->query("SELECT * FROM job_register WHERE
-                        (job_assign = 'Sazaly' AND job_status = '' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status = '' AND job_cancel IS NULL
-                        OR
-                        job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel IS NULL
-                         OR
-                        job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel IS NULL
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL
-                        OR
-                        job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel = '')
-                        ORDER BY jobregisterlastmodify_at
-                        DESC LIMIT 50");
-
-                $numRow = "SELECT * FROM `job_register`WHERE 
-                        job_assign = 'Sazaly' AND job_status = '' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel = ''
-                         OR
-                         job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel IS NULL
-                         OR
-                        job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel IS NULL
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = ''
-                        OR
-                        job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL
-                        OR
-                        job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel = '' ";
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query
+                                                   ("SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Sazaly' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel = '')
+                                                     ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                        
+                                        $numRow = "SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Sazaly' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Sazaly' AND job_status IS NULL AND job_cancel = '') ";
                 
-                $numRow_run = mysqli_query ($conn,$numRow);
-                if ($row_Total = mysqli_num_rows($numRow_run))
-                {
-                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-                }
-                
-                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Sazaly'"); 
-                while($data = mysqli_fetch_array($records))
-                {
-                    if ($data['tech_avai']==1){
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                    else {
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                }	
-
-                while($row = $results->fetch_assoc()) {
-                ?>
+                                        $numRow_run = mysqli_query ($conn,$numRow);
+                                            if ($row_Total = mysqli_num_rows($numRow_run))
+                                                {
+                                                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                                                }
+                                        
+                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Sazaly'");
+                                            while($data = mysqli_fetch_array($records))
+                                                {
+                                                    if ($data['tech_avai']==1)
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                    else 
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                }
+                                        
+                                                while($row = $results->fetch_assoc()) {
+                                    ?>
                         
-                <div class="Sazaly" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-target="doubleClick-Sazaly"  ondblclick="document.getElementById('doubleClick-Sazaly').style.display='block'">
-                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                <ul class="b" id="draged">
-                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-                <li><?php echo $row['job_priority']?></li>
-                <li><?php echo $row['customer_name']?></li>
-                <li><?php echo $row['machine_type']?></li>
-                <li><?php echo $row['job_description']?></li>
-                <li><?php echo $row['job_status']?></li>
-                </ul>
-                <div class='supports' id='support'> <?php echo $row['support']?></div>
-                </div>
-                <?php } ?>
-                </div>
-                </div>               
-                </div>
+                                <div class="Sazaly" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-target="doubleClick-Sazaly"  ondblclick="document.getElementById('doubleClick-Sazaly').style.display='block'">
+                                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                <ul class="b" id="draged">
+                                    <strong text-align="center"><?php echo $row['job_order_number']?></strong>
+                                    <li><?php echo $row['job_priority']?></li>
+                                    <li><?php echo $row['customer_name']?></li>
+                                    <li><?php echo $row['machine_type']?></li>
+                                    <li><?php echo $row['job_description']?></li>
+                                    <li><?php echo $row['job_status']?></li>
+                                </ul>
+                                <div class='supports' id='support'> <?php echo $row['support']?></div>
+                                </div>
+                                    <?php } ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Sazaly PopUp Modal -->
+                    <div id="doubleClick-Sazaly" class="modal">
+                        <div class="tabSazaly">
 
-                               
-                    <!--Double click Job Info (Sazaly) -->
-        <div id="doubleClick-Sazaly" class="modal">
-        <div class="tabSazaly">
+                            <!-- Sazaly Job Info Tab -->
+                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly1" checked="checked">
+                            <label for="tabDoingSazaly1" class="tabHeadingSazaly">Job Info</label>
+                            <div class="tab" id="SazalyJobInfoTab">
+                                <div class="contentSazalyJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+                                <form action="homeindex.php" method="post">
+                                    <div class="sazaly-details">
 
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly1" checked="checked">
-        <label for="tabDoingSazaly1" class="tabHeadingSazaly"> Job Info </label>
-        <div class="tab" id="SazalyJobInfoTab">
-        <div class="contentSazalyJobInfo" style="margin-top: -27px; margin-left: -22px;">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="homeindex.php" method="post">
-        <div class="sazaly-details">
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Sazaly',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
+                                        var customer_name = $(this).data('customer_name');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxhometechnician.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id, 
+                                                          type_id: type_id, 
+                                                    customer_name: customer_name},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.sazaly-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Sazaly').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Sazaly Job Assign Tab -->
+                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly2">
+                            <label for="tabDoingSazaly2" class="tabHeadingSazaly">Job Assign</label>
+                            <div class="tab" id="SazalyJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+                                <form action="jobassignADMIN.php" method="post">
+                                    <div class="sazaly-assign">
 
-        </div></form></div></div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Sazaly',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'jobassignADMIN.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.sazaly-assign').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Sazaly').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Sazaly Update Tab -->
+                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly3">
+                            <label for="tabDoingSazaly3" class="tabHeadingSazaly">Update</label>
+                            <div class="tab" id="SazalyJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+                                <form action="ajaxtechupdateadmin.php" method="post">
+                                    <div class="sazaly-update">
 
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Sazaly',function(){ 
-            var jobregister_id = $(this).data('id');
-            var type_id = $(this).data('type_id');
-            var customer_name = $(this).data('customer_name');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxhometechnician.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
-            success: function (response) {
-            // Add response in Modal body
-            $('.sazaly-details').html(response);
-            // Display Modal
-            $('#doubleClick-Sazaly').modal('show');
-                        }
-                    });
-                });
-            });
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Sazaly',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechupdateadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.sazaly-update').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Sazaly').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Sazaly Accessories Tab-->
+                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly4">
+                            <label for="tabDoingSazaly4" class="tabHeadingSazaly">Accessories</label>
+                            <div class="tab" id="SazalyJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+                                <form action="ajaxtabaccessories.php" method="post">
+                                    <div class="sazaly-accessories">
 
-        </script>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Sazaly',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtabaccessories.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.sazaly-accessories').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Sazaly').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Sazaly Photo Tab -->
+                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly5">
+                            <label for="tabDoingSazaly5" class="tabHeadingSazaly">Photo</label>
+                            <div class="tab" id="SazalyJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+                                <form action="ajaxtechphtoupdt.php" method="post">
+                                    <div class="sazaly-photos">
 
-        
-        <!-- Double click Job Assign -->
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly2">
-        <label for="tabDoingSazaly2" class="tabHeadingSazaly">Job Assign</label>
-        <div class="tab" id="SazalyJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="jobassignADMIN.php" method="post">
-        <div class="sazaly-assign">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Sazaly',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechphtoupdt.php',
+                                            type: 'post',
+                                            data: { jobregister_id: jobregister_id },
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.sazaly-photos').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Sazaly').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Sazaly Video Tab -->
+                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly6">
+                            <label for="tabDoingSazaly6" class="tabHeadingSazaly">Video</label>
+                            <div class="tab" id="SazalyJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+                                <form action="ajaxtechvideoupdt.php" method="post">
+                                    <div class="sazaly-video">
 
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Sazaly',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'jobassignADMIN.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.sazaly-assign').html(response);
-            // Display Modal
-            $('#doubleClick-Sazaly').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-
-        <!--Double click Update-->
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly3">
-        <label for="tabDoingSazaly3" class="tabHeadingSazaly">Update</label>
-        <div class="tab" id="SazalyJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxtechupdateadmin.php" method="post">
-        <div class="sazaly-update">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Sazaly',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechupdateadmin.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.sazaly-update').html(response);
-            // Display Modal
-            $('#doubleClick-Sazaly').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Accessories -->
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly4">
-        <label for="tabDoingSazaly4" class="tabHeadingSazaly">Accessories</label>
-        <div class="tab" id="SazalyJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxtabaccessories.php" method="post">
-        <div class="sazaly-accessories">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Sazaly',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtabaccessories.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.sazaly-accessories').html(response);
-            // Display Modal
-            $('#doubleClick-Sazaly').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Photo-->
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly5">
-        <label for="tabDoingSazaly5" class="tabHeadingSazaly">Photo</label>
-        <div class="tab" id="SazalyJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="sazaly-photos">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Sazaly',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechphtoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.sazaly-photos').html(response);
-            // Display Modal
-            $('#doubleClick-Sazaly').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-        <!--Double click Video-->
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly6">
-        <label for="tabDoingSazaly6" class="tabHeadingSazaly">Video</label>
-        <div class="tab" id="SazalyJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxtechvideoupdt.php" method="post">
-        <div class="sazaly-video">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Sazaly',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechvideoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.sazaly-video').html(response);
-            // Display Modal
-            $('#doubleClick-Sazaly').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-        <!-- Sazaly Job Status Tab -->
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly7">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Sazaly',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechvideoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.sazaly-video').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Sazaly').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Sazaly Job Status Tab -->
+                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly7">
                             <label for="tabDoingSazaly7" class="tabHeadingSazaly">Job Status</label>
                             <div class="tab" id="SazalyJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
@@ -4096,327 +4107,344 @@
                                     });
                                 });
                             </script>
-
-                <!--Double click Report-->
-        <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly8">
-        <label for="tabDoingSazaly8" class="tabHeadingSazaly"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
-        <div class="sazaly-report">
-
-        </div></form></div>
-
-        <!-- div for doubleclick and tabs -->
-         </div></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Sazaly',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreportadmin.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.sazaly-report').html(response);
-            // Display Modal
-            $('#doubleClick-Sazaly').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
-                <!-- END OF SAZALY -->
-
-                <!-- FAIZAN -->
-
-            <div class="" >
-			<div class="row">
-            <div class="box" id="myModal">
-            <div class="left-side">
-            <div class="box_topic">Faizan</div>
                             
-            <?php
-            include 'dbconnect.php';
-            $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Faizan' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = '' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Faizan' AND job_status IS NULL AND job_cancel = '')
-                    ORDER BY jobregisterlastmodify_at
-                    DESC LIMIT 50");
+                            <!-- Sazaly Report Tab -->
+                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly8">
+                            <label for="tabDoingSazaly8" class="tabHeadingSazaly">Report</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
+                                <form action="ajaxreportadmin.php" method="post">
+                                    <div class="sazaly-report">
 
-                $numRow = "SELECT * FROM `job_register`WHERE 
-                job_assign = 'Faizan' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL
-                     OR
-                    job_assign = 'Faizan' AND job_status IS NULL AND job_cancel = ''";
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Sazaly',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxreportadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.sazaly-report').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Sazaly').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <!-- End Of Sazaly PopUp Modal -->
+                    <!-- End Of Sazaly -->
+                </div>
+            </div>
+            <!-- End of third row of Admin Board Card -->
+            
+            <!-- Fourth row of Admin Board Card -->
+            <div class="" >
+                <div class="row">
+
+                    <!-- Faizan -->
+                    <div class="box" id="myModal">
+                        <div class="left-side">
+                            <div class="box_topic">Faizan</div>
+                                    
+                                    <?php
+                                        include 'dbconnect.php';
+                                        $results = $conn->query
+                                                    ("SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Faizan' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status IS NULL AND job_cancel = '')
+                                                     ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                        
+                                        $numRow = "SELECT * FROM `job_register`WHERE
+                                                        (job_assign = 'Faizan' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Faizan' AND job_status IS NULL AND job_cancel = '')";
                 
-                $numRow_run = mysqli_query ($conn,$numRow);
-                if ($row_Total = mysqli_num_rows($numRow_run))
-                {
-                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-                }
-                
-                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Faizan'"); 
-                while($data = mysqli_fetch_array($records))
-                {
-                    if ($data['tech_avai']==1){
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                    else {
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                }	
+                                        $numRow_run = mysqli_query ($conn,$numRow);
+                                            if ($row_Total = mysqli_num_rows($numRow_run))
+                                                {
+                                                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                                                }
+                                        
+                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Faizan'");
+                                        while($data = mysqli_fetch_array($records))
+                                            {
+                                                if ($data['tech_avai']==1)
+                                                    {
+                                                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                    }
+                                                
+                                                else
+                                                    {
+                                                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                    }
+                                            }
+                                            
+                                            while($row = $results->fetch_assoc()) {
+                                    ?>
 
-                while($row = $results->fetch_assoc()) {
-            ?>
-                        
-            <div class="Faizan" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Faizan"  ondblclick="document.getElementById('doubleClick-Faizan').style.display='block'">
-            <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-            <ul class="b" id="draged">
-            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-            <li><?php echo $row['job_priority']?></li>
-            <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['machine_type']?></li>
-            <li><?php echo $row['job_description']?></li>
-            <li><?php echo $row['job_status']?></li>
-            </ul>
-            <div class='supports' id='support'> <?php echo $row['support']?></div>
-            </div>
-            <?php } ?>
-            </div>
-            </div>
-                           
-                    <!--Double click Job Info (Faizan) -->
-    <div id="doubleClick-Faizan" class="modal">
-    <div class="tabFaizan">
+                                <div class="Faizan" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Faizan"  ondblclick="document.getElementById('doubleClick-Faizan').style.display='block'">
+                                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                <ul class="b" id="draged">
+                                    <strong text-align="center"><?php echo $row['job_order_number']?></strong>
+                                    <li><?php echo $row['job_priority']?></li>
+                                    <li><?php echo $row['customer_name']?></li>
+                                    <li><?php echo $row['machine_type']?></li>
+                                    <li><?php echo $row['job_description']?></li>
+                                    <li><?php echo $row['job_status']?></li>
+                                </ul>
+                                <div class='supports' id='support'> <?php echo $row['support']?></div>
+                                </div>
+                                    <?php } ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Faizan PopUp Modal -->
+                    <div id="doubleClick-Faizan" class="modal">
+                        <div class="tabFaizan">
 
-        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan1" checked="checked">
-        <label for="tabDoingFaizan1" class="tabHeadingFaizan"> Job Info </label>
-        <div class="tab" id="FaizanJobInfoTab">
-        <div class="contentFaizanJobInfo" style="margin-top: -27px; margin-left: -22px;">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="homeindex.php" method="post">
-        <div class="faizan-details">
+                            <!-- Faizan Job Info -->
+                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan1" checked="checked">
+                            <label for="tabDoingFaizan1" class="tabHeadingFaizan">Job Info</label>
+                            <div class="tab" id="FaizanJobInfoTab">
+                                <div class="contentFaizanJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+                                <form action="homeindex.php" method="post">
+                                    <div class="faizan-details">
 
-        </div></form></div></div>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Faizan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
+                                        var customer_name = $(this).data('customer_name');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxhometechnician.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id, 
+                                                          type_id: type_id, 
+                                                    customer_name: customer_name},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.faizan-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Faizan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Faizan Job Assign -->
+                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan2">
+                            <label for="tabDoingFaizan2" class="tabHeadingFaizan">Job Assign</label>
+                            <div class="tab" id="FaizanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+                                <form action="jobassignADMIN.php" method="post">
+                                    <div class="faizan-assign">
 
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Faizan',function(){ 
-            var jobregister_id = $(this).data('id');
-            var type_id = $(this).data('type_id');
-            var customer_name = $(this).data('customer_name');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxhometechnician.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
-            success: function (response) {
-            // Add response in Modal body
-            $('.faizan-details').html(response);
-            // Display Modal
-            $('#doubleClick-Faizan').modal('show');
-                        }
-                    });
-                });
-            });
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Faizan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'jobassignADMIN.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.faizan-assign').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Faizan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Faizan Update Tab -->
+                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan3">
+                            <label for="tabDoingFaizan3" class="tabHeadingFaizan">Update</label>
+                            <div class="tab" id="FaizanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+                                <form action="ajaxtechupdateadmin.php" method="post">
+                                    <div class="faizan-update">
 
-        </script>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Faizan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechupdateadmin.php',
+                                            type: 'post',
+                                            data: { jobregister_id: jobregister_id },
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.faizan-update').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Faizan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Faizan Accessories Tab -->
+                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan4">
+                            <label for="tabDoingFaizan4" class="tabHeadingFaizan">Accessories</label>
+                            <div class="tab" id="FaizanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+                                <form action="ajaxtabaccessories.php" method="post">
+                                    <div class="faizan-accessories">
 
-             <!-- Double click Job Assign -->
-        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan2">
-        <label for="tabDoingFaizan2" class="tabHeadingFaizan">Job Assign</label>
-        <div class="tab" id="FaizanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="jobassignADMIN.php" method="post">
-        <div class="faizan-assign">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Faizan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtabaccessories.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.faizan-accessories').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Faizan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Faizan Photo Tab -->
+                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan5">
+                            <label for="tabDoingFaizan5" class="tabHeadingFaizan">Photo</label>
+                            <div class="tab" id="FaizanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+                                <form action="ajaxtechphtoupdt.php" method="post">
+                                    <div class="faizan-photos">
 
-        </div></form></div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Faizan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechphtoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.faizan-photos').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Faizan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Faizan Video Tab -->
+                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan6">
+                            <label for="tabDoingFaizan6" class="tabHeadingFaizan">Video</label>
+                            <div class="tab" id="FaizanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+                                <form action="ajaxtechvideoupdt.php" method="post">
+                                    <div class="faizan-video">
 
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Faizan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'jobassignADMIN.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.faizan-assign').html(response);
-            // Display Modal
-            $('#doubleClick-Faizan').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-
-        <!--Double click Update-->
-        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan3">
-        <label for="tabDoingFaizan3" class="tabHeadingFaizan">Update</label>
-        <div class="tab" id="FaizanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxtechupdateadmin.php" method="post">
-        <div class="faizan-update">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Faizan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechupdateadmin.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.faizan-update').html(response);
-            // Display Modal
-            $('#doubleClick-Faizan').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-   
-
-        <!--Double click Accessories -->
-        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan4">
-        <label for="tabDoingFaizan4" class="tabHeadingFaizan">Accessories</label>
-        <div class="tab" id="FaizanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxtabaccessories.php" method="post">
-        <div class="faizan-accessories">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Faizan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtabaccessories.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.faizan-accessories').html(response);
-            // Display Modal
-            $('#doubleClick-Faizan').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Photo-->
-        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan5">
-        <label for="tabDoingFaizan5" class="tabHeadingFaizan">Photo</label>
-        <div class="tab" id="FaizanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="faizan-photos">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Faizan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechphtoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.faizan-photos').html(response);
-            // Display Modal
-            $('#doubleClick-Faizan').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-          <!--Double click Video-->
-        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan6">
-        <label for="tabDoingFaizan6" class="tabHeadingFaizan">Video</label>
-        <div class="tab" id="FaizanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxtechvideoupdt.php" method="post">
-        <div class="faizan-video">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Faizan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechvideoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.faizan-video').html(response);
-            // Display Modal
-            $('#doubleClick-Faizan').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-<!-- Faizan Job Status Tab -->
-<input type="radio" name="tabDoingFaizan" id="tabDoingFaizan7">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Faizan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechvideoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.faizan-video').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Faizan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Faizan Job Status Tab -->
+                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan7">
                             <label for="tabDoingFaizan7" class="tabHeadingFaizan">Job Status</label>
                             <div class="tab" id="FaizanJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
@@ -4446,331 +4474,338 @@
                                     });
                                 });
                             </script>
-
-                <!--Double click Report-->
-        <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan8">
-        <label for="tabDoingFaizan8" class="tabHeadingFaizan"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
-        <div class="faizan-report">
-
-        </div></form></div>
-
-                <!-- div for doubleclick and tabs -->
-    </div></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Faizan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreportadmin.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.faizan-report').html(response);
-            // Display Modal
-            $('#doubleClick-Faizan').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
-
-
-            <!-- END OF FAIZAN --
-
-            <!-FAUZIN -->
-                
-            <div class="box">
-            <div class="left-side">
-            <div class="box_topic">Fauzin</div>
                             
-            <?php
-            include 'dbconnect.php';
-            $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status = '' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL
-                     OR
-                    job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel = '')
-                    ORDER BY jobregisterlastmodify_at
-                    DESC LIMIT 50");
+                            <!-- Faizan Report -->
+                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan8">
+                            <label for="tabDoingFaizan8" class="tabHeadingFaizan">Report</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
+                                <form action="ajaxreportadmin.php" method="post">
+                                    <div class="faizan-report">
 
-            $numRow = "SELECT * FROM `job_register`WHERE 
-            job_assign = 'Fauzin' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR 
-                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = ''
-                    OR 
-                    job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel = ''";
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Faizan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxreportadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.faizan-report').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Faizan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <!-- End of Faizan PopUp Modal -->
+                    <!-- End of Faizan -->
+                    
+                    <!-- Fauzin -->
+                    <div class="box">
+                        <div class="left-side">
+                            <div class="box_topic">Fauzin</div>
+                                    
+                                    <?php
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query
+                                                    ("SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Fauzin' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel = '')
+                                                     ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+
+                                        $numRow = "SELECT * FROM job_register WHERE 
+                                                        (job_assign = 'Fauzin' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Fauzin' AND job_status IS NULL AND job_cancel = '')";
             
-            $numRow_run = mysqli_query ($conn,$numRow);
-            if ($row_Total = mysqli_num_rows($numRow_run))
-            {
-                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-            }
-            
-            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Fauzin'"); 
-                while($data = mysqli_fetch_array($records))
-                {
-                    if ($data['tech_avai']==1){
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                    else {
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                }	
+                                        $numRow_run = mysqli_query ($conn,$numRow);
+                                            if ($row_Total = mysqli_num_rows($numRow_run))
+                                                {
+                                                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                                                }
+                                        
+                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Fauzin'");
+                                        while($data = mysqli_fetch_array($records))
+                                            {
+                                                if ($data['tech_avai']==1)
+                                                    {
+                                                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                    }
+                                                
+                                                else 
+                                                    {
+                                                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                    }
+                                            }
+                                            
+                                            while($row = $results->fetch_assoc()) {
+                                    ?>
+                                
+                                <div class="Fauzin" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" ondblclick="document.getElementById('doubleClick-Fauzin').style.display='block'">
+                                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                <ul class="b" id="draged">
+                                    <strong text-align="center"><?php echo $row['job_order_number']?></strong>
+                                    <li><?php echo $row['job_priority']?></li>
+                                    <li><?php echo $row['customer_name']?></li>
+                                    <li><?php echo $row['machine_type']?></li>
+                                    <li><?php echo $row['job_description']?></li>
+                                    <li><?php echo $row['job_status']?></li>
+                                </ul>
+                                <div class='supports' id='support'> <?php echo $row['support']?></div>
+                                </div>
+                                    <?php } ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Fauzin PopUp Modal -->
+                    <div id="doubleClick-Fauzin" class="modal">
+                        <div class="tabFauzin">
 
-            while($row = $results->fetch_assoc()) {
-            ?>
+                            <!-- Fauzin Job Info tab -->
+                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin1" checked="checked">
+                            <label for="tabDoingFauzin1" class="tabHeadingFauzin">Job Info</label>
+                            <div class="tab" id="FauzinJobInfoTab">
+                                <div class="contentFauzinJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+                                <form action="homeindex.php" method="post">
+                                    <div class="fauzin-details">
 
-            <div class="Fauzin" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" ondblclick="document.getElementById('doubleClick-Fauzin').style.display='block'">
-            <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-            <ul class="b" id="draged">
-            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-            <li><?php echo $row['job_priority']?></li>
-            <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['machine_type']?></li>
-            <li><?php echo $row['job_description']?></li>
-            <li><?php echo $row['job_status']?></li>
-            </ul>
-            <div class='supports' id='support'> <?php echo $row['support']?></div>
-            </div>
-            <?php } ?>
-            </div>
-            </div>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Fauzin',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
+                                        var customer_name = $(this).data('customer_name');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxhometechnician.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id, 
+                                                          type_id: type_id, 
+                                                    customer_name: customer_name},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.fauzin-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Fauzin').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Fauzin Job Assign -->
+                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin2">
+                            <label for="tabDoingFauzin2" class="tabHeadingFauzin">Job Assign</label>
+                            <div class="tab" id="FauzinJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+                                <form action="jobassignADMIN.php" method="post">
+                                    <div class="fauzin-assign">
 
-               
-                    <!--Double click Job Info (Fauzin) -->
-        <div id="doubleClick-Fauzin" class="modal">
-        <div class="tabFauzin">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Fauzin',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'jobassignADMIN.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.fauzin-assign').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Fauzin').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Fauzin Update Tab -->
+                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin3">
+                            <label for="tabDoingFauzin3" class="tabHeadingFauzin">Update</label>
+                            <div class="tab" id="FauzinJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+                                <form action="ajaxtechupdateadmin.php" method="post">
+                                    <div class="fauzin-update">
 
-        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin1" checked="checked">
-        <label for="tabDoingFauzin1" class="tabHeadingFauzin"> Job Info </label>
-        <div class="tab" id="FauzinJobInfoTab">
-        <div class="contentFauzinJobInfo" style="margin-top: -27px; margin-left: -22px;">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="homeindex.php" method="post">
-        <div class="fauzin-details">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Fauzin',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechupdateadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.fauzin-update').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Fauzin').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Fauzin Accessories Tab -->
+                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin4">
+                            <label for="tabDoingFauzin4" class="tabHeadingFauzin">Accessories</label>
+                            <div class="tab" id="FauzinJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+                                <form action="ajaxtabaccessories.php" method="post">
+                                    <div class="fauzin-accessories">
 
-        </div></form></div></div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Fauzin',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtabaccessories.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.fauzin-accessories').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Fauzin').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Fauzin Photo Tab -->
+                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin5">
+                            <label for="tabDoingFauzin5" class="tabHeadingFauzin">Photo</label>
+                            <div class="tab" id="FauzinJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+                                <form action="ajaxtechphtoupdt.php" method="post">
+                                    <div class="fauzin-photos">
 
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Fauzin',function(){ 
-            var jobregister_id = $(this).data('id');
-            var type_id = $(this).data('type_id');
-            var customer_name = $(this).data('customer_name');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxhometechnician.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
-            success: function (response) {
-            // Add response in Modal body
-            $('.fauzin-details').html(response);
-            // Display Modal
-            $('#doubleClick-Fauzin').modal('show');
-                        }
-                    });
-                });
-            });
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Fauzin',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechphtoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.fauzin-photos').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Fauzin').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Fauzin Video Tab -->
+                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin6">
+                            <label for="tabDoingFauzin6" class="tabHeadingFauzin">Video</label>
+                            <div class="tab" id="FauzinJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+                                <form action="ajaxtechvideoupdt.php" method="post">
+                                    <div class="fauzin-video">
 
-        </script>
-
-         <!-- Double click Job Assign -->
-        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin2">
-        <label for="tabDoingFauzin2" class="tabHeadingFauzin">Job Assign</label>
-        <div class="tab" id="FauzinJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="jobassignADMIN.php" method="post">
-        <div class="fauzin-assign">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Fauzin',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'jobassignADMIN.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.fauzin-assign').html(response);
-            // Display Modal
-            $('#doubleClick-Fauzin').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-
-
-        <!--Double click Update-->
-        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin3">
-        <label for="tabDoingFauzin3" class="tabHeadingFauzin">Update</label>
-        <div class="tab" id="FauzinJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxtechupdateadmin.php" method="post">
-        <div class="fauzin-update">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Fauzin',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechupdateadmin.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.fauzin-update').html(response);
-            // Display Modal
-            $('#doubleClick-Fauzin').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-       
-
-        <!--Double click Accessories -->
-        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin4">
-        <label for="tabDoingFauzin4" class="tabHeadingFauzin">Accessories</label>
-        <div class="tab" id="FauzinJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxtabaccessories.php" method="post">
-        <div class="fauzin-accessories">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Fauzin',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtabaccessories.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.fauzin-accessories').html(response);
-            // Display Modal
-            $('#doubleClick-Fauzin').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Photo-->
-        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin5">
-        <label for="tabDoingFauzin5" class="tabHeadingFauzin">Photo</label>
-        <div class="tab" id="FauzinJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="fauzin-photos">
-
-        </div></form></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Fauzin',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechphtoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.fauzin-photos').html(response);
-            // Display Modal
-            $('#doubleClick-Fauzin').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-        <!--Double click Video-->
-        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin6">
-        <label for="tabDoingFauzin6" class="tabHeadingFauzin">Video</label>
-        <div class="tab" id="FauzinJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxtechvideoupdt.php" method="post">
-        <div class="fauzin-video">
-
-        </div></form></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Fauzin',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechvideoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.fauzin-video').html(response);
-            // Display Modal
-            $('#doubleClick-Fauzin').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-<!-- Fauzin Job Status Tab -->
-<input type="radio" name="tabDoingFauzin" id="tabDoingFauzin7">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Fauzin',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechvideoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.fauzin-video').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Fauzin').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Fauzin Job Status Tab -->
+                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin7">
                             <label for="tabDoingFauzin7" class="tabHeadingFauzin">Job Status</label>
                             <div class="tab" id="FauzinJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
@@ -4800,329 +4835,338 @@
                                     });
                                 });
                             </script>
-
-                <!--Double click Report-->
-        <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin8">
-        <label for="tabDoingFauzin8" class="tabHeadingFauzin"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
-        <div class="fauzin-report">
-
-        </div></form></div>
-       
-        <!-- div for doubleclick and tabs -->
-    </div></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Fauzin',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreportadmin.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.fauzin-report').html(response);
-            // Display Modal
-            $('#doubleClick-Fauzin').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
-<!-- END OF FAUZIN -->
-
-<!-- IZAAN -->
-
-            <div class="box">
-            <div class="left-side">
-            <div class="box_topic">Izaan</div>
                             
-            <?php
-            include 'dbconnect.php';
-                                
-            $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Izaan' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status = '' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status IS NULL AND job_cancel = '')
-                    ORDER BY jobregisterlastmodify_at
-                    DESC LIMIT 50");
+                            <!-- Fauzin Report Tab -->
+                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin8">
+                            <label for="tabDoingFauzin8" class="tabHeadingFauzin"> Report </label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
+                                <form action="ajaxreportadmin.php" method="post">
+                                    <div class="fauzin-report">
 
-            $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Izaan' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Izaan' AND job_status IS NULL AND job_cancel = ''";
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Fauzin',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxreportadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.fauzin-report').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Fauzin').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <!-- End Of Fauzin PopUp Modal -->
+                    <!-- End of Fauzin -->
+                    
+                    <!-- IZAAN -->
+                    <div class="box">
+                        <div class="left-side">
+                            <div class="box_topic">Izaan</div>
+                                    
+                                    <?php
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query
+                                                    ("SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Izaan' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status IS NULL AND job_cancel = '')
+                                                     ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+
+                                        $numRow = "SELECT * FROM job_register WHERE 
+                                                        (job_assign = 'Izaan' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Izaan' AND job_status IS NULL AND job_cancel = '')";
             
-            $numRow_run = mysqli_query ($conn,$numRow);
-            if ($row_Total = mysqli_num_rows($numRow_run))
-            {
-                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-            }
+                                        $numRow_run = mysqli_query ($conn,$numRow);
+                                            if ($row_Total = mysqli_num_rows($numRow_run))
+                                                {
+                                                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                                                }
+                                        
+                                            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Izaan'");
+                                                while($data = mysqli_fetch_array($records))
+                                                    {
+                                                        if ($data['tech_avai']==1) 
+                                                            {
+                                                                echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                            }
+                                                        
+                                                        else
+                                                            {
+                                                                echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                            }
+                                                    }
+                                                    
+                                                    while($row = $results->fetch_assoc()) {
+                                    ?>
+                                
+                                <div class="Izaan" data-customer_name="<?php echo $row['customer_name'];?>" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Izaan"  ondblclick="document.getElementById('doubleClick-Izaan').style.display='block'">
+                                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                <ul class="b" id="draged">
+                                    <strong text-align="center"><?php echo $row['job_order_number']?></strong>
+                                    <li><?php echo $row['job_priority']?></li>
+                                    <li><?php echo $row['customer_name']?></li>
+                                    <li><?php echo $row['machine_type']?></li>
+                                    <li><?php echo $row['job_description']?></li>
+                                    <li><?php echo $row['job_status']?></li>
+                                </ul>
+                                <div class='supports' id='support'> <?php echo $row['support']?></div>
+                                </div>
+                                    <?php } ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Izaan PopUp Modal -->
+                    <div id="doubleClick-Izaan" class="modal">
+                        <div class="tabIzaan">
+                            
+                            <!-- Izaan Job Info -->
+                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan1" checked="checked">
+                            <label for="tabDoingIzaan1" class="tabHeadingIzaan">Job Info</label>
+                            <div class="tab" id="IzaanJobInfoTab">
+                                <div class="contentIzaanJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+                                <form action="homeindex.php" method="post">
+                                    <div class="izaan-details">
 
-            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Izaan'"); 
-            while($data = mysqli_fetch_array($records))
-            {
-                if ($data['tech_avai']==1){
-                    echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
-                              Off</a></p>';
-                }
-                else {
-                    echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
-                              Off</a></p>';
-                }
-            }	
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Izaan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
+                                        var customer_name = $(this).data('customer_name');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxhometechnician.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id, 
+                                                          type_id: type_id, 
+                                                    customer_name: customer_name},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.izaan-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Izaan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Izaan Job Assign tab -->
+                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan2">
+                            <label for="tabDoingIzaan2" class="tabHeadingIzaan">Job Assign</label>
+                            <div class="tab" id="IzaanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+                                <form action="jobassignADMIN.php" method="post">
+                                    <div class="izaan-assign">
 
-            while($row = $results->fetch_assoc()) {
-            ?>  
-                        
-            <div class="Izaan" data-customer_name="<?php echo $row['customer_name'];?>" data-type_id="<?php echo $row['type_id'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Izaan"  ondblclick="document.getElementById('doubleClick-Izaan').style.display='block'">
-            <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-            <ul class="b" id="draged">
-            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-            <li><?php echo $row['job_priority']?></li>
-            <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['machine_type']?></li>
-            <li><?php echo $row['job_description']?></li>
-            <li><?php echo $row['job_status']?></li>
-            </ul>
-            <div class='supports' id='support'> <?php echo $row['support']?></div>
-            </div>
-            <?php } ?>
-            </div>
-            </div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Izaan',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'jobassignADMIN.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.izaan-assign').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Izaan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Izaan Update Tab -->
+                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan3">
+                            <label for="tabDoingIzaan3" class="tabHeadingIzaan">Update</label>
+                            <div class="tab" id="IzaanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+                                <form action="ajaxtechupdateadmin.php" method="post">
+                                    <div class="izaan-update">
 
-                           
-                    <!--Double click Job Info (Izaan) -->
-        <div id="doubleClick-Izaan" class="modal">
-        <div class="tabIzaan">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Izaan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechupdateadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.izaan-update').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Izaan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Izaan Accessories Tab -->
+                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan4">
+                            <label for="tabDoingIzaan4" class="tabHeadingIzaan">Accessories</label>
+                            <div class="tab" id="IzaanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+                                <form action="ajaxtabaccessories.php" method="post">
+                                    <div class="izaan-accessories">
 
-        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan1" checked="checked">
-        <label for="tabDoingIzaan1" class="tabHeadingIzaan"> Job Info </label>
-        <div class="tab" id="IzaanJobInfoTab">
-        <div class="contentIzaanJobInfo" style="margin-top: -27px; margin-left: -22px;">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="homeindex.php" method="post">
-        <div class="izaan-details">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Izaan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtabaccessories.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.izaan-accessories').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Izaan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Izaan Photo Tab -->
+                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan5">
+                            <label for="tabDoingIzaan5" class="tabHeadingIzaan">Photo</label>
+                            <div class="tab" id="IzaanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+                                <form action="ajaxtechphtoupdt.php" method="post">
+                                    <div class="izaan-photos">
 
-        </div></form></div></div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Izaan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechphtoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.izaan-photos').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Izaan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Izaan Video Tab -->
+                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan6">
+                            <label for="tabDoingIzaan6" class="tabHeadingIzaan">Video</label>
+                            <div class="tab" id="IzaanJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+                                <form action="ajaxtechvideoupdt.php" method="post">
+                                    <div class="izaan-video">
 
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Izaan',function(){ 
-            var jobregister_id = $(this).data('id');
-            var type_id = $(this).data('type_id');
-            var customer_name = $(this).data('customer_name');
-
-            // AJAX request
-            $.ajax({
-            url: 'ajaxhometechnician.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
-            success: function (response) {
-            // Add response in Modal body
-            $('.izaan-details').html(response);
-            // Display Modal
-            $('#doubleClick-Izaan').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!-- Double click Job Assign -->
-        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan2">
-        <label for="tabDoingIzaan2" class="tabHeadingIzaan">Job Assign</label>
-        <div class="tab" id="IzaanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="jobassignADMIN.php" method="post">
-        <div class="izaan-assign">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Izaan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'jobassignADMIN.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.izaan-assign').html(response);
-            // Display Modal
-            $('#doubleClick-Izaan').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-
-        <!--Double click Update-->
-        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan3">
-        <label for="tabDoingIzaan3" class="tabHeadingIzaan">Update</label>
-        <div class="tab" id="IzaanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxtechupdateadmin.php" method="post">
-        <div class="izaan-update">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Izaan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechupdateadmin.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.izaan-update').html(response);
-            // Display Modal
-            $('#doubleClick-Izaan').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-
-        <!--Double click Accessories -->
-        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan4">
-        <label for="tabDoingIzaan4" class="tabHeadingIzaan">Accessories</label>
-        <div class="tab" id="IzaanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxtabaccessories.php" method="post">
-        <div class="izaan-accessories">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Izaan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtabaccessories.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.izaan-accessories').html(response);
-            // Display Modal
-            $('#doubleClick-Izaan').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Photo-->
-        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan5">
-        <label for="tabDoingIzaan5" class="tabHeadingIzaan">Photo</label>
-        <div class="tab" id="IzaanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="izaan-photos">
-
-        </div></form></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Izaan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechphtoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.izaan-photos').html(response);
-            // Display Modal
-            $('#doubleClick-Izaan').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-        <!--Double click Video-->
-        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan6">
-        <label for="tabDoingIzaan6" class="tabHeadingIzaan">Video</label>
-        <div class="tab" id="IzaanJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxtechvideoupdt.php" method="post">
-        <div class="izaan-video">
-
-        </div></form></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Izaan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechvideoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.izaan-video').html(response);
-            // Display Modal
-            $('#doubleClick-Izaan').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-        <!-- Izaan Job Status Tab -->
-<input type="radio" name="tabDoingIzaan" id="tabDoingIzaan7">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Izaan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechvideoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.izaan-video').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Izaan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Izaan Job Status Tab -->
+                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan7">
                             <label for="tabDoingIzaan7" class="tabHeadingIzaan">Job Status</label>
                             <div class="tab" id="IzaanJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
@@ -5152,332 +5196,337 @@
                                     });
                                 });
                             </script>
-
-                <!--Double click Report-->
-        <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan8">
-        <label for="tabDoingIzaan8" class="tabHeadingIzaan"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
-        <div class="izaan-report">
-
-        </div></form></div>
-
-        
-        <!-- div for doubleclick and tabs -->
-    </div></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Izaan',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreportadmin.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.izaan-report').html(response);
-            // Display Modal
-            $('#doubleClick-Izaan').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
-            <!-- END OF IZAAN -->
-
-          
-    
-            <!-- TECK -->
-
-                <div class="box" id="myModal">
-            <div class="left-side">
-            <div class="box_topic">Teck</div>
                             
-            <?php
-            include 'dbconnect.php';
+                            <!-- Izaan Report Tab -->
+                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan8">
+                            <label for="tabDoingIzaan8" class="tabHeadingIzaan"> Report </label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
+                                <form action="ajaxreportadmin.php" method="post">
+                                    <div class="izaan-report">
+
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Izaan',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxreportadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.izaan-report').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Izaan').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <!-- End of Izaan PopUp Modal -->
+                    <!-- End of Izaan -->
+                    
+                    <!-- TECK -->
+                    <div class="box" id="myModal">
+                        <div class="left-side">
+                            <div class="box_topic">Teck</div>
+                                    
+                                    <?php
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query
+                                                    ("SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Teck' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status IS NULL AND job_cancel = '')
+                                                     ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+
+                                        $numRow = "SELECT * FROM job_register WHERE 
+                                                        (job_assign = 'Teck' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Teck' AND job_status IS NULL AND job_cancel = '')";
+            
+                                        $numRow_run = mysqli_query ($conn,$numRow);
+                                            if ($row_Total = mysqli_num_rows($numRow_run))
+                                                {
+                                                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                                                }
+            
+                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Teck'");
+                                            while($data = mysqli_fetch_array($records))
+                                                {
+                                                    if ($data['tech_avai']==1) 
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                    else 
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                }
+                                                
+                                                while($row = $results->fetch_assoc()) {
+                                    ?>
                                 
-            $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Teck' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = '' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status IS NULL AND job_cancel = '')
-                    ORDER BY jobregisterlastmodify_at
-                    DESC LIMIT 50");
+                                <div class="Teck" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Teck"  ondblclick="document.getElementById('doubleClick-Teck').style.display='block'">
+                                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                <ul class="b" id="draged">
+                                    <strong text-align="center"><?php echo $row['job_order_number']?></strong>
+                                    <li><?php echo $row['job_priority']?></li>
+                                    <li><?php echo $row['customer_name']?></li>
+                                    <li><?php echo $row['machine_type']?></li>
+                                    <li><?php echo $row['job_description']?></li>
+                                    <li><?php echo $row['job_status']?></li>
+                                </ul>
+                                <div class='supports' id='support'><?php echo $row['support']?></div>
+                                </div>
+                                     <?php } ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Teck PopUp Modal -->
+                    <div id="doubleClick-Teck" class="modal">
+                        <div class="tabTeck">
 
-            $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Teck' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Teck' AND job_status = 'Pending' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Teck' AND job_status IS NULL AND job_cancel = ''";
-            
-            $numRow_run = mysqli_query ($conn,$numRow);
-            if ($row_Total = mysqli_num_rows($numRow_run))
-            {
-                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-            }
-            
-            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Teck'"); 
-                while($data = mysqli_fetch_array($records))
-                {
-                    if ($data['tech_avai']==1){
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                    else {
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                }	
+                            <!-- Teck Job Info tab -->
+                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck1" checked="checked">
+                            <label for="tabDoingTeck1" class="tabHeadingTeck">Job Info</label>
+                            <div class="tab" id="TeckJobInfoTab">
+                                <div class="contentTeckJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+                                <form action="homeindex.php" method="post">
+                                    <div class="teck-details">
 
-            while($row = $results->fetch_assoc()) {
-            ?>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Teck',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
+                                        var customer_name = $(this).data('customer_name');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxhometechnician.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id, 
+                                                          type_id: type_id, 
+                                                    customer_name: customer_name},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.teck-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Teck').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Teck Job Assign Tab -->
+                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck2">
+                            <label for="tabDoingTeck2" class="tabHeadingTeck">Job Assign</label>
+                            <div class="tab" id="TeckJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+                                <form action="jobassignADMIN.php" method="post">
+                                    <div class="teck-assign">
 
-            <div class="Teck" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Teck"  ondblclick="document.getElementById('doubleClick-Teck').style.display='block'">
-            <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-            <ul class="b" id="draged">
-            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-            <li><?php echo $row['job_priority']?></li>
-            <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['machine_type']?></li>
-            <li><?php echo $row['job_description']?></li>
-            <li><?php echo $row['job_status']?></li>
-            </ul>
-            <div class='supports' id='support'> <?php echo $row['support']?></div>
-            </div>
-            <?php } ?>
-            </div>
-            </div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Teck',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'jobassignADMIN.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.teck-assign').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Teck').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Teck Update Tab -->
+                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck3">
+                            <label for="tabDoingTeck3" class="tabHeadingTeck">Update</label>
+                            <div class="tab" id="TeckJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+                                <form action="ajaxtechupdateadmin.php" method="post">
+                                    <div class="teck-update">
 
-                           
-    <!--Double click Job Info (Teck) -->
-    <div id="doubleClick-Teck" class="modal">
-    <div class="tabTeck">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Teck',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechupdateadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.teck-update').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Teck').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Teck Accessories Tab -->
+                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck3=4">
+                            <label for="tabDoingTeck4" class="tabHeadingTeck">Accessories</label>
+                            <div class="tab" id="TeckJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+                                <form action="ajaxtabaccessories.php" method="post">
+                                    <div class="teck-accessories">
 
-        <input type="radio" name="tabDoingTeck" id="tabDoingTeck1" checked="checked">
-        <label for="tabDoingTeck1" class="tabHeadingTeck"> Job Info </label>
-        <div class="tab" id="TeckJobInfoTab">
-        <div class="contentTeckJobInfo" style="margin-top: -27px; margin-left: -22px;">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="homeindex.php" method="post">
-        <div class="teck-details">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Teck',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtabaccessories.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.teck-accessories').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Teck').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Teck Photo Tab -->
+                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck5">
+                            <label for="tabDoingTeck5" class="tabHeadingTeck">Photo</label>
+                            <div class="tab" id="TeckJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+                                <form action="ajaxtechphtoupdt.php" method="post">
+                                    <div class="teck-photos">
 
-        </div></form></div></div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Teck',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechphtoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.teck-photos').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Teck').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Teck Video Tab -->
+                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck6">
+                            <label for="tabDoingTeck6" class="tabHeadingTeck">Video</label>
+                            <div class="tab" id="TeckJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+                                <form action="ajaxtechvideoupdt.php" method="post">
+                                    <div class="teck-video">
 
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Teck',function(){ 
-            var jobregister_id = $(this).data('id');
-            var type_id = $(this).data('type_id');
-            var customer_name = $(this).data('customer_name');
-
-            // AJAX request
-            $.ajax({
-            url: 'ajaxhometechnician.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
-            success: function (response) {
-            // Add response in Modal body
-            $('.teck-details').html(response);
-            // Display Modal
-            $('#doubleClick-Teck').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-                <!-- Double click Job Assign -->
-        <input type="radio" name="tabDoingTeck" id="tabDoingTeck2">
-        <label for="tabDoingTeck2" class="tabHeadingTeck">Job Assign</label>
-        <div class="tab" id="TeckJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="jobassignADMIN.php" method="post">
-        <div class="teck-assign">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Teck',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'jobassignADMIN.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.teck-assign').html(response);
-            // Display Modal
-            $('#doubleClick-Teck').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-
-        <!--Double click Update-->
-        <input type="radio" name="tabDoingTeck" id="tabDoingTeck3">
-        <label for="tabDoingTeck3" class="tabHeadingTeck">Update</label>
-        <div class="tab" id="TeckJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxtechupdateadmin.php" method="post">
-        <div class="teck-update">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Teck',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechupdateadmin.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.teck-update').html(response);
-            // Display Modal
-            $('#doubleClick-Teck').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-
-        <!--Double click Accessories -->
-        <input type="radio" name="tabDoingTeck" id="tabDoingTeck3=4">
-        <label for="tabDoingTeck4" class="tabHeadingTeck">Accessories</label>
-        <div class="tab" id="TeckJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxtabaccessories.php" method="post">
-        <div class="teck-accessories">
-
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Teck',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtabaccessories.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.teck-accessories').html(response);
-            // Display Modal
-            $('#doubleClick-Teck').modal('show');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-        <!--Double click Photo-->
-        <input type="radio" name="tabDoingTeck" id="tabDoingTeck5">
-        <label for="tabDoingTeck5" class="tabHeadingTeck">Photo</label>
-        <div class="tab" id="TeckJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="teck-photos">
-
-        </div></form></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Teck',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechphtoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.teck-photos').html(response);
-            // Display Modal
-            $('#doubleClick-Teck').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-         <!--Double click Video-->
-        <input type="radio" name="tabDoingTeck" id="tabDoingTeck6">
-        <label for="tabDoingTeck6" class="tabHeadingTeck">Video</label>
-        <div class="tab" id="TeckJobInfoTab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxtechvideoupdt.php" method="post">
-        <div class="teck-video">
-
-        </div></form></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-            $('body').on('click','.Teck',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechvideoupdt.php',
-            type: 'post',
-            data: { jobregister_id: jobregister_id },
-            success: function (response) {
-            // Add response in Modal body
-            $('.teck-video').html(response);
-            // Display Modal
-            $('#doubleClick-Teck').modal('show');
-                }
-             });
-                });
-                     });
-        </script>
-
-        <!-- Izaan Job Status Tab -->
-<input type="radio" name="tabDoingTeck" id="tabDoingTeck7">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Teck',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechvideoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.teck-video').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Teck').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Teck Job Status Tab -->
+                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck7">
                             <label for="tabDoingTeck7" class="tabHeadingTeck">Job Status</label>
                             <div class="tab" id="TeckJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
@@ -5507,331 +5556,345 @@
                                     });
                                 });
                             </script>
-
-
-                        <!--Double click Report-->
-        <input type="radio" name="tabDoingTeck" id="tabDoingTeck8">
-        <label for="tabDoingTeck8" class="tabHeadingTeck"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
-        <div class="teck-report">
-
-        </div></form></div>
-
-                <!-- div for doubleclick and tabs -->
-    </div></div>
-
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Teck',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreportadmin.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.teck-report').html(response);
-            // Display Modal
-            $('#doubleClick-Teck').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
-
-            <!-- END OF TECK -->
-
-            <!-- AIZAT -->
-
-            <div class="box">
-            <div class="left-side">
-            <div class="box_topic">Aizat</div>
                             
-            <?php
-            include 'dbconnect.php';
-                                
-             $results = $conn->query("SELECT * FROM job_register WHERE
-                    (job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL)
-                    ORDER BY jobregisterlastmodify_at
-                    DESC LIMIT 50");
+                            <!-- Teck Report Tab -->
+                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck8">
+                            <label for="tabDoingTeck8" class="tabHeadingTeck">Report</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
+                                <form action="ajaxreportadmin.php" method="post">
+                                    <div class="teck-report">
 
-            $numRow = "SELECT * FROM `job_register`WHERE 
-                    job_assign = 'Aizat' AND job_status = '' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL
-                     OR
-                    job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel IS NULL
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = ''
-                    OR
-                    job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL";
-            $numRow_run = mysqli_query ($conn,$numRow);
+                                    </div>
+                                </form>
+                            </div>
 
-            if ($row_Total = mysqli_num_rows($numRow_run))
-            {
-                echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-            }
-
-            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Aizat'"); 
-                while($data = mysqli_fetch_array($records))
-                {
-                    if ($data['tech_avai']==1){
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                    else {
-                        echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">
-                                  Off</a></p>';
-                    }
-                }	
-
-            while($row = $results->fetch_assoc()) {
-            ?>
-            <div class="Aizat" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Aizat" ondblclick="document.getElementById('doubleClick-Aizat').style.display='block'">
-            <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-            <ul class="b" id="draged">
-            <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-            <li><?php echo $row['job_priority']?></li>
-            <li><?php echo $row['customer_name']?></li>
-            <li><?php echo $row['machine_type']?></li>
-            <li><?php echo $row['job_description']?></li>
-            <li><?php echo $row['job_status']?></li>
-            </ul>
-            <div class='supports' id='support'> <?php echo $row['support']?></div>
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Teck',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxreportadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.teck-report').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Teck').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <!-- End of Teck PopUp Modal -->
+                    <!-- End of Teck -->
+                </div>
             </div>
-            <?php } ?>
-            </div>
-            </div>
-                                                     
-                      <!--Double click Job Info (Aizat) -->
-        <div id="doubleClick-Aizat" class="modal">
-        <div class="tabAizat" >
-
-        <input type="radio" name="tabDoingAizat" id="tabDoingAizat1" checked="checked">
-        <label for="tabDoingAizat1" class="tabHeadingAizat"> Job Info </label>
-        <div class="tab" id=AizatJobInfoTab>
-        <div class="contentAizatJobInfo" style="margin-top: -27px; margin-left: -22px;">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="homeindex.php" method="post">
-        <div class="aizat-details">
-               
-        </div></form></div></div>
-        
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Aizat',function(){ 
-            var jobregister_id = $(this).data('id');
-            var type_id = $(this).data('type_id');
-            var customer_name = $(this).data('customer_name');
-
-            // AJAX request
-            $.ajax({
-            url: 'ajaxhometechnician.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
-            success: function(response) {
-            // Add response in Modal body
-            $('.aizat-details').html(response);
-            // Display Modal
-            $('#doubleClick-Aizat').modal('show');
-             }
-                 });
-                });
-            });
-        </script>
-
-        <!-- Double click Job Assign -->
-        <input type="radio" name="tabDoingAizat" id="tabDoingAizat2">
-        <label for="tabDoingAizat2" class="tabHeadingAizat"> Job Assign </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="jobassignADMIN.php" method="post">
-        <div class="aizat-assign">
-
-        </div></form></div>
+            <!-- Fourth row of Admin Board Card -->
             
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Aizat',function(){ 
-            var jobregister_id = $(this).data('id');
-        
-            // AJAX request        
-            $.ajax({
-            url: 'jobassignADMIN.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {  
-            // Add response in Modal body
-            $('.aizat-assign').html(response);
-            // Display Modal
-            $('#doubleClick-Aizat').modal('show');
-                 }
-                     });
-                 });
-            });
-        </script>
+            <!-- Fifth row of Admin Board Card -->
+            <div class="" >
+                <div class="row">
 
- 
-     <!--Double click Update-->
-        <input type="radio" name="tabDoingAizat" id="tabDoingAizat3">
-        <label for="tabDoingAizat3" class="tabHeadingAizat">Update</label>
-        <div class="tab" id=AizatJobInfoTab>
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxtechupdateadmin.php" method="post">
-        <div class="Aizattechupdate-details">
+                    <!-- AIZAT -->
+                    <div class="box">
+                        <div class="left-side">
+                            <div class="box_topic">Aizat</div>
+                                    
+                                    <?php
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query
+                                                    ("SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Aizat' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                     ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
 
-        </div></form></div>
+                                        $numRow = "SELECT * FROM `job_register`WHERE 
+                                                        (job_assign = 'Aizat' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status IS NULL AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Aizat' AND job_status = 'Pending' AND job_cancel IS NULL)";
+            
+                                        $numRow_run = mysqli_query ($conn,$numRow);
+                                            if ($row_Total = mysqli_num_rows($numRow_run))
+                                                {
+                                                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                                                }
+                                        
+                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Aizat'");
+                                            while($data = mysqli_fetch_array($records))
+                                                {
+                                                    if ($data['tech_avai']==1)
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                    
+                                                    else 
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                }
+                                                
+                                                while($row = $results->fetch_assoc()) {
+                                    ?>
+                            
+                                <div class="Aizat" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Aizat" ondblclick="document.getElementById('doubleClick-Aizat').style.display='block'">
+                                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                <ul class="b" id="draged">
+                                    <strong text-align="center"><?php echo $row['job_order_number']?></strong>
+                                    <li><?php echo $row['job_priority']?></li>
+                                    <li><?php echo $row['customer_name']?></li>
+                                    <li><?php echo $row['machine_type']?></li>
+                                    <li><?php echo $row['job_description']?></li>
+                                    <li><?php echo $row['job_status']?></li>
+                                </ul>
+                                <div class='supports' id='support'> <?php echo $row['support']?></div>
+                                </div>
+                                    <?php } ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Aizat PopUp Modal -->
+                    <div id="doubleClick-Aizat" class="modal">
+                        <div class="tabAizat" >
 
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Aizat',function(){ 
-            var jobregister_id = $(this).data('id');
+                            <!-- Aizat Job Info -->
+                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat1" checked="checked">
+                            <label for="tabDoingAizat1" class="tabHeadingAizat">Job Info</label>
+                            <div class="tab" id="AizatJobInfoTab">
+                                <div class="contentAizatJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+                                <form action="homeindex.php" method="post">
+                                    <div class="aizat-details">
 
-            // AJAX request     
-            $.ajax({
-            url:'ajaxtechupdateadmin.php',
-            type:'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-              // Add response in Modal body
-              $('.Aizattechupdate-details').html(response);
-              // Display Modal
-              $('#doubleClick-Aizat').modal('show');
-             }
-             });
-             });
-            });
-        </script>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Aizat',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
+                                        var customer_name = $(this).data('customer_name');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxhometechnician.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id, 
+                                                          type_id: type_id, 
+                                                    customer_name: customer_name},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.aizat-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Aizat').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Aizat Job Assign -->
+                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat2">
+                            <label for="tabDoingAizat2" class="tabHeadingAizat">Job Assign</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+                                <form action="jobassignADMIN.php" method="post">
+                                    <div class="aizat-assign">
 
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Aizat',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'jobassignADMIN.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.aizat-assign').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Aizat').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Aizat Update Tab -->
+                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat3">
+                            <label for="tabDoingAizat3" class="tabHeadingAizat">Update</label>
+                            <div class="tab" id="AizatJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+                                <form action="ajaxtechupdateadmin.php" method="post">
+                                    <div class="Aizattechupdate-details">
 
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Aizat',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url:'ajaxtechupdateadmin.php',
+                                            type:'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.Aizattechupdate-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Aizat').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Aizat Accessories Tab -->
+                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat4">
+                            <label for="tabDoingAizat4" class="tabHeadingAizat">Accessories</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+                                <form action="ajaxtabaccessories.php" method="post">
+                                    <div class="AizatAcc-details">
 
-        <!--Double click Accessories -->
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Aizat',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtabaccessories.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.AizatAcc-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Aizat').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Aizat Photo Tab -->
+                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat5">
+                            <label for="tabDoingAizat5" class="tabHeadingAizat">Photo</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+                                <form action="ajaxtechphtoupdt.php" method="post">
+                                    <div class="Aizat-photo-details">
 
-        <input type="radio" name="tabDoingAizat" id="tabDoingAizat4">
-        <label for="tabDoingAizat4" class="tabHeadingAizat"> Accessories </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxtabaccessories.php" method="post">
-        <div class="AizatAcc-details">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Aizat',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechphtoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.Aizat-photo-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Aizat').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Aizat Video Tab -->
+                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat6">
+                            <label for="tabDoingAizat6" class="tabHeadingAizat">Video</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+                                <form action="ajaxtechvideoupdt.php" method="post">
+                                    <div class="Aizat-video-details">
 
-        </div></form></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Aizat',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtabaccessories.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.AizatAcc-details').html(response);
-            // Display Modal
-            $('#doubleClick-Aizat').modal('show');
-                }
-                 });
-                });
-            });
-        </script>
-
-        <!--Double click Photo-->
-        <input type="radio" name="tabDoingAizat" id="tabDoingAizat5">
-        <label for="tabDoingAizat5" class="tabHeadingAizat"> Photo </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxtechphtoupdt.php" method="post">
-        <div class="Aizat-photo-details">
-
-        </div></form></div>
-      
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Aizat',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechphtoupdt.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) { 
-            // Add response in Modal body
-            $('.Aizat-photo-details').html(response);
-            // Display Modal
-            $('#doubleClick-Aizat').modal('show');
-                }
-                    });
-                    });
-                });
-        </script>
-
-        <!--Double click Video-->
-        <input type="radio" name="tabDoingAizat" id="tabDoingAizat6">
-        <label for="tabDoingAizat6" class="tabHeadingAizat"> Video </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxtechvideoupdt.php" method="post">
-        <div class="Aizat-video-details">
-
-        </div></form></div>
-
-      
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Aizat',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxtechvideoupdt.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) { 
-            // Add response in Modal body
-            $('.Aizat-video-details').html(response);
-            // Display Modal
-            $('#doubleClick-Aizat').modal('show');
-                }
-                    });
-                    });
-                });
-        </script>
-
-        <!-- Aizat Job Status Tab -->
-<input type="radio" name="tabDoingAizat" id="tabDoingAizat7">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Aizat',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechvideoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.Aizat-video-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Aizat').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Aizat Job Status Tab -->
+                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat7">
                             <label for="tabDoingAizat7" class="tabHeadingAizat">Job Status</label>
                             <div class="tab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
@@ -5861,326 +5924,339 @@
                                     });
                                 });
                             </script>
+                            
+                            <!-- Aizat Report Tab -->
+                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat8">
+                            <label for="tabDoingAizat8" class="tabHeadingAizat">Report</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
+                                <form action="ajaxreportadmin.php" method="post">
+                                    <div class="aizat-report">
 
-                <!--Double click Report-->
-        <input type="radio" name="tabDoingAizat" id="tabDoingAizat8">
-        <label for="tabDoingAizat8" class="tabHeadingAizat"> Report </label>
-        <div class="tab">
-        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-        <form action="ajaxreportadmin.php" method="post">
-        <div class="aizat-report">
-
-        </div></form></div>
-
-        
-      <!-- div for doubleclick and tabs -->
-  </div></div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.Aizat',function(){ 
-            var jobregister_id = $(this).data('id');
-            // AJAX request
-            $.ajax({
-            url: 'ajaxreportadmin.php',
-            type: 'post',
-            data: {jobregister_id: jobregister_id},
-            success: function(response) {
-            // Add response in Modal body
-            $('.aizat-report').html(response);
-            // Display Modal
-            $('#doubleClick-Aizat').modal('show');
-                     }
-                    });
-                });
-            });
-        </script>
-
-               <!-- END OF AIZAT -->
-
-               <!-- BOON -->
-               <div class="box" id="myModal">
-                    <div class="left-side" >
-                        <div class="box_topic">Boon</div>
-
-                                <?php
-                                    include 'dbconnect.php';
-                                    $results = $conn->query("SELECT * FROM job_register WHERE
-                                                            (job_assign = 'Boon' AND job_status = '' AND job_cancel = ''
-                                                                OR
-                                                                job_assign = 'Boon' AND job_status = '' AND job_cancel IS NULL
-                                                                OR
-                                                             job_assign = 'Boon' AND job_status IS NULL AND job_cancel IS NULL
-                                                                OR
-                                                             job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel = '' 
-                                                                OR
-                                                             job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel IS NULL
-                                                                OR
-                                                             job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel = ''
-                                                                OR
-                                                             job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel IS NULL
-                                                                OR
-                                                             job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = ''
-                                                                OR
-                                                             job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL
-                                                             OR
-                                                            job_assign = 'Boon' AND job_status IS NULL AND job_cancel = '')
-                                                            ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-                                    $numRow = "SELECT * FROM `job_register`WHERE 
-                                                        job_assign = 'Boon' AND job_status = '' AND job_cancel = ''
-                                                            OR
-                                                        job_assign = 'Boon' AND job_status IS NULL AND job_cancel IS NULL
-                                                            OR
-                                                        job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel = ''
-                                                            OR
-                                                        job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel IS NULL
-                                                            OR
-                                                        job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel = ''
-                                                            OR
-                                                        job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel IS NULL
-                                                            OR
-                                                        job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = ''
-                                                        OR
-                                                        job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL
-                                                        OR
-                                                            job_assign = 'Boon' AND job_status IS NULL AND job_cancel = ''";
-                                    $numRow_run = mysqli_query ($conn,$numRow);
-                                    if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo  '<h4  style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-                                    }
-                                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='BOON'");
-                                    while($data = mysqli_fetch_array($records)) {
-                                        if ($data['tech_avai']==1) {
-                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
-                                         }
-                                        
-                                        else {
-                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
-                                        }
-                                    }
-                                    while($row = $results->fetch_assoc()) {
-                                ?>
-
-                            <div class="Boon" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Boon"  ondblclick="document.getElementById('doubleClick-Boon').style.display='block'">
-                            <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                            <ul class="b" id="draged">
-                                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-                                <li><?php echo $row['job_priority']?></li>
-                                <li><?php echo $row['customer_name']?></li>
-                                <li><?php echo $row['machine_type']?></li>
-                                <li><?php echo $row['job_description']?></li>
-                                <li><?php echo $row['job_status']?></li>
-                            </ul>
-                            <div class='supports' id='support'> <?php echo $row['support']?></div>
-                        </div>
-                                <?php } ?>
-                    </div>
-                </div>
-                
-                <!--Boon PopUp -->
-                <div id="doubleClick-Boon" class="modal">
-                    <div class="tabBoon">
-
-                        <!--Boon Job Info Tab -->
-                        <input type="radio" name="tabDoingBoon" id="tabDoingBoon1" checked="checked">
-                        <label for="tabDoingBoon1" class="tabHeadingBoon"> Job Info </label>
-                        <div class="tab" id="BoonJobInfoTab">
-                            <div class="contentBoonJobInfo" style="margin-top: -27px; margin-left: -22px;">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                            <form action="homeindex.php" method="post">
-                                <div class="boon-details">
-
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
-
-                        <script type='text/javascript'>
-                            $(document).ready(function () {
-                                $('body').on('click','.Boon',function(){
-                                    var jobregister_id = $(this).data('id');
-                                    var type_id = $(this).data('type_id');
-                                    var customer_name = $(this).data('customer_name');
-                                    // AJAX request
-                                    $.ajax({
-                                        url: 'ajaxhometechnician.php',
-                                        type: 'post',
-                                        data: {jobregister_id: jobregister_id,
-															  type_id: type_id,
-															  customer_name: customer_name},
-                                        success: function (response) {
-                                            // Add response in Modal body
-                                            $('.boon-details').html(response);
-                                            // Display Modal
-                                            $('#doubleClick-Boon').modal('show');
-                                        }
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Aizat',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxreportadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.aizat-report').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Aizat').modal('show');
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                        </script>
+                            </script>
+                        </div>
+                    </div>
+                    <!-- End Of Aizat PopUp Modal -->
+                    <!-- End Of Aizat -->
                     
-                        <!-- Boon Job Assign Tab -->
-                        <input type="radio" name="tabDoingBoon" id="tabDoingBoon2">
-                        <label for="tabDoingBoon2" class="tabHeadingBoon"> Job Assign </label>
-                        <div class="tab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                            <form action="jobassignADMIN.php" method="post">
-                                <div class="boon-assign">
-
+                    <!-- BOON -->
+                    <div class="box" id="myModal">
+                        <div class="left-side" >
+                            <div class="box_topic">Boon</div>
+                                    
+                                    <?php
+                                        
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query
+                                                    ("SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Boon' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status IS NULL AND job_cancel = '')
+                                                     ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                    
+                                        $numRow = "SELECT * FROM `job_register`WHERE 
+                                                        (job_assign = 'Boon' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Boon' AND job_status IS NULL AND job_cancel = '')";
+                                    
+                                        $numRow_run = mysqli_query ($conn,$numRow);
+                                            if ($row_Total = mysqli_num_rows($numRow_run)) 
+                                                {
+                                                    echo  '<h4  style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                                                }
+                                        
+                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='BOON'");
+                                            while($data = mysqli_fetch_array($records))
+                                                {
+                                                    if ($data['tech_avai']==1) 
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                    
+                                                    else
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                }
+                                                
+                                                while($row = $results->fetch_assoc()) {
+                                    ?>
+                                    
+                                <div class="Boon" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Boon"  ondblclick="document.getElementById('doubleClick-Boon').style.display='block'">
+                                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                <ul class="b" id="draged">
+                                    <strong text-align="center"><?php echo $row['job_order_number']?></strong>
+                                    <li><?php echo $row['job_priority']?></li>
+                                    <li><?php echo $row['customer_name']?></li>
+                                    <li><?php echo $row['machine_type']?></li>
+                                    <li><?php echo $row['job_description']?></li>
+                                    <li><?php echo $row['job_status']?></li>
+                                </ul>
+                                <div class='supports' id='support'> <?php echo $row['support']?></div>
                                 </div>
-                            </form>
+                                    <?php } ?>
                         </div>
-                        
-                        <script type='text/javascript'>
-                            $(document).ready(function () {
-                                $('body').on('click','.Boon',function(){ 
-                                    var jobregister_id = $(this).data('id');
-                                    // AJAX request
-                                    $.ajax( {
-                                        url: 'jobassignADMIN.php',
-                                        type: 'post',
-                                        data: { jobregister_id: jobregister_id },
-                                        success: function (response) {
-                                            // Add response in Modal body
-                                            $('.boon-assign').html(response);
-                                            // Display Modal
-                                            $('#doubleClick-Boon').modal('show');
-                                        }
+                    </div>
+                    
+                    <!--Boon PopUp -->
+                    <div id="doubleClick-Boon" class="modal">
+                        <div class="tabBoon">
+                            
+                            <!--Boon Job Info Tab -->
+                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon1" checked="checked">
+                            <label for="tabDoingBoon1" class="tabHeadingBoon">Job Info</label>
+                            <div class="tab" id="BoonJobInfoTab">
+                                <div class="contentBoonJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+                                <form action="homeindex.php" method="post">
+                                    <div class="boon-details">
+
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Boon',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
+                                        var customer_name = $(this).data('customer_name');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxhometechnician.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id,
+														  type_id: type_id,
+													customer_name: customer_name},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.boon-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Boon').modal('show');
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                        </script>
-                        
-                        <!-- Boon Update Tab-->
-                        <input type="radio" name="tabDoingBoon" id="tabDoingBoon3">
-                        <label for="tabDoingBoon3" class="tabHeadingBoon">Update</label>
-                        <div class="tab" id="BoonJobInfoTab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                            <form action="ajaxtechupdateadmin.php" method="post">
-                                <div class="boon-update">
+                            </script>
+                            
+                            <!-- Boon Job Assign Tab -->
+                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon2">
+                            <label for="tabDoingBoon2" class="tabHeadingBoon">Job Assign</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+                                <form action="jobassignADMIN.php" method="post">
+                                    <div class="boon-assign">
 
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <script type='text/javascript'>
-                            $(document).ready(function () {
-                                $('body').on('click','.Boon',function(){ 
-                                    var jobregister_id = $(this).data('id');
-                                    // AJAX request
-                                    $.ajax({
-                                        url: 'ajaxtechupdateadmin.php',
-                                        type: 'post',
-                                        data: { jobregister_id: jobregister_id },
-                                        success: function (response) {
-                                            // Add response in Modal body
-                                            $('.boon-update').html(response);
-                                            // Display Modal
-                                            $('#doubleClick-Boon').modal('show');
-                                        }
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Boon',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax( {
+                                            url: 'jobassignADMIN.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.boon-assign').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Boon').modal('show');
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                        </script>
-                        
-                        <!-- Boon Accessories Tab -->
-                        <input type="radio" name="tabDoingBoon" id="tabDoingBoon4">
-                        <label for="tabDoingBoon4" class="tabHeadingBoon"> Accessories </label>
-                        <div class="tab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                            <form action="ajaxtabaccessories.php" method="post">
-                                <div class="boon-accessories">
+                            </script>
+                            
+                            <!-- Boon Update Tab-->
+                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon3">
+                            <label for="tabDoingBoon3" class="tabHeadingBoon">Update</label>
+                            <div class="tab" id="BoonJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+                                <form action="ajaxtechupdateadmin.php" method="post">
+                                    <div class="boon-update">
 
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <script type='text/javascript'>
-                            $(document).ready(function () {
-                                $('body').on('click','.Boon',function(){ 
-                                    var jobregister_id = $(this).data('id');
-                                    // AJAX request
-                                    $.ajax({
-                                        url: 'ajaxtabaccessories.php',
-                                        type: 'post',
-                                        data: { jobregister_id: jobregister_id },
-                                        success: function (response) {
-                                            // Add response in Modal body
-                                            $('.boon-accessories').html(response);
-                                            // Display Modal
-                                            $('#doubleClick-Boon').modal('show');
-                                        }
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Boon',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechupdateadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.boon-update').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Boon').modal('show');
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                        </script>
-                        
-                        <!-- Boon Photo Tab-->
-                        <input type="radio" name="tabDoingBoon" id="tabDoingBoon5">
-                        <label for="tabDoingBoon5" class="tabHeadingBoon"> Photo </label>
-                        <div class="tab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                            <form action="ajaxtechphtoupdt.php" method="post">
-                                <div class="boon-photos">
+                            </script>
+                            
+                            <!-- Boon Accessories Tab -->
+                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon4">
+                            <label for="tabDoingBoon4" class="tabHeadingBoon"> Accessories </label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+                                <form action="ajaxtabaccessories.php" method="post">
+                                    <div class="boon-accessories">
 
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <script type='text/javascript'>
-                            $(document).ready(function () {
-                                $('body').on('click','.Boon',function(){ 
-                                    var jobregister_id = $(this).data('id');
-                                    // AJAX request
-                                    $.ajax({
-                                        url: 'ajaxtechphtoupdt.php',
-                                        type: 'post',
-                                        data: { jobregister_id: jobregister_id },
-                                        success: function (response) {
-                                            // Add response in Modal body
-                                            $('.boon-photos').html(response);
-                                            // Display Modal
-                                            $('#doubleClick-Boon').modal('show');
-                                        }
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Boon',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtabaccessories.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.boon-accessories').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Boon').modal('show');
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                        </script>
-                        
-                        <!-- Boon Video Tab -->
-                        <input type="radio" name="tabDoingBoon" id="tabDoingBoon6">
-                        <label for="tabDoingBoon6" class="tabHeadingBoon"> Video </label>
-                        <div class="tab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                            <form action="ajaxtechvideoupdt.php" method="post">
-                                <div class="boon-videos">
+                            </script>
+                            
+                            <!-- Boon Photo Tab-->
+                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon5">
+                            <label for="tabDoingBoon5" class="tabHeadingBoon"> Photo </label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+                                <form action="ajaxtechphtoupdt.php" method="post">
+                                    <div class="boon-photos">
 
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <script type='text/javascript'>
-                            $(document).ready(function () {
-                                $('body').on('click','.Boon',function(){ 
-                                    var jobregister_id = $(this).data('id');
-                                    // AJAX request
-                                    $.ajax({
-                                        url: 'ajaxtechvideoupdt.php',
-                                        type: 'post',
-                                        data: { jobregister_id: jobregister_id },
-                                        success: function (response) {
-                                            // Add response in Modal body
-                                            $('.boon-videos').html(response);
-                                            // Display Modal
-                                            $('#doubleClick-Boon').modal('show');
-                                        }
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Boon',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechphtoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.boon-photos').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Boon').modal('show');
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                        </script>
+                            </script>
+                            
+                            <!-- Boon Video Tab -->
+                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon6">
+                            <label for="tabDoingBoon6" class="tabHeadingBoon">Video</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+                                <form action="ajaxtechvideoupdt.php" method="post">
+                                    <div class="boon-videos">
 
-                         <!-- Boon Job Status Tab -->
-<input type="radio" name="tabDoingBoon" id="tabDoingBoon7">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Boon',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechvideoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.boon-videos').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Boon').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Boon Job Status Tab -->
+                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon7">
                             <label for="tabDoingBoon7" class="tabHeadingBoon">Job Status</label>
                             <div class="tab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
@@ -6210,328 +6286,338 @@
                                     });
                                 });
                             </script>
-                        
-                        <!-- Boon Report Tab -->
-                        <input type="radio" name="tabDoingBoon" id="tabDoingBoon8">
-                        <label for="tabDoingBoon8" class="tabHeadingBoon"> Report </label>
-                        <div class="tab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                            <form action="ajaxreportadmin.php" method="post">
-                                <div class="boon-report">
+                            
+                            <!-- Boon Report Tab -->
+                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon8">
+                            <label for="tabDoingBoon8" class="tabHeadingBoon">Report</label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
+                                <form action="ajaxreportadmin.php" method="post">
+                                    <div class="boon-report">
 
-                                </div>
-                            </form>
-                        </div>
-
-                        <script type='text/javascript'>
-                            $(document).ready(function() {
-                                $('body').on('click','.Boon',function(){
-                                    var jobregister_id = $(this).data('id');
-                                    // AJAX request
-                                    $.ajax({
-                                        url: 'ajaxreportadmin.php',
-                                        type: 'post',
-                                        data: {jobregister_id: jobregister_id},
-                                        success: function(response) {
-                                            // Add response in Modal body
-                                            $('.boon-report').html(response);
-                                            // Display Modal
-                                            $('#doubleClick-Boon').modal('show');
-                                        }
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Boon',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxreportadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.boon-report').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Boon').modal('show');
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                        </script>
-
-                    </div>
-                </div>
-                <!--Boon PopUp -->
-                <!-- End of BOON -->
-                
-                <!-- HAFIZ -->
-                <div class="box" id="myModal">
-                    <div class="left-side">
-                        <div class="box_topic">Hafiz</div>
-                                
-                                <?php
-                                    include 'dbconnect.php';
-                                    $results = $conn->query("SELECT * FROM job_register WHERE
-                                                            (job_assign = 'Hafiz' AND job_status = '' AND job_cancel = ''
-                                                                OR
-                                                                job_assign = 'Hafiz' AND job_status = '' AND job_cancel IS NULL
-                                                                OR
-                                                             job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel IS NULL
-                                                                OR
-                                                             job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel = ''
-                                                                OR
-                                                             job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel IS NULL
-                                                                OR
-                                                             job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel = ''
-                                                                OR
-                                                             job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel IS NULL
-                                                                OR
-                                                             job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = ''
-                                                             OR
-                                                             job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL
-                                                             OR
-                                                            job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel = '')
-                                                             ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
-                                    $numRow = "SELECT * FROM `job_register`WHERE 
-                                                        job_assign = 'Hafiz' AND job_status = '' AND job_cancel = ''
-                                                            OR
-                                                        job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel IS NULL
-                                                            OR
-                                                        job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel = ''
-                                                            OR
-                                                        job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel IS NULL
-                                                            OR
-                                                        job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel = ''
-                                                            OR
-                                                        job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel IS NULL
-                                                            OR
-                                                        job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = ''
-                                                            OR
-                                                        job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL
-                                                        OR
-                                                        job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel = ''";
-                                    $numRow_run = mysqli_query ($conn,$numRow);
-                                    if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
-                                    }
-                                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hafiz'");
-                                    while($data = mysqli_fetch_array($records)) {
-                                        if ($data['tech_avai']==1) {
-                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
-                                        }
-                                        else {
-                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
-                                        }
-                                    }
-                                    while($row = $results->fetch_assoc()) {
-                                ?>
-                                
-                            <div class="Hafiz" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hafiz"  ondblclick="document.getElementById('doubleClick-Hafiz').style.display='block'">
-                            <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                            <ul class="b" id="draged">
-                                <strong text-align="center"><?php echo $row['job_order_number']?></strong>
-                                <li><?php echo $row['job_priority']?></li>
-                                <li><?php echo $row['customer_name']?></li>
-                                <li><?php echo $row['machine_type']?></li>
-                                <li><?php echo $row['job_description']?></li>
-                                <li><?php echo $row['job_status']?></li>
-                            </ul>
-                            <div class='supports' id='support'> <?php echo $row['support']?></div>
+                            </script>
                         </div>
-                                <?php } ?>
                     </div>
-                </div>
-            </div>
-            <!--  End of First row of Admin Board Card -->
-            
-            <!-- Hafiz PopUp -->
-            <div id="doubleClick-Hafiz" class="modal">
-                <div class="tabHafiz">
+                    <!-- End of Boon PopUp -->
+                    <!-- End of BOON -->
                     
-                    <!-- Hafiz Job Info Tab -->
-                    <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz1" checked="checked">
-                    <label for="tabDoingHafiz1" class="tabHeadingHafiz"> Job Info </label>
-                    <div class="tab" id="HafizJobInfoTab">
-                        <div class="contentHafizJobInfo" style="margin-top: -27px; margin-left: -22px;">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                        <form action="homeindex.php" method="post">
-                            <div class="hafiz-details">
-
-                            </div>
-                        </form>
+                    <!-- HAFIZ -->
+                    <div class="box" id="myModal">
+                        <div class="left-side">
+                            <div class="box_topic">Hafiz</div>
+                                    
+                                    <?php
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query
+                                                    ("SELECT * FROM job_register WHERE
+                                                        (job_assign = 'Hafiz' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel = '')
+                                                     ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                    
+                                        $numRow = "SELECT * FROM `job_register`WHERE 
+                                                        (job_assign = 'Hafiz' AND job_status = '' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = '' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel = '')
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status = 'Pending' AND job_cancel IS NULL)
+                                                            OR
+                                                        (job_assign = 'Hafiz' AND job_status IS NULL AND job_cancel = '')";
+                                    
+                                        $numRow_run = mysqli_query ($conn,$numRow);
+                                            if ($row_Total = mysqli_num_rows($numRow_run))
+                                                {
+                                                    echo '<h4 style="text-align: -webkit-right;">Total Job: '.$row_Total.' </h4>';
+                                                }
+                                    
+                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='Hafiz'");
+                                            while($data = mysqli_fetch_array($records))
+                                                {
+                                                    if ($data['tech_avai']==1)
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                    
+                                                    else
+                                                        {
+                                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id='.$data['staffregister_id'].'&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                                        }
+                                                }
+                                                
+                                                while($row = $results->fetch_assoc()) {
+                                    ?>
+                                
+                                <div class="Hafiz" data-type_id="<?php echo $row['type_id'];?>" data-customer_name="<?php echo $row['customer_name'];?>" data-id="<?php echo $row['jobregister_id'];?>" data-target="doubleClick-Hafiz"  ondblclick="document.getElementById('doubleClick-Hafiz').style.display='block'">
+                                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                <ul class="b" id="draged">
+                                    <strong text-align="center"><?php echo $row['job_order_number']?></strong>
+                                    <li><?php echo $row['job_priority']?></li>
+                                    <li><?php echo $row['customer_name']?></li>
+                                    <li><?php echo $row['machine_type']?></li>
+                                    <li><?php echo $row['job_description']?></li>
+                                    <li><?php echo $row['job_status']?></li>
+                                </ul>
+                                <div class='supports' id='support'> <?php echo $row['support']?></div>
+                                </div>
+                                    <?php } ?>
                         </div>
                     </div>
                     
-                    <script type='text/javascript'>
-                        $(document).ready(function () {
-                            $('body').on('click','.Hafiz',function(){
-                                var jobregister_id = $(this).data('id');
-                                var type_id = $(this).data('type_id');
-                                var customer_name = $(this).data('customer_name');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxhometechnician.php',
-                                    type: 'post',
-                                   data: {jobregister_id: jobregister_id,
-															  type_id: type_id,
-															  customer_name: customer_name},
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.hafiz-details').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-Hafiz').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-                    
-                    <!-- Hafiz Job Assign Tab -->
-                    <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz2">
-                    <label for="tabDoingHafiz2" class="tabHeadingHafiz">Job Assign</label>
-                    <div class="tab" id=HafizJobInfoTab>
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                        <form action="jobassignADMIN.php" method="post">
-                            <div class="hafiz-assign">
+                    <!-- Hafiz PopUp Modal -->
+                    <div id="doubleClick-Hafiz" class="modal">
+                        <div class="tabHafiz">
+                            
+                            <!-- Hafiz Job Info Tab -->
+                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz1" checked="checked">
+                            <label for="tabDoingHafiz1" class="tabHeadingHafiz"> Job Info </label>
+                            <div class="tab" id="HafizJobInfoTab">
+                                <div class="contentHafizJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+                                <form action="homeindex.php" method="post">
+                                    <div class="hafiz-details">
 
+                                    </div>
+                                </form>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                    
-                    <script type='text/javascript'>
-                        $(document).ready(function () {
-                            $('body').on('click','.Hafiz',function(){
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'jobassignADMIN.php',
-                                    type: 'post',
-                                    data: { jobregister_id: jobregister_id },
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.hafiz-assign').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-Hafiz').modal('show');
-                                    }
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Hafiz',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        var type_id = $(this).data('type_id');
+                                        var customer_name = $(this).data('customer_name');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxhometechnician.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id,
+														  type_id: type_id,
+													customer_name: customer_name},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.hafiz-details').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Hafiz').modal('show');
+                                            }
+                                        });
+                                    });
                                 });
-                            });
-                        });
-                    </script>
-                    
-                    <!-- Hafiz Update Tab -->
-                    <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz3">
-                    <label for="tabDoingHafiz3" class="tabHeadingHafiz">Update</label>
-                    <div class="tab" id="HafizJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                        <form action="ajaxtechupdateadmin.php" method="post">
-                            <div class="hafiz-update">
+                            </script>
+                            
+                            <!-- Hafiz Job Assign Tab -->
+                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz2">
+                            <label for="tabDoingHafiz2" class="tabHeadingHafiz">Job Assign</label>
+                            <div class="tab" id="HafizJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+                                <form action="jobassignADMIN.php" method="post">
+                                    <div class="hafiz-assign">
 
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
-                    
-                    <script type='text/javascript'>
-                        $(document).ready(function () {
-                            $('body').on('click','.Hafiz',function(){
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxtechupdateadmin.php',
-                                    type: 'post',
-                                    data: { jobregister_id: jobregister_id },
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.hafiz-update').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-Hafiz').modal('show');
-                                    }
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Hafiz',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'jobassignADMIN.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.hafiz-assign').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Hafiz').modal('show');
+                                            }
+                                        });
+                                    });
                                 });
-                            });
-                        });
-                    </script>
+                            </script>
+                            
+                            <!-- Hafiz Update Tab -->
+                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz3">
+                            <label for="tabDoingHafiz3" class="tabHeadingHafiz">Update</label>
+                            <div class="tab" id="HafizJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+                                <form action="ajaxtechupdateadmin.php" method="post">
+                                    <div class="hafiz-update">
 
-                    <!-- Hafiz Accessories -->
-                    <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz4">
-                    <label for="tabDoingHafiz4" class="tabHeadingHafiz">Accessories</label>
-                    <div class="tab" id="HafizJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                        <form action="ajaxtabaccessories.php" method="post">
-                            <div class="hafiz-accessories">
-
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
-                    
-                    <script type='text/javascript'>
-                        $(document).ready(function () {
-                            $('body').on('click','.Hafiz',function(){
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxtabaccessories.php',
-                                    type: 'post',
-                                    data: { jobregister_id: jobregister_id },
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.hafiz-accessories').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-Hafiz').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-                    
-                    <!-- Hafiz Photo Tab -->
-                    <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz5">
-                    <label for="tabDoingHafiz5" class="tabHeadingHafiz">Photo</label>
-                    <div class="tab" id="HafizJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                        <form action="ajaxtechphtoupdt.php" method="post">
-                            <div class="hafiz-photo">
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Hafiz',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechupdateadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.hafiz-update').html(response);
+                                                 // Display Modal
+                                                 $('#doubleClick-Hafiz').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                            </script>
+                            
+                            <!-- Hafiz Accessories Tab -->
+                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz4">
+                            <label for="tabDoingHafiz4" class="tabHeadingHafiz">Accessories</label>
+                            <div class="tab" id="HafizJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+                                <form action="ajaxtabaccessories.php" method="post">
+                                    <div class="hafiz-accessories">
 
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
-                    
-                    <script type='text/javascript'>
-                        $(document).ready(function () {
-                            $('body').on('click','.Hafiz',function(){
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxtechphtoupdt.php',
-                                    type: 'post',
-                                    data: { jobregister_id: jobregister_id },
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.hafiz-photo').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-Hafiz').modal('show');
-                                    }
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Hafiz',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtabaccessories.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.hafiz-accessories').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Hafiz').modal('show');
+                                            }
+                                        });
+                                    });
                                 });
-                            });
-                        });
-                    </script>
+                            </script>
+                            
+                            <!-- Hafiz Photo Tab -->
+                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz5">
+                            <label for="tabDoingHafiz5" class="tabHeadingHafiz">Photo</label>
+                            <div class="tab" id="HafizJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+                                <form action="ajaxtechphtoupdt.php" method="post">
+                                    <div class="hafiz-photo">
 
-                    <!--Hafiz Vidoe Tab-->
-                    <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz6">
-                    <label for="tabDoingHafiz6" class="tabHeadingHafiz">Video</label>
-                    <div class="tab" id="HafizJobInfoTab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                        <form action="ajaxtechvideoupdt.php" method="post">
-                            <div class="hafiz-video">
-
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
-                    
-                    <script type='text/javascript'>
-                        $(document).ready(function () {
-                            $('body').on('click','.Hafiz',function(){ 
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxtechvideoupdt.php',
-                                    type: 'post',
-                                    data: { jobregister_id: jobregister_id },
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.hafiz-video').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-Hafiz').modal('show');
-                                    }
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Hafiz',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechphtoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.hafiz-photo').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Hafiz').modal('show');
+                                            }
+                                        });
+                                    });
                                 });
-                            });
-                        });
-                    </script>
+                            </script>
+                            
+                            <!--Hafiz Vidoe Tab-->
+                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz6">
+                            <label for="tabDoingHafiz6" class="tabHeadingHafiz">Video</label>
+                            <div class="tab" id="HafizJobInfoTab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+                                <form action="ajaxtechvideoupdt.php" method="post">
+                                    <div class="hafiz-video">
 
-                    <!-- Hafiz Job Status Tab -->
-<input type="radio" name="tabDoingHafiz" id="tabDoingHafiz7">
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function () {
+                                    $('body').on('click','.Hafiz',function() {
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxtechvideoupdt.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function (response) {
+                                                // Add response in Modal body
+                                                $('.hafiz-video').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Hafiz').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                            
+                            <!-- Hafiz Job Status Tab -->
+                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz7">
                             <label for="tabDoingHafiz7" class="tabHeadingHafiz">Job Status</label>
                             <div class="tab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
@@ -6561,70 +6647,70 @@
                                     });
                                 });
                             </script>
-                    
-                    <!-- Hafiz Report Tab -->
-                    <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz8">
-                    <label for="tabDoingHafiz8" class="tabHeadingHafiz"> Report </label>
-                    <div class="tab">
-                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                        <form action="ajaxreportadmin.php" method="post">
-                            <div class="hafiz-report">
+                            
+                            <!-- Hafiz Report Tab -->
+                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz8">
+                            <label for="tabDoingHafiz8" class="tabHeadingHafiz"> Report </label>
+                            <div class="tab">
+                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
+                                <form action="ajaxreportadmin.php" method="post">
+                                    <div class="hafiz-report">
 
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
-
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-                            $('body').on('click','.Hafiz',function(){
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxreportadmin.php',
-                                    type: 'post',
-                                    data: {jobregister_id: jobregister_id},
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.hafiz-report').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-Hafiz').modal('show');
-                                    }
+                            
+                            <script type='text/javascript'>
+                                $(document).ready(function() {
+                                    $('body').on('click','.Hafiz',function(){
+                                        var jobregister_id = $(this).data('id');
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'ajaxreportadmin.php',
+                                            type: 'post',
+                                            data: {jobregister_id: jobregister_id},
+                                            success: function(response) {
+                                                // Add response in Modal body
+                                                $('.hafiz-report').html(response);
+                                                // Display Modal
+                                                $('#doubleClick-Hafiz').modal('show');
+                                            }
+                                        });
+                                    });
                                 });
-                            });
-                        });
-                    </script>
+                            </script>
+                        </div>
+                    </div>
+                    <!-- End Of HAFIZ PopUp Modal -->
+                    <!-- End Of HAFIZ -->
                 </div>
             </div>
-            <!-- End Of HAFIZ -->
-            <!-- End of First row of Admin Board Card -->
+            <!-- End of fifth row of Admin Board Card -->
+        </div>
+    </div>
+    <!-- End of Admin Board Card -->
+    </section>
+    <!-- Admin Home Board -->
 
-
-							
-							
-                        	
-        	
-			</div>
-</div>
-</div>
-
-  <script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
-    });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
-  </script>
-
-
-</section>
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) 
+            {
+                arrow[i].addEventListener("click", (e)=>
+                    {
+                        let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+                        arrowParent.classList.toggle("showMenu");
+                    });
+            }
+            
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", ()=>
+            {
+                sidebar.classList.toggle("close");
+            });
+    </script>
 
 </body>
 </html>
