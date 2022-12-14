@@ -57,6 +57,8 @@
                         <button type="submit">Search</button>
                     </div>
                     <br>
+
+                    <!-- Tech Attendance and Rest Hour Table -->
                     <div id="wrapper">
                         <table>
                             <thead>
@@ -107,6 +109,51 @@
                         </table>
                         <br>
                     </div>
+                    <!-- End of Tech Attendance and Rest Hour Table -->
+
+                    <!-- Absent Technician -->
+                    <div id="wrapper">
+                    <b>Absent Technician</b>
+                        <table>
+                                <?php
+                                    include_once 'dbconnect.php';
+                                    
+                                    if(isset($_GET['DateAssign']))
+                                        {
+                                            $DateAssign = $_GET['DateAssign'];
+                                            
+                                            $sql = "SELECT * FROM staff_register WHERE tech_avai='1'";
+                                            $result = mysqli_query($conn, $sql);
+                                            if(mysqli_num_rows($result) > 0) 
+                                                { 
+                                                    foreach($result as $row) 
+                                                    { 
+                                ?>
+
+                            <thead>
+                                <tr>
+                                    <th style="font-weight: bold;background: #B2BEB5;"><?php echo $row["username"]; ?></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td data-label="<?php echo $row["username"]; ?>" style="font-weight: bold;">OFF</td>
+                                </tr>
+                            </tbody>
+
+                                <?php
+                                    } }
+                                        else
+                                            {
+                                                echo "No Record Found";
+                                            }
+                                        }
+                                ?>
+                        </table>
+                        <br>
+                    </div>
+                    <!-- End of Absent Technician -->
             </form>
         </div>
     </body>
