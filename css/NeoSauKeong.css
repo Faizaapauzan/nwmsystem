@@ -23,10 +23,11 @@ body {
 .timestamp {
     font-size: 14px;
     width: max-content;
-    text-align: end;
+    text-align: right;
     font-weight: bold;
     margin-left: auto;
     margin-bottom: 2px;
+    font-family: sans-serif;
 }
 
 /* -------Top Button------- */
