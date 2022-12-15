@@ -123,13 +123,14 @@ session_start();
 				<button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
 					<div id="draged">
 						<strong text-align="center" style="color: #081d45;"><?php echo $row['customer_name']?> [<?php echo $row['customer_grade']?>]</strong>
+                        <hr style="width: 100%; color:black; color:gray; background-color:gray; height:2px;">
 						<li><?php echo $row['job_priority']?></li>
 						<li><?php echo $row['job_order_number']?></li>
 						<li><?php echo $row['job_description']?></li>
 						<li><?php echo $row['machine_type']?></li>
 						<li><?php echo $row['machine_name']?></li>
 						<li><?php echo $row['serialnumber']?></li>
-						<strong text-align="center" style="color:red"><?php echo $row['reason']?></strong>
+						<strong style="color:red"><?php echo $row['reason']?></strong>
 					</div>
 					<div class='timestamp' style='font-family: sans-serif;'>
 						<strong><?php echo $row['support']?></strong>
