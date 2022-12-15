@@ -21,29 +21,13 @@ body {
 }
 
 .timestamp {
-    border-radius: 6px;
-    font-size: 15px;
-    padding: 2px 5px 2px 5px;
+    font-size: 14px;
     width: max-content;
     text-align: center;
     font-weight: bold;
     margin-left: auto;
     font-family: "Times New Roman", Times, serif;
     margin-bottom: 2px;
-}
-
-.card-complete {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1pxsolidrgba (0, 0, 0, 0.125);
-    border-radius: 0.25rem;
 }
 
 /* -------Top Button------- */
@@ -172,8 +156,8 @@ button:focus {
 }
 
 .modal .close {
-    right: 20px;
-    top: -110px;
+    right: 40px;
+    top: -90px;
     width: 20px;
     height: 0px;
     cursor: pointer;

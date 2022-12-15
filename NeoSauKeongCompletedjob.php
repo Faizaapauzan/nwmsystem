@@ -69,19 +69,17 @@
 				?> 
             
             <div class="cards" id="livesearch">
-                <div class="card" id="notYetStatus" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
-                <button type="button" class="btn btn-light text-left font-weight-bold font-color-black">
-                    <ul id="draged">
-                        <strong text-align="center" style="color: #081d45;"><?php echo $row['customer_name']?> [<?php echo $row['customer_grade']?>]</strong>
-                        <hr style="width: 100%; color:black; color:gray; background-color:gray; height:2px;">
-                        <li><?php echo $row['job_priority']?></li>
-                        <li><?php echo $row['job_order_number']?></li>
-                        <li><?php echo $row['job_description']?></li>
-                        <li><?php echo $row['machine_type']?></li>
-                        <li><?php echo $row['machine_name']?></li>
-                        <li><?php echo $row['serialnumber']?></li>
-                    </ul>
-                    <div class='timestamp' style='font-family: sans-serif;'>
+                <div class="card" id="notYetStatus" style="padding: 15px; background-color: #ededed" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
+                    <strong text-align="center" style="color: #081d45"><?php echo $row['customer_name']?> [<?php echo $row['customer_grade']?>]</strong>
+                    <hr style="width: 100%; color: black; color: gray; background-color: gray; height: 2px;" />
+                    <li><?php echo $row['job_priority']?></li>
+                    <li><?php echo $row['job_order_number']?></li>
+                    <li><?php echo $row['job_description']?></li>
+                    <li><?php echo $row['machine_type']?></li>
+                    <li><?php echo $row['machine_name']?></li>
+                    <li><?php echo $row['serialnumber']?></li>
+                    <strong style="color: red"><?php echo $row['reason']?></strong>
+                    <div class='timestamp'>
                         <strong><?php echo $row['job_assign']?></strong>
                         <br>
                         <strong><?php echo $date?></strong>
