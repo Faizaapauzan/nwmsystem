@@ -23,10 +23,9 @@ body {
 .timestamp {
     font-size: 14px;
     width: max-content;
-    text-align: center;
+    text-align: end;
     font-weight: bold;
     margin-left: auto;
-    font-family: "Times New Roman", Times, serif;
     margin-bottom: 2px;
 }
 
