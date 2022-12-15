@@ -78,7 +78,6 @@
                     <li><?php echo $row['machine_type']?></li>
                     <li><?php echo $row['machine_name']?></li>
                     <li><?php echo $row['serialnumber']?></li>
-                    <strong style="color: red"><?php echo $row['reason']?></strong>
                     <div class='timestamp'>
                         <strong><?php echo $row['job_assign']?></strong>
                         <br>
