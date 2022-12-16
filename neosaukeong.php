@@ -7,7 +7,7 @@
 		header("location:index.php?error");
 	}
 	
-	elseif($_SESSION['username']== 'KEONG')
+	elseif($_SESSION['username']=='KEONG' OR $_SESSION['username']=='keong' OR $_SESSION['username']=='Keong')
 	{
 
 	}
