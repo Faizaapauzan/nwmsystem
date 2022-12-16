@@ -123,9 +123,10 @@
                                  
                                  while($row =$results->fetch_assoc()) { 
                 ?>
-
+                    
             <div class="cards" id="livesearch">
                 <div class="card" id="notYetStatus" style="padding: 15px; background-color: #ededed" data-id="<?php echo $row['jobregister_id'];?>" data-toggle="modal" data-target="#myModal">
+                <ul class="b">
                     <strong text-align="center" style="color: #081d45"><?php echo $row['customer_name']?> [<?php echo $row['customer_grade']?>]</strong>
                     <hr style="width: 100%; color: black; color: gray; background-color: gray; height: 2px;" />
                     <li><?php echo $row['job_priority']?></li>
@@ -135,10 +136,11 @@
                     <li><?php echo $row['machine_name']?></li>
                     <li><?php echo $row['serialnumber']?></li>
                     <strong style="color: red"><?php echo $row['reason']?></strong>
+                </ul>
                 <div class="timestamp">
                     <strong><?php echo $row['support']?></strong>
                 </div>
-                </div>
+            </div>
             </div>
             <br/>
                 <?php } ?>
