@@ -9,8 +9,13 @@
 
 <!DOCTYPE html>
 <head>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+	  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -133,24 +138,19 @@ include 'dbconnect.php';
       }
   ?>
 
-<label style="color: blue" for="assistant">Select Assistant :</label>
-<table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -11px;" class="table" width="60%" cellspacing="0">
-   <thead>
-      <tr>
-        <th></th>
-      </tr>
-   </thead>
-   <tbody>
-      <?php foreach($queryRecords as $res) :?>
-      <tr data-row-id="<?php echo $res['id'];?>">
-         <td><b><?php echo $res['username'];?></b></td>
-         <td><span style="color: red" class='deleteassa' data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
-      </tr>
-	  <?php endforeach;?>
-   </tbody>
-</table>
+  <label style="color: blue" for="assistant">Select Assistant :</label>
+    <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left:-7px; width:96%; margin-top:11px;" class="table" cellspacing="0"> 
+    <tbody>
+        <?php foreach($queryRecords as $res) :?>
+            <tr data-row-id="<?php echo $res['id'];?>">
+            <td><b><?php echo $res['username'];?></b></td>
+            <td><span style="color: red" class='deleteassa' data-id='<?php echo $res["id"]; ?>'>Delete</span></td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+    </table>
 
-<div class="input-box" style="width: 432px;">
+<div class="input-box" style="width:100%">
   <select name="username[]" class="form-control multiple-assistant" multiple="multiple" style="height: auto; margin-left: -19px;">
       
       <?php
