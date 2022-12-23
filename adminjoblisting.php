@@ -8,7 +8,8 @@
     require_once 'dbconnect.php'; 
     
     // Count of all records 
-    $query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register");
+    $query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register WHERE job_cancel = '' AND job_status != 'Completed' 
+                                                                         OR job_cancel IS NULL AND job_status != 'Completed' ");
     $result  = $query->fetch_assoc();
     $rowCount= $result['rowNum'];
     
@@ -17,7 +18,9 @@
     $pagination =  new Pagination($pagConfig);
     
     // Fetch records based on the limit
-    $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = '' AND job_status != 'Completed' OR job_cancel IS NULL AND job_status != 'Completed' ORDER BY jobregisterlastmodify_at DESC"); 
+    $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = '' AND job_status != 'Completed' 
+                                                      OR job_cancel IS NULL AND job_status != 'Completed' 
+                                                      ORDER BY jobregisterlastmodify_at DESC"); 
 ?>
  
 <?php
@@ -322,6 +325,7 @@
                     </div>
                 </div>
                 
+                <!-- Job Info for Pending status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Pending',function() {
@@ -329,7 +333,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'ajaxhome.php',
+                                    url: 'AdminJoblistingJobinfo.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -343,6 +347,7 @@
                         });
                 </script>
                 
+                <!-- Job Info for Doing status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Doing',function(){
@@ -350,7 +355,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'ajaxhome.php',
+                                    url: 'AdminJoblistingJobInfoDoing.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -364,6 +369,7 @@
                         });
                 </script>
                 
+                <!-- Job Info for Incomplete status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Incomplete',function(){
@@ -371,7 +377,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'ajaxhomeincomplete.php',
+                                    url: 'AdminJoblistingJobinfoIncomplete.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -385,6 +391,7 @@
                         });
                 </script>
                 
+                <!-- Job Info for Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Ready',function() {
@@ -392,7 +399,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'ajaxhome.php',
+                                    url: 'AdminJoblistingJobinfo.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -406,6 +413,7 @@
                         });
                 </script>
                 
+                <!-- Job Info for Not Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Not Ready',function(){
@@ -413,7 +421,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'ajaxhome.php',
+                                    url: 'AdminJoblistingJobinfo.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -427,27 +435,7 @@
                         });
                 </script>
                 
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Completed',function(){
-                            // $('.false').click(function () {
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'ajaxjobcompleted.php',
-                                    type: 'post',
-                                    data: {jobregister_id: jobregister_id},
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.info-details').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                </script>
-                
+                <!-- Job Info for jobinfo -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         // $("p").click(function() {
@@ -457,7 +445,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhome.php',
+                                            url: 'AdminJoblistingJobinfo.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -483,6 +471,7 @@
                     </form>
                 </div>
                 
+                <!-- Assistant for Pending status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Pending',function(){
@@ -504,6 +493,7 @@
                         });
                 </script>
                 
+                <!-- Assistant for Doing status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Doing',function(){
@@ -525,6 +515,7 @@
                         });
                 </script>
                 
+                <!-- Assistant for Incomplete status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Incomplete',function(){
@@ -546,6 +537,7 @@
                         });
                 </script>
                 
+                <!-- Assistant for Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Ready',function(){
@@ -567,6 +559,7 @@
                         });
                 </script>
 
+                <!-- Assistant for Not Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Not Ready',function(){
@@ -588,27 +581,7 @@
                         });
                 </script>
 
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Completed',function(){
-                            // $('.JobInfo').click(function () {
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'jobassignst-completed.php',
-                                    type: 'post',
-                                    data: {jobregister_id: jobregister_id},
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.info-assistant').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                </script>
-
+                <!-- Assistant for job info -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.JobInfo',function(){
@@ -642,6 +615,7 @@
                     </form>
                 </div>
                 
+                <!-- Update for pending status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Pending',function(){
@@ -662,6 +636,7 @@
                     });
                 </script>
                 
+                <!-- Update for Doing status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Doing',function(){
@@ -682,6 +657,7 @@
                     });
                 </script>
                 
+                <!-- Update for Incomplete status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Incomplete',function(){
@@ -702,6 +678,7 @@
                     });
                 </script>
                 
+                <!-- Update for Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Ready',function(){
@@ -722,6 +699,7 @@
                     });
                 </script>
                 
+                <!-- Update for Not Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Not Ready',function(){
@@ -742,26 +720,7 @@
                     });
                 </script>
                 
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Completed',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'ajaxtechupdate-completed.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-update').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
+                <!-- Update for JobInfo -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.JobInfo',function(){
@@ -794,6 +753,7 @@
                     </form>
                 </div>
                 
+                <!-- Accessories Tab for doing status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Doing',function(){
@@ -814,6 +774,7 @@
                     });
                 </script>
                 
+                <!-- Accessories Tab for Pending status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Pending',function(){
@@ -834,6 +795,7 @@
                     });
                 </script>
                 
+                <!-- Accessories Tab for Incomplete status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Incomplete',function(){
@@ -854,6 +816,7 @@
                     });
                 </script>
                 
+                <!-- Accessories Tab for Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Ready',function(){
@@ -874,6 +837,7 @@
                     });
                 </script>
                 
+                <!-- Accessories Tab for Not Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Not Ready',function(){
@@ -894,26 +858,7 @@
                     });
                 </script>
                 
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Completed',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'ajaxtabaccessoriescomplete.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-accessories').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
+                <!-- Accessories Tab for JobInfo -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         //  $("th").click(function() {
@@ -947,6 +892,7 @@
                     </form>
                 </div>
                 
+                <!-- Photo Tab for Doing status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Doing',function(){
@@ -967,6 +913,7 @@
                     });
                 </script>
 
+                <!-- Photo Tab for Pending status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Pending',function(){
@@ -987,6 +934,7 @@
                     });
                 </script>
                 
+                <!-- Photo Tab for Incomplete status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Incomplete',function(){
@@ -1007,6 +955,7 @@
                     });
                 </script>
 
+                <!-- Photo Tab for Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Ready',function(){
@@ -1027,6 +976,7 @@
                     });
                 </script>
 
+                <!-- Photo Tab for Not Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Not Ready',function(){
@@ -1047,26 +997,7 @@
                         });
                 </script>
                 
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Completed',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'ajaxtechphtoupdtcomplete.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-photos').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
+                <!-- Photo Tab for JobInfo -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         // $("th").click(function() {
@@ -1100,6 +1031,7 @@
                     </form>
                 </div>
                 
+                <!-- Video Tab for Doing status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Doing',function(){
@@ -1120,6 +1052,7 @@
                     });
                 </script>
                 
+                <!-- Video Tab for Pending status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Pending',function(){
@@ -1140,6 +1073,7 @@
                     });
                 </script>
                 
+                <!-- Video Tab for Incomplete status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Incomplete',function(){
@@ -1160,6 +1094,7 @@
                     });
                 </script>
                 
+                <!-- Video Tab for Not Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Not Ready',function(){
@@ -1180,6 +1115,7 @@
                     });
                 </script>
                 
+                <!-- Video Tab for Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Ready',function(){
@@ -1200,26 +1136,7 @@
                     });
                 </script>
                 
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Completed',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'ajaxtechvideoupdtcomplete.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-video').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
+                <!-- Video Tab for JobInfo -->
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         //  $("th").click(function() {
@@ -1241,159 +1158,6 @@
                         });
                 </script>
 
-                <!-- Job Listing Job Status Tab -->
-                <input type="radio" name="tabDoingInfo" id="tabDoingInfo7">
-                <label for="tabDoingInfo7" class="tabHeadingInfo">Job Status</label>
-                <div class="tab" id="JobInfoTab">
-                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-info').style.display='none'">&times</div>
-                    <form action="JobStatusAdmin.php" method="post">
-                        <div class="info-JobStatus">
-
-                        </div>
-                    </form>
-                </div>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Doing',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'JobStatusAdmin.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-JobStatus').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Pending',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'JobStatusAdmin.php',
-                                type: 'post',
-                                data: { jobregister_id: jobregister_id },
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-JobStatus').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Incomplete',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'JobStatusAdmin.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-JobStatus').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Not Ready',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'JobStatusAdmin.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-JobStatus').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Ready',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'JobStatusAdmin.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-JobStatus').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        $('body').on('click','.Completed',function(){
-                            var jobregister_id = $(this).data('id');
-                            // AJAX request
-                            $.ajax({
-                                url: 'JobStatusAdmin.php',
-                                type: 'post',
-                                data: {jobregister_id: jobregister_id},
-                                success: function (response) {
-                                    // Add response in Modal body
-                                    $('.info-JobStatus').html(response);
-                                    // Display Modal
-                                    $('#doubleClick-info').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-                
-                <script type='text/javascript'>
-                    $(document).ready(function () {
-                        //  $("th").click(function() {
-                            $('body').on('click','.JobInfo',function(){
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'JobStatusAdmin.php',
-                                    type: 'post',
-                                    data: {jobregister_id: jobregister_id},
-                                    success: function (response) {
-                                        // Add response in Modal body
-                                        $('.info-JobStatus').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                </script>
-                
                 <!-- Job Listing Report Tab -->
                 <input type="radio" name="tabDoingInfo" id="tabDoingInfo8">
                 <label for="tabDoingInfo8" class="tabHeadingInfo">Report</label>
@@ -1406,6 +1170,7 @@
                     </form>
                 </div>
                 
+                <!-- Report Tab for Doing status -->
                 <script type='text/javascript'>
                     $(document).ready(function() {
                         $('body').on('click','.Doing',function(){
@@ -1426,6 +1191,7 @@
                     });
                 </script>
 
+                <!-- Report Tab for Pending status -->
                 <script type='text/javascript'>
                     $(document).ready(function() {
                         $('body').on('click','.Pending',function(){
@@ -1446,6 +1212,7 @@
                     });
                 </script>
                 
+                <!-- Report Tab for Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function() {
                         $('body').on('click','.Ready',function(){
@@ -1466,6 +1233,7 @@
                     });
                 </script>
                 
+                <!-- Report Tab for Not Ready status -->
                 <script type='text/javascript'>
                     $(document).ready(function() {
                         $('body').on('click','.Not Ready',function(){
@@ -1486,6 +1254,7 @@
                     });
                 </script>
                 
+                <!-- Report Tab for Incomplete status -->
                 <script type='text/javascript'>
                     $(document).ready(function() {
                         $('body').on('click','.Incomplete',function(){
@@ -1506,6 +1275,7 @@
                     });
                 </script>
                 
+                <!-- Report Tab for Completed status -->
                 <script type='text/javascript'>
                     $(document).ready(function() {
                         $('body').on('click','.Completed',function(){
@@ -1526,6 +1296,7 @@
                     });
                 </script>
                 
+                <!-- Report Tab for JobInfo -->
                 <script type='text/javascript'>
                     $(document).ready(function() {
                         //  $("p").click(function() {

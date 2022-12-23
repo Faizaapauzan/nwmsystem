@@ -174,6 +174,7 @@ td {
 /*.container{
 	padding: 20px;	
 }
+
 h1{
 	text-align: center;
 	font-size: 2rem;
@@ -355,7 +356,7 @@ h1{
   justify-content: center;
   align-items: center;
   padding: 1.2rem 2.3rem;
-  margin-right: -1.5rem;
+  margin-right: 0.3rem;
   cursor: pointer;
   background-color: #fff;
   font-size: 15px;
