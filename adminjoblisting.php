@@ -329,7 +329,6 @@
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Pending',function() {
-                            // $('.JobInfo').click(function () {
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
@@ -351,7 +350,6 @@
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Doing',function(){
-                            // $('.JobInfo').click(function () {
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
@@ -373,7 +371,6 @@
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Incomplete',function(){
-                            // $('.false').click(function () {
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
@@ -395,7 +392,6 @@
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Ready',function() {
-                            // $('.false').click(function () {
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
@@ -417,7 +413,6 @@
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Not Ready',function(){
-                            // $('.false').click(function () {
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
@@ -440,8 +435,6 @@
                     $(document).ready(function () {
                         // $("p").click(function() {
                             $('body').on('click','.JobInfo',function(){
-                                // $('body').on('click','.val()',function(){
-                                    // $('.false').click(function () {
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
@@ -475,7 +468,6 @@
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Pending',function(){
-                            // $('.JobInfo').click(function () {
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
@@ -497,7 +489,6 @@
                 <script type='text/javascript'>
                     $(document).ready(function () {
                         $('body').on('click','.Doing',function(){
-                            // $('.JobInfo').click(function () {
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({

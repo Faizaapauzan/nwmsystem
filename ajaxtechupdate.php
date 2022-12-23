@@ -215,6 +215,7 @@
                 function leavingTechnician() {
                     var technician_leaving = $('input[name=technician_leaving]').val();
                     var jobregister_id = $('input[name=jobregister_id]').val();
+                    
                     if (technician_leaving != '' || technician_leaving == '', 
 					        jobregister_id != '' || jobregister_id == '') 
 						
@@ -267,8 +268,9 @@
                 function RestOut() {
                     var tech_out = $('input[name=tech_out]').val();
                     var jobregister_id = $('input[name=jobregister_id]').val();
+                    
                     if (tech_out != '' || tech_out == '', 
-				  jobregister_id != '' || jobregister_id == '') 
+				        jobregister_id != '' || jobregister_id == '') 
 				  	
 				  	{
 						var formData = {tech_out: tech_out,
@@ -345,6 +347,7 @@
                 function RestIn() {
                     var tech_in = $('input[name=tech_in]').val();
                     var jobregister_id = $('input[name=jobregister_id]').val();
+                    
                     if (tech_in != '' || tech_in == '', 
 						jobregister_id != '' || jobregister_id == '') 
 					
