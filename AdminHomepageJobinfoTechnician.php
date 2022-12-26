@@ -39,6 +39,7 @@
             <div style="display: flex;">
                 <input type="text" class="job_order_number" name="job_order_number" id="job_order_number" value="<?php echo $row['job_order_number']?>">
                 <button type="button" style="border-radius: 5px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px; width:auto" onclick="buttonClick();">Click</button>
+                
                 <script>
                     var i = 0;
                     var jobordernumber = document.getElementById('job_order_number').value;
@@ -48,6 +49,7 @@
                         document.getElementById('job_order_number').value = jobordernumber + '-' + i;
                     }
                 </script>
+
             </div>
         </div>
         
@@ -211,12 +213,14 @@
         function updtMchn() {
             var jobregister_id = $('input[name=jobregister_id]').val();
             var machine_name = $('input[name=machine_name]').val();
+            
             if (jobregister_id != '' || jobregister_id == '', 
-                  machine_name != '' || machine_name == '') {
-                var formData = {
-                    jobregister_id: jobregister_id,
-                    machine_name: machine_name
-                };
+                  machine_name != '' || machine_name == '') 
+                  
+            {
+                var formData = {jobregister_id: jobregister_id,
+                                  machine_name: machine_name};
+                
                 $.ajax({
                     url: "machineassistant.php",
                     type: 'POST',
@@ -246,6 +250,7 @@
                     }
                 });
             });
+            
             $("#type").on('change', function() {
                 var typeid = $(this).val();
                 $.ajax({
@@ -262,10 +267,7 @@
     </script>
     
     <script>
-        $(document).ready(function() {
-            // Initialize select2
-            $("#serialnumbers").select2();
-        });
+        $(document).ready(function() {$("#serialnumbers").select2();});
     </script>
     
     <script>
@@ -276,7 +278,9 @@
                 document.getElementById("machine_code").value = "";
                 document.getElementById("machine_name").value = "";
                 return;
-            } else {
+            } 
+            
+            else {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {

@@ -14,20 +14,16 @@
     
     <?php
         include 'dbconnect.php';
-        
         if (isset($_POST['jobregister_id'])) {
-        $jobregister_id =$_POST['jobregister_id'];
-
-        $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-    
-        $query_run = mysqli_query($conn, $query);
-        if ($query_run) {
-            while ($row = mysqli_fetch_array($query_run)) {
+            $jobregister_id =$_POST['jobregister_id'];
+            $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
+            $query_run = mysqli_query($conn, $query);
+            if ($query_run) {
+                while ($row = mysqli_fetch_array($query_run)) {
     ?> 
     
-    <form action="homeindex.php" method="post" style="display: contents;">
+    <form action="homeindex.php" method="post" style=" display: contents;">
         <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        <input type="hidden" name="support" value="Support For <?php echo $row['job_assign'] ?>">
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Priority</label>
@@ -36,34 +32,34 @@
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Order Number</label>
-            <div style="display: flex;">
-                <input type="text" class="job_order_number" name="job_order_number" id="job_order_number" value="<?php echo $row['job_order_number']?>">
-                <button type="button" style="border-radius: 5px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px; width:auto" onclick="buttonClick();">Click</button>
-                <script>
-                    var i = 0;
-                    var jobordernumber = document.getElementById('job_order_number').value;
-
-                    function buttonClick() {
-                        i++;
-                        document.getElementById('job_order_number').value = jobordernumber + '-' + i;
-                    }
-                </script>
-            </div>
+            <input type="text" name="job_order_number" value="<?php echo $row['job_order_number']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Name</label>
             <input type="text" name="job_name" value="<?php echo $row['job_name']?>">
-            <input type="hidden" name="job_code" value="<?php echo $row['job_code']?>">
         </div>
-        
+
         <div class="input-box" style="width: 50%;">
             <label for="">Customer Name</label>
-            <input type="text" id="customer_name" name="customer_name" value="<?php echo $row['customer_name']?>">
-            <input type="hidden" id="cust" name="customer_id" readonly>
+            <select id="custModel" onchange="GetCustomer(this.value)">
+                <option value=""><?php echo $row['customer_name']?></option> 
+                
+                <?php
+                    include "dbconnect.php";
+                    $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
+                    while($data = mysqli_fetch_array($records))
+                        {
+                            echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";  // displaying data in option menu
+                        }
+                ?>
+
+            </select>
+            <input type="hidden" id="cust" name="customer_id" onchange="GetCustomer(this.value)" readonly>
             <input type="hidden" id="customer_code" name="customer_code" value="<?php echo $row['customer_code']?>" readonly>
+            <input type="hidden" id="customer_name" name="customer_name" value="<?php echo $row['customer_name']?>" readonly>
         </div>
-        
+
         <div class="input-box" style="width: 100%;">
             <label for="">Job Description</label>
             <input type="text" name="job_description" value="<?php echo $row['job_description']?>">
@@ -81,22 +77,22 @@
         
         <div class="input-box" style="width: 50%;">
             <label for="">Customer Grade</label>
-            <input type="text" name="customer_grade" value="<?php echo $row['customer_grade']?>">
+            <input type="text" name="customer_grade" id="customer_grade" value="<?php echo $row['customer_grade']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Customer PIC</label>
-            <input type="text" name="customer_PIC" value="<?php echo $row['customer_PIC']?>">
+            <input type="text" name="customer_PIC" id="customer_PIC" value="<?php echo $row['customer_PIC']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Contact Number 1</label>
-            <input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1']?>">
+            <input type="text" name="cust_phone1" id="cust_phone1" value="<?php echo $row['cust_phone1']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Contact Number 2</label>
-            <input type="text" name="cust_phone2" value="<?php echo $row['cust_phone2']?>">
+            <input type="text" name="cust_phone2" id="cust_phone2" value="<?php echo $row['cust_phone2']?>">
         </div>
         
         <div class="input-box" style="width: 100%;">
@@ -157,7 +153,7 @@
         
         <div class="input-box" style="width: 50%;">
             <label for="job_cancel">Cancel Job:</label>
-            <select type="text" id="job_cancel" name="job_cancel">
+            <select id="job_cancel" name="job_cancel">
                 <option value='' <?php if ($row['job_cancel'] == '') {echo "SELECTED";} ?>></option>
                 <option value='YES' <?php if ($row['job_cancel'] == 'YES') {echo "SELECTED";} ?>>YES</option>
             </select>
@@ -177,54 +173,51 @@
         <!--PENDING & INCOMPLETE REASON-->
         <div id="reason" class="input-box" style="width: 100%;">
             <label for="reason">Reason</label>
-            <input type="text" name="reason" value="<?php echo $row["reason"]; ?>">
+            <input type="text" id="inputreason" name="reason" value="<?php echo $row["reason"]; ?>">
         </div>
-        
+
         <script type="text/javascript">
             function myFunction() {
                 var x = document.getElementById("job_status").value;
                 if (x == 'Pending' || x == 'Incomplete') {
                     document.getElementById("reason").style.display = 'block';
-                } else {
+                } 
+                
+                else {
                     document.getElementById("reason").style.display = 'none';
                 }
             }
         </script>
         <!--PENDING & INCOMPLETE END REASON-->
         
-        <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
         <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-        
-        <div class="DuplicateUpdateButton" style="display: inline-flex; width: 100%;">
-            <button type="submit" id="submit" name="update">Update</button></n>
-            <button type="button" style="background-color: #f43636 ;" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormSupportAdmin();">Support</button>
-        </div>
-        
-        <p class="control"><b id="messageSupportAdmin"></b></p>
-    
+        <button type="submit" id="submit" name="update" class="btn btn-primary" onclick="updtMchn();">Update</button>
     </form> 
     
     <?php } } } ?>
-
+    
     <!-- Update machine name in assistant table -->
     <script type="text/javascript">
         function updtMchn() {
             var jobregister_id = $('input[name=jobregister_id]').val();
             var machine_name = $('input[name=machine_name]').val();
+            
             if (jobregister_id != '' || jobregister_id == '', 
-                  machine_name != '' || machine_name == '') {
-                var formData = {
-                    jobregister_id: jobregister_id,
-                    machine_name: machine_name
-                };
+                  machine_name != '' || machine_name == '') 
+            
+            {
+                var formData = {jobregister_id: jobregister_id,
+                                  machine_name: machine_name};
+                
                 $.ajax({
                     url: "machineassistant.php",
                     type: 'POST',
                     data: formData,
-                    success: function(response) {
-                        var res = JSON.parse(response);
-                        console.log(res);
-                    }
+                    success: function(response) 
+                        {
+                            var res = JSON.parse(response);
+                            console.log(res);
+                        }
                 });
             }
         }
@@ -246,6 +239,7 @@
                     }
                 });
             });
+
             $("#type").on('change', function() {
                 var typeid = $(this).val();
                 $.ajax({
@@ -262,10 +256,7 @@
     </script>
     
     <script>
-        $(document).ready(function() {
-            // Initialize select2
-            $("#serialnumbers").select2();
-        });
+        $(document).ready(function() {$("#serialnumbers").select2();});
     </script>
     
     <script>
@@ -276,7 +267,9 @@
                 document.getElementById("machine_code").value = "";
                 document.getElementById("machine_name").value = "";
                 return;
-            } else {
+            } 
+            
+            else {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
@@ -293,111 +286,57 @@
         }
     </script>
     
-    <!-- To ask for support -->
-    <script type="text/javascript">
-        function submitFormSupportAdmin() {
-            var job_priority = $('input[name=job_priority]').val();
-            var support = $('input[name=support]').val();
-            var job_order_number = $('input[name=job_order_number]').val();
-            var job_name = $('input[name=job_name]').val();
-            var job_code = $('input[name=job_code]').val();
-            var job_description = $('input[name=job_description]').val();
-            var requested_date = $('input[name=requested_date]').val();
-            var delivery_date = $('input[name=delivery_date]').val();
-            var customer_name = $('input[name=customer_name]').val();
-            var customer_code = $('input[name=customer_code]').val();
-            var customer_grade = $('input[name=customer_grade]').val();
-            var cust_address1 = $('input[name=cust_address1]').val();
-            var cust_address2 = $('input[name=cust_address2]').val();
-            var cust_address3 = $('input[name=cust_address3]').val();
-            var customer_PIC = $('input[name=customer_PIC]').val();
-            var cust_phone1 = $('input[name=cust_phone1]').val();
-            var cust_phone2 = $('input[name=cust_phone2]').val();
-            var machine_name = $('input[name=machine_name]').val();
-            var machine_code = $('input[name=machine_code]').val();
-            var machine_type = $('input[name=machine_type]').val();
-            var serialnumber = $('input[name=serialnumber]').val();
-            var machine_id = $('input[name=machine_id]').val();
-            var machine_brand = $('input[name=machine_brand]').val();
-            var accessories_required = $('select[name=accessories_required]').val();
-            var job_cancel = $('select[name=job_cancel]').val();
-            var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
-            var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
-            
-            if (job_priority != '' || job_priority == '', 
-                     support != '' || support == '', 
-            job_order_number != '' || job_order_number == '', 
-                    job_name != '' || job_name == '', 
-                    job_code != '' || job_code == '', 
-             job_description != '' || job_description == '', 
-              requested_date != '' || requested_date == '', 
-               delivery_date != '' || delivery_date == '', 
-               customer_name != '' || customer_name == '', 
-               customer_code != '' || customer_code == '', 
-              customer_grade != '' || customer_grade == '', 
-               cust_address1 != '' || cust_address1 == '', 
-               cust_address2 != '' || cust_address2 == '', 
-               cust_address3 != '' || cust_address3 == '', 
-                customer_PIC != '' || customer_PIC == '', 
-                 cust_phone1 != '' || cust_phone1 == '', 
-                 cust_phone2 != '' || cust_phone2 == '', 
-                machine_name != '' || machine_name == '', 
-                machine_code != '' || machine_code == '', 
-                machine_type != '' || machine_type == '', 
-                serialnumber != '' || serialnumber == '', 
-                  machine_id != '' || machine_id == '', 
-               machine_brand != '' || machine_brand == '', 
-        accessories_required != '' || accessories_required == '', 
-                  job_cancel != '' || job_cancel == '', 
-       jobregistercreated_by != '' || jobregistercreated_by == '', 
-    jobregisterlastmodify_by != '' || jobregisterlastmodify_by == '') 
-            
-            {
-                var formData = {
-                    job_priority: job_priority,
-                    support: support,
-                    job_order_number: job_order_number,
-                    job_name: job_name,
-                    job_code: job_code,
-                    job_description: job_description,
-                    requested_date: requested_date,
-                    delivery_date: delivery_date,
-                    customer_name: customer_name,
-                    customer_code: customer_code,
-                    customer_grade: customer_grade,
-                    cust_address1: cust_address1,
-                    cust_address2: cust_address2,
-                    cust_address3: cust_address3,
-                    customer_PIC: customer_PIC,
-                    cust_phone1: cust_phone1,
-                    cust_phone2: cust_phone2,
-                    machine_name: machine_name,
-                    machine_code: machine_code,
-                    machine_type: machine_type,
-                    serialnumber: serialnumber,
-                    machine_id: machine_id,
-                    machine_brand: machine_brand,
-                    accessories_required: accessories_required,
-                    job_cancel: job_cancel,
-                    jobregistercreated_by: jobregistercreated_by,
-                    jobregisterlastmodify_by: jobregisterlastmodify_by
-                };
+    <!-- Fetch customer info when change customer -->
+    <script>
+        $(document).ready(function() {$("#custModel").select2();});
+    </script>
 
-                $.ajax({
-                    url: "adminsupporttechnician.php",
-                    type: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        var res = JSON.parse(response);
-                        console.log(res);
-                        if (res.success == true) $('#messageSupportAdmin').html('<span style="color: green">Succesfully Request for Support!</span>');
-                        else $('#messageSupportAdmin').html('<span style="color: red">Request for support failed</span>');
+    <script>
+        $(document).ready(function() {
+            $("#custModel").on("change", function() {
+                var GetValue = $("#custModel").val();
+                $("#cust").val(GetValue);
+            });
+        });
+    </script>
+    
+    <script>
+        function GetCustomer(str) {
+            if (str.length == 0) {
+                document.getElementById("customer_code").value = "";
+                document.getElementById("customer_name").value = "";
+                document.getElementById("customer_grade").value = "";
+                document.getElementById("customer_PIC").value = "";
+                document.getElementById("cust_phone1").value = "";
+                document.getElementById("cust_phone2").value = "";
+                document.getElementById("cust_address1").value = "";
+                document.getElementById("cust_address2").value = "";
+                document.getElementById("cust_address3").value = "";
+                return;
+            } 
+            
+            else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var myObj = JSON.parse(this.responseText);
+                        document.getElementById("customer_code").value = myObj[0];
+                        document.getElementById("customer_name").value = myObj[1];
+                        document.getElementById("customer_grade").value = myObj[2];
+                        document.getElementById("customer_PIC").value = myObj[3];
+                        document.getElementById("cust_phone1").value = myObj[4];
+                        document.getElementById("cust_phone2").value = myObj[5];
+                        document.getElementById("cust_address1").value = myObj[6];
+                        document.getElementById("cust_address2").value = myObj[7];
+                        document.getElementById("cust_address3").value = myObj[8];
                     }
-                });
+                };
+                xmlhttp.open("GET", "fetchcustomer.php?customer_id=" + str, true);
+                xmlhttp.send();
             }
         }
     </script>
-    <!-- End of To ask for support -->
+    <!-- end of Fetch customer info when change customer -->
 
 </body>
 

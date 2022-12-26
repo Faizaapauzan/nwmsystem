@@ -428,7 +428,7 @@
                                     var customer_name = $(this).data('customer_name');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxhome.php',
+                                        url: 'AdminHomepageJobinfo.php',
                                         type: 'post',
                                        data: {jobregister_id: jobregister_id, 
                                                      type_id: type_id,
@@ -631,7 +631,7 @@
                                     var type_id = $(this).data('type_id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxhome.php',
+                                        url: 'AdminHomepageJobinfo.php',
                                         type: 'post',
                                         data: {jobregister_id: jobregister_id, type_id: type_id},
                                         success: function (response) {
@@ -1061,7 +1061,7 @@
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxhomeincomplete.php',
+                                        url: 'AdminHomepageJobinfoIncomplete.php',
                                         type: 'post',
                                         data: { jobregister_id: jobregister_id },
                                         success: function (response) {
@@ -1386,7 +1386,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
                                             success: function (response) {
@@ -1560,38 +1560,6 @@
                                 });
                             </script>
 
-                            <!-- Hamir Job Status Tab -->
-                            <input type="radio" name="tabDoingHamir" id="tabDoingHamir7">
-                            <label for="tabDoingHamir7" class="tabHeadingHamir">Job Status</label>
-                            <div class="tab" id="HamirJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="hamir-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Hamir',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: { jobregister_id: jobregister_id },
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.hamir-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Hamir').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Hamir Report Tab-->
                             <input type="radio" name="tabDoingHamir" id="tabDoingHamir8">
                             <label for="tabDoingHamir8" class="tabHeadingHamir">Report</label>
@@ -1741,7 +1709,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id,
@@ -1917,38 +1885,6 @@
                                 });
                             </script>
 
-                            <!-- Hwa Job Status Tab -->
-                            <input type="radio" name="tabDoingHwa" id="tabDoingHwa7">
-                            <label for="tabDoingHwa7" class="tabHeadingHwa">Job Status</label>
-                            <div class="tab" id="HwaJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="hwa-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Hwa',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: { jobregister_id: jobregister_id },
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.hwa-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Hwa').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Hwa report tab -->
                             <input type="radio" name="tabDoingHwa" id="tabDoingHwa8">
                             <label for="tabDoingHwa8" class="tabHeadingHwa">Report</label>
@@ -2099,7 +2035,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -2274,39 +2210,7 @@
                                     });
                                 });
                             </script>
-
-                            <!-- Iskandar Job Status Tab -->
-                            <input type="radio" name="tabDoingIsk" id="tabDoingIsk7">
-                            <label for="tabDoingIsk7" class="tabHeadingIsk">Job Status</label>
-                            <div class="tab" id="IskJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="isk-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Isk',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: { jobregister_id: jobregister_id },
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.isk-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Isk').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
+ 
                             <!-- Iskandar Report Tab -->
                             <input type="radio" name="tabDoingIsk" id="tabDoingIsk8">
                             <label for="tabDoingIsk8" class="tabHeadingIsk">Report</label>
@@ -2458,7 +2362,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -2634,38 +2538,6 @@
                                 });
                             </script>
 
-                            <!-- John Job Status Tab -->
-                            <input type="radio" name="tabDoingJohn" id="tabDoingJohn7">
-                            <label for="tabDoingJohn7" class="tabHeadingJohn">Job Status</label>
-                            <div class="tab" id="JohnJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="john-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.John',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.john-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-John').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- John Report tab -->
                             <input type="radio" name="tabDoingJohn" id="tabDoingJohn8">
                             <label for="tabDoingJohn8" class="tabHeadingJohn"> Report </label>
@@ -2824,7 +2696,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -3000,38 +2872,6 @@
                                 });
                             </script>
 
-                            <!-- Jun Jie Job Status Tab -->
-                            <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie7">
-                            <label for="tabDoingJunJie7" class="tabHeadingJunJie">Job Status</label>
-                            <div class="tab" id="JunJieJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="junjie-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.JunJie',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.junjie-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-JunJie').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Jun Jie Report tab -->
                             <input type="radio" name="tabDoingJunJie" id="tabDoingJunJie8">
                             <label for="tabDoingJunJie8" class="tabHeadingJunJie">Report</label>
@@ -3182,7 +3022,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -3358,38 +3198,6 @@
                                 });
                             </script>
 
-                            <!-- Razwill Job Status Tab -->
-                            <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill7">
-                            <label for="tabDoingRazwill7" class="tabHeadingRazwill">Job Status</label>
-                            <div class="tab" id="RazwillJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="razwill-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Razwill',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.razwill-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Razwill').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Razwill Report Tab -->
                             <input type="radio" name="tabDoingRazwill" id="tabDoingRazwill8">
                             <label for="tabDoingRazwill8" class="tabHeadingRazwill">Report</label>
@@ -3540,7 +3348,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, type_id: type_id, customer_name: customer_name},
                                             success: function (response) {
@@ -3714,38 +3522,6 @@
                                 });
                             </script>
 
-                            <!-- Sahele Job Status Tab -->
-                            <input type="radio" name="tabDoingSahele" id="tabDoingSahele7">
-                            <label for="tabDoingSahele7" class="tabHeadingSahele">Job Status</label>
-                            <div class="tab" id="SaheleJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="sahele-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Sahele',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.sahele-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Sahele').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Sahele Report Tab -->
                             <input type="radio" name="tabDoingSahele" id="tabDoingSahele8">
                             <label for="tabDoingSahele8" class="tabHeadingSahele">Report</label>
@@ -3900,7 +3676,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -4076,38 +3852,6 @@
                                 });
                             </script>
                             
-                            <!-- Sazaly Job Status Tab -->
-                            <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly7">
-                            <label for="tabDoingSazaly7" class="tabHeadingSazaly">Job Status</label>
-                            <div class="tab" id="SazalyJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="sazaly-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Sazaly',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.sazaly-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Sazaly').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Sazaly Report Tab -->
                             <input type="radio" name="tabDoingSazaly" id="tabDoingSazaly8">
                             <label for="tabDoingSazaly8" class="tabHeadingSazaly">Report</label>
@@ -4245,7 +3989,7 @@
                     <div id="doubleClick-Faizan" class="modal">
                         <div class="tabFaizan">
 
-                            <!-- Faizan Job Info -->
+                            <!-- Faizan Job Info Tab -->
                             <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan1" checked="checked">
                             <label for="tabDoingFaizan1" class="tabHeadingFaizan">Job Info</label>
                             <div class="tab" id="FaizanJobInfoTab">
@@ -4267,7 +4011,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -4443,38 +4187,6 @@
                                 });
                             </script>
                             
-                            <!-- Faizan Job Status Tab -->
-                            <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan7">
-                            <label for="tabDoingFaizan7" class="tabHeadingFaizan">Job Status</label>
-                            <div class="tab" id="FaizanJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="faizan-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Faizan',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.faizan-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Faizan').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Faizan Report -->
                             <input type="radio" name="tabDoingFaizan" id="tabDoingFaizan8">
                             <label for="tabDoingFaizan8" class="tabHeadingFaizan">Report</label>
@@ -4628,7 +4340,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -4804,38 +4516,6 @@
                                 });
                             </script>
                             
-                            <!-- Fauzin Job Status Tab -->
-                            <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin7">
-                            <label for="tabDoingFauzin7" class="tabHeadingFauzin">Job Status</label>
-                            <div class="tab" id="FauzinJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="fauzin-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Fauzin',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.fauzin-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Fauzin').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Fauzin Report Tab -->
                             <input type="radio" name="tabDoingFauzin" id="tabDoingFauzin8">
                             <label for="tabDoingFauzin8" class="tabHeadingFauzin"> Report </label>
@@ -4967,7 +4647,7 @@
                     <div id="doubleClick-Izaan" class="modal">
                         <div class="tabIzaan">
                             
-                            <!-- Izaan Job Info -->
+                            <!-- Izaan Job Info Tab -->
                             <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan1" checked="checked">
                             <label for="tabDoingIzaan1" class="tabHeadingIzaan">Job Info</label>
                             <div class="tab" id="IzaanJobInfoTab">
@@ -4989,7 +4669,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -5165,38 +4845,6 @@
                                 });
                             </script>
                             
-                            <!-- Izaan Job Status Tab -->
-                            <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan7">
-                            <label for="tabDoingIzaan7" class="tabHeadingIzaan">Job Status</label>
-                            <div class="tab" id="IzaanJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="izaan-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Izaan',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.izaan-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Izaan').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Izaan Report Tab -->
                             <input type="radio" name="tabDoingIzaan" id="tabDoingIzaan8">
                             <label for="tabDoingIzaan8" class="tabHeadingIzaan"> Report </label>
@@ -5349,7 +4997,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -5525,38 +5173,6 @@
                                 });
                             </script>
                             
-                            <!-- Teck Job Status Tab -->
-                            <input type="radio" name="tabDoingTeck" id="tabDoingTeck7">
-                            <label for="tabDoingTeck7" class="tabHeadingTeck">Job Status</label>
-                            <div class="tab" id="TeckJobInfoTab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="teck-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Teck',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.teck-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Teck').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Teck Report Tab -->
                             <input type="radio" name="tabDoingTeck" id="tabDoingTeck8">
                             <label for="tabDoingTeck8" class="tabHeadingTeck">Report</label>
@@ -5717,7 +5333,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id, 
                                                           type_id: type_id, 
@@ -5893,38 +5509,6 @@
                                 });
                             </script>
                             
-                            <!-- Aizat Job Status Tab -->
-                            <input type="radio" name="tabDoingAizat" id="tabDoingAizat7">
-                            <label for="tabDoingAizat7" class="tabHeadingAizat">Job Status</label>
-                            <div class="tab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="Aizat-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Aizat',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.Aizat-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Aizat').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Aizat Report Tab -->
                             <input type="radio" name="tabDoingAizat" id="tabDoingAizat8">
                             <label for="tabDoingAizat8" class="tabHeadingAizat">Report</label>
@@ -6079,7 +5663,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id,
 														  type_id: type_id,
@@ -6255,38 +5839,6 @@
                                 });
                             </script>
                             
-                            <!-- Boon Job Status Tab -->
-                            <input type="radio" name="tabDoingBoon" id="tabDoingBoon7">
-                            <label for="tabDoingBoon7" class="tabHeadingBoon">Job Status</label>
-                            <div class="tab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="boon-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Boon',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.boon-jobstatus').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Boon').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
                             <!-- Boon Report Tab -->
                             <input type="radio" name="tabDoingBoon" id="tabDoingBoon8">
                             <label for="tabDoingBoon8" class="tabHeadingBoon">Report</label>
@@ -6440,7 +5992,7 @@
                                         var customer_name = $(this).data('customer_name');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxhometechnician.php',
+                                            url: 'AdminHomepageJobinfoTechnician.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id,
 														  type_id: type_id,
@@ -6608,38 +6160,6 @@
                                             success: function (response) {
                                                 // Add response in Modal body
                                                 $('.hafiz-video').html(response);
-                                                // Display Modal
-                                                $('#doubleClick-Hafiz').modal('show');
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
-                            <!-- Hafiz Job Status Tab -->
-                            <input type="radio" name="tabDoingHafiz" id="tabDoingHafiz7">
-                            <label for="tabDoingHafiz7" class="tabHeadingHafiz">Job Status</label>
-                            <div class="tab">
-                                <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                                <form action="JobStatusAdmin.php" method="post">
-                                    <div class="hafiz-jobstatus">
-
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <script type='text/javascript'>
-                                $(document).ready(function () {
-                                    $('body').on('click','.Hafiz',function(){
-                                        var jobregister_id = $(this).data('id');
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'JobStatusAdmin.php',
-                                            type: 'post',
-                                            data: {jobregister_id: jobregister_id},
-                                            success: function (response) {
-                                                // Add response in Modal body
-                                                $('.hafiz-jobstatus').html(response);
                                                 // Display Modal
                                                 $('#doubleClick-Hafiz').modal('show');
                                             }

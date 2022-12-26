@@ -99,23 +99,23 @@
         
         <div class="input-box" style="width: 100%;">
             <label for="">Customer Address</label>
-            <input type="text" name="cust_address1" id="cust_address1" value="<?php echo $row['cust_address1']?>">
-            <input type="text" name="cust_address2" id="cust_address2" value="<?php echo $row['cust_address2']?>">
-            <input type="text" name="cust_address3" id="cust_address3" value="<?php echo $row['cust_address3']?>">
+            <input type="text" name="cust_address1" value="<?php echo $row['cust_address1']?>">
+            <input type="text" style="width: calc(100% / 2 - 2.5px);" name="cust_address2" value="<?php echo $row['cust_address2']?>">
+            <input type="text" style="width: calc(100% / 2 - 2.5px);" name="cust_address3" value="<?php echo $row['cust_address3']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
-            <label for="brand">Machine Brand</label><br>
+            <label for="brand">Machine Brand</label>
             <input type="text" id="brandname" name="machine_brand" value="<?php echo $row['machine_brand']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
-            <label for="type">Machine Type</label><br>
+            <label for="type">Machine Type</label>
             <input type="text" id="type_name" name="machine_type" value="<?php echo $row['machine_type']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
-            <label for="sn">Serial Number</label><br>
+            <label for="sn">Serial Number</label>
             <select id="serialnumbers" onchange="GetMachines(this.value)">
                 <option value="<?php echo $row['serialnumber']?>"><?php echo $row['serialnumber']?></option> 
                 
