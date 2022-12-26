@@ -785,7 +785,7 @@
                                     var type_id = $(this).data('type_id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxhome.php',
+                                        url: 'AdminHomepageJobinfo.php',
                                         type: 'post',
                                         data: {jobregister_id: jobregister_id, 
                                                       type_id: type_id},
