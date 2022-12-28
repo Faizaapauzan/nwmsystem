@@ -95,6 +95,7 @@
         
 		<label>Time at site</label>
         <input type="hidden" name="technician_arrival" value="<?php date_default_timezone_set('Asia/Kuala_Lumpur'); echo $technician_arrival = date('d-m-Y g:i A') ?>">
+        <input type="hidden" name="arrival_timestamp" value="<?php date_default_timezone_set('Asia/Kuala_Lumpur'); echo $arrival_timestamp = date('H:i:s') ?>">
         
 		<div class="input-group mb-3">
             <input readonly type="text" class="form-control" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
@@ -116,13 +117,16 @@
 			<script type="text/javascript">
                 function TechnicianArrival() {
                     var technician_arrival = $('input[name=technician_arrival]').val();
+                    var arrival_timestamp = $('input[name=arrival_timestamp]').val();
                     var jobregister_id = $('input[name=jobregister_id]').val();
                     
-					if (technician_arrival != '' || technician_arrival == '', 
+					if (technician_arrival != '' || technician_arrival == '',
+                         arrival_timestamp != '' || arrival_timestamp == '',  
 							jobregister_id != '' || jobregister_id == '') 
 							
 						{
 							var formData = {technician_arrival: technician_arrival,
+                                             arrival_timestamp: arrival_timestamp,
                             				    jobregister_id: jobregister_id};
                         	
 							$.ajax({
@@ -142,6 +146,7 @@
         
 		<label>Return time</label>
         <input type="hidden" name="technician_leaving" value="<?php date_default_timezone_set('Asia/Kuala_Lumpur'); echo $technician_leaving = date('d-m-Y g:i A') ?>">
+        <input type="hidden" name="leaving_timestamp" value="<?php date_default_timezone_set('Asia/Kuala_Lumpur'); echo $leaving_timestamp = date('H:i:s') ?>">
         
 		<div class="input-group mb-3">
             <input readonly type="text" class="form-control" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
@@ -165,13 +170,16 @@
 			<script type="text/javascript">
                 function TechnicianLeaving() {
                     var technician_leaving = $('input[name=technician_leaving]').val();
+                    var leaving_timestamp = $('input[name=leaving_timestamp]').val();
                     var jobregister_id = $('input[name=jobregister_id]').val();
                     
                     if (technician_leaving != '' || technician_leaving == '', 
+                         leaving_timestamp != '' || leaving_timestamp == '', 
 					        jobregister_id != '' || jobregister_id == '') 
 						
 						{
 							var formData = {technician_leaving: technician_leaving,
+                                             leaving_timestamp: leaving_timestamp,
                             					jobregister_id: jobregister_id};
                         
 							$.ajax({
