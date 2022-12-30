@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Technician Rest Hour</title>
         <link rel="icon" type="image/x-icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
@@ -178,7 +178,7 @@
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" id="technician_in" name="technician_in" value="<?php echo $row['technician_in']; ?>" style="position: static" aria-describedby="basic-addon2" readonly/>
                                 <div class="input-group-append">
-                                    <button type="button" class="buttonbiru" style="position: static; width: fit-content; padding-left: 50px; padding-right: 50px;" onclick="tech_ins()">IN</button>
+                                    <button type="button" class="buttonbiru" style="position: static; width: fit-content; padding-left: 51px; padding-right: 51px;" onclick="tech_ins()">IN</button>
                                 </div>
 
                                 <script type="text/javascript">

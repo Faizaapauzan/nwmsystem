@@ -6,7 +6,7 @@
 <head>
     <meta name="keywords" content="" />
     <meta charset="utf-8" />
-    <meta name=”viewport” content=”width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no”>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
     <title>NWM Management System</title>
