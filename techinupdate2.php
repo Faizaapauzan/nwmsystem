@@ -1,28 +1,32 @@
 <?php
 
+// Connect to the database
 include 'dbconnect.php';
 
-$response = array('success' => false);
+// Initialize variables to store the form data
+$technician_in = $tech_leader = $techupdate_date = "";
 
-if(isset($_POST['technician_in']) && $_POST['technician_in']!='' || $_POST['technician_in']==''
-    &&
-   isset($_POST['tech_leader']) && $_POST['tech_leader']!='' || $_POST['tech_leader']==''
-   &&
-   isset($_POST['techupdate_date']) && $_POST['techupdate_date']!='' || $_POST['techupdate_date']=='')
+// Check if the form has been submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Sanitize the form data to prevent SQL injection
+  $technician_in = $conn->real_escape_string($_POST['technician_in']);
+  $tech_leader = $conn->real_escape_string($_POST['tech_leader']);
+  $techupdate_date = $conn->real_escape_string($_POST['techupdate_date']);
 
-    {
-        $sql = "UPDATE tech_update SET 
-                technician_in ='".addslashes($_POST['technician_in'])."'
-       
-                WHERE tech_leader='".addslashes($_POST['tech_leader'])."'
-                AND techupdate_date='".addslashes($_POST['techupdate_date'])."'";
-        
-        if($conn->query($sql))
-        {
-            $response['success'] = true;
-        }
-    }
+  // Construct the UPDATE query
+  $query = "UPDATE tech_update SET technician_in='$technician_in' WHERE tech_leader='$tech_leader' AND techupdate_date='$techupdate_date'";
 
-echo json_encode($response);
+  // Execute the query
+  if ($conn->query($query) === TRUE) {
+    // Return a successful response if the query was successful
+    echo json_encode(array("status" => "success"));
+  } else {
+    // Return an error if the query failed
+    echo json_encode(array("status" => "error", "message" => $conn->error));
+  }
+}
+
+// Close the connection
+$conn->close();
 
 ?>
