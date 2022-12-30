@@ -90,7 +90,7 @@
         <div class="input-group mb-3">
             <input readonly type="text" class="form-control" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button id="update_ArrivalTime" class="buttonbiru update" onclick="TechnicianArrival(event)">Departure</button>
+                <button id="update_ArrivalTime" class="buttonbiru update" style="padding-left: 64px;" onclick="TechnicianArrival(event)">Arrival</button>
             </div>
         </div>
       </form>
@@ -124,7 +124,7 @@
         <div class="input-group mb-3">
             <input readonly type="text" class="form-control" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button id="update_LeavingTime" class="buttonbiru update" onclick="TechnicianLeaving(event)">Departure</button>
+                <button id="update_LeavingTime" class="buttonbiru update" style="padding-left: 51px;" onclick="TechnicianLeaving(event)">Leaving</button>
             </div>
         </div>
       </form>
@@ -219,7 +219,7 @@
             <input type="hidden" name="technician_in" value="<?php echo date('g:i A'); ?>">
             <input readonly type="text" style="position: static;" class="form-control" id="tech_in" value="<?php echo $row['tech_in']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="buttonbiru" onclick="updateInTime();" style="position: static; width: fit-content;" type="button">OUT</button>
+                <button class="buttonbiru" style="padding-left: 55px;" onclick="updateInTime();" style="position: static; width: fit-content;" type="button">IN</button>
             </div>
         </div>
     </form>
