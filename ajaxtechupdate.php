@@ -9,6 +9,7 @@
       }
 
 ?>
+
 <!DOCTYPE html>
 
 <head>
@@ -44,28 +45,24 @@
     
     <!-- Technician Departure Time -->
     <label>Departure time</label>
-      <form id="TechnicianDepartureTime">
+    <form id="TechnicianDepartureTime">
         <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        
         <input type="hidden" name="DateAssign" value="<?php echo date('d-m-Y'); ?>">
         <input type="hidden" name="job_status" value="Doing">
-        
-        <input type="hidden" name="technician_departure" value="<?php echo date('d-m-Y g:i A'); ?>">
         <input type="hidden" name="departure_timestamp" value="<?php echo date('H:i:s'); ?>">
-       
         <div class="input-group mb-3">
-            <input readonly type="text" class="form-control" id="Departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
+            <input readonly type="text" class="form-control" name="technician_departure" id="technician_departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button id="update_DepartureTime" class="buttonbiru update" onclick="TechnicianDeparture(event)">Departure</button>
             </div>
         </div>
-      </form>
+    </form>
     
     <script type="text/javascript">
         function TechnicianDeparture(event) {
             event.preventDefault();
             fetch("departureTime.php").then(response => response.text()).then(result => {
-                document.getElementById("Departure").value = result;
+                document.getElementById("technician_departure").value = result;
             });
             
             var formData = new FormData(document.getElementById("TechnicianDepartureTime"));
@@ -81,25 +78,22 @@
     
     <!-- Technician Time At Site Time -->
     <label>Time at site</label>
-      <form id="TechnicianTimeAtSite">
+    <form id="TechnicianTimeAtSite">
         <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        
-        <input type="hidden" name="technician_arrival" value="<?php echo date('d-m-Y g:i A'); ?>">
         <input type="hidden" name="arrival_timestamp" value="<?php echo date('H:i:s'); ?>">
-        
         <div class="input-group mb-3">
-            <input readonly type="text" class="form-control" id="arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
+            <input readonly type="text" class="form-control" id="technician_arrival" name="technician_arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button id="update_ArrivalTime" class="buttonbiru update" style="padding-left: 59px; padding-right: 59px;" onclick="TechnicianArrival(event)">Arrival</button>
+                <button id="update_ArrivalTime" class="buttonbiru update" style="padding-left: 58px; padding-right: 59px;" onclick="TechnicianArrival(event)">Arrival</button>
             </div>
         </div>
-      </form>
+    </form>
     
     <script type="text/javascript">
         function TechnicianArrival(event) {
             event.preventDefault();
             fetch("departureTime.php").then(response => response.text()).then(result => {
-                document.getElementById("arrival").value = result;
+                document.getElementById("technician_arrival").value = result;
             });
             
             var formData = new FormData(document.getElementById("TechnicianTimeAtSite"));
@@ -115,25 +109,22 @@
     
     <!-- Technician Return Time -->
     <label>Return time</label>
-      <form id="TechnicianReturnTime">
+    <form id="TechnicianReturnTime">
         <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        
-        <input type="hidden" name="technician_leaving" value="<?php echo date('d-m-Y g:i A'); ?>">
         <input type="hidden" name="leaving_timestamp" value="<?php echo date('H:i:s'); ?>">
-        
         <div class="input-group mb-3">
-            <input readonly type="text" class="form-control" id="leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
+            <input readonly type="text" class="form-control" id="technician_leaving" name="technician_leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button id="update_LeavingTime" class="buttonbiru update" style="padding-left: 52px; padding-right: 52px;" onclick="TechnicianLeaving(event)">Leaving</button>
+                <button id="update_LeavingTime" class="buttonbiru update" style="padding-left: 54px; padding-right: 53px;" onclick="TechnicianLeaving(event)">Leaving</button>
             </div>
         </div>
-      </form>
+    </form>
     
     <script type="text/javascript">
         function TechnicianLeaving(event) {
             event.preventDefault();
             fetch("departureTime.php").then(response => response.text()).then(result => {
-                document.getElementById("leaving").value = result;
+                document.getElementById("technician_leaving").value = result;
             });
             
             var formData = new FormData(document.getElementById("TechnicianReturnTime"));
@@ -154,11 +145,10 @@
             <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
             <input type="hidden" name="tech_leader" value="<?php echo $tech_leader; ?>">
             <input type="hidden" name="techupdate_date" value="<?php echo date('d-m-Y'); ?>">
-            <input type="hidden" name="tech_out" value="<?php echo date('g:i A'); ?>">
             <input type="hidden" name="technician_out" value="<?php echo date('g:i A'); ?>">
-            <input readonly type="text" style="position: static;" class="form-control" id="tech_out" value="<?php echo $row['tech_out']?>" aria-describedby="basic-addon2">
+            <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?php echo $row['tech_out']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="buttonbiru" onclick="updateOutTime();" style="position: static; width: fit-content;" type="button">OUT</button>
+                <button class="buttonbiru" onclick="updateOutTime(); updateTechnicianOut();" style="position: static; padding-left: 64px; padding-right: 64px;" type="button">OUT</button>
             </div>
         </div>
     </form>
@@ -175,31 +165,18 @@
             });
         }
 
-        function updateTechOut() {
-            var tech_out = $('input[name=tech_out]').val();
-            var jobregister_id = $('input[name=jobregister_id]').val();
-            if (tech_out !== '' && jobregister_id !== '') {
-                var formData = {
-                    tech_out: tech_out,
-                    jobregister_id: jobregister_id
-                };
-                $.post('techoutupdate.php', formData, function(response) {
-                    var res = JSON.parse(response);
-                    console.log(res);
-                });
-            }
-        }
-
         function updateTechnicianOut() {
             var technician_out = $('input[name=technician_out]').val();
             var tech_leader = $('input[name=tech_leader]').val();
             var techupdate_date = $('input[name=techupdate_date]').val();
+            
             if (technician_out !== '' && tech_leader !== '' && techupdate_date !== '') {
                 var formData = {
                     technician_out: technician_out,
                     tech_leader: tech_leader,
                     techupdate_date: techupdate_date
                 };
+                
                 $.post('techoutupdate2.php', formData, function(response) {
                     var res = JSON.parse(response);
                     console.log(res);
@@ -215,11 +192,10 @@
             <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
             <input type="hidden" name="tech_leader" value="<?php echo $tech_leader; ?>">
             <input type="hidden" name="techupdate_date" value="<?php echo date('d-m-Y'); ?>">
-            <input type="hidden" name="tech_in" value="<?php echo date('g:i A'); ?>">
             <input type="hidden" name="technician_in" value="<?php echo date('g:i A'); ?>">
-            <input readonly type="text" style="position: static;" class="form-control" id="tech_in" value="<?php echo $row['tech_in']?>" aria-describedby="basic-addon2">
+            <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="tech_in" value="<?php echo $row['tech_in']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="buttonbiru" style="padding-left: 55px;" onclick="updateInTime();" style="position: static; width: fit-content;" type="button">IN</button>
+                <button class="buttonbiru" onclick="updateInTime(); updateTechnicianIn();" style="position: static; padding-left: 70px; padding-right: 70px; width:160px" type="button">IN</button>
             </div>
         </div>
     </form>
@@ -236,31 +212,18 @@
             });
         }
 
-        function updateTechIn() {
-            var tech_in = $('input[name=tech_in]').val();
-            var jobregister_id = $('input[name=jobregister_id]').val();
-            if (tech_in !== '' && jobregister_id !== '') {
-                var formData = {
-                    tech_in: tech_in,
-                    jobregister_id: jobregister_id
-                };
-                $.post('techinupdate.php', formData, function(response) {
-                    var res = JSON.parse(response);
-                    console.log(res);
-                });
-            }
-        }
-
         function updateTechnicianIn() {
             var technician_in = $('input[name=technician_in]').val();
             var tech_leader = $('input[name=tech_leader]').val();
             var techupdate_date = $('input[name=techupdate_date]').val();
+            
             if (technician_in !== '' && tech_leader !== '' && techupdate_date !== '') {
                 var formData = {
                     technician_in: technician_in,
                     tech_leader: tech_leader,
                     techupdate_date: techupdate_date
                 };
+                
                 $.post('techinupdate2.php', formData, function(response) {
                     var res = JSON.parse(response);
                     console.log(res);
@@ -268,9 +231,48 @@
             }
         }
     </script>
-    <!-- End of Technician Rest Hour In --> 
+    <!-- End of Technician Rest Hour In -->
+
+    <div id="message" style="font-family: sans-serif; font-weight: bold; font-size: 15px; color:green"></div>
+    <div style="text-align: end;" class="updateBtn">
+        <button type="button" id="update_tech" class="buttonbiru" style="width:160px">Update</button>
+    </div>
+
+    <script>
+        $(function() {
+            $('#update_tech').click(function() {
+                var technician_departure = $('#technician_departure').val();
+                var technician_arrival = $('#technician_arrival').val();
+                var technician_leaving = $('#technician_leaving').val();
+                var tech_out = $('#tech_out').val();
+                var tech_in = $('#tech_in').val();
+                var jobregister_id = $('#jobregister_id').val();
+                
+                $.ajax({
+                    type: 'POST',
+                    url: 'techupdateindex.php',
+                    data: {
+                        technician_departure: technician_departure,
+                        technician_arrival: technician_arrival,
+                        technician_leaving: technician_leaving,
+                        tech_out: tech_out,
+                        tech_in: tech_in,
+                        jobregister_id: jobregister_id
+                    },
+                    
+                    success: function(response) {
+                        $('#message').html('Time has been update successfully');
+                    },
+                    error: function() {
+                        $('#message').html('An error occurred while updating the data');
+                    }
+                });
+            });
+        });
+    </script> 
     
     <?php } } } ?>
+
 </body>
 
 </html>

@@ -1,27 +1,24 @@
 <?php
-
     include 'dbconnect.php';
-    
-    $jobregister_id = $_POST['jobregister_id'];
-    $technician_departure = $_POST['technician_departure'];
-    $departure_timestamp = $_POST['departure_timestamp'];
-    $DateAssign = $_POST['DateAssign'];
-    $job_status = $_POST['job_status'];
-    
-    $stmt = $conn->prepare("UPDATE job_register SET 
-                            technician_departure=?, 
-                            departure_timestamp=?, 
-                            DateAssign=?, 
-                            job_status=? 
-                            WHERE jobregister_id=?");
-    
-    $stmt->bind_param("ssssi", $technician_departure, 
-                       $departure_timestamp, $DateAssign, 
-                       $job_status, $jobregister_id);
-    
-    $stmt->execute();
-    $stmt->close();
-    
-    $conn->close();
 
+    $jobregister_id = mysqli_real_escape_string($conn, $_POST['jobregister_id']);
+    $DateAssign = mysqli_real_escape_string($conn, $_POST['DateAssign']);
+    $job_status = mysqli_real_escape_string($conn, $_POST['job_status']);
+    $departure_timestamp = mysqli_real_escape_string($conn, $_POST['departure_timestamp']);
+
+    $sql = "UPDATE job_register SET 
+            DateAssign='$DateAssign', 
+            job_status='$job_status', 
+            departure_timestamp='$departure_timestamp' 
+            WHERE jobregister_id='$jobregister_id'";
+    
+    if (mysqli_query($conn, $sql)) {
+       
+    } 
+    
+    else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    mysqli_close($conn);
 ?>
