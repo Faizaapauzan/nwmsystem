@@ -50,6 +50,7 @@
         <input type="hidden" name="DateAssign" value="<?php echo date('d-m-Y'); ?>">
         <input type="hidden" name="job_status" value="Doing">
         <input type="hidden" name="departure_timestamp" value="<?php echo date('H:i:s'); ?>">
+        
         <div class="input-group mb-3">
             <input readonly type="text" class="form-control" name="technician_departure" id="technician_departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -80,7 +81,7 @@
     <label>Time at site</label>
     <form id="TechnicianTimeAtSite">
         <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        <input type="hidden" name="arrival_timestamp" value="<?php echo date('H:i:s'); ?>">
+        
         <div class="input-group mb-3">
             <input readonly type="text" class="form-control" id="technician_arrival" name="technician_arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -95,14 +96,6 @@
             fetch("departureTime.php").then(response => response.text()).then(result => {
                 document.getElementById("technician_arrival").value = result;
             });
-            
-            var formData = new FormData(document.getElementById("TechnicianTimeAtSite"));
-            fetch("arrivalupdate.php", {
-                method: "POST",
-                body: formData
-            }).then(response => response.text()).then(result => {
-                console.log(result);
-            });
         }
     </script>
     <!-- End of Technician Time At Site Time -->
@@ -111,7 +104,7 @@
     <label>Return time</label>
     <form id="TechnicianReturnTime">
         <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        <input type="hidden" name="leaving_timestamp" value="<?php echo date('H:i:s'); ?>">
+        
         <div class="input-group mb-3">
             <input readonly type="text" class="form-control" id="technician_leaving" name="technician_leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -125,14 +118,6 @@
             event.preventDefault();
             fetch("departureTime.php").then(response => response.text()).then(result => {
                 document.getElementById("technician_leaving").value = result;
-            });
-            
-            var formData = new FormData(document.getElementById("TechnicianReturnTime"));
-            fetch("leavingupdate.php", {
-                method: "POST",
-                body: formData
-            }).then(response => response.text()).then(result => {
-                console.log(result);
             });
         }
     </script>

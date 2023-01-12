@@ -30,7 +30,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Homepage</title>
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -158,6 +158,7 @@
                 </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
+                    <!-- <li><a class="link_name" href="AdminTechnicianLeave.php">Leave</a></li> -->
                 </ul>
             </li>
             <li>
@@ -316,35 +317,35 @@
                             <?php
                                 include 'dbconnect.php';
                                 $results = $conn->query
-                                ("SELECT * FROM job_register WHERE
-                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
-                                    OR
-                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                                    OR
-                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
-                                    OR
-                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
-                                    OR
-                                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
-                                    OR
-                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                                    OR
-                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
-                                    OR
-                                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
-                                    OR
-                                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                                    OR
-                                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                                    OR
-                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
-                                    OR
-                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
-                                    OR
-                                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
-                                    OR
-                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)   
-                             ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                            ("SELECT * FROM job_register WHERE
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+                                                    OR
+                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)   
+                                             ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
 
                                 $numRow = "SELECT * FROM job_register WHERE
                                                 (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
@@ -453,7 +454,7 @@
                             <div class="TechJobInfoTab">
                                 <div class="contentTechJobInfo">
                                     <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
-                                    <form action="jobassignADMIN.php" method="post">
+                                    <form action="AdminHomepageJobassign.php" method="post">
                                         <div class="assign-details">
 
                                         </div>
@@ -468,7 +469,7 @@
                                     var jobregister_id = $(this).data('id'); 
                                     // AJAX request 
                                     $.ajax({
-                                        url: 'jobassignJobListing.php',
+                                        url: 'AdminHomepageJobassign.php',
                                         type: 'post',
                                         data: {jobregister_id: jobregister_id},
                                         success: function(response) {
@@ -820,7 +821,7 @@
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'jobassignADMIN.php',
+                                        url: 'AdminHomepageJobassign.php',
                                         type: 'post',
                                         data: { jobregister_id: jobregister_id },
                                         success: function (response) {
@@ -839,7 +840,7 @@
                         <label for="tabDoingPending2" class="tabHeadingPending">Update</label>
                         <div class="tab" id="PendingJobInfoTab">
                             <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                            <form action="ajaxtechupdateadmin.php" method="post">
+                            <form action="AdminHomepageUpdate.php" method="post">
                                 <div class="pending-update">
 
                                 </div>
@@ -852,7 +853,7 @@
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxtechupdateadmin.php',
+                                        url: 'AdminHomepageUpdate.php',
                                         type: 'post',
                                         data: {jobregister_id: jobregister_id},
                                         success: function (response) {
@@ -1095,7 +1096,7 @@
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'jobassignADMIN.php',
+                                        url: 'AdminHomepageJobassign.php',
                                         type: 'post',
                                         data: { jobregister_id: jobregister_id },
                                         success: function (response) {
@@ -1114,7 +1115,7 @@
                         <label for="tabDoingIncomplete2" class="tabHeadingIncomplete">Update</label>
                         <div class="tab" id="IncompleteJobInfoTab">
                             <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                            <form action="ajaxtechupdateadmin.php" method="post">
+                            <form action="AdminHomepageUpdate.php" method="post">
                                 <div class="incomplete-update">
 
                                 </div>
@@ -1127,7 +1128,7 @@
                                     var jobregister_id = $(this).data('id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'ajaxtechupdateadmin.php',
+                                        url: 'AdminHomepageUpdate.php',
                                         type: 'post',
                                         data: { jobregister_id: jobregister_id },
                                         success: function (response) {
@@ -1407,7 +1408,7 @@
                             <label for="tabDoingHamir2" class="tabHeadingHamir">Job Assign</label>
                             <div class="tab" id="HamirJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="hamir-assign">
 
                                     </div>
@@ -1420,7 +1421,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: { jobregister_id: jobregister_id },
                                             success: function (response) {
@@ -1439,7 +1440,7 @@
                             <label for="tabDoingHamir3" class="tabHeadingHamir">Update</label>
                             <div class="tab" id="HamirJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hamir').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="hamir-update">
 
                                     </div>
@@ -1452,7 +1453,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: { jobregister_id: jobregister_id },
                                             success: function (response) {
@@ -1732,7 +1733,7 @@
                             <label for="tabDoingHwa2" class="tabHeadingHwa">Job Assign</label>
                             <div class="tab" id="HwaJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="hwa-assign">
 
                                     </div>
@@ -1745,7 +1746,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -1764,7 +1765,7 @@
                             <label for="tabDoingHwa3" class="tabHeadingHwa">Update</label>
                             <div class="tab" id="HwaJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hwa').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="hwa-update">
 
                                     </div>
@@ -1777,7 +1778,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -2058,7 +2059,7 @@
                             <label for="tabDoingIsk2" class="tabHeadingIsk">Job Assign</label>
                             <div class="tab" id="IskJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="isk-assign">
 
                                     </div>
@@ -2071,7 +2072,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -2090,7 +2091,7 @@
                             <label for="tabDoingIsk3" class="tabHeadingIsk">Update</label>
                             <div class="tab" id="IskJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Isk').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="isk-update">
 
                                     </div>
@@ -2103,7 +2104,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -2385,7 +2386,7 @@
                             <label for="tabDoingJohn2" class="tabHeadingJohn">Job Assign</label>
                             <div class="tab" id="JohnJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="john-assign">
 
                                     </div>
@@ -2398,7 +2399,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -2417,7 +2418,7 @@
                             <label for="tabDoingJohn3" class="tabHeadingJohn">Update</label>
                             <div class="tab" id="JohnJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-John').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="john-update">
 
                                     </div>
@@ -2430,7 +2431,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -2719,7 +2720,7 @@
                             <label for="tabDoingJunJie2" class="tabHeadingJunJie">Job Assign</label>
                             <div class="tab" id="JunJieJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="junjie-assign">
 
                                     </div>
@@ -2732,7 +2733,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -2751,7 +2752,7 @@
                             <label for="tabDoingJunJie3" class="tabHeadingJunJie">Update</label>
                             <div class="tab" id="JunJieJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-JunJie').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="junjie-update">
 
                                     </div>
@@ -2764,7 +2765,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -3045,7 +3046,7 @@
                             <label for="tabDoingRazwill2" class="tabHeadingRazwill">Job Assign</label>
                             <div class="tab" id="RazwillJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="razwill-assign">
 
                                     </div>
@@ -3058,7 +3059,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: { jobregister_id: jobregister_id },
                                             success: function (response) {
@@ -3077,7 +3078,7 @@
                             <label for="tabDoingRazwill3" class="tabHeadingRazwill">Update</label>
                             <div class="tab" id="RazwillJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Razwill').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="razwill-update">
 
                                     </div>
@@ -3090,7 +3091,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: { jobregister_id: jobregister_id },
                                             success: function (response) {
@@ -3369,7 +3370,7 @@
                             <label for="tabDoingSahele2" class="tabHeadingSahele">Job Assign</label>
                             <div class="tab" id="SaheleJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="sahele-assign">
 
                                     </div>
@@ -3382,7 +3383,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: { jobregister_id: jobregister_id },
                                             success: function (response) {
@@ -3401,7 +3402,7 @@
                             <label for="tabDoingSahele3" class="tabHeadingSahele">Update</label>
                             <div class="tab" id="SaheleJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sahele').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="sahele-update">
 
                                     </div>
@@ -3414,7 +3415,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: { jobregister_id: jobregister_id },
                                             success: function (response) {
@@ -3699,7 +3700,7 @@
                             <label for="tabDoingSazaly2" class="tabHeadingSazaly">Job Assign</label>
                             <div class="tab" id="SazalyJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="sazaly-assign">
 
                                     </div>
@@ -3712,7 +3713,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -3731,7 +3732,7 @@
                             <label for="tabDoingSazaly3" class="tabHeadingSazaly">Update</label>
                             <div class="tab" id="SazalyJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Sazaly').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="sazaly-update">
 
                                     </div>
@@ -3744,7 +3745,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -4034,7 +4035,7 @@
                             <label for="tabDoingFaizan2" class="tabHeadingFaizan">Job Assign</label>
                             <div class="tab" id="FaizanJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="faizan-assign">
 
                                     </div>
@@ -4047,7 +4048,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -4066,7 +4067,7 @@
                             <label for="tabDoingFaizan3" class="tabHeadingFaizan">Update</label>
                             <div class="tab" id="FaizanJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Faizan').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="faizan-update">
 
                                     </div>
@@ -4079,7 +4080,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: { jobregister_id: jobregister_id },
                                             success: function (response) {
@@ -4363,7 +4364,7 @@
                             <label for="tabDoingFauzin2" class="tabHeadingFauzin">Job Assign</label>
                             <div class="tab" id="FauzinJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="fauzin-assign">
 
                                     </div>
@@ -4376,7 +4377,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -4395,7 +4396,7 @@
                             <label for="tabDoingFauzin3" class="tabHeadingFauzin">Update</label>
                             <div class="tab" id="FauzinJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Fauzin').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="fauzin-update">
 
                                     </div>
@@ -4408,7 +4409,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -4692,7 +4693,7 @@
                             <label for="tabDoingIzaan2" class="tabHeadingIzaan">Job Assign</label>
                             <div class="tab" id="IzaanJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="izaan-assign">
 
                                     </div>
@@ -4705,7 +4706,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -4724,7 +4725,7 @@
                             <label for="tabDoingIzaan3" class="tabHeadingIzaan">Update</label>
                             <div class="tab" id="IzaanJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Izaan').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="izaan-update">
 
                                     </div>
@@ -4737,7 +4738,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -5020,7 +5021,7 @@
                             <label for="tabDoingTeck2" class="tabHeadingTeck">Job Assign</label>
                             <div class="tab" id="TeckJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="teck-assign">
 
                                     </div>
@@ -5033,7 +5034,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -5052,7 +5053,7 @@
                             <label for="tabDoingTeck3" class="tabHeadingTeck">Update</label>
                             <div class="tab" id="TeckJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Teck').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="teck-update">
 
                                     </div>
@@ -5065,7 +5066,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -5356,7 +5357,7 @@
                             <label for="tabDoingAizat2" class="tabHeadingAizat">Job Assign</label>
                             <div class="tab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="aizat-assign">
 
                                     </div>
@@ -5369,7 +5370,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function(response) {
@@ -5388,7 +5389,7 @@
                             <label for="tabDoingAizat3" class="tabHeadingAizat">Update</label>
                             <div class="tab" id="AizatJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Aizat').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="Aizattechupdate-details">
 
                                     </div>
@@ -5401,7 +5402,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url:'ajaxtechupdateadmin.php',
+                                            url:'AdminHomepageUpdate.php',
                                             type:'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function(response) {
@@ -5686,7 +5687,7 @@
                             <label for="tabDoingBoon2" class="tabHeadingBoon">Job Assign</label>
                             <div class="tab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="boon-assign">
 
                                     </div>
@@ -5699,7 +5700,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax( {
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -5718,7 +5719,7 @@
                             <label for="tabDoingBoon3" class="tabHeadingBoon">Update</label>
                             <div class="tab" id="BoonJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Boon').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="boon-update">
 
                                     </div>
@@ -5731,7 +5732,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -6015,7 +6016,7 @@
                             <label for="tabDoingHafiz2" class="tabHeadingHafiz">Job Assign</label>
                             <div class="tab" id="HafizJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                                <form action="jobassignADMIN.php" method="post">
+                                <form action="AdminHomepageJobassignAsisstant.php" method="post">
                                     <div class="hafiz-assign">
 
                                     </div>
@@ -6028,7 +6029,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'jobassignADMIN.php',
+                                            url: 'AdminHomepageJobassignAsisstant.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {
@@ -6047,7 +6048,7 @@
                             <label for="tabDoingHafiz3" class="tabHeadingHafiz">Update</label>
                             <div class="tab" id="HafizJobInfoTab">
                                 <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Hafiz').style.display='none'">&times</div>
-                                <form action="ajaxtechupdateadmin.php" method="post">
+                                <form action="AdminHomepageUpdate.php" method="post">
                                     <div class="hafiz-update">
 
                                     </div>
@@ -6060,7 +6061,7 @@
                                         var jobregister_id = $(this).data('id');
                                         // AJAX request
                                         $.ajax({
-                                            url: 'ajaxtechupdateadmin.php',
+                                            url: 'AdminHomepageUpdate.php',
                                             type: 'post',
                                             data: {jobregister_id: jobregister_id},
                                             success: function (response) {

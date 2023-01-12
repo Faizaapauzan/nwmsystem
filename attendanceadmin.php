@@ -256,8 +256,7 @@ $query = $conn->query("SELECT * FROM tech_update ORDER BY techupdate_id DESC");
         <div class="machineList">
         <h1>Attendance</h1>
         <div class="addMachineBtn">
-        <button style="background-color: #081d45; padding-left: 54px;" type="button" id="btnRegister" class="todo" data-target="doubleClick-machine"  onclick="document.getElementById('doubleClick-machine').style.display='block'">Add</button>
-        <button class="btn-reset" onclick="document.location='attendanceadmin.php'">Refresh</button>
+        <button style="margin-right: 50px;" class="btn-reset" onclick="document.location='attendanceadmin.php'">Refresh</button>
         </div>
 
         <div class="datalist-wrapper">    

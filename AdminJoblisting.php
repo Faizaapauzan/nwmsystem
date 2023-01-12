@@ -471,7 +471,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'jobassignADMIN.php',
+                                    url: 'AdminJoblistingJobassign.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -492,7 +492,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'jobassignADMIN.php',
+                                    url: 'AdminJoblistingJobassignAssistant.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -514,7 +514,7 @@
                                 var jobregister_id = $(this).data('id');
                                  // AJAX request
                                  $.ajax({
-                                    url: 'jobassignADMIN.php',
+                                    url: 'AdminJoblistingJobassign.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -536,7 +536,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'jobassignADMIN.php',
+                                    url: 'AdminJoblistingJobassign.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -558,7 +558,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'jobassignADMIN.php',
+                                    url: 'AdminJoblistingJobassign.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -580,7 +580,7 @@
                                 var jobregister_id = $(this).data('id');
                                 // AJAX request
                                 $.ajax({
-                                    url: 'jobassignADMIN.php',
+                                    url: 'AdminJoblistingJobassign.php',
                                     type: 'post',
                                     data: {jobregister_id: jobregister_id},
                                     success: function (response) {
@@ -599,7 +599,7 @@
                 <label for="tabDoingInfo3" class="tabHeadingInfo">Update</label>
                 <div class="tab" id="JobInfoTab">
                     <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-info').style.display='none'">&times</div>
-                    <form action="ajaxtechupdateadmin.php" method="post">
+                    <form action="AdminJoblistingUpdate.php" method="post">
                         <div class="info-update">
 
                         </div>
@@ -613,7 +613,7 @@
                             var jobregister_id = $(this).data('id');
                             // AJAX request
                             $.ajax({
-                                url: 'ajaxtechupdateadmin.php',
+                                url: 'AdminJoblistingUpdate.php',
                                 type: 'post',
                                 data: { jobregister_id: jobregister_id },
                                 success: function (response) {
@@ -634,7 +634,7 @@
                             var jobregister_id = $(this).data('id');
                             // AJAX request
                             $.ajax({
-                                url: 'ajaxtechupdateadmin.php',
+                                url: 'AdminJoblistingUpdate.php',
                                 type: 'post',
                                 data: {jobregister_id: jobregister_id},
                                 success: function (response) {
@@ -655,7 +655,7 @@
                             var jobregister_id = $(this).data('id');
                             // AJAX request
                             $.ajax({
-                                url: 'ajaxtechupdateadmin.php',
+                                url: 'AdminJoblistingUpdate.php',
                                 type: 'post',
                                 data: {jobregister_id: jobregister_id},
                                 success: function (response) {
@@ -676,7 +676,7 @@
                             var jobregister_id = $(this).data('id');
                             // AJAX request
                             $.ajax({
-                                url: 'ajaxtechupdateadmin.php',
+                                url: 'AdminJoblistingUpdate.php',
                                 type: 'post',
                                 data: {jobregister_id: jobregister_id},
                                 success: function (response) {
@@ -697,7 +697,7 @@
                             var jobregister_id = $(this).data('id');
                             // AJAX request
                             $.ajax({
-                                url: 'ajaxtechupdateadmin.php',
+                                url: 'AdminJoblistingUpdate.php',
                                 type: 'post',
                                 data: {jobregister_id: jobregister_id},
                                 success: function (response) {
@@ -718,7 +718,7 @@
                             var jobregister_id = $(this).data('id');
                             // AJAX request
                             $.ajax({
-                                url: 'ajaxtechupdateadmin.php',
+                                url: 'AdminJoblistingUpdate.php',
                                 type: 'post',
                                 data: {jobregister_id: jobregister_id},
                                 success: function (response) {
