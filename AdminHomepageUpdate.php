@@ -18,19 +18,6 @@
 
 <body>
 
-    <!-- To open ajax --> 
-    <?php
-        include 'dbconnect.php';
-        if (isset($_POST['jobregister_id'])) {
-            $jobregister_id =$_POST['jobregister_id'];
-            $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-            $query_run = mysqli_query($conn, $query);
-            if ($query_run) {
-                while ($row = mysqli_fetch_array($query_run)) {
-    ?> 
-    
-    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>"> <?php } } } ?>
-    
     <!-- To update travel time and rest hour --> 
     <?php
         include 'dbconnect.php';

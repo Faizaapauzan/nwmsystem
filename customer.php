@@ -89,27 +89,26 @@ $query = $conn->query("SELECT * FROM customer_list ORDER BY customer_id ASC");
 
 <body>
 
-  <div class="sidebar close">
-    <div class="logo-details">
-	    <img src="neo.png" height="65" width="75"></img>
-      <span class="logo_name">NWM SYSTEM</span>
-    </div>
-
-    <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi <?php echo $_SESSION["username"] ?>!</div>
-
-    <ul class="nav-links">
-
-      <li>
-        <a href="jobregister.php">
-          <i class='bx bx-registered' ></i>
-          <span class="link_name">Register Job</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-        </ul>
-      </li>
-
-       <li>
+<!-- Navigation Sidebar -->
+<div class="sidebar close">
+        <div class="logo-details">
+            <img src="neo.png" height="65" width="75"></img>
+            <span class="logo_name">NWM SYSTEM</span>
+        </div>
+        
+        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="jobregister.php">
+                    <i class='bx bx-registered' ></i>
+                    <span class="link_name">Register Job</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
+                </ul>
+            </li>
+            <li>
                 <div class="iocn-link">
                     <a href="attendanceadmin.php">
                         <i class='bx bx-calendar-check' ></i>
@@ -118,118 +117,107 @@ $query = $conn->query("SELECT * FROM customer_list ORDER BY customer_id ASC");
                 </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
+                    <li><a class="link_name" href="AdminLeave.php">Leave</a></li>
                 </ul>
             </li>
-
-      <li>
-        <div class="iocn-link">
-          <a href="staff.php">
-            <i class='bx bx-id-card' ></i>
-            <span class="link_name">Staff</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="staff.php">Staff</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="technicianlist.php">
-          <i class='fa fa-users' ></i>
-          <span class="link_name">Technician</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="customer.php">
-          <i class='bx bx-user' ></i>
-          <span class="link_name">Customers</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="customer.php">Customers</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <div class="iocn-link">
-          <a href="machine.php">
-            <i class='fa fa-medium' ></i>
-            <span class="link_name">Machine</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="machine.php">Machine</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="accessories.php">
-          <i class='bx bx-wrench' ></i>
-          <span class="link_name">Accessories</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="accessories.php">Accessories</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="jobtype.php">
-          <i class='bx bx-briefcase'></i>
-          <span class="link_name">Job Type</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="jobcompleted.php">
-          <i class='fa fa-check-square-o' ></i>
-          <span class="link_name">Completed Job</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="jobcanceled.php">
-          <i class='fa fa-minus-square' ></i>
-          <span class="link_name">Canceled Job</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-        </ul>
-      </li>
-      
-       <li>
+            <li>
+                <div class="iocn-link">
+                    <a href="staff.php">
+                        <i class='bx bx-id-card' ></i>
+                        <span class="link_name">Staff</span>
+                    </a>
+                </div>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="staff.php">Staff</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="technicianlist.php">
+                    <i class='fa fa-users' ></i>
+                    <span class="link_name">Technician</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="customer.php">
+                    <i class='bx bx-user' ></i>
+                    <span class="link_name">Customers</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="customer.php">Customers</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="machine.php">
+                        <i class='fa fa-medium' ></i>
+                        <span class="link_name">Machine</span>
+                    </a>
+                </div>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="machine.php">Machine</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="accessories.php">
+                    <i class='bx bx-wrench' ></i>
+                    <span class="link_name">Accessories</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="jobtype.php">
+                    <i class='bx bx-briefcase'></i>
+                    <span class="link_name">Job Type</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="jobcompleted.php">
+                    <i class='fa fa-check-square-o' ></i>
+                    <span class="link_name">Completed Job</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="jobcanceled.php">
+                    <i class='fa fa-minus-square' ></i>
+                    <span class="link_name">Canceled Job</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="">
                     <i class='bx bxs-report' ></i>
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
-                     <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
+                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
                     <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
-
-               
             </li>
-
-      <li>
-        <a href="logout.php">
-          <i class='bx bx-log-out' ></i>
-          <span class="link_name">Logout</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="logout.php">Logout</a></li>
+            <li>
+                <a href="logout.php">
+                    <i class='bx bx-log-out' ></i>
+                    <span class="link_name">Logout</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="logout.php">Logout</a></li>
+                </ul>
+            </li>
         </ul>
-      </li>
-
-
-  </div>
+    </div>
+    <!-- End of Navigation Sidebar -->
 
     <!--Home navigation-->
     <section class="home-section">

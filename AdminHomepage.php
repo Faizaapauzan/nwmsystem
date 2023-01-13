@@ -1,29 +1,14 @@
 <?php
     session_start();
-
-    // cek apakah yang mengakses halaman ini sudah login
-    if($_SESSION['staff_position']=="" )
-    {
-        header("location:index.php?error");
+    if (session_status() == PHP_SESSION_NONE) {
+        header("location: index.php?error=session");
     }
-    
-    if(!isset($_SESSION['username']))
-	{
-        header("location:index.php?error");
-	}
-
-    elseif($_SESSION['staff_position']== 'Admin')
-	{
-	}
-
-    elseif($_SESSION['staff_position']== 'Manager')
-	{
-	}
-
-    else
-	{
-        header("location:index.php?error");
-	}
+    if(!isset($_SESSION['username'])) {
+        header("location: index.php?error=login");
+    }
+    elseif($_SESSION['staff_position']!= 'Admin' && $_SESSION['staff_position']!='Manager') {
+        header("location: index.php?error=permission");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -158,7 +143,7 @@
                 </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                    <!-- <li><a class="link_name" href="AdminTechnicianLeave.php">Leave</a></li> -->
+                    <li><a class="link_name" href="AdminLeave.php">Leave</a></li>
                 </ul>
             </li>
             <li>
@@ -1455,7 +1440,7 @@
                                         $.ajax({
                                             url: 'AdminHomepageUpdate.php',
                                             type: 'post',
-                                            data: { jobregister_id: jobregister_id },
+                                            data: {jobregister_id: jobregister_id},
                                             success: function (response) {
                                                 // Add response in Modal body
                                                 $('.hamir-update').html(response);
@@ -3093,11 +3078,9 @@
                                         $.ajax({
                                             url: 'AdminHomepageUpdate.php',
                                             type: 'post',
-                                            data: { jobregister_id: jobregister_id },
+                                            data: {jobregister_id: jobregister_id},
                                             success: function (response) {
-                                                // Add response in Modal body
                                                 $('.razwill-update').html(response);
-                                                // Display Modal
                                                 $('#doubleClick-Razwill').modal('show');
                                             }
                                         });
@@ -3413,15 +3396,12 @@
                                 $(document).ready(function () {
                                     $('body').on('click','.Sahele',function(){
                                         var jobregister_id = $(this).data('id');
-                                        // AJAX request
                                         $.ajax({
                                             url: 'AdminHomepageUpdate.php',
                                             type: 'post',
-                                            data: { jobregister_id: jobregister_id },
+                                            data: {jobregister_id: jobregister_id},
                                             success: function (response) {
-                                                // Add response in Modal body
                                                 $('.sahele-update').html(response);
-                                                // Display Modal
                                                 $('#doubleClick-Sahele').modal('show');
                                             }
                                         });
