@@ -10,6 +10,10 @@
     $today_date = date("Y-m-d");
     $_SESSION['storeDate'] = $today_date;
 
+    if (isset($_SESSION["username"])) {
+        $job_assign = $_SESSION["username"];
+      }
+
 ?>
  
 <!DOCTYPE html>
@@ -90,8 +94,7 @@
             
             <form action="jobtechnicianindex.php" name="JobForm" method="post" onsubmit="return validateForm()">
             
-            <?php if (isset($_SESSION["username"])) ?>
-            <input type="hidden" name="job_assign" id="job_assign" value="<?php echo $_SESSION["username"] ?>" readonly >
+            <input type="hidden" name="job_assign" id="job_assign" value="<?php echo $job_assign; ?>" readonly >
             <input type="hidden" name="customer_grade" id="customer_grade">
             <input type="hidden" name="customer_PIC" id="customer_PIC">
             <input type="hidden" name="cust_phone1" id="cust_phone1">
@@ -110,7 +113,7 @@
                     <select id="ddlModel" onchange="GetDetail(this.value)"> 
                         <option value="">-- Select Customer --</option>
                         <?php
-                            include "dbconnect.php";  // Using database connection file here
+                            include "dbconnect.php";
                             $records = mysqli_query($conn, "SELECT * From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
                             while($data = mysqli_fetch_array($records))
                                 {
@@ -127,12 +130,7 @@
                 </div>
             </div>
             
-            <script>
-                $(document).ready(function(){
-                    // Initialize select2
-                    $("#ddlModel").select2();
-                });
-            </script>
+            <script>$(document).ready(function(){$("#ddlModel").select2();});</script>
             
             <script>
                 $(document).ready(function(){
@@ -159,14 +157,10 @@
                     }
                     
                     else {
-                        // Creates a new XMLHttpRequest object
+                        
                         var xmlhttp = new XMLHttpRequest();
                         xmlhttp.onreadystatechange = function () {
-                            // Defines a function to be called when
-                            // the readyState property changes
                             if (this.readyState == 4 && this.status == 200) {
-                                // Typical action to be performed
-                                // when the document is ready
                                 var myObj = JSON.parse (this.responseText);
                                 document.getElementById ("customer_code").value = myObj[0];
                                 document.getElementById ("customer_name").value = myObj[1];
@@ -263,8 +257,6 @@
                             if (this.readyState == 4 && this.status == 200) {
                                 var myObj = JSON.parse(this.responseText);
                                 document.getElementById("job_name").value = myObj[0];
-                                // Assign the value received to
-                                // last name input field
                                 document.getElementById("job_description").value = myObj[1];
                                 }
                             };
@@ -430,19 +422,9 @@
                 });
     </script>
     
-    <script>
-        $(document).ready(function(){
-            // Initialize select2
-            $("#JenisMachine").select2();
-        });
-    </script>
+    <script>$(document).ready(function(){$("#JenisMachine").select2();});</script>
     
-    <script>
-        $(document).ready(function(){
-            // Initialize select2
-            $("#NumberSiriSelect").select2();
-        });
-    </script>
+    <script>$(document).ready(function(){$("#NumberSiriSelect").select2();});</script>
     
     <script>
         function GetMachine(str) {
