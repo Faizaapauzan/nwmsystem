@@ -27,17 +27,17 @@
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Priority</label>
-            <input type="text" name="job_priority" value="<?php echo $row['job_priority']?>">
+            <input type="text" id="job_priority" name="job_priority" value="<?php echo $row['job_priority']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Order Number</label>
-            <input type="text" name="job_order_number" value="<?php echo $row['job_order_number']?>">
+            <input type="text" id="job_order_number" name="job_order_number" value="<?php echo $row['job_order_number']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Name</label>
-            <input type="text" name="job_name" value="<?php echo $row['job_name']?>">
+            <input type="text" id="job_name" name="job_name" value="<?php echo $row['job_name']?>">
         </div>
 
         <div class="input-box" style="width: 50%;">
@@ -62,17 +62,17 @@
 
         <div class="input-box" style="width: 100%;">
             <label for="">Job Description</label>
-            <input type="text" name="job_description" value="<?php echo $row['job_description']?>">
+            <input type="text" id="job_description" name="job_description" value="<?php echo $row['job_description']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Delivery date</label>
-            <input type="date" name="delivery_date" value="<?php echo $row['delivery_date']?>">
+            <input type="date" id="delivery_date" name="delivery_date" value="<?php echo $row['delivery_date']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Requested date</label>
-            <input type="date" name="requested_date" value="<?php echo $row['requested_date']?>">
+            <input type="date" id="requested_date" name="requested_date" value="<?php echo $row['requested_date']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
@@ -97,9 +97,9 @@
         
         <div class="input-box" style="width: 100%;">
             <label for="">Customer Address</label>
-            <input type="text" name="cust_address1" value="<?php echo $row['cust_address1']?>">
-            <input type="text" style="width: calc(100% / 2 - 2.5px);" name="cust_address2" value="<?php echo $row['cust_address2']?>">
-            <input type="text" style="width: calc(100% / 2 - 2.5px);" name="cust_address3" value="<?php echo $row['cust_address3']?>">
+            <input type="text" id="cust_address1" name="cust_address1" value="<?php echo $row['cust_address1']?>">
+            <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address2" name="cust_address2" value="<?php echo $row['cust_address2']?>">
+            <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address3" name="cust_address3" value="<?php echo $row['cust_address3']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
@@ -224,6 +224,7 @@
     </script>
     <!-- End of Update machine name in assistant table -->
     
+    <!-- Fetch machine details when change machine -->
     <script>
         $(document).ready(function() {
             $("#brand").on('change', function() {
@@ -285,6 +286,7 @@
             }
         }
     </script>
+    <!-- End of Fetch machine details when change machine -->
     
     <!-- Fetch customer info when change customer -->
     <script>

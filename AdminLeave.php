@@ -45,21 +45,16 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/number.js" type="text/javascript" defer></script>
     
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multidatespicker/1.6.6/jquery-ui.multdatespicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" />
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     
     <!-- Date Picker -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/dubrox/Multiple-Dates-Picker-for-jQuery-UI@master/jquery-ui.multidatespicker.js"></script>
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="jquery-ui.js"></script>
+    <script src="jquery.multi-select.js"></script>
     
     <!-- Font & icon -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -104,13 +99,11 @@
             <img src="neo.png" height="65" width="75"></img>
             <span class="logo_name">NWM SYSTEM</span>
         </div>
-        
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
-        
+        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi <?php echo $_SESSION["username"] ?>!</div>
         <ul class="nav-links">
             <li>
                 <a href="jobregister.php">
-                    <i class='bx bx-registered' ></i>
+                    <i class='bx bx-registered'></i>
                     <span class="link_name">Register Job</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -120,7 +113,7 @@
             <li>
                 <div class="iocn-link">
                     <a href="attendanceadmin.php">
-                        <i class='bx bx-calendar-check' ></i>
+                        <i class='bx bx-calendar-check'></i>
                         <span class="link_name">Attendance</span>
                     </a>
                 </div>
@@ -132,7 +125,7 @@
             <li>
                 <div class="iocn-link">
                     <a href="staff.php">
-                        <i class='bx bx-id-card' ></i>
+                        <i class='bx bx-id-card'></i>
                         <span class="link_name">Staff</span>
                     </a>
                 </div>
@@ -142,7 +135,7 @@
             </li>
             <li>
                 <a href="technicianlist.php">
-                    <i class='fa fa-users' ></i>
+                    <i class='fa fa-users'></i>
                     <span class="link_name">Technician</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -151,7 +144,7 @@
             </li>
             <li>
                 <a href="customer.php">
-                    <i class='bx bx-user' ></i>
+                    <i class='bx bx-user'></i>
                     <span class="link_name">Customers</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -161,7 +154,7 @@
             <li>
                 <div class="iocn-link">
                     <a href="machine.php">
-                        <i class='fa fa-medium' ></i>
+                        <i class='fa fa-medium'></i>
                         <span class="link_name">Machine</span>
                     </a>
                 </div>
@@ -171,7 +164,7 @@
             </li>
             <li>
                 <a href="accessories.php">
-                    <i class='bx bx-wrench' ></i>
+                    <i class='bx bx-wrench'></i>
                     <span class="link_name">Accessories</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -189,7 +182,7 @@
             </li>
             <li>
                 <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o' ></i>
+                    <i class='fa fa-check-square-o'></i>
                     <span class="link_name">Completed Job</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -198,7 +191,7 @@
             </li>
             <li>
                 <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square' ></i>
+                    <i class='fa fa-minus-square'></i>
                     <span class="link_name">Canceled Job</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -207,7 +200,7 @@
             </li>
             <li>
                 <a href="">
-                    <i class='bx bxs-report' ></i>
+                    <i class='bx bxs-report'></i>
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -217,7 +210,7 @@
             </li>
             <li>
                 <a href="logout.php">
-                    <i class='bx bx-log-out' ></i>
+                    <i class='bx bx-log-out'></i>
                     <span class="link_name">Logout</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -247,9 +240,9 @@
                         <div class="listAddForm-details">
                             <div class="input-box">
                                 <label for="tech_name" class="details">Name</label>
+                                
                                 <select class="input-box" style="width: 100%; height:45px; margin-bottom:-5px; border-radius:7px;" id="tech_name" name="tech_name">
-                                    <option value="">Select Name</option> 
-                                        <?php
+                                    <option value="">Select Name</option> <?php
                                             include "dbconnect.php";
                                             $records = mysqli_query($conn, 
                                                             "SELECT * FROM staff_register 
@@ -271,9 +264,7 @@
                             <div class="input-box">
                                 <label for="leave_date" class="details">Leave Date</label>
                                 <input type="text" id="datePick" name="leave_date" placeholder="Select Date" autocomplete="off">
-                                <script src="jquery.js"></script>
-                                <script src="jquery-ui.js"></script>
-                                <script src="jquery.multi-select.js"></script>
+                                
                                 <script>
                                     $(document).ready(function() {
                                         $('#datePick').multiDatesPicker({
@@ -285,6 +276,7 @@
                                         });
                                     });
                                 </script>
+
                             </div>
                         </div>
                         
@@ -340,8 +332,8 @@
                                 <td class="align-center"><button class="btn-delete" style="width: max-content; height:35px; padding-right:50px; padding-left:50px; border-radius:7px; background-color:#D10000" data-id="<?php echo $row['techOFF_id']; ?>">Delete</button></td>
                             </tr> 
                             
-                            <?php } } else {echo '<tr><td colspan="6" class="align-center">No records found...</td></tr>';}?>
-
+                            <?php } } else {echo '<tr><td colspan="6" class="align-center">No records found...</td></tr>';}?> 
+                        
                         </tbody>
                     </table>
                 </div>
@@ -380,7 +372,6 @@
                 selectedId = this.getAttribute("data-id");
             }
         }
-        
         span.onclick = function() {modal.style.display = "none";}
         btnCancel.onclick = function() {modal.style.display = "none";}
         
@@ -404,22 +395,23 @@
             }
         }
     </script>
+    
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+    </script>
 
-<script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
-    });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
-  </script>
 </body>
 
 </html>

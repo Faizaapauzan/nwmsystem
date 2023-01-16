@@ -18,20 +18,6 @@
 
 <body>
 
-    <!-- To open ajax --> 
-    <?php
-        include 'dbconnect.php';
-        if (isset($_POST['jobregister_id'])) {
-            $jobregister_id =$_POST['jobregister_id'];
-            $query = "SELECT * FROM job_register WHERE jobregister_id ='$jobregister_id'";
-            $query_run = mysqli_query($conn, $query);
-            if ($query_run) {
-                while ($row = mysqli_fetch_array($query_run)) {
-    ?> 
-    
-    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>"> <?php } } } ?>
-    
-    <!-- To update travel time and rest hour --> 
     <?php
         include 'dbconnect.php';
         if (isset($_POST['jobregister_id'])) {
@@ -47,7 +33,7 @@
         <div class="input-box-departure">
             <label for="">Departure Time</label>
             <form id="TechnicianDepartureTime">
-                <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+                <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
                 <input type="hidden" name="DateAssign" value="<?php echo date('d-m-Y'); ?>">
                 <input type="hidden" name="job_status" value="Doing">
                 <input type="hidden" name="departure_timestamp" value="<?php echo date('H:i:s'); ?>">
@@ -122,7 +108,7 @@
             <!-- Rest Hour Out -->
             <form id="TechnicianRestHourOut">
                 <div style="display: flex; align-items: baseline;">
-                    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+                    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
                     <input type="hidden" name="tech_leader" value="<?php echo $tech_leader; ?>">
                     <input type="hidden" name="techupdate_date" value="<?php echo date('d-m-Y'); ?>">
                     <input type="hidden" name="technician_out" value="<?php echo date('g:i A'); ?>">
@@ -167,7 +153,7 @@
             <!-- Rest Hour In -->
             <form id="TechnicianRestHourIn">
                 <div style="display: flex; align-items: baseline;">
-                    <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+                    <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
                     <input type="hidden" name="tech_leader" value="<?php echo $tech_leader; ?>">
                     <input type="hidden" name="techupdate_date" value="<?php echo date('d-m-Y'); ?>">
                     <input type="hidden" name="technician_in" value="<?php echo date('g:i A'); ?>">

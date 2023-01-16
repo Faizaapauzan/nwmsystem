@@ -26,12 +26,12 @@
     ?> 
     
     <form action="homeindex.php" method="post" style="display: contents;">
-        <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        <input type="hidden" name="support" value="Support For <?php echo $row['job_assign'] ?>">
+        <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+        <input type="hidden" id="support" name="support" value="Support For <?php echo $row['job_assign'] ?>">
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Priority</label>
-            <input type="text" name="job_priority" value="<?php echo $row['job_priority']?>">
+            <input type="text" id="job_priority" name="job_priority" value="<?php echo $row['job_priority']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
@@ -55,57 +55,70 @@
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Name</label>
-            <input type="text" name="job_name" value="<?php echo $row['job_name']?>">
-            <input type="hidden" name="job_code" value="<?php echo $row['job_code']?>">
+            <input type="text" id="job_name" name="job_name" value="<?php echo $row['job_name']?>">
+            <input type="hidden" id="job_code" name="job_code" value="<?php echo $row['job_code']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Customer Name</label>
-            <input type="text" id="customer_name" name="customer_name" value="<?php echo $row['customer_name']?>">
-            <input type="hidden" id="cust" name="customer_id" readonly>
+            <select id="custModel" onchange="GetCustomer(this.value)">
+                <option value=""><?php echo $row['customer_name']?></option> 
+                
+                <?php
+                    include "dbconnect.php";
+                    $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
+                    while($data = mysqli_fetch_array($records))
+                        {
+                            echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";  // displaying data in option menu
+                        }
+                ?>
+
+            </select>
+            <input type="hidden" id="cust" name="customer_id" onchange="GetCustomer(this.value)" readonly>
             <input type="hidden" id="customer_code" name="customer_code" value="<?php echo $row['customer_code']?>" readonly>
+            <input type="hidden" id="customer_name" name="customer_name" value="<?php echo $row['customer_name']?>" readonly>
         </div>
         
         <div class="input-box" style="width: 100%;">
             <label for="">Job Description</label>
-            <input type="text" name="job_description" value="<?php echo $row['job_description']?>">
+            <input type="text" id="job_description" name="job_description" value="<?php echo $row['job_description']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Delivery date</label>
-            <input type="date" name="delivery_date" value="<?php echo $row['delivery_date']?>">
+            <input type="date" id="delivery_date" name="delivery_date" value="<?php echo $row['delivery_date']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Requested date</label>
-            <input type="date" name="requested_date" value="<?php echo $row['requested_date']?>">
+            <input type="date" id="requested_date" name="requested_date" value="<?php echo $row['requested_date']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Customer Grade</label>
-            <input type="text" name="customer_grade" value="<?php echo $row['customer_grade']?>">
+            <input type="text" id="customer_grade" name="customer_grade" value="<?php echo $row['customer_grade']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Customer PIC</label>
-            <input type="text" name="customer_PIC" value="<?php echo $row['customer_PIC']?>">
+            <input type="text" id="customer_PIC" name="customer_PIC" value="<?php echo $row['customer_PIC']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Contact Number 1</label>
-            <input type="text" name="cust_phone1" value="<?php echo $row['cust_phone1']?>">
+            <input type="text" id="cust_phone1" name="cust_phone1" value="<?php echo $row['cust_phone1']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
             <label for="">Contact Number 2</label>
-            <input type="text" name="cust_phone2" value="<?php echo $row['cust_phone2']?>">
+            <input type="text" id="cust_phone2" name="cust_phone2" value="<?php echo $row['cust_phone2']?>">
         </div>
         
         <div class="input-box" style="width: 100%;">
             <label for="">Customer Address</label>
-            <input type="text" name="cust_address1" value="<?php echo $row['cust_address1']?>">
-            <input type="text" style="width: calc(100% / 2 - 2.5px);" name="cust_address2" value="<?php echo $row['cust_address2']?>">
-            <input type="text" style="width: calc(100% / 2 - 2.5px);" name="cust_address3" value="<?php echo $row['cust_address3']?>">
+            <input type="text" id="cust_address1" name="cust_address1" value="<?php echo $row['cust_address1']?>">
+            <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address2" name="cust_address2" value="<?php echo $row['cust_address2']?>">
+            <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address3" name="cust_address3" value="<?php echo $row['cust_address3']?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
@@ -179,7 +192,7 @@
         <!--PENDING & INCOMPLETE REASON-->
         <div id="reason" class="input-box" style="width: 100%;">
             <label for="reason">Reason</label>
-            <input type="text" name="reason" value="<?php echo $row["reason"]; ?>">
+            <input type="text" id="reason" name="reason" value="<?php echo $row["reason"]; ?>">
         </div>
         
         <script type="text/javascript">
@@ -296,6 +309,58 @@
             }
         }
     </script>
+
+    <!-- Fetch customer info when change customer -->
+    <script>
+        $(document).ready(function() {$("#custModel").select2();});
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#custModel").on("change", function() {
+                var GetValue = $("#custModel").val();
+                $("#cust").val(GetValue);
+            });
+        });
+    </script>
+    
+    <script>
+        function GetCustomer(str) {
+            if (str.length == 0) {
+                document.getElementById("customer_code").value = "";
+                document.getElementById("customer_name").value = "";
+                document.getElementById("customer_grade").value = "";
+                document.getElementById("customer_PIC").value = "";
+                document.getElementById("cust_phone1").value = "";
+                document.getElementById("cust_phone2").value = "";
+                document.getElementById("cust_address1").value = "";
+                document.getElementById("cust_address2").value = "";
+                document.getElementById("cust_address3").value = "";
+                return;
+            } 
+            
+            else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var myObj = JSON.parse(this.responseText);
+                        document.getElementById("customer_code").value = myObj[0];
+                        document.getElementById("customer_name").value = myObj[1];
+                        document.getElementById("customer_grade").value = myObj[2];
+                        document.getElementById("customer_PIC").value = myObj[3];
+                        document.getElementById("cust_phone1").value = myObj[4];
+                        document.getElementById("cust_phone2").value = myObj[5];
+                        document.getElementById("cust_address1").value = myObj[6];
+                        document.getElementById("cust_address2").value = myObj[7];
+                        document.getElementById("cust_address3").value = myObj[8];
+                    }
+                };
+                xmlhttp.open("GET", "fetchcustomer.php?customer_id=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+    <!-- end of Fetch customer info when change customer -->
     
     <!-- To ask for support -->
     <script type="text/javascript">
