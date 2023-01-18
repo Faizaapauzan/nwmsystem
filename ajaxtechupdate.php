@@ -54,7 +54,7 @@
         <div class="input-group mb-3">
             <input readonly type="text" class="form-control" name="technician_departure" id="technician_departure" value="<?php echo $row['technician_departure']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button id="update_DepartureTime" class="buttonbiru update" onclick="TechnicianDeparture(event)">Departure</button>
+                <button id="update_DepartureTime" class="buttonbiru update" style="width: max-content; padding-right:10px; padding-left:10px;" onclick="TechnicianDeparture(event)">Departure</button>
             </div>
         </div>
     </form>
@@ -85,7 +85,7 @@
         <div class="input-group mb-3">
             <input readonly type="text" class="form-control" id="technician_arrival" name="technician_arrival" value="<?php echo $row['technician_arrival']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button id="update_ArrivalTime" class="buttonbiru update" style="padding-left: 58px; padding-right: 59px;" onclick="TechnicianArrival(event)">Arrival</button>
+                <button id="update_ArrivalTime" class="buttonbiru update" style="width: max-content; padding-right:23px; padding-left:23px;" onclick="TechnicianArrival(event)">Arrival</button>
             </div>
         </div>
     </form>
@@ -108,7 +108,7 @@
         <div class="input-group mb-3">
             <input readonly type="text" class="form-control" id="technician_leaving" name="technician_leaving" value="<?php echo $row['technician_leaving']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button id="update_LeavingTime" class="buttonbiru update" style="padding-left: 54px; padding-right: 53px;" onclick="TechnicianLeaving(event)">Leaving</button>
+                <button id="update_LeavingTime" class="buttonbiru update" style="width: max-content; padding-right:18.5px; padding-left:18.5px;" onclick="TechnicianLeaving(event)">Leaving</button>
             </div>
         </div>
     </form>
@@ -133,7 +133,7 @@
             <input type="hidden" name="technician_out" value="<?php echo date('g:i A'); ?>">
             <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?php echo $row['tech_out']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="buttonbiru" onclick="updateOutTime(); updateTechnicianOut();" style="position: static; padding-left: 64px; padding-right: 64px;" type="button">OUT</button>
+                <button class="buttonbiru" onclick="updateOutTime(); updateTechnicianOut();" style="position: static; padding-left: 30px; padding-right: 30px;" type="button">OUT</button>
             </div>
         </div>
     </form>
@@ -180,7 +180,7 @@
             <input type="hidden" name="technician_in" value="<?php echo date('g:i A'); ?>">
             <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="tech_in" value="<?php echo $row['tech_in']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="buttonbiru" onclick="updateInTime(); updateTechnicianIn();" style="position: static; padding-left: 70px; padding-right: 70px; width:160px" type="button">IN</button>
+                <button class="buttonbiru" onclick="updateInTime(); updateTechnicianIn();" style="position: static; padding-left: 37px; padding-right: 37px; width: max-content" type="button">IN</button>
             </div>
         </div>
     </form>
@@ -220,7 +220,7 @@
 
     <div id="message" style="font-family: sans-serif; font-weight: bold; font-size: 15px; color:green"></div>
     <div style="text-align: end;" class="updateBtn">
-        <button type="button" id="update_tech" class="buttonbiru" style="width:160px">Update</button>
+        <button type="button" id="update_tech" class="buttonbiru" style="padding-left: 37px; padding-right: 37px; width: max-content">Update</button>
     </div>
 
     <script>
