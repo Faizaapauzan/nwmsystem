@@ -133,7 +133,7 @@
             <input type="hidden" name="technician_out" value="<?php echo date('g:i A'); ?>">
             <input readonly type="text" style="position: static;" class="form-control" id="tech_out" name="tech_out" value="<?php echo $row['tech_out']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="buttonbiru" onclick="updateOutTime(); updateTechnicianOut();" style="position: static; padding-left: 30px; padding-right: 30px;" type="button">OUT</button>
+                <button class="buttonbiru" onclick="updateOutTime(); updateTechnicianOut();" style="position: static; padding-left: 29.7px; padding-right: 29.7px;" type="button">OUT</button>
             </div>
         </div>
     </form>
@@ -180,7 +180,7 @@
             <input type="hidden" name="technician_in" value="<?php echo date('g:i A'); ?>">
             <input readonly type="text" style="position: static;" class="form-control" id="tech_in" name="tech_in" value="<?php echo $row['tech_in']?>" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="buttonbiru" onclick="updateInTime(); updateTechnicianIn();" style="position: static; padding-left: 37px; padding-right: 37px; width: max-content" type="button">IN</button>
+                <button class="buttonbiru" onclick="updateInTime(); updateTechnicianIn();" style="position: static; padding-left: 36.8px; padding-right: 36.8px; width: max-content" type="button">IN</button>
             </div>
         </div>
     </form>
