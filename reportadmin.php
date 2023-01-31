@@ -307,7 +307,7 @@
                         
                         <tbody>
                             <td style="text-align: center;"></td>
-                            <td style="text-align: center;"><?= $row['username']; ?></td>
+                            <td style="text-align: center;"><?= $row['tech_name']; ?></td>
                             <td style="text-align: center; color:red;">OFF</td>
                         </tbody> 
                             
