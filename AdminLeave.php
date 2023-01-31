@@ -87,9 +87,7 @@
         padding-bottom: 30px;
     }
 
-    .align-center {
-        text-align: center;
-    }
+    .align-center {text-align: center;}
 </style>
 
 <body>

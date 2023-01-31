@@ -298,7 +298,7 @@
                                 if(isset($_GET['DateAssign']))
                                     {
                                         $DateAssign = $_GET['DateAssign'];
-                                        $query = mysqli_query($conn, "SELECT * FROM staff_register WHERE tech_avai=1");
+                                        $query = mysqli_query($conn, "SELECT * FROM tech_off WHERE leave_date='$DateAssign'");
                                         if(mysqli_num_rows($query) > 0)
                                             {
                                         foreach($query as $row)
