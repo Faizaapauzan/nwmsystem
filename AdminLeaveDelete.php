@@ -26,3 +26,4 @@ if ($query_run) {
     echo json_encode(["message" => "Error deleting record: " . mysqli_stmt_error($stmt)]);
 }
 mysqli_stmt_close($stmt);
+?>

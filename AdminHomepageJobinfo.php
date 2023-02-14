@@ -6,10 +6,6 @@
 
 <!DOCTYPE html>
 
-<style>
-    #reason {display: none;}
-</style>
-
 <body> 
     
     <?php
@@ -171,22 +167,23 @@
         </div>
         
         <!--PENDING & INCOMPLETE REASON-->
-        <div id="reason" class="input-box" style="width: 100%;">
+        <div id="reasonInput" class="input-box" style="width: 100%;">
             <label for="reason">Reason</label>
             <input type="text" id="inputreason" name="reason" value="<?php echo $row["reason"]; ?>">
         </div>
 
-        <script type="text/javascript">
+        <script>
             function myFunction() {
-                var x = document.getElementById("job_status").value;
-                if (x == 'Pending' || x == 'Incomplete') {
-                    document.getElementById("reason").style.display = 'block';
-                } 
-                
-                else {
-                    document.getElementById("reason").style.display = 'none';
+                var jobStatus = document.getElementById("job_status").value;
+                var reasonDiv = document.getElementById("reasonInput");
+                if (jobStatus === "Pending" || jobStatus === "Incomplete") {
+                    reasonDiv.style.display = "block";
+                } else {
+                    reasonDiv.style.display = "none";
                 }
             }
+            // Call the function once to set the initial state of the "reason" div
+            myFunction();
         </script>
         <!--PENDING & INCOMPLETE END REASON-->
         

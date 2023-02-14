@@ -108,9 +108,10 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="jobregister.php">Register Job</a></li>
                 </ul>
             </li>
+            
             <li>
                 <div class="iocn-link">
-                    <a href="attendanceadmin.php">
+                    <a href="">
                         <i class='bx bx-calendar-check' ></i>
                         <span class="link_name">Attendance</span>
                     </a>
@@ -120,6 +121,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="AdminLeave.php">Leave</a></li>
                 </ul>
             </li>
+            
             <li>
                 <div class="iocn-link">
                     <a href="staff.php">
@@ -131,6 +133,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="staff.php">Staff</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="technicianlist.php">
                     <i class='fa fa-users' ></i>
@@ -140,6 +143,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="technicianlist.php">Technician</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="customer.php">
                     <i class='bx bx-user' ></i>
@@ -149,6 +153,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="customer.php">Customers</a></li>
                 </ul>
             </li>
+            
             <li>
                 <div class="iocn-link">
                     <a href="machine.php">
@@ -160,6 +165,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="machine.php">Machine</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="accessories.php">
                     <i class='bx bx-wrench' ></i>
@@ -169,6 +175,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="accessories.php">Accessories</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="jobtype.php">
                     <i class='bx bx-briefcase'></i>
@@ -178,6 +185,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="jobtype.php">Job Type</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="jobcompleted.php">
                     <i class='fa fa-check-square-o' ></i>
@@ -187,6 +195,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="jobcanceled.php">
                     <i class='fa fa-minus-square' ></i>
@@ -196,6 +205,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="">
                     <i class='bx bxs-report' ></i>
@@ -206,6 +216,7 @@ $query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER
                     <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="logout.php">
                     <i class='bx bx-log-out' ></i>

@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 
 <style>
-    #reason {display: none;}
+    #reasonInput {display: none;}
 </style>
 
 <body> 
@@ -78,9 +78,14 @@
             <input type="hidden" id="customer_name" name="customer_name" value="<?php echo $row['customer_name']?>" readonly>
         </div>
 
-        <div class="input-box" style="width: 100%;">
+        <div class="input-box" style="width: 50%;">
             <label for="">Job Description</label>
             <input type="text" id="job_description" name="job_description" value="<?php echo $row['job_description']?>">
+        </div>
+
+        <div class="input-box" style="width: 50%;">
+            <label for="">Assign Date</label>
+            <input type="text" id="DateAssign" name="DateAssign" value="<?php echo $row['DateAssign']?>">
         </div>
 
         <div class="input-box" style="width: 50%;">
@@ -190,22 +195,23 @@
         </div>
         
         <!--PENDING & INCOMPLETE REASON-->
-        <div id="reason" class="input-box" style="width: 100%;">
+        <div id="reasonInput" class="input-box" style="width: 100%;">
             <label for="reason">Reason</label>
             <input type="text" id="reason" name="reason" value="<?php echo $row["reason"]; ?>">
         </div>
         
-        <script type="text/javascript">
+        <script>
             function myFunction() {
-                var x = document.getElementById("job_status").value;
-                if (x == 'Pending' || x == 'Incomplete') {
-                    document.getElementById("reason").style.display = 'block';
-                } 
-                
-                else {
-                    document.getElementById("reason").style.display = 'none';
+                var jobStatus = document.getElementById("job_status").value;
+                var reasonDiv = document.getElementById("reasonInput");
+                if (jobStatus === "Pending" || jobStatus === "Incomplete") {
+                    reasonDiv.style.display = "block";
+                } else {
+                    reasonDiv.style.display = "none";
                 }
             }
+            // Call the function once to set the initial state of the "reason" div
+            myFunction();
         </script>
         <!--PENDING & INCOMPLETE END REASON-->
         

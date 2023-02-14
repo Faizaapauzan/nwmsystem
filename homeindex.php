@@ -9,6 +9,7 @@
      $job_name = $_POST["job_name"];
      $job_order_number = $_POST["job_order_number"];
      $job_description = $_POST["job_description"];
+     $DateAssign = $_POST["DateAssign"];
      $customer_name = $_POST["customer_name"];
      $customer_grade = $_POST["customer_grade"];
      $customer_code = $_POST["customer_code"];
@@ -39,6 +40,7 @@
                 job_name ='".addslashes($job_name)."',
                 job_order_number ='".addslashes($job_order_number)."',
                 job_description ='".addslashes($job_description)."',
+                DateAssign ='".addslashes($DateAssign)."',
                 requested_date ='".addslashes($requested_date)."',
                 delivery_date ='".addslashes($delivery_date)."',
                 customer_name ='".addslashes($customer_name)."',

@@ -95,7 +95,7 @@
 		<div class="tabC" id="completedJobInfoTab">
 			<div class="contentCompletedJobInfo">
 				<div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-completed').style.display='none'">&times</div>
-				<form action="ajaxjobcompleted.php" method="post">
+				<form action="AdminCompletedJobInfo.php" method="post">
 					<div class="completed-details">
 
 					</div>
@@ -109,7 +109,7 @@
 					var jobregister_id = $(this).data('jobregister_id');
 					// AJAX request
 					$.ajax({
-						url: 'ajaxjobcompleted.php',
+						url: 'AdminCompletedJobInfo.php',
 						type: 'post',
 						data: {jobregister_id: jobregister_id},
 						success: function(response) {

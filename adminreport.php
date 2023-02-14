@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,11 @@
     <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
     <link href="css/homepage.css" rel="stylesheet" />
     <link href="css/report.css" rel="stylesheet" />
+    
     <!-- Datatable CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" />
+    
     <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
@@ -19,6 +22,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
@@ -27,13 +31,10 @@
 </head>
 
 <style>
-    #auto {
-        counter-reset: rowNumber;
-    }
+    
+    #auto { counter-reset: rowNumber; }
 
-    #auto tr>td:first-child {
-        counter-increment: rowNumber;
-    }
+    #auto tr>td:first-child { counter-increment: rowNumber; }
 
     #auto tr td:first-child::before {
         content: counter(rowNumber);
@@ -41,15 +42,15 @@
         margin-right: 0.5em;
     }
 
-    table,
-    th,
-    td {
+    table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
     }
+
 </style>
 
 <body>
+    
     <!-- Navigation Sidebar -->
     <div class="sidebar close">
         <div class="logo-details">
@@ -69,9 +70,10 @@
                     <li><a class="link_name" href="jobregister.php">Register Job</a></li>
                 </ul>
             </li>
+            
             <li>
                 <div class="iocn-link">
-                    <a href="attendanceadmin.php">
+                    <a href="">
                         <i class='bx bx-calendar-check' ></i>
                         <span class="link_name">Attendance</span>
                     </a>
@@ -81,6 +83,7 @@
                     <li><a class="link_name" href="AdminLeave.php">Leave</a></li>
                 </ul>
             </li>
+            
             <li>
                 <div class="iocn-link">
                     <a href="staff.php">
@@ -92,6 +95,7 @@
                     <li><a class="link_name" href="staff.php">Staff</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="technicianlist.php">
                     <i class='fa fa-users' ></i>
@@ -101,6 +105,7 @@
                     <li><a class="link_name" href="technicianlist.php">Technician</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="customer.php">
                     <i class='bx bx-user' ></i>
@@ -110,6 +115,7 @@
                     <li><a class="link_name" href="customer.php">Customers</a></li>
                 </ul>
             </li>
+            
             <li>
                 <div class="iocn-link">
                     <a href="machine.php">
@@ -121,6 +127,7 @@
                     <li><a class="link_name" href="machine.php">Machine</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="accessories.php">
                     <i class='bx bx-wrench' ></i>
@@ -130,6 +137,7 @@
                     <li><a class="link_name" href="accessories.php">Accessories</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="jobtype.php">
                     <i class='bx bx-briefcase'></i>
@@ -139,6 +147,7 @@
                     <li><a class="link_name" href="jobtype.php">Job Type</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="jobcompleted.php">
                     <i class='fa fa-check-square-o' ></i>
@@ -148,6 +157,7 @@
                     <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="jobcanceled.php">
                     <i class='fa fa-minus-square' ></i>
@@ -157,6 +167,7 @@
                     <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="">
                     <i class='bx bxs-report' ></i>
@@ -167,6 +178,7 @@
                     <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
             </li>
+            
             <li>
                 <a href="logout.php">
                     <i class='bx bx-log-out' ></i>
@@ -179,260 +191,256 @@
         </ul>
     </div>
     <!-- End of Navigation Sidebar -->
-    <!--Home navigation-->
-
+    
     <section class="home-section">
+        <!-- Home Button -->
         <nav>
             <div class="home-content">
                 <i class='bx bx-menu'></i>
                 <a><button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button></a>
             </div>
         </nav>
+        <!-- End of Home Button -->
+        
         <div class="jobTypeList">
-            <h1>Admin Report</h1>
-            <div class="board" style="background-color:#ffffff;padding-top: 20px;padding-bottom: 20px;">
-                <div class="status" style="margin: 20px;font-weight: bold;">
-                    <b>Worker Assignment</b>
-                </div>
-                <form action="" method="GET">
-                    <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
-                        <label for="date" class="details" style="padding-right: 20px;">Date</label>
-                        <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width: 301px;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
-                        <button type="submit" class="btn-biru" style="width: auto;">Search</button>
-                        <button class="btn-biru" style="width: auto;" onclick="document.getElementById('myInput').value = ''">Clear</button>
-                        <input type="button" class="btn-biru" style="width: 57px;height: 35px;background: green;border-color: green;color: white;" onclick="window.open('reportadmin.php')" value="Print">
-                    </div>
-
-                    <!-- Remark - Total Workers -->
-                    <div class="remarks-job" style="margin-top: 27px; margin: 20px;">
-                        <b>Job Update Time</b>
-                        <div class="job-update" style="margin-top: 20px; margin: 20px;">
-                            <table id="auto" style="width:100%">
-                                <thead style="height: 42px;">
-                                    <th></th>
-                                    <th style="width: 9%;">Leader</th>
-                                    <th style="width: 12%;">Assistant</th>
-                                    <th style="width: 15%;">Place</th>
-                                    <th style="width: 27%;">Machine</th>
-                                    <th style="width: 7%;">Departure</th>
-                                    <th style="width: 7%;">Arrival</th>
-                                    <th style="width: 7%;">Leaving</th>
-                                    <th style="width: 9%;">Work Time</th>
-                                    <th style="width: 9%;">Travel Time</th>
-                                </thead> 
-                                    
-                                    <?php
-                                        include_once 'dbconnect.php';
-                                        
-                                        if(isset($_GET['DateAssign']))
-                                            {
-                                                $DateAssign = $_GET['DateAssign'];
-                                                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants 
-                                                                                ON job_register.jobregister_id=assistants.jobregister_id WHERE 
-                                                                                job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' AND job_register.job_cancel = '' 
-                                                                                    OR 
-                                                                                job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' AND job_register.job_cancel IS NULL 
-                                                                                ORDER BY job_assign ASC, departure_timestamp ASC");
-                                                if(mysqli_num_rows($query) > 0)
-                                                  {
-                                                    foreach($query as $row)
-                                                    {
-                                                      $technician_departure =$row['technician_departure'];
-                                                      $technician_arrival =$row['technician_arrival'];
-                                                      $technician_leaving =$row['technician_leaving'];
-                                                      $departure = substr($technician_departure,11);
-                                                      $arrival = substr($technician_arrival,11); 
-                                                      $leaving = substr($technician_leaving,11);
-                                                      
-                                                if (!function_exists('difftime')) {
-                                                  function difftime($techniciandeparture, $technicianarrival)
-                                                    {
-                                                      $dif=array();
-                                                      $first = strtotime($techniciandeparture);
-                                                      $second = strtotime($technicianarrival);
-                                                      $TravelTime = abs($first - $second);
-                                                      $dif['s'] = floor($TravelTime);
-                                                      $dif['m'] = floor($TravelTime/(60) % 60 ); //minute
-                                                      $dif['h'] = floor($TravelTime/(60*60)); //hour
-                                                      
-                                                      return $dif;
-                                                    }
-                                                }
-                                                
-                                                if (!function_exists('difftime2')) {
-                                                  function difftime2($technicianarrival, $technicianleaving)
-                                                    {
-                                                      $dif2=array();
-                                                      $first = strtotime($technicianarrival);
-                                                      $second = strtotime($technicianleaving);
-                                                      $WorkTime = abs($first - $second);
-                                                      $dif['s'] = floor($WorkTime);
-                                                      $dif['m'] = floor($WorkTime/(60) % 60 ); //minute
-                                                      $dif['h'] = floor($WorkTime/(60*60)); //hour
-                                                      
-                                                      return $dif2;
-                                                    }
-                                                  }
-                                    ?> 
-                                
-                                <tbody>
-                                    <td style="text-align: center;"></td>
-                                    <td style="padding-left: 7px;"><?= $row['job_assign']; ?></td>
-                                    <td><textarea style="border:none; resize:none;" class="infoarea" id="textarea-container"><?= $row['username']; ?></textarea></td>
-                                    <td style="padding-left: 7px;"><?= $row['customer_name']; ?></td>
-                                    <td style="padding-left: 7px;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
-                                    <td style="text-align: center;"><?php echo "$departure" ?></td>
-                                    <td style="text-align: center;"><?php echo "$arrival" ?></td>
-                                    <td style="text-align: center;"><?php echo "$leaving" ?></td>
-                                    <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?> hours <?php echo difftime($arrival, $leaving)['m']?> minutes</td>
-                                    <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?> hours <?php echo difftime($departure, $arrival)['m']?> minutes</td>
-                                </tbody> 
-                                    
-                                    <?php
-                                        } }
-                                            else
-                                                {
-                                                  echo "No Record Found";
-                                                }
-                                        }
-                                    ?>
-
-                            </table>
-                        </div>
-
-                        <script type="text/javascript">
-                            var $textArea = $("#textarea-container");
-                            // Re-size to fit initial content.
-                            resizeTextArea($textArea);
-                            // Remove this binding if you don't want to re-size on typing.
-                            $textArea.off("keyup.textarea").on("keyup.textarea", function() {
-                                resizeTextArea($(this));
-                            });
-                            // function resizeTextArea($element) {
-                            //     $element.height($element[0].scrollHeight);
-                            // }
-                        </script>
-
-                    </div>
-                    <!-- End of Remark - Total Workers -->
-
-                    <!-- Remark - Workers Attendance -->
-                    <div class="remarks-worker" style="margin: 20px;padding-top: 70px;  margin-top:-50px">
-                        <b>Technician Attendance And Rest Hour</b>
-                        <div class="staff-update" style="margin-top: 50px; margin: 20px;">
-                            <table id="auto" style="width:100%">
-                                <thead style="height: 42px;">
-                                    <th style="width: 3%;"></th>
-                                    <th style="width: 20%;">Leader</th>
-                                    <th style="width: 20%;">Assistant</th>
-                                    <th style="width: 10%">Clock In</th>
-                                    <th style="width: 10%;">Clock Out</th>
-                                    <th style="width: 10%;">Rest Out</th>
-                                    <th style="width: 10%;">Rest In</th>
-                                </thead> 
-                                    
-                                    <?php
-                                        include_once 'dbconnect.php';
-                                        
-                                        if(isset($_GET['DateAssign']))
-                                            {
-                                                $DateAssign = $_GET['DateAssign'];
-                                                $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
-                                                $result = mysqli_query($conn, $sql);
-                                                
-                                                if(mysqli_num_rows($result) > 0)
-                                                    {
-                                                        foreach($result as $row)
-                                                    {
-                                    ?>
-
-                                <tbody>
-                                    <td style="text-align: center;"></td>
-                                    <td style="padding-left: 7px;"><?php echo $row["tech_leader"]; ?></td>
-                                    <td style="padding-left: 7px;"><?php echo $row["username"]; ?></td>
-                                    <td style="text-align: center;"><?php echo $row["tech_clockin"]; ?></td>
-                                    <td style="text-align: center;"><?php echo $row["tech_clockout"]; ?></td>
-                                    <td style="text-align: center;"><?php echo $row["technician_out"]; ?></td>
-                                    <td style="text-align: center;"><?php echo $row["technician_in"]; ?></td>
-                                </tbody> 
-                                    
-                                    <?php
-                                        } }
-                                        
-                                            else
-                                                {
-                                                  echo "No Record Found";
-                                                }
-                                        }
-                                    ?>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- Remark - Workers Attendance -->
-
-                    <!-- Remark - Absent Technician -->
-                    <div class="remarks-worker" style="margin: 20px;padding-top: 70px; margin-top:-50px">
-                        <b>Absent Technician</b>
-                        <div class="staff-update" style="margin-top: 50px; margin: 20px;">
-                            <table id="auto" style="width:100%">
-                                <thead style="height: 42px;">
-                                    <th style="width: 3%;"></th>
-                                    <th style="width: 20%;">Technician</th>
-                                    <th style="width: 20%;"></th>
-                                </thead> 
-                                    
-                                    <?php
-                                        
-                                        include_once 'dbconnect.php';
-                                        
-                                        if(isset($_GET['DateAssign']))
-                                            {
-                                                $DateAssign = $_GET['DateAssign'];
-                                                $query = mysqli_query($conn, "SELECT * FROM tech_off WHERE leave_date='$DateAssign'");
-                                                if(mysqli_num_rows($query) > 0)
-                                                    {
-                                                        foreach($query as $row)
-                                                    { 
-                                    ?> 
-                                
-                                <tbody>
-                                    <td style="text-align: center;"></td>
-                                    <td style="text-align: center;"><?= $row['tech_name']; ?></td>
-                                    <td style="text-align: center; color:red;">OFF</td>
-                                </tbody> 
-                                    
-                                    <?php
-                                        
-                                        } }
-                                            else
-                                                {
-                                                    echo "No Record Found";
-                                                }
-                                        }
-                                    ?>
-
-                            </table>
-                        </div>
-                    </div>
-                    <!-- End of Remark - Absent Technician -->
-                </form>
-            </div>
             
-            <script>
-                let arrow = document.querySelectorAll(".arrow");
-                for (var i = 0; i < arrow.length; i++) {
-                    arrow[i].addEventListener("click", (e) => {
-                        let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-                        arrowParent.classList.toggle("showMenu");
+            <h1>Admin Report</h1>
+            
+            <form action="" method="GET">
+                <!-- Search date -->
+                <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
+                    <label for="date" class="details" style="padding-right: 20px;">Date</label>
+                    <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width: 301px;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
+                    <button type="submit" class="btn-biru" style="width: auto;">Search</button>
+                    <button class="btn-biru" style="width: auto;" onclick="document.getElementById('myInput').value = ''">Clear</button>
+                    <input type="button" class="btn-biru" style="width: 57px;height: 35px;background: green;border-color: green;color: white;" onclick="window.open('reportadmin.php')" value="Print">
+                </div>
+                <!-- End of Search date -->
+                
+                <!-- Remark - Total Workers -->
+                <div class="remarks-job" style="margin-top: 27px; margin: 20px;">
+                <b>Worker Assingment</b>
+                <div class="job-update" style="margin-top: 20px; margin: 20px;">
+                    <table id="auto" style="width:100%; background-color:#ffffff; box-shadow:none;">
+                        <thead style="height: 42px; box-shadow:none;">
+                            <th style="width: 2%;"></th>
+                            <th style="width: 9%;">Leader</th>
+                            <th style="width: 10%;">Assistant</th>
+                            <th style="width: 15%;">Place</th>
+                            <th style="width: 24%;">Machine</th>
+                            <th style="width: 7%;">Departure</th>
+                            <th style="width: 7%;">Arrival</th>
+                            <th style="width: 7%;">Leaving</th>
+                            <th style="width: 9%;">Working Time</th>
+                            <th style="width: 10%;">Travel Time</th>
+                        </thead>
+                        
+                        <?php
+                        
+                            include_once 'dbconnect.php';
+                            
+                            if(isset($_GET['DateAssign']))
+                                {
+                                    $DateAssign = $_GET['DateAssign'];
+                                    $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants 
+                                                                  ON job_register.jobregister_id=assistants.jobregister_id 
+                                                                  WHERE (job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' 
+                                                                  AND (job_register.job_cancel = '' OR job_register.job_cancel IS NULL))
+                                                                  ORDER BY job_assign ASC, departure_timestamp ASC");
+                                    
+                                    if(mysqli_num_rows($query) > 0)
+                                        {
+                                            foreach($query as $row)
+                                                {
+                                                    $technician_departure =$row['technician_departure'];
+                                                    $technician_arrival =$row['technician_arrival'];
+                                                    $technician_leaving =$row['technician_leaving'];
+                                                    $departure = substr($technician_departure,11);
+                                                    $arrival = substr($technician_arrival,11); 
+                                                    $leaving = substr($technician_leaving,11);
+                                                      
+                                                    if (!function_exists('difftime')) {
+                                                        function difftime($techniciandeparture, $technicianarrival) {
+                                                            $dif=array();
+                                                            $first = strtotime($techniciandeparture);
+                                                            $second = strtotime($technicianarrival);
+                                                            $TravelTime = abs($first - $second);
+                                                            $dif['s'] = floor($TravelTime);
+                                                            $dif['m'] = floor($TravelTime/(60) % 60 );
+                                                            $dif['h'] = floor($TravelTime/(60*60)); 
+                                                      
+                                                            return $dif;
+                                                        }
+                                                    }
+                                                
+                                                    if (!function_exists('difftime2')) {
+                                                        function difftime2($technicianarrival, $technicianleaving) {
+                                                            $dif2=array();
+                                                            $first = strtotime($technicianarrival);
+                                                            $second = strtotime($technicianleaving);
+                                                            $WorkTime = abs($first - $second);
+                                                            $dif['s'] = floor($WorkTime);
+                                                            $dif['m'] = floor($WorkTime/(60) % 60 );
+                                                            $dif['h'] = floor($WorkTime/(60*60));
+                                                            
+                                                            return $dif2;
+                                                        }
+                                                    }
+                        ?> 
+                                
+                        <tbody style="height: 38px; box-shadow:none;">
+                            <td style="text-align: center;"></td>
+                            <td style="text-align: center;"><?= $row['job_assign']; ?></td>
+                            <td style="text-align: center;"><?= $row['username']; ?></td>
+                            <td style="text-align: center;"><?= $row['customer_name']; ?></td>
+                            <td style="padding-left: 7px;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
+                            <td style="text-align: center;"><?php echo "$departure" ?></td>
+                            <td style="text-align: center;"><?php echo "$arrival" ?></td>
+                            <td style="text-align: center;"><?php echo "$leaving" ?></td>
+                            <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?> hrs <?php echo difftime($arrival, $leaving)['m']?> mins</td>
+                            <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?> hrs <?php echo difftime($departure, $arrival)['m']?> mins</td>
+                        </tbody> 
+                                    
+                        <?php
+                            
+                            } }
+                                else {
+                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+                                }
+                            }
+                        ?>
+
+                    </table>
+                </div>
+                
+                <script type="text/javascript">
+                    var $textArea = $("#textarea-container");
+                    resizeTextArea($textArea);
+                    $textArea.off("keyup.textarea").on("keyup.textarea", function() {
+                        resizeTextArea($(this));
+                    });        
+                </script>
+
+                </div>
+                <!-- End of Remark - Total Workers -->
+                
+                <!-- Remark - Workers Attendance -->
+                <div class="remarks-worker" style="margin: 20px;padding-top: 70px;  margin-top:-50px">
+                <b>Technician Attendance And Rest Hour</b>
+                <div class="staff-update" style="margin-top: 50px; margin: 20px;">
+                    <table id="auto" style="width:100%; background-color:#ffffff; box-shadow:none;">
+                        <thead style="height: 42px; box-shadow:none;">
+                            <th style="width: 3%;"></th>
+                            <th style="width: 20%;">Leader</th>
+                            <th style="width: 20%;">Assistant</th>
+                            <th style="width: 10%">Clock In</th>
+                            <th style="width: 10%;">Clock Out</th>
+                            <th style="width: 10%;">Rest Out</th>
+                            <th style="width: 10%;">Rest In</th>
+                        </thead>
+                        
+                        <?php
+                            
+                            include_once 'dbconnect.php';
+                            
+                            if(isset($_GET['DateAssign']))
+                                {
+                                    $DateAssign = $_GET['DateAssign'];
+                                    
+                                    $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
+                                    
+                                    $result = mysqli_query($conn, $sql);
+                                                
+                                    if(mysqli_num_rows($result) > 0) {
+                                        foreach($result as $row)
+                                        {
+                        ?>
+
+                        <tbody style="box-shadow:none;">
+                            <td style="text-align: center;"></td>
+                            <td style="padding-left: 7px;"><?php echo $row["tech_leader"]; ?></td>
+                            <td style="padding-left: 7px;"><?php echo $row["username"]; ?></td>
+                            <td style="text-align: center;"><?php echo $row["tech_clockin"]; ?></td>
+                            <td style="text-align: center;"><?php echo $row["tech_clockout"]; ?></td>
+                            <td style="text-align: center;"><?php echo $row["technician_out"]; ?></td>
+                            <td style="text-align: center;"><?php echo $row["technician_in"]; ?></td>
+                        </tbody> 
+                                    
+                        <?php
+                            } }
+                                else {
+                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+                                }
+                            }
+                        ?>
+
+                    </table>
+                </div>
+                </div>
+                <!-- End of Remark - Workers Attendance -->
+                
+                <!-- Remark - Absent Technician -->
+                <div class="remarks-worker" style="margin: 20px;padding-top: 70px; margin-top:-50px">
+                <b>Technician On Leave</b>
+                <div class="staff-update" style="margin-top: 50px; margin: 20px;">
+                    <table id="auto" style="width:100%; background-color:#ffffff; box-shadow:none;">
+                        <thead style="height: 42px; box-shadow:none;">
+                            <th style="width: 3%;"></th>
+                            <th style="width: 20%;">Technician</th>
+                            <th style="width: 20%;"></th>
+                        </thead>
+                        
+                        <?php
+                            
+                            include_once 'dbconnect.php';
+                            
+                            if(isset($_GET['DateAssign'])) 
+                                {
+                                    $DateAssign = $_GET['DateAssign'];
+                                    
+                                    $query = mysqli_query($conn, "SELECT * FROM tech_off WHERE leave_date='$DateAssign'");
+                                    
+                                    if(mysqli_num_rows($query) > 0) {
+                                        foreach($query as $row)
+                                        { 
+                        ?> 
+                                
+                        <tbody style="box-shadow:none;">
+                            <td style="text-align: center;"></td>
+                            <td style="text-align: center;"><?= $row['tech_name']; ?></td>
+                            <td style="text-align: center; color:red;">OFF</td>
+                        </tbody> 
+                                    
+                        <?php
+                            } }
+                                else {
+                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+                                }
+                            }
+                        ?>
+
+                    </table>
+                </div>
+                </div>
+                <!-- End of Remark - Absent Technician -->
+            </form>
+        </div>
+        
+        <script>
+            let arrow = document.querySelectorAll(".arrow");
+            for (var i = 0; i < arrow.length; i++) {
+                arrow[i].addEventListener("click", (e) => {
+                    let arrowParent = e.target.parentElement.parentElement;
+                    arrowParent.classList.toggle("showMenu");
                     });
                 }
+                
                 let sidebar = document.querySelector(".sidebar");
                 let sidebarBtn = document.querySelector(".bx-menu");
                 console.log(sidebarBtn);
                 sidebarBtn.addEventListener("click", () => {
                     sidebar.classList.toggle("close");
                 });
-            </script>
+        </script>
 </body>
-
 </html>

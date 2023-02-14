@@ -38,15 +38,25 @@
         <label for="">Job Name</label>
         <input type="text" class="job_name" name="job_name" value="<?php echo $row['job_name']?>">
     </div>
-    
+
     <div class="input-box" style="margin-left: 27px; width:350px;">
+    <label for="">Job Description</label>
+    <input type="text" style="width: 100%;" name="job_description"value="<?php echo $row['job_description']?>">
+    </div>
+    
+    <div class="input-box" style="width:350px;">
         <label for="">Requested date</label>
         <input type="date" class="requested_date" name="requested_date" value="<?php echo $row['requested_date']?>">
     </div>
     
-    <div class="input-box" style="width:350px;">
+    <div class="input-box" style="margin-left: 27px; width:350px;">
         <label for="">Delivery date</label>
         <input type="date" class="delivery_date" name="delivery_date" value="<?php echo $row['delivery_date']?>">
+    </div>
+
+    <div class="input-box" style="width:350px;">
+        <label for="">Assign Date</label>
+        <input type="text" class="DateAssign" name="DateAssign" value="<?php echo $row['DateAssign']?>">
     </div>
     
     <div class="input-box" style="margin-left: 27px; width:350px;">
@@ -146,11 +156,6 @@
     <div class="input-box-address" style="width: 730px;">
     <label for="">Machine Name</label>
     <input type="text" style="width: 100%;" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
-    </div>
-    
-    <div class="input-box-address" style="width: 730px;">
-    <label for="">Job Description</label>
-    <input type="text" style="width: 100%;" name="job_description"value="<?php echo $row['job_description']?>">
     </div>
     
     <input type="hidden" class="job_status" name="job_status" value="<?php echo $row['job_status']?>">

@@ -204,6 +204,8 @@
                     </script>
                     </div>
 
+                    <input type="hidden" name="attendancecreated_by" id="attendancecreatedby" value="<?php echo $tech_leader; ?>" readonly>
+                
                     <div style="position: static; width: fit-content; margin-top: 10px;">
                         <input type="button" onclick="submitupdtAtt();" class="buttonbiru" style=" width: 118px; height: 40px; padding-left: 20px; padding-right: 20px;" value="Update"/>
                     </div>
@@ -222,19 +224,22 @@
             var tech_clockin = $('input[name=tech_clockin]').val();
             var tech_clockout = $('input[name=tech_clockout]').val();
             var techupdate_id = $('input[name=techupdate_id]').val();
+            var attendancecreated_by = $('input[name=attendancecreated_by]').val();
             
             if (tech_leader !== '' || tech_leader === '',
             techupdate_date !== '' || techupdate_date === '',
                tech_clockin !== '' || tech_clockin === '',
               tech_clockout !== '' || tech_clockout === '',
-              techupdate_id !== '' || techupdate_id === '') 
+              techupdate_id !== '' || techupdate_id === '',
+       attendancecreated_by !== '' || attendancecreated_by === '') 
               
               {
                 var formData = {tech_leader: tech_leader,
                             techupdate_date: techupdate_date,
                                tech_clockin: tech_clockin,
                               tech_clockout: tech_clockout,
-                              techupdate_id: techupdate_id};
+                              techupdate_id: techupdate_id,
+                              attendancecreated_by: attendancecreated_by};
                 
                 $.ajax({
                   url: "techattendanceupdaterindex.php",
