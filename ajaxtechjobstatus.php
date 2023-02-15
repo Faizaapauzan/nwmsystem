@@ -34,8 +34,11 @@
 </head>
 
 <style>
+    
   .status{float:none;}
+    
   #reason {display:none;}
+
 </style>
 
 </head>
@@ -45,10 +48,6 @@
   <form id="techstatus_form" method="post">
     
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-    
-    <input type="hidden" name="technician_departure" class="technician_departure" value="<?php echo $row['technician_departure'] ?>">
-    <input type="hidden" name="technician_arrival" class="technician_arrival" value="<?php echo $row['technician_arrival'] ?>">
-    <input type="hidden" name="technician_leaving" class="technician_leaving" value="<?php echo $row['technician_leaving'] ?>">
     
     <div class="form-group">
       <label for="exampleFormControlSelect2">Job Status</label>
@@ -94,53 +93,38 @@
   </form>
   
   <script type="text/javascript">
-    function submitFormstatus() {
-      var technician_departure = $('select[name=technician_departure]').val();
-      var technician_arrival = $('select[name=technician_arrival]').val();
-      var technician_leaving = $('select[name=technician_leaving]').val();
-    
-      var job_status = $('select[name=job_status]').val();
-      var reason = $('input[name=reason]').val();
-      var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
-      var jobregister_id = $('input[name=jobregister_id]').val();
-
-      // Check if technician departure, arrival, and leaving are filled
-      if (job_status === 'Completed' && (!technician_departure || !technician_arrival || !technician_leaving)) {
-        document.getElementById("messagestatus").innerHTML = "<span style='color:red'>Departure time, Arrival time and leaving time must be filled before marking the job as completed</span>";
-        return;
-      }
-      
-      // Check if all required fields are filled
-      if(jobregisterlastmodify_by && job_status && jobregister_id) {
-        var formData = {
-          jobregisterlastmodify_by: jobregisterlastmodify_by,
-          job_status: job_status,
-          reason: reason,
-          jobregister_id: jobregister_id
-        };
+      function submitFormstatus() {
+        var job_status = $('select[name=job_status]').val();
+        var reason = $('input[name=reason]').val();
+        var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
+        var jobregister_id = $('input[name=jobregister_id]').val();
         
-        // Submit form data using AJAX
-        $.ajax({
-          url: "techstatusindex.php",
-          type: 'POST', 
-          data: formData,
-          success: function(response) {
-            var res = JSON.parse(response);
-            console.log(res);
-            // Show success or error message
-            if(res.success) {
-              $('#messagestatus').html('<span style="color: green">Update Saved!</span>');
-            } 
-            else {
-              $('#messagestatus').html('<span style="color: red">Data Cannot Be Saved</span>');
-            }
-          }
-        });
+        if(jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='',
+                         job_status!='' || job_status=='',
+                             reason!='' || reason=='',
+                     jobregister_id!='' || jobregister_id=='')
+        {
+          var formData = {jobregisterlastmodify_by: jobregisterlastmodify_by,
+                                        job_status: job_status,
+                                            reason: reason,
+                                    jobregister_id: jobregister_id};
+                                    
+          $.ajax({
+            url: "techstatusindex.php",
+            type: 'POST', 
+            data: formData,
+            success: function(response)
+              {
+                var res = JSON.parse(response);
+                console.log(res);
+                if(res.success == true)
+                $('#messagestatus').html('<span style="color: green">Update Saved!</span>');
+                else
+                $('#messagestatus').html('<span style="color: red">Data Cannot Be Saved</span>');
+              }
+            });
+        }
       } 
-      else {
-        document.getElementById("messagestatus").innerHTML = "<span style='color:red'>Please fill in all required fields</span>";
-      }
-    } 
   </script>
 
 <?php } } } ?>
