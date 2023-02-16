@@ -252,6 +252,7 @@
                                 <th>Clock Out</th>
                                 <th>Rest Out</th>
                                 <th>Rest In</th>
+                                <th></th>
                             </tr>
                         </thead>
                         
