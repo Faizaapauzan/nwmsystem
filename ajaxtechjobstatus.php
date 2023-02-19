@@ -33,14 +33,6 @@
   <script src="js/testing.js" type="text/javascript"></script>
 </head>
 
-<style>
-    
-  .status{float:none;}
-    
-  #reason {display:none;}
-
-</style>
-
 </head>
 
 <body>
@@ -48,6 +40,10 @@
   <form id="techstatus_form" method="post">
     
     <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+
+    <input type="hidden" name="technician_departure" class="technician_departure" value="<?php echo $row['technician_departure'] ?>">
+    <input type="hidden" name="technician_arrival" class="technician_arrival" value="<?php echo $row['technician_arrival'] ?>">
+    <input type="hidden" name="technician_leaving" class="technician_leaving" value="<?php echo $row['technician_leaving'] ?>">
     
     <div class="form-group">
       <label for="exampleFormControlSelect2">Job Status</label>
@@ -61,26 +57,27 @@
     </div>
     
     <!--PENDING & INCOMPLETE REASON-->
-    <div id="reason" class="form-group row">
-      <label for="reason" class="col-sm-2 col-form-label">Reason</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputreason" name="reason" value="<?php echo $row['reason'] ?>">
-      </div>
+    <div id="reasonInput" class="input-box">
+      <label for="reason">Reason</label>
+      <input type="text" id="reason" name="reason" value="<?php echo $row["reason"]; ?>">
+    </br>
     </div>
     
-    <script type="text/javascript">
+    <script>
       function myFunction() {
-        var x = document.getElementById("job_status").value;
-        if(x == 'Pending' || x == 'Incomplete')
-          {
-            document.getElementById("reason").style.display = 'block';
-          }
+        var jobStatus = document.getElementById("job_status").value;
+        var reasonDiv = document.getElementById("reasonInput");
+        if (jobStatus === "Pending" || jobStatus === "Incomplete") {
+          reasonDiv.style.display = "block";
+        } 
         
-        else
-          {
-            document.getElementById("reason").style.display = 'none';
-          }
+        else {
+          reasonDiv.style.display = "none";
+        }
       }
+      
+      // Call the function once to set the initial state of the "reason" div
+      myFunction();
     </script>
     <!--PENDING & INCOMPLETE END REASON-->
     
@@ -88,16 +85,26 @@
     <p class="control"><b id="messagestatus"></b></p>
     <div class="btn-box">
       <button type="button" id="update_techstatus" name="update_techstatus" value="Update" style="width: 103px;padding-left: 29px;" class="buttonbiru" onclick="submitFormstatus();">Update</button>
-    <br><br>
+      <br><br>
     </div>
   </form>
   
   <script type="text/javascript">
       function submitFormstatus() {
+        var job_status = document.getElementById('job_status').value;
+        var technician_departure = document.getElementById('technician_departure').value;
+        var technician_arrival = document.getElementById('technician_arrival').value;
+        var technician_leaving = document.getElementById('technician_leaving').value;
+
         var job_status = $('select[name=job_status]').val();
         var reason = $('input[name=reason]').val();
         var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
         var jobregister_id = $('input[name=jobregister_id]').val();
+
+        if (job_status === 'Completed' && (!technician_departure || !technician_arrival || !technician_leaving)) {
+          $('#messagestatus').html('<span style="color: red">Please fill in departure time, arrival time and leaving time before marking the job as Completed.</span>');
+          return false;
+        }
         
         if(jobregisterlastmodify_by!='' || jobregisterlastmodify_by=='',
                          job_status!='' || job_status=='',

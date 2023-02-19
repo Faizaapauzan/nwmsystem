@@ -278,7 +278,9 @@
                                 </td>
                             </tr> 
                             
-                            <?php } } else {echo '<tr><td class="text-center" colspan="8">No records found...</td></tr>';} ?> </tbody>
+                            <?php } } else {echo '<tr><td class="text-center" colspan="8">No records found...</td></tr>';} ?> 
+                            
+                        </tbody>
                     </table>
                 </div>
             </div>
