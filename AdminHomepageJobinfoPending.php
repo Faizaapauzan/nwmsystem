@@ -27,7 +27,7 @@
 
         <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
 
-        <input type="hidden" id="today_date" name="today_date" value="<?php echo date('d-m-Y'); ?>">
+        <input type="hidden" id="today_date" name="today_date" value="<?php echo $row['today_date'] ?>">
         <input type="hidden" id="job_assign" name="job_assign" value="<?php echo $row['job_assign'] ?>">
         <input type="hidden" id="technician_rank" name="technician_rank" value="<?php echo $row['technician_rank'] ?>">
         <input type="hidden" id="staff_position" name="staff_position" value="<?php echo $row['staff_position'] ?>">
