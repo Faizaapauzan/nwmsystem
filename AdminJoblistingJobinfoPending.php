@@ -1,5 +1,7 @@
 <?php
     session_start();
+
+    date_default_timezone_set('Asia/Kuala_Lumpur');
     
     if (isset($_SESSION["username"])) {
         $username = $_SESSION["username"];
@@ -26,15 +28,9 @@
     <form action="homeindex.php" method="post" style="display: contents;">
 
         <input type="hidden" id="jobregister_id" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-
-        <input type="hidden" id="today_date" name="today_date" value="<?php echo date('d-m-Y'); ?>">
-        <input type="hidden" id="job_assign" name="job_assign" value="<?php echo $row['job_assign'] ?>">
-        <input type="hidden" id="technician_rank" name="technician_rank" value="<?php echo $row['technician_rank'] ?>">
-        <input type="hidden" id="staff_position" name="staff_position" value="<?php echo $row['staff_position'] ?>">
+        <input type="hidden" id="today_date" name="today_date" value="<?php echo date('Y-m-d'); ?>">
         <input type="hidden" id="support" name="support" value="<?php echo $row['support'] ?>">
         <input type="hidden" id="job_status" name="job_status" value="<?php echo $row['job_status'] ?>">
-        <input type="hidden" id="type_id" name="type_id" value="<?php echo $row['type_id'] ?>">
-        <input type="hidden" id="brand_id" name="brand_id" value="<?php echo $row['brand_id'] ?>">
         
         <div class="input-box" style="width: 50%;">
             <label for="">Job Priority</label>
@@ -180,7 +176,10 @@
         <div class="input-box" style="width: 100%;">
             <label for="">Machine Name</label>
             <input type="text" id="machine_name" name="machine_name" value="<?php echo $row['machine_name']?>">
+            
             <input type="hidden" id="machine_code" name="machine_code" value="<?php echo $row['machine_code']?>">
+            <input type="hidden" id="type_id" name="type_id" value="<?php echo $row['type_id'] ?>">
+            <input type="hidden" id="brand_id" name="brand_id" value="<?php echo $row['brand_id'] ?>">
         </div>
         
         <div class="input-box" style="width: 50%;">
@@ -387,7 +386,6 @@
             var job_name = $('input[name=job_name]').val();
             var job_order_number = $('input[name=job_order_number]').val();
             var job_description = $('input[name=job_description]').val();
-            var job_assign = $('input[name=job_assign]').val();
             var technician_rank = $('input[name=technician_rank]').val();
             var staff_position = $('input[name=staff_position]').val();
             var job_cancel = $('select[name=job_cancel]').val();
@@ -423,7 +421,6 @@
                        job_name != '' || job_name == '',
                job_order_number != '' || job_order_number == '',
                 job_description != '' || job_description == '',
-                     job_assign != '' || job_assign == '',
                 technician_rank != '' || technician_rank == '',
                  staff_position != '' || staff_position == '',
                      job_cancel != '' || job_cancel == '',
@@ -461,7 +458,6 @@
                     job_name: job_name,
                     job_order_number: job_order_number,
                     job_description: job_description,
-                    job_assign: job_assign,
                     technician_rank: technician_rank,
                     staff_position: staff_position,
                     job_cancel: job_cancel,
