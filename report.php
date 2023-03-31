@@ -209,21 +209,14 @@ if(!isset($_SESSION['username']))
     <!--Home navigation-->
     <section class="home-section">
     <nav>
-                <div class="home-content">
-                      <i class='bx bx-menu' ></i>
-                          <a>
-						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                          </a>
-
-                 </div>
-
+        <div class="home-content">
+            <i class='bx bx-menu' ></i>
+            <a><button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button></a>
+        </div>
     </nav>  
 	
-
-<div class="jobTypeList">
-            <h1>Service Report</h1>
-	
-		
+    <div class="jobTypeList">
+        <h1>Service Report</h1>
 		<form method="POST" action="">
             <table>
                 <tr>
@@ -235,53 +228,54 @@ if(!isset($_SESSION['username']))
                 </tr>
             </table>
 		</form>
-
-    <div class="datalist-wrapper">    
-    <div class="col-lg-12" style="border: none;">
-    <table class="table table-striped sortable">
-			<thead>
-					<tr>
-            <th>No</th>
-						<th>Job Order Number</th>
-						<th>Customer Name</th>
-						<th>Requested Date</th>
-            <th>Report Date</th>
-            <th>Service Report Number</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php include 'range.php'?>	
-				</tbody>
-			</table>
-		</div>	
-	</div>
-  </div>
+        
+        <div class="datalist-wrapper">
+            <div class="col-lg-12" style="border: none;">
+            <table class="table table-striped sortable">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Job Order Number</th>
+                        <th>Customer Name</th>
+                        <th>Requested Date</th>
+                        <th>Report Date</th>
+                        <th>Service Report Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                    <?php include 'range.php'?>	
+			    </tbody>
+		    </table>
+		    </div>	
+	    </div>
+    </div>
 
     <script type="text/javascript">
-    $(document).ready(function(){
-        $('table').DataTable();
-
-    });
-
-</script>
-
+        $(document).ready(function(){
+            $('table').DataTable();
+        });
+    </script>
     
-  <script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
-    });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
-  </script>
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=> {
+                let arrowParent = e.target.parentElement.parentElement;
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+  
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", ()=> {
+            sidebar.classList.toggle("close");
+        });
+    </script>
 
 </body>
 </html>

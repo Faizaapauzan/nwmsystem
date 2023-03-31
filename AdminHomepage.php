@@ -267,8 +267,8 @@
                     <div class="dropdown1">
                         <button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="nav1-links sidebarbutton dropbtn1">Home</button>
                         <div class="dropdown-content1">
-                            <a href="Adminhomepage.php">Homepage</a>
-                            <a href="adminjoblisting.php">Job Listing</a>
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
                         </div>
                     </div>
                 </ul>
