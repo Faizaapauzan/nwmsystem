@@ -211,6 +211,7 @@
                         <th style="border-color: black;">Assistant</th>
                         <th style="border-color: black;">Place</th>
                         <th style="border-color: black;">Machine</th>
+                        <th style="border-color: black;">Reason</th>
                         <th style="border-color: black;">Last Update Date</th>
                     </tr>
                 </thead>
@@ -236,6 +237,7 @@
                         <td style="border-color: black;"><?php echo $row['username']?></td>
                         <td style="border-color: black;"><?php echo $row['customer_name']?></td>
                         <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
+                        <td style="border-color: black;"><?php echo $row['reason']?></td>
                         <td style="border-color: black;"><?php echo $datemodify ?></td>
                     </tr>
                 </tbody>
@@ -276,6 +278,7 @@
                         <th style="border-color: black;">Assistant</th>
                         <th style="border-color: black;">Place</th>
                         <th style="border-color: black;">Machine</th>
+                        <th style="border-color: black;">Reason</th>
                         <th style="border-color: black;">Last Update Date</th>
                     </tr>
                 </thead>
@@ -301,6 +304,7 @@
                         <td style="border-color: black;"><?php echo $row['username']?></td>
                         <td style="border-color: black;"><?php echo $row['customer_name']?></td>
                         <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
+                        <td style="border-color: black;"><?php echo $row['reason']?></td>
                         <td style="border-color: black;"><?php echo $datemodify ?></td>
                     </tr>
                 </tbody>
