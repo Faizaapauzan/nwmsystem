@@ -1004,10 +1004,14 @@
                                 
                                 $results = $conn->query
                                             ("SELECT * FROM job_register 
-                                                WHERE job_status = 'Incomplete'
+                                                WHERE (job_status = 'Incomplete' AND job_cancel = '')
+                                                            OR    
+                                                      (job_status = 'Incomplete' AND job_cancel IS NULL)
                                                 ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
                                 
-                                $numRow = "SELECT * FROM job_register WHERE job_status = 'Incomplete'";
+                                $numRow = "SELECT * FROM job_register WHERE (job_status = 'Incomplete' AND job_cancel = '')
+                                                                                OR    
+                                                                            (job_status = 'Incomplete' AND job_cancel IS NULL)";
                                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 if ($row_Total = mysqli_num_rows($numRow_run))
