@@ -188,7 +188,7 @@
                 $numRow = "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id 
                            WHERE job_register.job_status = 'Incomplete' AND job_register.job_cancel = ''
                            OR job_register.job_status = 'Incomplete' AND job_register.job_cancel IS NULL
-                           ORDER BY job_register.jobregisterlastmodify_at DESC LIMIT 50";
+                           LIMIT 50";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -222,7 +222,7 @@
                         $results = $conn->query("SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id 
                                                  WHERE job_register.job_status = 'Incomplete' AND job_register.job_cancel = ''
                                                  OR job_register.job_status = 'Incomplete' AND job_register.job_cancel IS NULL
-                                                 ORDER BY job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
                     
                         while($row = $results->fetch_assoc()) {
                           
@@ -255,7 +255,7 @@
                 $numRow = "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id 
                            WHERE job_register.job_status = 'Pending' AND job_register.job_cancel = ''
                            OR job_register.job_status = 'Pending' AND job_register.job_cancel IS NULL
-                           ORDER BY job_register.jobregisterlastmodify_at DESC LIMIT 50";
+                           LIMIT 50";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -289,7 +289,7 @@
                         $results = $conn->query("SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id 
                                                  WHERE job_register.job_status = 'Pending' AND job_register.job_cancel = ''
                                                  OR job_register.job_status = 'Pending' AND job_register.job_cancel IS NULL
-                                                 ORDER BY job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
                     
                         while($row = $results->fetch_assoc()) {
                           
@@ -324,7 +324,7 @@
                            WHERE  job_register.job_assign IS NOT NULL AND TRIM(job_register.job_assign) != ''
                            AND (job_register.job_cancel IS NULL OR job_register.job_cancel = ' ')
                            AND (job_register.job_status = '' OR job_register.job_status IS NULL OR job_register.job_status = 'Doing')
-                           ORDER BY job_register.jobregisterlastmodify_at DESC LIMIT 50;";
+                           LIMIT 50;";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -359,7 +359,7 @@
                         WHERE  job_register.job_assign IS NOT NULL AND TRIM(job_register.job_assign) != ''
                         AND (job_register.job_cancel IS NULL OR job_register.job_cancel = ' ')
                         AND (job_register.job_status = '' OR job_register.job_status IS NULL OR job_register.job_status = 'Doing')
-                        ORDER BY job_register.jobregisterlastmodify_at DESC LIMIT 50;");
+                        ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
                     
                         while($row = $results->fetch_assoc()) {
                     ?>
@@ -416,7 +416,7 @@
                     OR
                 (job_register.job_assign IS NULL AND job_register.job_status = 'Ready' AND job_register.job_cancel IS NULL)   
                 
-                ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
+                LIMIT 50";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -477,7 +477,7 @@
                             OR
                         (job_register.job_assign IS NULL AND job_register.job_status = 'Ready' AND job_register.job_cancel IS NULL)   
                         
-                        ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                        ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
                     
                         while($row = $results->fetch_assoc()) {
                     ?>
