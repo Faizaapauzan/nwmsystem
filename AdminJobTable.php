@@ -377,22 +377,22 @@
                         
                         WHERE job_register.job_assign IS NOT NULL AND job_register.job_cancel IS NULL
                         AND (job_register.job_status = '' 
-                             OR job_register.job_status = 'NULL'
+                             OR job_register.job_status IS NULL
                              OR job_register.job_status = 'Doing')
                         
-                        OR job_register.job_assign <>'' AND job_register.job_cancel = ''
+                        OR job_register.job_assign != '' AND job_register.job_cancel = ''
                         AND (job_register.job_status = ''
-                             OR job_register.job_status = 'NULL'
+                             OR job_register.job_status IS NULL
                              OR job_register.job_status = 'Doing')
                         
                         OR job_register.job_assign IS NOT NULL AND job_register.job_cancel = ''
                         AND (job_register.job_status = ''
-                             OR job_register.job_status = 'NULL'
+                             OR job_register.job_status IS NULL
                              OR job_register.job_status = 'Doing')
                         
-                        OR job_register.job_assign <>'' AND job_register.job_cancel IS NULL
+                        OR job_register.job_assign != '' AND job_register.job_cancel IS NULL
                         AND (job_register.job_status = ''
-                             OR job_register.job_status = 'NULL'
+                             OR job_register.job_status IS NULL
                              OR job_register.job_status = 'Doing')
                         
                         ORDER BY job_register.jobregisterlastmodify_at DESC LIMIT 50;");
