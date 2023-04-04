@@ -380,7 +380,7 @@
                              OR job_register.job_status IS NULL
                              OR job_register.job_status = 'Doing')
                         
-                        OR job_register.job_assign != '' AND job_register.job_cancel = ''
+                        OR job_register.job_assign <> '' AND job_register.job_cancel = ''
                         AND (job_register.job_status = ''
                              OR job_register.job_status IS NULL
                              OR job_register.job_status = 'Doing')
@@ -390,7 +390,7 @@
                              OR job_register.job_status IS NULL
                              OR job_register.job_status = 'Doing')
                         
-                        OR job_register.job_assign != '' AND job_register.job_cancel IS NULL
+                        OR job_register.job_assign <> '' AND job_register.job_cancel IS NULL
                         AND (job_register.job_status = ''
                              OR job_register.job_status IS NULL
                              OR job_register.job_status = 'Doing')
