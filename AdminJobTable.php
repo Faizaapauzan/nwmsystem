@@ -8,6 +8,8 @@
     <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
     <title>NWM Job of The Day</title>
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -20,18 +22,14 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <style>
-    
     #auto { counter-reset: rowNumber; }
 
-    #auto tr>td:first-child { counter-increment: rowNumber; }
+    #auto tr td:first-child { counter-increment: rowNumber; }
 
     #auto tr td:first-child::before { content: counter(rowNumber); }
-
 </style>
 
 <body>
@@ -185,10 +183,8 @@
                 
                 include 'dbconnect.php';
                 
-                $numRow = "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id 
-                           WHERE job_register.job_status = 'Incomplete' AND job_register.job_cancel = ''
-                           OR job_register.job_status = 'Incomplete' AND job_register.job_cancel IS NULL
-                           LIMIT 50";
+                $numRow = "SELECT * FROM job_register WHERE job_status = 'Incomplete' 
+                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -208,7 +204,6 @@
                     <tr>
                         <th style="border-color: black;"></th>
                         <th style="border-color: black;">Leader</th>
-                        <th style="border-color: black;">Assistant</th>
                         <th style="border-color: black;">Place</th>
                         <th style="border-color: black;">Machine</th>
                         <th style="border-color: black;">Reason</th>
@@ -219,9 +214,7 @@
                     <?php
                         include 'dbconnect.php';
                         
-                        $results = $conn->query("SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id 
-                                                 WHERE job_register.job_status = 'Incomplete' AND job_register.job_cancel = ''
-                                                 OR job_register.job_status = 'Incomplete' AND job_register.job_cancel IS NULL
+                        $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Incomplete' AND (job_cancel = '' OR job_cancel IS NULL)
                                                  ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
                     
                         while($row = $results->fetch_assoc()) {
@@ -233,8 +226,18 @@
                 <tbody>
                     <tr>
                         <td style="border-color: black;"></td>
-                        <td style="border-color: black;"><?php echo $row['job_assign']?></td>
-                        <td style="border-color: black;"><?php echo $row['username']?></td>
+                        <td style="border-color: black;" 
+                            id="<?php echo $row["jobregister_id"]; ?>"
+                            data-id="<?php echo $row['jobregister_id'];?>"
+                            data-idlagi="<?php echo $row['job_assign'];?>"
+                            class = '<?php echo $row["jobregister_id"];?>' 
+                            onClick="document.getElementById('doubleClick-info').style.display='block'">
+                            <p style="text-decoration: none; text-align: center;" 
+                               data-id="<?php echo $row['jobregister_id'];?>" 
+                               data-idlagi="<?php echo $row['job_assign'];?>"
+                               class = 'JobInfo'><?php echo $row["job_assign"]; ?>
+                            </p>
+                        </td>
                         <td style="border-color: black;"><?php echo $row['customer_name']?></td>
                         <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
                         <td style="border-color: black;"><?php echo $row['reason']?></td>
@@ -252,10 +255,8 @@
                 
                 include 'dbconnect.php';
                 
-                $numRow = "SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id 
-                           WHERE job_register.job_status = 'Pending' AND job_register.job_cancel = ''
-                           OR job_register.job_status = 'Pending' AND job_register.job_cancel IS NULL
-                           LIMIT 50";
+                $numRow = "SELECT * FROM job_register WHERE job_status = 'Pending'
+                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -275,7 +276,6 @@
                     <tr>
                         <th style="border-color: black;"></th>
                         <th style="border-color: black;">Leader</th>
-                        <th style="border-color: black;">Assistant</th>
                         <th style="border-color: black;">Place</th>
                         <th style="border-color: black;">Machine</th>
                         <th style="border-color: black;">Reason</th>
@@ -286,9 +286,7 @@
                     <?php
                         include 'dbconnect.php';
                         
-                        $results = $conn->query("SELECT * FROM job_register LEFT JOIN assistants ON job_register.jobregister_id=assistants.jobregister_id 
-                                                 WHERE job_register.job_status = 'Pending' AND job_register.job_cancel = ''
-                                                 OR job_register.job_status = 'Pending' AND job_register.job_cancel IS NULL
+                        $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending' AND (job_cancel = '' OR job_cancel IS NULL)
                                                  ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
                     
                         while($row = $results->fetch_assoc()) {
@@ -300,8 +298,18 @@
                 <tbody>
                     <tr>
                         <td style="border-color: black;"></td>
-                        <td style="border-color: black;"><?php echo $row['job_assign']?></td>
-                        <td style="border-color: black;"><?php echo $row['username']?></td>
+                        <td style="border-color: black;" 
+                            id="<?php echo $row["jobregister_id"]; ?>"
+                            data-id="<?php echo $row['jobregister_id'];?>"
+                            data-idlagi="<?php echo $row['job_assign'];?>"
+                            class = '<?php echo $row["jobregister_id"];?>' 
+                            onClick="document.getElementById('doubleClick-info').style.display='block'">
+                            <p style="text-decoration: none; text-align: center;" 
+                               data-id="<?php echo $row['jobregister_id'];?>" 
+                               data-idlagi="<?php echo $row['job_assign'];?>"
+                               class = 'JobInfo'><?php echo $row["job_assign"]; ?>
+                            </p>
+                        </td>
                         <td style="border-color: black;"><?php echo $row['customer_name']?></td>
                         <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
                         <td style="border-color: black;"><?php echo $row['reason']?></td>
@@ -319,11 +327,9 @@
                 
                 include 'dbconnect.php';
                 
-                $numRow = "SELECT * FROM job_register LEFT JOIN assistants 
-                           ON job_register.jobregister_id = assistants.jobregister_id 
-                           WHERE  job_register.job_assign IS NOT NULL AND TRIM(job_register.job_assign) != ''
-                           AND (job_register.job_cancel IS NULL OR job_register.job_cancel = ' ')
-                           AND (job_register.job_status = '' OR job_register.job_status IS NULL OR job_register.job_status = 'Doing')
+                $numRow = "SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
+                           AND (job_cancel IS NULL OR job_cancel = ' ')
+                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing')
                            LIMIT 50;";
                 
                 $numRow_run = mysqli_query ($conn,$numRow);
@@ -344,7 +350,6 @@
                     <tr>
                         <th style="border-color: black;"></th>
                         <th style="border-color: black;">Leader</th>
-                        <th style="border-color: black;">Assistant</th>
                         <th style="border-color: black;">Place</th>
                         <th style="border-color: black;">Machine</th>
                         <th style="border-color: black;">Status</th>
@@ -354,12 +359,10 @@
                     <?php
                         include 'dbconnect.php';
                         
-                        $results = $conn->query("SELECT * FROM job_register LEFT JOIN assistants 
-                        ON job_register.jobregister_id = assistants.jobregister_id 
-                        WHERE  job_register.job_assign IS NOT NULL AND TRIM(job_register.job_assign) != ''
-                        AND (job_register.job_cancel IS NULL OR job_register.job_cancel = ' ')
-                        AND (job_register.job_status = '' OR job_register.job_status IS NULL OR job_register.job_status = 'Doing')
-                        ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                        $results = $conn->query("SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
+                                                 AND (job_cancel IS NULL OR job_cancel = ' ')
+                                                 AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing')
+                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
                     
                         while($row = $results->fetch_assoc()) {
                     ?>
@@ -367,8 +370,18 @@
                 <tbody>
                     <tr>
                         <td style="border-color: black;"></td>
-                        <td style="border-color: black;"><?php echo $row['job_assign']?></td>
-                        <td style="border-color: black;"><?php echo $row['username']?></td>
+                        <td style="border-color: black;" 
+                            id="<?php echo $row["jobregister_id"]; ?>"
+                            data-id="<?php echo $row['jobregister_id'];?>"
+                            data-idlagi="<?php echo $row['job_assign'];?>"
+                            class = '<?php echo $row["jobregister_id"];?>' 
+                            onClick="document.getElementById('doubleClick-info').style.display='block'">
+                            <p style="text-decoration: none; text-align: center;" 
+                               data-id="<?php echo $row['jobregister_id'];?>" 
+                               data-idlagi="<?php echo $row['job_assign'];?>"
+                               class = 'JobInfo'><?php echo $row["job_assign"]; ?>
+                            </p>
+                        </td>
                         <td style="border-color: black;"><?php echo $row['customer_name']?></td>
                         <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
                         <td style="border-color: black;"><?php echo $row['job_status']?></td>
@@ -385,36 +398,35 @@
                 
                 include 'dbconnect.php';
                 
-                $numRow = "SELECT * FROM job_register LEFT JOIN assistants 
-                ON job_register.jobregister_id = assistants.jobregister_id WHERE
+                $numRow = "SELECT * FROM job_register WHERE
                 
-                (job_register.accessories_required = 'NO' AND job_register.job_status IS NULL AND job_register.job_assign IS NULL AND job_register.job_cancel = '')
+                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
                     OR
-                (job_register.accessories_required = 'NO' AND job_register.job_status IS NULL AND job_register.job_assign IS NULL AND job_register.job_cancel IS NULL)
+                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
                     OR
-                (job_register.accessories_required = 'NO' AND job_register.job_status IS NULL AND job_register.job_assign = '' AND job_register.job_cancel IS NULL)
+                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
                     OR
-                (job_register.accessories_required = 'NO' AND job_register.job_status IS NULL AND job_register.job_assign = '' AND job_register.job_cancel = '')
+                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
                     OR
-                (job_register.accessories_required = 'NO' AND job_register.job_status = '' AND job_register.job_assign IS NULL AND job_register.job_cancel = '')
+                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
                     OR
-                (job_register.accessories_required = 'NO' AND job_register.job_status = '' AND job_register.job_assign = '' AND job_register.job_cancel = '')
+                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
                     OR
-                (job_register.accessories_required = 'NO' AND job_register.job_status = '' AND job_register.job_assign = '' AND job_register.job_cancel IS NULL)
+                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
                     OR
-                (job_register.accessories_required = 'NO' AND job_register.job_assign = '' AND job_register.job_status = 'Doing' AND job_register.job_cancel IS NULL)
+                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
                     OR
-                (job_register.accessories_required = '' AND job_register.job_status = '' AND job_register.job_assign = '' AND job_register.job_cancel = '')
+                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
                     OR
-                (job_register.accessories_required IS NULL AND job_register.job_status IS NULL AND job_register.job_assign IS NULL AND job_register.job_cancel IS NULL)
+                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
                     OR
-                (job_register.staff_position = 'Storekeeper' AND job_register.job_status = 'Ready' AND job_register.job_cancel = '')
+                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
                     OR
-                (job_register.staff_position = 'Storekeeper' AND job_register.job_status = 'Ready' AND job_register.job_cancel IS NULL)
+                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
                     OR
-                (job_register.job_assign = '' AND job_register.job_status = 'Ready' AND job_register.job_cancel = '')
+                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                     OR
-                (job_register.job_assign IS NULL AND job_register.job_status = 'Ready' AND job_register.job_cancel IS NULL)   
+                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)   
                 
                 LIMIT 50";
                 
@@ -434,9 +446,8 @@
             <table class="table table-bordered" id="auto" style="box-shadow:none; border-color: black; background-color:#ffffff;">
                 <thead style="box-shadow:none;">
                     <tr>
-                        <th style="border-color: black;">#</th>
+                        <th style="border-color: black;"></th>
                         <th style="border-color: black;">Leader</th>
-                        <th style="border-color: black;">Assistant</th>
                         <th style="border-color: black;">Place</th>
                         <th style="border-color: black;">Machine</th>
                         <th style="border-color: black;">Status</th>
@@ -446,38 +457,37 @@
                     <?php
                         include 'dbconnect.php';
                         
-                        $results = $conn->query("SELECT * FROM job_register LEFT JOIN assistants 
-                        ON job_register.jobregister_id = assistants.jobregister_id WHERE
+                        $results = $conn->query("SELECT * FROM job_register WHERE
                         
-                        (job_register.accessories_required = 'NO' AND job_register.job_status IS NULL AND job_register.job_assign IS NULL AND job_register.job_cancel = '')
+                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
                             OR
-                        (job_register.accessories_required = 'NO' AND job_register.job_status IS NULL AND job_register.job_assign IS NULL AND job_register.job_cancel IS NULL)
+                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
                             OR
-                        (job_register.accessories_required = 'NO' AND job_register.job_status IS NULL AND job_register.job_assign = '' AND job_register.job_cancel IS NULL)
+                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
                             OR
-                        (job_register.accessories_required = 'NO' AND job_register.job_status IS NULL AND job_register.job_assign = '' AND job_register.job_cancel = '')
+                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
                             OR
-                        (job_register.accessories_required = 'NO' AND job_register.job_status = '' AND job_register.job_assign IS NULL AND job_register.job_cancel = '')
+                        (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
                             OR
-                        (job_register.accessories_required = 'NO' AND job_register.job_status = '' AND job_register.job_assign = '' AND job_register.job_cancel = '')
+                        (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
                             OR
-                        (job_register.accessories_required = 'NO' AND job_register.job_status = '' AND job_register.job_assign = '' AND job_register.job_cancel IS NULL)
+                        (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
                             OR
-                        (job_register.accessories_required = 'NO' AND job_register.job_assign = '' AND job_register.job_status = 'Doing' AND job_register.job_cancel IS NULL)
+                        (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
                             OR
-                        (job_register.accessories_required = '' AND job_register.job_status = '' AND job_register.job_assign = '' AND job_register.job_cancel = '')
+                        (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
                             OR
-                        (job_register.accessories_required IS NULL AND job_register.job_status IS NULL AND job_register.job_assign IS NULL AND job_register.job_cancel IS NULL)
+                        (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
                             OR
-                        (job_register.staff_position = 'Storekeeper' AND job_register.job_status = 'Ready' AND job_register.job_cancel = '')
+                        (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
                             OR
-                        (job_register.staff_position = 'Storekeeper' AND job_register.job_status = 'Ready' AND job_register.job_cancel IS NULL)
+                        (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
                             OR
-                        (job_register.job_assign = '' AND job_register.job_status = 'Ready' AND job_register.job_cancel = '')
+                        (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                             OR
-                        (job_register.job_assign IS NULL AND job_register.job_status = 'Ready' AND job_register.job_cancel IS NULL)   
+                        (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)   
                         
-                        ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                        ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
                     
                         while($row = $results->fetch_assoc()) {
                     ?>
@@ -486,8 +496,18 @@
                     <tr>
                         <td style="border-color: black;"></td>
                         <td style="border-color: black;"><?php echo $row['job_assign']?></td>
-                        <td style="border-color: black;"><?php echo $row['username']?></td>
-                        <td style="border-color: black;"><?php echo $row['customer_name']?></td>
+                        <td style="border-color: black;" 
+                            id="<?php echo $row["jobregister_id"]; ?>"
+                            data-id="<?php echo $row['jobregister_id'];?>"
+                            data-idlagi="<?php echo $row['job_assign'];?>"
+                            class = '<?php echo $row["jobregister_id"];?>' 
+                            onClick="document.getElementById('doubleClick-info').style.display='block'">
+                            <p style="text-decoration: none; text-align: center;" 
+                               data-id="<?php echo $row['jobregister_id'];?>" 
+                               data-idlagi="<?php echo $row['job_assign'];?>"
+                               class = 'JobInfo'><?php echo $row["customer_name"]; ?>
+                            </p>
+                        </td>
                         <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
                         <td style="border-color: black;"><?php echo $row['job_status']?></td>
                     </tr>
@@ -499,6 +519,42 @@
             <!-- End of Unplanned Job -->
         </div>
     </section>
+
+    <!-- Job Listing Pop Up Modal -->
+    <div id="doubleClick-info" class="modal">
+        <div class="tabInfo">
+            <input type="radio" name="tabDoingInfo" id="tabDoingInfo1" checked="checked">
+            <label for="tabDoingInfo1" class="tabHeadingInfo">Job Info</label>
+            <div class="tab" id="JobInfoTab">
+                <div class="contentJobInfo">
+                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-info').style.display='none'">&times</div>
+                    <form action="homeindex.php" method="post">
+                        <div class="info-details">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+                    
+            <script type='text/javascript'>
+                $(document).ready(function () {
+                    $('body').on('click','.JobInfo',function() {
+                        var jobregister_id = $(this).data('id');
+                        $.ajax({
+                            url: 'AdminJoblistingJobinfo.php',
+                            type: 'post',
+                            data: {jobregister_id: jobregister_id},
+                            success: function (response) {
+                                $('.info-details').html(response);
+                                $('#doubleClick-info').modal('show');
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </div>
+    <!-- End of Job Listing Pop Up Modal -->
     
     <script>
         let arrow = document.querySelectorAll(".arrow");
