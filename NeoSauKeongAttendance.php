@@ -122,7 +122,7 @@
                                         {
                                             $DateAssign = $_GET['DateAssign'];
                                             
-                                            $sql = "SELECT * FROM staff_register WHERE tech_avai='1'";
+                                            $sql = "SELECT * FROM tech_off WHERE leave_date='$DateAssign'";
                                             $result = mysqli_query($conn, $sql);
                                             if(mysqli_num_rows($result) > 0) 
                                                 { 
@@ -132,13 +132,13 @@
 
                             <thead>
                                 <tr>
-                                    <th style="font-weight: bold;background: #B2BEB5;"><?php echo $row["username"]; ?></th>
+                                    <th style="font-weight: bold;background: #B2BEB5;"><?php echo $row["tech_name"]; ?></th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr>
-                                    <td data-label="<?php echo $row["username"]; ?>" style="font-weight: bold;">OFF</td>
+                                    <td data-label="<?php echo $row["tech_name"]; ?>" style="font-weight: bold;">OFF</td>
                                 </tr>
                             </tbody>
 
