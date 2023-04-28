@@ -61,6 +61,7 @@
     
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -97,17 +98,14 @@
                     <li><a class="link_name" href="jobregister.php">Register Job</a></li>
                 </ul>
             </li>
-            
+
             <li>
-                <div class="iocn-link">
-                    <a href="">
-                        <i class='bx bx-calendar-check' ></i>
-                        <span class="link_name">Attendance</span>
-                    </a>
-                </div>
+                <a href="attendanceadmin.php">
+                    <i class='bx bxs-report' ></i>
+                    <span class="link_name">Attendance</span>
+                </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                    <li><a class="link_name" href="AdminLeave.php">Leave</a></li>
                 </ul>
             </li>
             
@@ -196,13 +194,12 @@
             </li>
             
             <li>
-                <a href="">
+                <a href="adminreport.php">
                     <i class='bx bxs-report' ></i>
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                    <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
             </li>
             
@@ -224,9 +221,11 @@
         <nav>
             <div class="home-content">
                 <i class='bx bx-menu'></i>
-                <a>
-                    <button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                </a>
+                <a><button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button></a>
+            </div>
+
+            <div>
+                <a href="AdminLeave.php" style="color:black; float: right; margin-top:-50px;"><i class="iconify" data-icon="material-symbols:data-info-alert-rounded" style="font-size:34px;"></i></a>
             </div>
         </nav>
         <!-- End of Home Button -->

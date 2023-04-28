@@ -107,17 +107,14 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
                     <li><a class="link_name" href="jobregister.php">Register Job</a></li>
                 </ul>
             </li>
-            
+
             <li>
-                <div class="iocn-link">
-                    <a href="">
-                        <i class='bx bx-calendar-check' ></i>
-                        <span class="link_name">Attendance</span>
-                    </a>
-                </div>
+                <a href="attendanceadmin.php">
+                    <i class='bx bxs-report' ></i>
+                    <span class="link_name">Attendance</span>
+                </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                    <li><a class="link_name" href="AdminLeave.php">Leave</a></li>
                 </ul>
             </li>
             
@@ -206,13 +203,12 @@ $query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1s
             </li>
             
             <li>
-                <a href="">
+                <a href="adminreport.php">
                     <i class='bx bxs-report' ></i>
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                    <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
             </li>
             
