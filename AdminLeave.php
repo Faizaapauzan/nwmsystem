@@ -107,36 +107,33 @@
             <span class="logo_name">NWM SYSTEM</span>
         </div>
         
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi <?php echo $_SESSION["username"] ?>!</div>
+        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
         
         <ul class="nav-links">
             <li>
                 <a href="jobregister.php">
-                    <i class='bx bx-registered'></i>
+                    <i class='bx bx-registered' ></i>
                     <span class="link_name">Register Job</span>
                 </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="jobregister.php">Register Job</a></li>
                 </ul>
             </li>
-            
+
             <li>
-                <div class="iocn-link">
-                    <a href="">
-                        <i class='bx bx-calendar-check'></i>
-                        <span class="link_name">Attendance</span>
-                    </a>
-                </div>
+                <a href="attendanceadmin.php">
+                    <i class='bx bxs-report' ></i>
+                    <span class="link_name">Attendance</span>
+                </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                    <li><a class="link_name" href="AdminLeave.php">Leave</a></li>
                 </ul>
             </li>
             
             <li>
                 <div class="iocn-link">
                     <a href="staff.php">
-                        <i class='bx bx-id-card'></i>
+                        <i class='bx bx-id-card' ></i>
                         <span class="link_name">Staff</span>
                     </a>
                 </div>
@@ -147,7 +144,7 @@
             
             <li>
                 <a href="technicianlist.php">
-                    <i class='fa fa-users'></i>
+                    <i class='fa fa-users' ></i>
                     <span class="link_name">Technician</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -157,7 +154,7 @@
             
             <li>
                 <a href="customer.php">
-                    <i class='bx bx-user'></i>
+                    <i class='bx bx-user' ></i>
                     <span class="link_name">Customers</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -168,7 +165,7 @@
             <li>
                 <div class="iocn-link">
                     <a href="machine.php">
-                        <i class='fa fa-medium'></i>
+                        <i class='fa fa-medium' ></i>
                         <span class="link_name">Machine</span>
                     </a>
                 </div>
@@ -179,7 +176,7 @@
             
             <li>
                 <a href="accessories.php">
-                    <i class='bx bx-wrench'></i>
+                    <i class='bx bx-wrench' ></i>
                     <span class="link_name">Accessories</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -199,7 +196,7 @@
             
             <li>
                 <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o'></i>
+                    <i class='fa fa-check-square-o' ></i>
                     <span class="link_name">Completed Job</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -209,7 +206,7 @@
             
             <li>
                 <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square'></i>
+                    <i class='fa fa-minus-square' ></i>
                     <span class="link_name">Canceled Job</span>
                 </a>
                 <ul class="sub-menu blank">
@@ -218,19 +215,18 @@
             </li>
             
             <li>
-                <a href="">
-                    <i class='bx bxs-report'></i>
+                <a href="adminreport.php">
+                    <i class='bx bxs-report' ></i>
                     <span class="link_name">Report</span>
                 </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                    <li><a class="link_name" href="report.php">Service Report</a></li>
                 </ul>
             </li>
             
             <li>
                 <a href="logout.php">
-                    <i class='bx bx-log-out'></i>
+                    <i class='bx bx-log-out' ></i>
                     <span class="link_name">Logout</span>
                 </a>
                 <ul class="sub-menu blank">
