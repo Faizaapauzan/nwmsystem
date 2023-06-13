@@ -63,17 +63,18 @@ session_start();
 						<a href="techattendance.php">Attendance</a>
 						<a href="techresthour.php">Rest Hour</a>
 					</div>
+				</div>
+				&nbsp;&nbsp;&nbsp;
+				<div class="dropdown1">
+					<a class="icon2"><i class="iconify" data-icon="mdi:application-import" style="font-size:37px;"></i></a>
+					<div class="dropdown-content1">
+						<a href="jobregistertechnician.php">Job Register</a>
+						<a href="techaccessories.php">Accessories</a>
 					</div>
-	
-					<div class="icon2">
-					<a href="jobregistertechnician.php" style="color:black;padding: 7px;"><i class="iconify" data-icon="mdi:application-import" style="font-size:34px;"></i></a>
-					</div>
-					</div>
-				
-
+				</div>
+				</div>
 			</ul>
 			
-
 			<!-- AVAILABLE UNAVAILABLE BUTTON -->
 			<!-- <div>
 				<?php

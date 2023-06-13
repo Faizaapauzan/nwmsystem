@@ -1,17 +1,17 @@
-<?php session_start(); ?>
+    <?php session_start(); ?>
 
-<?php
+    <?php
     
-    include 'dbconnect.php';
-
-    $accessories_id = $_POST['accessories_id'];
-
-    $query = "SELECT * FROM accessories_list WHERE accessories_id='$accessories_id' ";
-    $query_run = mysqli_query($conn, $query);
-
-    if ($query_run) {
-        while ($row = mysqli_fetch_array($query_run)) {
-?>
+        include 'dbconnect.php';
+        
+        $accessories_id = $_POST['accessories_id'];
+        
+        $query = "SELECT * FROM accessories_list WHERE accessories_id='$accessories_id' ";
+        $query_run = mysqli_query($conn, $query);
+        
+        if ($query_run) {
+            while ($row = mysqli_fetch_array($query_run)) {
+    ?>
     
     <div class="row">
         <div class="updatetech">
@@ -103,7 +103,7 @@
                     accessories_description='$accessories_description',";
         
         // Add the file_name column to the update statement if a file was uploaded
-        if(!empty($file_name)) { // use !empty() to check if $file_name is defined and not empty
+        if(!empty($file_name)) {
             $query .= " file_name='$file_name',";
         }
     
@@ -113,7 +113,7 @@
         
         if ($query_run) {
             echo '<script> alert("Data Updated"); </script>';
-            header("location:accessories.php");
+            header("Location:".$_SERVER["HTTP_REFERER"]);
         } 
         
         else {
@@ -122,11 +122,7 @@
         }
     ?>
     
-    <?php } } 
-        
-        else {
-            // echo '<script> alert("No Record Found"); </script>';
-    ?>
+    <?php } } else { ?>
     
     <div class="container">
         <div class="row">

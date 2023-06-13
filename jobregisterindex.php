@@ -31,6 +31,7 @@ include 'dbconnect.php';
 		$type_id = $_POST['type_id'];
 		$serialnumber  = $_POST['serialnumber'];
 		$accessories_required  = $_POST['accessories_required'];
+		$accessories_for  = $_POST['accessories_for'];
 		$jobregistercreated_by  = $_POST['jobregistercreated_by'];
 		$jobregisterlastmodify_by  = $_POST['jobregisterlastmodify_by'];
 
@@ -41,7 +42,7 @@ include 'dbconnect.php';
            
 	$sql = "INSERT INTO job_register (today_date, job_code, job_name, job_order_number, job_description, customer_code,
      customer_name, customer_grade, job_priority, requested_date, delivery_date, customer_PIC,
-	 cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, machine_id, machine_code, machine_name, machine_brand, brand_id, machine_type, type_id, serialnumber, accessories_required, jobregistercreated_by, jobregisterlastmodify_by)
+	 cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3, machine_id, machine_code, machine_name, machine_brand, brand_id, machine_type, type_id, serialnumber, accessories_required, accessories_for, jobregistercreated_by, jobregisterlastmodify_by)
 
 VALUES ('".addslashes($_POST['today_date'])."',
 		'".addslashes($_POST['job_code'])."',
@@ -68,6 +69,7 @@ VALUES ('".addslashes($_POST['today_date'])."',
 		'".addslashes($_POST['type_id'])."',
         '".addslashes($_POST['serialnumber'])."',
         '".addslashes($_POST['accessories_required'])."',
+		'".addslashes($_POST['accessories_for'])."',
         '".addslashes($_POST['jobregistercreated_by'])."',
         '".addslashes($_POST['jobregisterlastmodify_by'])."')";
 
@@ -80,7 +82,4 @@ VALUES ('".addslashes($_POST['today_date'])."',
 	}
 
 		}
-
-	
-	
 ?>
