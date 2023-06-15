@@ -626,7 +626,7 @@
                                     var type_id = $(this).data('type_id');
                                     // AJAX request
                                     $.ajax({
-                                        url: 'AdminHomepageJobinfo.php',
+                                        url: 'AdminHomepageJobinfoStorekeeper.php',
                                         type: 'post',
                                         data: {jobregister_id: jobregister_id, type_id: type_id},
                                         success: function (response) {
@@ -640,9 +640,41 @@
                             });
                         </script>
 
-                        <!-- Storekeeper Accessories Tab -->
+                        <!-- Storekeeper Job Assign Tab -->
                         <input type="radio" name="tabDoingStore" id="tabDoingStore2">
-                        <label for="tabDoingStore2" class="tabHeadingStore"> Accessories </label>
+                        <label for="tabDoingStore2" class="tabHeadingStore">Job Assign</label>
+                        <div style="min-width: -webkit-fill-available;" class="tab">
+                        <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                        <form action="AdminHomepageJobassignStore.php" method="post">
+                            <div class="store-jobassign">
+
+                            </div>
+                        </form>
+                        </div>
+                    
+                        <script type='text/javascript'>
+                            $(document).ready(function() {
+                                $('.Store').click(function() {
+                                    var jobregister_id = $(this).data('id');
+                                    // AJAX request
+                                    $.ajax({
+                                        url: 'AdminHomepageJobassignStore.php',
+                                        type: 'post',
+                                        data: {jobregister_id: jobregister_id},
+                                        success: function(response) {
+                                            // Add response in Modal body
+                                            $('.store-jobassign').html(response);
+                                            // Display Modal
+                                            $('#doubleClick-Store').modal('show');
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+                        <!-- Storekeeper Accessories Tab -->
+                        <input type="radio" name="tabDoingStore" id="tabDoingStore3">
+                        <label for="tabDoingStore3" class="tabHeadingStore"> Accessories </label>
                         <div style="min-width: -webkit-fill-available;" class="tab">
                         <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxtabaccessories.php" method="post">
@@ -673,8 +705,8 @@
                         </script>
 
                         <!-- Storekeeper Update Tab -->
-                        <input type="radio" name="tabDoingStore" id="tabDoingStore3">
-                        <label for="tabDoingStore3" class="tabHeadingStore"> Update </label>
+                        <input type="radio" name="tabDoingStore" id="tabDoingStore4">
+                        <label for="tabDoingStore4" class="tabHeadingStore"> Update </label>
                         <div style="min-width: -webkit-fill-available;" class="tab">
                         <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
                         <form action="ajaxstoreupdateADMIN.php" method="post">
