@@ -1,532 +1,735 @@
 <?php
-    
+
     session_start();
     
-    if($_SESSION['staff_position']=="" ) {
-        header("location:index.php?error");
+    if (session_status() == PHP_SESSION_NONE) {
+        header("location: index.php?error=session");
     }
     
-    if(!isset($_SESSION['username'])) {
-        header("location:index.php?error");
-	}
-
-    elseif($_SESSION['staff_position']== 'Admin') {
-
-	}
+    if (!isset($_SESSION['username'])) {
+        header("location: index.php?error=login");
+    } 
     
-    elseif($_SESSION['staff_position']== 'Manager') {
-
-	}
-
-    else {
-        header("location:index.php?error");
+    elseif ($_SESSION['staff_position'] != 'Admin' && $_SESSION['staff_position'] != 'Manager') {
+        header("location: index.php?error=permission");
     }
 
-?>
-
-<?php
-    
-    include_once 'Pagination.class.php';
-    
-    require_once 'dbconnect.php';
-    
-    $query   = $conn->query("SELECT COUNT(*) as rowNum FROM accessories_list");
-    $result  = $query->fetch_assoc();
-    $rowCount= $result['rowNum'];
-    
-    $pagConfig = array('totalRows' => $rowCount,);
-    $pagination =  new Pagination($pagConfig);
-    
-    $query = $conn->query("SELECT * FROM accessories_list ORDER BY accessories_id ASC"); 
 ?>
 
 <!DOCTYPE html>
-<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-<head>
-    <meta name="keywords" content="" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <title>NWM Accessories</title>
+        <title>Sample</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <link rel="stylesheet" href="assets/css/styles.css">
+    </head>
 
-    <link href="css/homepage.css" rel="stylesheet" />
-	<link href="css/machine.css" rel="stylesheet" />
-    <link href="css/accessories.css" rel="stylesheet" />
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
 
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-</head>
-
-<style>
-  .modal .contentAccessoriesPopup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  width: auto;
-  z-index: 2;
-  padding: 20px;
-  box-sizing: boder-box;
-  margin: 2% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-}
-</style>
-
-<body>
-
-<!-- Navigation Sidebar -->
-<div class="sidebar close">
-        <div class="logo-details">
-            <img src="neo.png" height="65" width="75"></img>
-            <span class="logo_name">NWM SYSTEM</span>
-        </div>
+        #accessoryListTable {
+            counter-reset: rowNumber;
+        }
         
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
+        #accessoryListTable tr>td:first-child {
+            counter-increment: rowNumber;
+        }
         
-        <ul class="nav-links">
-            <li>
-                <a href="jobregister.php">
-                    <i class='bx bx-registered' ></i>
-                    <span class="link_name">Register Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-                </ul>
-            </li>
+        #accessoryListTable tr td:first-child::before {
+            content: counter(rowNumber);
+        }
 
-            <li>
-                <a href="attendanceadmin.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Attendance</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="staff.php">
-                        <i class='bx bx-id-card' ></i>
-                        <span class="link_name">Staff</span>
+        .dropdown-content1 {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 1;
+        }
+        
+        .dropdown-content1 a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            padding-right: 7px;
+        }
+        
+        .dropdown-content1 a:hover {background-color: #f1f1f1}
+        
+        .dropdown1:hover .dropdown-content1 {display: block;}
+        
+        .dropdown1:hover .dropbtn1 {color:whitesmoke;}
+    
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: auto;
+            padding-left: 20px;
+            bottom: 55px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+            padding-right: 7px;
+        }
+    
+        .dropdown-content a:hover {background-color: #f1f1f1}
+        
+        .dropdown:hover .dropdown-content {display: block;}
+        
+        .dropdown:hover .dropbtn {color:whitesmoke;}
+    </style>
+    
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+                <div class="header__search">
+                    <div class="dropdown1">
+                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <div class="dropdown-content1">
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+                
+            </div>
+        </header>
+
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="Adminhomepage.php" class="nav__link nav__logo">
+                        <img src="neo.png" height="50" width="60"></img>
                     </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="staff.php">Staff</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="technicianlist.php">
-                    <i class='fa fa-users' ></i>
-                    <span class="link_name">Technician</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="customer.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="link_name">Customers</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="customer.php">Customers</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="machine.php">
-                        <i class='fa fa-medium' ></i>
-                        <span class="link_name">Machine</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="machine.php">Machine</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="accessories.php">
-                    <i class='bx bx-wrench' ></i>
-                    <span class="link_name">Accessories</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobtype.php">
-                    <i class='bx bx-briefcase'></i>
-                    <span class="link_name">Job Type</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o' ></i>
-                    <span class="link_name">Completed Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square' ></i>
-                    <span class="link_name">Canceled Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="adminreport.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Report</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out' ></i>
-                    <span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Navigation Sidebar -->
 
-    <!--Home navigation-->
-    <section class="home-section">
-    <nav>
-        <div class="home-content">
-            <i class='bx bx-menu' ></i>
-            <a><button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button></a>
-        </div>
-    </nav>
-    
-    <!--Add Accessories-->
-    <div id="popupListAddForm" class="modal">
-        <div class="listAddForm">
-            <div class="title">Add Accessories</div>
-            <div class="contentListAddForm">
-                <form action="accessoriesindex.php" method="post" enctype="multipart/form-data">
-                    <div class="listAddForm-details">
-                        <div class="input-box">
-                            <label for="AccessoriesCode" class="details">Accessories Code</label>
-                            <input type="text" id="accessories_code" name="accessories_code" onkeyup="checkAccessoriesCodelAvailability()" value="" class="form-control" placeholder="Enter Accessories Code" required> 
-                            <span style='color:red' id="accessories_code-availability-status"></span>
+                    <div class="nav__list">
+                        <div class="nav__items">
+
+                            <a href="jobregister.php" class="nav__link active">
+                                <i class='bx bx-folder-plus nav__icon'></i>
+                                <span class="nav__name">New Job</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="staff.php" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Staff</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                        <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                        <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                        <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="customer.php" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__name">Customer</span>
+                            </a>
+
+                            <a href="machine.php" class="nav__link">
+                                <i class='bx bx-cog nav__icon'></i>
+                                <span class="nav__name">Machine</span>
+                            </a>
+
+                            <a href="accessories.php" class="nav__link">
+                                <i class='bx bx-wrench nav__icon'></i>
+                                <span class="nav__name">Accessory</span>
+                            </a>
+
+                            <a href="jobtype.php" class="nav__link">
+                                <i class='bx bx-highlight nav__icon'></i>
+                                <span class="nav__name">Job Type</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-file nav__icon'></i>
+                                    <span class="nav__name">Record</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-task nav__icon'></i>
+                                    <span class="nav__name">Reports</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                        <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <a href="logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section>
+                <!-- Add Modal -->
+                <div class="modal fade" id="accessoryAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add New Accessory</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
                             
-                        <div class="input-box">
-                            <label for="AccessoriesName" class="details">Accessories Name</label>
-                            <input type="text" id="accessories_name" name="accessories_name" placeholder="Enter Accessories Name" required>
+                            <form id="saveAccessory" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Code</label>
+                                            <input type="text" name="accessories_code" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Name</label>
+                                            <input type="text" name="accessories_name" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Unit of Measurement (UOM)</label>
+                                            <input type="text" name="accessories_uom" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Brand</label>
+                                            <input type="text" name="accessories_brand" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Description</label>
+                                            <input type="text" name="accessories_description" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Photo</label>
+                                            <input type="file" id="image_input" name="files[]" multiple class="form-control" />
+                                            <div id="image_preview"></div>
+                                        </div>
+                                        
+                                        <script>
+                                            // JavaScript code to handle image preview
+                                            document.getElementById("image_input").addEventListener("change", function (event) {
+                                                const imagePreview = document.getElementById("image_preview");
+                                                imagePreview.innerHTML = "";
+                                                const files = event.target.files;
+                                                for (let i = 0; i < files.length; i++) {
+                                                    const file = files[i];
+                                                    const reader = new FileReader();
+                                                    
+                                                    reader.onload = function (e) {
+                                                        const img = document.createElement("img");
+                                                        img.src = e.target.result;
+                                                        img.classList.add("preview-image");
+                                                        imagePreview.appendChild(img);
+                                                    };
+                                                    
+                                                    reader.readAsDataURL(file);
+                                                }
+                                            });
+                                        </script>
+                                        
+                                        <?php if (isset($_SESSION["username"])) { ?>
+                                            <input type="hidden" name="accessorieslistcreated_by" id="accessorieslistcreatedby" value="<?php echo $_SESSION["username"] ?>" class="form-control" readonly>
+                                            <input type="hidden" name="accessorieslistlasmodify_by" id="accessorieslistlasmodify_by" value="<?php echo $_SESSION["username"] ?>" class="form-control" readonly>
+                                        <?php } ?>
+                                    </div>
+                                    <div id="errorMessage" class="alert alert-warning d-none" style="text-align: center;"></div>
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
                         </div>
-                        
-                        <div class="input-box">
-                            <label for="AccessoriesUOM" class="details">Unit of Measurement</label>
-                            <input type="text" id="accessories_uom" name="accessories_uom" placeholder="Enter Accessories UOM" required>
-                        </div>
-                        
-                        <div class="input-box">
-                            <label for="AccessoriesBrand" class="details">Accessories Brand</label>
-                            <input type="text" id="accessories_brand" name="accessories_brand" placeholder="Enter Accessories Brand" required>
-                        </div>
-                        
-                        <div class="input-box">
-                            <label for="customerGrade" class="details">Accessories Description</label>
-                            <input type="text" id="accessories_description" name="accessories_description" placeholder="Enter Customer Description" required>
-                        </div>
-                        
-                        <div class="photoBox">
-                            <label for="file_name" class="details">Photo</label>
-                            <input type="file" id="image_input" name="files[]" multiple>
-                            <div id="display_image"></div>
-                        </div>
-                        
-                        <?php if (isset($_SESSION["username"])) ?>
-                        <input type="hidden" name="accessorieslistcreated_by" id="accessorieslistcreatedby" value="<?php echo $_SESSION["username"] ?>" readonly>
-                        <input type="hidden" name="accessorieslistlasmodify_by" id="accessorieslistlasmodifyby" value="<?php echo $_SESSION["username"] ?>" readonly>
                     </div>
-                    
-                    <div class="listAddFormbutton">
-                        <input type="submit" name="submit" value="Register">
-                        <input type="button" onclick="document.getElementById('popupListAddForm').style.display='none'" value="Cancel" id="cancelbtn">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    <!--Accessories List-->
-    <div class="accessoriesList">
-        <h1 style="width: -webkit-fill-available">Accessories List</h1>
-        <div class="addAccessoriesBtn">
-            <button type="button" id="btnRegister" onclick="document.getElementById('popupListAddForm').style.display='block'">Add</button>
-            <button class="btn-reset" onclick="document.location='accessories.php'">Refresh</button>
-        </div>
-        
-        <div class="datalist-wrapper">
-            <div class="col-lg-12" style="border: none;">
-            <table class="table table-striped sortable">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Brand</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                        <?php 
-                            if($query->num_rows > 0){ $i=0;
-                                while($row = $query->fetch_assoc()){ $i++;
-                        ?>
-                    <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $row["accessories_name"]; ?></td>
-                        <td><?php echo $row["accessories_code"]; ?></td>
-                        <td><?php echo $row["accessories_brand"]; ?></td>
-                        <td><div class='accessoriesUpdateDeleteBtn'>
-                            <button data-accessories_id="<?php echo $row['accessories_id'];?>" class='userinfo' type='button' id='btnView'>View</button>
-                            <button data-accessories_id="<?php echo $row['accessories_id'];?>" class='updateinfo' type='button' id='btnEdit'>Update</button>
-                            <button data-accessories_id="<?php echo $row['accessories_id'];?>" class='deletebtn' type='button' id='btnDelete'>Delete</button>
-                        </div></td>
-                    </tr>
-                    
-                        <?php } }
-                            else {
-                                echo '<tr><td colspan="6">No records found...</td></tr>'; 
-                            } 
-                        ?>
-                </tbody>
-            </table>
-            </div>
-        </div>
-    </div>
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('table').DataTable();
-        });
-    </script>
+                </div>
 
-    <!--Delete Accesssories -->
-    <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="accessoriesPopup">
-                <div class="contentAccessoriesPopup">
-                    <div class="title">Accessories</div>
-                    <div class="accessories-details">
-                        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-                    </div>
-                    
-                    <br/>
-                    
-                    <div class="modal-body">
-
+                <!-- View Modal -->
+                <div class="modal fade" id="accessoryViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">View Accessory Info</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">ID</label>
+                                        <p id="view_ID" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Code</label>
+                                        <p id="view_code" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Name</label>
+                                        <p id="view_name" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Unit of Measurement (UOM)</label>
+                                        <p id="view_UOM" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Brand</label>
+                                        <p id="view_brand" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Description</label>
+                                        <p id="view_description" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="">Photo</label>
+                                        <div id="view_image_container">
+                                            <img id="view_photo" class="form-control" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Created by</label>
+                                        <p id="view_createdby" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Created at</label>
+                                        <p id="view_createdat" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Modify by</label>
+                                        <p id="view_modifyby" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Modify at</label>
+                                        <p id="view_modifyat" class="form-control"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <script type='text/javascript'>
-                    $(document).ready(function() {
-                        $('body').on('click','.deletebtn',function(){
-                            var accessories_id = $(this).data('accessories_id');
-                            
-                            $.ajax({
-                                url: 'deleteaccessories.php',
-                                type: 'post',
-                                data: { accessories_id: accessories_id },
-                                success: function(response) {
-                                    $('.modal-body').html(response);
-                                    $('#empModal').modal('show');
-                                }
-                            });
-                        });
-                    });
-                </script>
-            </div>
-        </div>
-    </div>
+                <!-- Update Modal -->
+                <div class="modal fade" id="accessoryEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Accessory Info</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="updateAccessory" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <input type="hidden" name="accessories_id" id="accessories_id" >
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Code</label>
+                                            <input type="text" name="accessories_code" id="accessories_code" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Name</label>
+                                            <input type="text" name="accessories_name" id="accessories_name" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Unit of Measurement (UOM)</label>
+                                            <input type="text" name="accessories_uom" id="accessories_uom" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Brand</label>
+                                            <input type="text" name="accessories_brand" id="accessories_brand" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Description</label>
+                                            <input type="text" name="accessories_description" id="accessories_description" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Accessories Photo</label>
+                                            <img id="edit_view_photo" class="form-control" alt="Preview" />
+                                            <input type="file" name="file_name" id="file_name" class="form-control" />
+                                        </div>
+                                        
+                                        <script>
+                                            document.getElementById("file_name").addEventListener("change", function (event) {
+                                                const imagePreview = document.getElementById("edit_view_photo");
+                                                imagePreview.src = URL.createObjectURL(event.target.files[0]);
+                                            });
+                                        </script>
+                                            
+                                        <?php if (isset($_SESSION["username"])) { ?>
+                                            <input type="hidden" name="accessorieslistlasmodify_by" id="accessorieslistlasmodifyby" value="<?php echo $_SESSION["username"] ?>" class="form-control" readonly>
+                                        <?php } ?>
+                                    </div>
+                                    <div id="errorMessageUpdate" class="alert alert-warning d-none" style="text-align: center;"></div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 
-    <!--Update Accesssories -->
-    <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="accessoriesPopup">
-                <div class="contentAccessoriesPopup">
-                    <div class="title"> Accessories Info</div>
-                    <div class="accessories-details">
-                        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
+                <!-- Delete Modal -->
+                <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <p style="text-align: center;">Are you sure you want to delete this accessory?</p>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Accessory List<button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#accessoryAddModal">Add</button></h4>
                     </div>
                     
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="accessoryListTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'></th>
+                                        <th style='text-align: center;'>Name</th>
+                                        <th style='text-align: center;'>Code</th>
+                                        <th style='text-align: center;'>Brand</th>
+                                        <th style='text-align: center;'>Action</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                        
+                                        require 'dbconnect.php';
+                                        
+                                        $query = "SELECT * FROM accessories_list ORDER BY accessories_name ASC";
+                                        
+                                        $query_run = mysqli_query($conn, $query);
+                                        
+                                        if (mysqli_num_rows($query_run) > 0) {
+                                            while ($entry = mysqli_fetch_array($query_run)) {
+                                                echo "<tr>";
+                                                echo "<td style='text-align: center;'></td>";
+                                                echo "<td>" . $entry['accessories_name'] . "</td>";
+                                                echo "<td>" . $entry['accessories_code'] . "</td>";
+                                                echo "<td style='text-align: center; white-space: nowrap;'>" . $entry['accessories_brand'] . "</td>";
+                                                echo "<td style='text-align: center; white-space: nowrap;'>
+                                                        <button type='button' value='" . $entry['accessories_id'] . "' class='viewAccessoryBtn btn btn-info btn-sm'>View</button>
+                                                        <button type='button' value='" . $entry['accessories_id'] . "' class='editAccessoryBtn btn btn-success btn-sm'>Edit</button>
+                                                        <button type='button' value='" . $entry['accessories_id'] . "' class='deleteAccessoryBtn btn btn-danger btn-sm'>Delete</button>
+                                                     </td>";
+                                                echo "</tr>";
+                                            }
+                                        } 
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 </br>
-                    
-                    <div class="modal-body">                         
-
-                    </div>
-                </div>
                 
-                <script type='text/javascript'>
-                    $(document).ready(function() {
-                        $('body').on('click','.updateinfo',function(){
-                            var accessories_id = $(this).data('accessories_id');
-                            
-                            $.ajax({
-                                url: 'updateaccessories.php',
-                                type: 'post',
-                                data: { accessories_id: accessories_id },
-                                success: function(response) {
-                                    $('.modal-body').html(response);
-                                    $('#empModal').modal('show');
-                                }
-                            });
+                <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script src="assets/js/main.js"></script>
+                
+                <script>
+                    $(document).ready(function(){
+                        $('#accessoryListTable').DataTable({
+                            responsive:true,
+                            language: {search:"_INPUT_",
+                                       searchPlaceholder:"Search"},
                         });
                     });
                 </script>
-            </div>
-        </div>
-    </div>
-        
-    <!--Accessories list pop up form-->
-    <!-- Modal -->
-    <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="accessoriesPopup">
-                <div class="contentAccessoriesPopup">
-                    <div class="title"> Accessories Info </div>
-                    <div class="accessories-details">
-                        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-                    </div>
-                    
-                    <br/>
-                    
-                    <div class="modal-body">
-
-                    </div>
-                </div>
                 
-                <script type='text/javascript'>
-                    $(document).ready(function() {
-                        $('body').on('click','.userinfo',function(){
-                            var userid = $(this).data('accessories_id');
+                <script>
+                    // <!-- Add -->
+                    $(document).on('submit', '#saveAccessory', function (e) {
+                        e.preventDefault();
+                        
+                        var formData = new FormData(this);
+                        formData.append("save_entry", true);
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "codeStoreAccessoryList.php",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
                             
-                            $.ajax({
-                                url: 'ajaxaccessories.php',
-                                type: 'post',
-                                data: {userid: userid},
-                                success: function(response) {
-                                    $('.modal-body').html(response);
-                                    $('#empModal').modal('show');
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 422) {
+                                    $('#errorMessage').removeClass('d-none');
+                                    $('#errorMessage').text(res.message);
                                 }
-                            });
+                                
+                                else if(res.status == 200){
+                                    $('#errorMessage').addClass('d-none');
+                                    $('#accessoryAddModal').modal('hide');
+                                    $('#saveAccessory')[0].reset();
+                                    
+                                    alertify.set('notifier','position', 'top-right');
+                                    alertify.success(res.message, 'onclose', function () {
+                                        window.location.reload();
+                                    });
+                                }
+                                
+                                else if(res.status == 500) {
+                                    alert(res.message);
+                                }
+                            }
+                        });
+                    });
+
+                    // <!-- View -->
+                    $(document).on('click', '.viewAccessoryBtn', function () {
+                        var entry_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "codeStoreAccessoryList.php?entry_id=" + entry_id,
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 404) {
+                                    alert(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#view_ID').text(res.data.accessories_id);
+                                    $('#view_code').text(res.data.accessories_code);
+                                    $('#view_name').text(res.data.accessories_name);
+                                    $('#view_UOM').text(res.data.accessories_uom);
+                                    $('#view_brand').text(res.data.accessories_brand);
+                                    $('#view_description').text(res.data.accessories_description);
+                                    
+                                    // Update the photo display
+                                    if (res.data.file_name) {
+                                        $('#view_photo').attr('src', res.data.file_name);
+                                        $('#view_image_container').show();
+                                    }
+                                    
+                                    else {
+                                        // Hide the photo container if there is no photo
+                                        $('#view_image_container').hide();
+                                    }
+                                    
+                                    $('#view_createdby').text(res.data.accessorieslistcreated_by);
+                                    $('#view_createdat').text(res.data.accessorieslistcreated_at);
+                                    $('#view_modifyby').text(res.data.accessorieslistlasmodify_by);
+                                    $('#view_modifyat').text(res.data.accessorieslistlasmodify_at);
+                                    
+                                    $('#accessoryViewModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    // <!-- Update -->
+                    $(document).on('click', '.editAccessoryBtn', function () {
+                        var entry_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "codeStoreAccessoryList.php?entry_id=" + entry_id,
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 404) {
+                                    alert(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#accessories_id').val(res.data.accessories_id);
+                                    $('#accessories_code').val(res.data.accessories_code);
+                                    $('#accessories_name').val(res.data.accessories_name);
+                                    $('#accessories_uom').val(res.data.accessories_uom);
+                                    $('#accessories_brand').val(res.data.accessories_brand);
+                                    $('#accessories_description').val(res.data.accessories_description);
+                                    $('#accessorieslistlasmodify_by').val(res.data.accessorieslistlasmodify_by);
+                                    
+                                    if (res.data.file_name) {
+                                        $('#edit_view_photo').attr('src', res.data.file_name);
+                                    }
+                                    
+                                    else {
+                                        // Hide the photo preview if there is no photo
+                                        $('#edit_photo_preview').hide();
+                                    }
+                                    
+                                    $('#accessoryEditModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    $(document).on('submit', '#updateAccessory', function (e) {
+                        e.preventDefault();
+                        
+                        var formData = new FormData(this);
+                        formData.append("update_entry", true);
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "codeStoreAccessoryList.php",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 422) {
+                                    $('#errorMessageUpdate').removeClass('d-none');
+                                    $('#errorMessageUpdate').text(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#errorMessageUpdate').addClass('d-none');
+                                    
+                                    alertify.set('notifier','position', 'top-right');
+                                    alertify.success(res.message);
+                                    
+                                    window.location.reload();
+
+                                    $('#accessoryEditModal').modal('hide');
+                                    $('#updateAccessory')[0].reset();
+                                }
+                                
+                                else if(res.status == 500) {
+                                    alert(res.message);
+                                }
+                            }
+                        });
+                    });
+                    
+                    // <!-- Delete -->
+                    $(document).on('click', '.deleteAccessoryBtn', function() {
+                        var entry_id = $(this).val();
+                        $('#confirmDeleteBtn').val(entry_id); 
+                        $('#deleteConfirmationModal').modal('show'); 
+                    });
+                    
+                    // Handle the delete confirmation
+                    $(document).on('click', '#confirmDeleteBtn', function() {
+                        var entry_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "codeStoreAccessoryList.php",
+                            data: {'delete_entry': true,
+                                       'entry_id': entry_id},
+                            
+                            success: function(response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if (res.status == 500) {
+                                    alert(res.message);
+                                }
+                                
+                                else {
+                                    alertify.set('notifier', 'position', 'top-right');
+                                    alertify.success(res.message);
+                                    
+                                    $('#deleteConfirmationModal').modal('hide');
+                                    
+                                    window.location.reload();
+                                }
+                            }
                         });
                     });
                 </script>
-            </div>
-        </div>
-    </div>
-    
-    </section>
-
-    <script>
-        var modal = document.getElementById('id01');
-        
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        var modal = document.getElementById('id02');
-        
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        var modal = document.getElementById('id03');
-        
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        var modal = document.getElementById('id04');
-        
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-    
-    <script>
-        let arrow = document.querySelectorAll(".arrow");
-        
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e)=> {
-                let arrowParent = e.target.parentElement.parentElement;
-                arrowParent.classList.toggle("showMenu");
-            });
-        }
-        
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
-        
-        console.log(sidebarBtn);
-        sidebarBtn.addEventListener("click", ()=> {
-            sidebar.classList.toggle("close");
-        });
-    </script>
-    
-    <script src="js/upload photo.js"></script>
-    <script src="js/form-validation.js"></script>
-
-</body>
-
-</html>
+            </section>
+        </main>        
+    </body>
+    </html>
