@@ -31,13 +31,14 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="assets/css/styles.css">
-
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
-        <!-- Date picker -->
+        <!--Date Picker-->
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/dubrox/Multiple-Dates-Picker-for-jQuery-UI@master/jquery-ui.multidatespicker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multidatespicker/1.6.6/jquery-ui.multidatespicker.js"></script>
+        
+
     </head>
 
     <style>
@@ -263,7 +264,7 @@
                                         
                                         <div class="mb-3">
                                             <label for="">Leave Date</label>
-                                            <input type="text" id="datePick" name="leave_date" class="form-control" autocomplete="off" />
+                                            <input type="text" id="datePick" name="leave_date" class="form-control" placeholder="Select Date" autocomplete="off" />
                                         </div>
 
                                         <script>
@@ -361,7 +362,7 @@
                 </div>
                 </br>
                 
-                <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+ 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
