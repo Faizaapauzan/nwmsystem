@@ -485,13 +485,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Accessory In and Out
-                            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#entryAddModal">Add</button>
-                            <a href="StoreReturnStock.php" class="btn btn-secondary float-end mx-2">Return</a>
-                            <button type='button' class='requestBtn btn btn-secondary float-end'>Request</button>
-                        </h4>
+                        <h4>Accessory In and Out</h4>
                     </div>
                     <div class="card-body" style="margin-bottom: 50px;">
+                        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#entryAddModal">Add</button>
+                        <a href="StoreReturnStock.php" class="btn btn-secondary float-end mx-2">Return</a>
+                        <button type='button' class='requestBtn btn btn-secondary float-end'>Request</button>
                         <div style="margin-bottom: 10px;">
                             <label for="job_tech">For: </label>
                             <select name="job_tech" id="job_tech" onchange="showSelectedTable()">
