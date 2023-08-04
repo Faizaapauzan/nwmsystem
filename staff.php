@@ -24,82 +24,68 @@
 
         <title>Staff List</title>
 
-        <!--========== BOX ICONS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
         <!--========== CSS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     </head>
 
     <style>
-        ::-webkit-scrollbar {
-            display: none;
-        }
+        ::-webkit-scrollbar {display: none;}
 
-        #staffListTable {
-            counter-reset: rowNumber;
-        }
-        
-        #staffListTable tr>td:first-child {
-            counter-increment: rowNumber;
-        }
-        
-        #staffListTable tr td:first-child::before {
-            content: counter(rowNumber);
-        }
+        #staffListTable {counter-reset:rowNumber}
+        #staffListTable tr>td:first-child {counter-increment:rowNumber}
+        #staffListTable tr td:first-child::before {content:counter(rowNumber)}
 
-        .dropdown-content1 {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
-        
-        .dropdown-content1 a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            padding-right: 7px;
-        }
-        
-        .dropdown-content1 a:hover {background-color: #f1f1f1}
-        
-        .dropdown1:hover .dropdown-content1 {display: block;}
-        
-        .dropdown1:hover .dropbtn1 {color:whitesmoke;}
-    
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
+
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
+
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
+
         .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: auto;
-            padding-left: 20px;
-            bottom: 55px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
         }
         
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
+
         .dropdown-content a {
-            color: black;
-            padding: 10px 10px;
-            text-decoration: none;
-            display: block;
-            padding-right: 7px;
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
         }
-    
-        .dropdown-content a:hover {background-color: #f1f1f1}
         
-        .dropdown:hover .dropdown-content {display: block;}
-        
-        .dropdown:hover .dropbtn {color:whitesmoke;}
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
     </style>
     
     <body>
@@ -222,7 +208,7 @@
             <section>
                 <!-- Add Modal -->
                 <div class="modal fade" id="staffAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Register New Staff</h5>
@@ -596,10 +582,12 @@
                 </div>
                 </br>
                 
+                <!--========== JS ==========-->
                 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-                <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-                <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
                 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
                 <script src="assets/js/main.js"></script>
                 

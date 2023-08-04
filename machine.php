@@ -1,911 +1,852 @@
 <?php
- session_start();
- // cek apakah yang mengakses halaman ini sudah login
- if($_SESSION['staff_position']=="" ){
-  header("location:index.php?error");
- }
-
-if(!isset($_SESSION['username']))
-	{	
-    header("location:index.php?error");
-	}
-
-    elseif($_SESSION['staff_position']== 'Admin')
-	{
-
-	}
-
-        elseif($_SESSION['staff_position']== 'Manager')
-	{
-	}
-
-  else
-	{
-			header("location:index.php?error");
-	}
-
+    session_start();
+    
+    if (session_status() == PHP_SESSION_NONE) {
+        header("location: index.php?error=session");
+    }
+    
+    if (!isset($_SESSION['username'])) {
+        header("location: index.php?error=login");
+    } 
+    
+    elseif ($_SESSION['staff_position'] != 'Admin' && $_SESSION['staff_position'] != 'Manager') {
+        header("location: index.php?error=permission");
+    }
 ?>
-
-<?php 
-// Include pagination library file 
-include_once 'Pagination.class.php'; 
- 
-// Include database configuration file 
-require_once 'dbconnect.php'; 
- 
-
-// Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM machine_list"); 
-$result  = $query->fetch_assoc(); 
-$rowCount= $result['rowNum']; 
- 
-// Initialize pagination class 
-$pagConfig = array( 
- 
-    'totalRows' => $rowCount, 
-  
-); 
-$pagination =  new Pagination($pagConfig); 
- 
-// Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM machine_list ORDER BY machine_id ASC"); 
-?>
-
 
 <!DOCTYPE html>
-<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-<head>
-   <meta name="keywords" content="" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NWM Machine</title>
-    <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <link href="css/homepage.css" rel="stylesheet" />
-    <link href="css/machine.css" rel="stylesheet" />
-    <script src="js/number.js" type="text/javascript" defer></script>
-    <script src="js/form-validation.js"></script>
+        <title>Machine List</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
-        <!-- Select2 CSS --> 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
-   
-   <!-- Script -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-        <!-- Select2 JS --> 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <!--Boxicons link -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <link rel="stylesheet" href="assets/css/styles.css">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-  <!-- Navigation Sidebar -->
-  <div class="sidebar close">
-        <div class="logo-details">
-            <img src="neo.png" height="65" width="75"></img>
-            <span class="logo_name">NWM SYSTEM</span>
-        </div>
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
-        
-        <ul class="nav-links">
-            <li>
-                <a href="jobregister.php">
-                    <i class='bx bx-registered' ></i>
-                    <span class="link_name">Register Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-                </ul>
-            </li>
+        <!--========== JS ==========-->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    </head>
 
-            <li>
-                <a href="attendanceadmin.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Attendance</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="staff.php">
-                        <i class='bx bx-id-card' ></i>
-                        <span class="link_name">Staff</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="staff.php">Staff</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="technicianlist.php">
-                    <i class='fa fa-users' ></i>
-                    <span class="link_name">Technician</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="customer.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="link_name">Customers</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="customer.php">Customers</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="machine.php">
-                        <i class='fa fa-medium' ></i>
-                        <span class="link_name">Machine</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="machine.php">Machine</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="accessories.php">
-                    <i class='bx bx-wrench' ></i>
-                    <span class="link_name">Accessories</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobtype.php">
-                    <i class='bx bx-briefcase'></i>
-                    <span class="link_name">Job Type</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o' ></i>
-                    <span class="link_name">Completed Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square' ></i>
-                    <span class="link_name">Canceled Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="adminreport.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Report</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out' ></i>
-                    <span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Navigation Sidebar -->
-    
-    <!--Home navigation-->
-    <section class="home-section">
-    <nav>
-                <div class="home-content">
-                      <i class='bx bx-menu' ></i>
-                          <a>
-						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                          </a>
+    <style>
+        ::-webkit-scrollbar {display: none;}
 
-                 </div>
+        #machineListTable {counter-reset:rowNumber}
+        #machineListTable tr>td:first-child {counter-increment:rowNumber}
+        #machineListTable tr td:first-child::before {content:counter(rowNumber)}
 
-    </nav>  
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
 
-    
-    <?php
-      include 'dbconnect.php';
-    ?>
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
 
-  <!--Add machine-->
-    <div id="doubleClick-machine" class="modal">
-    <div class="tabs">
-    <input type="radio" name="tabDoing" id="tabDoingOne" checked="checked">
-    <label for="tabDoingOne" class="tabHeading">Machine Brand</label>
-    <div class="tab">
-    <div class="TechJobInfoTab">
-    <div class="contentTechJobInfo">
-    <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-machine').style.display='none';">&times</div>
-    <form action="" method="post">
-    <div class="machine-brand">
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
 
-    <div class="CodeDropdown">
-    <label for="brand">Add new Machine Brand</label>
-    <input type="text" id="brandname" name="brandname" placeholder="Enter Brand Name">
-    </div>
-   <p style="margin-top: 19px;margin-left: 14px;" class="control"><b id="messageBrand"></b></p>
-    <div style="margin-top: 30px;" class="listAddFormbutton">
-    <input type="button" onclick="submitBrand();" value="Add">
-    <input type="button" onclick="document.getElementById('doubleClick-machine').style.display='none'" value="Cancel" id="cancelbtn">
-    </div>
-    </div></form></div></div></div>
-        
-     <script type="text/javascript">
-        function submitBrand()
-        {
-            var brandname = $('input[name=brandname]').val();
-            
-            if(
-               brandname!='' || brandname=='')
-                
-               {
-                var formData = {brandname};
-                
-                $.ajax({
-                        url: "brandindex.php", 
-                        type: 'POST',
-                        data: formData,
-                        success: function(response)
-                        {
-                            var res = JSON.parse(response);
-                            console.log(res);
-                            if(res.success == true)
-                            $('#messageBrand').html('<span style="color: green">New Machine Brand Added!</span>');
-                            else
-                            $('#messageBrand').html('<span style="color: red">Failed to Insert Data !</span>');
-                        }
-                    });
-               }
-        } 
-    </script>
-                  
-            <!-- Machine Type Tab -->
-
-  <input type="radio" name="tabDoing" id="tabDoingTwo">
-  <label for="tabDoingTwo" class="tabHeading"> Machine Type </label>
-  <div class="tab">
-  <div class="TechJobInfoTab">
-  <div class="contentTechJobInfo">
-  <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-machine').style.display='none'">&times</div>
-  <form action="" method="post">
-  <div class="machine-type">
-
-  <div class="CodeDropdown">
-  <label for="brand">Machine Brand</label>
-  <select class="form-select" id="branddrop" onchange="GetJobAss(this.value)">
-  <option value=""> Select Machine Brand</option>
-  <?php
-
-   $querydrop = "select * from machine_brand";
-   // $query = mysqli_query($con, $qr);
-   $result = $conn->query($querydrop);
-     if ($result->num_rows > 0) {
-        while ($row = mysqli_fetch_assoc($result)) { ?>
-  <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
-  <?php } } ?>
-
-  </select>
-  <input type="hidden" id="brand_id" name="brand_id">
-  </div>
-
-  <div class="CodeDropdown" style="padding-top: 15px;">
-  <label for="type"> Add New Machine Type</label><br>
-  <input type="text" id="type_name" name="type_name" placeholder="Enter Type Name">           
-  </div>
-
-  <p style="margin-top: 19px;margin-left: 14px;" class="control"><b id="messageType"></b></p>
-    <div style="margin-top: 30px;" class="listAddFormbutton">
-    <input type="button" onclick="submitType();" value="Add">
-    <input type="button" onclick="document.getElementById('doubleClick-machine').style.display='none'" value="Cancel" id="cancelbtn">
-    </div>
-
-  </div></form></div></div></div>
-
-    <script>
-$(document).ready(function(){	
-$("#branddrop").on("change",function(){
-   var GetValue=$("#branddrop").val();
-   $("#brand_id").val(GetValue);
-});
-});
-</script>
-
-     <script type="text/javascript">
-        function submitType()
-        {
-            var brand_id = $('input[name=brand_id]').val();
-            var type_name = $('input[name=type_name]').val();
-            
-            if( brand_id!='' || brand_id=='',
-               type_name!='' || type_name=='')
-                
-               {
-                var formData = {brand_id: brand_id,type_name: type_name};
-                
-                $.ajax({
-                        url: "typeindex.php", 
-                        type: 'POST',
-                        data: formData,
-                        success: function(response)
-                        {
-                            var res = JSON.parse(response);
-                            console.log(res);
-                            if(res.success == true)
-                            $('#messageType').html('<span style="color: green">New Machine Type Added!</span>');
-                            else
-                            $('#messageType').html('<span style="color: red">Failed to Insert Data !</span>');
-                        }
-                    });
-               }
-        } 
-    </script>
-
-    
-                    
-                         <!-- Register Machine Tab -->
-
-    <input type="radio" name="tabDoing" id="tabDoingThree">
-    <label for="tabDoingThree" class="tabHeading"> Register Machine </label>
-    <div class="tab">
-    <div class="TechJobInfoTab">
-    <div class="contentTechJobInfo">
-    <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-machine').style.display='none'">&times</div>
-    <form action="" method="post">
-    <div class="machine-register">
-    <div class="CodeDropdown">
-
-    
-    <label for="brand">Machine Brand</label>
-     <select onchange="GetJenama(this.value)" class="form-select" id="brandMesin" required>
-    <option value=""> Select Machine Brand</option>
-    <?php
-    $querydrop = "select * from machine_brand";
-    $result = $conn->query($querydrop);
-      if ($result->num_rows > 0) {
-       while ($row = mysqli_fetch_assoc($result)) { ?>
-    <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
-    <?php } }  ?>
-
-    </select>
-  <input type="hidden" id="BrandId" name="brand_id" onchange="GetJenama(this.value)" readonly >  
-  <input type="hidden" id="NamaBrand" name="machine_brand" onchange="GetJenama(this.value)" readonly >  
-  </div>
-
-  <script>
-		function GetJenama(str) {
-			if (str.length == 0) {
-                document.getElementById("BrandId").value = "";
-                document.getElementById("NamaBrand").value = "";
-				return;
-			}
-			else {
-
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function () {
-
-					if (this.readyState == 4 &&
-							this.status == 200) {
-						
-						var myObj = JSON.parse(this.responseText);
-
-				        document.getElementById
-							("BrandId").value = myObj[0];
-                        document.getElementById
-							("NamaBrand").value = myObj[1];
-            
-					}
-				};
-
-				xmlhttp.open("GET", "fetchbrand.php?brand_id=" + str, true);
-				xmlhttp.send();
-			}
-		}
-	</script>
-
-
-
-
-    <div class="CodeDropdown" style="padding-top: 15px;">
-    <label for="type"> Machine Type</label><br>
-     <select onchange="GetJenis(this.value)" class="form-select" style="width: 400px; height:40px;" id="type" required>
-    <!-- <select name="type_id" style="width: 400px; height:40px;" class="form-select" id="type"> -->
-    <option value="">Select Machine Type</option>
-    </select>
-    <input type="hidden" id="IdType" name="type_id" onchange="GetJenis(this.value)" readonly >  
-    <input type="hidden" id="TypeNama" name="machine_type" onchange="GetJenis(this.value)" readonly >  
-    </div> 
-
-      <script>
-		function GetJenis(str) {
-			if (str.length == 0) {
-                document.getElementById("IdType").value = "";
-                 document.getElementById("TypeNama").value = "";
-				return;
-			}
-			else {
-
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function () {
-
-					if (this.readyState == 4 &&
-							this.status == 200) {
-						
-						var myObj = JSON.parse(this.responseText);
-
-				        document.getElementById
-							("IdType").value = myObj[0];
-
-                        document.getElementById
-							("TypeNama").value = myObj[1];
-            
-					}
-				};
-
-				xmlhttp.open("GET", "fetchtype.php?type_id=" + str, true);
-				xmlhttp.send();
-			}
-		}
-	</script>
-
-
-    <div class="CodeDropdown" style="padding-top: 20px;">
-    <label for="sn"> Serial Number </label><br>
-    <input type="text" id="serialnumber" name="serialnumber" placeholder="Enter Machine Serial Number">  
-    </div> 
- 
-    <div class="CodeDropdown" style="padding-top: 20px;">
-    <label for="MachineCode" class="details">Machine Code</label>
-    <input type="text" id="machine_code" name="machine_code" value="" class="form-control" placeholder="Enter Machine Code" required> 
-    </div>
-     
-    <div class="CodeDropdown" style="padding-top: 20px;">
-    <label for="MachineCode" class="details">Machine Name</label>
-    <input type="text" id="machine_name" name="machine_name" placeholder="Enter Machine Name" required>
-    </div>
-
- <div class="CodeDropdown" style="padding-top: 15px;">
-    <label for="type"> Customer Name</label><br>
-    <select style="width: 400px; height:40px;" class="form-select" id="customername" onchange="GetCustName(this.value)">
-    <option value=""> Select Customer</option>
-    <?php
-     $querycust = "select * from customer_list";
-    $result = $conn->query($querycust);
-      if ($result->num_rows > 0) {
-       while ($row = mysqli_fetch_assoc($result)) { ?>
-    <option value="<?php echo $row['customer_id']; ?>"><?php echo $row['customer_name']; ?></option>
-    <?php } }  ?>
-
-    </select></div>
-
-           <script>
-        $(document).ready(function(){
-            
-            // Initialize select2
-            $("#customername").select2();
-
-        });
-        </script>
-
-    <input type="hidden" id="customer_name" name="customer_name" onchange="GetCustName(this.value)">
-    </div>
-
-    <div class="CodeDropdown" style="padding-top: 20px;">
-    <label for="PurchaseDate" class="details">Purchase Date</label>
-    <input type="date" id="PurchaseDate" name="purchase_date" placeholder="Enter Machine Purchase Date">
-    </div>
-
-    <div class="CodeDropdown" style="padding-top: 20px;">
-    <label for="MachineDescription" class="details">Machine Description</label>
-    <input type="text" id="MachineDescription" name="machine_description" placeholder="Enter Machine Description">
-    </div>
-
-    <?php if (isset($_SESSION["username"])) ?>
-    <input type="hidden" name="machinelistcreated_by" id="machinelistcreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-    <input type="hidden" name="machinelistlastmodify_by" id="machinelistlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-    </div>
- <p style="margin-top: 19px;margin-left: 14px;" class="control"><b id="messageMachine"></b></p>
-        <div class="listAddFormbutton">
-            <input type="button" onclick="submitMachine();" value="Add">
-        <input type="button" onclick="document.getElementById('popupListAddForm').style.display='none'" value="Cancel" id="cancelbtn">
-        </div>
-        </form></div>
-        </div>
-        </div>
-
-        <script>
-
-		function GetCustName(str) {
-			if (str.length == 0) {
-				document.getElementById("customer_name").value = "";
-               
-				return;
-			}
-			else {
-
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function () {
-					if (this.readyState == 4 &&
-							this.status == 200) {
-						
-						var myObj = JSON.parse(this.responseText);
-						
-						document.getElementById
-							("customer_name").value = myObj[0];
-
-                            
-					}
-				};
-
-				// xhttp.open("GET", "filename", true);
-				xmlhttp.open("GET", "fetchcustomername.php?customer_id=" + str, true);
-				
-				// Sends the request to the server
-				xmlhttp.send();
-			}
-		}
-	</script>
-
-            <!-- <script>
-    $(document).ready(function() {
-
-    $('#serialnumber').hide();
-
-    $("#serialnumbers").change(function() {
-        var val = $(this).val();
-        
-        if (val == 'Add Serial Number') {
-            $('#serialnumber').show();
-        } else {
-            $('#serialnumber').hide();
+        .dropdown-content {
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
         }
-    }).change();
+        
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
 
-});
-
-            </script> -->
-
-         <script>
-        $(document).ready(function() {
-            $("#brandMesin").on('change', function() {
-                var brandid = $(this).val();
-
-                $.ajax({
-                    method: "POST",
-                    url: "ajaxData.php",
-                    data: {
-                        id: brandid
-                    },
-                    datatype: "html",
-                    success: function(data) {
-                        $("#type").html(data);
-                        $("#serialnumbers").html('<option value="">Select Serial Number</option><option value="Add Serial Number" style="color:darkblue;">Add Serial Number</option>');
-
-                    }
-                });
-            });
-       
-        });
-    </script>
-
-     <script type="text/javascript">
-        function submitMachine()
-        {
-            var type_id = $('input[name=type_id]').val();
-             var machine_type = $('input[name=machine_type]').val();
-              var brand_id = $('input[name=brand_id]').val();
-               var machine_brand = $('input[name=machine_brand]').val();
-            var serialnumber = $('input[name=serialnumber]').val();
-             var machine_code = $('input[name=machine_code]').val();
-             var machine_name = $('input[name=machine_name]').val();
-             var customer_name = $('input[name=customer_name]').val();
-             var purchase_date = $('input[name=purchase_date]').val();
-             var machine_description = $('input[name=machine_description]').val();
-             var machinelistcreated_by = $('input[name=machinelistcreated_by]').val();
-             var machinelistlastmodify_by = $('input[name=machinelistlastmodify_by]').val();;
-             
-            
-            if( type_id!='' || type_id=='',
-            machine_type!='' || machine_type=='',
-            brand_id!='' || brand_id=='',
-            machine_brand!='' || machine_brand=='',
-               serialnumber!='' || serialnumber=='',
-               machine_code!='' || machine_code=='',
-               machine_name!='' || machine_name=='',
-               customer_name!='' || customer_name=='',
-               purchase_date!='' || purchase_date=='',
-               machine_description!='' || machine_description=='',
-               machinelistcreated_by!='' || machinelistcreated_by=='',
-                 machinelistlastmodify_by!='' || machinelistlastmodify_by==''
-               )
-                
-               {
-                var formData = {type_id: type_id,
-                  machine_type: machine_type,
-                  brand_id: brand_id,
-                  machine_brand: machine_brand,
-                  serialnumber: serialnumber,
-                  machine_code: machine_code,
-                  machine_name: machine_name,
-                  customer_name: customer_name,
-                  purchase_date: purchase_date,
-                  machine_description: machine_description,
-                  machinelistcreated_by: machinelistcreated_by,
-                   machinelistlastmodify_by: machinelistlastmodify_by
-                };
-                
-                $.ajax({
-                        url: "machineindex.php", 
-                        type: 'POST',
-                        data: formData,
-                        success: function(response)
-                        {
-                            var res = JSON.parse(response);
-                            console.log(res);
-                            if(res.success == true)
-                            $('#messageMachine').html('<span style="color: green">Succesfully Registered Machine!</span>');
-                            else
-                            $('#messageMachine').html('<span style="color: red">Failed to Insert Data !</span>');
-                        }
-                    });
-               }
-        } 
-    </script>
-
-
+        .dropdown-content a {
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }
+        
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
+    </style>
     
-       <script>
-        $(document).ready(function(){
-            
-            // Initialize select2
-            $("#type").select2();
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+                <div class="header__search">
+                    <div class="dropdown1">
+                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <div class="dropdown-content1">
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+                
+            </div>
+        </header>
 
-        });
-        </script>
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="Adminhomepage.php" class="nav__link nav__logo">
+                        <img src="neo.png" height="50" width="60"></img>
+                    </a>
 
-   
+                    <div class="nav__list">
+                        <div class="nav__items">
 
-</div></div>						
+                            <a href="jobregister.php" class="nav__link active">
+                                <i class='bx bx-folder-plus nav__icon'></i>
+                                <span class="nav__name">New Job</span>
+                            </a>
 
+                            <div class="nav__dropdown">
+                                <a href="staff.php" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Staff</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
 
-        <!--START MACHINE LIST-->
-        <div class="machineList">
-        <h1>Machine List</h1>
-        <div class="addMachineBtn">
-        <button style="background-color: #081d45; padding-left: 54px;" type="button" id="btnRegister" class="todo" data-target="doubleClick-machine"  onclick="document.getElementById('doubleClick-machine').style.display='block'">Add</button>
-        <button class="btn-reset" onclick="document.location='machine.php'">Refresh</button>
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                        <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                        <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                        <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="customer.php" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__name">Customer</span>
+                            </a>
+
+                            <a href="machine.php" class="nav__link">
+                                <i class='bx bx-cog nav__icon'></i>
+                                <span class="nav__name">Machine</span>
+                            </a>
+
+                            <a href="accessories.php" class="nav__link">
+                                <i class='bx bx-wrench nav__icon'></i>
+                                <span class="nav__name">Accessory</span>
+                            </a>
+
+                            <a href="jobtype.php" class="nav__link">
+                                <i class='bx bx-highlight nav__icon'></i>
+                                <span class="nav__name">Job Type</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-file nav__icon'></i>
+                                    <span class="nav__name">Record</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-task nav__icon'></i>
+                                    <span class="nav__name">Reports</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                        <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
         </div>
 
-        <div class="datalist-wrapper">    
-        <div class="col-lg-12" style="border: none;">
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section>
+                <!-- Add Modal -->
+                <div class="modal fade" id="machineAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="tab-buttons" role="tablist" style="text-align: center; display:inline-flex;">
+                                    <button class="btn tab-button active" data-bs-target="#tab1" aria-controls="tab1" aria-selected="true" id="addMachBrand"
+                                            style="border:none; margin-left:20px; margin-right:30px; font-weight: bold;">Add New Machine Brand</button>
+                                    <button class="btn tab-button" data-bs-target="#tab2" aria-controls="tab2" aria-selected="false" id="addMachType"
+                                            style="border:none; margin-right:30px; font-weight: bold;">Add New Machine Type</button>
+                                    <button class="btn tab-button" data-bs-target="#tab3" aria-controls="tab3" aria-selected="false" 
+                                            id="addMachine" style="border:none; font-weight: bold;">Add New Machine</button>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <div class="tab-content mt-3">
+                                    <!-- Add New Machine Brand -->
+                                    <div class="tab-pane show active" id="tab1" role="tabpanel" aria-labelledby="tab1" style="color: black;">
+                                    <form id="addNewMachineBrand">
+                                        <div class="mb-3">
+                                            <label for="">New Machine Brand</label>
+                                            <input type="text" name="brandname" class="form-control" />
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Save</button>
+                                    </form>
+                                    </div>
 
-    <table class="table table-striped sortable">
-    <thead>
-    <tr>
-    <th>No</th>
-    <th>Customer Name</th>
-    <th>Machine Code</th>
-    <th>Machine Name</th>
-    <th>Serial Number</th>
-    <th>Action</th>
-    </thead>
+                                    <!-- Add New Machine Type -->
+                                    <div class="tab-pane" id="tab2" role="tabpanel" aria-labelledby="tab2" style="color: black;">
+                                    <form id="addNewMachineType">
+                                        <div class="mb-3">
+                                            <label for="">Machine Brand</label>
+                                            <select name="brandname" id="machineBrand" style="width: 100%;" class="form-select form-select-lg mb-3">
+                                            <option value=""> Select Machine Brand</option>
+                                                <?php
+                                                    include "dbconnect.php";
+                                                    $querydrop = "SELECT * FROM machine_brand";
+                                                    $result = $conn->query($querydrop);
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = mysqli_fetch_assoc($result)) { 
+                                                ?>
+                                                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+                                                <?php } }  ?>
+                                            </select>
 
-    <tbody>
-    <?php 
-            if($query->num_rows > 0){ $i=0; 
-                while($row = $query->fetch_assoc()){ $i++; 
-            ?>
-     
-    <tr>
-        <td><?php echo $i; ?></td>
-        <td><?php echo $row["customer_name"]; ?></td>
-        <td><?php echo $row["machine_code"]; ?></td>
-        <td><?php echo $row["machine_name"]; ?></td>
-        <td><?php echo $row["serialnumber"]; ?></td>
-        <td><div class='MachineUpdateDeleteBtn'>
-<button data-machine_id="<?php echo $row["machine_id"]; ?>" class="userinfo" type='button' id='btnView'>View</button>
-<button data-machine_id="<?php echo $row["machine_id"]; ?>" class="updateinfo" type='button' id='btnEdit'>Update</button>
-<button data-machine_id="<?php echo $row["machine_id"]; ?>" class="deletebtn" type='button' id='btnDelete'>Delete</button>
-</div></td>
-       
+                                            <input type="hidden" name="brand_id" class="form-control" />
+                                        </div>
 
-    </tr>
-        <?php 
-                } 
-            }else{ 
-                echo '<tr><td colspan="6">No records found...</td></tr>'; 
-            } 
-            ?>
-        </tbody>
-        </table>
-		
+                                        <script>
+                                            $('#machineBrand').select2({
+                                                dropdownParent: $('#machineAddModal')
+                                            });
+                                        </script>
+                                        
+                                        <script>
+                                            function GetDetail(value) {
+                                                var selectedOption = document.querySelector('#AddAccessoryReturn option[value="' + value + '"]');
+                                                var brandId = selectedOption.getAttribute('data-brandId');
+                                                
+                                                document.querySelector('input[name="brand_id"]').value = brandId;
+                                            }
+                                        </script>
 
-    </div>
-    </div>
-  </div>
+                                        <div class="mb-3">
+                                            <label for="">New Machine Type</label>
+                                            <input type="text" name="type_name" class="form-control" />
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Save</button>
+                                    </form>
+                                    </div>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('table').DataTable();
+                                    <!-- Add New Machine -->
+                                    <div class="tab-pane" id="tab3" role="tabpanel" aria-labelledby="tab3" style="color: black;">
+                                    <form id="addNewMachine">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Brand</label>
+                                            <select name="machine_brand" id="machineBrand2" style="width: 100%;" class="form-select mb-3">
+                                            <option value="">Select Machine Brand</option>
+                                                <?php
+                                                    include "dbconnect.php";
+                                                    $querydrop = "SELECT * FROM machine_brand";
+                                                    $result = $conn->query($querydrop);
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = mysqli_fetch_assoc($result)) { 
+                                                ?>
+                                                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+                                                <?php } }  ?>
+                                            </select>
+                                            <input type="hidden" name="brand_id" id="selectedBrandId">
+                                        </div>
 
-    });
+                                        <div class="col-md-6 mb-3">
+                                            <label for="machineType">Machine Type</label>
+                                            <select name="machine_type" id="machineType" style="width: 100%;" class="form-select mb-3">
+                                                <option value="">Select Machine Type</option>
+                                            </select>
 
-</script>
+                                            <input type="hidden" name="type_id" id="selectedBrandId">
+                                        </div>
 
-         <!--Delete Machine -->      
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#machineBrand2').select2({
+                                                    dropdownParent: $('#machineAddModal')
+                                                });
+                                                
+                                                $('#machineBrand2').on('change', function () {
+                                                    var selectedBrandId = $(this).val();
+                                                    $('#selectedBrandId').val(selectedBrandId);
+                                                    
+                                                    $.ajax({
+                                                        url: 'machineGetMachineType.php',
+                                                        type: 'POST',
+                                                        data: { brand_id: selectedBrandId },
+                                                        dataType: 'json',
+                                                        success: function (response) {
+                                                            $('#machineType').empty().append('<option value="">Select Machine Type</option>');
+                                                            $.each(response, function (index, value) {
+                                                                $('#machineType').append('<option value="' + value.machine_type_id + '">' + value.machine_type_name + '</option>');
+                                                            });
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
 
-        <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
-        <!-- Modal content-->
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Code</label>
+                                            <input type="text" name="machine_code" class="form-control" />
+                                        </div>
 
-        <div class="MachinePopup">
-        <div class="contentMachinePopup">
-        <div class="title">Machine</div>
-        <div class="Machine-details">
-        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Name</label>
+                                            <input type="text" name="machine_name" class="form-control" />
+                                        </div>
 
-        </div>
-        <div class="modal-body">    
-                          
-        </div></div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Description</label>
+                                            <input type="text" name="machine_description" class="form-control" />
+                                        </div>
 
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.deletebtn',function(){ 
-            var machine_id = $(this).data('machine_id');
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Serial Number</label>
+                                            <input type="text" name="serialnumber" class="form-control" />
+                                        </div>
 
-            // AJAX request
-            $.ajax({
-                url: 'deletemachine.php',
-                type: 'post',
-                data: { machine_id: machine_id },
-                success: function(response) {
-                // Add response in Modal body
-                $('.modal-body').html(response);
-                // Display Modal
-                $('#empModal').modal('show');
-                                    }
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Purchase Date</label>
+                                            <input type="text" name="purchase_date" class="form-control" />
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Customer Name</label>
+                                            <input type="text" name="customer_name" class="form-control" />
+                                        </div>
+
+                                        <?php if (isset($_SESSION["username"])) { ?>
+                                            <input type="hidden" name="machinelistcreated_by" value="<?php echo $_SESSION["username"] ?>">
+                                            <input type="hidden" name="machinelistlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
+                                        <?php } ?>
+                                     </div>
+                                     <button type="submit" class="btn btn-primary" style="float:right;">Save</button>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const tabButtons = document.querySelectorAll('.tab-buttons .tab-button');
+                        tabButtons.forEach((button) => {
+                            button.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                const targetTab = button.getAttribute('data-bs-target');
+                                
+                                document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                    pane.classList.remove('show', 'active');
                                 });
+                                
+                                document.querySelector(targetTab).classList.add('show', 'active');
+                                
+                                tabButtons.forEach((btn) => {
+                                    btn.classList.remove('active');
+                                });
+                                
+                                button.classList.add('active');
                             });
                         });
-        </script>
-        
-         <!--Update Machine -->
-    <div class="modal fade" id="empModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="MachinePopup">
-        <div class="contentMachinePopup">
-        <div class="title"> Machine Info </div>
-        <div class="Machine-details">
-        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
+                    });
+                </script>
 
-        </div>
-        <div class="modal-body">                         
-        </div>
-        </div>
+                <!-- View Modal -->
+                <div class="modal fade" id="machineViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">View Machine Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">ID</label>
+                                        <p id="view_ID" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Machine Code</label>
+                                        <p id="view_machineCode" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Machine Name</label>
+                                        <p id="view_machineName" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Machine Brand</label>
+                                        <p id="view_machineBrand" class="form-control"></p>
+                                    </div>
 
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.updateinfo',function(){ 
-            var machine_id = $(this).data('machine_id');
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Machine Type</label>
+                                        <p id="view_machineType" class="form-control"></p>
+                                    </div>
 
-            // AJAX request
-            $.ajax({
-                url: 'updatemachine.php',
-                type: 'post',
-                data: { machine_id: machine_id },
-                success: function(response) {
-            // Add response in Modal body
-                $('.modal-body').html(response);
-            // Display Modal
-                $('#empModal').modal('show');
-                                    }
-                                });
-                            });
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Serial Number</label>
+                                        <p id="view_serialNum" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Machine Description</label>
+                                        <p id="view_machineDes" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Puchase Date</label>
+                                        <p id="view_purDate" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Customer Name</label>
+                                        <p id="view_cusName" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Machine Register By</label>
+                                        <p id="view_machRegBy" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Machine Register At</label>
+                                        <p id="view_machRegAt" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Last Modify By</label>
+                                        <p id="view_machModBy" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Last Modify At</label>
+                                        <p id="view_machModAt" class="form-control"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Update Modal -->
+                <div class="modal fade" id="machineEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Machine Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="updateMachine">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <input type="hidden" name="machine_id" id="machine_id" >
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Code</label>
+                                            <input type="text" name="machine_code" id="machine_code" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Name</label>
+                                            <input type="text" name="machine_name" id="machine_name" class="form-control" />
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Brand</label>
+                                            <input type="text" name="machine_brand" id="machine_brand" class="form-control" />
+                                            <input type="hidden" name="brand_id" id="brand_id"/>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Type</label>
+                                            <input type="text" name="machine_type" id="machine_type" class="form-control" />
+                                            <input type="hidden" name="type_id" id="type_id"/>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Serial Number</label>
+                                            <input type="text" name="serialnumber" id="serialnumber" class="form-control" />
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Description</label>
+                                            <input type="text" name="machine_description" id="machine_description" class="form-control" />
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Puchase Date</label>
+                                            <input type="text" name="purchase_date" id="purchase_date" class="form-control" />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Customer Name</label>
+                                            <input type="text" name="customer_name" id="customer_name" class="form-control" />
+                                        </div>
+
+                                        <?php if (isset($_SESSION["username"])) { ?>
+                                            <input type="hidden" name="machinelistlastmodify_by" id="staffregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
+                                        <?php } ?>
+                                    </div>
+                                    <div id="errorMessageUpdate" class="alert alert-warning d-none" style="text-align: center;"></div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Delete Modal -->
+                <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <p style="text-align: center;">Are you sure you want to delete this machine?</p>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Machine List<button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#machineAddModal">Add</button></h4>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="machineListTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'>No</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Machine Name</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Machine Code</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Customer Name</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Serial Number</th>
+                                        <th style='text-align: center;'>Action</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                <?php
+                                    
+                                    require 'dbconnect.php';
+                                
+                                    $query = "SELECT * FROM machine_list ORDER BY machine_name";
+                                    $query_run = mysqli_query($conn, $query);
+                                
+                                    if(mysqli_num_rows($query_run) > 0) {
+                                        foreach($query_run as $machine) {
+                                ?>
+                            
+                                <tr>
+                                    <td style='text-align: center;'></td>
+                                    <td><?= $machine['machine_name'] ?></td>
+                                    <td><?= $machine['machine_code'] ?></td>
+                                    <td><?= $machine['customer_name'] ?></td>
+                                    <td style='text-align: center; white-space: nowrap;'><?= $machine['serialnumber'] ?></td>
+                                    <td style='text-align: center; white-space: nowrap;'>
+                                        <button type="button" value="<?=$machine['machine_id'];?>" class="viewMachineBtn btn btn-info btn-sm">View</button>
+                                        <button type="button" value="<?=$machine['machine_id'];?>" class="editMachineBtn btn btn-success btn-sm">Update</button>
+                                        <button type="button" value="<?=$machine['machine_id'];?>" class="deleteMachineBtn btn btn-danger btn-sm">Delete</button>
+                                    </td>
+                                </tr>
+                                <?php } } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                
+                <!--========== JS ==========-->
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script src="assets/js/main.js"></script>
+                
+                <script>
+                    $(document).ready(function(){
+                        $('#machineListTable').DataTable({
+                            responsive:true,
+                            language: {search:"_INPUT_",
+                                       searchPlaceholder:"Search"},
                         });
-        </script>
-        
-        <!--Machine list pop up form-->
-        <!-- Modal -->
-        <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="MachinePopup">
-        <div class="contentMachinePopup">
-        <div class="title"> Machine Info </div>
-        <div class="Machine-details">
-        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-        </div>
-        <div class="modal-body">
-        </div>
-        </div>
-
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.userinfo',function(){ 
-            var machine_id = $(this).data('machine_id');
-
-            // AJAX request
-            $.ajax({
-                url: 'ajaxmachine.php',
-                type: 'post',
-                data: { machine_id: machine_id },
-                success: function(response) {
-                // Add response in Modal body
-                $('.modal-body').html(response);
-                // Display Modal
-                $('#empModal').modal('show');
+                    });
+                </script>
+                
+                <script>
+                    // <!-- Add New Machine -->
+                    $(document).on('submit', 'form', function (e) {
+                        e.preventDefault();
+                        
+                        var form = $(this);
+                        var formData = new FormData(form[0]);
+                        
+                        formData.append("save_machine_brand", true);
+                        formData.append("save_machine_type", true);
+                        formData.append("save_machine", true);
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "machineCode.php",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if (res.status == 422) {
+                                    $('#errorMessage').removeClass('d-none');
+                                    $('#errorMessage').text(res.message);
+                                } 
+                                
+                                else if (res.status == 200) {
+                                    $('#errorMessage').addClass('d-none');
+                                    $('#machineAddModal').modal('hide');
+                                    form[0].reset();
+                                    
+                                    alertify.set('notifier', 'position', 'top-right');
+                                    alertify.success(res.message, 'onclose', function () {
+                                        window.location.reload();
+                                    });
+                                    
+                                    // Find the index of the active tab
+                                    var tabIndex = $('button.tab-button.active').index();
+                                    
+                                    // Move to the next tab if not the last tab
+                                    if (tabIndex < 2) {
+                                        $('.tab-buttons .tab-button:eq(' + (tabIndex + 1) + ')').trigger('click');
                                     }
-                                });
-                            });
+                                } 
+                                
+                                else if (res.status == 500) {
+                                    alert(res.message);
+                                }
+                            }
                         });
-        </script>
-         
+                    });
 
+                    // <!-- View -->
+                    $(document).on('click', '.viewMachineBtn', function () {
+                        var machine_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "machineCode.php?machine_id=" + machine_id,
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 404) {
+                                    alert(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#view_ID').text(res.data.machine_id);
+                                    $('#view_machineCode').text(res.data.machine_code);
+                                    $('#view_machineName').text(res.data.machine_name);
+                                    $('#view_machineBrand').text(res.data.machine_brand);
+                                    $('#view_machineType').text(res.data.machine_type);
+                                    $('#view_serialNum').text(res.data.serialnumber);
+                                    $('#view_machineDes').text(res.data.machine_description);
+                                    $('#view_purDate').text(res.data.purchase_date);
+                                    $('#view_cusName').text(res.data.customer_name);
+                                    $('#view_machRegBy').text(res.data.machinelistcreated_by);
+                                    $('#view_machRegAt').text(res.data.machinelistcreated_at);
+                                    $('#view_machModBy').text(res.data.machinelistlastmodify_by);
+                                    $('#view_machModAt').text(res.data.machinelistlastmodify_at);
+                                    
+                                    $('#machineViewModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    // <!-- Update -->
+                    $(document).on('click', '.editMachineBtn', function () {
+                        var machine_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "machineCode.php?machine_id=" + machine_id,
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 404) {
+                                    alert(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#machine_id').val(res.data.machine_id);
+                                    $('#machine_code').val(res.data.machine_code);
+                                    $('#machine_name').val(res.data.machine_name);
+                                    $('#machine_brand').val(res.data.machine_brand);
+                                    $('#brand_id').val(res.data.brand_id);
+                                    $('#machine_type').val(res.data.machine_type);
+                                    $('#type_id').val(res.data.type_id);
+                                    $('#serialnumber').val(res.data.serialnumber);
+                                    $('#machine_description').val(res.data.machine_description);
+                                    $('#purchase_date').val(res.data.purchase_date);
+                                    $('#customer_name').val(res.data.customer_name);
+                                    $('#machinelistlastmodify_by').val(res.data.machinelistlastmodify_by);
+                                    
+                                    $('#machineEditModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    $(document).on('submit', '#updateMachine', function (e) {
+                        e.preventDefault();
+                        
+                        var formData = new FormData(this);
+                        formData.append("update_machine", true);
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "machineCode.php",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 422) {
+                                    $('#errorMessageUpdate').removeClass('d-none');
+                                    $('#errorMessageUpdate').text(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#errorMessageUpdate').addClass('d-none');
+                                    
+                                    alertify.set('notifier','position', 'top-right');
+                                    alertify.success(res.message);
+                                    
+                                    window.location.reload();
 
-</div>
-</div>
-                    </script>
-
-
-    </section>
-  <script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
-    });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
-  </script>
-
-</body>
-
-</html>
+                                    $('#machineEditModal').modal('hide');
+                                    $('#updateMachine')[0].reset();
+                                }
+                                
+                                else if(res.status == 500) {
+                                    alert(res.message);
+                                }
+                            }
+                        });
+                    });
+                    
+                    // <!-- Delete -->
+                    $(document).on('click', '.deleteMachineBtn', function() {
+                        var machine_id = $(this).val();
+                        
+                        $('#confirmDeleteBtn').val(machine_id); 
+                        $('#deleteConfirmationModal').modal('show'); 
+                    });
+                    
+                    $(document).on('click', '#confirmDeleteBtn', function() {
+                        var machine_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "machineCode.php",
+                            data: {'delete_machine': true,
+                                       'machine_id': machine_id},
+                                    
+                            success: function(response) {
+                                var res = jQuery.parseJSON(response);
+                                if (res.status == 500) {
+                                    alert(res.message);
+                                }
+                                
+                                else {
+                                    alertify.set('notifier', 'position', 'top-right');
+                                    alertify.success(res.message);
+                                    
+                                    $('#deleteConfirmationModal').modal('hide');
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </section>
+        </main>        
+    </body>
+    </html>
