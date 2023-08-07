@@ -1,123 +1,124 @@
 <?php
 
     require 'dbconnect.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
     // ========== Add New Machine Brand ==========
-    if (isset($_POST['save_machine_brand'])) {
-        $brandname = mysqli_real_escape_string($conn, $_POST['brandname']);
-        
-        if ($brandname == NULL) {
+    if (isset($_POST['sBrand'])) {
+        $brandname = $_POST['brand'];
+    
+        if (empty($brandname)) {
             $res = ['status' => 422, 'message' => 'Brand name is mandatory'];
             echo json_encode($res);
             return;
         }
+    
+        $stmt = $conn->prepare("INSERT INTO machine_brand (brandname) VALUES (?)");
+        $stmt->bind_param("s", $brandname);
         
-        $query = "INSERT INTO machine_brand (brandname) VALUES ('$brandname')";
-        $query_run = mysqli_query($conn, $query);
-        
-        if ($query_run) {
-            $res = ['status' => 200, 'message' => 'Machine Brand Added Successfully!'];
+        if ($stmt->execute()) {
+            // Use prepared statement for the SELECT query
+            $stmtSelect = $conn->prepare("SELECT brand_id FROM machine_brand WHERE brandname = ?");
+            $stmtSelect->bind_param("s", $brandname);
+            $stmtSelect->execute();
+            $stmtSelect->bind_result($brand_id);
             
-            echo json_encode($res);
-            
-            return;
-        } 
-        
-        else {
+            // Fetch the result
+            if ($stmtSelect->fetch()) {
+                $res = ['status' => 200, 'message' => 'Machine Brand Added Successfully!', 'brand_id' => $brand_id];
+            } else {
+                $res = ['status' => 500, 'message' => 'Machine Brand Not Added'];
+            }
+            $stmtSelect->close(); // Close the SELECT statement
+        } else {
             $res = ['status' => 500, 'message' => 'Machine Brand Not Added'];
-            
-            echo json_encode($res);
-            
-            return;
         }
+    
+        echo json_encode($res);
     }
     
     // ========== Add New Machine Type ==========
-    if (isset($_POST['save_machine_type'])) {
-        $brand_id = mysqli_real_escape_string($conn, $_POST['brand_id']);
-        $type_name = mysqli_real_escape_string($conn, $_POST['type_name']);
-        
-        if ($brand_id == NULL || $type_name == NULL) {
-            $res = ['status' => 422, 'message' => 'Brand and type are mandatory'];
-            
+    if (isset($_POST['sType'])) {
+        $brand_id = $_POST['brand_id'];
+        $type_name = $_POST['type_name'];
+    
+        if (empty($brand_id) || empty($type_name)) {
+            $res = ['status' => 422, 'message' => 'Brand and Type are mandatory'];
             echo json_encode($res);
-            
             return;
         }
-        
-        $query = "INSERT INTO machine_type (brand_id, machine_type_name) VALUES ('$brand_id', '$type_name')";
-        $query_run = mysqli_query($conn, $query);
-        
-        if ($query_run) {
-            $res = ['status' => 200, 'message' => 'Machine Type Added Successfully!'];
-            
-            echo json_encode($res);
-            
-            return;
-        } 
-        
-        else {
+    
+        $stmt = $conn->prepare("INSERT INTO machine_type (type_name, brand_id) VALUES (?, ?)");
+        $stmt->bind_param("ss", $type_name, $brand_id);
+    
+        if ($stmt->execute()) {
+            // Use prepared statement for the SELECT query
+            $stmtSelect = $conn->prepare("SELECT type_id FROM machine_type WHERE type_name = ?");
+            $stmtSelect->bind_param("s", $type_name);
+            $stmtSelect->execute();
+            $stmtSelect->bind_result($type_id);
+    
+            // Fetch the result
+            if ($stmtSelect->fetch()) {
+                $res = ['status' => 200, 'message' => 'Machine Type Added Successfully!', 'type_id' => $type_id];
+            } else {
+                $res = ['status' => 500, 'message' => 'Machine Type Not Added'];
+            }
+            $stmtSelect->close(); // Close the SELECT statement
+        } else {
             $res = ['status' => 500, 'message' => 'Machine Type Not Added'];
-            
-            echo json_encode($res);
-            
-            return;
         }
+    
+        echo json_encode($res);
     }
+    
     
     // ========== Add New Machine ==========
     if(isset($_POST['save_machine'])) {
+
         $machine_code = mysqli_real_escape_string($conn, $_POST['machine_code']);
         $machine_name = mysqli_real_escape_string($conn, $_POST['machine_name']);
-        $machine_brand = mysqli_real_escape_string($conn, $_POST['machine_brand']);
-        $brand_id = mysqli_real_escape_string($conn, $_POST['brand_id']);
-        $machine_type = mysqli_real_escape_string($conn, $_POST['machine_type']);
-        $type_id = mysqli_real_escape_string($conn, $_POST['type_id']);
+        $brand_id = mysqli_real_escape_string($conn, $_POST['machine_brand']);
+        $type_id = mysqli_real_escape_string($conn, $_POST['machine_type']);
         $serialnumber = mysqli_real_escape_string($conn, $_POST['serialnumber']);
         $machine_description = mysqli_real_escape_string($conn, $_POST['machine_description']);
         $purchase_date = mysqli_real_escape_string($conn, $_POST['purchase_date']);
         $customer_name = mysqli_real_escape_string($conn, $_POST['customer_name']);
         $machinelistcreated_by = mysqli_real_escape_string($conn, $_POST['machinelistcreated_by']);
         $machinelistlastmodify_by = mysqli_real_escape_string($conn, $_POST['machinelistlastmodify_by']);
-        
-        if($machine_code == NULL || $machine_name == NULL || $machine_brand == NULL || $brand_id == NULL ||
-           $machine_type == NULL || $type_id == NULL || $serialnumber == NULL || $machine_description == NULL || 
-           $purchase_date == NULL || $customer_name == NULL || $machinelistcreated_by == NULL || $machinelistlastmodify_by == NULL) {
-            
-            $res = ['status' => 422, 'message' => 'All fields are mandatory'];
-                    
-            echo json_encode($res);
-            
-            return;
+
+        $stmt1 = $conn->prepare("SELECT brandname FROM machine_brand WHERE brand_id = ?");
+        $stmt1->bind_param("s", $brand_id);
+        $stmt1->execute();
+        $stmt1->bind_result($machine_brand);
+        $stmt1->fetch();
+        $stmt1->close();
+
+        $stmt2 = $conn->prepare("SELECT type_name FROM machine_type WHERE type_id = ?");
+        $stmt2->bind_param("s", $type_id);
+        $stmt2->execute();
+        $stmt2->bind_result($machine_type);
+        $stmt2->fetch();
+        $stmt2->close();
+
+        $query = "INSERT INTO machine_list (machine_code, machine_name, machine_brand, brand_id, machine_type, type_id, serialnumber, machine_description, purchase_date, customer_name, machinelistcreated_by, machinelistlastmodify_by) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($query);
+
+        $stmt->bind_param("ssssssssssss", $machine_code, $machine_name, $machine_brand, $brand_id, $machine_type, $type_id, $serialnumber, $machine_description, $purchase_date, $customer_name, $machinelistcreated_by, $machinelistlastmodify_by);
+
+        if ($stmt->execute()) {
+        $res = ['status' => 200, 'message' => 'Machine Added Successfully!'];
+        } else {
+        $res = ['status' => 500, 'message' => 'Error executing query: ' . $stmt->error];
         }
-        
-        $query = "INSERT INTO machine_list (machine_code, machine_name, machine_brand, 
-                                            brand_id, machine_type, type_id, serialnumber, 
-                                            machine_description, purchase_date, customer_name, 
-                                            machinelistcreated_by, machinelistlastmodify_by) 
-                  
-                  VALUES ('$machine_code','$machine_name','$machine_brand','$brand_id', 
-                          '$machine_type','$type_id','$serialnumber','$machine_description', 
-                          '$purchase_date','$customer_name','$machinelistcreated_by',
-                          '$staffregistercreated_by','$staffregisterlastmodify_by')";
-        
-        $query_run = mysqli_query($conn, $query);
-        
-        if($query_run) {
-            $res = ['status' => 200, 'message' => 'Machine Added Successfully!'];
-            
-            echo json_encode($res);
-            
-            return;
-        }
-        
-        else {
-            $res = ['status' => 500, 'message' => 'Machine Not Added'];
-            
-            echo json_encode($res);
-            
-            return;
-        }
+
+        $stmt->close();
+
+        echo json_encode($res);
+        return;
     }
     
     // ========== View ==========
