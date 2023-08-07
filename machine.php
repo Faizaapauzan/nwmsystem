@@ -283,12 +283,17 @@ if (!isset($_SESSION['username'])) {
                                                     // Clear the input field after adding the brand
                                                     $('#brand').val('');
 
+                                                    setTimeout(function() {
+                                                        $('#addbrandmessage').html('');
+                                                        document.querySelector('[data-bs-target="#tab2"]').click();
+                                                    }, 1000);
+
                                                 } else if (res.status == 500 || res.status == 422) {
                                                     $('#addbrandmessage').html('<span style="color: red">' + res.message + '</span>');
+                                                    setTimeout(function() {
+                                                        $('#addbrandmessage').html('');
+                                                    }, 1000);
                                                 }
-                                                setTimeout(function() {
-                                                    $('#addbrandmessage').html('');
-                                                }, 1000);
                                             }
                                         });
 
@@ -349,12 +354,18 @@ if (!isset($_SESSION['username'])) {
                                                     $('#type').val('');
                                                     $('#machineBrand').val('').trigger('change');
 
+                                                    setTimeout(function() {
+                                                        $('#addtypemessage').html('');
+                                                        document.querySelector('[data-bs-target="#tab3"]').click();
+                                                    }, 1000);   
+
                                                 } else if (res.status == 500 || res.status == 422) {
                                                     $('#addtypemessage').html('<span style="color: red">' + res.message + '</span>');
+                                                    setTimeout(function() {
+                                                        $('#addtypemessage').html('');
+                                                    }, 1000);
                                                 }
-                                                setTimeout(function() {
-                                                    $('#addtypemessage').html('');
-                                                }, 1000);
+
                                             }
                                         });
                                     }
