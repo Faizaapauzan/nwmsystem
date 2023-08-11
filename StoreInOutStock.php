@@ -674,8 +674,8 @@
                                                             
                                                             $query_run2 = mysqli_query($conn, $query2);
                                                             
-                                                            if (mysqli_num_rows($query_run2) > 0) {
-                                                                $entry = mysqli_fetch_array($query_run2);
+                                                            if (mysqli_num_rows($query_run2) == 0) {
+                                                                
                                                 ?>
                                                 
                                                 <tr>
