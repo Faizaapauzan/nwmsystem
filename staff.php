@@ -626,13 +626,13 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessage').addClass('d-none');
-                                    $('#staffAddModal').modal('hide');
-                                    $('#addStaff')[0].reset();
                                     
-                                    alertify.set('notifier','position', 'top-right');
-                                    alertify.success(res.message, 'onclose', function () {
-                                        window.location.reload();
-                                    });
+                                    alertify.set('notifier', 'position', 'top-right');
+                                    alertify.success(res.message);
+                                    
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                                 
                                 else if(res.status == 500) {
@@ -736,14 +736,13 @@
                                 
                                 else if (res.status == 200) {
                                     $('#errorMessageUpdate').addClass('d-none');
-                                    
+
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                     
-                                    window.location.reload();
-                                    
-                                    $('#staffEditModal').modal('hide');
-                                    $('#updateStaff')[0].reset();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 } 
                                 
                                 else if (res.status == 500) {
@@ -768,7 +767,7 @@
                             type: "POST",
                             url: "staffCode.php",
                             data: {'delete_staff': true,
-                                       'staffregister_id': staffregister_id},
+                                   'staffregister_id': staffregister_id},
                                     
                             success: function(response) {
                                 var res = jQuery.parseJSON(response);
@@ -780,9 +779,9 @@
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                     
-                                    window.location.reload();
-                                    
-                                    $('#deleteConfirmationModal').modal('hide');
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                             }
                         });

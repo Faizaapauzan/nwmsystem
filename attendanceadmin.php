@@ -220,7 +220,7 @@
             <section>  
                 <!-- Delete Modal -->
                 <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
@@ -339,9 +339,10 @@
                                 else {
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
-                                    
-                                    $('#deleteConfirmationModal').modal('hide');
-                                    window.location.reload();
+                                
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                             }
                         });

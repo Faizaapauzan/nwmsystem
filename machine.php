@@ -1,15 +1,18 @@
 <?php
-session_start();
-
-if (session_status() == PHP_SESSION_NONE) {
-    header("location: index.php?error=session");
-}
-
-if (!isset($_SESSION['username'])) {
-    header("location: index.php?error=login");
-} elseif ($_SESSION['staff_position'] != 'Admin' && $_SESSION['staff_position'] != 'Manager') {
-    header("location: index.php?error=permission");
-}
+    
+    session_start();
+    
+    if (session_status() == PHP_SESSION_NONE) {
+        header("location: index.php?error=session");
+    }
+    
+    if (!isset($_SESSION['username'])) {
+        header("location: index.php?error=login");
+    } 
+    
+    elseif ($_SESSION['staff_position'] != 'Admin' && $_SESSION['staff_position'] != 'Manager') {
+        header("location: index.php?error=permission");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -260,6 +263,7 @@ if (!isset($_SESSION['username'])) {
                                     <button type="button" class="btn btn-primary" style="float:right;" onclick="saveBrand()">Save</button>
                                     <p style="margin-left: 20px;margin-top: 1px;margin-bottom: 11px;" class="control"><b id="addbrandmessage"></b></p>
                                 </div>
+                                
                                 <script>
                                     function saveBrand() {
                                         var brandInput = document.getElementById('brand').value;
@@ -268,10 +272,9 @@ if (!isset($_SESSION['username'])) {
                                             url: 'machineCode.php',
                                             type: 'POST',
                                             dataType: 'json',
-                                            data: {
-                                                brand: brandInput,
-                                                sBrand: true
-                                            },
+                                            data: {brand: brandInput,
+                                                  sBrand: true},
+
                                             success: function(res) {
                                                 if (res.status == 200) {
                                                     $('#addbrandmessage').html('<span style="color: green">' + res.message + '</span>');
@@ -286,18 +289,16 @@ if (!isset($_SESSION['username'])) {
                                                     setTimeout(function() {
                                                         $('#addbrandmessage').html('');
                                                         document.querySelector('[data-bs-target="#tab2"]').click();
-                                                    }, 1000);
+                                                    }, 500);
 
                                                 } else if (res.status == 500 || res.status == 422) {
                                                     $('#addbrandmessage').html('<span style="color: red">' + res.message + '</span>');
                                                     setTimeout(function() {
                                                         $('#addbrandmessage').html('');
-                                                    }, 1000);
+                                                    }, 500);
                                                 }
                                             }
                                         });
-
-
                                     }
                                 </script>
 
@@ -307,31 +308,38 @@ if (!isset($_SESSION['username'])) {
                                         <label for="">Machine Brand</label>
                                         <select name="brandname" id="machineBrand" style="width: 100%;" class="form-select form-select-lg mb-3">
                                             <option value=""> Select Machine Brand</option>
-                                            <?php
-                                            include "dbconnect.php";
-                                            $querydrop = "SELECT * FROM machine_brand";
-                                            $result = $conn->query($querydrop);
-                                            if ($result->num_rows > 0) {
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                            ?>
-                                                    <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
-                                            <?php }
-                                            }  ?>
+                                                <?php
+                                                    
+                                                    include "dbconnect.php";
+                                                    
+                                                    $querydrop = "SELECT * FROM machine_brand";
+                                                    
+                                                    $result = $conn->query($querydrop);
+                                                    
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                ?>
+                                                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+                                                <?php } } ?>
                                         </select>
                                     </div>
+                                    
                                     <script>
                                         $('#machineBrand').select2({
                                             dropdownParent: $('#machineAddModal')
                                         });
                                     </script>
+                                    
                                     <div class="mb-3">
                                         <label for="">New Machine Type</label>
                                         <input type="text" name="type_name" id="type" class="form-control" />
                                     </div>
 
-                                    <button type="button" class="btn btn-primary" style="float:right;" onclick="saveType()">Save</button>
                                     <p style="margin-left: 20px;margin-top: 1px;margin-bottom: 11px;" class="control"><b id="addtypemessage"></b></p>
+
+                                    <button type="button" class="btn btn-primary" style="float:right;" onclick="saveType()">Save</button>
                                 </div>
+                                
                                 <script>
                                     function saveType() {
                                         var brand_id = document.getElementById('machineBrand').value;
@@ -341,31 +349,31 @@ if (!isset($_SESSION['username'])) {
                                             url: 'machineCode.php',
                                             type: 'POST',
                                             dataType: 'json',
-                                            data: {
-                                                brand_id: brand_id,
-                                                type_name: typeInput,
-                                                sType: true
-                                            },
+                                            data: {brand_id: brand_id,
+                                                  type_name: typeInput,
+                                                      sType: true},
+                                            
                                             success: function(res) {
                                                 if (res.status == 200) {
                                                     $('#addtypemessage').html('<span style="color: green">' + res.message + '</span>');
 
-                                                    // Clear the input field after adding the brand
                                                     $('#type').val('');
                                                     $('#machineBrand').val('').trigger('change');
 
                                                     setTimeout(function() {
                                                         $('#addtypemessage').html('');
                                                         document.querySelector('[data-bs-target="#tab3"]').click();
-                                                    }, 1000);   
+                                                    }, 500);   
 
-                                                } else if (res.status == 500 || res.status == 422) {
+                                                } 
+                                                
+                                                else if (res.status == 500 || res.status == 422) {
                                                     $('#addtypemessage').html('<span style="color: red">' + res.message + '</span>');
+                                                    
                                                     setTimeout(function() {
                                                         $('#addtypemessage').html('');
-                                                    }, 1000);
+                                                    }, 500);
                                                 }
-
                                             }
                                         });
                                     }
@@ -379,16 +387,18 @@ if (!isset($_SESSION['username'])) {
                                                 <label for="">Machine Brand</label>
                                                 <select name="machine_brand" id="machineBrand2" style="width: 100%;" class="form-select mb-3">
                                                     <option value="">Select Machine Brand</option>
-                                                    <?php
-                                                    include "dbconnect.php";
-                                                    $querydrop = "SELECT * FROM machine_brand";
-                                                    $result = $conn->query($querydrop);
-                                                    if ($result->num_rows > 0) {
-                                                        while ($row = mysqli_fetch_assoc($result)) {
-                                                    ?>
-                                                            <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
-                                                    <?php }
-                                                    }  ?>
+                                                        <?php
+                                                            include "dbconnect.php";
+                                                            
+                                                            $querydrop = "SELECT * FROM machine_brand";
+                                                            
+                                                            $result = $conn->query($querydrop);
+                                                            
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                        ?>
+                                                        <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+                                                        <?php } } ?>
                                                 </select>
                                             </div>
 
@@ -407,6 +417,10 @@ if (!isset($_SESSION['username'])) {
                                                         dropdownParent: $('#machineAddModal')
                                                     });
 
+                                                    $('#machineType').select2({
+                                                        dropdownParent: $('#machineAddModal')
+                                                    });
+
                                                     $('#machineBrand2').on('change', function() {
                                                         var selectedBrandId = $(this).val();
                                                         $('#selectedBrandId').val(selectedBrandId);
@@ -414,10 +428,9 @@ if (!isset($_SESSION['username'])) {
                                                         $.ajax({
                                                             url: 'machineGetMachineType.php',
                                                             type: 'POST',
-                                                            data: {
-                                                                brand_id: selectedBrandId
-                                                            },
+                                                            data: {brand_id: selectedBrandId},
                                                             dataType: 'json',
+                                                            
                                                             success: function(response) {
                                                                 $('#selectedBrandId').val()
                                                                 $('#machineType').empty().append('<option value="">Select Machine Type</option>');
@@ -452,7 +465,7 @@ if (!isset($_SESSION['username'])) {
 
                                             <div class="col-md-6 mb-3">
                                                 <label for="">Purchase Date</label>
-                                                <input type="text" name="purchase_date" class="form-control" />
+                                                <input type="date" name="purchase_date" class="form-control" />
                                             </div>
 
                                             <div class="col-md-6 mb-3">
@@ -764,13 +777,17 @@ if (!isset($_SESSION['username'])) {
 
                         success: function(res) {
                             if (res.status == 200) {
+                                $('#errorMessage').addClass('d-none');
+                                
                                 alertify.set('notifier', 'position', 'top-right');
                                 alertify.success(res.message);
-
+                                
                                 setTimeout(function() {
                                     location.reload();
-                                }, 1500);
-                            } else if (res.status == 500) {
+                                }, 700);
+                            } 
+                            
+                            else if (res.status == 500) {
                                 alert(res.message);
                             }
                         }
@@ -822,7 +839,9 @@ if (!isset($_SESSION['username'])) {
 
                             if (res.status == 404) {
                                 alert(res.message);
-                            } else if (res.status == 200) {
+                            } 
+                            
+                            else if (res.status == 200) {
                                 $('#machine_id').val(res.data.machine_id);
                                 $('#machine_code').val(res.data.machine_code);
                                 $('#machine_name').val(res.data.machine_name);
@@ -861,17 +880,20 @@ if (!isset($_SESSION['username'])) {
                             if (res.status == 422) {
                                 $('#errorMessageUpdate').removeClass('d-none');
                                 $('#errorMessageUpdate').text(res.message);
-                            } else if (res.status == 200) {
+                            } 
+                            
+                            else if (res.status == 200) {
                                 $('#errorMessageUpdate').addClass('d-none');
 
                                 alertify.set('notifier', 'position', 'top-right');
                                 alertify.success(res.message);
-
-                                window.location.reload();
-
-                                $('#machineEditModal').modal('hide');
-                                $('#updateMachine')[0].reset();
-                            } else if (res.status == 500) {
+                                
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 700);
+                            } 
+                            
+                            else if (res.status == 500) {
                                 alert(res.message);
                             }
                         }
@@ -892,21 +914,24 @@ if (!isset($_SESSION['username'])) {
                     $.ajax({
                         type: "POST",
                         url: "machineCode.php",
-                        data: {
-                            'delete_machine': true,
-                            'machine_id': machine_id
+                        data: {'delete_machine': true,
+                                   'machine_id': machine_id
                         },
 
                         success: function(response) {
                             var res = jQuery.parseJSON(response);
+                            
                             if (res.status == 500) {
                                 alert(res.message);
-                            } else {
+                            } 
+                            
+                            else {
                                 alertify.set('notifier', 'position', 'top-right');
                                 alertify.success(res.message);
-
-                                $('#deleteConfirmationModal').modal('hide');
-                                window.location.reload();
+                                
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 700);
                             }
                         }
                     });
@@ -915,5 +940,4 @@ if (!isset($_SESSION['username'])) {
         </section>
     </main>
 </body>
-
 </html>

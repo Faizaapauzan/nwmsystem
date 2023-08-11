@@ -22,89 +22,81 @@
 
         <title>Leave</title>
 
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+
         <!--========== BOX ICONS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
-        <!--========== CSS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-        <link rel="stylesheet" href="assets/css/styles.css">
         
+        <!--========== JS ==========-->
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
         <!--Date Picker-->
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multidatespicker/1.6.6/jquery-ui.multidatespicker.js"></script>
+        <!--Select2-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     </head>
 
     <style>
-        ::-webkit-scrollbar {
-            display: none;
-        }
+        ::-webkit-scrollbar {display: none;}
 
-        #staffListTable {
-            counter-reset: rowNumber;
-        }
+        #leaveTable {counter-reset: rowNumber;}
         
-        #staffListTable tr>td:first-child {
-            counter-increment: rowNumber;
-        }
+        #leaveTable tr>td:first-child {counter-increment: rowNumber;}
         
-        #staffListTable tr td:first-child::before {
-            content: counter(rowNumber);
-        }
+        #leaveTable tr td:first-child::before {content: counter(rowNumber);}
 
-        .dropdown-content1 {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
-        
-        .dropdown-content1 a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            padding-right: 7px;
-        }
-        
-        .dropdown-content1 a:hover {background-color: #f1f1f1}
-        
-        .dropdown1:hover .dropdown-content1 {display: block;}
-        
-        .dropdown1:hover .dropbtn1 {color:whitesmoke;}
-    
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
+
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
+
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
+
         .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: auto;
-            padding-left: 20px;
-            bottom: 55px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
         }
         
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
+
         .dropdown-content a {
-            color: black;
-            padding: 10px 10px;
-            text-decoration: none;
-            display: block;
-            padding-right: 7px;
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
         }
-    
-        .dropdown-content a:hover {background-color: #f1f1f1}
         
-        .dropdown:hover .dropdown-content {display: block;}
-        
-        .dropdown:hover .dropbtn {color:whitesmoke;}
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
     </style>
     
     <body>
@@ -130,7 +122,7 @@
 
         <!--========== NAV ==========-->
         <div class="nav" id="navbar">
-        <nav class="nav__container">
+            <nav class="nav__container">
                 <div>
                     <a href="Adminhomepage.php" class="nav__link nav__logo">
                         <img src="neo.png" height="50" width="60"></img>
@@ -226,7 +218,7 @@
         <main>
             <section>
                 <!-- Add Modal -->
-                <div class="modal fade" id="studentAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="leaveAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -238,7 +230,7 @@
                                     <div class="row">
                                         <div class="mb-3">
                                             <label for="">Name</label>
-                                            <select name="tech_name" class="form-select">
+                                            <select name="tech_name" id="tech_name" style="width: 100%;" class="form-select">
                                                 <option value="">Select Name</option> 
                                                 <?php
                                                     
@@ -255,6 +247,12 @@
                                                 ?>
                                             </select>
                                         </div>
+
+                                        <script>
+                                            $('#tech_name').select2({
+                                                dropdownParent: $('#leaveAddModal')
+                                            });
+                                        </script>
                                     
                                         <div class="mb-3">
                                             <label for="">Reason</label>
@@ -291,7 +289,7 @@
 
                 <!-- Delete Modal -->
                 <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
@@ -299,7 +297,7 @@
                             </div>
                             
                             <div class="modal-body">
-                                <p style="text-align: center;">Are you sure you want to delete this accessory?</p>
+                                <p style="text-align: center;">Are you sure you want to delete this record?</p>
                             </div>
                             
                             <div class="modal-footer">
@@ -313,12 +311,12 @@
                 <!-- Table -->
                 <div class="card">
                     <div class="card-header">
-                        <h4>Sample<button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#studentAddModal">Add</button></h4>
+                        <h4>Leave<button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#leaveAddModal">Add</button></h4>
                     </div>
                     
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="myTable" class="table table-bordered table-striped">
+                            <table id="leaveTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th style='text-align: center;'>No</th>
@@ -346,10 +344,8 @@
                                     <td style='text-align: center;'><?= $staff['tech_name'] ?></td>
                                     <td style='text-align: center;'><?= $staff['leave_date'] ?></td>
                                     <td style='text-align: center;'><?= $staff['reason'] ?></td>
-                                    <td style='text-align: center; white-space: nowrap;'>
-                                        <button type="button" value="<?=$staff['techOFF_id'];?>" class="viewStaffBtn btn btn-info btn-sm">View</button>
-                                        <button type="button" value="<?=$staff['techOFF_id'];?>" class="editStaffBtn btn btn-success btn-sm">Update</button>
-                                        <button type="button" value="<?=$staff['techOFF_id'];?>" class="deleteStaffBtn btn btn-danger btn-sm">Delete</button>
+                                    <td style='text-align: center;'>
+                                        <button type="button" value="<?=$staff['techOFF_id'];?>" class="deleteLeaveBtn btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
                                 <?php } } ?>
@@ -361,7 +357,6 @@
                 </div>
                 </br>
                 
- 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
@@ -370,7 +365,7 @@
                 
                 <script>
                     $(document).ready(function(){
-                        $('#myTable').DataTable({
+                        $('#leaveTable').DataTable({
                             responsive:true,
                             language: {search:"_INPUT_",
                                        searchPlaceholder:"Search"},
@@ -380,15 +375,15 @@
                 
                 <script>
                     // <!-- Add -->
-                    $(document).on('submit', '#saveStudent', function (e) {
+                    $(document).on('submit', '#LeaveApplication', function (e) {
                         e.preventDefault();
                         
                         var formData = new FormData(this);
-                        formData.append("save_student", true);
+                        formData.append("save_record", true);
                         
                         $.ajax({
                             type: "POST",
-                            url: "code.php",
+                            url: "AdminLeaveCode.php",
                             data: formData,
                             processData: false,
                             contentType: false,
@@ -403,13 +398,13 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessage').addClass('d-none');
-                                    $('#studentAddModal').modal('hide');
-                                    $('#saveStudent')[0].reset();
                                     
-                                    alertify.set('notifier','position', 'top-right');
-                                    alertify.success(res.message, 'onclose', function () {
-                                        window.location.reload();
-                                    });
+                                    alertify.set('notifier', 'position', 'top-right');
+                                    alertify.success(res.message);
+                                
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                                 
                                 else if(res.status == 500) {
@@ -420,21 +415,21 @@
                     });
 
                     // <!-- Delete -->
-                    $(document).on('click', '.deleteStudentBtn', function() {
-                        var student_id = $(this).val();
+                    $(document).on('click', '.deleteLeaveBtn', function() {
+                        var techOFF_id = $(this).val();
                         
-                        $('#confirmDeleteBtn').val(student_id); 
+                        $('#confirmDeleteBtn').val(techOFF_id); 
                         $('#deleteConfirmationModal').modal('show'); 
                     });
                     
                     $(document).on('click', '#confirmDeleteBtn', function() {
-                        var student_id = $(this).val();
+                        var techOFF_id = $(this).val();
                         
                         $.ajax({
                             type: "POST",
-                            url: "code.php",
-                            data: {'delete_student': true,
-                                       'student_id': student_id},
+                            url: "AdminLeaveCode.php",
+                            data: {'delete_record': true,
+                                      'techOFF_id': techOFF_id},
                                     
                             success: function(response) {
                                 var res = jQuery.parseJSON(response);
@@ -445,9 +440,10 @@
                                 else {
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
-                                    
-                                    $('#deleteConfirmationModal').modal('hide');
-                                    window.location.reload();
+                                
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                             }
                         });

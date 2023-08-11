@@ -25,15 +25,15 @@
 
         <title>Sample</title>
 
-        <!--========== BOX ICONS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
         <!--========== CSS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     </head>
 
     <style>
@@ -443,7 +443,7 @@
                 
                 <!-- Delete Modal -->
                 <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
@@ -555,13 +555,13 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessage').addClass('d-none');
-                                    $('#accessoryAddModal').modal('hide');
-                                    $('#saveAccessory')[0].reset();
                                     
-                                    alertify.set('notifier','position', 'top-right');
-                                    alertify.success(res.message, 'onclose', function () {
-                                        window.location.reload();
-                                    });
+                                    alertify.set('notifier', 'position', 'top-right');
+                                    alertify.success(res.message);
+                                    
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                                 
                                 else if(res.status == 500) {
@@ -643,7 +643,6 @@
                                     }
                                     
                                     else {
-                                        // Hide the photo preview if there is no photo
                                         $('#edit_photo_preview').hide();
                                     }
                                     
@@ -674,16 +673,15 @@
                                     $('#errorMessageUpdate').text(res.message);
                                 }
                                 
-                                else if(res.status == 200){
+                                else if(res.status == 200) {
                                     $('#errorMessageUpdate').addClass('d-none');
-                                    
-                                    alertify.set('notifier','position', 'top-right');
+
+                                    alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                     
-                                    window.location.reload();
-
-                                    $('#accessoryEditModal').modal('hide');
-                                    $('#updateAccessory')[0].reset();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                                 
                                 else if(res.status == 500) {
@@ -700,7 +698,6 @@
                         $('#deleteConfirmationModal').modal('show'); 
                     });
                     
-                    // Handle the delete confirmation
                     $(document).on('click', '#confirmDeleteBtn', function() {
                         var entry_id = $(this).val();
                         
@@ -721,9 +718,9 @@
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                     
-                                    $('#deleteConfirmationModal').modal('hide');
-                                    
-                                    window.location.reload();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                             }
                         });

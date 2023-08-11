@@ -11,7 +11,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => 'Staff Deleted Successfully'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Staff Deleted Successfully</span>'];
             
             echo json_encode($res);
             
@@ -19,7 +19,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => 'Staff Not Deleted'];
+            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Staff Not Deleted</span>'];
         
             echo json_encode($res);
             

@@ -37,7 +37,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => 'Customer Created Successfully'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Customer Created Successfully</span>'];
             
             echo json_encode($res);
             
@@ -45,7 +45,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => 'Customer Not Created'];
+            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Customer Not Created</span>'];
             
             echo json_encode($res);
             
@@ -119,7 +119,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => 'Customer Updated Successfully'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Customer Updated Successfully</span>'];
             
             echo json_encode($res);
             
@@ -127,7 +127,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => 'Customer Not Updated'];
+            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Customer Not Updated</span>'];
             
             echo json_encode($res);
             
@@ -144,7 +144,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => 'Customer Deleted Successfully'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Customer Deleted Successfully</span>'];
             
             echo json_encode($res);
             
@@ -152,7 +152,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => 'Customer Not Deleted'];
+            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Customer Not Deleted</span>'];
             
             echo json_encode($res);
             

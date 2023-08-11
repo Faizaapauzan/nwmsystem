@@ -2,11 +2,11 @@
     
     require 'dbconnect.php';
 
+    // ========== Update ==========
     if (isset($_POST['update_entry'])) {
         $success = true;
         
         for ($i = 0; $i < count($_POST['remark_note']); $i++) {
-
             $remark_note = mysqli_real_escape_string($conn, $_POST['remark_note'][$i]);
             $remark_date = mysqli_real_escape_string($conn, $_POST['remark_date'][$i]);
             $remark_quantity = mysqli_real_escape_string($conn, $_POST['remark_quantity'][$i]);
@@ -38,12 +38,6 @@
                     
                     return;
                 }
-                
-                // Calculate the new balance
-                $newBalance = $currentBalance - $remark_quantity;
-                // Update the balance in the accessories_inout table
-                $updateQuery = "UPDATE accessories_inout SET balance = '$newBalance' WHERE inout_id = '$inout_id'";
-                mysqli_query($conn, $updateQuery);
             }
             
             else {
@@ -56,15 +50,18 @@
                     
                     return;
                 }
-                
+            }
+            
+            $pattern = '/.*\(request by [^)]+\)/';
+
+            if (!preg_match($pattern, $remark_note)) {
                 // Calculate the new balance
-                $newBalance = $quantity - $remark_quantity;
-                
+                $newBalance = $currentBalance - $remark_quantity;
                 // Update the balance in the accessories_inout table
                 $updateQuery = "UPDATE accessories_inout SET balance = '$newBalance' WHERE inout_id = '$inout_id'";
                 mysqli_query($conn, $updateQuery);
             }
-    
+
             $query = "INSERT INTO accessories_remark (remark_note, remark_date, remark_quantity, inout_id) 
                       VALUES ('$remark_note', '$remark_date', '$remark_quantity', '$inout_id')";
     
@@ -87,6 +84,7 @@
         echo json_encode($res);
     }
     
+    // ========== View ==========
     if (isset($_GET['entry_id'])) {
 
         $entry_id = mysqli_real_escape_string($conn, $_GET['entry_id']);
@@ -104,13 +102,13 @@
         } 
         
         else {
-            
             $res = ['status' => 404, 'message' => 'Id Not Found'];
     
             echo json_encode($res);
         }
     }
     
+    // ========== Remark ==========
     if (isset($_GET['entry_idRemark'])) {
         $entry_idRemark = mysqli_real_escape_string($conn, $_GET['entry_idRemark']);
     

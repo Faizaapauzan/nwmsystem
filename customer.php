@@ -415,7 +415,7 @@
                 
                 <!-- Delete Modal -->
                 <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
@@ -525,13 +525,13 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessage').addClass('d-none');
-                                    $('#customerAddModal').modal('hide');
-                                    $('#saveCustomer')[0].reset();
+
+                                    alertify.set('notifier', 'position', 'top-right');
+                                    alertify.success(res.message);
                                     
-                                    alertify.set('notifier','position', 'top-right');
-                                    alertify.success(res.message, 'onclose', function () {
-                                        window.location.reload();
-                                    });
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                                 
                                 else if(res.status == 500) {
@@ -633,14 +633,13 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessageUpdate').addClass('d-none');
-                                    
-                                    alertify.set('notifier','position', 'top-right');
+
+                                    alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                     
-                                    window.location.reload();
-
-                                    $('#custEditModal').modal('hide');
-                                    $('#updateCustomer')[0].reset();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);;
                                 }
                                 
                                 else if(res.status == 500) {
@@ -676,9 +675,10 @@
                                 else {
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
-                                      
-                                    $('#deleteConfirmationModal').modal('hide');
-                                    window.location.reload();
+                                    
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                             }
                         });

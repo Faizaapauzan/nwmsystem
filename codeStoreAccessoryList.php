@@ -3,7 +3,6 @@
     require 'dbconnect.php';
     
     // ========== Add ==========
-
     if (isset($_POST['save_entry'])) {
         $accessories_code = mysqli_real_escape_string($conn, $_POST['accessories_code']);
         $accessories_name = mysqli_real_escape_string($conn, $_POST['accessories_name']);
@@ -41,14 +40,14 @@
                 $query_run = mysqli_query($conn, $query);
                 
                 if ($query_run) {
-                    $res = ['status' => 200, 'message' => 'New Accessory Inserted'];
+                    $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">New Accessory Inserted</span>'];
                     echo json_encode($res);
                     
                     return;
                 } 
                 
                 else {
-                    $res = ['status' => 500, 'message' => 'Accessory Not Inserted'];
+                    $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Accessory Not Inserted</span>'];
                     echo json_encode($res);
                     
                     return;
@@ -56,7 +55,7 @@
             } 
             
             else {
-                $res = ['status' => 500, 'message' => 'Error uploading file. Please try again.'];
+                $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Error uploading file. Please try again</span>'];
                 echo json_encode($res);
                 
                 return;
@@ -64,14 +63,13 @@
         } 
         
         else {
-            $res = ['status' => 422, 'message' => 'All fields are mandatory, including the image.'];
+            $res = ['status' => 422, 'message' => '<span style="white-space: nowrap;">All fields are mandatory, including the image</span>'];
             echo json_encode($res);
             return;
         }
     }
     
     // ========== Update ==========
-
     if (isset($_POST['update_entry'])) {
         $accessories_id = mysqli_real_escape_string($conn, $_POST['accessories_id']);
         $accessories_code = mysqli_real_escape_string($conn, $_POST['accessories_code']);
@@ -130,21 +128,20 @@
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => 'Accessory Updated Successfully'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Accessory Updated Successfully</span>'];
             echo json_encode($res);
             
             return;
         } 
         
         else {
-            $res = ['status' => 500, 'message' => 'Accessory Not Updated'];
+            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Accessory Not Updated</span>'];
             echo json_encode($res);
             return;
         }
     }
     
     // ========== View ==========
-    
     if (isset($_GET['entry_id'])) {
         $entry_id = mysqli_real_escape_string($conn, $_GET['entry_id']);
         $query = "SELECT * FROM accessories_list WHERE accessories_id='$entry_id'";
@@ -177,21 +174,20 @@
     }
     
     // ========== Delete ==========
-    
     if(isset($_POST['delete_entry'])) {
         $entry_id = mysqli_real_escape_string($conn, $_POST['entry_id']);
         $query = "DELETE FROM accessories_list WHERE accessories_id='$entry_id'";
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => 'Accessory Deleted Successfully'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Accessory Deleted Successfully</span>'];
             echo json_encode($res);
         
             return;
         } 
         
         else {
-            $res = ['status' => 500, 'message' => 'Accessory Not Deleted'];
+            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Accessory Not Deleted</span>'];
             echo json_encode($res);
         
             return;

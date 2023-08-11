@@ -2,6 +2,7 @@
     
     require 'dbconnect.php';
     
+    // ========== Save ==========
     if(isset($_POST['save_entry'])) {
         $accessoriesname = mysqli_real_escape_string($conn, $_POST['accessoriesname']);
         $techname = mysqli_real_escape_string($conn, $_POST['techname']);
@@ -23,7 +24,7 @@
         
         if($query_run) {
             
-            $res = ['status' => 200, 'message' => 'New Entry Inserted'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">New Entry Inserted</span>'];
             
             echo json_encode($res);
             
@@ -32,14 +33,45 @@
         
         else {
             
-            $res = ['status' => 500, 'message' => 'Entry Not Inserted'];
+            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Entry Not Inserted</span>'];
             
             echo json_encode($res);
             
             return;
         }
     }
+
+    // ========== View ==========
+    if(isset($_GET['entry_id'])) {
+        
+        $entry_id = mysqli_real_escape_string($conn, $_GET['entry_id']);
+        
+        $query = "SELECT * FROM accessories_inout WHERE inout_id='$entry_id'";
+        
+        $query_run = mysqli_query($conn, $query);
+        
+        if(mysqli_num_rows($query_run) == 1) {
+            
+            $student = mysqli_fetch_array($query_run);
+            
+            $res = ['status' => 200, 'message' => 'Entry Fetch Successfully by id', 'data' => $student];
+            
+            echo json_encode($res);
+            
+            return;
+        }
     
+        else {
+            
+            $res = ['status' => 404, 'message' => 'Entry Id Not Found'];
+            
+            echo json_encode($res);
+            
+            return;
+        }
+    }
+
+    // ========== Update ==========
     if(isset($_POST['update_entry'])) {
         
         $entry_id = mysqli_real_escape_string($conn, $_POST['inout_id']);
@@ -69,7 +101,7 @@
         
         if($query_run) {
             
-            $res = ['status' => 200, 'message' => 'Entry Updated Successfully'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Entry Updated Successfully</span>'];
             
             echo json_encode($res);
             
@@ -78,7 +110,7 @@
         
         else {
             
-            $res = ['status' => 500,'message' => 'Entry Not Updated'];
+            $res = ['status' => 500,'message' => '<span style="white-space: nowrap;">Entry Not Updated</span>'];
             
             echo json_encode($res);
             
@@ -86,35 +118,7 @@
         }
     }
     
-    if(isset($_GET['entry_id'])) {
-        
-        $entry_id = mysqli_real_escape_string($conn, $_GET['entry_id']);
-        
-        $query = "SELECT * FROM accessories_inout WHERE inout_id='$entry_id'";
-        
-        $query_run = mysqli_query($conn, $query);
-        
-        if(mysqli_num_rows($query_run) == 1) {
-            
-            $student = mysqli_fetch_array($query_run);
-            
-            $res = ['status' => 200, 'message' => 'Entry Fetch Successfully by id', 'data' => $student];
-            
-            echo json_encode($res);
-            
-            return;
-        }
-    
-        else {
-            
-            $res = ['status' => 404, 'message' => 'Entry Id Not Found'];
-            
-            echo json_encode($res);
-            
-            return;
-        }
-    }
-    
+    // ========== Delete ==========
     if(isset($_POST['delete_entry'])) {
         
         $entry_id = mysqli_real_escape_string($conn, $_POST['entry_id']);
@@ -132,7 +136,7 @@
 
         if($query_run) {
             
-            $res = ['status' => 200, 'message' => 'Entry Deleted Successfully'];
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Entry Deleted Successfully</span>'];
             
             echo json_encode($res);
             
@@ -141,14 +145,15 @@
         
         else {
             
-            $res = ['status' => 500, 'message' => 'Entry Not Deleted'];
+            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Entry Not Deleted</span>'];
             
             echo json_encode($res);
             
             return;
         }
     }
-
+    
+    // ========== Remark ==========
     if (isset($_GET['entry_idRemark'])) {
         $entry_idRemark = mysqli_real_escape_string($conn, $_GET['entry_idRemark']);
     
@@ -166,12 +171,16 @@
             $res = ['status' => 200, 'message' => 'Successfully fetched by id', 'data' => $resultsRemark];
     
             echo json_encode($res);
-        } else {
+        } 
+        
+        else {
             $res = ['status' => 404, 'message' => 'No records found'];
     
             echo json_encode($res);
         }
     }
+
+    // ========== Request ==========
     if (isset($_GET['Request'])) {
     
         $queryRequest = "SELECT * FROM accessories_remark";
@@ -184,22 +193,23 @@
             $resultsRequest = array();
             
             while ($row = mysqli_fetch_assoc($queryRequest_run)) {
-
-                if (preg_match($pattern, $row['remark_note'])){
+                if (preg_match($pattern, $row['remark_note'])) {
                     $resultsRequest[] = $row;
                 }
-               
             }
     
             $res = ['status' => 200, 'message' => 'Successfully fetched by id', 'data' => $resultsRequest];
     
             echo json_encode($res);
-        } else {
+        } 
+        
+        else {
             $res = ['status' => 404, 'message' => 'No records found'];
     
             echo json_encode($res);
         }
     }
+
     if (isset($_GET['RequestItem'])) {
         
         $inout_id = mysqli_real_escape_string($conn, $_GET['inout_id']);
@@ -210,17 +220,20 @@
 
         if ($queryRequest_run && mysqli_num_rows($queryRequest_run) > 0) {
             $resultRequest = mysqli_fetch_assoc($queryRequest_run);
-            $item_name = $resultRequest['accessoriesname']; // Fetch the item name from the result
+            $item_name = $resultRequest['accessoriesname'];
 
             $res = ['status' => 200, 'message' => 'Successfully fetched by id', 'accessoriesname' => $item_name]; // Use the correct field name
-
-        } else {
+        } 
+        
+        else {
             $res = ['status' => 404, 'message' => 'No records found'];
         }
     
         echo json_encode($res);
         return;
     }
+
+    // ========== Accept ==========
     if (isset($_POST['accept'])) {
         $remarkid = mysqli_real_escape_string($conn, $_POST['remarkid']);
     
@@ -247,14 +260,18 @@
         $query3_run = mysqli_query($conn, "UPDATE accessories_inout set balance='$newbalance' WHERE inout_id='$inout_id'");
     
         if ($query3_run) {
-            $res = ['status' => 200, 'message' => 'Request Accepted'];
-        } else {
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Request Accepted</span>'];
+        } 
+        
+        else {
             $res = ['status' => 500, 'message' => 'Failed'];
         }
     
         echo json_encode($res);
         return;
     }
+
+    // ========== Delete Remark ==========
     if (isset($_POST['delete'])) {
         $remarkid = mysqli_real_escape_string($conn, $_POST['remarkid']);
     
@@ -263,8 +280,10 @@
         $queryRequest_run = mysqli_query($conn, $queryRequest);
     
         if ($queryRequest_run) {
-            $res = ['status' => 200, 'message' => 'Request Rejected'];
-        } else {
+            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Deleted Successfully!</span>'];
+        } 
+        
+        else {
             $res = ['status' => 500, 'message' => 'Failed'];
         }
     
