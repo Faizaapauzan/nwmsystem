@@ -17,14 +17,14 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link href="css/technicianmain.css" rel="stylesheet" />
 
+        <!--========== JS ==========-->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
         <!--========== BOX ICONS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-
-        <!--========== JS ==========-->
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     </head>
     
     <style>
@@ -556,7 +556,7 @@
                                                     
                                                     currentTable = new DataTable('#myTable', {
                                                         autoWidth: false,
-                                                        responsive:true,
+                                                        responsive: true,
                                                         dom: '<"toolbar">lfrtip'
                                                     });
                                                 } 
@@ -567,7 +567,7 @@
                                                     
                                                     currentTable = new DataTable('#myTable2', {
                                                         autoWidth: false,
-                                                        responsive:true,
+                                                        responsive: true,
                                                         dom: '<"toolbar">lfrtip'
                                                     });
                                                 }
@@ -577,7 +577,7 @@
                                                 showSelectedTable();
                                             });
                                         </script>
-
+                                        
                                         <table id="myTable" class="table table-bordered table-striped" style="display:none;" >
                                             <thead>
                                                 <tr>
@@ -597,46 +597,47 @@
                                             
                                             <tbody>
                                                 <?php
-                                                
+                                                    
                                                     require 'dbconnect.php';
-                                                
+                                                    
                                                     $query = "SELECT * FROM accessories_inout ORDER BY CreatedTime_inout";
+                                                    
                                                     $query_run = mysqli_query($conn, $query);
-                                                
+                                                    
                                                     if (mysqli_num_rows($query_run) > 0) {
-                                                        while ($entry = mysqli_fetch_array($query_run)) {
+                                                        foreach ($query_run as $entry) {
                                                             $query2 = "SELECT job_order_number, job_name, customer_name 
                                                                        FROM accessories_inout, job_accessories, job_register 
-                                                                       WHERE accessories_inout.accessoriesname = '$entry[accessoriesname]' 
+                                                                       WHERE accessories_inout.accessoriesname = '{$entry['accessoriesname']}' 
                                                                        AND accessories_inout.accessoriesname = job_accessories.accessories_name 
                                                                        AND job_accessories.jobregister_id=job_register.jobregister_id";
-                                                            
+                
                                                             $query_run2 = mysqli_query($conn, $query2);
+                    
                                                             if (mysqli_num_rows($query_run2) > 0) {
                                                                 $entry2 = mysqli_fetch_array($query_run2);
-                                                                echo "<tr>";
-                                                                echo "<td style='text-align: center;'></td>";
-                                                                echo "<td style='text-align: center; white-space: nowrap'>" . $entry2['job_order_number'] . "</td>";
-                                                                echo "<td style='text-align: center;'>" . $entry2['job_name'] . "</td>";
-                                                                echo "<td style='text-align: center;'>" . $entry2['customer_name'] . "</td>";
-                                                                echo "<td style='text-align: center; white-space: nowrap;'>" . $entry['techname'] . "</td>";
-                                                                echo "<td>" . $entry['accessoriesname'] . "</td>";
-                                                                echo "<td style='white-space: nowrap;'>" . $entry['out_date'] . "</td>";
-                                                                echo "<td style='text-align: center;'>" . $entry['quantity'] . "</td>";
-                                                                echo "<td style='text-align: center;'>" . $entry['balance'] . "</td>";
-                                                                echo "<td style='text-align: center; white-space: nowrap;'>
-                                                                        <button type='button' value='" . $entry['inout_id'] . "' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
-                                                                      </td>";
-                                                                echo "<td style='text-align: center; white-space: nowrap;'>
-                                                                        <button type='button' value='" . $entry['inout_id'] . "' class='viewEntryBtn btn btn-info btn-sm'>View</button>
-                                                                        <button type='button' value='" . $entry['inout_id'] . "' class='editEntryBtn btn btn-success btn-sm'>Edit</button>
-                                                                        <button type='button' value='" . $entry['inout_id'] . "' class='deleteEntryBtn btn btn-danger btn-sm'>Delete</button>
-                                                                       </td>";
-                                                                echo "</tr>";
-                                                            }
-                                                        }
-                                                    }
                                                 ?>
+                                                
+                                                <tr>
+                                                    <td style='text-align: center;'></td>
+                                                    <td style='text-align: center; white-space: nowrap'><?= $entry2['job_order_number'] ?></td>
+                                                    <td style='text-align: center;'><?= $entry2['job_name'] ?></td>
+                                                    <td style='text-align: center;'><?= $entry2['customer_name'] ?></td>
+                                                    <td style='text-align: center; white-space: nowrap;'><?= $entry['techname'] ?></td>
+                                                    <td><?= $entry['accessoriesname'] ?></td>
+                                                    <td style='white-space: nowrap;'><?= $entry['out_date'] ?></td>
+                                                    <td style='text-align: center;'><?= $entry['quantity'] ?></td>
+                                                    <td style='text-align: center;'><?= $entry['balance'] ?></td>
+                                                    <td style='text-align: center; white-space: nowrap;'>
+                                                        <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
+                                                    </td>
+                                                    <td style='text-align: center; white-space: nowrap;'>
+                                                        <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-info btn-sm'>View</button>
+                                                        <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button>
+                                                        <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-danger btn-sm'>Delete</button>
+                                                    </td>
+                                                </tr>
+                                                <?php } } } ?>
                                             </tbody>
                                         </table>
                                         
@@ -660,10 +661,11 @@
                                                     require 'dbconnect.php';
                                                     
                                                     $query = "SELECT * FROM accessories_inout ORDER BY CreatedTime_inout";
+                                                    
                                                     $query_run = mysqli_query($conn, $query);
                                                     
                                                     if (mysqli_num_rows($query_run) > 0) {
-                                                        while ($entry = mysqli_fetch_array($query_run)) {
+                                                        foreach ($query_run as $entry) {
                                                             $query2 = "SELECT job_order_number, job_name, customer_name 
                                                                        FROM accessories_inout, job_accessories, job_register 
                                                                        WHERE accessories_inout.accessoriesname = '$entry[accessoriesname]' 
@@ -671,27 +673,28 @@
                                                                        AND job_accessories.jobregister_id=job_register.jobregister_id";
                                                             
                                                             $query_run2 = mysqli_query($conn, $query2);
-                                                            if (mysqli_num_rows($query_run2) == 0) {
-                                                                echo "<tr>";
-                                                                echo "<td style='text-align: center;'></td>";
-                                                                echo "<td style='text-align: center; white-space: nowrap;'>" . $entry['techname'] . "</td>";
-                                                                echo "<td>" . $entry['accessoriesname'] . "</td>";
-                                                                echo "<td style='white-space: nowrap;'>" . $entry['out_date'] . "</td>";
-                                                                echo "<td style='text-align: center;'>" . $entry['quantity'] . "</td>";
-                                                                echo "<td style='text-align: center;'>" . $entry['balance'] . "</td>";
-                                                                echo "<td style='text-align: center; white-space: nowrap;'>
-                                                                        <button type='button' value='" . $entry['inout_id'] . "' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
-                                                                      </td>";
-                                                                echo "<td style='text-align: center; white-space: nowrap;'>
-                                                                        <button type='button' value='" . $entry['inout_id'] . "' class='viewEntryBtn btn btn-info btn-sm'>View</button>
-                                                                        <button type='button' value='" . $entry['inout_id'] . "' class='editEntryBtn btn btn-success btn-sm'>Edit</button>
-                                                                        <button type='button' value='" . $entry['inout_id'] . "' class='deleteEntryBtn btn btn-danger btn-sm'>Delete</button>
-                                                                      </td>";
-                                                                echo "</tr>";
-                                                            }
-                                                        }
-                                                    }
+                                                            
+                                                            if (mysqli_num_rows($query_run2) > 0) {
+                                                                $entry = mysqli_fetch_array($query_run2);
                                                 ?>
+                                                
+                                                <tr>
+                                                    <td style='text-align: center;'></td>
+                                                    <td style='text-align: center; white-space: nowrap;'><?= $entry['techname'] ?></td>
+                                                    <td><?= $entry['accessoriesname'] ?></td>
+                                                    <td style='white-space: nowrap;'><?= $entry['out_date'] ?></td>
+                                                    <td style='text-align: center;'><?= $entry['quantity'] ?></td>
+                                                    <td style='text-align: center;'><?= $entry['balance'] ?></td>
+                                                    <td style='text-align: center; white-space: nowrap;'>
+                                                        <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
+                                                    </td>
+                                                    <td style='text-align: center; white-space: nowrap;'>
+                                                        <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-info btn-sm'>View</button>
+                                                        <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button>
+                                                        <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-danger btn-sm'>Delete</button>
+                                                    </td>
+                                                </tr>
+                                                <?php } } } ?>
                                             </tbody>
                                         </table>
                                     </div>
