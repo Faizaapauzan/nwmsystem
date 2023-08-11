@@ -75,13 +75,11 @@
     if(isset($_POST['update_entry'])) {
         
         $entry_id = mysqli_real_escape_string($conn, $_POST['inout_id']);
-        $accessoriesname = mysqli_real_escape_string($conn, $_POST['accessoriesname']);
         $techname = mysqli_real_escape_string($conn, $_POST['techname']);
         $out_date = mysqli_real_escape_string($conn, $_POST['out_date']);
-        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
         $balance = mysqli_real_escape_string($conn, $_POST['balance']);
         
-        if($accessoriesname == NULL || $techname == NULL || $out_date == NULL || $quantity == NULL  || $balance == NULL) {
+        if( $techname == NULL || $out_date == NULL || $balance == NULL) {
             $res = ['status' => 422, 'message' => 'All fields are mandatory'];
             
             echo json_encode($res);
@@ -90,10 +88,8 @@
         }
         
         $query = "UPDATE accessories_inout SET 
-                         accessoriesname='$accessoriesname', 
                          techname='$techname', 
                          out_date='$out_date',
-                         quantity='$quantity',
                          balance='$balance'
                   WHERE inout_id='$entry_id'";
         
@@ -101,7 +97,7 @@
         
         if($query_run) {
             
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Entry Updated Successfully</span>'];
+            $res = ['status' => 200, 'message' => 'Entry Updated Successfully'];
             
             echo json_encode($res);
             
@@ -110,7 +106,7 @@
         
         else {
             
-            $res = ['status' => 500,'message' => '<span style="white-space: nowrap;">Entry Not Updated</span>'];
+            $res = ['status' => 500,'message' => 'Entry Not Updated'];
             
             echo json_encode($res);
             

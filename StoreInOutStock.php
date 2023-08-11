@@ -375,7 +375,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             
-                            <form id="updateStudent">
+                            <form id="updateEntry">
                                 <div class="modal-body">
                                     <div class="row">
                                         <input type="hidden" name="inout_id" id="inout_id">
@@ -814,6 +814,15 @@
                         
                         var formData = new FormData(this);
                         formData.append("update_entry", true);
+
+                        for (var p of formData) {
+                            let name = p[0];
+                            let value = p[1];
+
+                            console.log(name, value)
+                        }
+
+                        
                         
                         $.ajax({
                             type: "POST",
