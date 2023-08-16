@@ -40,11 +40,12 @@
         // Use prepared statements to prevent SQL injection
         $query = "UPDATE staff_register SET  
                     technician_rank = ?, 
-                    job_ability = ?
+                    job_ability = ?,
+                    staffregisterlastmodify_by = ?
                   WHERE staffregister_id = ?";
         
         $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssss", $technician_rank, $job_ability, $staffregister_id, $staffregisterlastmodify_by);
+        mysqli_stmt_bind_param($stmt, "ssss", $technician_rank, $job_ability, $staffregisterlastmodify_by, $staffregister_id);
         
         if (mysqli_stmt_execute($stmt)) {
             $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Technician Info Updated Successfully!</span>'];

@@ -342,57 +342,57 @@
                                         <label for="">Job Ability</label>
                                         
                                         <div class="col-6 col-md-3">
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityWiring" name="job_ability" value="Wiring">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityWiring" name="job_ability[]" value="Wiring">
                                             <label class="form-check-label" for="WIRING">Wiring</label>
                                         </div>
                                                 
                                         <div class="col-6 col-md-3"> 
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityPneumatic" name="job_ability" value="Pneumatic">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityPneumatic" name="job_ability[]" value="Pneumatic">
                                             <label class="form-check-label" for="PNEUMATIC">Pneumatic</label>
                                         </div>
                                                 
                                         <div class="col-6 col-md-3"> 
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityMechanic" name="job_ability" value="Mechanic">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityMechanic" name="job_ability[]" value="Mechanic">
                                             <label class="form-check-label" for="MECHANIC">Mechanic</label>
                                         </div>
                                                 
                                         <div class="col-6 col-md-3"> 
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityGluepot" name="job_ability" value="Gluepot">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityGluepot" name="job_ability[]" value="Gluepot">
                                             <label class="form-check-label" for="GLUEPOT">Gluepot</label>
                                         </div>
                                                 
                                         <div class="col-6 col-md-3">  
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityJesh" name="job_ability" value="Jesh">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityJesh" name="job_ability[]" value="Jesh">
                                             <label class="form-check-label" for="JESH">Jesh</label>
                                         </div>
                                                 
                                         <div class="col-6 col-md-3">  
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityCNC" name="job_ability" value="CNC">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityCNC" name="job_ability[]" value="Cnc">
                                             <label class="form-check-label" for="CNC">CNC</label>
                                         </div>
                                                   
                                         <div class="col-6 col-md-3">
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityUV" name="job_ability" value="UV">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityUV" name="job_ability[]" value="Uv">
                                             <label class="form-check-label" for="UV">UV</label>
                                         </div>
 
                                         <div class="col-6 col-md-3"> 
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityPanelSaw" name="job_ability" value="Panel Saw">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityPanelSaw" name="job_ability[]" value="Panel Saw">
                                             <label class="form-check-label" for="PANELSAWMAC">Panel Saw</label>
                                         </div>
                                                 
                                         <div class="col-6 col-md-3"> 
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityEdgeBanding" name="job_ability" value="Edge Banding">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityEdgeBanding" name="job_ability[]" value="Edge Banding">
                                             <label class="form-check-label" for="EDGEBANDINGMAC">Edge Banding</label>
                                         </div>
 
                                         <div class="col-6 col-md-3"> 
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityFingerJoint" name="job_ability" value="Finger Joint">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityFingerJoint" name="job_ability[]" value="Finger Joint">
                                             <label class="form-check-label" for="FINGER JOINT">Finger Joint</label>
                                         </div>
                                                 
                                         <div class="col-6 col-md-4">
-                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityLoading/Unloading" name="job_ability" value="Loading / Unloading">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityLoading/Unloading" name="job_ability[]" value="Loading/Unloading">
                                             <label class="form-check-label" for="LOADINGUNLOADING">Loading / Unloading</label>
                                         </div>
                                         <!-- Ability -->
@@ -544,15 +544,21 @@
 
                                     var jobAbilities = res.data.job_ability.split(',');
                                     
+                                       
+                                    
+
                                     $('.job-ability-checkbox').each(function () {
-                                        if (jobAbilities.includes($(this).val())) {
-                                            $(this).prop('checked', true);
-                                        } 
-                                        
-                                        else {
-                                            $(this).prop('checked', false);
+                                        var currentCheckbox = $(this);
+                                        var abilityValue = currentCheckbox.val();
+
+                                        if (jobAbilities.includes(abilityValue)) {
+                                            currentCheckbox.prop('checked', true);
+                                        } else {
+                                            currentCheckbox.prop('checked', false);
                                         }
                                     });
+                                    
+                                    
 
                                     $('#staffregisterlastmodify_by').val(res.data.staffregisterlastmodify_by);
 
@@ -576,7 +582,9 @@
                             contentType: false,
                             
                             success: function (response) {
+                                console.log(response);
                                 var res = jQuery.parseJSON(response);
+                                alert(res.message);
                                 
                                 if(res.status == 422) {
                                     $('#errorMessageUpdate').removeClass('d-none');
