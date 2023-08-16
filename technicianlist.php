@@ -1,448 +1,608 @@
 <?php
- session_start();
- // cek apakah yang mengakses halaman ini sudah login
- if($_SESSION['staff_position']=="" ){
-  header("location:index.php?error");
- }
+    
+    session_start();
+    
+    if($_SESSION['staff_position']=="" ){
+        header("location:index.php?error");
+    }
+    
+    if(!isset($_SESSION['username'])) {
+        header("location:index.php?error");
+    }
 
-if(!isset($_SESSION['username']))
-	{	
-    header("location:index.php?error");
+    elseif($_SESSION['staff_position']== 'Admin') {
+
 	}
+    
+    elseif($_SESSION['staff_position']== 'Manager') {
 
-    elseif($_SESSION['staff_position']== 'Admin')
-	{
-
-	}
-
-        elseif($_SESSION['staff_position']== 'Manager')
-	{
-	}
-
-  else
-	{
-			header("location:index.php?error");
-	}
+    }
+    
+    else {
+        header("location:index.php?error");
+    }
 
 ?>
-<?php 
-// Include pagination library file 
-include_once 'Pagination.class.php'; 
- 
-// Include database configuration file 
-require_once 'dbconnect.php'; 
- 
-
-// Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM staff_register WHERE (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')"); 
-$result  = $query->fetch_assoc(); 
-$rowCount= $result['rowNum']; 
- 
-// Initialize pagination class 
-$pagConfig = array( 
- 
-    'totalRows' => $rowCount, 
-  
-); 
-$pagination =  new Pagination($pagConfig); 
- 
-// Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM staff_register WHERE (technician_rank = '1st Leader' OR technician_rank = '2nd Leader') ORDER BY staffregister_id ASC"); 
-?>
-
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-<head>
-    <meta name="keywords" content="" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NWM Technician</title>
-    <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <link href="css/homepage.css"rel="stylesheet" />
-	  <link href="css/machine.css"rel="stylesheet" />
-    <script src="js/number.js" type="text/javascript" defer></script>
-    <script src="js/form-validation.js"></script>  
-    <link href="css/technicianlist.css" rel="stylesheet" />
+        <title>NWM Technician</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
-   
-   <!-- Script -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-    <!--Boxicons link -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <link rel="stylesheet" href="assets/css/styles.css">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-</head>
-
-
-<body>
-
-<!-- Navigation Sidebar -->
-<div class="sidebar close">
-        <div class="logo-details">
-            <img src="neo.png" height="65" width="75"></img>
-            <span class="logo_name">NWM SYSTEM</span>
-        </div>
-        
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
-        
-        <ul class="nav-links">
-            <li>
-                <a href="jobregister.php">
-                    <i class='bx bx-registered' ></i>
-                    <span class="link_name">Register Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="attendanceadmin.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Attendance</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="staff.php">
-                        <i class='bx bx-id-card' ></i>
-                        <span class="link_name">Staff</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="staff.php">Staff</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="technicianlist.php">
-                    <i class='fa fa-users' ></i>
-                    <span class="link_name">Technician</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="customer.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="link_name">Customers</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="customer.php">Customers</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="machine.php">
-                        <i class='fa fa-medium' ></i>
-                        <span class="link_name">Machine</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="machine.php">Machine</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="accessories.php">
-                    <i class='bx bx-wrench' ></i>
-                    <span class="link_name">Accessories</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobtype.php">
-                    <i class='bx bx-briefcase'></i>
-                    <span class="link_name">Job Type</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o' ></i>
-                    <span class="link_name">Completed Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square' ></i>
-                    <span class="link_name">Canceled Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="adminreport.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Report</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out' ></i>
-                    <span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Navigation Sidebar -->
-
-    <!--Home navigation-->
-    <section class="home-section">
-    <nav>
-                <div class="home-content">
-                <i class='bx bx-menu' ></i>
-                          <a>
-						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                          </a>
-
-                 </div>
-
-    </nav>  
-
-          <!--Technician List-->
-        <div class="technicianList">
-        <h1>Technician List</h1>
-
-        <div class="staffRegisterBtn">
-        <button class="btn-reset" onclick="document.location='technicianlist.php'">Refresh</button>
-        </div>
-
-        <div class="datalist-wrapper">    
-        <div class="col-lg-12" style="border: none; padding-right: 8px; padding-left: 8px;">
-
-    <table class="table table-striped sortable">
-    <thead>
-    <tr>
-    <th>No</th>
-    <th>Name</th>
-    <th>Rank</th>
-    <th>Ability</th>
-    <th>Action</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <?php 
-            if($query->num_rows > 0){ $i=0; 
-                while($row = $query->fetch_assoc()){ $i++; 
-            ?>
-     
-    <tr>
-      <td><?php echo $i; ?></td>
-      <td><?php echo $row["staff_fullname"]; ?></td>
-      <td><?php echo $row["technician_rank"]; ?></td>
-      <td><?php echo $row["job_ability"]; ?></td>
-      <td><div class='staffUpdateDeleteBtn'>
-<button data-staffregister_id="<?php echo $row['staffregister_id'];?>" class='userinfo' type='button' id='btnView'>View</button>
-<button data-staffregister_id="<?php echo $row['staffregister_id'];?>" class='updateinfo' type='button' id='btnEdit'>Update</button>
-<button data-staffregister_id="<?php echo $row['staffregister_id'];?>" class='deletebtn' type='button' id='btnDelete'>Delete</button>
-</div></td>
-       
-
-    </tr>
-        <?php 
-                } 
-            }else{ 
-                echo '<tr><td colspan="6">No records found...</td></tr>'; 
-            } 
-            ?>
-        </tbody>
-        </table>
-		
-
-    </div>
-    </div>
-  </div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('table').DataTable();
-
-    });
-
-</script>
-
-      <!--Delete Staff -->      
-
-    <div class="modal fade" id="empModal" role="dialog">
-    <div class="modal-dialog">
-
-    <!-- Modal content-->
-
-    <div class="staffPopup">
-    <div class="contentStaffPopup">
-    <div class="title">Staff</div>
-    <div class="staff-details">
-    <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-    </div>
-    <div class="modal-body">    
-                          
-    </div>
-    </div>
-
-    <script type='text/javascript'>
-        $(document).ready(function() {
-        $('body').on('click','.deletebtn',function(){ 
-        var staffregister_id = $(this).data('staffregister_id');
-
-        // AJAX request
-        $.ajax({
-            url: 'deletetechnician.php',
-            type: 'post',
-            data: { staffregister_id: staffregister_id },
-            success: function(response) {
-            // Add response in Modal body
-            $('.modal-body').html(response);
-            // Display Modal
-            $('#empModal').modal('show');
-                                    }
-                                });
-                            });
-                        });
-    </script>
-        
-
-    <!--Update staff -->
-
-    <div class="modal fade" id="empModal" role="dialog">
-    <div class="modal-dialog">
-
-    <!-- Modal content-->
-
-    <div class="staffPopup">
-    <div class="contentStaffPopup">
-    <div class="title"> Technician </div>
-    <div class="staff-details">
-    <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-    </div>
-
-    <div class="modal-body">                         
-    </div></div>
-
-    <script type='text/javascript'>
-        $(document).ready(function() {
-        $('body').on('click','.updateinfo',function(){
-        var staffregister_id = $(this).data('staffregister_id');
-
-        // AJAX request
-        $.ajax({
-            url: 'updatetechnician.php',
-            type: 'post',
-            data: { staffregister_id: staffregister_id },
-            success: function(response) {
-            // Add response in Modal body
-            $('.modal-body').html(response);
-            // Display Modal
-            $('#empModal').modal('show');
-                                    }
-                                });
-                            });
-                        });
-    </script>
-        
-        <!--Staff list pop up form-->
-        <!-- Modal -->
-        <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="staffPopup">
-        <div class="contentStaffPopup">
-        <div class="title"> Staff Info </div>
-        <div class="staff-details">
-        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-        </div>       
-        <div class="modal-body">
-
-        </div>
-        </div>
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    </head>
     
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.userinfo',function(){
-            var userid = $(this).data('staffregister_id');
+    <style>
+        ::-webkit-scrollbar {display: none;}
+              
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
 
-            // AJAX request
-            $.ajax({
-                url: 'ajaxtechnicianlist.php',
-                type: 'post',
-                data: { userid: userid },
-                success: function(response) {
-            // Add response in Modal body
-                $('.modal-body').html(response);
-            // Display Modal
-                 $('#empModal').modal('show');
-                                    }
-                                });
-                            });
-                        });
-        </script>
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
+
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
+
+        .dropdown-content {
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
+        }
+        
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
+
+        .dropdown-content a {
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }
+        
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
+    </style>
     
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+                <div class="header__search">
+                    <div class="dropdown1">
+                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <div class="dropdown-content1">
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+                
+            </div>
+        </header>
 
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="Adminhomepage.php" class="nav__link nav__logo">
+                        <img src="neo.png" height="50" width="60"></img>
+                    </a>
 
-</div>
-</div>
-                    </script>
-    </section>
+                    <div class="nav__list">
+                        <div class="nav__items">
 
-  <script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
-    });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
-  </script>
+                            <a href="jobregister.php" class="nav__link active">
+                                <i class='bx bx-folder-plus nav__icon'></i>
+                                <span class="nav__name">New Job</span>
+                            </a>
 
-</body>
+                            <div class="nav__dropdown">
+                                <a href="staff.php" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Staff</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
 
-</html>
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                        <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                        <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                        <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="customer.php" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__name">Customer</span>
+                            </a>
+
+                            <a href="machine.php" class="nav__link">
+                                <i class='bx bx-cog nav__icon'></i>
+                                <span class="nav__name">Machine</span>
+                            </a>
+
+                            <a href="accessories.php" class="nav__link">
+                                <i class='bx bx-wrench nav__icon'></i>
+                                <span class="nav__name">Accessory</span>
+                            </a>
+
+                            <a href="jobtype.php" class="nav__link">
+                                <i class='bx bx-highlight nav__icon'></i>
+                                <span class="nav__name">Job Type</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-file nav__icon'></i>
+                                    <span class="nav__name">Record</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-task nav__icon'></i>
+                                    <span class="nav__name">Reports</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                        <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section>
+                <!-- View Modal -->
+                <div class="modal fade" id="technicianViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">View Technician</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">ID</label>
+                                        <p id="view_ID" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Employee ID</label>
+                                        <p id="view_EmpID" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Username</label>
+                                        <p id="view_username" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Full Name</label>
+                                        <p id="view_fullName" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Phone</label>
+                                        <p id="view_phone" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Email</label>
+                                        <p id="view_email" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Department</label>
+                                        <p id="view_department" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Group</label>
+                                        <p id="view_group" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Position</label>
+                                        <p id="view_position" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Technician Rank</label>
+                                        <p id="view_techRank" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="mb-3">
+                                        <label for="">Job Ability</label>
+                                        <p id="view_jobAbility" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Created By</label>
+                                        <p id="view_techCreBy" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Created At</label>
+                                        <p id="view_techCreAt" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Last Modify By</label>
+                                        <p id="view_lastModBy" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Last Modify At</label>
+                                        <p id="view_lastModAt" class="form-control"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Update Modal -->
+                <div class="modal fade" id="technicianEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Technician</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="updateTechnician">
+                                <div class="modal-body">
+                                    <input type="hidden" name="staffregister_id" id="staffregister_id">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Name</label>
+                                            <input type="text" name="staff_fullname" id="staff_fullname" class="form-control" disabled />
+                                        </div>
+                                            
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Employee ID</label>
+                                            <input type="text" name="employee_id" id="employee_id" class="form-control" disabled />
+                                        </div>
+                                        
+                                        <!-- Rank -->
+                                        <label for="">Technician Rank</label>
+
+                                        <div class="col-md-6 mb-3">
+                                            <input class="form-check-input" type="radio" name="technician_rank" id="technician_rank-1st" value="1st Leader">
+                                            <label class="form-check-label" for="inlineRadio1">1st Leader</label>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <input class="form-check-input" type="radio" name="technician_rank" id="technician_rank-2nd" value="2nd Leader">
+                                            <label class="form-check-label" for="inlineRadio2">2nd Leader</label>
+                                        </div>
+                                        <!-- Rank -->
+
+                                        <!-- Ability -->
+                                        <label for="">Job Ability</label>
+                                        
+                                        <div class="col-6 col-md-3">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityWiring" name="job_ability" value="Wiring">
+                                            <label class="form-check-label" for="WIRING">Wiring</label>
+                                        </div>
+                                                
+                                        <div class="col-6 col-md-3"> 
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityPneumatic" name="job_ability" value="Pneumatic">
+                                            <label class="form-check-label" for="PNEUMATIC">Pneumatic</label>
+                                        </div>
+                                                
+                                        <div class="col-6 col-md-3"> 
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityMechanic" name="job_ability" value="Mechanic">
+                                            <label class="form-check-label" for="MECHANIC">Mechanic</label>
+                                        </div>
+                                                
+                                        <div class="col-6 col-md-3"> 
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityGluepot" name="job_ability" value="Gluepot">
+                                            <label class="form-check-label" for="GLUEPOT">Gluepot</label>
+                                        </div>
+                                                
+                                        <div class="col-6 col-md-3">  
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityJesh" name="job_ability" value="Jesh">
+                                            <label class="form-check-label" for="JESH">Jesh</label>
+                                        </div>
+                                                
+                                        <div class="col-6 col-md-3">  
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityCNC" name="job_ability" value="CNC">
+                                            <label class="form-check-label" for="CNC">CNC</label>
+                                        </div>
+                                                  
+                                        <div class="col-6 col-md-3">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityUV" name="job_ability" value="UV">
+                                            <label class="form-check-label" for="UV">UV</label>
+                                        </div>
+
+                                        <div class="col-6 col-md-3"> 
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityPanelSaw" name="job_ability" value="Panel Saw">
+                                            <label class="form-check-label" for="PANELSAWMAC">Panel Saw</label>
+                                        </div>
+                                                
+                                        <div class="col-6 col-md-3"> 
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityEdgeBanding" name="job_ability" value="Edge Banding">
+                                            <label class="form-check-label" for="EDGEBANDINGMAC">Edge Banding</label>
+                                        </div>
+
+                                        <div class="col-6 col-md-3"> 
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityFingerJoint" name="job_ability" value="Finger Joint">
+                                            <label class="form-check-label" for="FINGER JOINT">Finger Joint</label>
+                                        </div>
+                                                
+                                        <div class="col-6 col-md-4">
+                                            <input class="form-check-input job-ability-checkbox" type="checkbox" id="job_abilityLoading/Unloading" name="job_ability" value="Loading / Unloading">
+                                            <label class="form-check-label" for="LOADINGUNLOADING">Loading / Unloading</label>
+                                        </div>
+                                        <!-- Ability -->
+                                        
+                                        <?php if (isset($_SESSION["username"])) { ?>
+                                            <input type="hidden" name="staffregisterlastmodify_by" id="staffregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
+                                        <?php } ?>
+                                    </div>
+                                   
+                                    <div id="errorMessageUpdate" class="alert alert-warning d-none" style="text-align: center;"></div>
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Technician List</h4>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="technicianTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'>No</th>
+                                        <th style='text-align: center;'>Name</th>
+                                        <th style='text-align: center;'>Rank</th>
+                                        <th style='text-align: center;'>Ability</th>
+                                        <th style='text-align: center;'>Action</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                    
+                                        require 'dbconnect.php';
+                                
+                                        $query = "SELECT * FROM staff_register WHERE (technician_rank = '1st Leader' OR technician_rank = '2nd Leader') ORDER BY staff_fullname ASC";
+                                        $query_run = mysqli_query($conn, $query);
+
+                                        $counter = 1;
+                                
+                                        if(mysqli_num_rows($query_run) > 0) {
+                                            foreach($query_run as $technician) {
+                                    ?>
+                            
+                                    <tr>
+                                        <td style='text-align: center;'><?= $counter ?></td>
+                                        <td style='white-space: nowrap;'><?= $technician['staff_fullname'] ?></td>
+                                        <td style='white-space: nowrap;'><?= $technician['technician_rank'] ?></td>
+                                        <td style='text-align: center;'><?= $technician['job_ability'] ?></td>
+                                        <td style='text-align: center; white-space: nowrap;'>
+                                            <button type="button" value="<?=$technician['staffregister_id'];?>" class="viewTechBtn btn btn-info btn-sm">View</button>
+                                            <button type="button" value="<?=$technician['staffregister_id'];?>" class="editTechBtn btn btn-success btn-sm">Update</button>
+                                        </td>
+                                    </tr>
+                                    <?php $counter++; } } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                
+                <!--========== JS ==========-->
+                <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script src="assets/js/main.js"></script>
+                
+                <script>
+                    $(document).ready(function(){
+                        $('#technicianTable').DataTable({
+                            responsive:true,
+                            language: {search:"_INPUT_",
+                                       searchPlaceholder:"Search"},
+                            pagingType: 'full_numbers'
+                        });
+                    });
+                </script>
+                
+                <script>
+                    // <!-- View -->
+                    $(document).on('click', '.viewTechBtn', function () {
+                        var staffregister_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "technicianlistCode.php?staffregister_id=" + staffregister_id,
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 404) {
+                                    alert(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#view_ID').text(res.data.staffregister_id);
+                                    $('#view_username').text(res.data.username);
+                                    $('#view_fullName').text(res.data.staff_fullname);
+                                    $('#view_EmpID').text(res.data.employee_id);
+                                    $('#view_phone').text(res.data.staff_phone);
+                                    $('#view_email').text(res.data.staff_email);
+                                    $('#view_department').text(res.data.staff_department);
+                                    $('#view_position').text(res.data.staff_position);
+                                    $('#view_group').text(res.data.staff_group);
+                                    $('#view_techRank').text(res.data.technician_rank);
+                                    $('#view_jobAbility').text(res.data.job_ability);
+                                    $('#view_techCreBy').text(res.data.staffregistercreated_by);
+                                    $('#view_techCreAt').text(res.data.staffregistercreated_at);
+                                    $('#view_lastModBy').text(res.data.staffregisterlastmodify_by);
+                                    $('#view_lastModAt').text(res.data.staffregisterlastmodify_at);
+                                    
+                                    $('#technicianViewModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    // <!-- Update -->
+                    $(document).on('click', '.editTechBtn', function () {
+                        var staffregister_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "technicianlistCode.php?staffregister_id=" + staffregister_id,
+                            
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if (res.status == 404) {
+                                    alert(res.message);
+                                } 
+                                
+                                else if (res.status == 200) {
+                                    $('#staffregister_id').val(res.data.staffregister_id);
+                                    $('#staff_fullname').val(res.data.staff_fullname);
+                                    $('#employee_id').val(res.data.employee_id);
+                                    $('input[name=technician_rank][value="' + res.data.technician_rank + '"]').prop('checked', true);
+
+                                    var jobAbilities = res.data.job_ability.split(',');
+                                    
+                                    $('.job-ability-checkbox').each(function () {
+                                        if (jobAbilities.includes($(this).val())) {
+                                            $(this).prop('checked', true);
+                                        } 
+                                        
+                                        else {
+                                            $(this).prop('checked', false);
+                                        }
+                                    });
+
+                                    $('#staffregisterlastmodify_by').val(res.data.staffregisterlastmodify_by);
+
+                                    $('#technicianEditModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+
+                    $(document).on('submit', '#updateTechnician', function (e) {
+                        e.preventDefault();
+                        
+                        var formData = new FormData(this);
+                        formData.append('update_technician', true);
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "technicianlistCode.php",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 422) {
+                                    $('#errorMessageUpdate').removeClass('d-none');
+                                    $('#errorMessageUpdate').text(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#errorMessageUpdate').addClass('d-none');
+                                    
+                                    alertify.set('notifier','position', 'top-right');
+                                    alertify.success(res.message);
+                                    
+                                    window.location.reload();
+
+                                    $('#technicianEditModal').modal('hide');
+                                    $('#updateTechnician')[0].reset();
+                                }
+                                
+                                else if(res.status == 500) {
+                                    alert(res.message);
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </section>
+        </main>        
+    </body>
+    </html>
