@@ -36,8 +36,7 @@
         $technician_rank = mysqli_real_escape_string($conn, $_POST['technician_rank']);
         $job_ability = isset($_POST['job_ability']) ? (is_array($_POST['job_ability']) ? implode(',', $_POST['job_ability']) : $_POST['job_ability']) : '';
         $staffregisterlastmodify_by = mysqli_real_escape_string($conn, $_POST['staffregisterlastmodify_by']);
-    
-        // Use prepared statements to prevent SQL injection
+
         $query = "UPDATE staff_register SET  
                     technician_rank = ?, 
                     job_ability = ?,
@@ -49,15 +48,15 @@
         
         if (mysqli_stmt_execute($stmt)) {
             $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Technician Info Updated Successfully!</span>'];
-            
-            // Retrieve the updated data and send it back to the client
-            $updatedData = [
-                'technician_rank' => $technician_rank,
-                'job_ability' => $job_ability,
-                'staffregisterlastmodify_by' => $staffregisterlastmodify_by
-            ];
+
+            $updatedData = ['technician_rank' => $technician_rank,
+                            'job_ability' => $job_ability,
+                            'staffregisterlastmodify_by' => $staffregisterlastmodify_by];
+
             $res['data'] = $updatedData;
-        } else {
+        } 
+        
+        else {
             $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Technician Info Not Updated</span>'];
         }
         

@@ -544,21 +544,18 @@
 
                                     var jobAbilities = res.data.job_ability.split(',');
                                     
-                                       
-                                    
-
                                     $('.job-ability-checkbox').each(function () {
                                         var currentCheckbox = $(this);
                                         var abilityValue = currentCheckbox.val();
 
                                         if (jobAbilities.includes(abilityValue)) {
                                             currentCheckbox.prop('checked', true);
-                                        } else {
+                                        } 
+                                        
+                                        else {
                                             currentCheckbox.prop('checked', false);
                                         }
                                     });
-                                    
-                                    
 
                                     $('#staffregisterlastmodify_by').val(res.data.staffregisterlastmodify_by);
 
@@ -582,9 +579,7 @@
                             contentType: false,
                             
                             success: function (response) {
-                                console.log(response);
                                 var res = jQuery.parseJSON(response);
-                                alert(res.message);
                                 
                                 if(res.status == 422) {
                                     $('#errorMessageUpdate').removeClass('d-none');
@@ -593,14 +588,15 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessageUpdate').addClass('d-none');
+                                    $('#technicianEditModal').modal('hide');
+                                    $('#updateTechnician')[0].reset();
                                     
                                     alertify.set('notifier','position', 'top-right');
                                     alertify.success(res.message);
                                     
-                                    window.location.reload();
-
-                                    $('#technicianEditModal').modal('hide');
-                                    $('#updateTechnician')[0].reset();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
                                 }
                                 
                                 else if(res.status == 500) {

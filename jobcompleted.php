@@ -1,243 +1,524 @@
 <?php session_start(); ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-	<head>
-		<meta name="keywords" content="" />
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>NWM Completed Job</title>
-		<link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
-		<link href="css/homepage.css" rel="stylesheet" />
-		<link href="css/machine.css" rel="stylesheet" />
-		<link href="css/jobcompleted.css" rel="stylesheet" />
-		<!-- Datatable CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" />
-		<!-- Script -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<!--Boxicons link -->
-		<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-		<script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-	</head>
+        <title>Completed Job</title>
 
-	<body>
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+        
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    </head>
+    
+    <style>
+        ::-webkit-scrollbar {display: none;}
 
-		<!-- Navigation Sidebar -->
-        <div class="sidebar close">
-        <div class="logo-details">
-            <img src="neo.png" height="65" width="75"></img>
-            <span class="logo_name">NWM SYSTEM</span>
+        #staffListTable {counter-reset:rowNumber}
+        #staffListTable tr>td:first-child {counter-increment:rowNumber}
+        #staffListTable tr td:first-child::before {content:counter(rowNumber)}
+
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
+
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
+
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
+
+        .dropdown-content {
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
+        }
+        
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
+
+        .dropdown-content a {
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }
+        
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
+    </style>
+    
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+                <div class="header__search">
+                    <div class="dropdown1">
+                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <div class="dropdown-content1">
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+                
+            </div>
+        </header>
+
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="Adminhomepage.php" class="nav__link nav__logo">
+                        <img src="neo.png" height="50" width="60"></img>
+                    </a>
+
+                    <div class="nav__list">
+                        <div class="nav__items">
+
+                            <a href="jobregister.php" class="nav__link active">
+                                <i class='bx bx-folder-plus nav__icon'></i>
+                                <span class="nav__name">New Job</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="staff.php" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Staff</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                        <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                        <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                        <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="customer.php" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__name">Customer</span>
+                            </a>
+
+                            <a href="machine.php" class="nav__link">
+                                <i class='bx bx-cog nav__icon'></i>
+                                <span class="nav__name">Machine</span>
+                            </a>
+
+                            <a href="accessories.php" class="nav__link">
+                                <i class='bx bx-wrench nav__icon'></i>
+                                <span class="nav__name">Accessory</span>
+                            </a>
+
+                            <a href="jobtype.php" class="nav__link">
+                                <i class='bx bx-highlight nav__icon'></i>
+                                <span class="nav__name">Job Type</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-file nav__icon'></i>
+                                    <span class="nav__name">Record</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-task nav__icon'></i>
+                                    <span class="nav__name">Reports</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                        <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
         </div>
-        
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
-        
-        <ul class="nav-links">
-            <li>
-                <a href="jobregister.php">
-                    <i class='bx bx-registered' ></i>
-                    <span class="link_name">Register Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-                </ul>
-            </li>
 
-            <li>
-                <a href="attendanceadmin.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Attendance</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="staff.php">
-                        <i class='bx bx-id-card' ></i>
-                        <span class="link_name">Staff</span>
-                    </a>
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section>
+                <!-- Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Completed Job</h4>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="completeJobTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'>No</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Job Order Number</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Customer Name</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Job Assign</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Job Created date</th>
+                                        <th style='text-align: center;'>Action</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                        
+                                        require 'dbconnect.php';
+                                        
+                                        $query = "SELECT * FROM job_register WHERE job_status = 'Completed' ORDER BY today_date ASC";
+                                        $query_run = mysqli_query($conn, $query);
+
+                                        $counter = 1;
+                                
+                                        if(mysqli_num_rows($query_run) > 0) {
+                                            foreach($query_run as $job) {
+                                    ?>
+                            
+                                    <tr>
+                                        <td style='text-align: center;'><?= $counter ?></td>
+                                        <td style='text-align: center; white-space: nowrap;'><?= $job['job_order_number'] ?></td>
+                                        <td><?= $job['customer_name'] ?></td>
+                                        <td style='text-align: center; white-space: nowrap;'><?= $job['job_assign'] ?></td>
+                                        <td style='text-align: center; white-space: nowrap;'><?= $job['today_date'] ?></td>
+                                        <td style='text-align: center;'>
+                                            <button type="button" class="viewJobBtn btn btn-info btn-sm" data-jobregister-id="<?=$job['jobregister_id'];?>">View</button>
+                                        </td>
+                                    </tr>
+                                    <?php $counter++; } } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="staff.php">Staff</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="technicianlist.php">
-                    <i class='fa fa-users' ></i>
-                    <span class="link_name">Technician</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="customer.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="link_name">Customers</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="customer.php">Customers</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="machine.php">
-                        <i class='fa fa-medium' ></i>
-                        <span class="link_name">Machine</span>
-                    </a>
+                </br>
+                
+                <!--========== JS ==========-->
+                <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script src="assets/js/main.js"></script>
+                
+                <script>
+                    $(document).ready(function(){
+                        $('#completeJobTable').DataTable({
+                            responsive:true,
+                            language: {search:"_INPUT_",
+                                       searchPlaceholder:"Search"},
+                            pagingType: 'full_numbers'
+                        });
+                    });
+                </script>
+
+                <!-- PopUp Modal -->
+                <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="tab-buttons" role="tablist" style="text-align: center; display:inline-flex;">
+                                    <button class="btn tab-button active" data-bs-target="#JobInfo" aria-controls="JobInfo" aria-selected="true" id="showjobinfo" style="border:none; margin-left:20px; margin-right:30px; font-weight: bold;">Job Info</button>
+                                    <button class="btn tab-button" data-bs-target="#JobAssign" aria-controls="JobAssign" aria-selected="false" id="showjobassign" style="border:none; margin-right:30px; font-weight: bold;">Job Assign</button>
+                                    <button class="btn tab-button" data-bs-target="#Update" aria-controls="Update" aria-selected="false" id="showUpdate" style="border:none; font-weight: bold;">Update</button>
+                                    <button class="btn tab-button" data-bs-target="#Accessory" aria-controls="Accessory" aria-selected="false" id="showaccessory" style="border:none; margin-left:20px; margin-right:30px; font-weight: bold;">Accessory</button>
+                                    <button class="btn tab-button" data-bs-target="#Photo" aria-controls="Photo" aria-selected="false" id="showPhoto" style="border:none; margin-right:30px; font-weight: bold;">Photo</button>
+                                    <button class="btn tab-button" data-bs-target="#Video" aria-controls="Video" aria-selected="false" id="showVideo" style="border:none; font-weight: bold;">Video</button>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <div class="tab-content mt-3">
+                                    <!-- Job info -->
+                                    <div class="tab-pane show active" id="JobInfo" role="tabpanel" aria-labelledby="JobInfo" style="color: black;">
+                                        <form id="showjobinfo" action="AdminCompletedJobInfo.php" method="post">
+                                            <div class="completed-details">
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <script type='text/javascript'>
+                                        $(document).ready(function() {
+                                            $('.viewJobBtn').click(function() {
+                                                var jobregister_id = $(this).data('jobregister-id');
+                                                
+                                                $.ajax({
+                                                    url: 'AdminCompletedJobInfo.php',
+                                                    type: 'post',
+                                                    data: { jobregister_id: jobregister_id },
+                                                    success: function(response) {
+                                                        $('.completed-details').html(response);
+                                                        $('#JobModal').modal('show');
+                                                    },
+                                                    
+                                                    error: function(xhr, status, error) {
+                                                        console.log("An error occurred:", error);
+                                                        $('.completed-details').html("An error occurred while fetching data.");
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                    
+                                    <!-- Job Assign -->
+                                    <div class="tab-pane" id="JobAssign" role="tabpanel" aria-labelledby="JobAssign" style="color: black;">
+                                        <form id="showjobassign" action="jobassignAdminCOMPLETED.php" method="post">
+                                            <div class="completed-JobAssign">
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <script type='text/javascript'>
+                                        $(document).ready(function() {
+                                            $('.viewJobBtn').click(function() {
+                                                var jobregister_id = $(this).data('jobregister-id');
+                                                
+                                                $.ajax({
+                                                    url: 'jobassignAdminCOMPLETED.php',
+                                                    type: 'post',
+                                                    data: { jobregister_id: jobregister_id },
+                                                    success: function(response) {
+                                                        $('.completed-JobAssign').html(response);
+                                                        $('#JobModal').modal('show');
+                                                    },
+                                                    
+                                                    error: function(xhr, status, error) {
+                                                        console.log("An error occurred:", error);
+                                                        $('.completed-JobAssign').html("An error occurred while fetching data.");
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+
+                                    <!-- Update -->
+                                    <div class="tab-pane" id="Update" role="tabpanel" aria-labelledby="Update" style="color: black;">
+                                        <form id="showUpdate" action="ajaxtechupdatecomplete.php" method="post">
+                                            <div class="completed-update">
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <script type='text/javascript'>
+                                        $(document).ready(function() {
+                                            $('.viewJobBtn').click(function() {
+                                                var jobregister_id = $(this).data('jobregister-id');
+                                                
+                                                $.ajax({
+                                                    url: 'ajaxtechupdatecomplete.php',
+                                                    type: 'post',
+                                                    data: { jobregister_id: jobregister_id },
+                                                    success: function(response) {
+                                                        $('.completed-update').html(response);
+                                                        $('#JobModal').modal('show');
+                                                    },
+                                                    
+                                                    error: function(xhr, status, error) {
+                                                        console.log("An error occurred:", error);
+                                                        $('.completed-update').html("An error occurred while fetching data.");
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+
+                                    <!-- Accessories -->
+                                    <div class="tab-pane" id="Accessory" role="tabpanel" aria-labelledby="Accessory" style="color: black;">
+                                        <form id="showaccessory" action="ajaxtabaccessories.php" method="post">
+                                            <div class="completed-accessories">
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <script type='text/javascript'>
+                                        $(document).ready(function() {
+                                            $('.viewJobBtn').click(function() {
+                                                var jobregister_id = $(this).data('jobregister-id');
+                                                
+                                                $.ajax({
+                                                    url: 'ajaxtabaccessories.php',
+                                                    type: 'post',
+                                                    data: { jobregister_id: jobregister_id },
+                                                    success: function(response) {
+                                                        $('.completed-accessories').html(response);
+                                                        $('#JobModal').modal('show');
+                                                    },
+                                                    
+                                                    error: function(xhr, status, error) {
+                                                        console.log("An error occurred:", error);
+                                                        $('.completed-accessories').html("An error occurred while fetching data.");
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+
+                                    <!-- Photo -->
+                                    <div class="tab-pane" id="Photo" role="tabpanel" aria-labelledby="Photo" style="color: black;">
+                                        <form id="showPhoto" action="ajaxtechphtoupdtcomplete.php" method="post">
+                                            <div class="completed-photos">
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <script type='text/javascript'>
+                                        $(document).ready(function() {
+                                            $('.viewJobBtn').click(function() {
+                                                var jobregister_id = $(this).data('jobregister-id');
+                                                
+                                                $.ajax({
+                                                    url: 'ajaxtechphtoupdtcomplete.php',
+                                                    type: 'post',
+                                                    data: { jobregister_id: jobregister_id },
+                                                    success: function(response) {
+                                                        $('.completed-photos').html(response);
+                                                        $('#JobModal').modal('show');
+                                                    },
+                                                    
+                                                    error: function(xhr, status, error) {
+                                                        console.log("An error occurred:", error);
+                                                        $('.completed-photos').html("An error occurred while fetching data.");
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+
+                                    <!-- Video -->
+                                    <div class="tab-pane" id="Video" role="tabpanel" aria-labelledby="Video" style="color: black;">
+                                        <form id="showVideo"action="ajaxtechvideoupdtcomplete.php" method="post">
+                                            <div class="completed-video">
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <script type='text/javascript'>
+                                        $(document).ready(function() {
+                                            $('.viewJobBtn').click(function() {
+                                                var jobregister_id = $(this).data('jobregister-id');
+                                                
+                                                $.ajax({
+                                                    url: 'ajaxtechvideoupdtcomplete.php',
+                                                    type: 'post',
+                                                    data: { jobregister_id: jobregister_id },
+                                                    success: function(response) {
+                                                        $('.completed-video').html(response);
+                                                        $('#JobModal').modal('show');
+                                                    },
+                                                    
+                                                    error: function(xhr, status, error) {
+                                                        console.log("An error occurred:", error);
+                                                        $('.completed-video').html("An error occurred while fetching data.");
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="machine.php">Machine</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="accessories.php">
-                    <i class='bx bx-wrench' ></i>
-                    <span class="link_name">Accessories</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobtype.php">
-                    <i class='bx bx-briefcase'></i>
-                    <span class="link_name">Job Type</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o' ></i>
-                    <span class="link_name">Completed Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square' ></i>
-                    <span class="link_name">Canceled Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="adminreport.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Report</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out' ></i>
-                    <span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Navigation Sidebar -->
-
-		<!--Home navigation-->
-		<section class="home-section">
-			<nav>
-				<div class="home-content">
-					<i class='bx bx-menu'></i>
-					<a><button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button></a>
-				</div>
-			</nav>
-
-			<!--Job Type-->
-			<div class="jobTypeList">
-				<h1>Completed Job List</h1>
-
-				<form method="POST" action="">
-					<table>
-						<tr>
-							<td style="padding-left: 17px;"><input type="date" class="form-control" placeholder="START" name="date1" /></td>
-							<td><input type="date" class="form-control" placeholder="END" name="date2" /></td>
-							<td><button id="btn_search" name="search" class="btn-search">Search</button></td>
-							<td><button class="btn-reset" onclick="document.location='jobcompleted.php'">Refresh</button></td>
-						</tr>
-					</table>
-				</form>
-
-				<div class="datalist-wrapper">
-					<div class="col-lg-12" style="border: none;">
-						<table class="table table-striped sortable">
-							<thead>
-								<tr>
-									<th>No</th>
-									<th>Job Order Number</th>
-									<th>Customer Name</th>
-									<th>Job Assign</th>
-									<th>Job Created Date</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php include "completedrange.php"; ?>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<script type="text/javascript">
-					$(document).ready(function() {
-						$('table').DataTable();
-
-					});
-				</script>
-
-				<script>
-					let arrow = document.querySelectorAll(".arrow");
-					for (var i = 0; i < arrow.length; i++) {
-						arrow[i].addEventListener("click", (e) => {
-							let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-							arrowParent.classList.toggle("showMenu");
-						});
-					}
-					let sidebar = document.querySelector(".sidebar");
-					let sidebarBtn = document.querySelector(".bx-menu");
-					console.log(sidebarBtn);
-					sidebarBtn.addEventListener("click", () => {
-						sidebar.classList.toggle("close");
-					});
-				</script>
-
-	</body>
-
-</html>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const tabButtons = document.querySelectorAll('.tab-buttons .tab-button');
+                        const viewJobButtons = document.querySelectorAll('.viewJobBtn');
+                        
+                        tabButtons.forEach((button) => {
+                            button.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                const targetTab = button.getAttribute('data-bs-target');
+                                
+                                document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                    pane.classList.remove('show', 'active');
+                                });
+                                
+                                document.querySelector(targetTab).classList.add('show', 'active');
+                                
+                                tabButtons.forEach((btn) => {
+                                    btn.classList.remove('active');
+                                });
+                                
+                                button.classList.add('active');
+                            });
+                        });
+                        
+                        viewJobButtons.forEach((button) => {
+                            button.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                const jobregisterId = button.getAttribute('data-jobregister-id');
+                                const modal = document.querySelector('#JobModal');
+                                const jobRegisterInput = modal.querySelector('#jobregister_id');
+                                
+                                if (jobRegisterInput) {
+                                    jobRegisterInput.value = jobregisterId;
+                                }
+                                
+                                const bootstrapModal = new bootstrap.Modal(modal);
+                                bootstrapModal.show();
+                            });
+                        });
+                    });
+                </script>
+            </section>
+        </main>        
+    </body>
+    </html>

@@ -847,7 +847,7 @@
                                     
                                     setTimeout(function() {
                                         location.reload();
-                                    }, 700);;
+                                    }, 700);
                                 } 
                                 
                                 else if (res.status == 500) {

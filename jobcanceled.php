@@ -1,404 +1,615 @@
 <?php
- session_start();
- // cek apakah yang mengakses halaman ini sudah login
- if($_SESSION['staff_position']=="" ){
-  header("location:index.php?error");
- }
-
-if(!isset($_SESSION['username']))
-	{	
-    header("location:index.php?error");
+    
+    session_start();
+    
+    if($_SESSION['staff_position']=="" ) {
+        header("location:index.php?error");
+    }
+    
+    if(!isset($_SESSION['username'])) {
+        header("location:index.php?error");
 	}
 
-    elseif($_SESSION['staff_position']== 'Admin')
-	{
+    elseif($_SESSION['staff_position']== 'Admin') {
 
-	}
+    }
+    
+    elseif($_SESSION['staff_position']== 'Manager') {
 
-        elseif($_SESSION['staff_position']== 'Manager')
-	{
-	}
-
-  else
-	{
-			header("location:index.php?error");
+    }
+    
+    else {
+        header("location:index.php?error");
 	}
 
 ?>
-
-<?php 
-// Include pagination library file 
-include_once 'Pagination.class.php'; 
- 
-// Include database configuration file 
-require_once 'dbconnect.php'; 
- 
-
-// Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM job_register WHERE job_cancel = 'YES'"); 
-$result  = $query->fetch_assoc(); 
-$rowCount= $result['rowNum']; 
- 
-// Initialize pagination class 
-$pagConfig = array( 
- 
-    'totalRows' => $rowCount, 
-  
-); 
-$pagination =  new Pagination($pagConfig); 
- 
-// Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM job_register WHERE job_cancel = 'YES' ORDER BY jobregister_id ASC"); 
-?>
-
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-<head>
-    <meta name="keywords" content="" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NWM Canceled Job</title>
-    <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <link href="css/homepage.css" rel="stylesheet" />
-    <link href="css/machine.css" rel="stylesheet" />
-    <link href="css/jobcanceled.css" rel="stylesheet" />
+        <title>Canceled Job</title>
 
-    <script src="js/number.js" type="text/javascript" defer></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css"/>
-   
-   <!-- Script -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-    <!--Boxicons link -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <link rel="stylesheet" href="assets/css/styles.css">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-</head>
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
-
-<body>
-
-            
- <!-- Navigation Sidebar -->
- <div class="sidebar close">
-        <div class="logo-details">
-            <img src="neo.png" height="65" width="75"></img>
-            <span class="logo_name">NWM SYSTEM</span>
-        </div>
-        
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
-        
-        <ul class="nav-links">
-            <li>
-                <a href="jobregister.php">
-                    <i class='bx bx-registered' ></i>
-                    <span class="link_name">Register Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="attendanceadmin.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Attendance</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="staff.php">
-                        <i class='bx bx-id-card' ></i>
-                        <span class="link_name">Staff</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="staff.php">Staff</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="technicianlist.php">
-                    <i class='fa fa-users' ></i>
-                    <span class="link_name">Technician</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="customer.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="link_name">Customers</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="customer.php">Customers</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="machine.php">
-                        <i class='fa fa-medium' ></i>
-                        <span class="link_name">Machine</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="machine.php">Machine</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="accessories.php">
-                    <i class='bx bx-wrench' ></i>
-                    <span class="link_name">Accessories</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobtype.php">
-                    <i class='bx bx-briefcase'></i>
-                    <span class="link_name">Job Type</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o' ></i>
-                    <span class="link_name">Completed Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square' ></i>
-                    <span class="link_name">Canceled Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="adminreport.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Report</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out' ></i>
-                    <span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Navigation Sidebar -->
-
-    <!--Home navigation-->
-    <section class="home-section">
-    <nav>
-                <div class="home-content">
-                      <i class='bx bx-menu' ></i>
-                          <a>
-						<button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                          </a>
-
-                 </div>
-
-    </nav>  
-
-
-        <!--Canceled Job List-->
-
-        <div class="jobTypeList">
-            <h1>Canceled Job List</h1>
-            <div class="addJobTypeBtn">
-            <button class="btn-reset" onclick="document.location='jobcanceled.php'">Refresh</button>
-            </div>
-
-        <div class="datalist-wrapper">    
-        <div class="col-lg-12" style="border: none;">
-
-        <table class="table table-striped sortable">
-<thead>
-    <tr>
-    <th>No</th>
-    <th>Job Order Number</th>
-    <th>Customer Name</th>
-    <th>Requested Date</th>
-    <th>Action</th>
+        <!--========== JS ==========-->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    </head>
     
-    </tr>
-</thead>
-<tbody>
-    <?php 
-            if($query->num_rows > 0){ $i=0; 
-                while($row = $query->fetch_assoc()){ $i++; 
-            ?>
-     
-    <tr>
-        <td><?php echo $i; ?></td>
-        <td><?php echo $row["job_order_number"]; ?></td>
-        <td><?php echo $row["customer_name"]; ?></td>
-        <td><?php echo $row["requested_date"]; ?></td>
-        <td><div class='jobTypeUpdateDeleteBtn'>
-<button data-jobregister_id="<?php echo $row['jobregister_id'];?>" class='userinfo' type='button' id='btnView'>View</button>
-<button data-jobregister_id="<?php echo $row['jobregister_id'];?>" class='updateinfo' type='button' id='btnEdit'>Update</button>
-</div>
-</td>
-       
+    <style>
+        ::-webkit-scrollbar {display: none;}
+              
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
 
-    </tr>
- <?php 
-                } 
-            }else{ 
-                echo '<tr><td colspan="6">No records found...</td></tr>'; 
-            } 
-            ?>
-</tbody>
-        </table>
-		
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
 
-    </div>
-    </div>
-  </div>
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('table').DataTable();
+        .dropdown-content {
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
+        }
+        
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
 
-    });
-
-</script>
-
-          <!--Update Job Canceled -->
-
-            <div class="modal fade" id="empModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-
-            <div class="jobTypePopup">
-            <div class="contentjobTypePopup">
-            <div class="title">Canceled Job</div>
-            <div class="jobType-details">
-            <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
-            </div>         
-            <div class="modal-body">                         
+        .dropdown-content a {
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }
+        
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
+    </style>
+    
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+                <div class="header__search">
+                    <div class="dropdown1">
+                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <div class="dropdown-content1">
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+                
             </div>
-            </div>
+        </header>
 
-            <script type='text/javascript'>
-                $(document).ready(function() {
-                $('body').on('click','.updateinfo',function(){
-                var jobregister_id = $(this).data('jobregister_id');
-                // AJAX request
-                $.ajax({
-                    url: 'updatejobcancel.php',
-                    type: 'post',
-                    data: { jobregister_id: jobregister_id },
-                    success: function(response) {
-                // Add response in Modal body
-                    $('.modal-body').html(response);
-                // Display Modal
-                    $('#empModal').modal('show');
-                                    }
-                                });
-                            });
-                        });
-            </script>
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="Adminhomepage.php" class="nav__link nav__logo">
+                        <img src="neo.png" height="50" width="60"></img>
+                    </a>
 
-        <!-- View Modal -->
-       <div class="modal fade" id="empModal" role="dialog">
-        <div class="modal-dialog">
+                    <div class="nav__list">
+                        <div class="nav__items">
 
-        <!-- Modal content-->
-        <div class="jobTypePopup">
-        <div class="contentjobTypePopup">
-        <div class="title">Canceled Job</div>
-        <div class="jobType-details">
-        <div class="close" data-dismiss="modal" onclick="document.getElementById('popup-1').style.display='none'">&times</div>
+                            <a href="jobregister.php" class="nav__link active">
+                                <i class='bx bx-folder-plus nav__icon'></i>
+                                <span class="nav__name">New Job</span>
+                            </a>
 
-        </div>            
-        <div class="modal-body">
-        <h5>Canceled Job Info</h5>  
+                            <div class="nav__dropdown">
+                                <a href="staff.php" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Staff</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                        <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                        <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                        <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="customer.php" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__name">Customer</span>
+                            </a>
+
+                            <a href="machine.php" class="nav__link">
+                                <i class='bx bx-cog nav__icon'></i>
+                                <span class="nav__name">Machine</span>
+                            </a>
+
+                            <a href="accessories.php" class="nav__link">
+                                <i class='bx bx-wrench nav__icon'></i>
+                                <span class="nav__name">Accessory</span>
+                            </a>
+
+                            <a href="jobtype.php" class="nav__link">
+                                <i class='bx bx-highlight nav__icon'></i>
+                                <span class="nav__name">Job Type</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-file nav__icon'></i>
+                                    <span class="nav__name">Record</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-task nav__icon'></i>
+                                    <span class="nav__name">Reports</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                        <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
         </div>
-        </div>
 
-        <script type='text/javascript'>
-            $(document).ready(function() {
-            $('body').on('click','.userinfo',function(){           
-            var userid = $(this).data('jobregister_id');
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section>
+                <!-- View Modal -->
+                <div class="modal fade" id="jobViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">View Job Info</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">ID</label>
+                                        <p id="view_ID" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Job Order Number</label>
+                                        <p id="view_JON" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Job Name</label>
+                                        <p id="view_jobName" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Job Description</label>
+                                        <p id="view_description" class="form-control"></p>
+                                    </div>
 
-        // AJAX request
-            $.ajax({
-                url: 'ajaxjobcanceled.php',
-                type: 'post',
-                data: { userid: userid },
-                success: function(response) {
-        // Add response in Modal body
-                $('.modal-body').html(response);
-        // Display Modal
-                $('#empModal').modal('show');
-                                    }
-                                });
-                            });
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Customer Name</label>
+                                        <p id="view_custName" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Customer PIC</label>
+                                        <p id="view_PIC" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Machine Name</label>
+                                        <p id="view_machName" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Job Assign</label>
+                                        <p id="view_jobAss" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Requested Date</label>
+                                        <p id="view_reqDate" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Job Register By</label>
+                                        <p id="view_jobRegBy" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Job Register At</label>
+                                        <p id="view_jobRegAt" class="form-control"></p>
+                                    </div>
+                                
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Last Modify By</label>
+                                        <p id="view_lastModBy" class="form-control"></p>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="">Last Modify At</label>
+                                        <p id="view_lastModAt" class="form-control"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Update Modal -->
+                <div class="modal fade" id="jobEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Job Info</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form id="updateJob">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <input type="hidden" name="jobregister_id" id="jobregister_id" >
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Job Order Number</label>
+                                            <input type="text" name="job_order_number" id="job_order_number" class="form-control" disabled />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Job Name</label>
+                                            <select type="text" name="job_name" id="job_name" style="width: 100%;" class="form-select" onchange="GetDetail(this.value)">
+                                                <option value="">-- Select Job Name --</option>
+                                                    <?php
+                                                        
+                                                        include "dbconnect.php";
+                                                        
+                                                        $records = mysqli_query($conn, "SELECT * FROM jobtype_list ORDER BY jobtype_id ASC");
+
+                                                        while ($data = mysqli_fetch_array($records)) {
+                                                            echo "<option value='" . $data['job_name'] . "' data-jobDescription='". $data['job_description'] ."' data-jobCode='". $data['job_code'] ."'>" . $data['job_name'] . "</option>";
+                                                        }
+                                                    ?>
+                                            </select>
+                                        </div>
+
+                                        <script>
+                                            $(document).ready(function(){
+                                                $('#job_name').select2({
+                                                    dropdownParent: $('#jobEditModal'),
+                                                    theme: 'bootstrap-5'
+                                                });
+                                            });
+                                        </script>
+                                        
+                                        <script>
+                                            function GetDetail(value) {
+                                                var selectedOption = document.querySelector('#job_name option[value="' + value + '"]');
+                                                var jobDescription = selectedOption.getAttribute('data-jobDescription');
+                                                var jobCode = selectedOption.getAttribute('data-jobCode');
+                                                
+                                                document.querySelector('input[name="job_description"]').value = jobDescription;
+                                                document.querySelector('input[name="job_code"]').value = jobCode;
+                                            }
+                                    </script>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Job Description</label>
+                                            <input type="text" name="job_description" id="job_description" class="form-control" />
+                                            <input type="hidden" name="job_code" id="job_code" />
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Customer Name</label>
+                                            <input type="text" name="customer_name" id="customer_name" class="form-control" disabled />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Customer PIC</label>
+                                            <input type="text" name="customer_PIC" id="customer_PIC" class="form-control" />
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Machine Name</label>
+                                            <input type="text" name="machine_name" id="machine_name" class="form-control" disabled />
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Job Assign</label>
+                                            <select type="text" name="job_assign" id="job_assign" style="width: 100%;" class="form-select">
+                                                <option value="">-- Select Technician --</option>
+                                                    <?php
+                                                        
+                                                        include "dbconnect.php";
+                                                        
+                                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE tech_avai = '0' 
+                                                                                        AND (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')
+                                                                                        ORDER BY username ASC");
+
+                                                        while ($data = mysqli_fetch_array($records)) {
+                                                            echo "<option value='" . $data['username'] . "'>" . $data['username'] . "</option>";
+                                                        }
+                                                     ?>
+                                            </select>
+                                        </div>
+
+                                        <script>
+                                            $(document).ready(function(){
+                                                $('#job_assign').select2({
+                                                    dropdownParent: $('#jobEditModal'),
+                                                    theme: 'bootstrap-5'
+                                                });
+                                            });
+                                        </script>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Requested Date</label>
+                                            <input type="date" name="requested_date" id="requested_date" class="form-control" />
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="">Cancel Job</label>
+                                            <select name="job_cancel" id="job_cancel" class="form-select">
+                                                <option selected></option>
+                                                <option value="YES">YES</option>
+                                            </select>
+                                        </div>
+
+                                        <?php if (isset($_SESSION["username"])) { ?>
+                                            <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
+                                        <?php } ?>
+                                    </div>
+                                    <div id="errorMessageUpdate" class="alert alert-warning d-none" style="text-align: center;"></div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Canceled Job</h4>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="jobCanceledTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'>No</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Job Order Number</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Customer Name</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Requested Date</th>
+                                        <th style='text-align: center;'>Action</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                    
+                                        require 'dbconnect.php';
+                                
+                                        $query = "SELECT * FROM job_register WHERE (job_cancel = 'YES') ORDER BY jobregister_id ASC";
+                                        $query_run = mysqli_query($conn, $query);
+
+                                        $counter = 1;
+                                
+                                        if(mysqli_num_rows($query_run) > 0) {
+                                            foreach($query_run as $job) {
+                                    ?>
+                            
+                                    <tr>
+                                        <td style='text-align: center;'><?= $counter ?></td>
+                                        <td style='text-align: center; white-space: nowrap;'><?= $job['job_order_number'] ?></td>
+                                        <td style='white-space: nowrap;'><?= $job['customer_name'] ?></td>
+                                        <td style='text-align: center; white-space: nowrap;'><?= $job['requested_date'] ?></td>
+                                        <td style='text-align: center; white-space: nowrap;'>
+                                            <button type="button" value="<?=$job['jobregister_id'];?>" class="viewJobBtn btn btn-info btn-sm">View</button>
+                                            <button type="button" value="<?=$job['jobregister_id'];?>" class="editJobBtn btn btn-success btn-sm">Update</button>
+                                        </td>
+                                    </tr>
+                                    <?php $counter++; } } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                
+                <!--========== JS ==========-->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+                <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                <script src="assets/js/main.js"></script>
+                
+                <script>
+                    $(document).ready(function(){
+                        $('#jobCanceledTable').DataTable({
+                            responsive:true,
+                            language: {search:"_INPUT_",
+                                       searchPlaceholder:"Search"},
+                            pagingType: 'full_numbers'
                         });
-        </script>
-
-
-
-
-
-    </section>
-
-  <script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
-    });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
-  </script>
-</body>
-</html>
+                    });
+                </script>
+                
+                <script>
+                    // <!-- View -->
+                    $(document).on('click', '.viewJobBtn', function () {
+                        var jobregister_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "jobcanceledCode.php?jobregister_id=" + jobregister_id,
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 404) {
+                                    alert(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#view_ID').text(res.data.jobregister_id);
+                                    $('#view_JON').text(res.data.job_order_number);
+                                    $('#view_jobName').text(res.data.job_name);
+                                    $('#view_description').text(res.data.job_description);
+                                    $('#view_custName').text(res.data.customer_name);
+                                    $('#view_PIC').text(res.data.customer_PIC);
+                                    $('#view_machName').text(res.data.machine_name);
+                                    $('#view_jobAss').text(res.data.job_assign);
+                                    $('#view_reqDate').text(res.data.requested_date);
+                                    $('#view_jobRegBy').text(res.data.jobregistercreated_by);
+                                    $('#view_jobRegAt').text(res.data.jobregistercreated_at);
+                                    $('#view_lastModBy').text(res.data.jobregisterlastmodify_by);
+                                    $('#view_lastModAt').text(res.data.jobregisterlastmodify_at);
+                                    
+                                    $('#jobViewModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    // <!-- Update -->
+                    $(document).on('click', '.editJobBtn', function () {
+                        var jobregister_id = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "jobcanceledCode.php?jobregister_id=" + jobregister_id,
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 404) {
+                                    alert(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#jobregister_id').val(res.data.jobregister_id);
+                                    $('#job_order_number').val(res.data.job_order_number);
+                                    $('#job_name').val(res.data.job_name).trigger('change');
+                                    $('#job_code').val(res.data.job_code);
+                                    $('#job_description').val(res.data.job_description);
+                                    $('#customer_name').val(res.data.customer_name);
+                                    $('#customer_PIC').val(res.data.customer_PIC);
+                                    $('#machine_name').val(res.data.machine_name);
+                                    $('#job_assign').val(res.data.job_assign).trigger('change');
+                                    $('#requested_date').val(res.data.requested_date);
+                                    $('#job_cancel').val(res.data.job_cancel);
+                                    $('#jobregisterlastmodify_by').val(res.data.jobregisterlastmodify_by);
+                                    
+                                    $('#jobEditModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    $(document).on('submit', '#updateJob', function (e) {
+                        e.preventDefault();
+                        
+                        var formData = new FormData(this);
+                        formData.append("update_job", true);
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "jobcanceledCode.php",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            
+                            success: function (response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if(res.status == 422) {
+                                    $('#errorMessageUpdate').removeClass('d-none');
+                                    $('#errorMessageUpdate').text(res.message);
+                                }
+                                
+                                else if(res.status == 200){
+                                    $('#errorMessageUpdate').addClass('d-none');
+                                    $('#jobEditModal').modal('hide');
+                                    $('#updateJob')[0].reset();
+                                    
+                                    alertify.set('notifier','position', 'top-right');
+                                    alertify.success(res.message);
+                                    
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 700);
+                                }
+                                
+                                else if(res.status == 500) {
+                                    alert(res.message);
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </section>
+        </main>        
+    </body>
+    </html>
