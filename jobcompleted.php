@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
         <link rel="stylesheet" href="assets/css/styles.css">
         
@@ -196,6 +197,18 @@
                     <div class="card-header">
                         <h4>Completed Job</h4>
                     </div>
+                    <table cellspacing="5" cellpadding="5">
+                        <tbody>
+                            <tr>
+                                <td>Start date:</td>
+                                <td><input type="text" id="min" name="min"></td>
+                            </tr>
+                            <tr>
+                                <td>End date:</td>
+                                <td><input type="text" id="max" name="max"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     
                     <div class="card-body">
                         <div class="table-responsive">
@@ -248,17 +261,48 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+                <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
                 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
                 <script src="assets/js/main.js"></script>
                 
                 <script>
                     $(document).ready(function(){
-                        $('#completeJobTable').DataTable({
+                        let table = $('#completeJobTable').DataTable({
                             responsive:true,
                             language: {search:"_INPUT_",
                                        searchPlaceholder:"Search"},
                             pagingType: 'full_numbers'
                         });
+                        let minDate, maxDate;
+ 
+                        // Custom filtering function which will search data in column four between two values
+                        DataTable.ext.search.push(function (settings, data, dataIndex) {
+                            let min = minDate.val();
+                            let max = maxDate.val();
+                            let date = new Date(data[4]);
+                        
+                            if (
+                                (min === null && max === null) ||
+                                (min === null && date <= max) ||
+                                (min <= date && max === null) ||
+                                (min <= date && date <= max)
+                            ) {
+                                return true;
+                            }
+                            return false;
+                        });
+
+                        // Create date inputs
+                        minDate = new DateTime('#min', {
+                            format: 'YYYY-MM-DD'
+                        });
+                        maxDate = new DateTime('#max', {
+                            format: 'YYYY-MM-DD'
+                        });
+                        document.querySelectorAll('#min, #max').forEach((el) => {
+                        el.addEventListener('change', () => table.draw());
+                    });
                     });
                 </script>
 
