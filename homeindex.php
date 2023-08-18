@@ -5,7 +5,6 @@
     
     if (isset($_POST["update"])) {
      $jobregister_id = $_POST["jobregister_id"];
-     $jobregister_id = $_POST["jobregister_id"];
      $job_name = $_POST["job_name"];
      $job_order_number = $_POST["job_order_number"];
      $job_description = $_POST["job_description"];
