@@ -633,6 +633,62 @@
                     </div>
                     
                     <!-- Staff Update Tab -->
+                    <input type="radio" class="tab-radio" id="tabDoing3">
+                    <label for="tabDoing3" class="tabHeadingStaff"  onclick="openTab('JobUpdateTab')">Update</label>
+                    <div class="tab" id="JobUpdateTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
+                        <input type="hidden" name="jobregister_id" id="jobregister_idupdate" value="">
+                        <div style="margin-left: 30px">
+                            <!-- Departure Time -->
+                            <div class="input-box-departure">
+                                <label for="">Departure Time</label>
+                                <input type="text" class="technician_departure" id="technician_departure" name="technician_departure" value="">
+                                <input type="button" id="update_DepartureTime" value="Departure" style=" background-color: #081d45;" onclick="getFormattedDateTime('technician_departure')">
+                            </div>
+                            <!-- End of Departure Time -->
+                            
+                            <!-- Time at site -->
+                            <div class="input-box-arrival">
+                                <label for="">Time at site</label>
+                                <input type="text" class="technician_arrival" id="technician_arrival" name="technician_arrival" value="">
+                                <input type="button" id="update_ArrivalTime" value="Arrival" style=" background-color: #081d45;" onclick="getFormattedDateTime('technician_arrival')">
+                            </div>
+                            <!-- End of Time at site -->
+                            
+                            <!-- Return Time -->
+                            <div class="input-box-leaving">
+                                <label for="">Return time</label>
+                                <div style="display: flex; align-items: baseline;">
+                                    <input type="text" class="technician_leaving" id="technician_leaving" name="technician_leaving" value="">
+                                    <input type="button" id="update_LeavingTime" value="Leaving" style="background-color: #081d45;" onclick="getFormattedDateTime('technician_leaving')">
+                                </div>
+                            </div>
+                            <!-- End of Return Time -->
+                            
+                            <div class="input-box-out">
+                                <label for="">Rest Hour</label>
+                                <!-- Rest Hour Out -->
+                                <div style="display: flex; align-items: baseline;"> 
+                                    <input type="text" style="width: 406.5px;" id="tech_out" name="tech_out" value="">
+                                    <input style="background-color: #081d45; color: white; width: 203.8px" type="button" value="OUT" onclick="getFormattedTime('tech_out')">
+                                </div>
+                                <!-- End of Rest Hour Out -->
+                                
+                                <!-- Rest Hour In -->
+                            
+                                <div style="display: flex; align-items: baseline;">
+                                    <input type="text" style="width: 408px;" id="tech_in" name="tech_in" value="">
+                                    <input style="background-color: #081d45; color: white; width: 203.8px" type="button" value="IN" onclick="getFormattedTime('tech_in')">
+                                </div>
+                                <!-- End of Rest Hour In -->
+                            </div>
+                            
+                            <p class="control" style="color: green;"><b id="techupdateAdmin"></b></p>
+                            <div style="margin-top:30px; margin-left:420px; margin-bottom:30px">
+                                <input type="button" id="update_tech" name="update_tech" value="Update" style="background-color: #081d45; color: white; width: 203.8px; height:40px; border: none; border-radius: 4px; font-size:15px;">
+                            </div>
+                        </div>
+                    </div>
                     
                     <!-- Staff Accessories Tab -->
 
@@ -1163,6 +1219,72 @@
                         }
                     });
                 });
+                // STAFF UPDATE
+                function updateJobUpdate(){
+                    var technician_departure = document.getElementById('technician_departure');
+                    var technician_arrival = document.getElementById('technician_arrival');
+                    var technician_leaving = document.getElementById('technician_leaving');
+                    var tech_out = document.getElementById('tech_out');
+                    var tech_in = document.getElementById('tech_in');
+
+                    technician_departure.value = job_table.technician_departure;
+                    technician_arrival.value = job_table.technician_arrival;
+                    technician_leaving.value = job_table.technician_leaving;
+                    tech_out.value = job_table.tech_out;
+                    tech_in.value = job_table.tech_in;
+                }
+
+                function getFormattedDateTime(textid) {
+                    var options = {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    };
+                    var textchange = document.getElementById(textid);
+                    var formattedDateTime = new Date().toLocaleString('en-SG', options);
+                    textchange.value = formattedDateTime;
+                }
+                function getFormattedTime(textid) {
+                    var options = {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    };
+                    var textchange = document.getElementById(textid);
+                    var formattedTime = new Date().toLocaleTimeString('en-SG', options);
+                    textchange.value =formattedTime;
+                }
+                $(function() {
+                    $('#update_tech').click(function() {
+                        var technician_departure = $('#technician_departure').val();
+                        var technician_arrival = $('#technician_arrival').val();
+                        var technician_leaving = $('#technician_leaving').val();
+                        var tech_out = $('#tech_out').val();
+                        var tech_in = $('#tech_in').val();
+                        var jobregister_id = job_table.jobregister_id;
+                        $.ajax({
+                            type: 'POST',
+                            url: 'techupdateindex.php',
+                            data: {
+                                technician_departure: technician_departure,
+                                technician_arrival: technician_arrival,
+                                technician_leaving: technician_leaving,
+                                tech_out: tech_out,
+                                tech_in: tech_in,
+                                jobregister_id: jobregister_id
+                            },
+                            success: function(response) {
+                                $('#techupdateAdmin').html('Time has been update successfully');
+                            },
+                            error: function() {
+                                $('#techupdateAdmin').html('An error occurred while updating the time');
+                            }
+                        });
+                    });
+                });
 
                 $(document).ready(function() {
                     $('.staff-card').click(function() {
@@ -1206,19 +1328,8 @@
                         });
                     });
 
-                    $('.staff-card').click(function() {
-                        var jobregister_id = $(this).data('id');
-
-                        $.ajax({
-                            url: 'AdminHomepageUpdate.php',
-                            type: 'post',
-                            data: {jobregister_id: jobregister_id},
-
-                            success: function(response) {
-                                $('.<?php echo $username ?>techupdate-details').html(response);
-                                $('#jobdetails-<?php echo $username ?>').modal('show');
-                            }
-                        });
+                    $('#tabDoing3').click(function() {
+                        updateJobUpdate();
                     });
 
                     $('.staff-card').click(function() {
