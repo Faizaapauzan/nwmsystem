@@ -185,6 +185,63 @@
       /* Position the tooltip */
       position: absolute;
     }
+    
+    #preview {
+      display: flex;
+      width: 200px;
+      height: 200px;
+      border: 1px solid black;
+      margin-top: -15px;
+      flex-wrap: wrap;
+      overflow-y: scroll;
+    }
+    
+    #preview img {
+      width: 50%;
+      height: 50%;
+    }
+
+    /* #ImageRow {
+      margin-right: 20px;
+      margin-left: 40px;
+      display: flex; 
+      width: 200px; 
+      height: 200px;
+
+    } */
+    
+    form .upload-report .input-box {
+      padding-left: 49px;
+      margin-bottom: 1px;
+      margin-top: 7px;
+      width: calc(100% / 2 - -302px);
+      padding: 0 -9px 0 15px;
+    }
+    
+    form .upload-report label.details {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    
+    .upload-report .input-box input,
+    .upload-report .input-box select {
+      height: 40px;
+      width: 100%;
+      outline: none;
+      font-size: 16px;
+      border-radius: 5px;
+      padding-left: 15px;
+      border: 1px solid #ccc;
+      border-bottom-width: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    .upload-report .input-box input:focus,
+    .upload-report .input-box input:valid,
+    .upload-report .input-box select:focus,
+    .upload-report .input-box select:valid {border-color: #081d45;} 
+
 </style>
 </head>
 
@@ -738,10 +795,156 @@
                     </div>
 
                     <!-- Staff Photo Tab -->
+                    <input type="radio" class="tab-radio" id="tabDoing5">
+                    <label for="tabDoing5" class="tabHeadingStaff" onclick="openTab('JobPhotoTab')">Photo</label>
+                    <div class="tab" id="JobPhotoTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
+                        <form id="submitForm">
+                            <!-- for select job register id -->
+                            <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
+                            <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+                            <div id="previewBefore"></div>
+                            <div class="update-form">
+                                <div class="upload-report">
+                                    <div class="input-box" style="display: flex; margin-left: -16px;">
+                                        <input type="file" class="form-control" name="multipleFile[]" id="multipleFile" required="" multiple>
+                                        <input type="submit" name="upload" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="message">
+                                <p class="control"><b id="messageImagebefore"></b></p>
+                            </div>
+
+                            <!-- for select data from tech photo update database -->
+
+                            <!-- Photos Table Before Service -->
+                            <div class="table-responsive">
+                                <table style="box-shadow: 0 5px 10px #f7f7f7;">
+                                    <tbody style="display: flex; flex-wrap: wrap;">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                        <form id="submitAfterForm">
+                            <!-- for select job register id -->
+                            <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
+                            <input type="hidden" id="description" name="description" value="Machine (After Service)">
+                            <div id="previewAfter"></div>
+                            <div class="update-form">
+                                <div class="upload-report">
+                                    <div class="input-box" style="display: flex; margin-left: -16px;">
+                                        <input type="file" class="form-control" name="multipleFile[]" id="multipleAfter" required="" multiple>
+                                        <input type="submit" name="upload" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                    </div>
+                                </div>
+                                <div class="message">
+                                    <p class="control"><b id="messageImageAfter"></b></p>
+                                </div>
+                                
+                                <!-- for select data from tech photo update database -->
+                                
+                                <!-- Photos Table Before Service -->
+                                <div class="table-responsive">
+                                    <table style="box-shadow: 0 5px 10px #f7f7f7;">
+                                        <tbody style="display: flex; flex-wrap: wrap;">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
                     <!-- Staff Video Tab -->
+                    <input type="radio" class="tab-radio" id="tabDoing6">
+                    <label for="tabDoing6" class="tabHeadingStaff" onclick="openTab('JobVideoTab')">Video</label>
+                    <div class="tab" id="JobVideoTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
+                        <form id="submitVideoBefore">
+                            <!-- for select job register id -->
+                            <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
+                            <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+                            <div id="previewBeforeVideo"></div>
+                            <div class="update-form">
+                                <div class="upload-report">
+                                    <div class="input-box" style="display: flex; margin-left: -16px;">
+                                        <input type="file" class="form-control" name="multipleVideo[]" id="multipleVideo" required="" multiple>
+                                        <input type="submit" name="uploadVideo" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                    </div>
+                                </div>
+                                <div class="message">
+                                    <p class="control"><b id="messageVideoBefore"></b></p>
+                                </div>
+
+                                <!-- for select data from tech video update database -->
+
+                                <!-- Videos Table Before Service -->
+                                <div class="table-responsive">
+                                    <table style="box-shadow: 0 5px 10px #f7f7f7;">
+                                        <tbody style="display: flex; flex-wrap: wrap; padding-left: 15px;">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                        <form id="submitAfterVideo">
+                            <!-- for select job register id -->
+                            <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
+                            <input type="hidden" id="description" name="description" value="Machine (After Service)">
+                            <div id="previewAfterVideo"></div>
+                            <div class="update-form">
+                                <div class="upload-report">
+                                    <div class="input-box" style="display: flex; margin-left: -16px;">
+                                        <input type="file" class="form-control" name="multipleVideo[]" id="multipleAfterVideo" required="" multiple>
+                                        <input type="submit" name="uploadVideo" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                    </div>
+                                </div>
+                                <div class="message">
+                                    <p class="control"><b id="messageVideoAfter"></b></p>
+                                </div>
+
+                                <!-- for select data from tech video update database -->
+                                <!-- Videos Table After Service -->
+                                <div class="table-responsive">
+                                    <table style="box-shadow: 0 5px 10px #f7f7f7;">
+                                        <tbody style="display: flex; flex-wrap: wrap; padding-left: 15px;">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
 
                     <!-- Staff Report Tab -->
+                    <input type="radio"  class="tab-radio"  id="tabDoing7">
+                    <label for="tabDoing7" class="tabHeadingStaff" onclick="openTab('JobReportTab')">Report</label>
+                    <div class="tab" id="JobReportTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
+                        <form method="POST" action="servicereportdate.php">
+                            <input type="hidden" id="jobregister_idreport" name="jobregister_id" value="">
+                            <label for="reportdate" style="margin-left: 20px">Service Report Date:</label>
+                            <div class="date-form">
+                                <div class="submit-date" style="padding-left: 20px; padding-right: 25px;">
+                                    <div class="input-box" style="width: 75%; display: flex; align-items: baseline;">
+                                        <input type="text" id="srvcreportdate" name="srvcreportdate" value="<?php $date = date('d-m-Y');?>" readonly>
+                                        <div class="input-group-append" style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
+                                            <!-- closing div for input-group-append is missing in your provided code -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form id="view_form" method="post">
+                            <div style="display:flex;">
+                            <button  style="padding: 8px 44px; border-radius: 4px;" id="userinfo" class="userinfo" type="button" 
+                            >New</button></n>
+                            <button style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" id="useredit" class="useredit" type="button" >Edit</button>
+                            </div>  
+                        </form>
+                    </div>
 
                 </div>
             </div>
@@ -1530,6 +1733,41 @@
                         }
                 });
 
+                // STAFF REPORT TAB
+                function updatereporttab(){
+                    var jobregister_id = document.getElementById('jobregister_idreport');
+                    jobregister_id.value = job_table.jobregister_id;
+
+                }
+                $(document).ready(function(){
+                    $('.userinfo').click(function(){
+                        var jobregister_id = job_table.jobregister_id;
+
+                        $.ajax({
+                            url: 'servicereportajaxadmin.php',
+                            type: 'post',
+                            data: {jobregister_id:jobregister_id},
+                            success: function(data){
+                                var win = window.open('servicereport.php');
+                                win.document.write(data);
+                            }
+                        });
+                    });
+
+                    $('.useredit').click(function(){
+                        var jobregister_id = job_table.jobregister_id;
+                        $.ajax({
+                            url: 'servicereportEDIT.php',
+                            type: 'post',
+                            data: {jobregister_id: jobregister_id},
+                            success: function(data){
+                                var win = window.open('servicereportEDIT.php');
+                                win.document.write(data);
+                            }
+                        });
+                    });
+                });
+
                 $(document).ready(function() {
                     $('.staff-card').click(function() {
                         var jobregister_id = $(this).data('id');
@@ -1595,49 +1833,42 @@
                         });
                     });
 
-                    $('.staff-card').click(function() {
-                        var jobregister_id = $(this).data('id');
+                    $('#tabDoing5').click(function() {
+                        var jobregister_id = job_table.jobregister_id;
 
                         $.ajax({
-                            url: 'ajaxtechphtoupdt.php',
+                            url: 'AdminHomepageStaffCode.php',
                             type: 'post',
-                            data: {jobregister_id: jobregister_id},
-
+                            data: {jobregister_id: jobregister_id,
+                                jobaccessories: true},
+                            
                             success: function(response) {
-                                $('.<?php echo $username ?>-photo-details').html(response);
-                                $('#jobdetails-<?php echo $username ?>').modal('show');
+                                var res = jQuery.parseJSON(response);
+                                var data2 = res.data2;
+                                updateJobAccessory(data2);
                             }
                         });
                     });
 
-                    $('.staff-card').click(function() {
-                        var jobregister_id = $(this).data('id');
+                    $('#tabDoing6').click(function() {
+                        var jobregister_id = job_table.jobregister_id;
 
                         $.ajax({
-                            url: 'ajaxtechvideoupdt.php',
+                            url: 'AdminHomepageStaffCode.php',
                             type: 'post',
-                            data: {jobregister_id: jobregister_id},
-
+                            data: {jobregister_id: jobregister_id,
+                                jobaccessories: true},
+                            
                             success: function(response) {
-                                $('.<?php echo $username ?>-video-details').html(response);
-                                $('#jobdetails-<?php echo $username ?>').modal('show');
+                                var res = jQuery.parseJSON(response);
+                                var data2 = res.data2;
+                                updateJobAccessory(data2);
                             }
                         });
                     });
 
-                    $('.staff-card').click(function() {
-                        var jobregister_id = $(this).data('id');
-
-                        $.ajax({
-                            url: 'ajaxreportadmin.php',
-                            type: 'post',
-                            data: {jobregister_id: jobregister_id},
-
-                            success: function(response) {
-                                $('.<?php echo $username ?>-report').html(response);
-                                $('#jobdetails-<?php echo $username ?>').modal('show');
-                            }
-                        });
+                    $('#tabDoing7').click(function() {
+                        
                     });
                 });
             </script>
