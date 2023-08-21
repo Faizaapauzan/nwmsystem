@@ -31,6 +31,8 @@
     <link href="css/admin.css" rel="stylesheet" />
     <link href="css/adminhomepageAUTO.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    
+    
 
     <!--========== BOX ICONS ==========-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -39,8 +41,8 @@
 
     <!--========== JS ==========-->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 
@@ -169,6 +171,19 @@
     .mobile-view a {
         color: black;
         margin-left: 10px;
+    }
+
+    .tooltip {
+      z-index: 1000000;
+      background-color: black;
+      width: 360px;
+      opacity: 1;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      /* Position the tooltip */
+      position: absolute;
     }
 </style>
 </head>
@@ -691,6 +706,36 @@
                     </div>
                     
                     <!-- Staff Accessories Tab -->
+                    <input type="radio" class="tab-radio" id="tabDoing4">
+                    <label for="tabDoing4" class="tabHeadingStaff" onclick="openTab('JobAccessoriesTab')">Accessories</label>
+                    <div class="tab" id="JobAccessoriesTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
+                        <div class="input-boxAccessories" id="input_fields_wrapAccessories">
+                            <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -18px;" id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table" width="60%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                    <th>No</th>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>UOM</th>
+                                    <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody id="_editable_table">
+                                </tbody>
+                            </table>
+                            <a href="javascript:void(0);" class="add_button" title="Add field" type="button">Click Here to Add Accessories</a>
+                            <form  id="adminacc_form" method="post">
+                                <div class="model">
+                                </div>
+                                <div class="updateBtn">
+                                    <p class="control"><b id="accessoriesmessage"></b></p>
+                                    <input type="button" id="update_acc" name="update_acc" value="Update"/>
+                                </div>
+                            </form>
+                        </div>              
+                    </div>
 
                     <!-- Staff Photo Tab -->
 
@@ -1219,7 +1264,7 @@
                         }
                     });
                 });
-                // STAFF UPDATE
+                // STAFF UPDATE TAB
                 function updateJobUpdate(){
                     var technician_departure = document.getElementById('technician_departure');
                     var technician_arrival = document.getElementById('technician_arrival');
@@ -1286,6 +1331,205 @@
                     });
                 });
 
+                // STAFF ACCESSORIES TAB
+                function updateJobAccessory(data2){
+                    var count = 1;
+                    var tbody = document.getElementById("_editable_table");
+
+                    tbody.innerHTML = "";
+
+                    data2.forEach(function(res){
+                        var row = document.createElement("tr");
+                        row.setAttribute("data-row-id", res[0]);
+
+                        var idCell = document.createElement("td");
+                        idCell.textContent = count++;
+                        row.appendChild(idCell);
+
+                        var codeCell = document.createElement("td");
+                        var codeLink = document.createElement("a");
+                        codeLink.style.color = "blue";
+                        codeLink.style.cursor = "pointer";
+                        codeLink.textContent = res[3];
+                        codeLink.setAttribute("data-toggle", "tooltip");
+                        codeLink.className = "hover";
+                        codeLink.id = res[2];
+                        codeCell.appendChild(codeLink);
+                        row.appendChild(codeCell);
+
+                        var nameCell = createEditableCell(res[4], 1);
+                        var uomCell = createEditableCell(res[5], 2);
+                        var quantityCell = createEditableCell(res[6], 3);
+                        row.appendChild(nameCell);
+                        row.appendChild(uomCell);
+                        row.appendChild(quantityCell);
+
+                        var deleteCell = document.createElement("td");
+                        var deleteSpan = document.createElement("span");
+                        deleteSpan.className = "delete";
+                        deleteSpan.setAttribute("data-id", res[0]);
+                        deleteSpan.textContent = "Delete";
+                        deleteCell.appendChild(deleteSpan);
+                        row.appendChild(deleteCell);
+
+                        tbody.appendChild(row);
+                    });
+
+                    $('[data-toggle="tooltip"]').tooltip({
+                        title: fetchData,
+                        html: true,
+                        placement: 'right'
+                    });
+                }
+
+                function createEditableCell(value, colIndex) {
+                    var cell = document.createElement("td");
+                    cell.className = "editable-col";
+                    cell.setAttribute("contenteditable", "true");
+                    cell.setAttribute("col-index", colIndex);
+                    cell.setAttribute("oldVal", value);
+                    cell.textContent = value;
+                    return cell;
+                }
+                $(document).ready(function(){
+                    $('#update_acc').click(function () {
+                        var data = $('#adminacc_form').serialize(); 
+                        $.ajax({
+                                url: 'addaccessoriesindex.php',
+                                type: 'post',
+                                data: { data: data, jobregister_id: job_table.jobregister_id, update_acc: true },
+
+                                success: function(response)
+                                {
+                                    var res = JSON.parse(response);
+                                    console.log(res);
+                                    if(res.success == true)
+                                        $('#accessoriesmessage').html('<span style="color: green">Update Success</span>');
+                                    else
+                                        $('#accessoriesmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+                                }
+                         });
+                    });
+                    // Delete
+                    $(document).on('click', '.delete', function() {
+                        var el = this;
+                        // Delete id
+                        var deleteid = $(this).data('id');
+                        var confirmalert = confirm("Are you sure?");
+                        if (confirmalert == true) {
+                            // AJAX Request
+                            $.ajax({
+                                    url: 'delete-ajax-acc.php',
+                                    type: 'POST',
+                                    data: { id:deleteid },
+                                    success: function(response){
+                                    if(response == 1){
+                                        // Remove row from HTML Table
+                                        $(el).closest('tr').css('background','tomato');
+                                        $(el).closest('tr').fadeOut(800,function(){
+                                        $(this).remove();
+                                        });
+                                    } 
+                                    else {
+                                        alert('Invalid ID.');
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+
+                function fetchData(){
+                    var fetch_data = '';
+                    var element = $(this);
+                    var accessories_id = element.attr("id");
+                    $.ajax({
+                            url:"fetch-hover.php",
+                            method:"POST",
+                            async: false,
+                            data:{accessories_id:accessories_id},
+                            success:function(data)
+                            {
+                                fetch_data = data;
+                            }
+                    });
+                    return fetch_data;
+                }
+
+                $(document).ready(function () {
+
+                    var maxField = 100; // Total 100 product fields we add
+                    var addButton = $('.add_button'); // Add more button selector
+                    var wrapper = $('.model'); // Input fields wrapper
+                    var fieldHTML = `
+                    <div class="field-element">
+                        <div class="model">
+                            <select style="width: 90%;" id="select_box" class="accessoriesModel" name="accessoriesModel[]">
+                                <option value=""> Select Accessories Code </option>
+                                <!-- Options will be dynamically added using PHP -->
+                                <?php 
+                                    include "dbconnect.php";  // Using database connection file here
+                                    $records = mysqli_query($conn, "SELECT accessories_code, accessories_name, accessories_uom, accessories_id  From accessories_list ORDER BY accessorieslistlasmodify_at DESC");  // Use select query here
+                                    while($data = mysqli_fetch_array($records))
+                                    {
+                                    echo "<option value='". $data['accessories_id'] ."'>" .$data['accessories_code']. "      -      " . $data['accessories_name']."</option>";  // displaying data in option menu
+                                    }	
+                                ?>
+                            </select>
+                            <div id="results">
+                                <input type="hidden" name="accessories_id[]" class="accessories_id">
+                                <input type="text" id="codes" class="accessories_code" name="accessories_code[]" placeholder="Accessories Code">
+                                <input type="text" class="accessories_name" name="accessories_name[]" placeholder="Accessories Name">
+                                <input type="text" class="accessories_uom" name="accessories_uom[]" placeholder="Unit of Measurement">
+                                <input type="text" class="accQuan" name="accessories_quantity[]" placeholder="Accessories Quantity">
+                            </div>
+                            <a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a>
+                        </div>
+                    </div>`;
+                    
+                    
+                    var x = 1; //Initial field counter is 1
+                    $(addButton).click(function () {
+                        //Check maximum number of input fields
+                        console.log("Add button clicked");  
+                        if (x < maxField) {
+                            console.log("Adding field");
+                            x++; //Increment field counter
+                            $(wrapper).append(fieldHTML);
+                        }
+                    });
+                    
+                    //Once remove button is clicked
+                    $(wrapper).on('click', '.remove_button', function (e) {
+                        e.preventDefault();
+                        $(this).parent().closest(".field-element").remove();
+                        x--; //Decrement field counter
+                    });
+
+                    // $("#accessoriesModel[]").selectize({
+                    //     sortField: 'text'
+                    // });
+                });
+
+                $(document).on('change', '[name="accessoriesModel[]"]', function(){
+                    var accessories_id = $(this).val();
+                    var model = $(this).parent('.model');
+                    if (accessories_id != '') {
+                    $.ajax({
+                            url:"getcode.php",
+                            method:"POST",
+                            data: { accessories_id:accessories_id },
+                            dataType:"json",
+                            success:function(result){
+                                model.find(".accessories_id").val(accessories_id);
+                                model.find(".accessories_code").val(result.accessories_code);
+                                model.find(".accessories_name").val(result.accessories_name);
+                                model.find(".accessories_uom").val(result.accessories_uom);
+                            }
+                            })
+                        }
+                });
+
                 $(document).ready(function() {
                     $('.staff-card').click(function() {
                         var jobregister_id = $(this).data('id');
@@ -1332,17 +1576,21 @@
                         updateJobUpdate();
                     });
 
-                    $('.staff-card').click(function() {
-                        var jobregister_id = $(this).data('id');
+                    $('#tabDoing4').click(function() {
+                        var model = $('.model');
+                        model.empty();
+                        var jobregister_id = job_table.jobregister_id;
 
                         $.ajax({
-                            url: 'ajaxtabaccessories.php',
+                            url: 'AdminHomepageStaffCode.php',
                             type: 'post',
-                            data: {jobregister_id: jobregister_id},
+                            data: {jobregister_id: jobregister_id,
+                                jobaccessories: true},
                             
                             success: function(response) {
-                                $('.<?php echo $username ?>Acc-details').html(response);
-                                $('#jobdetails-<?php echo $username ?>').modal('show');
+                                var res = jQuery.parseJSON(response);
+                                var data2 = res.data2;
+                                updateJobAccessory(data2);
                             }
                         });
                     });

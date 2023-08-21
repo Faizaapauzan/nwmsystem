@@ -38,4 +38,16 @@
         $res = ['status' => 200, 'message' => 'Success', 'data2' => $rows2];
         echo json_encode($res);
     }
+
+    if (isset($_POST['jobaccessories'])){
+        $query2 = "SELECT * FROM job_accessories WHERE jobregister_id = ?";
+        $stmt2 = mysqli_prepare($conn, $query2);
+        mysqli_stmt_bind_param($stmt2, "s", $jobregister_id);
+        mysqli_stmt_execute($stmt2);
+        $result2 = mysqli_stmt_get_result($stmt2);
+        $rows2 = mysqli_fetch_all($result2);
+
+        $res = ['status' => 200, 'message' => 'Success', 'data2' => $rows2];
+        echo json_encode($res);
+    }
 ?>

@@ -4,20 +4,16 @@ include 'dbconnect.php';
 
 $response = array('success' => false);
 
-  if (isset($_POST['jobregister_id'])) {
-      $jobregister_id =$_POST['jobregister_id'];
-
-      $sql = "SELECT jobregister_id FROM `job_accessories` WHERE  jobregister_id ='$jobregister_id'";
-  }
-
 if(isset($_POST['update_acc']))
 {
-    $jobid = $_POST['jobregister_id'];
-    $accessories_id = $_POST['accessories_id'];
-    $accessories_code = $_POST['accessories_code'];
-    $accessories_name = $_POST['accessories_name'];
-    $accessories_uom = $_POST['accessories_uom'];
-    $accessories_quantity = $_POST['accessories_quantity'];
+  $jobid = $_POST['jobregister_id'];
+  parse_str($_POST['data'], $formData); // Parse serialized form data
+
+  $accessories_id = $formData['accessories_id'];
+  $accessories_code = $formData['accessories_code'];
+  $accessories_name = $formData['accessories_name'];
+  $accessories_uom = $formData['accessories_uom'];
+  $accessories_quantity = $formData['accessories_quantity'];
 
    foreach ($accessories_id as $index => $accessories_ids) {
 
@@ -39,13 +35,13 @@ if(isset($_POST['update_acc']))
 
     }
 
-      if($query)
-{
-    $response['success'] = true;
-	
-} 
+  if ($query) {
+      $response['success'] = true;
+  } else {
+      $response['error'] = mysqli_error($conn); // Add error message to response
+  }
 
-echo json_encode($response);
+  echo json_encode($response);
 
 }
   
