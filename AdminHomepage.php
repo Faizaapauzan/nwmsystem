@@ -1,16 +1,16 @@
 <?php
 
-session_start();
+    session_start();
 
-if (session_status() == PHP_SESSION_NONE) {
-    header("location: index.php?error=session");
-}
+    if (session_status() == PHP_SESSION_NONE) {
+        header("location: index.php?error=session");
+    }
 
-if (!isset($_SESSION['username'])) {
-    header("location: index.php?error=login");
-} elseif ($_SESSION['staff_position'] != 'Admin' && $_SESSION['staff_position'] != 'Manager') {
-    header("location: index.php?error=permission");
-}
+    if (!isset($_SESSION['username'])) {
+        header("location: index.php?error=login");
+    } elseif ($_SESSION['staff_position'] != 'Admin' && $_SESSION['staff_position'] != 'Manager') {
+        header("location: index.php?error=permission");
+    }
 
 ?>
 
@@ -27,10 +27,10 @@ if (!isset($_SESSION['username'])) {
     <link href="assets/css/styles.css" rel="stylesheet">
     <link href="css/homepage.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <link href="css/adminhomepage.css" rel="stylesheet" />
     <link href="css/adminboard.css" rel="stylesheet" />
     <link href="css/admin.css" rel="stylesheet" />
     <link href="css/adminhomepageAUTO.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
     <!--========== BOX ICONS ==========-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -46,9 +46,8 @@ if (!isset($_SESSION['username'])) {
 
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-</head>
 
-<style>
+    <style>
     .supports {
         border-radius: 6px;
         font-size: 15px;
@@ -172,6 +171,7 @@ if (!isset($_SESSION['username'])) {
         margin-left: 10px;
     }
 </style>
+</head>
 
 <body>
     <!--========== HEADER ==========-->
@@ -320,235 +320,327 @@ if (!isset($_SESSION['username'])) {
         <section>
             <div id="staffpopup" class="modal">
                 <div class="tabStaff">
-                <!-- Staff Job Info -->
-                <input type="radio"  id="tabDoing" checked="checked">
-                <label for="tabDoing" class="tabHeadingStaff">Job Info</label>
-                <div class="tab" id="StaffJobInfoTab">
-                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
-                    <form action="homeindex.php" method="post" style="display: contents;" >
-                        <input type="hidden" id="jobregister_idinfo" name="jobregister_id" value="">
-                        <input type="hidden" id="support" name="support" value="Support For">
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Job Priority</label>
-                            <input type="text" id="job_priority" name="job_priority" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Job Order Number</label>
-                            <div style="display: flex;">
-                                <input type="text" class="job_order_number" name="job_order_number" id="job_order_number" value="">
-                                <button type="button" style="border-radius: 5px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px; width:auto" onclick="buttonClick();">Click</button>
-                                
-                                <script>
-                                    var i = 1;
-                                    var jobordernumber2;
-                                    
-                                    function buttonClick() {
-                                        if (i == 1){
-                                            var jobordernumber = document.getElementById('job_order_number').value;
-                                            jobordernumber2 = jobordernumber;
-                                        }
-                                        
-
-                                        // Split the existing job order number into parts
-                                        var parts = jobordernumber2.split('-');
-                                        
-                                        
-                                        // Increment the number part
-                                        var newNumber = parts[parts.length-1] + "-" + i;
-                                        var newJobOrderNumber = parts[0];
-
-                                        // Construct the new job order number
-                                        for (var j = 1; j < parts.length-1; j++){
-                                            newJobOrderNumber = newJobOrderNumber + "-" + parts[j];
-                                        }
-                                        newJobOrderNumber = newJobOrderNumber + "-" + newNumber;
-                                        
-
-                                        // Update the input value
-                                        document.getElementById('job_order_number').value = newJobOrderNumber;
-
-                                        i++;
-                                    }
-                                </script>
-
+                    `<!-- Staff Job Info -->
+                    <input type="radio"  id="tabDoing" class="tab-radio" checked="checked">
+                    <label for="tabDoing" class="tabHeadingStaff" onclick="openTab('StaffJobInfoTab')">Job Info</label>
+                    <div class="tab" id="StaffJobInfoTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
+                        <form action="homeindex.php" method="post" style="display: contents;" >
+                            <input type="hidden" id="jobregister_idinfo" name="jobregister_id" value="">
+                            <input type="hidden" id="support" name="support" value="Support For">
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Job Priority</label>
+                                <input type="text" id="job_priority" name="job_priority" value="">
                             </div>
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Job Name</label>
-                            <input type="text" id="job_name" name="job_name" value="">
-                            <input type="hidden" id="job_code" name="job_code" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Customer Name</label>
-                            <select id="custModel" onchange="GetCustomer(this.value)">
-                                <option value=""></option> 
-                                
-                                <?php
-                                    include "dbconnect.php";
-                                    $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
-                                    while($data = mysqli_fetch_array($records))
-                                    {
-                                        echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";  // displaying data in option menu
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Job Order Number</label>
+                                <div style="display: flex;">
+                                    <input type="text" class="job_order_number" name="job_order_number" id="job_order_number" value="">
+                                    <button type="button" style="border-radius: 5px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px; width:auto" onclick="buttonClick();">Click</button>
+                                    
+                                    <script>
+                                        var i = 1;
+                                        var jobordernumber2;
+                                        
+                                        function buttonClick() {
+                                            if (i == 1){
+                                                var jobordernumber = document.getElementById('job_order_number').value;
+                                                jobordernumber2 = jobordernumber;
+                                            }
+                                            
+
+                                            // Split the existing job order number into parts
+                                            var parts = jobordernumber2.split('-');
+                                            
+                                            
+                                            // Increment the number part
+                                            var newNumber = parts[parts.length-1] + "-" + i;
+                                            var newJobOrderNumber = parts[0];
+
+                                            // Construct the new job order number
+                                            for (var j = 1; j < parts.length-1; j++){
+                                                newJobOrderNumber = newJobOrderNumber + "-" + parts[j];
+                                            }
+                                            newJobOrderNumber = newJobOrderNumber + "-" + newNumber;
+                                            
+
+                                            // Update the input value
+                                            document.getElementById('job_order_number').value = newJobOrderNumber;
+
+                                            i++;
+                                        }
+                                    </script>
+
+                                </div>
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Job Name</label>
+                                <input type="text" id="job_name" name="job_name" value="">
+                                <input type="hidden" id="job_code" name="job_code" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Customer Name</label>
+                                <select id="custModel" onchange="GetCustomer(this.value)">
+                                    <option value=""></option> 
+                                    
+                                    <?php
+                                        include "dbconnect.php";
+                                        $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
+                                        while($data = mysqli_fetch_array($records))
+                                        {
+                                            echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";  // displaying data in option menu
+                                        }
+                                    ?>
+
+                                </select>
+                                <input type="hidden" id="cust" name="customer_id" onchange="GetCustomer(this.value)" readonly>
+                                <input type="hidden" id="customer_code" name="customer_code" value="" readonly>
+                                <input type="hidden" id="customer_name" name="customer_name" value="" readonly>
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Job Description</label>
+                                <input type="text" id="job_description" name="job_description" value="">
+                            </div>
+
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Assign Date</label>
+                                <input type="text" id="DateAssign" name="DateAssign" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Delivery date</label>
+                                <input type="date" id="delivery_date" name="delivery_date" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Requested date</label>
+                                <input type="date" id="requested_date" name="requested_date" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Customer Grade</label>
+                                <input type="text" id="customer_grade" name="customer_grade" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Customer PIC</label>
+                                <input type="text" id="customer_PIC" name="customer_PIC" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Contact Number 1</label>
+                                <input type="text" id="cust_phone1" name="cust_phone1" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="">Contact Number 2</label>
+                                <input type="text" id="cust_phone2" name="cust_phone2" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 100%;">
+                                <label for="">Customer Address</label>
+                                <input type="text" id="cust_address1" name="cust_address1" value="">
+                                <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address2" name="cust_address2" value="">
+                                <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address3" name="cust_address3" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="brand">Machine Brand</label>
+                                <input type="text" id="brandname" name="machine_brand" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="type">Machine Type</label>
+                                <input type="text" id="type_name" name="machine_type" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="sn">Serial Number</label>
+                                <select id="serialnumbers" onchange="GetMachines(this.value)">
+                                    <option value=""></option> 
+
+                                </select>
+                                <input type="hidden" id="machine_id" name="machine_id" value="">
+                                <input type="hidden" id="serialnumber" name="serialnumber" value="">
+                                <input type="hidden" id="machine_code" name="machine_code" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="accessories_required">Accessories Required</label>
+                                <select id="accessories_required" name="accessories_required">
+                                    <option value=''></option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-box" style="width: 100%;">
+                                <label for="">Machine Name</label>
+                                <input type="text" id="machine_name" name="machine_name" value="">
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="job_cancel">Cancel Job:</label>
+                                <select type="text" id="job_cancel" name="job_cancel">
+                                    <option value=''></option>
+                                    <option value='YES'>YES</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-box" style="width: 50%;">
+                                <label for="job_status">Job Status:</label>
+                                <select type="text" id="job_status" name="job_status" onchange="myFunction()">
+                                    <option value='' ></option>
+                                    <option value='Doing'>Doing</option>
+                                    <option value='Pending'>Pending</option>
+                                    <option value='Incomplete'>Incomplete</option>
+                                    <option value='Completed'>Completed</option>
+                                </select>
+                            </div>
+                            
+                            <!--PENDING & INCOMPLETE REASON-->
+                            <div id="reasonInput" class="input-box" style="width: 100%;">
+                                <label for="reason">Reason</label>
+                                <input type="text" id="reason" name="reason" value="">
+                            </div>
+                            </br>
+                            
+                            <script>
+                                function myFunction() {
+                                    var jobStatus = document.getElementById("job_status").value;
+                                    var reasonDiv = document.getElementById("reasonInput");
+                                    if (jobStatus === "Pending" || jobStatus === "Incomplete") {
+                                        reasonDiv.style.display = "block";
+                                    } else {
+                                        reasonDiv.style.display = "none";
                                     }
-                                ?>
-
-                            </select>
-                            <input type="hidden" id="cust" name="customer_id" onchange="GetCustomer(this.value)" readonly>
-                            <input type="hidden" id="customer_code" name="customer_code" value="" readonly>
-                            <input type="hidden" id="customer_name" name="customer_name" value="" readonly>
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Job Description</label>
-                            <input type="text" id="job_description" name="job_description" value="">
-                        </div>
-
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Assign Date</label>
-                            <input type="text" id="DateAssign" name="DateAssign" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Delivery date</label>
-                            <input type="date" id="delivery_date" name="delivery_date" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Requested date</label>
-                            <input type="date" id="requested_date" name="requested_date" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Customer Grade</label>
-                            <input type="text" id="customer_grade" name="customer_grade" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Customer PIC</label>
-                            <input type="text" id="customer_PIC" name="customer_PIC" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Contact Number 1</label>
-                            <input type="text" id="cust_phone1" name="cust_phone1" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="">Contact Number 2</label>
-                            <input type="text" id="cust_phone2" name="cust_phone2" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 100%;">
-                            <label for="">Customer Address</label>
-                            <input type="text" id="cust_address1" name="cust_address1" value="">
-                            <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address2" name="cust_address2" value="">
-                            <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address3" name="cust_address3" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="brand">Machine Brand</label>
-                            <input type="text" id="brandname" name="machine_brand" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="type">Machine Type</label>
-                            <input type="text" id="type_name" name="machine_type" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="sn">Serial Number</label>
-                            <select id="serialnumbers" onchange="GetMachines(this.value)">
-                                <option value=""></option> 
-                                
-                                <option value=""></option>
-                            </select>
-                            <input type="hidden" id="machine_id" name="machine_id" value=">">
-                            <input type="hidden" id="serialnumber" name="serialnumber" value="">
-                            <input type="hidden" id="machine_code" name="machine_code" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="accessories_required">Accessories Required</label>
-                            <select id="accessories_required" name="accessories_required">
-                                <option value=''></option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                        </div>
-                        
-                        <div class="input-box" style="width: 100%;">
-                            <label for="">Machine Name</label>
-                            <input type="text" id="machine_name" name="machine_name" value="">
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="job_cancel">Cancel Job:</label>
-                            <select type="text" id="job_cancel" name="job_cancel">
-                                <option value=''></option>
-                                <option value='YES'>YES</option>
-                            </select>
-                        </div>
-                        
-                        <div class="input-box" style="width: 50%;">
-                            <label for="job_status">Job Status:</label>
-                            <select type="text" id="job_status" name="job_status" onchange="myFunction()">
-                                <option value='' ></option>
-                                <option value='Doing'>Doing</option>
-                                <option value='Pending'>Pending</option>
-                                <option value='Incomplete'>Incomplete</option>
-                                <option value='Completed'>Completed</option>
-                            </select>
-                        </div>
-                        
-                        <!--PENDING & INCOMPLETE REASON-->
-                        <div id="reasonInput" class="input-box" style="width: 100%;">
-                            <label for="reason">Reason</label>
-                            <input type="text" id="reason" name="reason" value="">
-                        </div>
-                        </br>
-                        
-                        <script>
-                            function myFunction() {
-                                var jobStatus = document.getElementById("job_status").value;
-                                var reasonDiv = document.getElementById("reasonInput");
-                                if (jobStatus === "Pending" || jobStatus === "Incomplete") {
-                                    reasonDiv.style.display = "block";
-                                } else {
-                                    reasonDiv.style.display = "none";
                                 }
-                            }
-                            // Call the function once to set the initial state of the "reason" div
-                            myFunction();
-                        </script>
-                        <!--PENDING & INCOMPLETE END REASON-->
-                        
-                        <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
-                        
-                        <div class="DuplicateUpdateButton" style="display: inline-flex; width: 100%;">
-                            <button type="submit" id="submit" name="update">Update</button></n>
-                            <button type="button" style="background-color: #f43636 ;" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormSupportAdmin();">Support</button>
-                        </div>
-                        
-                        <p class="control"><b id="messageSupportAdmin"></b></p>
-                    </form>
-                </div>
+                                // Call the function once to set the initial state of the "reason" div
+                                myFunction();
+                            </script>
+                            <!--PENDING & INCOMPLETE END REASON-->
+                            
+                            <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
+                            
+                            <div class="DuplicateUpdateButton" style="display: inline-flex; width: 100%;">
+                                <button type="submit" id="submit" name="update">Update</button></n>
+                                <button type="button" style="background-color: #f43636 ;" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormSupportAdmin();">Support</button>
+                            </div>
+                            
+                            <p class="control"><b id="messageSupportAdmin"></b></p>
+                        </form>
+                    </div>
 
 
-                <!-- Staff Job Assign -->
-                
-                <!-- Staff Update Tab -->
-                
-                <!-- Staff Accessories Tab -->
+                    <!-- Staff Job Assign -->
+                    <input type="radio" class="tab-radio" id="tabDoing2">
+                    <label for="tabDoing2" class="tabHeadingStaff" onclick="openTab('JobAssignTab')">Job Assign</label>
+                    <div class="tab" id="JobAssignTab">
+                        <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
+                        <form id="assignupdate_form" method="post">
+                            <input type="hidden" name="jobregister_id" class="jobregister_id" id="jobregister_id2" value="">
+                            
+                            <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br />
+                            
+                            <div class="input-box" style="display:flex; width: 100%">
+                                <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)">
+                                    <option value=""></option> 
+                                        
+                                        <?php
+                                            include "dbconnect.php";
+                                            
+                                            $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE 
+                                                                            technician_rank = '1st Leader' AND tech_avai = '0'
+                                                                                OR
+                                                                            technician_rank = '2nd Leader' AND tech_avai = '0'
+                                                                                OR
+                                                                            staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here
+                                            echo "<option></option>";
+                                            
+                                            while($data = mysqli_fetch_array($records))
+                                                {echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";}	
+                                        ?> 
+                                    
+                                    <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
+                                    <input type="hidden" name="job_assign" id='username' value="">
+                                    <input type="hidden" name="technician_rank" id='technician_rank' value="" readonly>
+                                    <input type="hidden" name="staff_position" id='staff_position' value="" readonly>
+                                </select> 
+                                
+                                <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION['username']?>" readonly>
+                                <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" />
+                            </div>
+                            <p style="padding-left: 20px;"><b id="assignupdateadminmessage"></b></p>
+                        </form>
 
-                <!-- Staff Photo Tab -->
+                        <form class="form" id="adminassistant_form" method="post" style="margin-left: 20px;">
+                            <input type="hidden" name="jobregister_id" id="jobregister_id3" value="">
+                            <input type="hidden" name="ass_date" id="ass_date" value="">
+                            <input type="hidden" name="techupdate_date" id="techupdate_date" value="">
+                            <input type="hidden" name="tech_leader" id="tech_leader" value="">
+                            <input type="hidden" name="cust_name" id="cust_name" value="">
+                            <input type="hidden" name="requested_date" id="requested_date2" value="">
+                            <input type="hidden" name="machine_name" id="machine_name2" value="">
+                            
+                            <div id="multipleassist"> 
+                                <label for="assistant">Select Assistant :</label>
+                                <table id="selectedassistant" style="margin-top: 10px; margin-bottom:20px; margin-right:30px; box-shadow: none; background-color:#FFFFFF;">
+                                    <tbody> 
+                                    </tbody>
+                                </table>
+                                
+                                <div class="input-box" style="width:100%">
+                                    <select name="username[]" class="multiple-assistant" multiple="multiple" style="height: max-content; margin-left:-17px;"> 
+                                        
+                                        <?php
+                                            $query = "SELECT * FROM staff_register 
+                                                    WHERE staff_group = 'Technician' AND tech_avai = '0' 
+                                                    ORDER BY staffregister_id ASC";
+                                            
+                                            $query_run = mysqli_query($conn, $query);
+                                            if(mysqli_num_rows($query_run) > 0)
+                                                {
+                                                    foreach ($query_run as $rowstaff) {
+                                        ?> 
+                                        
+                                        <option value="<?php echo $rowstaff["username"]; ?>"><?php echo $rowstaff["username"]; ?></option> 
+                                        
+                                        <?php } } else {echo "No Record Found";} ?> 
+                                        
+                                    </select>
+                                    
+                                    <script>
+                                        $("#multipleassist").on('change', function() {
+                                            $(".multiple-assistant").select2({});
+                                        });
+                                    </script>
+                                </div>
+                                
+                                <div class="buttonUpdate" style="display: flex;flex-direction: row-reverse;"> 
+                                    <input type="hidden" name="jobregisterlastmodify_by2" id="jobregisterlastmodify_by2" value="<?php echo $_SESSION['username']?>" readonly>
+                                        <div>
+                                            <p class="control"><b id="assignadminmessage"></b></p>
+                                        </div>
+                                    <input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Staff Update Tab -->
+                    
+                    <!-- Staff Accessories Tab -->
 
-                <!-- Staff Video Tab -->
+                    <!-- Staff Photo Tab -->
 
-                <!-- Staff Report Tab -->
+                    <!-- Staff Video Tab -->
+
+                    <!-- Staff Report Tab -->
 
                 </div>
             </div>
@@ -639,7 +731,7 @@ if (!isset($_SESSION['username'])) {
                                     while ($row = $results->fetch_assoc()) {
                                 ?>
 
-                                <div class="Staff staff-card" id="<?php echo $username ?>" data-type_id="<?php echo $row['type_id']; ?>" data-id="<?php echo $row['jobregister_id']; ?>" data-customer_name="<?php echo $row['customer_name']; ?>" onclick="document.getElementById('staffpopup').style.display='block'">
+                                <div class="Staff staff-card" id="<?php echo $username ?>" data-type_id="<?php echo $row['type_id']; ?>" data-id="<?php echo $row['jobregister_id']; ?>" data-customer_name="<?php echo $row['customer_name']; ?>" onclick="openPopup('staffpopup')">
                                     <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
                                         <ul class="b" id="draged">
                                             <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
@@ -670,7 +762,9 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </div>
             <script type='text/javascript'>
-                function updateJobInfo(data, data2){
+                var job_table;
+                // STAFF JOB INFO FUNCTION
+                function updateJobInfo(data2){
                     var i;
                     var jobregister_id = document.getElementById('jobregister_idinfo');
                     var support = document.getElementById('support');
@@ -704,70 +798,70 @@ if (!isset($_SESSION['username'])) {
                     var reason = document.getElementById('reason');
                     var jobregisterlastmodify_by = document.getElementById('jobregisterlastmodify_by');
 
-                    jobregister_id.value = data.jobregister_id;
-                    support.value = data.job_assign;
-                    job_priority.value = data.job_priority;
-                    job_order_number.value = data.job_order_number;
-                    job_name.value = data.job_name;
-                    job_code.value = data.job_code;
+                    jobregister_id.value = job_table.jobregister_id;
+                    support.value = job_table.job_assign;
+                    job_priority.value = job_table.job_priority;
+                    job_order_number.value = job_table.job_order_number;
+                    job_name.value = job_table.job_name;
+                    job_code.value = job_table.job_code;
                     for (i = 0; i < custModel.options.length; i++) {
-                        if (custModel.options[i].text === data.customer_name) {
+                        if (custModel.options[i].text === job_table.customer_name) {
                             custModel.options[i].selected = true;
                             break;
                         }
                     }
-                    customer_code.value = data.customer_code;
-                    customer_name.value = data.customer_name;
-                    customer_grade.value = data.customer_grade;
-                    customer_PIC.value = data.customer_PIC;
-                    job_description.value = data.job_description;
-                    assign_date.value = data.DateAssign;
-                    delivery_date.value = data.delivery_date;
-                    requested_date.value = data.requested_date;
-                    cust_phone1.value = data.cust_phone1;
-                    cust_phone2.value = data.cust_phone2;
-                    cust_address1.value = data.cust_address1;
-                    cust_address2.value = data.cust_address2;
-                    cust_address3.value = data.cust_address3;
-                    machine_brand.value = data.machine_brand;
-                    machine_type.value = data.machine_type;
-                    machine_id.value = data.machine_id;
-                    machine_code.value = data.machine_code;
-                    machine_name.value = data.machine_name;
+                    customer_code.value = job_table.customer_code;
+                    customer_name.value = job_table.customer_name;
+                    customer_grade.value = job_table.customer_grade;
+                    customer_PIC.value = job_table.customer_PIC;
+                    job_description.value = job_table.job_description;
+                    assign_date.value = job_table.DateAssign;
+                    delivery_date.value = job_table.delivery_date;
+                    requested_date.value = job_table.requested_date;
+                    cust_phone1.value = job_table.cust_phone1;
+                    cust_phone2.value = job_table.cust_phone2;
+                    cust_address1.value = job_table.cust_address1;
+                    cust_address2.value = job_table.cust_address2;
+                    cust_address3.value = job_table.cust_address3;
+                    machine_brand.value = job_table.machine_brand;
+                    machine_type.value = job_table.machine_type;
+                    machine_id.value = job_table.machine_id;
+                    machine_code.value = job_table.machine_code;
+                    machine_name.value = job_table.machine_name;
                     for (i = 0; i < data2.length; i++) {
                         addOption(serialnumbers, data2[i]);
                     }
                     for (i = 0; i < serialnumbers.options.length; i++) {
-                        if (serialnumbers.options[i].text === data.serialnumber) {
+                        if (serialnumbers.options[i].text === job_table.serialnumber) {
                             serialnumbers.options[i].selected = true;
                             break;
                         }
                     }
                     for (i = 0; i < accessories_required.options.length; i++) {
-                        if (accessories_required.options[i].text === data.accessories_required) {
+                        if (accessories_required.options[i].text === job_table.accessories_required) {
                             accessories_required.options[i].selected = true;
                             break;
                         }
                     }
                     for (i = 0; i < job_cancel.options.length; i++) {
-                        if (job_cancel.options[i].text === data.job_cancel) {
+                        if (job_cancel.options[i].text === job_table.job_cancel) {
                             job_cancel.options[i].selected = true;
                             break;
                         }
                     }
                     for (i = 0; i < job_status.options.length; i++) {
-                        if (job_status.options[i].text === data.job_status) {
+                        if (job_status.options[i].text === job_table.job_status) {
                             job_status.options[i].selected = true;
                             break;
                         }
                     }
-                    reason.value = data.reason;
+                    reason.value = job_table.reason;
                     jobregisterlastmodify_by.value = '<?php echo $_SESSION["username"]?>'
                 }
 
-                function addOption(element, data) {
+                function addOption(element, data2) {
                     var newOption = document.createElement("option");
-                    var serialNumber = data[7]; 
+                    var serialNumber = data2[7]; 
 
                     newOption.value = serialNumber;
                     newOption.text = serialNumber;
@@ -778,7 +872,7 @@ if (!isset($_SESSION['username'])) {
                 function GetMachines(str) {
                     if (str.length == 0) {
                         document.getElementById("machine_id").value = "";
-                        document.getElementById("serialnumbers").value = "";
+                        document.getElementById("serialnumber").value = "";
                         document.getElementById("machine_code").value = "";
                         document.getElementById("machine_name").value = "";
                         return;
@@ -790,7 +884,7 @@ if (!isset($_SESSION['username'])) {
                             if (this.readyState == 4 && this.status == 200) {
                                 var myObj = JSON.parse(this.responseText);
                                 document.getElementById("machine_id").value = myObj[0];
-                                document.getElementById("serialnumbers").value = myObj[1];
+                                document.getElementById("serialnumber").value = myObj[1];
                                 document.getElementById("machine_code").value = myObj[2];
                                 document.getElementById("machine_name").value = myObj[3];
                             }
@@ -935,6 +1029,140 @@ if (!isset($_SESSION['username'])) {
                         });
                     }
                 }
+                
+                // STAFF JOB ASSIGN
+                function updateJobAssign(data2){
+                    var jobregister_id2 = document.getElementById('jobregister_id2');
+                    var jobassignto = document.getElementById('jobassignto')
+                    jobregister_id2.value = job_table.jobregister_id;
+                    for (i = 0; i < jobassignto.options.length; i++) {
+                        if (jobassignto.options[i].text === (job_table.job_assign + " - " + job_table.technician_rank)) {
+                            jobassignto.options[i].selected = true;
+                            break;
+                        }
+                    }
+
+                    var jobregister_id3 = document.getElementById('jobregister_id3');
+                    var tech_leader = document.getElementById('tech_leader');
+                    var cust_name = document.getElementById('cust_name');
+                    var requested_date2 = document.getElementById('requested_date2');
+                    var machine_name = document.getElementById('machine_name2');
+
+                    jobregister_id3.value = job_table.jobregister_id;
+                    tech_leader.value = job_table.technician_rank;
+                    cust_name.value = job_table.customer_name;
+                    requested_date2 = job_table.requested_date;
+                    machine_name = job_table.machine_name;
+
+                    var tableBody = document.querySelector('#selectedassistant tbody');
+                    tableBody.innerHTML = ''; // Clear the table body
+
+                    data2.forEach(function(record){
+                        var tableBody = document.querySelector('#selectedassistant tbody');
+
+                        var newRow = document.createElement("tr");
+                        newRow.setAttribute("data-row-id", record[0]);
+
+                        var usernameCell = document.createElement("td");
+                        var usernameText = document.createElement("b");
+                        usernameText.textContent = record[2];
+                        usernameCell.appendChild(usernameText);
+
+                        var actionCell = document.createElement("td");
+                        var deleteSpan = document.createElement("span");
+                        deleteSpan.style.color = "red";
+                        deleteSpan.className = "deleteassa";
+                        deleteSpan.setAttribute("data-id", record[0]);
+                        deleteSpan.textContent = "Delete";
+                        actionCell.appendChild(deleteSpan);
+
+                        newRow.appendChild(usernameCell);
+                        newRow.appendChild(actionCell);
+
+                        tableBody.appendChild(newRow);
+                    });
+
+                }
+                function GetJobAss(str) {
+                    if (str.length == 0) {
+                        document.getElementById("username").value = "";
+                        document.getElementById("technician_rank").value = "";
+                        document.getElementById("staff_position").value = "";
+                        return;
+                    } 
+                    
+                    else {
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                var myObj = JSON.parse(this.responseText);
+                                document.getElementById("username").value = myObj[0];
+                                document.getElementById("technician_rank").value = myObj[1];
+                                document.getElementById("staff_position").value = myObj[2];
+                            }
+                        };
+                        xmlhttp.open("GET", "fetchtechnicianrank.php?staffregister_id=" + str, true);
+                        xmlhttp.send();
+                    }
+                }
+
+                $(document).ready(function() {
+                    $('#technicianassign').click(function() {
+                        var data = $('#assignupdate_form').serialize() + '&technicianassign=technicianassign';
+                        $.ajax({
+                            url: 'assigntechindex.php',
+                            type: 'post',
+                            data: data,
+                            success: function(response) {
+                                var res = JSON.parse(response);
+                                console.log(res);
+                                if (res.success == true) $('#assignupdateadminmessage').html('<span style="color: green">Job Assigned!</span>');
+                                else $('#assignupdateadminmessage').html('<span style="color: red">Data Cannot Be Saved</span>');
+                            }
+                        });
+                    });
+                });
+
+                $(document).ready(function() {
+                    $('#updateassign').click(function() {
+                        var data = $('#adminassistant_form').serialize() + '&updateassign=updateassign';
+                        $.ajax({
+                            url: 'assignleaderindex.php',
+                            type: 'post',
+                            data: data,
+                            success: function(response) {
+                                var res = JSON.parse(response);
+                                console.log(res);
+                                if (res.success == true) $('#assignadminmessage').html('<span style="color: green;margin-left: -116px;">Update Saved!</span>');
+                                else $('#assignadminmessage').html('<span style="color: red;margin-left: -116px;">Data Cannot Be Saved</span>');
+                            }
+                        });
+                    });
+                });
+                $(document).ready(function() {
+                    $(document).on('click', '.deleteassa', function() {
+                        var el = this;
+                        var deletedid = $(this).data('id');
+                        var confirmalert = confirm("Are you sure?" + deletedid);
+                        if (confirmalert == true) {
+                            // AJAX Request
+                            $.ajax({
+                                url: 'delete-assistant.php',
+                                type: 'POST',
+                                data: {id: deletedid},
+                                success: function(response) {
+                                    if (response == 1) {
+                                        $(el).closest('tr').fadeOut(800, function() {
+                                            $(this).remove();
+                                        });
+                                    } 
+                                    
+                                    else {alert('Invalid ID.');}
+                                }
+                            });
+                        }
+                    });
+                });
 
                 $(document).ready(function() {
                     $('.staff-card').click(function() {
@@ -952,26 +1180,28 @@ if (!isset($_SESSION['username'])) {
 
                             success: function(response) {
                                 var res = jQuery.parseJSON(response);
-                                data = res.data;
-                                data2 = res.data2;
-                                console.log(data);
-                                console.log(data2);
-                                updateJobInfo(data, data2);
+                                job_table = res.data;
+                                var data2 = res.data2;
+                                updateJobInfo(data2);
                             }
                         });
                     });
 
-                    $('.staff-card').click(function() {
-                        var jobregister_id = $(this).data('id');
+                    $('#tabDoing2').click(function() {
+                        var jobregister_id = job_table.jobregister_id;
 
                         $.ajax({
-                            url: 'AdminHomepageJobassignAsisstant.php',
+                            url: 'AdminHomepageStaffCode.php',
                             type: 'post',
-                            data: {jobregister_id: jobregister_id},
+                            data: {jobregister_id: jobregister_id,
+                                   jobassign: true
+                            },
 
                             success: function(response) {
-                                $('.<?php echo $username ?>-assign').html(response);
-                                $('#jobdetails-<?php echo $username ?>').modal('show');
+                                var res = jQuery.parseJSON(response);
+                                var data2 = res.data2;
+                                updateJobAssign(data2);
+
                             }
                         });
                     });
@@ -1064,6 +1294,50 @@ if (!isset($_SESSION['username'])) {
                 closeAllModalsAndRefresh();
             });
         });
+
+        function resetTabs() {
+            // Uncheck all radio buttons
+            var tabRadioButtons = document.getElementsByClassName("tab-radio");
+            for (var i = 0; i < tabRadioButtons.length; i++) {
+                tabRadioButtons[i].checked = false;
+            }
+            
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].style.display = "none";
+            }
+        }
+
+        function openPopup(popupId) {
+            resetTabs(); // Reset tab states and content
+            document.getElementById(popupId).style.display = "block"; // Show the popup
+            
+            // Select the first tab and display its content
+            var firstTabRadio = document.getElementById("tabDoing");
+            var firstTabContent = document.getElementById("StaffJobInfoTab");
+            if (firstTabRadio && firstTabContent) {
+                firstTabRadio.checked = true;
+                firstTabContent.style.display = "block";
+            }
+        }
+
+        function openTab(tabId) {
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].style.display = "none";
+            }
+            
+            // Uncheck all radio buttons
+            var tabRadioButtons = document.getElementsByClassName("tab-radio");
+            for (var i = 0; i < tabRadioButtons.length; i++) {
+                tabRadioButtons[i].checked = false;
+            }
+            
+            // Display the selected tab content
+            document.getElementById(tabId).style.display = "block";
+        }
     </script>
 
 
