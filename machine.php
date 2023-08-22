@@ -385,7 +385,7 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="">Machine Brand</label>
-                                                <select name="machine_brand" id="machineBrand2" style="width: 100%;" class="form-select mb-3">
+                                                <select name="machine_brand" id="machineBrand2" style="width: 100%;" class="form-select">
                                                     <option value="">Select Machine Brand</option>
                                                         <?php
                                                             include "dbconnect.php";

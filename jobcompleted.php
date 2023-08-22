@@ -14,19 +14,21 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
         <link rel="stylesheet" href="assets/css/styles.css">
         
         <!--========== BOX ICONS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+        <!--========== JS ==========-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
     </head>
     
     <style>
         ::-webkit-scrollbar {display: none;}
-
-        #staffListTable {counter-reset:rowNumber}
-        #staffListTable tr>td:first-child {counter-increment:rowNumber}
-        #staffListTable tr td:first-child::before {content:counter(rowNumber)}
 
         .dropdown:hover .dropbtn {color:#f5f5f5}
         .dropdown1:hover .dropbtn1 {color:#f5f5f5}
@@ -71,7 +73,15 @@
             text-decoration:none;
             display:block;
             padding-right:7px
-        }   
+        }
+        
+        .side-by-side {
+    display: flex;
+    align-items: center;
+  }
+  .side-by-side td {
+    margin-right: 10px; /* Adjust this value as needed */
+  }
     </style>
     
     <body>
@@ -197,19 +207,23 @@
                     <div class="card-header">
                         <h4>Completed Job</h4>
                     </div>
-                    <table cellspacing="5" cellpadding="5">
-                        <tbody>
-                            <tr>
-                                <td>Start date:</td>
-                                <td><input type="text" id="min" name="min"></td>
-                            </tr>
-                            <tr>
-                                <td>End date:</td>
-                                <td><input type="text" id="max" name="max"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
+
+                    <br>
+
+                    <div class="row" style="padding-left: 15px;">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" id="min" name="min" placeholder="Start Date" class="form-control border border-dark">
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" id="max" name="max" placeholder="End Date" class="form-control border border-dark">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="completeJobTable" class="table table-bordered table-striped">
@@ -257,12 +271,11 @@
                 </br>
                 
                 <!--========== JS ==========-->
-                <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
                 <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
                 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
                 <script src="assets/js/main.js"></script>
                 
@@ -274,6 +287,7 @@
                                        searchPlaceholder:"Search"},
                             pagingType: 'full_numbers'
                         });
+                        
                         let minDate, maxDate;
  
                         // Custom filtering function which will search data in column four between two values
@@ -295,11 +309,13 @@
 
                         // Create date inputs
                         minDate = new DateTime('#min', {
-                            format: 'YYYY-MM-DD'
+                            format: 'DD/MM/YYYY'
                         });
+                        
                         maxDate = new DateTime('#max', {
-                            format: 'YYYY-MM-DD'
+                            format: 'DD/MM/YYYY'
                         });
+                        
                         document.querySelectorAll('#min, #max').forEach((el) => {
                         el.addEventListener('change', () => table.draw());
                     });
@@ -311,15 +327,16 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <div class="tab-buttons" role="tablist" style="text-align: center; display:inline-flex;">
-                                    <button class="btn tab-button active" data-bs-target="#JobInfo" aria-controls="JobInfo" aria-selected="true" id="showjobinfo" style="border:none; margin-left:20px; margin-right:30px; font-weight: bold;">Job Info</button>
-                                    <button class="btn tab-button" data-bs-target="#JobAssign" aria-controls="JobAssign" aria-selected="false" id="showjobassign" style="border:none; margin-right:30px; font-weight: bold;">Job Assign</button>
+                                <div class="tab-buttons" role="tablist" style="display:inline-flex;">
+                                    <button class="btn tab-button active" data-bs-target="#JobInfo" aria-controls="JobInfo" aria-selected="true" id="showjobinfo" style="border:none; font-weight: bold;">Job Info</button>
+                                    <button class="btn tab-button" data-bs-target="#JobAssign" aria-controls="JobAssign" aria-selected="false" id="showjobassign" style="border:none; font-weight: bold;">Job Assign</button>
                                     <button class="btn tab-button" data-bs-target="#Update" aria-controls="Update" aria-selected="false" id="showUpdate" style="border:none; font-weight: bold;">Update</button>
-                                    <button class="btn tab-button" data-bs-target="#Accessory" aria-controls="Accessory" aria-selected="false" id="showaccessory" style="border:none; margin-left:20px; margin-right:30px; font-weight: bold;">Accessory</button>
-                                    <button class="btn tab-button" data-bs-target="#Photo" aria-controls="Photo" aria-selected="false" id="showPhoto" style="border:none; margin-right:30px; font-weight: bold;">Photo</button>
+                                    <button class="btn tab-button" data-bs-target="#Accessory" aria-controls="Accessory" aria-selected="false" id="showaccessory" style="border:none; font-weight: bold;">Accessory</button>
+                                    <button class="btn tab-button" data-bs-target="#Photo" aria-controls="Photo" aria-selected="false" id="showPhoto" style="border:none; font-weight: bold;">Photo</button>
                                     <button class="btn tab-button" data-bs-target="#Video" aria-controls="Video" aria-selected="false" id="showVideo" style="border:none; font-weight: bold;">Video</button>
                                 </div>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                
+                                <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             
                             <div class="modal-body">

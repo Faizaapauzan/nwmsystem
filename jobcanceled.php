@@ -350,7 +350,7 @@
                                                 document.querySelector('input[name="job_description"]').value = jobDescription;
                                                 document.querySelector('input[name="job_code"]').value = jobCode;
                                             }
-                                    </script>
+                                        </script>
                                         
                                         <div class="col-md-6 mb-3">
                                             <label for="">Job Description</label>
