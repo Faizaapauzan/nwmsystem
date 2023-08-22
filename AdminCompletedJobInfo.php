@@ -244,13 +244,13 @@
             <script>
                 $(document).ready(function() {
                     $('#machine_brand').select2({
-                        dropdownParent: $('#JobModal'),
+                        
                         dropdownPosition: 'below',
                         theme: 'bootstrap-5'
                     });
                     
                     $('#machine_type').select2({
-                        dropdownParent: $('#JobModal'),
+                        
                         dropdownPosition: 'below',
                         theme: 'bootstrap-5'
                     });
