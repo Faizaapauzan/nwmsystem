@@ -5,9 +5,6 @@
 
 <!DOCTYPE html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/tab.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 </head>
 
 <style>
