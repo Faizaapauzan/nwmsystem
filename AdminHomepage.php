@@ -801,6 +801,7 @@
                         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
                         <form id="submitForm">
                             <!-- for select job register id -->
+                            <input type="hidden" id="jobregister_idp1" name="jobregister_id" value="">
                             <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
                             <input type="hidden" id="description" name="description" value="Machine (Before Service)">
                             <div id="previewBefore"></div>
@@ -819,15 +820,16 @@
                             <!-- for select data from tech photo update database -->
 
                             <!-- Photos Table Before Service -->
-                            <div class="table-responsive">
-                                <table style="box-shadow: 0 5px 10px #f7f7f7;">
-                                    <tbody style="display: flex; flex-wrap: wrap;">
+                            <div class="table-responsivep1">
+                                <table id="tablep1" style="box-shadow: 0 5px 10px #f7f7f7;">
+                                    <tbody id="tbodyp1" style="display: flex; flex-wrap: wrap;">
                                     </tbody>
                                 </table>
                             </div>
                         </form>
                         <form id="submitAfterForm">
                             <!-- for select job register id -->
+                            <input type="hidden" id="jobregister_idp2" name="jobregister_id" value="">
                             <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
                             <input type="hidden" id="description" name="description" value="Machine (After Service)">
                             <div id="previewAfter"></div>
@@ -844,11 +846,10 @@
                                 
                                 <!-- for select data from tech photo update database -->
                                 
-                                <!-- Photos Table Before Service -->
-                                <div class="table-responsive">
-                                    <table style="box-shadow: 0 5px 10px #f7f7f7;">
-                                        <tbody style="display: flex; flex-wrap: wrap;">
-                                            
+                                <!-- Photos Table After Service -->
+                                <div class="table-responsivep2">
+                                    <table id="tablep2" style="box-shadow: 0 5px 10px #f7f7f7;">
+                                        <tbody id="tbodyp2" style="display: flex; flex-wrap: wrap;">
                                         </tbody>
                                     </table>
                                 </div>
@@ -863,6 +864,7 @@
                         <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none'">&times</div>
                         <form id="submitVideoBefore">
                             <!-- for select job register id -->
+                            <input type="hidden" id="jobregister_idv1" name="jobregister_id" value="">
                             <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
                             <input type="hidden" id="description" name="description" value="Machine (Before Service)">
                             <div id="previewBeforeVideo"></div>
@@ -880,9 +882,9 @@
                                 <!-- for select data from tech video update database -->
 
                                 <!-- Videos Table Before Service -->
-                                <div class="table-responsive">
-                                    <table style="box-shadow: 0 5px 10px #f7f7f7;">
-                                        <tbody style="display: flex; flex-wrap: wrap; padding-left: 15px;">
+                                <div class="table-responsivev1">
+                                    <table id="tablev1" style="box-shadow: 0 5px 10px #f7f7f7;">
+                                        <tbody id="tbodyv1"style="display: flex; flex-wrap: wrap; padding-left: 15px;">
                                         </tbody>
                                     </table>
                                 </div>
@@ -890,6 +892,7 @@
                         </form>
                         <form id="submitAfterVideo">
                             <!-- for select job register id -->
+                            <input type="hidden" id="jobregister_idv2" name="jobregister_id" value="">
                             <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
                             <input type="hidden" id="description" name="description" value="Machine (After Service)">
                             <div id="previewAfterVideo"></div>
@@ -906,9 +909,9 @@
 
                                 <!-- for select data from tech video update database -->
                                 <!-- Videos Table After Service -->
-                                <div class="table-responsive">
-                                    <table style="box-shadow: 0 5px 10px #f7f7f7;">
-                                        <tbody style="display: flex; flex-wrap: wrap; padding-left: 15px;">
+                                <div class="table-responsivev2">
+                                    <table id="tablev2" style="box-shadow: 0 5px 10px #f7f7f7;">
+                                        <tbody id="tbodyv2" style="display: flex; flex-wrap: wrap; padding-left: 15px;">
                                         </tbody>
                                     </table>
                                 </div>
@@ -1733,11 +1736,288 @@
                         }
                 });
 
+                // STAFF PHOTO TAB
+                $(document).ready(function(){
+                    function setupImageUpload(formSelector, previewContainer, messageContainer) {
+                        function previewImages() {
+                            var $preview = $(previewContainer).empty();
+                            if (this.files) $.each(this.files, readAndPreview);
+                            function readAndPreview(i, file) {
+                                var reader = new FileReader();
+                                $(reader).on("load", function() {
+                                    $preview.append($("<img/>", { src: this.result, height: 100 }));
+                                });
+                                reader.readAsDataURL(file);
+                            }
+                        }
+
+                        $(formSelector + " input[type=file]").on("change", previewImages);
+                        
+                        $(formSelector).on("submit", function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                url: 'uploads.php',
+                                type: 'POST',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                data: new FormData(this),
+                                success: function (response) {
+                                    var res = JSON.parse(response);
+                                    console.log(res);
+                                    if (res.success == true) {
+                                        $(messageContainer).html('<span style="color: green">Image Uploaded!</span>');
+                                    } else {
+                                        $(messageContainer).html('<span style="color: red">Image cannot be Upload</span>');
+                                    }
+                                    $(formSelector + " input[type=file]").val("");
+                                }
+                            });
+                        });
+                    }
+
+                    setupImageUpload("#submitForm", "#previewBefore", "#messageImagebefore");
+                    setupImageUpload("#submitAfterForm", "#previewAfter", "#messageImageAfter");
+
+
+                    // Delete 
+                    $(document).on('click', '.deleted', function () {
+                        var el = this;
+                        var deletedid = $(this).data('id');
+                        var confirmalert = confirm("Are you sure?");
+                        if (confirmalert == true) {
+                            $.ajax({
+                                url: 'techphoto_delete.php',
+                                type: 'POST',
+                                data: { id: deletedid },
+                                success: function (response) {
+                                    if (response == 1) {
+                                        $(el).closest('tr').fadeOut(800, function () {
+                                            $(this).remove();
+                                        });
+                                    } else {
+                                        alert('Invalid ID.');
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+                function clearTableBody(tableSelector) {
+                    $(tableSelector + ' tbody').empty();
+                }
+                function updatephototab(data2, data3){
+                    clearTableBody("#tablep1");
+                    clearTableBody("#tablep2");
+                    var jobregister_idp1 = document.getElementById('jobregister_idp1');
+                    jobregister_idp1.value = job_table.jobregister_id;
+                    var tbodyp1 = document.getElementById('tbodyp1');
+
+                    data2.forEach(function(res) {
+                        var newRow = document.createElement('tr');
+                        newRow.style.display = 'grid';
+                        newRow.style.paddingLeft = '25px';
+                        
+                        var imgCell = document.createElement('td');
+                        var imgLink = document.createElement('a');
+                        imgLink.href = 'image/' + res[2];
+                        imgLink.download = '';
+                        var imgElement = document.createElement('img');
+                        imgElement.src = 'image/' + res[2];
+                        imgElement.id = 'display_image';
+                        imgLink.appendChild(imgElement);
+                        imgCell.appendChild(imgLink);
+                        
+                        var deleteCell = document.createElement('td');
+                        var deleteSpan = document.createElement('span');
+                        deleteSpan.className = 'deleted';
+                        deleteSpan.style.color = 'red';
+                        deleteSpan.style.cursor = 'pointer';
+                        deleteSpan.setAttribute('data-id', res[0]);
+                        deleteSpan.textContent = 'Delete';
+                        deleteCell.appendChild(deleteSpan);
+                        
+                        newRow.appendChild(imgCell);
+                        newRow.appendChild(deleteCell);
+                        
+                        // Append the new row to the tbody
+                        tbodyp1.appendChild(newRow);
+                    });
+
+                    var jobregister_idp2 = document.getElementById('jobregister_idp2');
+                    jobregister_idp2.value = job_table.jobregister_id;
+                    var tbodyp2 = document.getElementById('tbodyp2');
+
+                    data3.forEach(function(res2) {
+                        var newRow = document.createElement('tr');
+                        newRow.style.display = 'grid';
+                        newRow.style.paddingLeft = '25px';
+
+                        var imgCell = document.createElement('td');
+                        var imgLink = document.createElement('a');
+                        imgLink.href = 'image/' + res2[2];
+                        imgLink.download = '';
+                        var imgElement = document.createElement('img');
+                        imgElement.src = 'image/' + res2[2];
+                        imgElement.id = 'display_image';
+                        imgLink.appendChild(imgElement);
+                        imgCell.appendChild(imgLink);
+
+                        var deleteCell = document.createElement('td');
+                        var deleteSpan = document.createElement('span');
+                        deleteSpan.className = 'deleted';
+                        deleteSpan.style.color = 'red';
+                        deleteSpan.style.cursor = 'pointer';
+                        deleteSpan.setAttribute('data-id', res2[0]);
+                        deleteSpan.textContent = 'Delete';
+                        deleteCell.appendChild(deleteSpan);
+
+                        newRow.appendChild(imgCell);
+                        newRow.appendChild(deleteCell);
+
+                        // Append the new row to the tbody
+                        tbodyp2.appendChild(newRow);
+                    });
+                }
+
+                // STAFF VIDEO TAB
+                $(document).ready(function() {
+                    function setupVideoUpload(formSelector, previewContainer, messageContainer) {
+                        function previewVideos() {
+                            var $preview = $(previewContainer).empty();
+                            if (this.files) {
+                                $.each(this.files, function(i, file) {
+                                    var reader = new FileReader();
+                                    $(reader).on("load", function() {
+                                        $preview.append($("<video/>", { src: this.result, height: 100, controls: true }));
+                                    });
+                                    reader.readAsDataURL(file);
+                                });
+                            }
+                        }
+
+                        $(formSelector + " input[type=file]").on("change", previewVideos);
+
+                        $(formSelector).on("submit", function(e) {
+                            e.preventDefault();
+                            $.ajax({
+                                url: 'uploadvideo.php',
+                                type: 'POST',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                data: new FormData(this),
+                                success: function(response) {
+                                    var res = JSON.parse(response);
+                                    console.log(res);
+                                    var message = res.success ? "Video Uploaded!" : "Video cannot be Upload";
+                                    $(messageContainer).html('<span style="color: ' + (res.success ? 'green' : 'red') + '">' + message + '</span>');
+                                    $(formSelector + " input[type=file]").val("");
+                                }
+                            });
+                        });
+                    }
+
+                    setupVideoUpload("#submitVideoBefore", "#previewBeforeVideo", "#messageVideoBefore");
+                    setupVideoUpload("#submitAfterVideo", "#previewAfterVideo", "#messageVideoAfter");
+
+                    // Delete
+                    $(document).on('click', '.deletedv', function () {
+                        var el = this;
+                        var deletedid = $(this).data('id');
+                        var confirmalert = confirm("Are you sure?");
+                        if (confirmalert == true) {
+                            $.ajax({
+                                    url: 'techvideo-delete.php',
+                                    type: 'POST',
+                                    data: {id:deletedid},
+                                    success: function(response){
+                                    if(response == 1){
+                                        $(el).closest('tr').fadeOut(800, function () {
+                                            $(this).remove();
+                                        });
+                                    }
+                                    else {
+                                        alert('Invalid ID.');
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+                function updatevideotab(data2, data3){
+                    clearTableBody("#tablev1");
+                    clearTableBody("#tablev2");
+                    var jobregister_idv1 = document.getElementById('jobregister_idv1');
+                    var tbodyv1 = document.getElementById('tbodyv1');
+                    data2.forEach(function(data) {
+                        var newRow = document.createElement('tr');
+                        newRow.style.display = 'grid';
+                        newRow.style.paddingLeft = '25px';
+                        newRow.style.marginLeft = '3px';
+                        
+                        var videoCell = document.createElement('td');
+                        var videoElement = document.createElement('video');
+                        videoElement.width = 170;
+                        videoElement.height = 150;
+                        videoElement.src = 'image/' + data.video_url;
+                        videoElement.controls = true;
+                        videoCell.appendChild(videoElement);
+                        
+                        var deleteCell = document.createElement('td');
+                        var deleteSpan = document.createElement('span');
+                        deleteSpan.className = 'deletedv';
+                        deleteSpan.style.color = 'red';
+                        deleteSpan.style.cursor = 'pointer';
+                        deleteSpan.setAttribute('data-id', data.id);
+                        deleteSpan.textContent = 'Delete';
+                        deleteCell.appendChild(deleteSpan);
+                        
+                        newRow.appendChild(videoCell);
+                        newRow.appendChild(deleteCell);
+                        
+                        // Append the new row to the tbody
+                        tbodyv1.appendChild(newRow);
+                    });
+
+                    var jobregister_idv2 = document.getElementById('jobregister_idv2');
+                    var tbodyv2 = document.getElementById('tbodyv2');
+                    data3.forEach(function(data) {
+                        var newRow = document.createElement('tr');
+                        newRow.style.display = 'grid';
+                        newRow.style.paddingLeft = '25px';
+                        newRow.style.marginLeft = '3px';
+                        
+                        var videoCell = document.createElement('td');
+                        var videoElement = document.createElement('video');
+                        videoElement.width = 170;
+                        videoElement.height = 150;
+                        videoElement.src = 'image/' + data.video_url;
+                        videoElement.controls = true;
+                        videoCell.appendChild(videoElement);
+                        
+                        var deleteCell = document.createElement('td');
+                        var deleteSpan = document.createElement('span');
+                        deleteSpan.className = 'deletedv';
+                        deleteSpan.style.color = 'red';
+                        deleteSpan.style.cursor = 'pointer';
+                        deleteSpan.setAttribute('data-id', data.id);
+                        deleteSpan.textContent = 'Delete';
+                        deleteCell.appendChild(deleteSpan);
+                        
+                        newRow.appendChild(videoCell);
+                        newRow.appendChild(deleteCell);
+                        
+                        // Append the new row to the tbody
+                        tbodyv2.appendChild(newRow);
+                    });
+                }
+
+
                 // STAFF REPORT TAB
                 function updatereporttab(){
                     var jobregister_id = document.getElementById('jobregister_idreport');
                     jobregister_id.value = job_table.jobregister_id;
-
                 }
                 $(document).ready(function(){
                     $('.userinfo').click(function(){
@@ -1840,12 +2120,13 @@
                             url: 'AdminHomepageStaffCode.php',
                             type: 'post',
                             data: {jobregister_id: jobregister_id,
-                                jobaccessories: true},
+                                photo: true},
                             
                             success: function(response) {
                                 var res = jQuery.parseJSON(response);
                                 var data2 = res.data2;
-                                updateJobAccessory(data2);
+                                var data3 = res.data3;
+                                updatephototab(data2, data3);
                             }
                         });
                     });
@@ -1857,12 +2138,13 @@
                             url: 'AdminHomepageStaffCode.php',
                             type: 'post',
                             data: {jobregister_id: jobregister_id,
-                                jobaccessories: true},
+                                video: true},
                             
                             success: function(response) {
                                 var res = jQuery.parseJSON(response);
                                 var data2 = res.data2;
-                                updateJobAccessory(data2);
+                                var data3 = res.data3;
+                                updatevideotab(data2, data3);
                             }
                         });
                     });

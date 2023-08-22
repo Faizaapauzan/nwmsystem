@@ -50,4 +50,46 @@
         $res = ['status' => 200, 'message' => 'Success', 'data2' => $rows2];
         echo json_encode($res);
     }
+
+    if (isset($_POST['photo'])){
+        $description = 'Machine (Before Service)';
+        $query2 = "SELECT * FROM technician_photoupdate WHERE description= ? AND jobregister_id = ?";
+        $stmt2 = mysqli_prepare($conn, $query2);
+        mysqli_stmt_bind_param($stmt2, "ss", $description, $jobregister_id);
+        mysqli_stmt_execute($stmt2);
+        $result2 = mysqli_stmt_get_result($stmt2);
+        $rows2 = mysqli_fetch_all($result2);
+
+        $description2 = 'Machine (After Service)';
+        $query3 = "SELECT * FROM technician_photoupdate WHERE description= ? AND jobregister_id = ?";
+        $stmt3 = mysqli_prepare($conn, $query3);
+        mysqli_stmt_bind_param($stmt3, "ss", $description2, $jobregister_id);
+        mysqli_stmt_execute($stmt3);
+        $result3 = mysqli_stmt_get_result($stmt3);
+        $rows3 = mysqli_fetch_all($result3);
+
+        $res = ['status' => 200, 'message' => 'Success', 'data2' => $rows2, 'data3' => $rows3];
+        echo json_encode($res);
+    }
+
+    if (isset($_POST['video'])){
+        $description = 'Machine (Before Service)';
+        $query2 = "SELECT * FROM technician_videoupdate WHERE description= ? AND jobregister_id = ?";
+        $stmt2 = mysqli_prepare($conn, $query2);
+        mysqli_stmt_bind_param($stmt2, "ss", $description, $jobregister_id);
+        mysqli_stmt_execute($stmt2);
+        $result2 = mysqli_stmt_get_result($stmt2);
+        $rows2 = mysqli_fetch_all($result2);
+
+        $description2 = 'Machine (After Service)';
+        $query3 = "SELECT * FROM technician_videoupdate WHERE description= ? AND jobregister_id = ?";
+        $stmt3 = mysqli_prepare($conn, $query3);
+        mysqli_stmt_bind_param($stmt3, "ss", $description2, $jobregister_id);
+        mysqli_stmt_execute($stmt3);
+        $result3 = mysqli_stmt_get_result($stmt3);
+        $rows3 = mysqli_fetch_all($result3);
+
+        $res = ['status' => 200, 'message' => 'Success', 'data2' => $rows2, 'data3' => $rows3];
+        echo json_encode($res);
+    }
 ?>
