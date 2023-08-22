@@ -955,6 +955,976 @@
 
             <div class="w3-quarter">
                 <div class="overview-boxes">
+                    <!-- First row of Admin Board Card -->
+                    <div class="row">
+                        <!-- Job Listing -->
+                        <div class="box" id="myModal">
+                            <div class="box_topic">Job Listing</div>
+                                <?php
+                                    
+                                    include 'dbconnect.php';
+                                    
+                                    $results = $conn->query("SELECT * FROM job_register WHERE (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+                                                    OR
+                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                        
+                                    $numRow = "SELECT * FROM job_register WHERE (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+                                                    OR
+                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)";
+
+                                    $numRow_run = mysqli_query($conn, $numRow);
+                                    
+                                    if ($row_Total = mysqli_num_rows($numRow_run)) {
+                                        echo '<h4 style="text-align:right;">Total Job: ' . $row_Total . ' </h4>';
+                                    } 
+                                    
+                                    else {
+                                        echo '<h4 style="text-align:right;">No Data </h4>';
+                                    }
+                                    
+                                    while ($row = $results->fetch_assoc()) {
+                                ?>
+                                
+                                <div class="todo" data-id="<?php echo $row['jobregister_id']; ?>" data-type_id="<?php echo $row['type_id']; ?>" data-customer_name="<?php echo $row['customer_name']; ?>" data-target="doubleClick-1" ondblclick="document.getElementById('doubleClick-1').style.display='block'">
+                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                        <ul class="b" id="draged">
+                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                            <li><?php echo $row['job_priority'] ?></li>
+                                            <li><?php echo $row['customer_name'] ?></li>
+                                            <li><?php echo $row['machine_type'] ?></li>
+                                            <li><?php echo $row['job_description'] ?></li>
+                                            <li><b><?php echo $row['accessories_required'] ?></b> accessories required</li>
+                                            <li><?php echo $row['job_status'] ?></li>
+                                            <strong text-align="center" style="color:red"><?php echo $row['reason'] ?></strong>
+                                        </ul>
+                                        <div class='supports' id='support'> <?php echo $row['support'] ?></div>
+                                </div>
+                                <?php } ?>
+                        </div>
+                        
+                        <!-- Job Listing PopUp -->
+                        <div id="doubleClick-1" class="modal">
+                            <div class="tabs">
+                                <!-- Job Listing Job Info Tab -->
+                                <input type="radio" name="tabDoing" id="tabDoingOne" checked="checked">
+                                <label for="tabDoingOne" class="tabHeading">Job Info</label>
+                                <div class="tab" id="jobInfoTabs">
+                                    <div class="TechJobInfoTab">
+                                        <div class="contentTechJobInfo">
+                                            <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none';">&times</div>
+                                            <form action="homeindex.php" method="post">
+                                                <div class="tech-details">
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.todo').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            var type_id = $(this).data('type_id');
+                                            var customer_name = $(this).data('customer_name');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageJobinfo.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id,
+                                                                type_id: type_id,
+                                                        customer_name: customer_name},
+                                                        
+                                                success: function(response) {
+                                                    $('.tech-details').html(response);
+                                                    $('#doubleClick-1').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Job Listing Job Assign Tab -->
+                                <input type="radio" name="tabDoing" id="tabDoingTwo">
+                                <label for="tabDoingTwo" class="tabHeading"> Job Assign </label>
+                                <div class="tab">
+                                    <div class="TechJobInfoTab">
+                                        <div class="contentTechJobInfo">
+                                            <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                                            <form action="AdminHomepageJobassign.php" method="post">
+                                                <div class="assign-details">
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.todo').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageJobassign.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                        
+                                                success: function(response) {
+                                                    $('.assign-details').html(response);
+                                                    $('#doubleClick-1').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Job Listing Accessories Tab -->
+                                <input type="radio" name="tabDoing" id="tabDoingThree">
+                                <label for="tabDoingThree" class="tabHeading"> Accessories </label>
+                                <div class="tab">
+                                    <div class="TechJobInfoTab">
+                                        <div class="contentTechJobInfo">
+                                            <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
+                                            <form action="ajaxtabaccessories.php" method="post">
+                                                <div class="acc-details">
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.todo').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxtabaccessories.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.acc-details').html(response);
+                                                    $('#doubleClick-1').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <!-- End of Job Listing PopUp -->
+                        <!-- End of Job Listing -->
+                        
+                        <!-- Storekeeper -->
+                        <div class="box" id="myModal">
+                            <div class="box_topic">Store</div>
+                                <?php
+                                    
+                                    include 'dbconnect.php';
+                                    
+                                    $results = $conn->query("SELECT * FROM job_register WHERE (accessories_required = 'Yes' AND job_status = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'Yes' AND job_status IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = '' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+
+                                    $numRow = "SELECT * FROM job_register WHERE (accessories_required = 'Yes' AND job_status = '' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'Yes' AND job_status IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel = '')
+                                                    OR
+                                                (accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = '' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status IS NULL AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Not Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Incomplete' AND job_cancel IS NULL)
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel = '')
+                                                    OR
+                                                (staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel IS NULL)";
+                                                
+                                    $numRow_run = mysqli_query($conn, $numRow);
+                                    
+                                    if ($row_Total = mysqli_num_rows($numRow_run)) {
+                                        echo '<h4 style="text-align:right;" >Total Job: ' . $row_Total . ' </h4>';
+                                    } 
+                                    
+                                    else {
+                                        echo '<h4 style="text-align:right;">No Data </h4>';
+                                    }
+                                    
+                                    while ($row = $results->fetch_assoc()) {
+                                ?>
+                                
+                                <div class="Store" data-id="<?php echo $row['jobregister_id']; ?>" data-type_id="<?php echo $row['type_id']; ?>" data-target="doubleClick-Store" ondblclick="document.getElementById('doubleClick-Store').style.display='block'">
+                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                        <ul class="b" id="draged">
+                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                            <li><?php echo $row['job_priority'] ?></li>
+                                            <li><?php echo $row['customer_name'] ?></li>
+                                            <li><?php echo $row['machine_type'] ?></li>
+                                            <li><?php echo $row['job_description'] ?></li>
+                                            <li><?php echo $row['job_status'] ?></li>
+                                            <strong text-align="center" style="color:red"><?php echo $row['reason'] ?></strong>
+                                        </ul>
+                                </div>
+                                <?php } ?>
+                        </div>
+                        
+                        <!-- Storekeeper PopUp -->
+                        <div id="doubleClick-Store" class="modal">
+                            <div class="tabStore">
+                                <!-- Storekeeper Job Info Tab -->
+                                <input type="radio" name="tabDoingStore" id="tabDoingStore1" checked="checked">
+                                <label for="tabDoingStore1" class="tabHeadingStore"> Job Info </label>
+                                <div class="tab" id="StoreJobInfoTab">
+                                    <div class="contentStoreJobInfo" style="padding-left: 66px; margin-left: -89px; margin-top: -47px;">
+                                    <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                                    <form action="homeindex.php" method="post">
+                                        <div class="store-details">
+
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Store').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            var type_id = $(this).data('type_id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageJobinfoStorekeeper.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id,
+                                                                type_id: type_id},
+                                                            
+                                                success: function(response) {
+                                                    $('.store-details').html(response);
+                                                    $('#doubleClick-Store').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                            
+                                <!-- Storekeeper Job Assign Tab -->
+                                <input type="radio" name="tabDoingStore" id="tabDoingStore2">
+                                <label for="tabDoingStore2" class="tabHeadingStore">Job Assign</label>
+                                <div style="min-width: -webkit-fill-available;" class="tab">
+                                <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                                    <form action="AdminHomepageJobassignStore.php" method="post">
+                                        <div class="store-jobassign">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Store').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageJobassignStore.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.store-jobassign').html(response);
+                                                    $('#doubleClick-Store').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                                <!-- Storekeeper Accessories Tab -->
+                                <input type="radio" name="tabDoingStore" id="tabDoingStore3">
+                                <label for="tabDoingStore3" class="tabHeadingStore"> Accessories </label>
+                                <div style="min-width: -webkit-fill-available;" class="tab">
+                                <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                                    <form action="ajaxtabaccessories.php" method="post">
+                                        <div class="store-accessories">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Store').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxtabaccessories.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.store-accessories').html(response);
+                                                    $('#doubleClick-Store').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Storekeeper Update Tab -->
+                                <input type="radio" name="tabDoingStore" id="tabDoingStore4">
+                                <label for="tabDoingStore4" class="tabHeadingStore"> Update </label>
+                                <div style="min-width: -webkit-fill-available;" class="tab">
+                                <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
+                                    <form action="ajaxstoreupdateADMIN.php" method="post">
+                                        <div class="store-update">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Store').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxstoreupdateADMIN.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.store-update').html(response);
+                                                    $('#doubleClick-Store').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <!-- End of Storekeeper PopUp -->
+                        <!-- End of Storekeeper -->
+                        
+                        <!-- Pending -->
+                        <div class="box" id="myModal">
+                            <div class="box_topic">Pending</div>
+                                <?php
+                                    
+                                    include 'dbconnect.php';
+                                    
+                                    $results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '')
+                                                                OR    
+                                                            (job_status = 'Pending' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+
+                                    $numRow = "SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '')
+                                                    OR    
+                                                (job_status = 'Pending' AND job_cancel IS NULL)";
+
+                                    $numRow_run = mysqli_query($conn, $numRow);
+
+                                    if ($row_Total = mysqli_num_rows($numRow_run)) {
+                                        echo '<h4 style="text-align:right;">Total Job: ' . $row_Total . ' </h4>';
+                                    }
+                                    
+                                    else {
+                                        echo '<h4 style="text-align:right;">No Data </h4>';
+                                    }
+                                    
+                                    while ($row = $results->fetch_assoc()) {
+                                ?>
+                                
+                                <div class="Pending" data-type_id="<?php echo $row['type_id']; ?>" data-id="<?php echo $row['jobregister_id']; ?>" data-target="doubleClick-Pending" ondblclick="document.getElementById('doubleClick-Pending').style.display='block'">
+                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                        <ul class="b" id="draged">
+                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                            <li><?php echo $row['job_priority'] ?></li>
+                                            <li><?php echo $row['customer_name'] ?></li>
+                                            <li><?php echo $row['machine_type'] ?></li>
+                                            <li><?php echo $row['job_description'] ?></li>
+                                            <li><?php echo $row['job_status'] ?></li>
+                                            <li><b>Pending Reason: </b><?php echo $row['reason'] ?></li>
+                                        </ul>
+                                </div>
+                                <?php } ?>
+                        </div>
+                        
+                        <!-- Pending Popup Modal -->
+                        <div id="doubleClick-Pending" class="modal">
+                            <div class="tabPending">
+                                <input type="radio" name="tabDoingPending" id="tabDoingPending1" checked="checked">
+                                <!-- Pending Job Info Tab -->
+                                <label for="tabDoingPending1" class="tabHeadingPending"> Job Info </label>
+                                <div class="tab" id="PendingJobInfoTab">
+                                    <div class="contentPendingJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                                    <form action="homeindex.php" method="post">
+                                        <div class="pending-details">
+
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Pending').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            var type_id = $(this).data('type_id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageJobinfoPending.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id,
+                                                                type_id: type_id},
+                                                                
+                                                success: function(response) {
+                                                    $('.pending-details').html(response);
+                                                    $('#doubleClick-Pending').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Pending Job Assign tab -->
+                                <input type="radio" name="tabDoingPending" id="tabDoingPending3">
+                                <label for="tabDoingPending3" class="tabHeadingPending">Job Assign</label>
+                                <div class="tab" id="PendingJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                                    <form action="jobassignADMIN.php" method="post">
+                                        <div class="pending-assign">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('body').on('click', '.Pending', function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageJobassign.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.pending-assign').html(response);
+                                                    $('#doubleClick-Pending').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Pending Update Tab -->
+                                <input type="radio" name="tabDoingPending" id="tabDoingPending2">
+                                <label for="tabDoingPending2" class="tabHeadingPending">Update</label>
+                                <div class="tab" id="PendingJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                                    <form action="AdminHomepageUpdate.php" method="post">
+                                        <div class="pending-update">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Pending').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageUpdate.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.pending-update').html(response);
+                                                    $('#doubleClick-Pending').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Pending Accessories Tab -->
+                                <input type="radio" name="tabDoingPending" id="tabDoingPending4">
+                                <label for="tabDoingPending4" class="tabHeadingPending">Accessories</label>
+                                <div class="tab" id="PendingJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                                    <form action="ajaxtabaccessories.php" method="post">
+                                        <div class="pending-accessories">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Pending').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxtabaccessories.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.pending-accessories').html(response);
+                                                    $('#doubleClick-Pending').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Pending Photo Tab -->
+                                <input type="radio" name="tabDoingPending" id="tabDoingPending5">
+                                <label for="tabDoingPending5" class="tabHeadingPending">Photo</label>
+                                <div class="tab" id="PendingJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                                    <form action="ajaxtechphtoupdt.php" method="post">
+                                        <div class="pending-photos">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Pending').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxtechphtoupdt.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.pending-photos').html(response);
+                                                    $('#doubleClick-Pending').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Pending Video Tab -->
+                                <input type="radio" name="tabDoingPending" id="tabDoingPending7">
+                                <label for="tabDoingPending7" class="tabHeadingPending">Video</label>
+                                <div class="tab" id="PendingJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                                    <form action="ajaxtechvideoupdt.php" method="post">
+                                        <div class="pending-video">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Pending').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxtechvideoupdt.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                            
+                                                success: function(response) {
+                                                    $('.pending-video').html(response);
+                                                    $('#doubleClick-Pending').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Pending Report Tab -->
+                                <input type="radio" name="tabDoingPending" id="tabDoingPending6">
+                                <label for="tabDoingPending6" class="tabHeadingPending"> Report </label>
+                                <div class="tab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
+                                    <form action="ajaxreportadmin.php" method="post">
+                                        <div class="pending-report">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Pending').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxreportadmin.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.pending-report').html(response);
+                                                    $('#doubleClick-Pending').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <!-- End of Pending Popup Modal -->
+                        <!-- End of Pending -->
+                        
+                        <!-- Incomplete -->
+                        <div class="box" id="myModal">
+                            <div class="box_topic">Incomplete</div>
+                                <?php
+                                    
+                                    include 'dbconnect.php';
+                                    
+                                    $results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Incomplete' AND job_cancel = '')
+                                                                OR    
+                                                            (job_status = 'Incomplete' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+
+                                    $numRow ="SELECT * FROM job_register WHERE (job_status = 'Incomplete' AND job_cancel = '')
+                                                OR    
+                                                (job_status = 'Incomplete' AND job_cancel IS NULL)";
+
+                                    $numRow_run = mysqli_query($conn, $numRow);
+                                    
+                                    if ($row_Total = mysqli_num_rows($numRow_run)) {
+                                        echo '<h4 style="text-align:right;">Total Job: ' . $row_Total . ' </h4>';
+                                    } 
+                                    
+                                    else {
+                                        echo '<h4 style="text-align:right;">No Data </h4>';
+                                    }
+                                    
+                                    while ($row = $results->fetch_assoc()) {
+                                ?>
+
+                                <div class="Incomplete" data-id="<?php echo $row['jobregister_id']; ?>" data-target="doubleClick-Incomplete" ondblclick="document.getElementById('doubleClick-Incomplete').style.display='block'">
+                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
+                                        <ul class="b" id="draged">
+                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                            <li><?php echo $row['job_priority'] ?></li>
+                                            <li><?php echo $row['customer_name'] ?></li>
+                                            <li><?php echo $row['machine_type'] ?></li>
+                                            <li><?php echo $row['job_description'] ?></li>
+                                            <li><?php echo $row['job_status'] ?></li>
+                                            <li><b>Incomplete Reason: </b><?php echo $row['reason'] ?></li>
+                                        </ul>
+                                </div>
+                                <?php } ?>
+                        </div>
+
+                        <!-- Incomplete Popup Modal -->
+                        <div id="doubleClick-Incomplete" class="modal">
+                            <div class="tabIncomplete">
+                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete1" checked="checked">
+                                <!-- Incomplete Job Info Tab -->
+                                <label for="tabDoingIncomplete1" class="tabHeadingIncomplete"> Job Info </label>
+                                <div class="tab" id="IncompleteJobInfoTab">
+                                    <div class="contentIncompleteJobInfo" style="margin-top: -27px; margin-left: -22px;">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                                    <form action="homeindex.php" method="post">
+                                        <div class="incomplete-details">
+
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Incomplete').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageJobinfoIncomplete.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.incomplete-details').html(response);
+                                                    $('#doubleClick-Incomplete').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Incomplete Job Assign Tab -->
+                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete3">
+                                <label for="tabDoingIncomplete3" class="tabHeadingIncomplete">Job Assign</label>
+                                <div class="tab" id="IncompleteJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                                    <form action="jobassignADMIN.php" method="post">
+                                        <div class="incomplete-assign">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Incomplete').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageJobassign.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+
+                                                success: function(response) {
+                                                    $('.incomplete-assign').html(response);
+                                                    $('#doubleClick-Incomplete').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Incomplete Update Tab -->
+                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete2">
+                                <label for="tabDoingIncomplete2" class="tabHeadingIncomplete">Update</label>
+                                <div class="tab" id="IncompleteJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                                    <form action="AdminHomepageUpdate.php" method="post">
+                                        <div class="incomplete-update">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Incomplete').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'AdminHomepageUpdate.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.incomplete-update').html(response);
+                                                    $('#doubleClick-Incomplete').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Incomplete Accessories Tab -->
+                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete4">
+                                <label for="tabDoingIncomplete4" class="tabHeadingIncomplete">Accessories</label>
+                                <div class="tab" id="IncompleteJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                                    <form action="ajaxtabaccessories.php" method="post">
+                                        <div class="incomplete-accessories">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Incomplete').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxtabaccessories.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.incomplete-accessories').html(response);
+                                                    $('#doubleClick-Incomplete').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Pending Photo Tab -->
+                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete5">
+                                <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Photo</label>
+                                <div class="tab" id="IncompleteJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                                    <form action="ajaxtechphtoupdt.php" method="post">
+                                        <div class="incomplete-photos">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Incomplete').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxtechphtoupdt.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+
+                                                success: function(response) {
+                                                    $('.incomplete-photos').html(response);
+                                                    $('#doubleClick-Incomplete').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Incomplete Video Tab -->
+                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete7">
+                                <label for="tabDoingIncomplete7" class="tabHeadingIncomplete">Video</label>
+                                <div class="tab" id="IncompleteJobInfoTab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                                    <form action="ajaxtechvideoupdt.php" method="post">
+                                        <div class="incomplete-video">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Incomplete').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxtechvideoupdt.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.incomplete-video').html(response);
+                                                    $('#doubleClick-Incomplete').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
+                                <!-- Incomplete Report Tab -->
+                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete6">
+                                <label for="tabDoingIncomplete6" class="tabHeadingIncomplete"> Report </label>
+                                <div class="tab">
+                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
+                                    <form action="ajaxreportadmin.php" method="post">
+                                        <div class="incomplete-report">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.Incomplete').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            
+                                            $.ajax({
+                                                url: 'ajaxreportadmin.php',
+                                                type: 'post',
+                                                data: {jobregister_id: jobregister_id},
+                                                
+                                                success: function(response) {
+                                                    $('.incomplete-report').html(response);
+                                                    $('#doubleClick-Incomplete').modal('show');
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <!-- End of Incomplete Popup Modal -->
+                        <!-- End of Incomplete -->
+                    </div>
+                    <!-- End of First row of Admin Board Card -->
+                    
+                    <!-- Technician Card -->
                     <!-- Employee Modal Box -->
                     <?php
                         include 'dbconnect.php';
@@ -1068,6 +2038,7 @@
                     ?>
                 </div>
             </div>
+
             <script type='text/javascript'>
                 var job_table;
                 // STAFF JOB INFO FUNCTION

@@ -10,7 +10,7 @@
         <title>Completed Job</title>
 
         <!--========== CSS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
@@ -323,7 +323,7 @@
                 </script>
 
                 <!-- PopUp Modal -->
-                <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false" data-keyboard="false">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -336,7 +336,7 @@
                                     <button class="btn tab-button" data-bs-target="#Video" aria-controls="Video" aria-selected="false" id="showVideo" style="border:none; font-weight: bold;">Video</button>
                                 </div>
                                 
-                                <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close" ></button>
                             </div>
                             
                             <div class="modal-body">
@@ -344,7 +344,7 @@
                                     <!-- Job info -->
                                     <div class="tab-pane show active" id="JobInfo" role="tabpanel" aria-labelledby="JobInfo" style="color: black;">
                                         <form id="showjobinfo" action="AdminCompletedJobInfo.php" method="post">
-                                            <div class="completed-details">
+                                            <div class="completed-details" id="completed-details">
 
                                             </div>
                                         </form>
@@ -354,14 +354,16 @@
                                         $(document).ready(function() {
                                             $('.viewJobBtn').click(function() {
                                                 var jobregister_id = $(this).data('jobregister-id');
-                                                
+                                                $('#JobModal').modal('show');
+                                                var details = document.getElementById('completed-details');
                                                 $.ajax({
                                                     url: 'AdminCompletedJobInfo.php',
                                                     type: 'post',
                                                     data: { jobregister_id: jobregister_id },
                                                     success: function(response) {
-                                                        $('.completed-details').html(response);
-                                                        $('#JobModal').modal('show');
+                                                        details.innerHTML = response;
+
+                                                        
                                                     },
                                                     
                                                     error: function(xhr, status, error) {
@@ -376,7 +378,7 @@
                                     <!-- Job Assign -->
                                     <div class="tab-pane" id="JobAssign" role="tabpanel" aria-labelledby="JobAssign" style="color: black;">
                                         <form id="showjobassign" action="jobassignAdminCOMPLETED.php" method="post">
-                                            <div class="completed-JobAssign">
+                                            <div class="completed-JobAssign" id="completed-JobAssign">
 
                                             </div>
                                         </form>
@@ -386,14 +388,15 @@
                                         $(document).ready(function() {
                                             $('.viewJobBtn').click(function() {
                                                 var jobregister_id = $(this).data('jobregister-id');
+                                                var details = document.getElementById('completed-JobAssign');
                                                 
                                                 $.ajax({
                                                     url: 'jobassignAdminCOMPLETED.php',
                                                     type: 'post',
                                                     data: { jobregister_id: jobregister_id },
                                                     success: function(response) {
-                                                        $('.completed-JobAssign').html(response);
-                                                        $('#JobModal').modal('show');
+                                                        details.innerHTML = response;
+                                                        
                                                     },
                                                     
                                                     error: function(xhr, status, error) {
@@ -408,7 +411,7 @@
                                     <!-- Update -->
                                     <div class="tab-pane" id="Update" role="tabpanel" aria-labelledby="Update" style="color: black;">
                                         <form id="showUpdate" action="ajaxtechupdatecomplete.php" method="post">
-                                            <div class="completed-update">
+                                            <div class="completed-update" id="completed-update">
 
                                             </div>
                                         </form>
@@ -418,14 +421,16 @@
                                         $(document).ready(function() {
                                             $('.viewJobBtn').click(function() {
                                                 var jobregister_id = $(this).data('jobregister-id');
+                                                var details = document.getElementById('completed-update');
+
                                                 
                                                 $.ajax({
                                                     url: 'ajaxtechupdatecomplete.php',
                                                     type: 'post',
                                                     data: { jobregister_id: jobregister_id },
                                                     success: function(response) {
-                                                        $('.completed-update').html(response);
-                                                        $('#JobModal').modal('show');
+                                                        details.innerHTML = response;
+
                                                     },
                                                     
                                                     error: function(xhr, status, error) {
@@ -440,7 +445,7 @@
                                     <!-- Accessories -->
                                     <div class="tab-pane" id="Accessory" role="tabpanel" aria-labelledby="Accessory" style="color: black;">
                                         <form id="showaccessory" action="ajaxtabaccessories.php" method="post">
-                                            <div class="completed-accessories">
+                                            <div class="completed-accessories" id="completed-accessories">
 
                                             </div>
                                         </form>
@@ -450,14 +455,16 @@
                                         $(document).ready(function() {
                                             $('.viewJobBtn').click(function() {
                                                 var jobregister_id = $(this).data('jobregister-id');
+                                                var details = document.getElementById('completed-accessories');
+
                                                 
                                                 $.ajax({
                                                     url: 'ajaxtabaccessories.php',
                                                     type: 'post',
                                                     data: { jobregister_id: jobregister_id },
                                                     success: function(response) {
-                                                        $('.completed-accessories').html(response);
-                                                        $('#JobModal').modal('show');
+                                                        details.innerHTML = response;
+                    
                                                     },
                                                     
                                                     error: function(xhr, status, error) {
@@ -472,7 +479,7 @@
                                     <!-- Photo -->
                                     <div class="tab-pane" id="Photo" role="tabpanel" aria-labelledby="Photo" style="color: black;">
                                         <form id="showPhoto" action="ajaxtechphtoupdtcomplete.php" method="post">
-                                            <div class="completed-photos">
+                                            <div class="completed-photos" id="completed-photos">
 
                                             </div>
                                         </form>
@@ -482,14 +489,17 @@
                                         $(document).ready(function() {
                                             $('.viewJobBtn').click(function() {
                                                 var jobregister_id = $(this).data('jobregister-id');
+                                                var details = document.getElementById('completed-photos');
+
+                                                
                                                 
                                                 $.ajax({
                                                     url: 'ajaxtechphtoupdtcomplete.php',
                                                     type: 'post',
                                                     data: { jobregister_id: jobregister_id },
                                                     success: function(response) {
-                                                        $('.completed-photos').html(response);
-                                                        $('#JobModal').modal('show');
+                                                        details.innerHTML = response;
+                                
                                                     },
                                                     
                                                     error: function(xhr, status, error) {
@@ -504,7 +514,7 @@
                                     <!-- Video -->
                                     <div class="tab-pane" id="Video" role="tabpanel" aria-labelledby="Video" style="color: black;">
                                         <form id="showVideo"action="ajaxtechvideoupdtcomplete.php" method="post">
-                                            <div class="completed-video">
+                                            <div class="completed-video" id="completed-video">
 
                                             </div>
                                         </form>
@@ -514,14 +524,16 @@
                                         $(document).ready(function() {
                                             $('.viewJobBtn').click(function() {
                                                 var jobregister_id = $(this).data('jobregister-id');
+                                                var details = document.getElementById('completed-video');
+
                                                 
                                                 $.ajax({
                                                     url: 'ajaxtechvideoupdtcomplete.php',
                                                     type: 'post',
                                                     data: { jobregister_id: jobregister_id },
                                                     success: function(response) {
-                                                        $('.completed-video').html(response);
-                                                        $('#JobModal').modal('show');
+                                                        details.innerHTML = response;
+                                                  
                                                     },
                                                     
                                                     error: function(xhr, status, error) {
@@ -562,21 +574,7 @@
                             });
                         });
                         
-                        viewJobButtons.forEach((button) => {
-                            button.addEventListener('click', (event) => {
-                                event.preventDefault();
-                                const jobregisterId = button.getAttribute('data-jobregister-id');
-                                const modal = document.querySelector('#JobModal');
-                                const jobRegisterInput = modal.querySelector('#jobregister_id');
-                                
-                                if (jobRegisterInput) {
-                                    jobRegisterInput.value = jobregisterId;
-                                }
-                                
-                                const bootstrapModal = new bootstrap.Modal(modal);
-                                bootstrapModal.show();
-                            });
-                        });
+
                     });
                 </script>
             </section>

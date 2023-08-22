@@ -4,7 +4,6 @@
     <html>
         <head>
             <!--========== CSS ==========-->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
 
@@ -28,7 +27,7 @@
                         while ($row = mysqli_fetch_array($query_run)) {
             ?>
             
-            <form action="homeindex.php" method="post">
+            <form action="homeindex.php" method="post" id="formjobinfo">
                 <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
                 <input type="hidden" name="job_cancel" value="<?php echo $row['job_cancel'] ?>">
                 <input type="hidden" name="job_status" value="<?php echo $row['job_status'] ?>">
@@ -66,7 +65,7 @@
                     <script>
                         $(document).ready(function(){
                             $('#job_name').select2({
-                                dropdownParent: $('#JobModal'),
+                                dropdownParent: $('#formjobinfo'),
                                 theme: 'bootstrap-5'
                             });
                         });
@@ -132,7 +131,7 @@
                     <script>
                         $(document).ready(function(){
                             $('#customer_name').select2({
-                                dropdownParent: $('#JobModal'),
+                                dropdownParent: $('#formjobinfo'),
                                 dropdownPosition: 'below',
                                 theme: 'bootstrap-5'
                             });
@@ -244,13 +243,13 @@
             <script>
                 $(document).ready(function() {
                     $('#machine_brand').select2({
-                        
+                        dropdownParent: $('#formjobinfo'),
                         dropdownPosition: 'below',
                         theme: 'bootstrap-5'
                     });
                     
                     $('#machine_type').select2({
-                        
+                        dropdownParent: $('#formjobinfo'),
                         dropdownPosition: 'below',
                         theme: 'bootstrap-5'
                     });
@@ -281,6 +280,7 @@
             <script>
                 $(document).ready(function() {
                     $('#serialnumber').select2({
+                        dropdownParent: $('#formjobinfo'),
                         dropdownPosition: 'below',
                         theme: 'bootstrap-5'
                     });
@@ -299,7 +299,7 @@
                                 $('#selecteTypeId').val()
                                 $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
                                 $.each(response, function(index, value) {
-                                    $('#serialnumber').append('<option value="' + value.machine_ID + '">' + value.machine_serialNumber + '</option>');
+                                    $('#serialnumber').append('<option value="' + value.machine_serialNumber + '">' + value.machine_serialNumber + '</option>');
                                 });
                             }
                         });
@@ -312,11 +312,11 @@
                 $(document).ready(function() {
                     $('#serialnumber').on('change', function() {
                         var selectedSerialNumber = $(this).val();
-                        
+
                         $.ajax({
                             url: 'machineGetMachineDetails.php',
                             type: 'POST',
-                            data: { serial_number: selectedSerialNumber },
+                            data: { serialnumber: selectedSerialNumber },
                             dataType: 'json',
                             
                             success: function(response) {
