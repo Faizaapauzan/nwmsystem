@@ -14,14 +14,17 @@
     <!-- Datatable CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
     
     <!-- Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
     
     <!--Boxicons link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -207,15 +210,28 @@
             
             <h1>Admin Report</h1>
             
-            <form action="" method="GET">
+            <form action="" method="GET" id="getRecord">
                 <!-- Search date -->
                 <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
                     <label for="date" class="details" style="padding-right: 20px;">Date</label>
-                    <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 36px; width: 301px;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
+                    <input id="myInput" type="text" style="height: 36px; width: 301px;" name="DateAssign" class="form-control">
                     <button type="submit" class="btn-biru" style="width: auto;">Search</button>
                     <button class="btn-biru" style="width: auto;" onclick="document.getElementById('myInput').value = ''">Clear</button>
-                    <input type="button" class="btn-biru" style="width: 57px;height: 35px;background: green;border-color: green;color: white;" onclick="window.open('reportadmin.php')" value="Print">
+                    <input type="button" class="btn-biru" style="width: 57px;height: 35px;background: green;border-color: green;color: white;" onclick="window.open('reportadmin.php?DateAssign=' + document.getElementById('myInput').value)" value="Print">
                 </div>
+
+                <script>
+                    var pattern = /DateAssign=[0-9]{2}-[0-9]{2}-[0-9]{4}/;
+                    $(document).ready(function() {
+                        $("#myInput").datepicker();
+                        $("#myInput").datepicker("setDate", new Date());
+                        $("#myInput").datepicker("option", "dateFormat", "dd-mm-yy");
+
+                        if (!pattern.test(document.URL)) {
+                            document.getElementById("getRecord").submit();
+                        } 
+                    });
+                </script>
                 <!-- End of Search date -->
                 
                 <!-- Remark - Total Workers -->
