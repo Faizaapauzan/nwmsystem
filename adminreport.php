@@ -214,23 +214,40 @@
                 <!-- Search date -->
                 <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
                     <label for="date" class="details" style="padding-right: 20px;">Date</label>
-                    <input id="myInput" type="text" style="height: 36px; width: 301px;" name="DateAssign" class="form-control">
-                    <button type="submit" class="btn-biru" style="width: auto;">Search</button>
-                    <button class="btn-biru" style="width: auto;" onclick="document.getElementById('myInput').value = ''">Clear</button>
+                    <input id="myInput" type="text" style="height: 36px; width: 301px;" name="DateAssign" class="form-control" onchange="changeRecord();">
                     <input type="button" class="btn-biru" style="width: 57px;height: 35px;background: green;border-color: green;color: white;" onclick="window.open('reportadmin.php?DateAssign=' + document.getElementById('myInput').value)" value="Print">
                 </div>
 
                 <script>
+                    var date = new Date();
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear();
+
+                    // Ensure leading zeros for day and month if needed
+                    var formattedDay = (day < 10) ? '0' + day : day;
+                    var formattedMonth = (month < 10) ? '0' + month : month;
+
+                    var formattedDate = formattedDay + "-" + formattedMonth + "-" + year;
                     var pattern = /DateAssign=[0-9]{2}-[0-9]{2}-[0-9]{4}/;
+                    
                     $(document).ready(function() {
                         $("#myInput").datepicker();
-                        $("#myInput").datepicker("setDate", new Date());
                         $("#myInput").datepicker("option", "dateFormat", "dd-mm-yy");
-
-                        if (!pattern.test(document.URL)) {
+                        
+                        var urlParams = new URLSearchParams(window.location.search); 
+                        var dateFromUrl = urlParams.get('DateAssign');   
+                        if (!pattern.test(document.URL)) { 
+                            $("#myInput").datepicker("setDate", new Date());
                             document.getElementById("getRecord").submit();
-                        } 
+                        } else {
+                            $("#myInput").datepicker("setDate", dateFromUrl);
+                        }
+
                     });
+                    function changeRecord(){
+                        document.getElementById("getRecord").submit();
+                    }
                 </script>
                 <!-- End of Search date -->
                 
