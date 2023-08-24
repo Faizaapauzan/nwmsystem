@@ -112,9 +112,9 @@
         <div class="status" style="margin: 20px;font-weight: bold;">Worker Assignment<br />
         </div>
         <form action="" method="GET">
-            <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
-                <label for="date" class="details" style="padding-right: 20px;">Date</label>
-                <input id="myInput" placeholder="DD - MM - YYYY" type="text" style="height: 24px; width: auto;" name="DateAssign" value="<?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?>" class="form-control">
+            <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px; display: flex; align-items: center;" >
+                <label for="date" class="details" style="padding-right: 10px;">Date:</label>
+                <p><?php if(isset($_GET['DateAssign'])){echo $_GET['DateAssign'];} else { echo $date = date('d-m-Y'); } ?></p>
             </div>
 
             <!-- Job Update Time -->
@@ -134,7 +134,7 @@
                             <th style="width: 9%;">Work Time</th>
                             <th style="width: 9%;">Travel Time</th>
                         </thead> 
-                            
+                        <tbody id = "tbody">
                             <?php
                                 include_once 'dbconnect.php';
                                 
@@ -146,6 +146,7 @@
                                             {
                                                 foreach($query as $row)
                                             {
+                                                $currentname = $row['job_assign'];
                                                 $technician_departure =$row['technician_departure'];
                                                 $technician_arrival =$row['technician_arrival'];
                                                 $technician_leaving =$row['technician_leaving'];
@@ -186,32 +187,60 @@
                                             }
                             ?> 
                         
-                        <tbody>
-                            <td style="text-align: center;"></td>
-                            <td style="padding-left: 7px;"><?= $row['job_assign']; ?></td>
-                            <td><textarea style="border:none; resize:none;" class="infoarea" id="textarea-container"><?= $row['username']; ?></textarea></td>
-                            <td style="padding-left: 7px;"><?= $row['customer_name']; ?></td>
-                            <td style="padding-left: 7px;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
-                            <td style="text-align: center;"><?php echo "$departure" ?></td>
-                            <td style="text-align: center;"><?php echo "$arrival" ?></td>
-                            <td style="text-align: center;"><?php echo "$leaving" ?></td>
-                            <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?> hours <?php echo difftime($arrival, $leaving)['m']?> minutes</td>
-                            <td style="text-align: center;"><textarea style="border:none; resize:none; text-align: center;" class="differenttime" id="textarea-container"><?php echo difftime($departure, $arrival)['h']?> hours <?php echo difftime($departure, $arrival)['m']?> minutes</textarea></td>
-                        </tbody> 
+
+                            <tr>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: center;"><?= $row['job_assign']; ?></td>
+                                <td><textarea style="border:none; resize:none;" class="infoarea" id="textarea-container"><?= $row['username']; ?></textarea></td>
+                                <td style="padding-left: 7px;"><?= $row['customer_name']; ?></td>
+                                <td style="padding-left: 7px;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
+                                <td style="text-align: center;"><?php echo "$departure" ?></td>
+                                <td style="text-align: center;"><?php echo "$arrival" ?></td>
+                                <td style="text-align: center;"><?php echo "$leaving" ?></td>
+                                <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?> hours <?php echo difftime($arrival, $leaving)['m']?> minutes</td>
+                                <td style="text-align: center;"><textarea style="border:none; resize:none; text-align: center;" class="differenttime" id="textarea-container"><?php echo difftime($departure, $arrival)['h']?> hours <?php echo difftime($departure, $arrival)['m']?> minutes</textarea></td>
+                            </tr>
+                       
                             
                             <?php
                                 } }
                                     else
                                         {
-                                            echo "No Record Found";
+                                            echo '<tbody><tr><td colspan="10" style="text-align: center;">No Record Found</td></tr></tbody>';
                                         }
                                     }
                             ?>
-
+                         </tbody> 
                     </table>
                 </div>
 
                 <script type="text/javascript">
+                    $(document).ready(function() {
+                        var previousName = null;
+                        var count = 1;
+                        var index2;
+
+                        $("#tbody tr").each(function(index) {
+                            index2 = index;
+                            var currentName = $(this).find("td:eq(1)").text();
+
+                            if (previousName !== currentName) {
+                                if (count > 1){
+                                    $("#tbody tr:eq(" + (index - count) + ") td:eq(1)").attr("rowspan", count);
+                                }
+
+                                count = 1;
+                                previousName = currentName;
+                            } else {
+                                count++;
+                                $(this).find("td:eq(1)").hide();
+                            }
+                        });
+                        if (count > 1){
+                            $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(1)").attr("rowspan", count);
+                        }
+                    });
+
                     var $textArea = $("#textarea-container");
                     resizeTextArea($textArea);
                     $textArea.off("keyup.textarea").on("keyup.textarea", function() {
