@@ -79,7 +79,7 @@
         <div class="update-form">
           <div class="upload-report">
             <div class="input-group">
-              <input type="file" class="form-control" name="multipleFile[]" id="multipleAfter" required="" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+              <input type="file" class="form-control" name="multipleFile[]" id="multipleBefore" required="" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
               <input type="hidden" id="description" name="description" value="Machine (Before Service)">
               <button type="submit" name="upload" class="btn btn-outline-secondary" style="background-color: #081d45; color: #fff; cursor: pointer;">Upload</button>
             </div>
@@ -137,7 +137,7 @@
             }
           }
           
-          $('#multipleFile').on("change", previewImages);
+          $('#multipleBefore').on("change", previewImages);
           $("#submitForm").on("submit", function(e) {
             e.preventDefault();
             
