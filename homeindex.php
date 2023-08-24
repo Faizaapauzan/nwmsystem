@@ -27,55 +27,99 @@
      $machine_brand = $_POST["machine_brand"];
      $machine_type = $_POST["machine_type"];
      $serialnumber = $_POST["serialnumber"];
+     $brand_id = $_POST["brand_id"];
+     $type_id = $_POST["type_id"];
      $accessories_required = $_POST["accessories_required"];
      $job_cancel = $_POST["job_cancel"];
      $job_status = $_POST["job_status"];
      $reason = $_POST["reason"];
      $jobregisterlastmodify_by = $_POST["jobregisterlastmodify_by"];
 
-     $machine_id = !empty($machine_id) ? "'$machine_id'" : "NULL";
+     $machine_id = !empty($machine_id) ? $machine_id : "NULL";
 
-     $sql ="UPDATE job_register SET
-                job_name ='".addslashes($job_name)."',
-                job_order_number ='".addslashes($job_order_number)."',
-                job_description ='".addslashes($job_description)."',
-                DateAssign ='".addslashes($DateAssign)."',
-                requested_date ='".addslashes($requested_date)."',
-                delivery_date ='".addslashes($delivery_date)."',
-                customer_name ='".addslashes($customer_name)."',
-                customer_grade ='".addslashes($customer_grade)."',
-                customer_code ='".addslashes($customer_code)."',
-                job_priority ='".addslashes($job_priority)."',
-                requested_date ='".addslashes($requested_date)."',
-                delivery_date ='".addslashes($delivery_date)."',
-                customer_PIC ='".addslashes($customer_PIC)."',
-                cust_phone1 ='".addslashes($cust_phone1)."',
-                cust_phone2 ='".addslashes($cust_phone2)."',
-                cust_address1 ='".addslashes($cust_address1)."',
-                cust_address2 ='".addslashes($cust_address2)."',
-                cust_address3 ='".addslashes($cust_address3)."',
-                machine_id =$machine_id,
-                machine_code ='".addslashes($machine_code)."',
-                machine_name ='".addslashes($machine_name)."',
-                machine_brand ='".addslashes($machine_brand)."',
-                machine_type ='".addslashes($machine_type)."',
-                serialnumber ='".addslashes($serialnumber)."',
-                accessories_required ='".addslashes($accessories_required)."',
-                job_cancel ='".addslashes($job_cancel)."',
-                job_status ='".addslashes($job_status)."',
-                reason ='".addslashes($reason)."',
-                jobregisterlastmodify_by ='".addslashes($jobregisterlastmodify_by)."'
-            
-            WHERE  jobregister_id ='".addslashes($jobregister_id)."' ";
+     $sql = "UPDATE job_register SET
+            job_name = ?,
+            job_order_number = ?,
+            job_description = ?,
+            DateAssign = ?,
+            requested_date = ?,
+            delivery_date = ?,
+            customer_name = ?,
+            customer_grade = ?,
+            customer_code = ?,
+            job_priority = ?,
+            requested_date = ?,
+            delivery_date = ?,
+            customer_PIC = ?,
+            cust_phone1 = ?,
+            cust_phone2 = ?,
+            cust_address1 = ?,
+            cust_address2 = ?,
+            cust_address3 = ?,
+            machine_id = ?,
+            machine_code = ?,
+            machine_name = ?,
+            machine_brand = ?,
+            machine_type = ?,
+            brand_id = ?,
+            type_id = ?,
+            serialnumber = ?,
+            accessories_required = ?,
+            job_cancel = ?,
+            job_status = ?,
+            reason = ?,
+            jobregisterlastmodify_by = ?
+        WHERE jobregister_id = ?";
 
-     if (mysqli_query($conn, $sql)) {
-         header("Location:" . $_SERVER["HTTP_REFERER"]);
-     } else {
-         echo "ERROR: Hush! Sorry $sql. " . mysqli_error($conn);
-     }
+    // Prepare and bind parameters
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ssssssssssssssssssssssssssssssss", 
+    $job_name,
+    $job_order_number,
+    $job_description,
+    $DateAssign,
+    $requested_date,
+    $delivery_date,
+    $customer_name,
+    $customer_grade,
+    $customer_code,
+    $job_priority,
+    $requested_date,
+    $delivery_date,
+    $customer_PIC,
+    $cust_phone1,
+    $cust_phone2,
+    $cust_address1,
+    $cust_address2,
+    $cust_address3,
+    $machine_id,
+    $machine_code,
+    $machine_name,
+    $machine_brand,
+    $machine_type,
+    $brand_id,
+    $type_id,
+    $serialnumber,
+    $accessories_required,
+    $job_cancel,
+    $job_status,
+    $reason,
+    $jobregisterlastmodify_by,
+    $jobregister_id
+    );
 
-     // Close connection
-     mysqli_close($conn);
+    // Execute the statement
+    if (mysqli_stmt_execute($stmt)) {
+    header("Location: " . $_SERVER["HTTP_REFERER"]);
+    } else {
+    echo "ERROR: Hush! Sorry. " . mysqli_error($conn);
+    }
+
+    // Close statement
+    mysqli_stmt_close($stmt);
+
+    // Close connection
+    mysqli_close($conn);
  }
 
 ?>

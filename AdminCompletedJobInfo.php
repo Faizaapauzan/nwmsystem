@@ -182,8 +182,8 @@
     
                     <div class="col-md-6 mb-3">
                         <label for="">Machine Brand</label>
-                        <select type="text" name="machine_brand" id="machine_brand" style="width: 100%;" class="form-select">
-                            <option value="<?php echo $row['machine_brand'] ?>"><?php echo $row['machine_brand'] ?></option>
+                        <select type="text" name="brand_id" id="machine_brand" style="width: 100%;" class="form-select">
+                            <option value="<?php echo $row['machine_id'] ?>"><?php echo $row['machine_brand'] ?></option>
                                 <?php
                                     
                                     include "dbconnect.php";
@@ -196,14 +196,15 @@
                                 ?>
                                 <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
                                 <?php } } ?>
+                                <input type="hidden" id="brand" name="machine_brand" value="<?php echo $row['machine_brand'] ?>">
                         </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="">Machine Type</label>
-                        <select type="text" name="machine_type" id="machine_type" style="width: 100%;" class="form-select"></select>
+                        <select type="text" name="type_id" id="machine_type" style="width: 100%;" class="form-select"></select>
                         
-                        <input type="hidden" name="type_id" value="<?php echo $row['type_id'] ?>">
+                        <input type="hidden" id="type" name="machine_type" value="<?php echo $row['machine_type'] ?>">
                     </div>
 
                     <div class="mb-3">
@@ -245,8 +246,10 @@
                     
                     $('#machine_brand').on('change', function() {
                         var selectedBrandId = $(this).val();
+                        var brand = document.getElementById("brand");
+                        var selectedBrandText = $(this).find('option:selected').text();
                         $('#selectedBrandId').val(selectedBrandId);
-                        
+
                         $.ajax({
                             url: 'machineGetMachineType.php',
                             type: 'POST',
@@ -254,6 +257,8 @@
                             dataType: 'json',
                             
                             success: function(response) {
+                                brand.value = selectedBrandText;
+                                
                                 $('#selectedBrandId').val()
                                 $('#machine_type').empty().append('<option value="">Select Machine Type</option>');
                                 $.each(response, function(index, value) {
@@ -276,8 +281,10 @@
                     
                     $('#machine_type').on('change', function() {
                         var selecteTypeId = $(this).val();
+                        var type = document.getElementById("type");
                         $('#selecteTypeId').val(selecteTypeId);
-                        
+                        var selectedTypeText = $(this).find('option:selected').text();
+
                         $.ajax({
                             url: 'machineGetMachineSerialNum.php',
                             type: 'POST',
@@ -285,6 +292,7 @@
                             dataType: 'json',
                             
                             success: function(response) {
+                                type.value = selectedTypeText;
                                 $('#selecteTypeId').val()
                                 $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
                                 $.each(response, function(index, value) {
