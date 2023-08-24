@@ -207,24 +207,16 @@
                     <div class="card-header">
                         <h4>Completed Job</h4>
                     </div>
-
-                    <br>
-
-                    <div class="row" style="padding-left: 15px;">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <input type="text" id="min" name="min" placeholder="Start Date" class="form-control border border-dark">
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <input type="text" id="max" name="max" placeholder="End Date" class="form-control border border-dark">
-                                </div>
-                            </div>
+                    
+                    <div class="card-body" >
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <input type="text" id="min" name="min" placeholder="Start Date" class="form-control border border-dark">
+                            <input type="text" id="max" name="max" placeholder="End Date" class="form-control border border-dark">
+                            
+                            <button type="reset" id="refreshButton" class="btn btn-primary" style="background-color: #1a0845; color: white; border:none;" onclick="document.location='jobcompleted.php'">Refresh</button>
                         </div>
-                    </div>
-
-                    <div class="card-body">
+                        </br>
+                        
                         <div class="table-responsive">
                             <table id="completeJobTable" class="table table-bordered table-striped">
                                 <thead>
@@ -259,7 +251,7 @@
                                         <td style='text-align: center; white-space: nowrap;'><?= $job['job_assign'] ?></td>
                                         <td style='text-align: center; white-space: nowrap;'><?= $job['today_date'] ?></td>
                                         <td style='text-align: center;'>
-                                            <button type="button" class="viewJobBtn btn btn-info btn-sm" data-jobregister-id="<?=$job['jobregister_id'];?>">View</button>
+                                            <button type="button" class="viewJobBtn btn btn-info btn-sm" data-jobregister-id="<?=$job['jobregister_id'];?>">Details</button>
                                         </td>
                                     </tr>
                                     <?php $counter++; } } ?>
@@ -290,24 +282,21 @@
                         
                         let minDate, maxDate;
  
-                        // Custom filtering function which will search data in column four between two values
                         DataTable.ext.search.push(function (settings, data, dataIndex) {
                             let min = minDate.val();
                             let max = maxDate.val();
                             let date = new Date(data[4]);
                         
-                            if (
-                                (min === null && max === null) ||
+                            if ((min === null && max === null) ||
                                 (min === null && date <= max) ||
                                 (min <= date && max === null) ||
-                                (min <= date && date <= max)
-                            ) {
-                                return true;
+                                (min <= date && date <= max)) {
+                                    return true;
                             }
+                            
                             return false;
                         });
 
-                        // Create date inputs
                         minDate = new DateTime('#min', {
                             format: 'DD/MM/YYYY'
                         });
@@ -317,8 +306,8 @@
                         });
                         
                         document.querySelectorAll('#min, #max').forEach((el) => {
-                        el.addEventListener('change', () => table.draw());
-                    });
+                            el.addEventListener('change', () => table.draw());
+                        });
                     });
                 </script>
 
@@ -327,18 +316,19 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <div class="tab-buttons" role="tablist" style="display:inline-flex;">
-                                    <button class="btn tab-button active" data-bs-target="#JobInfo" aria-controls="JobInfo" aria-selected="true" id="showjobinfo" style="border:none; font-weight: bold;">Job Info</button>
-                                    <button class="btn tab-button" data-bs-target="#JobAssign" aria-controls="JobAssign" aria-selected="false" id="showjobassign" style="border:none; font-weight: bold;">Job Assign</button>
-                                    <button class="btn tab-button" data-bs-target="#Update" aria-controls="Update" aria-selected="false" id="showUpdate" style="border:none; font-weight: bold;">Update</button>
-                                    <button class="btn tab-button" data-bs-target="#Accessory" aria-controls="Accessory" aria-selected="false" id="showaccessory" style="border:none; font-weight: bold;">Accessory</button>
-                                    <button class="btn tab-button" data-bs-target="#Photo" aria-controls="Photo" aria-selected="false" id="showPhoto" style="border:none; font-weight: bold;">Photo</button>
-                                    <button class="btn tab-button" data-bs-target="#Video" aria-controls="Video" aria-selected="false" id="showVideo" style="border:none; font-weight: bold;">Video</button>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="tab-buttons d-flex flex-wrap" role="tablist">
+                                        <button class="btn tab-button active flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobInfo" aria-controls="JobInfo" aria-selected="true" id="showjobinfo">Job Info</button>
+                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobAssign" aria-controls="JobAssign" aria-selected="false" id="showjobassign">Job Assign</button>
+                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#Update" aria-controls="Update" aria-selected="false" id="showUpdate">Update</button>
+                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#Accessory" aria-controls="Accessory" aria-selected="false" id="showaccessory">Accessory</button>
+                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#Photo" aria-controls="Photo" aria-selected="false" id="showPhoto">Photo</button>
+                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#Video" aria-controls="Video" aria-selected="false" id="showVideo">Video</button>
+                                    </div>
                                 </div>
-                                
-                                <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            
+
                             <div class="modal-body">
                                 <div class="tab-content mt-3">
                                     <!-- Job info -->
