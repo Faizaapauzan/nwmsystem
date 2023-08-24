@@ -40,14 +40,14 @@
                 $query_run = mysqli_query($conn, $query);
                 
                 if ($query_run) {
-                    $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">New Accessory Inserted</span>'];
+                    $res = ['status' => 200, 'message' => 'New Accessory Inserted'];
                     echo json_encode($res);
                     
                     return;
                 } 
                 
                 else {
-                    $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Accessory Not Inserted</span>'];
+                    $res = ['status' => 500, 'message' => 'Accessory Not Inserted'];
                     echo json_encode($res);
                     
                     return;
@@ -55,7 +55,7 @@
             } 
             
             else {
-                $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Error uploading file. Please try again</span>'];
+                $res = ['status' => 500, 'message' => 'Error uploading file. Please try again'];
                 echo json_encode($res);
                 
                 return;
@@ -63,7 +63,7 @@
         } 
         
         else {
-            $res = ['status' => 422, 'message' => '<span style="white-space: nowrap;">All fields are mandatory, including the image</span>'];
+            $res = ['status' => 422, 'message' => 'All fields are mandatory, including the image'];
             echo json_encode($res);
             return;
         }
@@ -128,14 +128,14 @@
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Accessory Updated Successfully</span>'];
+            $res = ['status' => 200, 'message' => 'Accessory Updated Successfully'];
             echo json_encode($res);
             
             return;
         } 
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Accessory Not Updated</span>'];
+            $res = ['status' => 500, 'message' => 'Accessory Not Updated'];
             echo json_encode($res);
             return;
         }
@@ -180,14 +180,14 @@
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Accessory Deleted Successfully</span>'];
+            $res = ['status' => 200, 'message' => 'Accessory Deleted Successfully'];
             echo json_encode($res);
         
             return;
         } 
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Accessory Not Deleted</span>'];
+            $res = ['status' => 500, 'message' => 'Accessory Not Deleted'];
             echo json_encode($res);
         
             return;

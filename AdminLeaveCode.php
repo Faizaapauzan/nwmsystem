@@ -22,7 +22,7 @@
         }
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Leave Recorded Successfully!</span>'];
+            $res = ['status' => 200, 'message' => 'Leave Recorded Successfully!'];
             
             echo json_encode($res);
             
@@ -47,7 +47,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Record Deleted Successfully</span>'];
+            $res = ['status' => 200, 'message' => 'Record Deleted Successfully'];
 
             
             echo json_encode($res);
@@ -56,7 +56,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Record Not Deleted</span>'];
+            $res = ['status' => 500, 'message' => 'Record Not Deleted'];
         
             echo json_encode($res);
             

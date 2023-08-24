@@ -1,11 +1,7 @@
 <?php session_start(); ?>
 
 <!DOCTYPE html>
-    <html>
-        <head>
-
-        </head>
-        
+    <html> 
         <body>
             <?php
                 
@@ -219,15 +215,17 @@
                         <label for="">Machine Name</label>
                         <input type="text" name="machine_name" id="machine_name" class="form-control">
                         
-                        <input type="text" name="machine_code" id="machine_code">
-                        <input type="text" name="machine_id" id="machine_id">
+                        <input type="hidden" name="machine_code" id="machine_code">
+                        <input type="hidden" name="machine_id" id="machine_id">
                     </div>
 
                     <?php if (isset($_SESSION["username"])) { ?>
-                        <input type="text" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
+                        <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
                     <?php } ?>
-
-                    <button type="submit" id="submit" name="update" class="btn btn-primary" onclick="updtMchn();">Update</button>
+                    
+                    <div class="d-grid">
+                        <button type="submit" id="submit" name="update" class="btn btn-primary" style="background-color: #1a0845; color: white; border:none;" onclick="updtMchn();">Update</button>
+                    </div>
                 </div>
             </form>
             <?php } } } ?>
@@ -237,13 +235,11 @@
                 $(document).ready(function() {
                     $('#machine_brand').select2({
                         dropdownParent: $('#formjobinfo'),
-                        dropdownPosition: 'below',
                         theme: 'bootstrap-5'
                     });
                     
                     $('#machine_type').select2({
                         dropdownParent: $('#formjobinfo'),
-                        dropdownPosition: 'below',
                         theme: 'bootstrap-5'
                     });
                     
@@ -292,7 +288,7 @@
                                 $('#selecteTypeId').val()
                                 $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
                                 $.each(response, function(index, value) {
-                                    $('#serialnumber').append('<option value="' + value.machine_serialNumber + '">' + value.machine_serialNumber + '</option>');
+                                    $('#serialnumber').append('<option value="' + value.machine_serialNumber + '">' + value.machine_serialNumber + ' - ' + value.machine_custName + '</option>');
                                 });
                             }
                         });

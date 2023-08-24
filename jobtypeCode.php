@@ -24,7 +24,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Job Type Registered Successfully!</span>'];
+            $res = ['status' => 200, 'message' => 'Job Type Registered Successfully!'];
             
             echo json_encode($res);
             
@@ -32,7 +32,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Job Type Not Registered</span>'];
+            $res = ['status' => 500, 'message' => 'Job Type Not Registered'];
             
             echo json_encode($res);
             
@@ -77,7 +77,7 @@
         $job_description = mysqli_real_escape_string($conn, $_POST['job_description']);
         $jobtypelastmodify_by = mysqli_real_escape_string($conn, $_POST['jobtypelastmodify_by']);
         
-        if($job_code == NULL || $job_name == NULL || $job_description == NULL || $jobtypelastmodify_by == NULL) {
+        if($job_code == NULL || $job_name == NULL || $job_description == NULL) {
             
             $res = ['status' => 422, 'message' => 'All fields are mandatory'];
         
@@ -96,7 +96,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Job Type Updated Successfully!</span>'];
+            $res = ['status' => 200, 'message' => 'Job Type Updated Successfully!'];
         
             echo json_encode($res);
             
@@ -104,7 +104,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Job Type Not Updated</span>'];
+            $res = ['status' => 500, 'message' => 'Job Type Not Updated'];
         
             echo json_encode($res);
         
@@ -121,7 +121,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Job Type Deleted Successfully</span>'];
+            $res = ['status' => 200, 'message' => 'Job Type Deleted Successfully'];
             
             echo json_encode($res);
             
@@ -129,7 +129,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Job Type Not Deleted</span>'];
+            $res = ['status' => 500, 'message' => '>Job Type Not Deleted'];
         
             echo json_encode($res);
             

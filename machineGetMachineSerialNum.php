@@ -12,7 +12,8 @@
         while ($row = mysqli_fetch_assoc($result)) {
             $machineTypes[] = array(
                 'machine_ID' => $row['machine_id'],
-                'machine_serialNumber' => $row['serialnumber']
+                'machine_serialNumber' => $row['serialnumber'],
+                'machine_custName' => $row['customer_name']
             );
         }
         

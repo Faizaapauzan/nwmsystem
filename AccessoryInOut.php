@@ -1,632 +1,629 @@
 <?php
-session_start();
-// cek apakah yang mengakses halaman ini sudah login
-if ($_SESSION['staff_position'] == "") {
-    header("location:index.php?error");
-}
-
-if (!isset($_SESSION['username'])) {
-    header("location:index.php?error");
-} elseif ($_SESSION['staff_position'] == 'Admin') {
-} elseif ($_SESSION['staff_position'] == 'Manager') {
-} else {
-    header("location:index.php?error");
-}
-
+    
+    session_start();
+    
+    if (session_status() == PHP_SESSION_NONE) {
+        header("location: index.php?error=session");
+    }
+    
+    if (!isset($_SESSION['username'])) {
+        header("location: index.php?error=login");
+    } 
+    
+    elseif ($_SESSION['staff_position'] != 'Admin' && $_SESSION['staff_position'] != 'Manager') {
+        header("location: index.php?error=permission");
+    }
 ?>
-
-<?php
-// Include pagination library file 
-include_once 'Pagination.class.php';
-
-// Include database configuration file 
-require_once 'dbconnect.php';
-
-
-// Count of all records 
-$query   = $conn->query("SELECT COUNT(*) as rowNum FROM accessories_inout");
-$result  = $query->fetch_assoc();
-$rowCount = $result['rowNum'];
-
-// Initialize pagination class 
-$pagConfig = array(
-
-    'totalRows' => $rowCount,
-
-);
-$pagination =  new Pagination($pagConfig);
-
-// Fetch records based on the limit 
-$query = $conn->query("SELECT * FROM accessories_inout ORDER BY CreatedTime_inout DESC LIMIT 50");
-?>
-
 
 <!DOCTYPE html>
-<html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
+            
+            <title>Sample</title>
+            
+            <!--========== CSS ==========-->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+            <link rel="stylesheet" href="assets/css/styles.css">
 
-<head>
-    <meta name="keywords" content="" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NWM Accessories In Out</title>
-    <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
-    <link href="css/homepage.css" rel="stylesheet" />
-    <link href="css/machine.css" rel="stylesheet" />
-    <script src="js/number.js" type="text/javascript" defer></script>
-    <script src="js/form-validation.js"></script>
-    <link href="css/customer.css" rel="stylesheet" />
+            <!--========== BOX ICONS ==========-->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        </head>
+    
+        <style>
+            ::-webkit-scrollbar {display: none;}
+            
+            .dropdown:hover .dropbtn {color:#f5f5f5}
+            .dropdown1:hover .dropbtn1 {color:#f5f5f5}
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" />
+            .dropdown-content a:hover {background-color:#f1f1f1}
+            .dropdown-content1 a:hover {background-color:#f1f1f1}
 
-    <!-- Script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
+            .dropdown:hover .dropdown-content {display:block}
+            .dropdown1:hover .dropdown-content1 {display:block}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-    <!--Boxicons link -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
+            .dropdown-content {
+                display:none;
+                position:absolute;
+                background-color:#f9f9f9;
+                min-width:auto;
+                padding-left:20px;
+                bottom:55px;
+                box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+                z-index:1
+            }
+        
+            .dropdown-content1{
+                display:none;
+                position:absolute;
+                background-color:#f9f9f9;
+                min-width:160px;
+                box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+                padding:12px 16px;z-index:1
+            }
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap"
-        rel="stylesheet">
-
-</head>
-<style>
-#myTable {
-    counter-reset: rowNumber;
-}
-
-#myTable tr>td:first-child {
-    counter-increment: rowNumber;
-}
-
-#myTable tr td:first-child::before {
-    content: counter(rowNumber);
-}
-</style>
-
-<body>
-
-    <!-- Navigation Sidebar -->
-    <div class="sidebar close">
-        <div class="logo-details">
-            <img src="neo.png" height="65" width="75"></img>
-            <span class="logo_name">NWM SYSTEM</span>
-        </div>
-
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi
-            <?php echo $_SESSION["username"] ?>!</div>
-
-        <ul class="nav-links">
-            <li>
-                <a href="jobregister.php">
-                    <i class='bx bx-registered'></i>
-                    <span class="link_name">Register Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="attendanceadmin.php">
-                    <i class='bx bxs-report'></i>
-                    <span class="link_name">Attendance</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <div class="iocn-link">
-                    <a href="staff.php">
-                        <i class='bx bx-id-card'></i>
-                        <span class="link_name">Staff</span>
-                    </a>
+            .dropdown-content a {
+                color:#000;
+                padding:10px 10px;
+                text-decoration:none;
+                display:block;
+                padding-right:7px
+            }
+        
+            .dropdown-content1 a{
+                color:#000;
+                padding:12px 16px;
+                text-decoration:none;
+                display:block;
+                padding-right:7px
+            }   
+        </style>
+        
+        <body>
+            <!--========== HEADER ==========-->
+            <header class="header">
+                <div class="header__container">
+                    <div class="header__search">
+                        <div class="dropdown1">
+                            <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                            <div class="dropdown-content1">
+                                <a href="AdminJobTable.php">Job - Table view</a>
+                                <a href="adminjoblisting.php">Job - List View</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="header__toggle">
+                        <i class='bx bx-menu' id="header-toggle"></i>
+                    </div>
                 </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="staff.php">Staff</a></li>
-                </ul>
-            </li>
+            </header>
+            
+            <!--========== NAV ==========-->
+            <div class="nav" id="navbar">
+                <nav class="nav__container">
+                    <div>
+                        <a href="Adminhomepage.php" class="nav__link nav__logo">
+                            <img src="neo.png" height="50" width="60"></img>
+                        </a>
+                        
+                        <div class="nav__list">
+                            <div class="nav__items">
+                                <a href="jobregister.php" class="nav__link active">
+                                    <i class='bx bx-folder-plus nav__icon'></i>
+                                    <span class="nav__name">New Job</span>
+                                </a>
+                                
+                                <div class="nav__dropdown">
+                                    <a href="staff.php" class="nav__link">
+                                        <i class='bx bx-group nav__icon'></i>
+                                        <span class="nav__name">Staff</span>
+                                        <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                    </a>
+                                    
+                                    <div class="nav__dropdown-collapse">
+                                        <div class="nav__dropdown-content">
+                                            <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                            <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                            <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                            <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <a href="customer.php" class="nav__link">
+                                    <i class='bx bx-buildings nav__icon'></i>
+                                    <span class="nav__name">Customer</span>
+                                </a>
+                                
+                                <a href="machine.php" class="nav__link">
+                                    <i class='bx bx-cog nav__icon'></i>
+                                    <span class="nav__name">Machine</span>
+                                </a>
+                                
+                                <a href="accessories.php" class="nav__link">
+                                    <i class='bx bx-wrench nav__icon'></i>
+                                    <span class="nav__name">Accessory</span>
+                                </a>
 
-            <li>
-                <a href="technicianlist.php">
-                    <i class='fa fa-users'></i>
-                    <span class="link_name">Technician</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-                </ul>
-            </li>
+                                <a href="jobtype.php" class="nav__link">
+                                    <i class='bx bx-highlight nav__icon'></i>
+                                    <span class="nav__name">Job Type</span>
+                                </a>
 
-            <li>
-                <a href="customer.php">
-                    <i class='bx bx-user'></i>
-                    <span class="link_name">Customers</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="customer.php">Customers</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <div class="iocn-link">
-                    <a href="machine.php">
-                        <i class='fa fa-medium'></i>
-                        <span class="link_name">Machine</span>
+                                <div class="nav__dropdown">
+                                    <a href="#" class="nav__link">
+                                        <i class='bx bx-file nav__icon'></i>
+                                        <span class="nav__name">Record</span>
+                                        <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                    </a>
+                                    
+                                    <div class="nav__dropdown-collapse">
+                                        <div class="nav__dropdown-content">
+                                            <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                            <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                            <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="nav__dropdown">
+                                    <a href="#" class="nav__link">
+                                        <i class='bx bx-task nav__icon'></i>
+                                        <span class="nav__name">Reports</span>
+                                        <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                    </a>
+                                    
+                                    <div class="nav__dropdown-collapse">
+                                        <div class="nav__dropdown-content">
+                                            <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                            <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="logout.php" class="nav__link nav__logout">
+                        <i class='bx bx-log-out nav__icon'></i>
+                        <span class="nav__name">Log Out</span>
                     </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="machine.php">Machine</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="accessories.php">
-                    <i class='bx bx-wrench'></i>
-                    <span class="link_name">Accessories</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="jobtype.php">
-                    <i class='bx bx-briefcase'></i>
-                    <span class="link_name">Job Type</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o'></i>
-                    <span class="link_name">Completed Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square'></i>
-                    <span class="link_name">Canceled Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="adminreport.php">
-                    <i class='bx bxs-report'></i>
-                    <span class="link_name">Report</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out'></i>
-                    <span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Navigation Sidebar -->
-
-    <!--Home navigation-->
-    <section class="home-section">
-        <nav>
-            <div class="home-content">
-                <i class='bx bx-menu'></i>
-                <a>
-                    <button
-                        style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;"
-                        class="btn-reset" onclick="document.location='Adminhomepage.php'"
-                        ondblclick="document.location='adminjoblisting.php'">Home</button>
-                </a>
-
+                </nav>
             </div>
-
-        </nav>
-
-        <!-- Add Entry -->
-        <div id="popupListAddForm" class="modal">
-            <div class="listAddForm">
-                <div class="title">Add New Entry</div>
-                <div class="contentListAddForm">
-                    <form action="inoutindex.php" method="post">
-                        <div class="listAddForm-details">
-
-                            <div class="input-box">
-                                <label for="customerCode" class="details">Item</label>
-                                <select name="accessoriesname" id="AddAccessory" class="form-control">
-                                    <option value="">-- Select Accessory --</option>
-                                    <?php
-                                    include "dbconnect.php";
-
-                                    $records = mysqli_query($conn, "SELECT * FROM accessories_list ORDER BY accessories_name ASC");
-
-                                    while ($data = mysqli_fetch_array($records)) {
-                                        echo "<option value='" . $data['accessories_name'] . "'>" . $data['accessories_name'] . "</option>";
-                                    }
-                                    ?>
-                                </select>
+            
+            <!--========== CONTENTS ==========-->
+            <main>
+                <section>
+                    <!-- View Modal -->
+                <div class="modal fade" id="entryViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">View</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <script>
-                            $(document).ready(function() {
-                                $("#AddAccessory").select2({
-                                    placeholder: "-- Select Accessory --",
-                                    allowClear: true
-                                });
-                            });
-                            </script>
-
-                            <div class="input-box">
-                                <label for="customerName" class="details">Technician</label>
-                                <select name="techname" id="Addtechnician" class="form-control">
-                                    <option value="">-- Select Technician --</option>
-                                    <?php
-                                    include "dbconnect.php";
-
-                                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE tech_avai = '0' 
-                                                                                    AND (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')
-                                                                                    ORDER BY username ASC");
-
-                                    while ($data = mysqli_fetch_array($records)) {
-                                        echo "<option value='" . $data['username'] . "'>" . $data['username'] . "</option>";
-                                    }
-                                    ?>
-                                </select>
+                            
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label for="">Item</label>
+                                        <p id="view_accessoryname" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="">Technician</label>
+                                        <p id="view_techname" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="">Out Date Time</label>
+                                        <p id="view_accoutdatetime" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="">Quantity</label>
+                                        <p id="view_quantity" class="form-control"></p>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="">Remaining</label>
+                                        <p id="view_balance" class="form-control"></p>
+                                    </div>
+                                </div>
                             </div>
-                            <script>
-                            $(document).ready(function() {
-                                $("#Addtechnician").select2({
-                                    placeholder: "-- Select Technician --",
-                                    allowClear: true
-                                });
-                            });
-                            </script>
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="input-box">
-                                <label for="address" class="details">In Out Date</label>
-                                <div style="display: flex; align-items: center;">
-                                    <input style="height:35px;" type="text" id="out_date" name="out_date" class="form-control" />
-                                    <input type="button" class="btn btn-primary"
-                                        style="height:35px; background-color: #081d45; border:none; width:20%;"
-                                        onclick="ItemOutDateTime(event)" value="Click"/>
+                <!-- View Remark -->
+                <div class="modal fade" id="RemarkViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Remark</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="remarkContainer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                    <!-- Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Accessory In/Out</h4>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="btn-group" role="group" aria-label="Table Switch">
+                                    <button type="button" class="btn btn-outline-secondary rounded switch-table" style="margin-right: 10px;" data-table-id="myTable">Job Requirement</button>
+                                    <button type="button" class="btn btn-outline-secondary rounded switch-table" data-table-id="myTable-2">Technician Request</button>
                                 </div>
 
-                                <script type="text/javascript">
-                                function ItemOutDateTime(event) {
-                                    event.preventDefault();
-                                    fetch("departureTime.php").then(response => response.text()).then(result => {
-                                        document.getElementById("out_date").value = result;
-                                    });
-                                }
-                                </script>
-                            </div>
-
-                            <div class="input-box">
-                                <label for="customerGrade" class="details">Quantity</label>
-                                <input style="height:35px;" type="number" name="quantity" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="listAddFormbutton">
-                            <input type="submit" id="submit" name="submit" value="Save">
-                            <input type="button"
-                                onclick="document.getElementById('popupListAddForm').style.display='none'"
-                                value="Cancel" id="cancelbtn">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <!--In Out-->
-        <div class="customerList">
-            <h1>Accessory In Out Stock Record</h1>
-
-            <div class="addCustomerBtn">
-                <button id="btnRegister" style="float: inline-end;" onclick="document.getElementById('popupListAddForm').style.display='block'">Add</button>
-                <button class="btn-reset float-end mx-2" onclick="document.location='AccessoryInOut.php'">Refresh</button>
-            </div>
-
-            <div class="datalist-wrapper">
-                <div class="col-lg-12" style="border: none;">
-
-                    <table class="table table-striped sortable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Technician</th>
-                                <th>Item</th>
-                                <th>Out Date</th>
-                                <th>Quantity</th>
-                                <th>Remaining</th>
-                                <th>Remark</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <?php
-                            if ($query->num_rows > 0) {
-                                $i = 0;
-                                while ($row = $query->fetch_assoc()) {
-                                    $i++;
-                            ?>
-
-                            <tr>
-                                <td><?php echo $i; ?></td>
-                                <td><?php echo $row["techname"]; ?></td>
-                                <td><?php echo $row["accessoriesname"]; ?></td>
-                                <td style="white-space: nowrap;"><?php echo $row["out_date"]; ?></td>
-                                <td><?php echo $row["quantity"]; ?></td>
-                                <td><?php echo $row["balance"]; ?></td>
-                                <td><button type="button" value="<?php echo $row['inout_id']; ?>" id="RemarkButton"
-                                        class="RemarkBtn btn btn-warning btn-sm">Remark</button></td>
-                                <td style="padding:0px;display:flex; margin-top:7px;">
-                                    <button data-inout_id="<?php echo $row['inout_id']; ?>" class='inoutinfo'
-                                        type='button' id='btnView'>View</button>
-                                    <button data-inout_id="<?php echo $row['inout_id']; ?>" class='updateinfo'
-                                        type='button' id='btnEdit'>Update</button>
-                                    <button data-inout_id="<?php echo $row['inout_id']; ?>" class='deletebtn'
-                                        type='button' id='btnDelete'>Delete</button>
-                                </td>
-
-                            </tr>
-                            <?php
-                                }
-                            } else {
-                                echo '<tr><td colspan="6">No records found...</td></tr>';
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-
-
-                </div>
-            </div>
-        </div>
-
-        <script type="text/javascript">
-        $(document).ready(function() {
-            $('table').DataTable();
-
-        });
-        </script>
-
-        <script>
-            $(document).on('click', '.RemarkBtn', function () {
-            var entry_idRemark = $(this).val();
-            
-            $.ajax({
-                type: "GET",
-                url: "code.php?entry_idRemark=" + entry_idRemark,
-                success: function (response) {
-                    
-                    var res = jQuery.parseJSON(response);
-                    
-                    if (res.status == 404) {
-                        alert(res.message);
-                    } 
-                    
-                    else if (res.status == 200) {
-                        
-                        var remarks = res.data;
-                        
-                        $('#remarkContainer').empty();
-                        
-                        remarks.forEach(function (remark) {
-                            
-                            var inputGroup = '<div class="mb-3">' +
-                                                '<div class="row">' +
-                                                    '<div class="col-sm">'+
-                                                        '<label for="Remark">Remark</label>' +
-                                                        '<input type="text" value="' + remark.remark_note + '" style="background:none;" class="form-control" Readonly></input>'+
-                                                    '</div>' +
+                                </br>
+                                </br>
+                                
+                                <table id="myTable" class="display table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center; white-space: nowrap;"></th>
+                                            <th style="text-align: center; white-space: nowrap;">Job</th>
+                                            <th style="text-align: center; white-space: nowrap;">Job Name</th>
+                                            <th style="text-align: center; white-space: nowrap;">Customer</th>
+                                            <th style="text-align: center; white-space: nowrap;">Technician</th>
+                                            <th style="text-align: center; white-space: nowrap;">Item</th>
+                                            <th style="text-align: center; white-space: nowrap;">Out Date</th>
+                                            <th style="text-align: center; white-space: nowrap;">Quantity</th>
+                                            <th style="text-align: center; white-space: nowrap;">Remaining</th>
+                                            <th style="text-align: center; white-space: nowrap;">Remark</th>
+                                            <th style="text-align: center; white-space: nowrap;">Action</th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+                                        <?php
+                                            
+                                            require 'dbconnect.php';
+                                            
+                                            $query = "SELECT * FROM accessories_inout ORDER BY CreatedTime_inout";
+                                            
+                                            $query_run = mysqli_query($conn, $query);
+                                            
+                                            $counter = 1;
+                                            
+                                            if (mysqli_num_rows($query_run) > 0) {
+                                                foreach ($query_run as $entry) {
+                                                    $query2 = "SELECT job_order_number, job_name, customer_name 
+                                                               FROM accessories_inout, job_accessories, job_register 
+                                                               WHERE accessories_inout.accessoriesname = '{$entry['accessoriesname']}' 
+                                                               AND accessories_inout.accessoriesname = job_accessories.accessories_name 
+                                                               AND job_accessories.jobregister_id=job_register.jobregister_id";
                                                     
-                                                    '<div class="col-sm" style="text-align:center;">'+
-                                                        '<label for="Date">Date</label>' +
-                                                        '<input type="text" value="' + remark.remark_date + '" style="text-align:center; background:none;" class="form-control" Readonly></input>'+
-                                                    '</div>' +
+                                                    $query_run2 = mysqli_query($conn, $query2);
                                                     
-                                                    '<div class="col-sm-3" style="text-align:center;">'+
-                                                        '<label for="Quantity">Quantity</label>' +
-                                                        '<input type="text" value="' + remark.remark_quantity + '" style="text-align:center; background:none;" class="form-control" Readonly></input>'+
-                                                    '</div>' +
-                                                '</div>'
-                                              '</div>';
-                            
-                                             $('#remarkContainer').append(inputGroup);
-                        });
-                        
-                        $('#RemarkViewModal').modal('show');
-                    }
-                }
-            });
-        });
-        </script>
+                                                    if (mysqli_num_rows($query_run2) > 0) {
+                                                        $entry2 = mysqli_fetch_array($query_run2);
+                                        ?>                                                
+                                        <tr>
+                                            <td style='text-align: center;'><?= $counter ?></td>
+                                            <td style='text-align: center; white-space: nowrap'><?= $entry2['job_order_number'] ?></td>
+                                            <td style='text-align: center;'><?= $entry2['job_name'] ?></td>
+                                            <td style='text-align: center;'><?= $entry2['customer_name'] ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?= $entry['techname'] ?></td>
+                                            <td><?= $entry['accessoriesname'] ?></td>
+                                            <td style='white-space: nowrap;'><?= $entry['out_date'] ?></td>
+                                            <td style='text-align: center;'><?= $entry['quantity'] ?></td>
+                                            <td style='text-align: center;'><?= $entry['balance'] ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'>
+                                                <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
+                                            </td>
+                                            <td style='text-align: center; white-space: nowrap;'>
+                                                <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-info btn-sm'>View</button>
+                                            </td>
+                                        </tr>
+                                        <?php $counter++; } } } ?>
+                                    </tbody>
+                                </table>
+                                
+                                <table id="myTable-2" class="display table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center; white-space: nowrap;"></th>
+                                            <th style="text-align: center; white-space: nowrap;">Technician</th>
+                                            <th style="text-align: center; white-space: nowrap;">Item</th>
+                                            <th style="text-align: center; white-space: nowrap;">Out Date</th>
+                                            <th style="text-align: center; white-space: nowrap;">Quantity</th>
+                                            <th style="text-align: center; white-space: nowrap;">Remaining</th>
+                                            <th style="text-align: center; white-space: nowrap;">Remark</th>
+                                            <th style="text-align: center; white-space: nowrap;">Action</th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+                                        <?php
+                                            
+                                            require 'dbconnect.php';
+                                                    
+                                            $query = "SELECT * FROM accessories_inout ORDER BY CreatedTime_inout";
+                                                    
+                                            $query_run = mysqli_query($conn, $query);
 
-        <!--Delete record -->
-
-        <div class="modal fade" id="empModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-
-                <div class="customerPopup">
-                    <div class="contentCustomerPopup">
-                        <div class="title">In Out Record</div>
-                        <div class="Machine-details">
-                            <div class="close" data-dismiss="modal"
-                                onclick="document.getElementById('popup-1').style.display='none'">&times</div>
-
+                                            $counter = 1;
+                                            
+                                            if (mysqli_num_rows($query_run) > 0) {
+                                                foreach ($query_run as $entry) {
+                                                    $query2 = "SELECT job_order_number, job_name, customer_name 
+                                                               FROM accessories_inout, job_accessories, job_register 
+                                                               WHERE accessories_inout.accessoriesname = '$entry[accessoriesname]' 
+                                                               AND accessories_inout.accessoriesname = job_accessories.accessories_name 
+                                                               AND job_accessories.jobregister_id=job_register.jobregister_id";
+                                                            
+                                                    $query_run2 = mysqli_query($conn, $query2);
+                                                            
+                                                    if (mysqli_num_rows($query_run2) == 0) {
+                                                                
+                                        ?>
+                                        <tr>
+                                            <td style='text-align: center;'><?= $counter ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?= $entry['techname'] ?></td>
+                                            <td><?= $entry['accessoriesname'] ?></td>
+                                            <td style='white-space: nowrap;'><?= $entry['out_date'] ?></td>
+                                            <td style='text-align: center;'><?= $entry['quantity'] ?></td>
+                                            <td style='text-align: center;'><?= $entry['balance'] ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'>
+                                                <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
+                                            </td>
+                                            <td style='text-align: center; white-space: nowrap;'>
+                                                <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-info btn-sm'>View</button>
+                                            </td>
+                                        </tr>
+                                        <?php $counter++; } } } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <br />
-                        <div class="modal-body"></div>
-
                     </div>
-
-                    <script type='text/javascript'>
-                    $(document).ready(function() {
-                        $('body').on('click', '.deletebtn', function() {
-                            var entry_id = $(this).data('inout_id');
-
-                            // AJAX request
-                            $.ajax({
-                                url: 'deleteinout.php',
-                                type: 'post',
-                                data: {
-                                    'entry_id': entry_id
-                                },
-                                success: function(response) {
-                                    // Add response in Modal body
-                                    $('.modal-body').html(response);
-
-                                    // Display Modal
-                                    $('#empModal').modal('show');
+                    </br>
+                    
+                    <!--========== JS ==========-->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+                    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+                    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+                    <script src="assets/js/main.js"></script>
+                    
+                    <script>
+                        $(document).ready(function(){
+                            var tables = {
+                                'myTable': $('#myTable'),
+                                'myTable-2': $('#myTable-2')
+                            };
+                            
+                            $('table.display').DataTable({
+                                responsive: true,
+                                language: {search: "_INPUT_",
+                                           searchPlaceholder: "Search"},
+                                pagingType: 'full_numbers'
+                            });
+                            
+                            for (var tableId in tables) {
+                                if (tableId !== 'myTable') {
+                                    tables[tableId].hide();
+                                }
+                            }
+                            
+                            $('#myTable-2_wrapper .dataTables_length, #myTable-2_wrapper .dataTables_filter, #myTable-2_wrapper .pagination, #myTable-2_wrapper .dataTables_info').hide();
+                            
+                            $('.switch-table').on('click', function() {
+                                var tableId = $(this).data('table-id');
+                                for (var id in tables) {
+                                    if (id === tableId) {
+                                        tables[id].show();
+                                        $('#' + id + '_wrapper .dataTables_length, #' + id + '_wrapper .dataTables_filter, #' + id + '_wrapper .pagination, #' + id + '_wrapper .dataTables_info').show();
+                                    } 
+                                    
+                                    else {
+                                        tables[id].hide();
+                                        $('#' + id + '_wrapper .dataTables_length, #' + id + '_wrapper .dataTables_filter, #' + id + '_wrapper .pagination, #' + id + '_wrapper .dataTables_info').hide();
+                                    }
                                 }
                             });
+                        });
+                    </script>
+                    
+                    <script>
+                        // <!-- View -->
+                        $(document).on('click', '.viewEntryBtn', function() {
+                            var entry_id = $(this).val();
+                            
+                            $.ajax({
+                            type: "GET",
+                            url: "code.php?entry_id=" + entry_id,
+                            
+                            success: function(response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if (res.status == 404) {
+                                    alert(res.message);
+                                } 
+                                
+                                else if (res.status == 200) {
+                                    $('#view_accessoryname').text(res.data.accessoriesname);
+                                    $('#view_techname').text(res.data.techname);
+                                    $('#view_accoutdatetime').text(res.data.out_date);
+                                    $('#view_quantity').text(res.data.quantity);
+                                    $('#view_balance').text(res.data.balance);
+
+                                    $('#entryViewModal').modal('show');
+                                }
+                            }
                         });
                     });
-                    </script>
-
-
-                    <!--Update record -->
-
-                    <div class="modal fade" id="empModal" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="InfoPopup">
-                                <div class="contentInfoPopup">
-                                    <div class="title"> In Out Record Info </div>
-                                    <div class="Machine-details">
-                                        <div class="close" data-dismiss="modal"
-                                            onclick="document.getElementById('popup-1').style.display='none'">&times
-                                        </div>
-
-
-                                    </div><br />
-                                    <div class="modal-body">
-                                    </div>
-                                </div>
-
-                                <script type='text/javascript'>
-                                $(document).ready(function() {
-                                    $('body').on('click', '.updateinfo', function() {
-                                        var entry_id = $(this).data('inout_id');
-
-                                        // AJAX request
-                                        $.ajax({
-                                            url: 'updateinout.php',
-                                            type: 'POST',
-                                            data: {
-                                                'entry_id': entry_id
-                                            },
-                                            success: function(response) {
-                                                // Add response in Modal body
-                                                $('.modal-body').html(response);
-                                                // Display Modal
-                                                $('#empModal').modal('show');
-                                            }
-                                        });
+                    
+                  
+                    
+                   
+                    
+                    // <!-- Remark -->
+                    $(document).on('click', '.RemarkBtn', function() {
+                        var entry_idRemark = $(this).val();
+                        
+                        $.ajax({
+                            type: "GET",
+                            url: "code.php?entry_idRemark=" + entry_idRemark,
+                            success: function(response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if (res.status == 404) {
+                                    alert(res.message);
+                                } 
+                                
+                                else if (res.status == 200) {
+                                    var remarks = res.data;
+                                    
+                                    $('#remarkContainer').empty();
+                                    
+                                    remarks.forEach(function(remark) {
+                                        var inputGroup =
+                                            '<div class="mb-3">' +
+                                                '<div class="row">' +
+                                                    '<div class="col-sm">' +
+                                                        '<label for="Remark">Remark</label>' +
+                                                        '<input type="text" value="' + remark.remark_note + '" style="background:none;" class="form-control" Readonly></input>' +
+                                                        '</div>' +
+                                                         
+                                                    '<div class="col-sm" style="text-align:center;">' +
+                                                        '<label for="Date">Date</label>' +
+                                                        '<input type="text" value="' + remark.remark_date + '" style="text-align:center; background:none;" class="form-control" Readonly></input>' +
+                                                    '</div>' +
+                                                         
+                                                    '<div class="col-sm-3" style="text-align:center;">' +
+                                                        '<label for="Quantity">Quantity</label>' +
+                                                        '<input type="text" value="' + remark.remark_quantity + '" style="text-align:center; background:none;" class="form-control" Readonly></input>' +
+                                                    '</div>' +
+                                                '</div>'
+                                            '</div>';
+                                                        
+                                        $('#remarkContainer').append(inputGroup);
                                     });
-                                });
-                                </script>
+                                    
+                                    $('#RemarkViewModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    // <!-- Request -->
+                    $(document).on('click', '.requestBtn', function() {
+                        $.ajax({
+                            type: "GET",
+                            url: "code.php",
+                            data: {'Request': true},
+                            
+                            success: function(response) {
+                                var res = jQuery.parseJSON(response);
+                                
+                                if (res.status == 404) {
+                                    alert(res.message);
+                                } 
+                                
+                                else if (res.status == 200) {
+                                    var requests = res.data;
+                                    
+                                    $('#requestContainer').empty();
+                                    
+                                    requests.forEach(function(request) {
+                                        var inputGroup =
+                                            '<div class="mb-3"  id="request' + request.remarkid + '">' +
+                                                '<div class="row d-flex flex-row">' +
+                                                    '<div class="col-sm-4">' +
+                                                        '<label for="request">Request</label>' +
+                                                        '<input type="text" value="' + request.remark_note + '" style="background:none;" class="form-control" Readonly></input>' +
+                                                    '</div>' +
+                                                                
+                                                    '<div class="col-sm-3" style="text-align:center;">' +
+                                                        '<label for="item">Item</label>' +
+                                                        '<input type="text" data-item-id="' + request.inout_id + '" class="form-control item-input" Readonly></input>' +
+                                                    '</div>' +
 
-                                <!--In Out Record pop up form-->
-                                <!-- Modal -->
-                                <div class="modal fade" id="empModal" role="dialog">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="customerPopup">
-                                            <div class="contentCustomerPopup">
-                                                <div class="title"> In Out Record Info </div>
-                                                <div class="Machine-details">
-                                                    <div class="close" data-dismiss="modal"
-                                                        onclick="document.getElementById('popup-1').style.display='none'">
-                                                        &times</div>
+                                                    '<div class="col-sm-3" style="text-align:center;">' +
+                                                        '<label for="Date">Date</label>' +
+                                                        '<input type="text" value="' + request.remark_date + '" style="text-align:center; background:none;" class="form-control" Readonly></input>' +
+                                                    '</div>' +
 
-                                                </div>
-                                                <br />
-                                                <div class="modal-body">
-                                                </div>
-                                            </div>
+                                                    '<div class="col-sm-2" style="text-align:center;">' +
+                                                        '<label for="Quantity">Quantity</label>' +
+                                                        '<input type="text" value="' + request.remark_quantity + '" style="text-align:center; background:none;" class="form-control" Readonly></input>' +
+                                                    '</div>' +
 
-                                            <script type='text/javascript'>
-                                            $(document).ready(function() {
-                                                $('body').on('click', '.inoutinfo', function() {
-                                                    var entry_id = $(this).data('inout_id');
+                                                    '<div class="col-sm">' +
+                                                        '<label for=""></label>' +
+                                                        '<button id="acceptBtn" style="width: 70px; margin-left: 80%;height: 40px; background-color: green; color:white;" class="form-control" onclick="acceptRecord(' + request.remarkid + ')" style="width: 70px; color: white; background-color:green;">accept</button>' +
+                                                    '</div>' +
 
-                                                    // AJAX request
-                                                    $.ajax({
-                                                        url: 'ajaxinout.php',
-                                                        type: 'post',
-                                                        data: {
-                                                            'entry_id': entry_id
-                                                        },
-                                                        success: function(response) {
-                                                            // Add response in Modal body
-                                                            $('.modal-body').html(response);
-                                                            // Display Modal
-                                                            $('#empModal').modal('show');
-                                                        }
-                                                    });
-                                                });
-                                            });
-                                            </script>
+                                                    '<div class="col-sm">' +
+                                                        '<label for=""></label>' +
+                                                        '<button id="rejectBtn" style="width: 70px; height: 40px; background-color: red; color:white;"class="form-control" onclick="rejectRecord(' + request.remarkid + ')" style="width: 70px; color: white; background-color:red;">reject</button>' +
+                                                    '</div>'
+                                                '</div>'
+                                            '</div>';
 
+                                        $('#requestContainer').append(inputGroup);
+                                        fetchItemNames();
+                                    });
+                                
+                                    $('#RequestModal').modal('show');
+                                }
+                            }
+                        });
+                    });
+                    
+                    function fetchItemNames() {
+                        var itemInputs = $('.item-input');
+                        
+                        itemInputs.each(function(index, element) {
+                            var itemId = $(element).data('item-id');
+                            
+                            $.ajax({
+                                type: "GET",
+                                url: "code.php",
+                                data: {'inout_id': itemId,
+                                       'RequestItem': true},
+                                       
+                                success: function(response) {
+                                    var res = jQuery.parseJSON(response);
+                                    
+                                    if (res.status == 404) {
+                                        alert(res.message);
+                                    } 
+                                    
+                                    else if (res.status == 200) {
+                                        $(element).val(res.accessoriesname);
+                                    }
+                                },
+                                
+                                error: function() {
 
-
-
-                                        </div>
-                                    </div>
-
-
-    </section>
-    <section>
-
-        <script>
-        let arrow = document.querySelectorAll(".arrow");
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e) => {
-                let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-                arrowParent.classList.toggle("showMenu");
-            });
-        }
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
-        console.log(sidebarBtn);
-        sidebarBtn.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
-        });
-        </script>
-</body>
-
-</html>
+                                }
+                            });
+                        });
+                    }
+                    
+                   
+                    
+              
+                </script>
+            </section>
+        </main>        
+    </body>
+    </html>

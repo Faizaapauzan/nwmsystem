@@ -24,7 +24,7 @@
            $staff_group == NULL || $username == NULL || $password == NULL || 
            $staffregistercreated_by == NULL || $staffregisterlastmodify_by == NULL) {
             
-            $res = ['status' => 422, 'message' => '<span style="white-space: nowrap;">Some info cannot be leave empty</span>'];
+            $res = ['status' => 422, 'message' => 'Some info cannot be leave empty'];
                     
             echo json_encode($res);
             
@@ -44,7 +44,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Staff Registered Successfully!</span>'];
+            $res = ['status' => 200, 'message' => 'Staff Registered Successfully!'];
             
             echo json_encode($res);
             
@@ -52,7 +52,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Staff Not Registered</span>'];
+            $res = ['status' => 500, 'message' => 'Staff Not Registered'];
             
             echo json_encode($res);
             
@@ -155,7 +155,7 @@
         $query_run = mysqli_query($conn, $query);
     
         if($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Staff Updated Successfully!</span>'];
+            $res = ['status' => 200, 'message' => 'Staff Updated Successfully!'];
     
             echo json_encode($res);
         
@@ -163,7 +163,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Staff Not Updated</span>'];
+            $res = ['status' => 500, 'message' => 'Staff Not Updated'];
     
             echo json_encode($res);
     
@@ -180,7 +180,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Staff Deleted Successfully</span>'];
+            $res = ['status' => 200, 'message' => 'Staff Deleted Successfully'];
             
             echo json_encode($res);
             
@@ -188,7 +188,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Staff Not Deleted</span>'];
+            $res = ['status' => 500, 'message' => 'Staff Not Deleted'];
         
             echo json_encode($res);
             

@@ -75,9 +75,9 @@
           
         <?php }  } } ?>
            
-        <b><label style="font-size: 15px; margin-bottom:15px;" for="position">Machine (Before Service)</label></b></br>
+        <b><label style="font-size: 15px; margin-bottom:15px;" for="position">Photo Machine (Before Service)</label></b></br>
         <div class="update-form">
-          <div class="upload-report">
+          <div class="upload-report" style="margin-bottom: 20px;">
             <div class="input-group">
               <input type="file" class="form-control" name="multipleFile[]" id="multipleBefore" required="" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
               <input type="hidden" id="description" name="description" value="Machine (Before Service)">
@@ -185,17 +185,17 @@
         
         <?php }  } } ?>
         
-        <b><label style="font-size: 15px; margin-bottom:15px; margin-top:15px;" for="position" class="details">Machine (After Service)</label></b>
+        <b><label style="font-size: 15px; margin-bottom:15px; margin-top:15px;" for="position" class="details">Photo Machine (After Service)</label></b>
         <div class="update-form">
-          <div class="upload-report">
+          <div class="upload-report" style="margin-bottom: 20px;">
             <div class="input-group">
               <input type="file" class="form-control" name="multipleFile[]" id="multipleAfter" required="" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
               <input type="hidden" id="description" name="description" value="Machine (After Service)">
               <button type="submit" name="upload" class="btn btn-outline-secondary" style="background-color: #081d45; color: #fff; cursor: pointer;">Upload</button>
             </div>
-
-            <div id="previewAfter"></div>
           </div>
+
+          <div id="previewAfter"></div>
           
           <div class="message">
             <p class="control"><b id="messageImageAfter"></b></p>
@@ -212,7 +212,7 @@
               } 
           ?>
           
-          <!-- Photos Table Before Service -->
+          <!-- Photos Table After Service -->
           <div class="table-responsive">
             <table style="box-shadow: 0 5px 10px #f7f7f7;">
               <tbody style="display: flex; flex-wrap: wrap;">

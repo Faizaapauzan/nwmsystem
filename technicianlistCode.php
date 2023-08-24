@@ -47,7 +47,7 @@
         mysqli_stmt_bind_param($stmt, "ssss", $technician_rank, $job_ability, $staffregisterlastmodify_by, $staffregister_id);
         
         if (mysqli_stmt_execute($stmt)) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Technician Info Updated Successfully!</span>'];
+            $res = ['status' => 200, 'message' => 'Technician Info Updated Successfully!'];
 
             $updatedData = ['technician_rank' => $technician_rank,
                             'job_ability' => $job_ability,
@@ -57,7 +57,7 @@
         } 
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Technician Info Not Updated</span>'];
+            $res = ['status' => 500, 'message' => 'Technician Info Not Updated'];
         }
         
         mysqli_stmt_close($stmt);

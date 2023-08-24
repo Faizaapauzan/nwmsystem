@@ -24,18 +24,18 @@
             $stmtSelect->bind_result($brand_id);
             
             if ($stmtSelect->fetch()) {
-                $res = ['status' => 200, 'message' =>'<span style="white-space: nowrap;">Machine Brand Added Successfully</span>', 'brand_id' => $brand_id];
+                $res = ['status' => 200, 'message' =>'Machine Brand Added Successfully', 'brand_id' => $brand_id];
             } 
             
             else {
-                $res = ['status' => 500, 'message' =>'<span style="white-space: nowrap;">Machine Brand Not Added</span>'];
+                $res = ['status' => 500, 'message' =>'Machine Brand Not Added'];
             }
             
             $stmtSelect->close();
         } 
         
         else {
-            $res = ['status' => 500, 'message' =>'<span style="white-space: nowrap;">Machine Brand Not Added</span>'];
+            $res = ['status' => 500, 'message' =>'Machine Brand Not Added'];
         }
     
         echo json_encode($res);
@@ -62,11 +62,11 @@
             $stmtSelect->bind_result($type_id);
     
             if ($stmtSelect->fetch()) {
-                $res = ['status' => 200, 'message' =>'<span style="white-space: nowrap;">Machine Type Added Successfully!</span>', 'type_id' => $type_id];
+                $res = ['status' => 200, 'message' =>'Machine Type Added Successfully!', 'type_id' => $type_id];
             } 
             
             else {
-                $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Machine Type Not Added</span>'];
+                $res = ['status' => 500, 'message' => 'Machine Type Not Added'];
             }
 
             $stmtSelect->close();
@@ -115,7 +115,7 @@
         $stmt->bind_param("ssssssssssss", $machine_code, $machine_name, $machine_brand, $brand_id, $machine_type, $type_id, $serialnumber, $machine_description, $purchase_date, $customer_name, $machinelistcreated_by, $machinelistlastmodify_by);
 
         if ($stmt->execute()) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Machine Added Successfully</span>'];
+            $res = ['status' => 200, 'message' => 'Machine Added Successfully'];
         } 
         
         else {
@@ -199,7 +199,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Machine Updated Successfully!</span>'];
+            $res = ['status' => 200, 'message' => 'Machine Updated Successfully!'];
         
             echo json_encode($res);
             
@@ -207,7 +207,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Machine Not Updated</span>'];
+            $res = ['status' => 500, 'message' => 'Machine Not Updated'];
         
             echo json_encode($res);
         
@@ -224,7 +224,7 @@
         $query_run = mysqli_query($conn, $query);
         
         if ($query_run) {
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">Machine Deleted Successfully</span>'];
+            $res = ['status' => 200, 'message' => 'Machine Deleted Successfully'];
             
             echo json_encode($res);
             
@@ -232,7 +232,7 @@
         }
         
         else {
-            $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Machine Not Deleted</span>'];
+            $res = ['status' => 500, 'message' => 'Machine Not Deleted'];
         
             echo json_encode($res);
             

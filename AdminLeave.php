@@ -23,35 +23,27 @@
         <title>Leave</title>
 
         <!--========== CSS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
         <link rel="stylesheet" href="assets/css/styles.css">
 
-        <!--========== BOX ICONS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-        
         <!--========== JS ==========-->
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-
-        <!--Date Picker-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multidatespicker/1.6.6/jquery-ui.multidatespicker.js"></script>
-        <!--Select2-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     </head>
 
     <style>
         ::-webkit-scrollbar {display: none;}
-
-        #leaveTable {counter-reset: rowNumber;}
-        
-        #leaveTable tr>td:first-child {counter-increment: rowNumber;}
-        
-        #leaveTable tr td:first-child::before {content: counter(rowNumber);}
 
         .dropdown:hover .dropbtn {color:#f5f5f5}
         .dropdown1:hover .dropbtn1 {color:#f5f5f5}
@@ -249,8 +241,11 @@
                                         </div>
 
                                         <script>
-                                            $('#tech_name').select2({
-                                                dropdownParent: $('#leaveAddModal')
+                                            $(document).ready(function(){
+                                                $('#tech_name').select2({
+                                                    dropdownParent: $('#leaveAddModal'),
+                                                    theme: 'bootstrap-5'
+                                                });
                                             });
                                         </script>
                                     
@@ -300,7 +295,7 @@
                                 <p style="text-align: center;">Are you sure you want to delete this record?</p>
                             </div>
                             
-                            <div class="modal-footer">
+                            <div class="modal-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
                             </div>
@@ -334,13 +329,15 @@
                                 
                                     $query = "SELECT * FROM tech_off ORDER BY techOFF_id DESC";
                                     $query_run = mysqli_query($conn, $query);
+
+                                    $counter = 1;
                                 
                                     if(mysqli_num_rows($query_run) > 0) {
                                         foreach($query_run as $staff) {
                                 ?>
                             
                                 <tr>
-                                    <td style='text-align: center;'></td>
+                                    <td style='text-align: center;'><?= $counter ?></td>
                                     <td style='text-align: center;'><?= $staff['tech_name'] ?></td>
                                     <td style='text-align: center;'><?= $staff['leave_date'] ?></td>
                                     <td style='text-align: center;'><?= $staff['reason'] ?></td>
@@ -348,7 +345,7 @@
                                         <button type="button" value="<?=$staff['techOFF_id'];?>" class="deleteLeaveBtn btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
-                                <?php } } ?>
+                                <?php $counter++; } } ?>
                                 </tbody>
                             </table>
                             </table>
@@ -357,7 +354,8 @@
                 </div>
                 </br>
                 
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <!--========== JS ==========-->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
                 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -369,6 +367,7 @@
                             responsive:true,
                             language: {search:"_INPUT_",
                                        searchPlaceholder:"Search"},
+                            pagingType: 'full_numbers'
                         });
                     });
                 </script>
@@ -398,6 +397,8 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessage').addClass('d-none');
+                                    $('#LeaveApplication')[0].reset();
+                                    $('#leaveAddModal').modal('hide');
                                     
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
@@ -438,6 +439,9 @@
                                 }
                                 
                                 else {
+                                    $('#errorMessage').addClass('d-none');
+                                    $('#deleteConfirmationModal').modal('hide');
+
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                 

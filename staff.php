@@ -25,8 +25,7 @@
         <title>Staff List</title>
 
         <!--========== CSS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="assets/css/styles.css">
@@ -37,10 +36,6 @@
 
     <style>
         ::-webkit-scrollbar {display: none;}
-
-        #staffListTable {counter-reset:rowNumber}
-        #staffListTable tr>td:first-child {counter-increment:rowNumber}
-        #staffListTable tr td:first-child::before {content:counter(rowNumber)}
 
         .dropdown:hover .dropbtn {color:#f5f5f5}
         .dropdown1:hover .dropbtn1 {color:#f5f5f5}
@@ -503,7 +498,6 @@
                                 </div>
                                 
                                 <div class="modal-footer">
-                                    
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </form>
@@ -524,7 +518,7 @@
                                 <p style="text-align: center;">Are you sure you want to delete this staff?</p>
                             </div>
                             
-                            <div class="modal-footer" style="text-align: center;">
+                            <div class="modal-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
                             </div>
@@ -558,13 +552,15 @@
                                 
                                     $query = "SELECT * FROM staff_register ORDER BY staff_position";
                                     $query_run = mysqli_query($conn, $query);
+
+                                    $counter = 1;
                                 
                                     if(mysqli_num_rows($query_run) > 0) {
                                         foreach($query_run as $staff) {
                                 ?>
                             
                                 <tr>
-                                    <td style='text-align: center;'></td>
+                                    <td style='text-align: center;'><?= $counter ?></td>
                                     <td><?= $staff['staff_fullname'] ?></td>
                                     <td style='text-align: center;'><?= $staff['employee_id'] ?></td>
                                     <td style='text-align: center;'><?= $staff['staff_position'] ?></td>
@@ -574,7 +570,7 @@
                                         <button type="button" value="<?=$staff['staffregister_id'];?>" class="deleteStaffBtn btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
-                                <?php } } ?>
+                                <?php $counter++; } } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -583,9 +579,8 @@
                 </br>
                 
                 <!--========== JS ==========-->
-                <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
                 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
                 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -597,6 +592,7 @@
                             responsive:true,
                             language: {search:"_INPUT_",
                                        searchPlaceholder:"Search"},
+                            pagingType: 'full_numbers'
                         });
                     });
                 </script>
@@ -626,6 +622,8 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessage').addClass('d-none');
+                                    $('#addStaff')[0].reset();
+                                    $('#staffAddModal').modal('hide');
                                     
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
@@ -736,7 +734,9 @@
                                 
                                 else if (res.status == 200) {
                                     $('#errorMessageUpdate').addClass('d-none');
-
+                                    $('#updateStaff')[0].reset();
+                                    $('#staffEditModal').modal('hide');
+                                    
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                     
@@ -776,6 +776,9 @@
                                 }
                                 
                                 else {
+                                    $('#errorMessage').addClass('d-none');
+                                    $('#deleteConfirmationModal').modal('hide');
+
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                     

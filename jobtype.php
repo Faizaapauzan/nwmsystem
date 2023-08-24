@@ -22,10 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-        <title>Job Type List</title>
-
-        <!--========== BOX ICONS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <title>Job Type</title>
 
         <!--========== CSS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -33,73 +30,58 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     </head>
 
     <style>
-        ::-webkit-scrollbar {
-            display: none;
-        }
+        ::-webkit-scrollbar {display: none;}
 
-        #JobTypeList {
-            counter-reset: rowNumber;
-        }
-        
-        #JobTypeList tr>td:first-child {
-            counter-increment: rowNumber;
-        }
-        
-        #JobTypeList tr td:first-child::before {
-            content: counter(rowNumber);
-        }
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
 
-        .dropdown-content1 {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
-        
-        .dropdown-content1 a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            padding-right: 7px;
-        }
-        
-        .dropdown-content1 a:hover {background-color: #f1f1f1}
-        
-        .dropdown1:hover .dropdown-content1 {display: block;}
-        
-        .dropdown1:hover .dropbtn1 {color:whitesmoke;}
-    
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
+
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
+
         .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: auto;
-            padding-left: 20px;
-            bottom: 55px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
         }
         
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
+
         .dropdown-content a {
-            color: black;
-            padding: 10px 10px;
-            text-decoration: none;
-            display: block;
-            padding-right: 7px;
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
         }
-    
-        .dropdown-content a:hover {background-color: #f1f1f1}
         
-        .dropdown:hover .dropdown-content {display: block;}
-        
-        .dropdown:hover .dropbtn {color:whitesmoke;}
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
     </style>
     
     <body>
@@ -345,7 +327,7 @@
                                         </div>
 
                                         <?php if (isset($_SESSION["username"])) { ?>
-                                            <input type="hidden" name="jobtypelastmodify_by" id="jobtypelastmodify_by" value="<?php echo $_SESSION["username"] ?>">
+                                            <input type="text" name="jobtypelastmodify_by" id="jobtypelastmodify_by" value="<?php echo $_SESSION["username"] ?>">
                                         <?php } ?>
                                     </div>
                                     <div id="errorMessageUpdate" class="alert alert-warning d-none" style="text-align: center;"></div>
@@ -372,7 +354,7 @@
                                 <p style="text-align: center;">Are you sure you want to delete this job type?</p>
                             </div>
                             
-                            <div class="modal-footer">
+                            <div class="modal-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
                             </div>
@@ -405,13 +387,15 @@
                                 
                                     $query = "SELECT * FROM jobtype_list ORDER BY job_name";
                                     $query_run = mysqli_query($conn, $query);
+
+                                    $counter = 1;
                                 
                                     if(mysqli_num_rows($query_run) > 0) {
                                         foreach($query_run as $job) {
                                 ?>
                             
                                 <tr>
-                                    <td style='text-align: center;'></td>
+                                    <td style='text-align: center;'><?= $counter ?></td>
                                     <td><?= $job['job_name'] ?></td>
                                     <td style='text-align: center;'><?= $job['job_code'] ?></td>
                                     <td style='text-align: center; white-space: nowrap;'>
@@ -420,7 +404,7 @@
                                         <button type="button" value="<?=$job['jobtype_id'];?>" class="deleteJobBtn btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
-                                <?php } } ?>
+                                <?php $counter++; } } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -428,8 +412,9 @@
                 </div>
                 </br>
                 
-                <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <!--========== JS ==========-->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
                 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -441,6 +426,7 @@
                             responsive:true,
                             language: {search:"_INPUT_",
                                        searchPlaceholder:"Search"},
+                            pagingType: 'full_numbers'
                         });
                     });
                 </script>
@@ -470,6 +456,8 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessage').addClass('d-none');
+                                    $('#saveJobType')[0].reset();
+                                    $('#jobAddModal').modal('hide');
 
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
@@ -566,6 +554,8 @@
                                 
                                 else if(res.status == 200){
                                     $('#errorMessageUpdate').addClass('d-none');
+                                    $('#updateJobType')[0].reset();
+                                    $('#jobEditModal').modal('hide');
 
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
@@ -606,6 +596,9 @@
                                 }
                                 
                                 else {
+                                    $('#errorMessage').addClass('d-none');
+                                    $('#deleteConfirmationModal').modal('hide');
+
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                     

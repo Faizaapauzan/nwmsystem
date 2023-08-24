@@ -22,82 +22,64 @@
 
         <title>Attendance</title>
 
-        <!--========== BOX ICONS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
         <!--========== CSS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     </head>
 
     <style>
-        ::-webkit-scrollbar {
-            display: none;
-        }
+        ::-webkit-scrollbar {display: none;}
+              
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
 
-        #attendanceTable {
-            counter-reset: rowNumber;
-        }
-        
-        #attendanceTable tr>td:first-child {
-            counter-increment: rowNumber;
-        }
-        
-        #attendanceTable tr td:first-child::before {
-            content: counter(rowNumber);
-        }
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
 
-        .dropdown-content1 {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 12px 16px;
-            z-index: 1;
-        }
-        
-        .dropdown-content1 a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            padding-right: 7px;
-        }
-        
-        .dropdown-content1 a:hover {background-color: #f1f1f1}
-        
-        .dropdown1:hover .dropdown-content1 {display: block;}
-        
-        .dropdown1:hover .dropbtn1 {color:whitesmoke;}
-    
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
+
         .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: auto;
-            padding-left: 20px;
-            bottom: 55px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
         }
         
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
+
         .dropdown-content a {
-            color: black;
-            padding: 10px 10px;
-            text-decoration: none;
-            display: block;
-            padding-right: 7px;
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
         }
-    
-        .dropdown-content a:hover {background-color: #f1f1f1}
         
-        .dropdown:hover .dropdown-content {display: block;}
-        
-        .dropdown:hover .dropbtn {color:whitesmoke;}
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
     </style>
     
     <body>
@@ -231,7 +213,7 @@
                                 <p style="text-align: center;">Are you sure you want to delete this record?</p>
                             </div>
                             
-                            <div class="modal-footer">
+                            <div class="modal-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
                             </div>
@@ -269,13 +251,15 @@
                                 
                                     $query = "SELECT * FROM tech_update ORDER BY techupdate_id DESC";
                                     $query_run = mysqli_query($conn, $query);
+
+                                    $counter = 1;
                                 
                                     if(mysqli_num_rows($query_run) > 0) {
                                         foreach($query_run as $staff) {
                                 ?>
                             
                                 <tr>
-                                    <td style='text-align: center;'></td>
+                                    <td style='text-align: center;'><?= $counter ?></td>
                                     <td style='text-align: center;'><?= $staff['techupdate_date'] ?></td>
                                     <td style='text-align: center;'><?= $staff['tech_leader'] ?></td>
                                     <td style='text-align: center;'><?= $staff['username'] ?></td>
@@ -287,7 +271,7 @@
                                         <button type="button" value="<?=$staff['techupdate_id'];?>" class="deleteAttendanceBtn btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
-                                <?php } } ?>
+                                <?php $counter++; } } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -295,8 +279,9 @@
                 </div>
                 </br>
                 
-                <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <!--========== JS ==========-->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
                 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -308,6 +293,7 @@
                             responsive:true,
                             language: {search:"_INPUT_",
                                        searchPlaceholder:"Search"},
+                            pagingType: 'full_numbers'
                         });
                     });
                 </script>
@@ -337,6 +323,9 @@
                                 }
                                 
                                 else {
+                                    $('#errorMessage').addClass('d-none');
+                                    $('#deleteConfirmationModal').modal('hide');
+                                    
                                     alertify.set('notifier', 'position', 'top-right');
                                     alertify.success(res.message);
                                 

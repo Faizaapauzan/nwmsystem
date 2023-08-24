@@ -11,14 +11,9 @@
 
 <!DOCTYPE html>
     <html>
-        <head>
-
-        </head>
-        
         <body>
-            
             <?php
-            
+                
                 include "dbconnect.php";
             
                 if (isset($_POST["jobregister_id"])) {
@@ -32,15 +27,14 @@
             ?>
         
             <!-- ASSIGN TECHNICIAN -->
-            <input type="hidden" name="jobregister_id" class="jobregister_id" value="<?php echo $row["jobregister_id"]; ?>">
+            <input type="hidden" name="jobregister_id" value="<?php echo $row["jobregister_id"]; ?>">
         
-            <label for="job_assign" style="padding-left: 20px; font-size: 18px;" class="job_assign">Job Assign to: <?php echo $row["job_assign"]; ?></label>
+            <label for="job_assign" style="font-size: 15px; font-weight: bold;">Job Assign to: <?php echo $row["job_assign"]; ?></label>
         
             <br>
         
             <!-- ASSIGN ASSISTANT -->
-            <form class="form" id="adminassistant_form" method="post" style="margin-left: 20px;">
-            
+            <form id="adminassistant_form" method="post">
                 <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
                 <input type="hidden" name="ass_date" value="<?php echo $_SESSION["storeDate"] ?>">
                 <input type="hidden" name="techupdate_date" value="<?php echo $_SESSION["storeDate"] ?>">
@@ -81,7 +75,7 @@
             
                 ?>
                 
-                <label style="color: blue" for="assistant">Select Assistant</label>
+                <label style="color: blue; font-size: 15px; font-weight: bold; margin-bottom:10px;" for="assistant">Select Assistant</label>
             
                 <div class="card">
                     <div class="card-body">
@@ -122,7 +116,8 @@
                                 $('#assistant').select2({
                                     dropdownParent: $('#adminassistant_form'),
                                     theme: 'bootstrap-5',
-                                    placeholder: 'Select Assistant'
+                                    placeholder: 'Select Assistant',
+                                    width: '100%',
                                 });
                             });
                         </script>
