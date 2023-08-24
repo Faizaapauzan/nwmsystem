@@ -24,13 +24,17 @@
     <title>Admin Homepage</title>
 
     <!--========== CSS ==========-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
     <link href="assets/css/styles.css" rel="stylesheet">
     <link href="css/homepage.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <!--<link href="css/adminboard.css" rel="stylesheet" />
-    <link href="css/admin.css" rel="stylesheet" />-->
+    
+    <link href="css/adminboard.css" rel="stylesheet" />
+    <link href="css/admin.css" rel="stylesheet" />
     <link href="css/adminhomepageAUTO.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    
     
     
 
@@ -246,6 +250,10 @@
         overflow: hidden; /* Prevent scrolling on the background */
     }
 
+    .modal {
+        opacity:1 !important;
+    }
+
 </style>
 </head>
 
@@ -396,564 +404,564 @@
         <section>
             <div class="modal fade" id="staffpopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="tabStaff">
-                        `<!-- Staff Job Info -->
-                        <input type="radio"  id="tabDoing" class="tab-radio" checked="checked">
-                        <label for="tabDoing" class="tabHeadingStaff" onclick="openTab('StaffJobInfoTab')">Job Info</label>
-                        <div class="tab" id="StaffJobInfoTab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');">&times</div>
-                            <form action="homeindex.php" method="post" style="display: contents;" >
-                                <input type="hidden" id="jobregister_idinfo" name="jobregister_id" value="">
-                                <input type="hidden" id="support" name="support" value="Support For">
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Job Priority</label>
-                                    <input type="text" id="job_priority" name="job_priority" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Job Order Number</label>
-                                    <div style="display: flex;">
-                                        <input type="text" class="job_order_number" name="job_order_number" id="job_order_number" value="">
-                                        <button type="button" style="border-radius: 5px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px; width:auto" onclick="buttonClick();">Click</button>
-                                        
-                                        <script>
-                                            var i = 1;
-                                            var jobordernumber2;
-                                            
-                                            function buttonClick() {
-                                                if (i == 1){
-                                                    var jobordernumber = document.getElementById('job_order_number').value;
-                                                    jobordernumber2 = jobordernumber;
-                                                }
-                                                
-
-                                                // Split the existing job order number into parts
-                                                var parts = jobordernumber2.split('-');
-                                                
-                                                
-                                                // Increment the number part
-                                                var newNumber = parts[parts.length-1] + "-" + i;
-                                                var newJobOrderNumber = parts[0];
-
-                                                // Construct the new job order number
-                                                for (var j = 1; j < parts.length-1; j++){
-                                                    newJobOrderNumber = newJobOrderNumber + "-" + parts[j];
-                                                }
-                                                newJobOrderNumber = newJobOrderNumber + "-" + newNumber;
-                                                
-
-                                                // Update the input value
-                                                document.getElementById('job_order_number').value = newJobOrderNumber;
-
-                                                i++;
-                                            }
-                                        </script>
-
-                                    </div>
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Job Name</label>
-                                    <input type="text" id="job_name" name="job_name" value="">
-                                    <input type="hidden" id="job_code" name="job_code" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Customer Name</label>
-                                    <select id="custModel" onchange="GetCustomer(this.value)">
-                                        <option value=""></option> 
-                                        
-                                        <?php
-                                            include "dbconnect.php";
-                                            $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
-                                            while($data = mysqli_fetch_array($records))
-                                            {
-                                                echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";  // displaying data in option menu
-                                            }
-                                        ?>
-
-                                    </select>
-                                    <input type="hidden" id="cust" name="customer_id" onchange="GetCustomer(this.value)" readonly>
-                                    <input type="hidden" id="customer_code" name="customer_code" value="" readonly>
-                                    <input type="hidden" id="customer_name" name="customer_name" value="" readonly>
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Job Description</label>
-                                    <input type="text" id="job_description" name="job_description" value="">
-                                </div>
-
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Assign Date</label>
-                                    <input type="text" id="DateAssign" name="DateAssign" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Delivery date</label>
-                                    <input type="date" id="delivery_date" name="delivery_date" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Requested date</label>
-                                    <input type="date" id="requested_date" name="requested_date" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Customer Grade</label>
-                                    <input type="text" id="customer_grade" name="customer_grade" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Customer PIC</label>
-                                    <input type="text" id="customer_PIC" name="customer_PIC" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Contact Number 1</label>
-                                    <input type="text" id="cust_phone1" name="cust_phone1" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="">Contact Number 2</label>
-                                    <input type="text" id="cust_phone2" name="cust_phone2" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 100%;">
-                                    <label for="">Customer Address</label>
-                                    <input type="text" id="cust_address1" name="cust_address1" value="">
-                                    <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address2" name="cust_address2" value="">
-                                    <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address3" name="cust_address3" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="brand">Machine Brand</label>
-                                    <input type="text" id="brandname" name="machine_brand" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="type">Machine Type</label>
-                                    <input type="text" id="type_name" name="machine_type" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="sn">Serial Number</label>
-                                    <select id="serialnumbers" onchange="GetMachines(this.value)">
-                                        <option value=""></option> 
-
-                                    </select>
-                                    <input type="hidden" id="machine_id" name="machine_id" value="">
-                                    <input type="hidden" id="serialnumber" name="serialnumber" value="">
-                                    <input type="hidden" id="machine_code" name="machine_code" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="accessories_required">Accessories Required</label>
-                                    <select id="accessories_required" name="accessories_required">
-                                        <option value=''></option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="input-box" style="width: 100%;">
-                                    <label for="">Machine Name</label>
-                                    <input type="text" id="machine_name" name="machine_name" value="">
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="job_cancel">Cancel Job:</label>
-                                    <select type="text" id="job_cancel" name="job_cancel">
-                                        <option value=''></option>
-                                        <option value='YES'>YES</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="input-box" style="width: 50%;">
-                                    <label for="job_status">Job Status:</label>
-                                    <select type="text" id="job_status" name="job_status" onchange="myFunction()">
-                                        <option value='' ></option>
-                                        <option value='Doing'>Doing</option>
-                                        <option value='Pending'>Pending</option>
-                                        <option value='Incomplete'>Incomplete</option>
-                                        <option value='Completed'>Completed</option>
-                                    </select>
-                                </div>
-                                
-                                <!--PENDING & INCOMPLETE REASON-->
-                                <div id="reasonInput" class="input-box" style="width: 100%;">
-                                    <label for="reason">Reason</label>
-                                    <input type="text" id="reason" name="reason" value="">
-                                </div>
-                                </br>
-                                
-                                <script>
-                                    function myFunction() {
-                                        var jobStatus = document.getElementById("job_status").value;
-                                        var reasonDiv = document.getElementById("reasonInput");
-                                        if (jobStatus === "Pending" || jobStatus === "Incomplete") {
-                                            reasonDiv.style.display = "block";
-                                        } else {
-                                            reasonDiv.style.display = "none";
-                                        }
-                                    }
-                                    // Call the function once to set the initial state of the "reason" div
-                                    myFunction();
-                                </script>
-                                <!--PENDING & INCOMPLETE END REASON-->
-                                
-                                <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
-                                
-                                <div class="DuplicateUpdateButton" style="display: inline-flex; width: 100%;">
-                                    <button type="submit" id="submit" name="update">Update</button></n>
-                                    <button type="button" style="background-color: #f43636 ;" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormSupportAdmin();">Support</button>
-                                </div>
-                                
-                                <p class="control"><b id="messageSupportAdmin"></b></p>
-                            </form>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div style="text-align: center; display:inline-flex;">
+                                <button  id="tabDoing" class="btn tab-button tabbutton" checked="checked" onclick="openTab('StaffJobInfoTab')">Job Info</button>
+                                <button class="btn tab-button tabbutton" id="tabDoing2" onclick="openTab('JobAssignTab')">Job Assign</button>
+                                <button class="btn tab-button tabbutton" id="tabDoing3" onclick="openTab('JobUpdateTab')">Update</button>
+                                <button class="btn tab-button tabbutton" id="tabDoing4" onclick="openTab('JobAccessoriesTab')">Accessories</button>
+                                <button class="btn tab-button tabbutton" id="tabDoing5" onclick="openTab('JobPhotoTab')">Photo</button>
+                                <button class="btn tab-button tabbutton" id="tabDoing6" onclick="openTab('JobVideoTab')">Video</button>
+                                <button class="btn tab-button tabbutton" id="tabDoing7" onclick="openTab('JobReportTab')">Report</button>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');"></button>
                         </div>
+                        <div class="modal-body">
+                            <!-- Staff Job Info -->
+                            
+                            
+                            <div class="tab" id="StaffJobInfoTab">
+                                <form action="homeindex.php" method="post" style="display: contents;" >
+                                    <input type="hidden" id="jobregister_idinfo" name="jobregister_id" value="">
+                                    <input type="hidden" id="support" name="support" value="Support For">
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Job Priority</label>
+                                        <input type="text" id="job_priority" name="job_priority" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Job Order Number</label>
+                                        <div style="display: flex;">
+                                            <input type="text" class="job_order_number" name="job_order_number" id="job_order_number" value="">
+                                            <button type="button" style="border-radius: 5px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px; width:auto" onclick="buttonClick();">Click</button>
+                                            
+                                            <script>
+                                                var i = 1;
+                                                var jobordernumber2;
+                                                
+                                                function buttonClick() {
+                                                    if (i == 1){
+                                                        var jobordernumber = document.getElementById('job_order_number').value;
+                                                        jobordernumber2 = jobordernumber;
+                                                    }
+                                                    
 
+                                                    // Split the existing job order number into parts
+                                                    var parts = jobordernumber2.split('-');
+                                                    
+                                                    
+                                                    // Increment the number part
+                                                    var newNumber = parts[parts.length-1] + "-" + i;
+                                                    var newJobOrderNumber = parts[0];
 
-                        <!-- Staff Job Assign -->
-                        <input type="radio" class="tab-radio" id="tabDoing2">
-                        <label for="tabDoing2" class="tabHeadingStaff" onclick="openTab('JobAssignTab')">Job Assign</label>
-                        <div class="tab" id="JobAssignTab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');">&times</div>
-                            <form id="assignupdate_form" method="post">
-                                <input type="hidden" name="jobregister_id" class="jobregister_id" id="jobregister_id2" value="">
-                                
-                                <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br />
-                                
-                                <div class="input-box" style="display:flex; width: 100%">
-                                    <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)">
-                                        <option value=""></option> 
+                                                    // Construct the new job order number
+                                                    for (var j = 1; j < parts.length-1; j++){
+                                                        newJobOrderNumber = newJobOrderNumber + "-" + parts[j];
+                                                    }
+                                                    newJobOrderNumber = newJobOrderNumber + "-" + newNumber;
+                                                    
+
+                                                    // Update the input value
+                                                    document.getElementById('job_order_number').value = newJobOrderNumber;
+
+                                                    i++;
+                                                }
+                                            </script>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Job Name</label>
+                                        <input type="text" id="job_name" name="job_name" value="">
+                                        <input type="hidden" id="job_code" name="job_code" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Customer Name</label>
+                                        <select id="custModel" onchange="GetCustomer(this.value)">
+                                            <option value=""></option> 
                                             
                                             <?php
                                                 include "dbconnect.php";
-                                                
-                                                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE 
-                                                                                technician_rank = '1st Leader' AND tech_avai = '0'
-                                                                                    OR
-                                                                                technician_rank = '2nd Leader' AND tech_avai = '0'
-                                                                                    OR
-                                                                                staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here
-                                                echo "<option></option>";
-                                                
+                                                $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
                                                 while($data = mysqli_fetch_array($records))
-                                                    {echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";}	
-                                            ?> 
-                                        
-                                        <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
-                                        <input type="hidden" name="job_assign" id='username' value="">
-                                        <input type="hidden" name="technician_rank" id='technician_rank' value="" readonly>
-                                        <input type="hidden" name="staff_position" id='staff_position' value="" readonly>
-                                    </select> 
-                                    
-                                    <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION['username']?>" readonly>
-                                    <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" />
-                                </div>
-                                <p style="padding-left: 20px;"><b id="assignupdateadminmessage"></b></p>
-                            </form>
+                                                {
+                                                    echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";  // displaying data in option menu
+                                                }
+                                            ?>
 
-                            <form class="form" id="adminassistant_form" method="post" style="margin-left: 20px;">
-                                <input type="hidden" name="jobregister_id" id="jobregister_id3" value="">
-                                <input type="hidden" name="ass_date" id="ass_date" value="">
-                                <input type="hidden" name="techupdate_date" id="techupdate_date" value="">
-                                <input type="hidden" name="tech_leader" id="tech_leader" value="">
-                                <input type="hidden" name="cust_name" id="cust_name" value="">
-                                <input type="hidden" name="requested_date" id="requested_date2" value="">
-                                <input type="hidden" name="machine_name" id="machine_name2" value="">
-                                
-                                <div id="multipleassist"> 
-                                    <label for="assistant">Select Assistant :</label>
-                                    <table id="selectedassistant" style="margin-top: 10px; margin-bottom:20px; margin-right:30px; box-shadow: none; background-color:#FFFFFF;">
-                                        <tbody> 
-                                        </tbody>
-                                    </table>
-                                    
-                                    <div class="input-box" style="width:100%">
-                                        <select name="username[]" class="multiple-assistant" multiple="multiple" style="height: max-content; margin-left:-17px;"> 
-                                            
-                                            <?php
-                                                $query = "SELECT * FROM staff_register 
-                                                        WHERE staff_group = 'Technician' AND tech_avai = '0' 
-                                                        ORDER BY staffregister_id ASC";
-                                                
-                                                $query_run = mysqli_query($conn, $query);
-                                                if(mysqli_num_rows($query_run) > 0)
-                                                    {
-                                                        foreach ($query_run as $rowstaff) {
-                                            ?> 
-                                            
-                                            <option value="<?php echo $rowstaff["username"]; ?>"><?php echo $rowstaff["username"]; ?></option> 
-                                            
-                                            <?php } } else {echo "No Record Found";} ?> 
-                                            
                                         </select>
-                                        
-                                        <script>
-                                            $("#multipleassist").on('change', function() {
-                                                $(".multiple-assistant").select2({});
-                                            });
-                                        </script>
+                                        <input type="hidden" id="cust" name="customer_id" onchange="GetCustomer(this.value)" readonly>
+                                        <input type="hidden" id="customer_code" name="customer_code" value="" readonly>
+                                        <input type="hidden" id="customer_name" name="customer_name" value="" readonly>
                                     </div>
                                     
-                                    <div class="buttonUpdate" style="display: flex;flex-direction: row-reverse;"> 
-                                        <input type="hidden" name="jobregisterlastmodify_by2" id="jobregisterlastmodify_by2" value="<?php echo $_SESSION['username']?>" readonly>
-                                            <div>
-                                                <p class="control"><b id="assignadminmessage"></b></p>
-                                            </div>
-                                        <input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Job Description</label>
+                                        <input type="text" id="job_description" name="job_description" value="">
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <!-- Staff Update Tab -->
-                        <input type="radio" class="tab-radio" id="tabDoing3">
-                        <label for="tabDoing3" class="tabHeadingStaff"  onclick="openTab('JobUpdateTab')">Update</label>
-                        <div class="tab" id="JobUpdateTab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');">&times</div>
-                            <input type="hidden" name="jobregister_id" id="jobregister_idupdate" value="">
-                            <div style="margin-left: 30px">
-                                <!-- Departure Time -->
-                                <div class="input-box-departure">
-                                    <label for="">Departure Time</label>
-                                    <input type="text" class="technician_departure" id="technician_departure" name="technician_departure" value="">
-                                    <input type="button" id="update_DepartureTime" value="Departure" style=" background-color: #081d45;" onclick="getFormattedDateTime('technician_departure')">
-                                </div>
-                                <!-- End of Departure Time -->
-                                
-                                <!-- Time at site -->
-                                <div class="input-box-arrival">
-                                    <label for="">Time at site</label>
-                                    <input type="text" class="technician_arrival" id="technician_arrival" name="technician_arrival" value="">
-                                    <input type="button" id="update_ArrivalTime" value="Arrival" style=" background-color: #081d45;" onclick="getFormattedDateTime('technician_arrival')">
-                                </div>
-                                <!-- End of Time at site -->
-                                
-                                <!-- Return Time -->
-                                <div class="input-box-leaving">
-                                    <label for="">Return time</label>
-                                    <div style="display: flex; align-items: baseline;">
-                                        <input type="text" class="technician_leaving" id="technician_leaving" name="technician_leaving" value="">
-                                        <input type="button" id="update_LeavingTime" value="Leaving" style="background-color: #081d45;" onclick="getFormattedDateTime('technician_leaving')">
+
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Assign Date</label>
+                                        <input type="text" id="DateAssign" name="DateAssign" value="">
                                     </div>
-                                </div>
-                                <!-- End of Return Time -->
-                                
-                                <div class="input-box-out">
-                                    <label for="">Rest Hour</label>
-                                    <!-- Rest Hour Out -->
-                                    <div style="display: flex; align-items: baseline;"> 
-                                        <input type="text" style="width: 406.5px;" id="tech_out" name="tech_out" value="">
-                                        <input style="background-color: #081d45; color: white; width: 203.8px" type="button" value="OUT" onclick="getFormattedTime('tech_out')">
-                                    </div>
-                                    <!-- End of Rest Hour Out -->
                                     
-                                    <!-- Rest Hour In -->
-                                
-                                    <div style="display: flex; align-items: baseline;">
-                                        <input type="text" style="width: 408px;" id="tech_in" name="tech_in" value="">
-                                        <input style="background-color: #081d45; color: white; width: 203.8px" type="button" value="IN" onclick="getFormattedTime('tech_in')">
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Delivery date</label>
+                                        <input type="date" id="delivery_date" name="delivery_date" value="">
                                     </div>
-                                    <!-- End of Rest Hour In -->
-                                </div>
-                                
-                                <p class="control" style="color: green;"><b id="techupdateAdmin"></b></p>
-                                <div style="margin-top:30px; margin-left:420px; margin-bottom:30px">
-                                    <input type="button" id="update_tech" name="update_tech" value="Update" style="background-color: #081d45; color: white; width: 203.8px; height:40px; border: none; border-radius: 4px; font-size:15px;">
-                                </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Requested date</label>
+                                        <input type="date" id="requested_date" name="requested_date" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Customer Grade</label>
+                                        <input type="text" id="customer_grade" name="customer_grade" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Customer PIC</label>
+                                        <input type="text" id="customer_PIC" name="customer_PIC" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Contact Number 1</label>
+                                        <input type="text" id="cust_phone1" name="cust_phone1" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="">Contact Number 2</label>
+                                        <input type="text" id="cust_phone2" name="cust_phone2" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 100%;">
+                                        <label for="">Customer Address</label>
+                                        <input type="text" id="cust_address1" name="cust_address1" value="">
+                                        <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address2" name="cust_address2" value="">
+                                        <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address3" name="cust_address3" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="brand">Machine Brand</label>
+                                        <input type="text" id="brandname" name="machine_brand" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="type">Machine Type</label>
+                                        <input type="text" id="type_name" name="machine_type" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="sn">Serial Number</label>
+                                        <select id="serialnumbers" onchange="GetMachines(this.value)">
+                                            <option value=""></option> 
+
+                                        </select>
+                                        <input type="hidden" id="machine_id" name="machine_id" value="">
+                                        <input type="hidden" id="serialnumber" name="serialnumber" value="">
+                                        <input type="hidden" id="machine_code" name="machine_code" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="accessories_required">Accessories Required</label>
+                                        <select id="accessories_required" name="accessories_required">
+                                            <option value=''></option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 100%;">
+                                        <label for="">Machine Name</label>
+                                        <input type="text" id="machine_name" name="machine_name" value="">
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="job_cancel">Cancel Job:</label>
+                                        <select type="text" id="job_cancel" name="job_cancel">
+                                            <option value=''></option>
+                                            <option value='YES'>YES</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="input-box" style="width: 50%;">
+                                        <label for="job_status">Job Status:</label>
+                                        <select type="text" id="job_status" name="job_status" onchange="myFunction()">
+                                            <option value='' ></option>
+                                            <option value='Doing'>Doing</option>
+                                            <option value='Pending'>Pending</option>
+                                            <option value='Incomplete'>Incomplete</option>
+                                            <option value='Completed'>Completed</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!--PENDING & INCOMPLETE REASON-->
+                                    <div id="reasonInput" class="input-box" style="width: 100%;">
+                                        <label for="reason">Reason</label>
+                                        <input type="text" id="reason" name="reason" value="">
+                                    </div>
+                                    </br>
+                                    
+                                    <script>
+                                        function myFunction() {
+                                            var jobStatus = document.getElementById("job_status").value;
+                                            var reasonDiv = document.getElementById("reasonInput");
+                                            if (jobStatus === "Pending" || jobStatus === "Incomplete") {
+                                                reasonDiv.style.display = "block";
+                                            } else {
+                                                reasonDiv.style.display = "none";
+                                            }
+                                        }
+                                        // Call the function once to set the initial state of the "reason" div
+                                        myFunction();
+                                    </script>
+                                    <!--PENDING & INCOMPLETE END REASON-->
+                                    
+                                    <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
+                                    
+                                    <div class="DuplicateUpdateButton" style="display: inline-flex; width: 100%;">
+                                        <button type="submit" id="submit" name="update">Update</button></n>
+                                        <button type="button" style="background-color: #f43636 ;" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormSupportAdmin();">Support</button>
+                                    </div>
+                                    
+                                    <p class="control"><b id="messageSupportAdmin"></b></p>
+                                </form>
                             </div>
-                        </div>
-                        
-                        <!-- Staff Accessories Tab -->
-                        <input type="radio" class="tab-radio" id="tabDoing4">
-                        <label for="tabDoing4" class="tabHeadingStaff" onclick="openTab('JobAccessoriesTab')">Accessories</label>
-                        <div class="tab" id="JobAccessoriesTab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');">&times</div>
-                            <div class="input-boxAccessories" id="input_fields_wrapAccessories">
-                                <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -18px;" id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table" width="60%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                        <th>No</th>
-                                        <th>Code</th>
-                                        <th>Name</th>
-                                        <th>UOM</th>
-                                        <th>Quantity</th>
-                                        </tr>
-                                    </thead>
+
+
+                            <!-- Staff Job Assign -->
+
+                            <div class="tab" id="JobAssignTab">
+                                <form id="assignupdate_form" method="post">
+                                    <input type="hidden" name="jobregister_id" class="jobregister_id" id="jobregister_id2" value="">
                                     
-                                    <tbody id="_editable_table">
-                                    </tbody>
-                                </table>
-                                <a href="javascript:void(0);" class="add_button" title="Add field" type="button">Click Here to Add Accessories</a>
-                                <form  id="adminacc_form" method="post">
-                                    <div class="model">
+                                    <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br />
+                                    
+                                    <div class="input-box" style="display:flex; width: 100%">
+                                        <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)">
+                                            <option value=""></option> 
+                                                
+                                                <?php
+                                                    include "dbconnect.php";
+                                                    
+                                                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE 
+                                                                                    technician_rank = '1st Leader' AND tech_avai = '0'
+                                                                                        OR
+                                                                                    technician_rank = '2nd Leader' AND tech_avai = '0'
+                                                                                        OR
+                                                                                    staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here
+                                                    echo "<option></option>";
+                                                    
+                                                    while($data = mysqli_fetch_array($records))
+                                                        {echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";}	
+                                                ?> 
+                                            
+                                            <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
+                                            <input type="hidden" name="job_assign" id='username' value="">
+                                            <input type="hidden" name="technician_rank" id='technician_rank' value="" readonly>
+                                            <input type="hidden" name="staff_position" id='staff_position' value="" readonly>
+                                        </select> 
+                                        
+                                        <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION['username']?>" readonly>
+                                        <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" />
                                     </div>
-                                    <div class="updateBtn">
-                                        <p class="control"><b id="accessoriesmessage"></b></p>
-                                        <input type="button" id="update_acc" name="update_acc" value="Update"/>
+                                    <p style="padding-left: 20px;"><b id="assignupdateadminmessage"></b></p>
+                                </form>
+
+                                <form class="form" id="adminassistant_form" method="post" style="margin-left: 20px;">
+                                    <input type="hidden" name="jobregister_id" id="jobregister_id3" value="">
+                                    <input type="hidden" name="ass_date" id="ass_date" value="">
+                                    <input type="hidden" name="techupdate_date" id="techupdate_date" value="">
+                                    <input type="hidden" name="tech_leader" id="tech_leader" value="">
+                                    <input type="hidden" name="cust_name" id="cust_name" value="">
+                                    <input type="hidden" name="requested_date" id="requested_date2" value="">
+                                    <input type="hidden" name="machine_name" id="machine_name2" value="">
+                                    
+                                    <div id="multipleassist"> 
+                                        <label for="assistant">Select Assistant :</label>
+                                        <table id="selectedassistant" style="margin-top: 10px; margin-bottom:20px; margin-right:30px; box-shadow: none; background-color:#FFFFFF;">
+                                            <tbody> 
+                                            </tbody>
+                                        </table>
+                                        
+                                        <div class="input-box" style="width:100%">
+                                            <select name="username[]" class="multiple-assistant" multiple="multiple" style="height: max-content; margin-left:-17px;"> 
+                                                
+                                                <?php
+                                                    $query = "SELECT * FROM staff_register 
+                                                            WHERE staff_group = 'Technician' AND tech_avai = '0' 
+                                                            ORDER BY staffregister_id ASC";
+                                                    
+                                                    $query_run = mysqli_query($conn, $query);
+                                                    if(mysqli_num_rows($query_run) > 0)
+                                                        {
+                                                            foreach ($query_run as $rowstaff) {
+                                                ?> 
+                                                
+                                                <option value="<?php echo $rowstaff["username"]; ?>"><?php echo $rowstaff["username"]; ?></option> 
+                                                
+                                                <?php } } else {echo "No Record Found";} ?> 
+                                                
+                                            </select>
+                                            
+                                            <script>
+                                                $("#multipleassist").on('change', function() {
+                                                    $(".multiple-assistant").select2({});
+                                                });
+                                            </script>
+                                        </div>
+                                        
+                                        <div class="buttonUpdate" style="display: flex;flex-direction: row-reverse;"> 
+                                            <input type="hidden" name="jobregisterlastmodify_by2" id="jobregisterlastmodify_by2" value="<?php echo $_SESSION['username']?>" readonly>
+                                                <div>
+                                                    <p class="control"><b id="assignadminmessage"></b></p>
+                                                </div>
+                                            <input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>
+                                        </div>
                                     </div>
                                 </form>
-                            </div>              
-                        </div>
+                            </div>
+                            
+                            <!-- Staff Update Tab -->
 
-                        <!-- Staff Photo Tab -->
-                        <input type="radio" class="tab-radio" id="tabDoing5">
-                        <label for="tabDoing5" class="tabHeadingStaff" onclick="openTab('JobPhotoTab')">Photo</label>
-                        <div class="tab" id="JobPhotoTab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');">&times</div>
-                            <form id="submitForm">
-                                <!-- for select job register id -->
-                                <input type="hidden" id="jobregister_idp1" name="jobregister_id" value="">
-                                <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
-                                <input type="hidden" id="description" name="description" value="Machine (Before Service)">
-                                <div id="previewBefore"></div>
-                                <div class="update-form">
-                                    <div class="upload-report">
-                                        <div class="input-box" style="display: flex; margin-left: -16px;">
-                                            <input type="file" class="form-control" name="multipleFile[]" id="multipleFile" required="" multiple>
-                                            <input type="submit" name="upload" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                            <div class="tab" id="JobUpdateTab">
+                                <input type="hidden" name="jobregister_id" id="jobregister_idupdate" value="">
+                                <div style="margin-left: 30px">
+                                    <!-- Departure Time -->
+                                    <div class="input-box-departure">
+                                        <label for="">Departure Time</label>
+                                        <input type="text" class="technician_departure" id="technician_departure" name="technician_departure" value="">
+                                        <input type="button" id="update_DepartureTime" value="Departure" style=" background-color: #081d45;" onclick="getFormattedDateTime('technician_departure')">
+                                    </div>
+                                    <!-- End of Departure Time -->
+                                    
+                                    <!-- Time at site -->
+                                    <div class="input-box-arrival">
+                                        <label for="">Time at site</label>
+                                        <input type="text" class="technician_arrival" id="technician_arrival" name="technician_arrival" value="">
+                                        <input type="button" id="update_ArrivalTime" value="Arrival" style=" background-color: #081d45;" onclick="getFormattedDateTime('technician_arrival')">
+                                    </div>
+                                    <!-- End of Time at site -->
+                                    
+                                    <!-- Return Time -->
+                                    <div class="input-box-leaving">
+                                        <label for="">Return time</label>
+                                        <div style="display: flex; align-items: baseline;">
+                                            <input type="text" class="technician_leaving" id="technician_leaving" name="technician_leaving" value="">
+                                            <input type="button" id="update_LeavingTime" value="Leaving" style="background-color: #081d45;" onclick="getFormattedDateTime('technician_leaving')">
                                         </div>
                                     </div>
+                                    <!-- End of Return Time -->
+                                    
+                                    <div class="input-box-out">
+                                        <label for="">Rest Hour</label>
+                                        <!-- Rest Hour Out -->
+                                        <div style="display: flex; align-items: baseline;"> 
+                                            <input type="text" style="width: 406.5px;" id="tech_out" name="tech_out" value="">
+                                            <input style="background-color: #081d45; color: white; width: 203.8px" type="button" value="OUT" onclick="getFormattedTime('tech_out')">
+                                        </div>
+                                        <!-- End of Rest Hour Out -->
+                                        
+                                        <!-- Rest Hour In -->
+                                    
+                                        <div style="display: flex; align-items: baseline;">
+                                            <input type="text" style="width: 408px;" id="tech_in" name="tech_in" value="">
+                                            <input style="background-color: #081d45; color: white; width: 203.8px" type="button" value="IN" onclick="getFormattedTime('tech_in')">
+                                        </div>
+                                        <!-- End of Rest Hour In -->
+                                    </div>
+                                    
+                                    <p class="control" style="color: green;"><b id="techupdateAdmin"></b></p>
+                                    <div style="margin-top:30px; margin-left:420px; margin-bottom:30px">
+                                        <input type="button" id="update_tech" name="update_tech" value="Update" style="background-color: #081d45; color: white; width: 203.8px; height:40px; border: none; border-radius: 4px; font-size:15px;">
+                                    </div>
                                 </div>
-                                <div class="message">
-                                    <p class="control"><b id="messageImagebefore"></b></p>
-                                </div>
+                            </div>
+                            
+                            <!-- Staff Accessories Tab -->
 
-                                <!-- for select data from tech photo update database -->
-
-                                <!-- Photos Table Before Service -->
-                                <div class="table-responsivep1">
-                                    <table id="tablep1" style="box-shadow: 0 5px 10px #f7f7f7;">
-                                        <tbody id="tbodyp1" style="display: flex; flex-wrap: wrap;">
+                            <div class="tab" id="JobAccessoriesTab">
+                                <div class="input-boxAccessories" id="input_fields_wrapAccessories">
+                                    <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -18px;" id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table" width="60%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                            <th>No</th>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>UOM</th>
+                                            <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody id="_editable_table">
                                         </tbody>
                                     </table>
-                                </div>
-                            </form>
-                            <form id="submitAfterForm">
-                                <!-- for select job register id -->
-                                <input type="hidden" id="jobregister_idp2" name="jobregister_id" value="">
-                                <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
-                                <input type="hidden" id="description" name="description" value="Machine (After Service)">
-                                <div id="previewAfter"></div>
-                                <div class="update-form">
-                                    <div class="upload-report">
-                                        <div class="input-box" style="display: flex; margin-left: -16px;">
-                                            <input type="file" class="form-control" name="multipleFile[]" id="multipleAfter" required="" multiple>
-                                            <input type="submit" name="upload" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                    <a href="javascript:void(0);" class="add_button" title="Add field" type="button">Click Here to Add Accessories</a>
+                                    <form  id="adminacc_form" method="post">
+                                        <div class="model">
                                         </div>
-                                    </div>
-                                    <div class="message">
-                                        <p class="control"><b id="messageImageAfter"></b></p>
-                                    </div>
-                                    
-                                    <!-- for select data from tech photo update database -->
-                                    
-                                    <!-- Photos Table After Service -->
-                                    <div class="table-responsivep2">
-                                        <table id="tablep2" style="box-shadow: 0 5px 10px #f7f7f7;">
-                                            <tbody id="tbodyp2" style="display: flex; flex-wrap: wrap;">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <!-- Staff Video Tab -->
-                        <input type="radio" class="tab-radio" id="tabDoing6">
-                        <label for="tabDoing6" class="tabHeadingStaff" onclick="openTab('JobVideoTab')">Video</label>
-                        <div class="tab" id="JobVideoTab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');">&times</div>
-                            <form id="submitVideoBefore">
-                                <!-- for select job register id -->
-                                <input type="hidden" id="jobregister_idv1" name="jobregister_id" value="">
-                                <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
-                                <input type="hidden" id="description" name="description" value="Machine (Before Service)">
-                                <div id="previewBeforeVideo"></div>
-                                <div class="update-form">
-                                    <div class="upload-report">
-                                        <div class="input-box" style="display: flex; margin-left: -16px;">
-                                            <input type="file" class="form-control" name="multipleVideo[]" id="multipleVideo" required="" multiple>
-                                            <input type="submit" name="uploadVideo" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                        <div class="updateBtn">
+                                            <p class="control"><b id="accessoriesmessage"></b></p>
+                                            <input type="button" id="update_acc" name="update_acc" value="Update"/>
                                         </div>
-                                    </div>
-                                    <div class="message">
-                                        <p class="control"><b id="messageVideoBefore"></b></p>
-                                    </div>
+                                    </form>
+                                </div>              
+                            </div>
 
-                                    <!-- for select data from tech video update database -->
+                            <!-- Staff Photo Tab -->
 
-                                    <!-- Videos Table Before Service -->
-                                    <div class="table-responsivev1">
-                                        <table id="tablev1" style="box-shadow: 0 5px 10px #f7f7f7;">
-                                            <tbody id="tbodyv1"style="display: flex; flex-wrap: wrap; padding-left: 15px;">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </form>
-                            <form id="submitAfterVideo">
-                                <!-- for select job register id -->
-                                <input type="hidden" id="jobregister_idv2" name="jobregister_id" value="">
-                                <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
-                                <input type="hidden" id="description" name="description" value="Machine (After Service)">
-                                <div id="previewAfterVideo"></div>
-                                <div class="update-form">
-                                    <div class="upload-report">
-                                        <div class="input-box" style="display: flex; margin-left: -16px;">
-                                            <input type="file" class="form-control" name="multipleVideo[]" id="multipleAfterVideo" required="" multiple>
-                                            <input type="submit" name="uploadVideo" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
-                                        </div>
-                                    </div>
-                                    <div class="message">
-                                        <p class="control"><b id="messageVideoAfter"></b></p>
-                                    </div>
-
-                                    <!-- for select data from tech video update database -->
-                                    <!-- Videos Table After Service -->
-                                    <div class="table-responsivev2">
-                                        <table id="tablev2" style="box-shadow: 0 5px 10px #f7f7f7;">
-                                            <tbody id="tbodyv2" style="display: flex; flex-wrap: wrap; padding-left: 15px;">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </form>
-
-
-                        </div>
-
-                        <!-- Staff Report Tab -->
-                        <input type="radio"  class="tab-radio"  id="tabDoing7">
-                        <label for="tabDoing7" class="tabHeadingStaff" onclick="openTab('JobReportTab')">Report</label>
-                        <div class="tab" id="JobReportTab">
-                            <div class="techClose" data-dismiss="modal" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');">&times</div>
-                            <form method="POST" action="servicereportdate.php">
-                                <input type="hidden" id="jobregister_idreport" name="jobregister_id" value="">
-                                <label for="reportdate" style="margin-left: 20px">Service Report Date:</label>
-                                <div class="date-form">
-                                    <div class="submit-date" style="padding-left: 20px; padding-right: 25px;">
-                                        <div class="input-box" style="width: 75%; display: flex; align-items: baseline;">
-                                            <input type="text" id="srvcreportdate" name="srvcreportdate" value="<?php $date = date('d-m-Y');?>" readonly>
-                                            <div class="input-group-append" style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
-                                                <!-- closing div for input-group-append is missing in your provided code -->
+                            <div class="tab" id="JobPhotoTab">
+                                <form id="submitForm">
+                                    <!-- for select job register id -->
+                                    <input type="hidden" id="jobregister_idp1" name="jobregister_id" value="">
+                                    <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
+                                    <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+                                    <div id="previewBefore"></div>
+                                    <div class="update-form">
+                                        <div class="upload-report">
+                                            <div class="input-box" style="display: flex; margin-left: -16px;">
+                                                <input type="file" class="form-control" name="multipleFile[]" id="multipleFile" required="" multiple>
+                                                <input type="submit" name="upload" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                            <form id="view_form" method="post">
-                                <div style="display:flex;">
-                                <button  style="padding: 8px 44px; border-radius: 4px;" id="userinfo" class="userinfo" type="button" 
-                                >New</button></n>
-                                <button style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" id="useredit" class="useredit" type="button" >Edit</button>
-                                </div>  
-                            </form>
-                        </div>
+                                    <div class="message">
+                                        <p class="control"><b id="messageImagebefore"></b></p>
+                                    </div>
 
+                                    <!-- for select data from tech photo update database -->
+
+                                    <!-- Photos Table Before Service -->
+                                    <div class="table-responsivep1">
+                                        <table id="tablep1" style="box-shadow: 0 5px 10px #f7f7f7;">
+                                            <tbody id="tbodyp1" style="display: flex; flex-wrap: wrap;">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                                <form id="submitAfterForm">
+                                    <!-- for select job register id -->
+                                    <input type="hidden" id="jobregister_idp2" name="jobregister_id" value="">
+                                    <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
+                                    <input type="hidden" id="description" name="description" value="Machine (After Service)">
+                                    <div id="previewAfter"></div>
+                                    <div class="update-form">
+                                        <div class="upload-report">
+                                            <div class="input-box" style="display: flex; margin-left: -16px;">
+                                                <input type="file" class="form-control" name="multipleFile[]" id="multipleAfter" required="" multiple>
+                                                <input type="submit" name="upload" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                            </div>
+                                        </div>
+                                        <div class="message">
+                                            <p class="control"><b id="messageImageAfter"></b></p>
+                                        </div>
+                                        
+                                        <!-- for select data from tech photo update database -->
+                                        
+                                        <!-- Photos Table After Service -->
+                                        <div class="table-responsivep2">
+                                            <table id="tablep2" style="box-shadow: 0 5px 10px #f7f7f7;">
+                                                <tbody id="tbodyp2" style="display: flex; flex-wrap: wrap;">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Staff Video Tab -->
+
+                            <div class="tab" id="JobVideoTab">
+                                <form id="submitVideoBefore">
+                                    <!-- for select job register id -->
+                                    <input type="hidden" id="jobregister_idv1" name="jobregister_id" value="">
+                                    <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
+                                    <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+                                    <div id="previewBeforeVideo"></div>
+                                    <div class="update-form">
+                                        <div class="upload-report">
+                                            <div class="input-box" style="display: flex; margin-left: -16px;">
+                                                <input type="file" class="form-control" name="multipleVideo[]" id="multipleVideo" required="" multiple>
+                                                <input type="submit" name="uploadVideo" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                            </div>
+                                        </div>
+                                        <div class="message">
+                                            <p class="control"><b id="messageVideoBefore"></b></p>
+                                        </div>
+
+                                        <!-- for select data from tech video update database -->
+
+                                        <!-- Videos Table Before Service -->
+                                        <div class="table-responsivev1">
+                                            <table id="tablev1" style="box-shadow: 0 5px 10px #f7f7f7;">
+                                                <tbody id="tbodyv1"style="display: flex; flex-wrap: wrap; padding-left: 15px;">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form id="submitAfterVideo">
+                                    <!-- for select job register id -->
+                                    <input type="hidden" id="jobregister_idv2" name="jobregister_id" value="">
+                                    <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
+                                    <input type="hidden" id="description" name="description" value="Machine (After Service)">
+                                    <div id="previewAfterVideo"></div>
+                                    <div class="update-form">
+                                        <div class="upload-report">
+                                            <div class="input-box" style="display: flex; margin-left: -16px;">
+                                                <input type="file" class="form-control" name="multipleVideo[]" id="multipleAfterVideo" required="" multiple>
+                                                <input type="submit" name="uploadVideo" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
+                                            </div>
+                                        </div>
+                                        <div class="message">
+                                            <p class="control"><b id="messageVideoAfter"></b></p>
+                                        </div>
+
+                                        <!-- for select data from tech video update database -->
+                                        <!-- Videos Table After Service -->
+                                        <div class="table-responsivev2">
+                                            <table id="tablev2" style="box-shadow: 0 5px 10px #f7f7f7;">
+                                                <tbody id="tbodyv2" style="display: flex; flex-wrap: wrap; padding-left: 15px;">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+
+                            <!-- Staff Report Tab -->
+
+                            <div class="tab" id="JobReportTab">
+                                <form method="POST" action="servicereportdate.php">
+                                    <input type="hidden" id="jobregister_idreport" name="jobregister_id" value="">
+                                    <label for="reportdate" style="margin-left: 20px">Service Report Date:</label>
+                                    <div class="date-form">
+                                        <div class="submit-date" style="padding-left: 20px; padding-right: 25px;">
+                                            <div class="input-box" style="width: 75%; display: flex; align-items: baseline;">
+                                                <input type="text" id="srvcreportdate" name="srvcreportdate" value="<?php $date = date('d-m-Y');?>" readonly>
+                                                <div class="input-group-append" style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
+                                                    <!-- closing div for input-group-append is missing in your provided code -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form id="view_form" method="post">
+                                    <div style="display:flex;">
+                                    <button  style="padding: 8px 44px; border-radius: 4px;" id="userinfo" class="userinfo" type="button" 
+                                    >New</button></n>
+                                    <button style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" id="useredit" class="useredit" type="button" >Edit</button>
+                                    </div>  
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3146,7 +3154,7 @@
 
         function resetTabs() {
             // Uncheck all radio buttons
-            var tabRadioButtons = document.getElementsByClassName("tab-radio");
+            var tabRadioButtons = document.getElementsByClassName("tabbutton");
             for (var i = 0; i < tabRadioButtons.length; i++) {
                 tabRadioButtons[i].checked = false;
             }
@@ -3180,7 +3188,7 @@
             }
             
             // Uncheck all radio buttons
-            var tabRadioButtons = document.getElementsByClassName("tab-radio");
+            var tabRadioButtons = document.getElementsByClassName("tabbutton");
             for (var i = 0; i < tabRadioButtons.length; i++) {
                 tabRadioButtons[i].checked = false;
             }
