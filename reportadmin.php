@@ -190,7 +190,7 @@
 
                             <tr>
                                 <td style="text-align: center;"></td>
-                                <td><?= $row['job_assign']; ?></td>
+                                <td style="text-align: center;"><?= $row['job_assign']; ?></td>
                                 <td><textarea style="border:none; resize:none;" class="infoarea" id="textarea-container"><?= $row['username']; ?></textarea></td>
                                 <td style="padding-left: 7px;"><?= $row['customer_name']; ?></td>
                                 <td style="padding-left: 7px;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
