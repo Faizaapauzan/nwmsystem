@@ -150,7 +150,7 @@
                         }
                     </script>
 
-                    <div class="mb-3">
+                    <div class="d-grid gap-2 mb-3">
                         <label for="">Customer Address</label>
                         <input type="text" name="cust_address1" value="<?php echo $row['cust_address1']?>" class="form-control">
                         <div class="input-group">
