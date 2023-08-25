@@ -17,7 +17,7 @@
             ?>
             
             <form action="homeindex.php" method="post" id="formjobinfo">
-                <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
+                <input type="hidden" id="jid" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
                 <input type="hidden" name="job_cancel" value="<?php echo $row['job_cancel'] ?>">
                 <input type="hidden" name="job_status" value="<?php echo $row['job_status'] ?>">
                 <input type="hidden" name="reason" value="<?php echo $row['reason'] ?>">
@@ -183,7 +183,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="">Machine Brand</label>
                         <select type="text" name="brand_id" id="machine_brand" style="width: 100%;" class="form-select">
-                            <option value="<?php echo $row['machine_id'] ?>"><?php echo $row['machine_brand'] ?></option>
+                            <option value="<?php echo $row['brand_id'] ?>"><?php echo $row['machine_brand'] ?></option>
                                 <?php
                                     
                                     include "dbconnect.php";
@@ -192,9 +192,9 @@
                                     $result = $conn->query($querydrop);
                                     
                                     if ($result->num_rows > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        while ($rows = mysqli_fetch_assoc($result)) {
                                 ?>
-                                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
+                                <option value="<?php echo $rows['brand_id']; ?>"><?php echo $rows['brandname']; ?></option>
                                 <?php } } ?>
                                 <input type="hidden" id="brand" name="machine_brand" value="<?php echo $row['machine_brand'] ?>">
                         </select>
@@ -206,11 +206,31 @@
                         
                         <input type="hidden" id="type" name="machine_type" value="<?php echo $row['machine_type'] ?>">
                     </div>
+                    <script>
+                        function getType(){
+                            for (i = 0; i < document.getElementById('machine_type').options.length; i++) {
+                                if (document.getElementById('machine_type').options[i].text === "<?php echo $row['machine_type']?>") {
+                                    document.getElementById('machine_type').options[i].selected = true;
+                                    break;
+                                }
+                            }
+                        }
+                    </script>
 
                     <div class="mb-3">
                         <label for="">Serial Number</label>
                         <select type="text" name="serialnumber" id="serialnumber" style="width: 100%;" class="form-select"></select>
                     </div>
+                    <script>
+                        function getSerialNumber(){
+                            for (i = 0; i < document.getElementById('serialnumber').options.length; i++) {
+                                if (document.getElementById('serialnumber').options[i].value === "<?php echo $row['serialnumber']?>") {
+                                    document.getElementById('serialnumber').options[i].selected = true;
+                                    break;
+                                }
+                            }
+                        }
+                    </script>
 
                     <div class="mb-3">
                         <label for="">Machine Name</label>
@@ -233,6 +253,79 @@
 
             <!-- Populate machine_type dropdown -->
             <script>
+                $(document).ready(function() {
+                    var brand_id = $('#machine_brand').val();
+                    var brand = document.getElementById("brand");
+                    var selectedBrandText = $('#machine_brand').find('option:selected').text();
+
+                    $.ajax({
+                        url: 'machineGetMachineType.php',
+                        type: 'POST',
+                        data: {brand_id: brand_id},
+                        dataType: 'json',
+                        
+                        success: function(response) {  
+                            brand.value = selectedBrandText;
+   
+                            $('#selectedBrandId').val();
+                            $('#machine_type').empty().append('<option value="">Select Machine Type</option>');
+                            $.each(response, function(index, value) {
+                                $('#machine_type').append('<option value="' + value.machine_type_id + '">' + value.machine_type_name + '</option>');
+                            });
+                            getType();  
+                            var selecteTypeId = $('#machine_type').val();
+                            var type = document.getElementById("type");
+                            $('#selecteTypeId').val(selecteTypeId);
+                            var selectedTypeText = $('#machine_type').find('option:selected').text();
+
+                            $.ajax({
+                                url: 'machineGetMachineSerialNum.php',
+                                type: 'POST',
+                                data: {type_id: selecteTypeId},
+                                dataType: 'json',
+                                
+                                success: function(response) {
+                                    type.value = selectedTypeText;
+                                    $('#selecteTypeId').val()
+                                    $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
+                                    $.each(response, function(index, value) {
+                                        $('#serialnumber').append('<option value="' + value.machine_serialNumber + '">' + value.machine_serialNumber + ' - ' + value.machine_custName + '</option>');
+                                    });
+                                    getSerialNumber();  
+                                    var selectedSerialNumber = $('#serialnumber').val();
+
+                                    $.ajax({
+                                        url: 'machineGetMachineDetails.php',
+                                        type: 'POST',
+                                        data: { serialnumber: selectedSerialNumber },
+                                        dataType: 'json',
+                                        
+                                        success: function(response) {
+                                            console.log(response);
+                                            
+                                            if (response.machine_name) {
+                                                $('#machine_name').val(response.machine_name);
+                                                $('#machine_code').val(response.machine_code);
+                                                $('#machine_id').val(response.machine_id);
+                                            } 
+                                            
+                                            else {
+                                                $('#machine_name').val('');
+                                                $('#machine_code').val('');
+                                                $('#machine_id').val('');
+                                            }
+                                        },
+                                        
+                                        error: function(xhr, status, error) {
+                                            console.error('AJAX Error:', error);
+                                            console.log(xhr.responseText);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
                 $(document).ready(function() {
                     $('#machine_brand').select2({
                         dropdownParent: $('#formjobinfo'),
