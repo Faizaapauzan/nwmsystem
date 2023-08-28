@@ -74,14 +74,6 @@
             display:block;
             padding-right:7px
         }
-        
-        .side-by-side {
-    display: flex;
-    align-items: center;
-  }
-  .side-by-side td {
-    margin-right: 10px; /* Adjust this value as needed */
-  }
     </style>
     
     <body>

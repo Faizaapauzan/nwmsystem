@@ -153,7 +153,7 @@
                     <div class="d-grid gap-2 mb-3">
                         <label for="">Customer Address</label>
                         <input type="text" name="cust_address1" value="<?php echo $row['cust_address1']?>" class="form-control">
-                        <div class="input-group">
+                        <div class="d-grid gap-2 d-md-flex">
                             <input type="text" name="cust_address2" value="<?php echo $row['cust_address2']?>" class="form-control">
                             <input type="text" name="cust_address3" value="<?php echo $row['cust_address3']?>" class="form-control">
                         </div>
