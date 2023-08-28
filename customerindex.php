@@ -3,7 +3,7 @@
 include 'dbconnect.php';
 
 //code check customer code
-	
+	if ($_POST["customer_code"] != ""){
 	$result = mysqli_query($conn,"SELECT count(*) FROM customer_list WHERE customer_code='" . $_POST["customer_code"] . "'");
 	$row = mysqli_fetch_row($result);
 	$customer_code_count = $row[0];
@@ -56,5 +56,6 @@ include 'dbconnect.php';
 		}
 
 	}
+}
 	
 ?>

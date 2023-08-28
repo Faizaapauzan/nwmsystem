@@ -47,15 +47,15 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
-        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="assets/css/styles.css">
 
         <!--========== JS ==========-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
-        
-        <script src="assets/js/main.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 
         <!--========== BOX ICONS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -109,6 +109,35 @@
             display:block;
             padding-right:7px
         }
+
+        
+    @media (min-width: 769px) {
+        .mobile-view {
+            display: none;
+        }
+    }
+
+    /* Styles for phone and smaller screens */
+    @media (max-width: 768px) {
+        .mobile-view {
+            display: block;
+            position: relative;
+            top: -10px;
+        }
+
+        .dropdown-content1 {
+            display: none;
+        }
+
+        .dropdown1:hover .dropdown-content1 {
+            display: none;
+        }
+    }
+
+    .mobile-view a {
+        color: black;
+        margin-left: 10px;
+    }
     </style>
     
     <body>
@@ -128,7 +157,10 @@
                 <div class="header__toggle">
                     <i class='bx bx-menu' id="header-toggle"></i>
                 </div>
-                
+            </div>
+            <div class="mobile-view">
+                <a href="AdminJobTable.php">Table View</a>
+                <a href="adminjoblisting.php">List View</a>
             </div>
         </header>
 
@@ -225,6 +257,7 @@
                 </a>
             </nav>
         </div>
+        <script src="assets/js/main.js"></script>     
         
         <!--========== CONTENTS ==========-->
         <main>
@@ -242,8 +275,22 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="">Customer Code</label>
-                                        <input type="text" name="customer_code" class="form-control" />
+                                        <input type="text" id="rgtcustomer_code" name="customer_code" class="form-control" onkeyup="checkcustomer_codelAvailability()"/>
+                                        <span id="customer_code-availability-status"></span>
                                     </div>
+                                    <script>
+                                        function checkcustomer_codelAvailability() {
+                                            jQuery.ajax({
+                                                url: "customerindex.php",
+                                                data: "customer_code=" + $("#rgtcustomer_code").val(),
+                                                type: "POST",
+                                                success: function (data) {
+                                                    $("#customer_code-availability-status").html(data);
+                                                },
+                                                error: function () {},
+                                            });
+                                        }
+                                    </script>
                                     
                                     <div class="col-md-6 mb-3">
                                         <label for="">Customer Grade</label>
@@ -292,6 +339,7 @@
             <script>
                 $(document).on('submit', '#saveCustomer', function (e) {
                     e.preventDefault();
+                    var select = document.getElementById("customer_code");
                     
                     var formData = new FormData(this);
                     formData.append("save_customer", true);
@@ -318,10 +366,15 @@
 
                                 alertify.set('notifier', 'position', 'top-right');
                                 alertify.success(res.message);
-                                    
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 700);
+                                
+                                var newOptionValue = res.latest_customer.customer_id;
+                                var newOptionText = res.latest_customer.customer_code + ' - ' + res.latest_customer.customer_name;
+
+                                var option = document.createElement("option");
+                                option.value = newOptionValue;
+                                option.text = newOptionText;
+
+                                select.appendChild(option);
                             }
                             
                             else if(res.status == 500) {
@@ -346,8 +399,23 @@
                                 <div class="row">
                                     <div class="mb-3">
                                         <label for="">Job Code</label>
-                                        <input type="text" name="job_code" class="form-control" />
+                                        <input type="text" id="rgtjob_code"name="job_code" class="form-control" onkeyup="checkJobCodelAvailability()"/>
+                                        <span id="job_code-availability-status"></span>
                                     </div>
+
+                                    <script>
+                                        function checkJobCodelAvailability() {
+                                            jQuery.ajax({
+                                                url: "jobtypeindex.php",
+                                                data: "job_code=" + $("#rgtjob_code").val(),
+                                                type: "POST",
+                                                success: function (data) {
+                                                    $("#job_code-availability-status").html(data);
+                                                },
+                                                error: function () {},
+                                            });
+                                        }
+                                    </script>
                                 
                                     <div class="mb-3">
                                         <label for="">Job Name</label>
@@ -377,6 +445,7 @@
             <script>
                 $(document).on('submit', '#saveJobType', function (e) {
                     e.preventDefault();
+                    var select = document.getElementById("job_code");
                     
                     var formData = new FormData(this);
                     formData.append("save_jobType", true);
@@ -403,10 +472,16 @@
                                 
                                 alertify.set('notifier', 'position', 'top-right');
                                 alertify.success(res.message);
-                                
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 700);
+
+                                var newOptionValue = res.latest_jobtype.job_code;
+                                var newOptionText = res.latest_jobtype.job_code + ' - ' + res.latest_jobtype.job_name;
+
+                                var option = document.createElement("option");
+                                option.value = newOptionValue;
+                                option.text = newOptionText;
+
+                                select.appendChild(option);
+
                             }
                             
                             else if(res.status == 500) {
@@ -699,6 +774,7 @@
             <script>
                 $(document).on('submit', '#addNewMachine', function(e) {
                     e.preventDefault();
+                    var select = document.getElementById('machine_brand');
 
                     var form = $(this);
                     var formData = new FormData(form[0]);
@@ -723,10 +799,16 @@
                                 
                                 alertify.set('notifier', 'position', 'top-right');
                                 alertify.success(res.message);
+
+                                var newOptionValue = res.brand_id;
+                                var newOptionText = res.brandname;
+
+                                var option = document.createElement("option");
+                                option.value = newOptionValue;
+                                option.text = newOptionText;
+
+                                select.appendChild(option);
                                 
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 700);
                             } 
                             
                             else if (res.status == 500) {
@@ -741,7 +823,7 @@
             <!--========== Job Registration Form ==========-->
             <section class="mt-4">
                 <div class="container">
-                    <form class="card" id="JobRegisterForm">
+                    <form action="jobregisterindex.php" class="card" id="JobRegisterForm" method="POST">
                         <div class="card-header">
                             <nav class="nav-2 nav-pills nav-fill" style="display: flex; justify-content: center; align-items: center; font-size: large;">
                                 <a class="nav-link tab-pills" href="#">Customer</a>
@@ -756,7 +838,7 @@
                                 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Customer Code</label>
-                                    <select name="customer_code" id="customer_code" class="form-select mb-3">
+                                    <select name="customer_id" id="customer_code" class="form-select mb-3" onchange="GetDetail(this.value)">
                                         <option value="">Select Customer Code</option>
                                             <?php
                                                 
@@ -769,9 +851,11 @@
                                                     if ($result->num_rows > 0) {
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                             ?>
-                                            <option value="<?php echo $row['customer_code']; ?>"><?php echo $row['customer_code']; ?> - <?php echo $row['customer_name']; ?></option>
+                                            <option value="<?php echo $row['customer_id']; ?>"><?php echo $row['customer_code']; ?> - <?php echo $row['customer_name']; ?></option>
                                             <?php } } ?>
                                     </select>
+                                    <input type="hidden" id="code" class="form-control" name="customer_code" readonly>
+
                                 </div>
 
                                 <script>
@@ -786,35 +870,75 @@
                                 <div class="input-group mb-3">
                                     <label for="">Customer Name</label>
                                     <div class="input-group">
-                                        <input type="text" name="customer_name" class="form-control">
+                                        <input type="text" name="customer_name" id="customer_name" class="form-control" placeholder='Enter Customer Name'>
+                                        <input type="hidden" name="today_date" id="today_date" value="<?php echo $_SESSION["today_date"] ?>">
                                         <button type="button" class="btn btn-primary" style="background-color: #081d45; border: none;" data-bs-toggle="modal" data-bs-target="#customerAddModal"><i class="bi bi-plus-lg fs-6" style="color: #081d45; color: #f1f1f1;"></i></button>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="">Customer Grade</label>
-                                    <input type="text" name="customer_grade" class="form-control">
+                                    <input type="text" name="customer_grade" id="customer_grade" class="form-control" placeholder='Enter Customer Grade'>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="">Customer PIC</label>
-                                    <input type="text" name="customer_PIC" class="form-control">
+                                    <input type="text" name="customer_PIC" id="customer_PIC" class="form-control" placeholder='Enter Customer PIC'>
                                 </div>
 
                                 <div class="d-grid gap-2 mb-3">
                                     <label for="">Customer Phone Number</label>
-                                    <input type="text" name="cust_phone1" class="form-control">
-                                    <input type="text" name="cust_phone1" class="form-control">
+                                    <input type="text" name="cust_phone1" id="cust_phone1" class="form-control" placeholder='Enter Customer Phone'>
+                                    <input type="text" name="cust_phone2" id="cust_phone2" class="form-control" placeholder='Enter Customer Phone'>
                                 </div>
 
                                 <div class="d-grid gap-2 mb-3">
                                     <label for="">Customer Address</label>
-                                    <input type="text" name="cust_address1" class="form-control">
-                                    <input type="text" name="cust_address2" class="form-control">
-                                    <input type="text" name="cust_address3" class="form-control">
+                                    <input type="text" name="cust_address1" id="cust_address1" class="form-control" placeholder='Enter Customer Address'>
+                                    <input type="text" name="cust_address2" id="cust_address2" class="form-control" placeholder='Address 2'>
+                                    <input type="text" name="cust_address3" id="cust_address3" class="form-control" placeholder='Address 3'>
                                 </div>
                             </div>
                             <!-- End Customer Tab -->
+                            <script>
+                                function GetDetail(str) {
+                                    if (str.length == 0) {
+                                        document.getElementById("code").value = "";
+                                        document.getElementById("customer_name").value = "";
+                                        document.getElementById("customer_grade").value = "";
+                                        document.getElementById("customer_PIC").value = "";
+                                        document.getElementById("cust_phone1").value = "";
+                                        document.getElementById("cust_phone2").value = "";
+                                        document.getElementById("cust_address1").value = "";
+                                        document.getElementById("cust_address2").value = "";
+                                        document.getElementById("cust_address3").value = "";
+                                        return;
+                                    } 
+                                    
+                                    else {
+                                        var xmlhttp = new XMLHttpRequest();
+                                        xmlhttp.onreadystatechange = function() {
+                                            if (this.readyState == 4 && this.status == 200) {
+                                                
+                                                var myObj = JSON.parse(this.responseText);
+                                                
+                                                document.getElementById("code").value = myObj[0];
+                                                document.getElementById("customer_name").value = myObj[1];
+                                                document.getElementById("customer_grade").value = myObj[2];
+                                                document.getElementById("customer_PIC").value = myObj[3];
+                                                document.getElementById("cust_phone1").value = myObj[4];
+                                                document.getElementById("cust_phone2").value = myObj[5];
+                                                document.getElementById("cust_address1").value = myObj[6];
+                                                document.getElementById("cust_address2").value = myObj[7];
+                                                document.getElementById("cust_address3").value = myObj[8];
+                                            }
+                                        };
+
+                                        xmlhttp.open("GET", "fetchcustomer.php?customer_id=" + str, true);
+                                        xmlhttp.send();
+                                    }
+                                }
+                            </script>
                             
                             <!-- Job Tab -->
                             <div class="tab d-none">
@@ -824,7 +948,7 @@
                                     <label for="">Job Order Number</label>
                                     <div class="input-group">
                                         <input type="text" id="Departure" name="job_order_number" class="form-control">
-                                        <button type="button" onclick="test();" class="btn btn-outline-primary" style="background-color: #1a0845; color: white; border:none;" onclick="test3()">Job Order Number</button>
+                                        <button type="button" onclick="test();" class="btn btn-outline-primary" style="background-color: #1a0845; color: white; border:none;">Job Order Number</button>
                                     </div>
                                 </div>
 
@@ -841,7 +965,7 @@
                                                                 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Job Code</label>
-                                    <select name="job_code" id="job_code" class="form-select mb-3">
+                                    <select name="job_code" id="job_code" class="form-select mb-3" onchange="GetJob(this.value)">
                                         <option value="">Select Job Code</option>
                                             <?php
                                                 
@@ -860,7 +984,7 @@
                                             <?php } } ?>
                                     </select>
                                 </div>
-                                
+
                                 <script>
                                     $(document).ready(function(){
                                         $('#job_code').select2({
@@ -873,14 +997,14 @@
                                 <div class="input-group mb-3">
                                     <label for="">Job Name</label>
                                     <div class="input-group">
-                                        <input type="text" name="job_name" class="form-control">
+                                        <input type="text" id="job_name" name="job_name" class="form-control">
                                         <button type="button" class="btn btn-primary" style="background-color: #081d45; border: none;" data-bs-toggle="modal" data-bs-target="#jobAddModal"><i class="bi bi-plus-lg fs-6" style="color: #081d45; color: #f1f1f1;"></i></button>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3">
                                     <label for="">Job Description</label>
-                                    <input type="text" name="job_description" class="form-control">
+                                    <input type="text" id="job_description" name="job_description" class="form-control">
                                 </div>
 
                                 <div class="mb-3">
@@ -898,6 +1022,30 @@
                                     <input type="date" name="delivery_date" class="form-control">
                                 </div>
                             </div>
+
+                            <script>
+                                    function GetJob(str) {
+                                        if (str.length == 0) {
+                                            document.getElementById("job_name").value = "";
+                                            document.getElementById("job_description").value = "";
+                                            return;
+                                        } 
+                                        
+                                        else {
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.onreadystatechange = function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                    var myObj = JSON.parse(this.responseText);
+                                                    document.getElementById("job_name").value = myObj[0];
+                                                    document.getElementById("job_description").value = myObj[1];
+                                                }
+                                            };
+
+                                            xmlhttp.open("GET", "fetchjob.php?job_code=" + str, true);
+                                            xmlhttp.send();
+                                        }
+                                    }
+                                </script>
                             <!-- End of Job Tab -->
                             
                             <!-- Machine Tab -->
@@ -906,7 +1054,7 @@
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Machine Brand</label>
-                                    <select name="machine_brand" id="machine_brand" class="form-select mb-3">
+                                    <select name="brand_id" id="machine_brand" class="form-select mb-3" onchange="GetBrand(this.value)">
                                         <option value="">Select Machine Brand</option>
                                             <?php
                                                 
@@ -920,10 +1068,11 @@
                                                     while ($row = mysqli_fetch_assoc($result)) {
                                             ?>
                                             
-                                            <option value="<?php echo $row['brandname']; ?>"><?php echo $row['brandname']; ?></option>
+                                            <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brandname']; ?></option>
                                             
                                             <?php } } ?>
                                     </select>
+                                    <input type="hidden" id="NamaJenama" name="machine_brand" onchange="GetBrand(this.value)" readonly>
                                 </div>
                                 
                                 <script>
@@ -934,27 +1083,32 @@
                                         });
                                     });
                                 </script>
+
+                                <script>
+                                    function GetBrand(str) {
+                                        if (str.length == 0) {
+                                            document.getElementById("NamaJenama").value = "";
+                                            return;
+                                        } else {
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.onreadystatechange = function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                    var myObj = JSON.parse(this.responseText);
+                                                    document.getElementById("NamaJenama").value = myObj[1];
+                                                }
+                                            };
+                                            xmlhttp.open("GET", "fetchbrand.php?brand_id=" + str, true);
+                                            xmlhttp.send();
+                                        }
+                                    }
+                                </script>
                                 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Machine Type</label>
-                                    <select name="machine_type" id="machine_type" class="form-select mb-3">
+                                    <select name="type_id" id="machine_type" class="form-select mb-3" onchange="GetType(this.value)">
                                         <option value="">Select Machine Type</option>
-                                            <?php
-                                                
-                                                include "dbconnect.php";
-                                                
-                                                $querydrop = "SELECT * FROM machine_type ORDER BY job_code";
-                                                
-                                                $result = $conn->query($querydrop);
-                                                
-                                                if ($result->num_rows > 0) {
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                            ?>
-                                            
-                                            <option value="<?php echo $row['type_name']; ?>"><?php echo $row['type_name']; ?></option>
-            
-                                            <?php } } ?>
                                     </select>
+                                    <input type="hidden" id="NamaJenis" name="machine_type" onchange="GetType(this.value)" readonly>
                                 </div>
                                 
                                 <script>
@@ -965,27 +1119,31 @@
                                         });
                                     });
                                 </script>
+                                <script>
+                                    function GetType(str) {
+                                        if (str.length == 0) {
+                                            document.getElementById("NamaJenis").value = "";
+                                            return;
+                                        } else {
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.onreadystatechange = function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                    var myObj = JSON.parse(this.responseText);
+                                                    document.getElementById("NamaJenis").value = myObj[1];
+                                                }
+                                            };
+                                            xmlhttp.open("GET", "fetchtype.php?type_id=" + str, true);
+                                            xmlhttp.send();
+                                        }
+                                    }
+                                </script>
                                 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Serial Number</label>
-                                    <select name="serialnumber" id="serialnumber" class="form-select mb-3">
+                                    <select id="serialnumber" class="form-select mb-3" onchange="GetMachine(this.value)">
                                         <option value="">Select Serial Number</option>
-                                            <?php
-                                                
-                                                include "dbconnect.php";
-                                            
-                                                $querydrop = "SELECT * FROM machine_list ORDER BY customer_name";
-                                            
-                                                $result = $conn->query($querydrop);
-                                            
-                                                if ($result->num_rows > 0) {
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                            ?>
-            
-                                            <option value="<?php echo $row['serialnumber']; ?>"><?php echo $row['serialnumber']; ?> - <?php echo $row['customer_name']; ?></option>
-                                                        
-                                            <?php } } ?>
                                     </select>
+                                    <input type="hidden" style="width: 300px; height: 33px;" id="NumberSiriInput" name="serialnumber">
                                 </div>
                                 
                                 <script>
@@ -999,13 +1157,14 @@
                                 
                                 <div class="mb-3">
                                     <label for="">Machine Code</label>
-                                    <input type="text" name="machine_code" class="form-control">
+                                    <input type="text" id="CodeMachine" name="machine_code" class="form-control">
+                                    <input type="hidden" id="IdMachine" name="machine_id">
                                 </div>
 
                                 <div class="input-group mb-3">
                                     <label for="">Machine Name</label>
                                     <div class="input-group">
-                                        <input type="text" name="machine_name" class="form-control">
+                                        <input type="text" id="NamaMachine" name="machine_name" class="form-control">
                                         <button type="button" class="btn btn-primary" style="background-color: #081d45; border: none;" data-bs-toggle="modal" data-bs-target="#machineAddModal"><i class="bi bi-plus-lg fs-6" style="color: #081d45; color: #f1f1f1;"></i></button>
                                     </div>
                                 </div>
@@ -1026,6 +1185,8 @@
                                         <option value="Customer">Customer Request</option>
                                     </select>
                                 </div>
+                                <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+                                <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
 
                                 <script>
                                     function myFunctionAccessory() {
@@ -1038,6 +1199,7 @@
                                         
                                         else {
                                             reasonDiv.style.display = "none";
+                                            document.getElementById("accessories_for").value="";
                                         }
                                     }
                                     
@@ -1046,6 +1208,64 @@
                             </div>
                             <!-- End Machine Tab -->
                         </div>
+
+                        <script>
+                            $(document).ready(function() {
+                                $("#machine_brand").on('change', function() {
+                                    var brandid = $(this).val();
+                                    $.ajax({
+                                        method: "POST",
+                                        url: "ajaxData.php",
+                                        data: {id: brandid},
+                                        datatype: "html",
+                                        success: function(data) {
+                                            $("#machine_type").html(data);
+                                            $("#serialnumber").html('<option value="">Select Serial Number</option>');
+                                        }
+                                    });
+                                });
+                                
+                                $("#machine_type").on('change', function() {
+                                    var typeid = $(this).val();
+                                    $.ajax({
+                                        method: "POST",
+                                        url: "ajaxData.php",
+                                        data: {sid: typeid},
+                                        datatype: "html",
+                                        success: function(data) {
+                                            $("#serialnumber").html(data);
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+                        <script>
+                            function GetMachine(str) {
+                                if (str.length == 0) {
+                                    document.getElementById("IdMachine").value = "";
+                                    document.getElementById("NumberSiriInput").value = "";
+                                    document.getElementById("CodeMachine").value = "";
+                                    document.getElementById("NamaMachine").value = "";
+                                    return;
+                                } 
+                                
+                                else {
+                                    var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange = function() {
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            var myObj = JSON.parse(this.responseText);
+                                            document.getElementById("IdMachine").value = myObj[0];
+                                            document.getElementById("NumberSiriInput").value = myObj[1];
+                                            document.getElementById("CodeMachine").value = myObj[2];
+                                            document.getElementById("NamaMachine").value = myObj[3];
+                                        }
+                                    };
+                                    
+                                    xmlhttp.open("GET", "fetchmachine.php?machine_id=" + str, true);
+                                    xmlhttp.send();
+                                }
+                            }
+                        </script>
                         <div class="card-footer d-flex justify-content-center">
                             <button type="button" id="back_button" class="btn btn-danger w-25" style="margin-right: 10px;" onclick="back()">Back</button>
                             <button type="button" id="next_button" class="btn btn-primary w-25" style="background-color: #081d45; border: none;" onclick="next()">Next</button>
@@ -1055,42 +1275,52 @@
                 <br>
             </section>
 
-              <script>
+            <script>
                 var current = 0;
                 var tabs = $(".tab");
                 var tabs_pill = $(".tab-pills");
                 
-                loadFormData(current);
+                loadFormData();
                 
-                function loadFormData(n) {
-                    $(tabs_pill[n]).addClass("active");
-  $(tabs[n]).removeClass("d-none");
-  $("#back_button").attr("disabled", n == 0 ? true : false);
-  n == tabs.length - 1
-    ? $("#next_button").text("Submit").css("background-color", "green").removeAttr("onclick")
-    : $("#next_button")
-        .attr("type", "button")
-        .text("Next").css("background-color", "#081d45")
-        .attr("onclick", "next()");
-}
-
-function next() {
-  $(tabs[current]).addClass("d-none");
-  $(tabs_pill[current]).removeClass("active");
-
-  current++;
-  loadFormData(current);
-}
-
-function back() {
-  $(tabs[current]).addClass("d-none");
-  $(tabs_pill[current]).removeClass("active");
-
-  current--;
-  loadFormData(current);
-}
-
-              </script>
-        </main>        
+                function loadFormData() {
+                    $(tabs_pill[current]).addClass("active");
+                    $(tabs[current]).removeClass("d-none");
+                    $("#back_button").attr("disabled", current === 0);
+                    
+                    if (current === tabs.length - 1) {
+                        $("#next_button").text("Submit").css("background-color", "green");
+                    } else if (current === tabs.length ){
+                        $("#next_button").attr("type", "submit").attr("name","submit");
+                    }
+                    else {
+                        $("#next_button").attr("type", "button").text("Next").css("background-color", "#081d45").attr("onclick", "next()");
+                    }
+                }
+                
+                function scrollToTop() {
+                    window.scrollTo(0, 0);
+                }
+                
+                function next() {
+                    $(tabs[current]).addClass("d-none");
+                    $(tabs_pill[current]).removeClass("active");
+                    
+                    current++;
+                    
+                    loadFormData();
+                    scrollToTop(); // Scroll to top when clicking Next
+                }
+                
+                function back() {
+                    $(tabs[current]).addClass("d-none");
+                    $(tabs_pill[current]).removeClass("active");
+                    
+                    current--;
+                    loadFormData();
+                    scrollToTop(); // Scroll to top when clicking Back
+                }
+            </script>
+        </main>   
+        
     </body>
     </html>

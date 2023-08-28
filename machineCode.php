@@ -115,7 +115,12 @@
         $stmt->bind_param("ssssssssssss", $machine_code, $machine_name, $machine_brand, $brand_id, $machine_type, $type_id, $serialnumber, $machine_description, $purchase_date, $customer_name, $machinelistcreated_by, $machinelistlastmodify_by);
 
         if ($stmt->execute()) {
-            $res = ['status' => 200, 'message' => 'Machine Added Successfully'];
+            $stmt3 = $conn->prepare("SELECT brand_id, brandname FROM machine_brand ORDER BY brand_id DESC LIMIT 1");
+            $stmt3->execute();
+            $stmt3->bind_result($brand_id, $brandname);
+            $stmt3->fetch();
+            $stmt3->close();
+            $res = ['status' => 200, 'message' => 'Machine Added Successfully', 'brand_id' => $brand_id, 'brandname' => $brandname];
         } 
         
         else {

@@ -37,7 +37,15 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => 'Customer Created Successfully'];
+            $latest_query = "SELECT * FROM customer_list ORDER BY customer_id DESC LIMIT 1";
+            $latest_result = mysqli_query($conn, $latest_query);
+            $latest_row = mysqli_fetch_assoc($latest_result);
+            
+            $res = [
+                'status' => 200,
+                'message' => 'Customer Created Successfully',
+                'latest_customer' => $latest_row  // Add the latest customer details
+            ];
             
             echo json_encode($res);
             

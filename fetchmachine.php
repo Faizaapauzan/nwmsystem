@@ -1,17 +1,17 @@
 <?php
 
 // Get the user id
-$serialnumber = $_REQUEST['serialnumber'];
+$machine_id = $_REQUEST['machine_id'];
 // $machine_code = $_REQUEST['machine_code'];
 
 // Database connection
 include 'dbconnect.php';
 
-if ($serialnumber !== "") {
+if ($machine_id !== "") {
 	
 	// Get corresponding first name and
 	// last name for that user id	
-	$query = mysqli_query($conn, "SELECT * FROM machine_list WHERE serialnumber='$serialnumber'");
+	$query = mysqli_query($conn, "SELECT * FROM machine_list WHERE machine_id='$machine_id'");
 
 	$row = mysqli_fetch_array($query);
 
@@ -29,6 +29,5 @@ $result = array("$machine_id", "$serialnumber", "$machine_code", "$machine_name"
 
 // Send in JSON encoded form
 $myJSON = json_encode($result);
-
 echo $myJSON;
 ?>

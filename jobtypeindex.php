@@ -3,7 +3,7 @@
 include 'dbconnect.php';
 
 //code check customer code
-	
+	if ($_POST["job_code"] != ""){
 	$result = mysqli_query($conn,"SELECT count(*) FROM jobtype_list WHERE job_code='" . $_POST["job_code"] . "'");
 	$row = mysqli_fetch_row($result);
 	$job_code_count = $row[0];
@@ -41,5 +41,6 @@ include 'dbconnect.php';
 		}
 
 	}
+}
 	
 ?>

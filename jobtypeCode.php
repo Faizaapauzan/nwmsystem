@@ -24,7 +24,15 @@
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
-            $res = ['status' => 200, 'message' => 'Job Type Registered Successfully!'];
+            $latest_query = "SELECT * FROM jobtype_list ORDER BY jobtype_id DESC LIMIT 1";
+            $latest_result = mysqli_query($conn, $latest_query);
+            $latest_row = mysqli_fetch_assoc($latest_result);
+            
+            $res = [
+                'status' => 200,
+                'message' => 'Job Type Register Successfully',
+                'latest_jobtype' => $latest_row  // Add the latest customer details
+            ];
             
             echo json_encode($res);
             
