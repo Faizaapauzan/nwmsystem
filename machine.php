@@ -740,7 +740,6 @@
 
                     console.log([...formData.entries()]);
 
-
                     $.ajax({
                         type: "POST",
                         url: "machineCode.php",

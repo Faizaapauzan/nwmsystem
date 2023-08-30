@@ -16,964 +16,182 @@
 
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
+        
+        <title>Admin Homepage</title>
+        
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
-    <title>Admin Homepage</title>
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="css/AdminHomepageStyle.css">
+       
+        <!--========== JS ==========-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+   
+        <!--========== ICONS ==========-->
+        <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
+    </head>
 
-    <!--========== CSS ==========-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
-    <link href="assets/css/styles.css" rel="stylesheet">
-    <link href="css/homepage.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    
-    <link href="css/adminboard.css" rel="stylesheet" />
-    <link href="css/admin.css" rel="stylesheet" />
-    <link href="css/adminhomepageAUTO.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
-    
-    
-    
-
-    <!--========== BOX ICONS ==========-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-
-    <!--========== JS ==========-->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-
-    <style>
-    .supports {
-        border-radius: 6px;
-        font-size: 15px;
-        width: max-content;
-        text-align: center;
-        font-weight: bold;
-        font-family: "Times New Roman", Times, serif;
-        margin-bottom: 2px;
-        color: #22304d;
-        margin: unset;
-        margin-top: auto;
-    }
-
-    .dropdown:hover .dropbtn {
-        color: #f5f5f5
-    }
-
-    .dropdown1:hover .dropbtn1 {
-        color: #f5f5f5
-    }
-
-    .dropdown-content a:hover {
-        background-color: #f1f1f1
-    }
-
-    .dropdown-content1 a:hover {
-        background-color: #f1f1f1
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block
-    }
-
-    .dropdown1:hover .dropdown-content1 {
-        display: block
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: auto;
-        padding-left: 20px;
-        bottom: 55px;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
-        z-index: 1
-    }
-
-    .dropdown-content1 {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
-        padding: 12px 16px;
-        z-index: 1
-    }
-
-    .dropdown-content a {
-        color: #000;
-        padding: 10px 10px;
-        text-decoration: none;
-        display: block;
-        padding-right: 7px
-    }
-
-    .dropdown-content1 a {
-        color: #000;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        padding-right: 7px
-    }
-
-    .updateBtn input {
-        height: 30px;
-        width: 100px;
-        border-radius: 5px;
-        border: none;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 500;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background-color: #081d45;
-        margin-bottom: 10px;
-    }
-
-    /* flexible box */
-    .box {
-        flex-wrap: wrap;
-        flex: 1 1 200px;
-    }
-
-    @media (min-width: 769px) {
-        .mobile-view {
-            display: none;
-        }
-    }
-
-    /* Styles for phone and smaller screens */
-    @media (max-width: 768px) {
-        .mobile-view {
-            display: block;
-            position: relative;
-            top: -10px;
-        }
-
-        .dropdown-content1 {
-            display: none;
-        }
-
-        .dropdown1:hover .dropdown-content1 {
-            display: none;
-        }
-    }
-
-    .mobile-view a {
-        color: black;
-        margin-left: 10px;
-    }
-
-    .tooltip {
-      z-index: 1000000;
-      background-color: black;
-      width: 360px;
-      opacity: 1;
-      color: #fff;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px 0;
-      /* Position the tooltip */
-      position: absolute;
-    }
-    
-    #preview {
-      display: flex;
-      width: 200px;
-      height: 200px;
-      border: 1px solid black;
-      margin-top: -15px;
-      flex-wrap: wrap;
-      overflow-y: scroll;
-    }
-    
-    #preview img {
-      width: 50%;
-      height: 50%;
-    }
-
-    /* #ImageRow {
-      margin-right: 20px;
-      margin-left: 40px;
-      display: flex; 
-      width: 200px; 
-      height: 200px;
-
-    } */
-    
-    form .upload-report .input-box {
-      padding-left: 49px;
-      margin-bottom: 1px;
-      margin-top: 7px;
-      width: calc(100% / 2 - -302px);
-      padding: 0 -9px 0 15px;
-    }
-    
-    form .upload-report label.details {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 5px;
-    }
-    
-    .upload-report .input-box input,
-    .upload-report .input-box select {
-      height: 40px;
-      width: 100%;
-      outline: none;
-      font-size: 16px;
-      border-radius: 5px;
-      padding-left: 15px;
-      border: 1px solid #ccc;
-      border-bottom-width: 2px;
-      transition: all 0.3s ease;
-    }
-    
-    .upload-report .input-box input:focus,
-    .upload-report .input-box input:valid,
-    .upload-report .input-box select:focus,
-    .upload-report .input-box select:valid {border-color: #081d45;} 
-    
-    .popup-open {
-        overflow: hidden; /* Prevent scrolling on the background */
-    }
-
-    .modal {
-        opacity:1 !important;
-    }
-
-</style>
-</head>
-
-<body>
-    <!--========== HEADER ==========-->
-    <header class="header">
-        <div class="header__container">
-            <div class="header__search">
-                <div class="dropdown1">
-                    <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
-                    <div class="dropdown-content1">
-                        <a href="AdminJobTable.php">Job - Table view</a>
-                        <a href="adminjoblisting.php">Job - List View</a>
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+                <div class="header__search">
+                    <div class="dropdown1">
+                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <div class="dropdown-content1">
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+                
             </div>
+        </header>
 
-            <div class="header__toggle">
-                <i class='bx bx-menu' id="header-toggle"></i>
-            </div>
-        </div>
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="Adminhomepage.php" class="nav__link nav__logo">
+                        <img src="neo.png" height="50" width="60"></img>
+                    </a>
 
-        <div class="mobile-view">
-            <a href="AdminJobTable.php">Table View</a>
-            <a href="adminjoblisting.php">List View</a>
-        </div>
-    </header>
+                    <div class="nav__list">
+                        <div class="nav__items">
 
-    <!--========== NAV ==========-->
-    <div class="nav" id="navbar">
-        <nav class="nav__container">
-            <div>
-                <a href="#" class="nav__link nav__logo">
-                    <img src="neo.png" height="50" width="60"></img>
+                            <a href="jobregister.php" class="nav__link active">
+                                <i class='bx bx-folder-plus nav__icon'></i>
+                                <span class="nav__name">New Job</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="staff.php" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Staff</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                        <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                        <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                        <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="customer.php" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__name">Customer</span>
+                            </a>
+
+                            <a href="machine.php" class="nav__link">
+                                <i class='bx bx-cog nav__icon'></i>
+                                <span class="nav__name">Machine</span>
+                            </a>
+
+                            <a href="accessories.php" class="nav__link">
+                                <i class='bx bx-wrench nav__icon'></i>
+                                <span class="nav__name">Accessory</span>
+                            </a>
+
+                            <a href="jobtype.php" class="nav__link">
+                                <i class='bx bx-highlight nav__icon'></i>
+                                <span class="nav__name">Job Type</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-file nav__icon'></i>
+                                    <span class="nav__name">Record</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-task nav__icon'></i>
+                                    <span class="nav__name">Reports</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                        <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <span class="nav__name">Log Out</span>
                 </a>
+            </nav>
+        </div>
 
-                <div class="nav__list">
-                    <div class="nav__items">
-                        <a href="jobregister.php" class="nav__link active">
-                            <i class='bx bx-folder-plus nav__icon'></i>
-                            <span class="nav__name">New Job</span>
-                        </a>
-
-                        <div class="nav__dropdown">
-                            <a href="staff.php" class="nav__link">
-                                <i class='bx bx-group nav__icon'></i>
-                                <span class="nav__name">Staff</span>
-                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                            </a>
-
-                            <div class="nav__dropdown-collapse">
-                                <div class="nav__dropdown-content">
-                                    <a href="staff.php" class="nav__dropdown-item">All User</a>
-                                    <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
-                                    <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
-                                    <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a href="customer.php" class="nav__link">
-                            <i class='bx bx-buildings nav__icon'></i>
-                            <span class="nav__name">Customer</span>
-                        </a>
-
-                        <a href="machine.php" class="nav__link">
-                            <i class='bx bx-cog nav__icon'></i>
-                            <span class="nav__name">Machine</span>
-                        </a>
-
-                        <a href="accessories.php" class="nav__link">
-                            <i class='bx bx-wrench nav__icon'></i>
-                            <span class="nav__name">Accessory</span>
-                        </a>
-
-                        <a href="jobtype.php" class="nav__link">
-                            <i class='bx bx-highlight nav__icon'></i>
-                            <span class="nav__name">Job Type</span>
-                        </a>
-
-                        <div class="nav__dropdown">
-                            <a href="#" class="nav__link">
-                                <i class='bx bx-file nav__icon'></i>
-                                <span class="nav__name">Record</span>
-                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                            </a>
-
-                            <div class="nav__dropdown-collapse">
-                                <div class="nav__dropdown-content">
-                                    <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
-                                    <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
-                                    <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Acessories In/Out</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="nav__dropdown">
-                            <a href="#" class="nav__link">
-                                <i class='bx bx-task nav__icon'></i>
-                                <span class="nav__name">Reports</span>
-                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                            </a>
-
-                            <div class="nav__dropdown-collapse">
-                                <div class="nav__dropdown-content">
-                                    <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
-                                    <a href="report.php" class="nav__dropdown-item">Service Report</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section>
+                <!-- Back to top Button -->
+                <div class="d-md-flex justify-content-md-end">
+                    <button onclick="topFunction()" id="myBtn" class="btn rounded-3" style="background-color: #081d45; color: #fff; width:max-content;">Top</button>
                 </div>
-            </div>
+                
+                <script>
+                    var mybutton = document.getElementById("myBtn");
+                    
+                    window.onscroll = function() {
+                        scrollFunction()
+                    };
+                    
+                    function scrollFunction() {
+                        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                            mybutton.style.display = "block";
+                        }
+                        
+                        else {
+                            mybutton.style.display = "none";
+                        }
+                    }
+                    
+                    function topFunction() {
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                    }
+                </script>
+                <!-- End Back to top Button -->
 
-            <a href="logout.php" class="nav__link nav__logout">
-                <i class='bx bx-log-out nav__icon'></i>
-                <span class="nav__name">Log Out</span>
-            </a>
-        </nav>
-    </div>
-
-    <!--========== CONTENTS ==========-->
-    <!-- Back to top Button -->
-    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-
-    <script>
-        var mybutton = document.getElementById("myBtn");
-        window.onscroll = function() {
-            scrollFunction()
-        };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-        }
-
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
-    <!-- End Back to top Button -->
-
-    <main>
-        <section>
-            <div class="modal fade" id="staffpopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div style="text-align: center; display:inline-flex;">
-                                <button  id="tabDoing" class="btn tab-button tabbutton" checked="checked" onclick="openTab('StaffJobInfoTab')">Job Info</button>
-                                <button class="btn tab-button tabbutton" id="tabDoing2" onclick="openTab('JobAssignTab')">Job Assign</button>
-                                <button class="btn tab-button tabbutton" id="tabDoing3" onclick="openTab('JobUpdateTab')">Update</button>
-                                <button class="btn tab-button tabbutton" id="tabDoing4" onclick="openTab('JobAccessoriesTab')">Accessories</button>
-                                <button class="btn tab-button tabbutton" id="tabDoing5" onclick="openTab('JobPhotoTab')">Photo</button>
-                                <button class="btn tab-button tabbutton" id="tabDoing6" onclick="openTab('JobVideoTab')">Video</button>
-                                <button class="btn tab-button tabbutton" id="tabDoing7" onclick="openTab('JobReportTab')">Report</button>
-                            </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="document.getElementById('staffpopup').style.display='none';document.body.classList.remove('popup-open');"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Staff Job Info -->
-                            
-                            
-                            <div class="tab" id="StaffJobInfoTab">
-                                <form action="homeindex.php" method="post" style="display: contents;" >
-                                    <input type="hidden" id="jobregister_idinfo" name="jobregister_id" value="">
-                                    <input type="hidden" id="support" name="support" value="Support For">
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Job Priority</label>
-                                        <input type="text" id="job_priority" name="job_priority" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Job Order Number</label>
-                                        <div style="display: flex;">
-                                            <input type="text" class="job_order_number" name="job_order_number" id="job_order_number" value="">
-                                            <button type="button" style="border-radius: 5px; color: white;background-color: #081d45;border-color: #081d45;padding-left: 7px;padding-right: 8px; width:auto" onclick="buttonClick();">Click</button>
-                                            
-                                            <script>
-                                                var i = 1;
-                                                var jobordernumber2;
-                                                
-                                                function buttonClick() {
-                                                    if (i == 1){
-                                                        var jobordernumber = document.getElementById('job_order_number').value;
-                                                        jobordernumber2 = jobordernumber;
-                                                    }
-                                                    
-
-                                                    // Split the existing job order number into parts
-                                                    var parts = jobordernumber2.split('-');
-                                                    
-                                                    
-                                                    // Increment the number part
-                                                    var newNumber = parts[parts.length-1] + "-" + i;
-                                                    var newJobOrderNumber = parts[0];
-
-                                                    // Construct the new job order number
-                                                    for (var j = 1; j < parts.length-1; j++){
-                                                        newJobOrderNumber = newJobOrderNumber + "-" + parts[j];
-                                                    }
-                                                    newJobOrderNumber = newJobOrderNumber + "-" + newNumber;
-                                                    
-
-                                                    // Update the input value
-                                                    document.getElementById('job_order_number').value = newJobOrderNumber;
-
-                                                    i++;
-                                                }
-                                            </script>
-
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Job Name</label>
-                                        <input type="text" id="job_name" name="job_name" value="">
-                                        <input type="hidden" id="job_code" name="job_code" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Customer Name</label>
-                                        <select id="custModel" onchange="GetCustomer(this.value)">
-                                            <option value=""></option> 
-                                            
-                                            <?php
-                                                include "dbconnect.php";
-                                                $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
-                                                while($data = mysqli_fetch_array($records))
-                                                {
-                                                    echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";  // displaying data in option menu
-                                                }
-                                            ?>
-
-                                        </select>
-                                        <input type="hidden" id="cust" name="customer_id" onchange="GetCustomer(this.value)" readonly>
-                                        <input type="hidden" id="customer_code" name="customer_code" value="" readonly>
-                                        <input type="hidden" id="customer_name" name="customer_name" value="" readonly>
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Job Description</label>
-                                        <input type="text" id="job_description" name="job_description" value="">
-                                    </div>
-
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Assign Date</label>
-                                        <input type="text" id="DateAssign" name="DateAssign" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Delivery date</label>
-                                        <input type="date" id="delivery_date" name="delivery_date" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Requested date</label>
-                                        <input type="date" id="requested_date" name="requested_date" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Customer Grade</label>
-                                        <input type="text" id="customer_grade" name="customer_grade" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Customer PIC</label>
-                                        <input type="text" id="customer_PIC" name="customer_PIC" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Contact Number 1</label>
-                                        <input type="text" id="cust_phone1" name="cust_phone1" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="">Contact Number 2</label>
-                                        <input type="text" id="cust_phone2" name="cust_phone2" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 100%;">
-                                        <label for="">Customer Address</label>
-                                        <input type="text" id="cust_address1" name="cust_address1" value="">
-                                        <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address2" name="cust_address2" value="">
-                                        <input type="text" style="width: calc(100% / 2 - 2.5px);" id="cust_address3" name="cust_address3" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="brand">Machine Brand</label>
-                                        <input type="text" id="brandname" name="machine_brand" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="type">Machine Type</label>
-                                        <input type="text" id="type_name" name="machine_type" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="sn">Serial Number</label>
-                                        <select id="serialnumbers" onchange="GetMachines(this.value)">
-                                            <option value=""></option> 
-
-                                        </select>
-                                        <input type="hidden" id="machine_id" name="machine_id" value="">
-                                        <input type="hidden" id="serialnumber" name="serialnumber" value="">
-                                        <input type="hidden" id="machine_code" name="machine_code" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="accessories_required">Accessories Required</label>
-                                        <select id="accessories_required" name="accessories_required">
-                                            <option value=''></option>
-                                            <option value="Yes">Yes</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 100%;">
-                                        <label for="">Machine Name</label>
-                                        <input type="text" id="machine_name" name="machine_name" value="">
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="job_cancel">Cancel Job:</label>
-                                        <select type="text" id="job_cancel" name="job_cancel">
-                                            <option value=''></option>
-                                            <option value='YES'>YES</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="input-box" style="width: 50%;">
-                                        <label for="job_status">Job Status:</label>
-                                        <select type="text" id="job_status" name="job_status" onchange="myFunction()">
-                                            <option value='' ></option>
-                                            <option value='Doing'>Doing</option>
-                                            <option value='Pending'>Pending</option>
-                                            <option value='Incomplete'>Incomplete</option>
-                                            <option value='Completed'>Completed</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <!--PENDING & INCOMPLETE REASON-->
-                                    <div id="reasonInput" class="input-box" style="width: 100%;">
-                                        <label for="reason">Reason</label>
-                                        <input type="text" id="reason" name="reason" value="">
-                                    </div>
-                                    </br>
-                                    
-                                    <script>
-                                        function myFunction() {
-                                            var jobStatus = document.getElementById("job_status").value;
-                                            var reasonDiv = document.getElementById("reasonInput");
-                                            if (jobStatus === "Pending" || jobStatus === "Incomplete") {
-                                                reasonDiv.style.display = "block";
-                                            } else {
-                                                reasonDiv.style.display = "none";
-                                            }
-                                        }
-                                        // Call the function once to set the initial state of the "reason" div
-                                        myFunction();
-                                    </script>
-                                    <!--PENDING & INCOMPLETE END REASON-->
-                                    
-                                    <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
-                                    
-                                    <div class="DuplicateUpdateButton" style="display: inline-flex; width: 100%;">
-                                        <button type="submit" id="submit" name="update">Update</button></n>
-                                        <button type="button" style="background-color: #f43636 ;" id="duplicate" name="duplicate" value="duplicate" onclick="submitFormSupportAdmin();">Support</button>
-                                    </div>
-                                    
-                                    <p class="control"><b id="messageSupportAdmin"></b></p>
-                                </form>
-                            </div>
-
-
-                            <!-- Staff Job Assign -->
-
-                            <div class="tab" id="JobAssignTab">
-                                <form id="assignupdate_form" method="post">
-                                    <input type="hidden" name="jobregister_id" class="jobregister_id" id="jobregister_id2" value="">
-                                    
-                                    <label for="job_assign" style="padding-left: 20px;" class="job_assign">Job Assign to:</label><br />
-                                    
-                                    <div class="input-box" style="display:flex; width: 100%">
-                                        <select id="jobassignto" name="job_assign" onchange="GetJobAss(this.value)">
-                                            <option value=""></option> 
-                                                
-                                                <?php
-                                                    include "dbconnect.php";
-                                                    
-                                                    $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE 
-                                                                                    technician_rank = '1st Leader' AND tech_avai = '0'
-                                                                                        OR
-                                                                                    technician_rank = '2nd Leader' AND tech_avai = '0'
-                                                                                        OR
-                                                                                    staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here
-                                                    echo "<option></option>";
-                                                    
-                                                    while($data = mysqli_fetch_array($records))
-                                                        {echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";}	
-                                                ?> 
-                                            
-                                            <input type="hidden" id='jobassign' onchange="GetJobAss(this.value)">
-                                            <input type="hidden" name="job_assign" id='username' value="">
-                                            <input type="hidden" name="technician_rank" id='technician_rank' value="" readonly>
-                                            <input type="hidden" name="staff_position" id='staff_position' value="" readonly>
-                                        </select> 
-                                        
-                                        <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION['username']?>" readonly>
-                                        <input type="button" style="color: white; background-color: #081d45; height: 46px; margin-top: -1px;  padding-left: 2px; width: 145px;" class="btn btn-primary" id="technicianassign" name="technicianassign" value="Update" />
-                                    </div>
-                                    <p style="padding-left: 20px;"><b id="assignupdateadminmessage"></b></p>
-                                </form>
-
-                                <form class="form" id="adminassistant_form" method="post" style="margin-left: 20px;">
-                                    <input type="hidden" name="jobregister_id" id="jobregister_id3" value="">
-                                    <input type="hidden" name="ass_date" id="ass_date" value="">
-                                    <input type="hidden" name="techupdate_date" id="techupdate_date" value="">
-                                    <input type="hidden" name="tech_leader" id="tech_leader" value="">
-                                    <input type="hidden" name="cust_name" id="cust_name" value="">
-                                    <input type="hidden" name="requested_date" id="requested_date2" value="">
-                                    <input type="hidden" name="machine_name" id="machine_name2" value="">
-                                    
-                                    <div id="multipleassist"> 
-                                        <label for="assistant">Select Assistant :</label>
-                                        <table id="selectedassistant" style="margin-top: 10px; margin-bottom:20px; margin-right:30px; box-shadow: none; background-color:#FFFFFF;">
-                                            <tbody> 
-                                            </tbody>
-                                        </table>
-                                        
-                                        <div class="input-box" style="width:100%">
-                                            <select name="username[]" class="multiple-assistant" multiple="multiple" style="height: max-content; margin-left:-17px;"> 
-                                                
-                                                <?php
-                                                    $query = "SELECT * FROM staff_register 
-                                                            WHERE staff_group = 'Technician' AND tech_avai = '0' 
-                                                            ORDER BY staffregister_id ASC";
-                                                    
-                                                    $query_run = mysqli_query($conn, $query);
-                                                    if(mysqli_num_rows($query_run) > 0)
-                                                        {
-                                                            foreach ($query_run as $rowstaff) {
-                                                ?> 
-                                                
-                                                <option value="<?php echo $rowstaff["username"]; ?>"><?php echo $rowstaff["username"]; ?></option> 
-                                                
-                                                <?php } } else {echo "No Record Found";} ?> 
-                                                
-                                            </select>
-                                            
-                                            <script>
-                                                $("#multipleassist").on('change', function() {
-                                                    $(".multiple-assistant").select2({});
-                                                });
-                                            </script>
-                                        </div>
-                                        
-                                        <div class="buttonUpdate" style="display: flex;flex-direction: row-reverse;"> 
-                                            <input type="hidden" name="jobregisterlastmodify_by2" id="jobregisterlastmodify_by2" value="<?php echo $_SESSION['username']?>" readonly>
-                                                <div>
-                                                    <p class="control"><b id="assignadminmessage"></b></p>
-                                                </div>
-                                            <input type="button" style="color: white;background-color: #081d45;height: 36px;margin-top: 33px; width: 100px; border-radius: 9px;" id="updateassign" name="updateassign" value="Update"/>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            
-                            <!-- Staff Update Tab -->
-
-                            <div class="tab" id="JobUpdateTab">
-                                <input type="hidden" name="jobregister_id" id="jobregister_idupdate" value="">
-                                <div style="margin-left: 30px">
-                                    <!-- Departure Time -->
-                                    <div class="input-box-departure">
-                                        <label for="">Departure Time</label>
-                                        <input type="text" class="technician_departure" id="technician_departure" name="technician_departure" value="">
-                                        <input type="button" id="update_DepartureTime" value="Departure" style=" background-color: #081d45;" onclick="getFormattedDateTime('technician_departure')">
-                                    </div>
-                                    <!-- End of Departure Time -->
-                                    
-                                    <!-- Time at site -->
-                                    <div class="input-box-arrival">
-                                        <label for="">Time at site</label>
-                                        <input type="text" class="technician_arrival" id="technician_arrival" name="technician_arrival" value="">
-                                        <input type="button" id="update_ArrivalTime" value="Arrival" style=" background-color: #081d45;" onclick="getFormattedDateTime('technician_arrival')">
-                                    </div>
-                                    <!-- End of Time at site -->
-                                    
-                                    <!-- Return Time -->
-                                    <div class="input-box-leaving">
-                                        <label for="">Return time</label>
-                                        <div style="display: flex; align-items: baseline;">
-                                            <input type="text" class="technician_leaving" id="technician_leaving" name="technician_leaving" value="">
-                                            <input type="button" id="update_LeavingTime" value="Leaving" style="background-color: #081d45;" onclick="getFormattedDateTime('technician_leaving')">
-                                        </div>
-                                    </div>
-                                    <!-- End of Return Time -->
-                                    
-                                    <div class="input-box-out">
-                                        <label for="">Rest Hour</label>
-                                        <!-- Rest Hour Out -->
-                                        <div style="display: flex; align-items: baseline;"> 
-                                            <input type="text" style="width: 406.5px;" id="tech_out" name="tech_out" value="">
-                                            <input style="background-color: #081d45; color: white; width: 203.8px" type="button" value="OUT" onclick="getFormattedTime('tech_out')">
-                                        </div>
-                                        <!-- End of Rest Hour Out -->
-                                        
-                                        <!-- Rest Hour In -->
-                                    
-                                        <div style="display: flex; align-items: baseline;">
-                                            <input type="text" style="width: 408px;" id="tech_in" name="tech_in" value="">
-                                            <input style="background-color: #081d45; color: white; width: 203.8px" type="button" value="IN" onclick="getFormattedTime('tech_in')">
-                                        </div>
-                                        <!-- End of Rest Hour In -->
-                                    </div>
-                                    
-                                    <p class="control" style="color: green;"><b id="techupdateAdmin"></b></p>
-                                    <div style="margin-top:30px; margin-left:420px; margin-bottom:30px">
-                                        <input type="button" id="update_tech" name="update_tech" value="Update" style="background-color: #081d45; color: white; width: 203.8px; height:40px; border: none; border-radius: 4px; font-size:15px;">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Staff Accessories Tab -->
-
-                            <div class="tab" id="JobAccessoriesTab">
-                                <div class="input-boxAccessories" id="input_fields_wrapAccessories">
-                                    <table style="box-shadow: 0 5px 10px #f7f7f7; margin-left: -6px; margin-top: -18px;" id="employee_grid" class="table table-condensed table-hover table-striped bootgrid-table" width="60%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                            <th>No</th>
-                                            <th>Code</th>
-                                            <th>Name</th>
-                                            <th>UOM</th>
-                                            <th>Quantity</th>
-                                            </tr>
-                                        </thead>
-                                        
-                                        <tbody id="_editable_table">
-                                        </tbody>
-                                    </table>
-                                    <a href="javascript:void(0);" class="add_button" title="Add field" type="button">Click Here to Add Accessories</a>
-                                    <form  id="adminacc_form" method="post">
-                                        <div class="model">
-                                        </div>
-                                        <div class="updateBtn">
-                                            <p class="control"><b id="accessoriesmessage"></b></p>
-                                            <input type="button" id="update_acc" name="update_acc" value="Update"/>
-                                        </div>
-                                    </form>
-                                </div>              
-                            </div>
-
-                            <!-- Staff Photo Tab -->
-
-                            <div class="tab" id="JobPhotoTab">
-                                <form id="submitForm">
-                                    <!-- for select job register id -->
-                                    <input type="hidden" id="jobregister_idp1" name="jobregister_id" value="">
-                                    <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
-                                    <input type="hidden" id="description" name="description" value="Machine (Before Service)">
-                                    <div id="previewBefore"></div>
-                                    <div class="update-form">
-                                        <div class="upload-report">
-                                            <div class="input-box" style="display: flex; margin-left: -16px;">
-                                                <input type="file" class="form-control" name="multipleFile[]" id="multipleFile" required="" multiple>
-                                                <input type="submit" name="upload" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="message">
-                                        <p class="control"><b id="messageImagebefore"></b></p>
-                                    </div>
-
-                                    <!-- for select data from tech photo update database -->
-
-                                    <!-- Photos Table Before Service -->
-                                    <div class="table-responsivep1">
-                                        <table id="tablep1" style="box-shadow: 0 5px 10px #f7f7f7;">
-                                            <tbody id="tbodyp1" style="display: flex; flex-wrap: wrap;">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </form>
-                                <form id="submitAfterForm">
-                                    <!-- for select job register id -->
-                                    <input type="hidden" id="jobregister_idp2" name="jobregister_id" value="">
-                                    <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
-                                    <input type="hidden" id="description" name="description" value="Machine (After Service)">
-                                    <div id="previewAfter"></div>
-                                    <div class="update-form">
-                                        <div class="upload-report">
-                                            <div class="input-box" style="display: flex; margin-left: -16px;">
-                                                <input type="file" class="form-control" name="multipleFile[]" id="multipleAfter" required="" multiple>
-                                                <input type="submit" name="upload" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
-                                            </div>
-                                        </div>
-                                        <div class="message">
-                                            <p class="control"><b id="messageImageAfter"></b></p>
-                                        </div>
-                                        
-                                        <!-- for select data from tech photo update database -->
-                                        
-                                        <!-- Photos Table After Service -->
-                                        <div class="table-responsivep2">
-                                            <table id="tablep2" style="box-shadow: 0 5px 10px #f7f7f7;">
-                                                <tbody id="tbodyp2" style="display: flex; flex-wrap: wrap;">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <!-- Staff Video Tab -->
-
-                            <div class="tab" id="JobVideoTab">
-                                <form id="submitVideoBefore">
-                                    <!-- for select job register id -->
-                                    <input type="hidden" id="jobregister_idv1" name="jobregister_id" value="">
-                                    <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (Before Service)</label></b>
-                                    <input type="hidden" id="description" name="description" value="Machine (Before Service)">
-                                    <div id="previewBeforeVideo"></div>
-                                    <div class="update-form">
-                                        <div class="upload-report">
-                                            <div class="input-box" style="display: flex; margin-left: -16px;">
-                                                <input type="file" class="form-control" name="multipleVideo[]" id="multipleVideo" required="" multiple>
-                                                <input type="submit" name="uploadVideo" value="Upload Machine (Before Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
-                                            </div>
-                                        </div>
-                                        <div class="message">
-                                            <p class="control"><b id="messageVideoBefore"></b></p>
-                                        </div>
-
-                                        <!-- for select data from tech video update database -->
-
-                                        <!-- Videos Table Before Service -->
-                                        <div class="table-responsivev1">
-                                            <table id="tablev1" style="box-shadow: 0 5px 10px #f7f7f7;">
-                                                <tbody id="tbodyv1"style="display: flex; flex-wrap: wrap; padding-left: 15px;">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form id="submitAfterVideo">
-                                    <!-- for select job register id -->
-                                    <input type="hidden" id="jobregister_idv2" name="jobregister_id" value="">
-                                    <b><label style="margin-left: 33px; font-size: 20px;" for="position" class="details">Machine (After Service)</label></b>
-                                    <input type="hidden" id="description" name="description" value="Machine (After Service)">
-                                    <div id="previewAfterVideo"></div>
-                                    <div class="update-form">
-                                        <div class="upload-report">
-                                            <div class="input-box" style="display: flex; margin-left: -16px;">
-                                                <input type="file" class="form-control" name="multipleVideo[]" id="multipleAfterVideo" required="" multiple>
-                                                <input type="submit" name="uploadVideo" value="Upload Machine (After Service)" style="font-size: 15px; background-color: #081d45; color: #fff; cursor: pointer;">
-                                            </div>
-                                        </div>
-                                        <div class="message">
-                                            <p class="control"><b id="messageVideoAfter"></b></p>
-                                        </div>
-
-                                        <!-- for select data from tech video update database -->
-                                        <!-- Videos Table After Service -->
-                                        <div class="table-responsivev2">
-                                            <table id="tablev2" style="box-shadow: 0 5px 10px #f7f7f7;">
-                                                <tbody id="tbodyv2" style="display: flex; flex-wrap: wrap; padding-left: 15px;">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </form>
-
-
-                            </div>
-
-                            <!-- Staff Report Tab -->
-
-                            <div class="tab" id="JobReportTab">
-                                <form method="POST" action="servicereportdate.php">
-                                    <input type="hidden" id="jobregister_idreport" name="jobregister_id" value="">
-                                    <label for="reportdate" style="margin-left: 20px">Service Report Date:</label>
-                                    <div class="date-form">
-                                        <div class="submit-date" style="padding-left: 20px; padding-right: 25px;">
-                                            <div class="input-box" style="width: 75%; display: flex; align-items: baseline;">
-                                                <input type="text" id="srvcreportdate" name="srvcreportdate" value="<?php $date = date('d-m-Y');?>" readonly>
-                                                <div class="input-group-append" style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
-                                                    <!-- closing div for input-group-append is missing in your provided code -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form id="view_form" method="post">
-                                    <div style="display:flex;">
-                                    <button  style="padding: 8px 44px; border-radius: 4px;" id="userinfo" class="userinfo" type="button" 
-                                    >New</button></n>
-                                    <button style="padding: 8px 44px; border-radius: 4px; display: flex; background-color: #f43636 ;" id="useredit" class="useredit" type="button" >Edit</button>
-                                    </div>  
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="w3-quarter">
-                <div class="overview-boxes">
-                    <!-- First row of Admin Board Card -->
-                    <div class="row">
-                        <!-- Job Listing -->
-                        <div class="box" id="myModal">
-                            <div class="box_topic">Job Listing</div>
+                        <!-- First Row of Admin Board -->
+                        <div class="row d-grid d-flex">
+                            <!-- Job Listing -->
+                            <div class="box card" id="myModal">
+                                <h6></h6>Job Listing</h6>
                                 <?php
                                     
                                     include 'dbconnect.php';
@@ -1035,152 +253,190 @@
                                     $numRow_run = mysqli_query($conn, $numRow);
                                     
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<h4 style="text-align:right;">Total Job: ' . $row_Total . ' </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3 mb-3">Total Job: ' . $row_Total . ' </h6>';
                                     } 
                                     
                                     else {
-                                        echo '<h4 style="text-align:right;">No Data </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3 mb-3">No Data </h6>';
                                     }
                                     
                                     while ($row = $results->fetch_assoc()) {
                                 ?>
-                                
-                                <div class="todo" data-id="<?php echo $row['jobregister_id']; ?>" data-type_id="<?php echo $row['type_id']; ?>" data-customer_name="<?php echo $row['customer_name']; ?>" data-target="doubleClick-1" ondblclick="document.getElementById('doubleClick-1').style.display='block';document.body.classList.add('popup-open');">
-                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                                        <ul class="b" id="draged">
-                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
-                                            <li><?php echo $row['job_priority'] ?></li>
-                                            <li><?php echo $row['customer_name'] ?></li>
-                                            <li><?php echo $row['machine_type'] ?></li>
-                                            <li><?php echo $row['job_description'] ?></li>
-                                            <li><b><?php echo $row['accessories_required'] ?></b> accessories required</li>
-                                            <li><?php echo $row['job_status'] ?></li>
-                                            <strong text-align="center" style="color:red"><?php echo $row['reason'] ?></strong>
-                                        </ul>
-                                        <div class='supports' id='support'> <?php echo $row['support'] ?></div>
+
+                                <div class="todo card-body mb-4 joblistPopup" data-bs-toggle="modal" data-bs-target="#joblistModal" data-jobregisterjoblist-id="<?php echo $row['jobregister_id']; ?>">
+                                    <ul class="b" id="draged">
+                                        <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                        <li><?php echo $row['job_priority'] ?></li>
+                                        <li><?php echo $row['customer_name'] ?></li>
+                                        <li><?php echo $row['machine_type'] ?></li>
+                                        <li><?php echo $row['job_description'] ?></li>
+                                        <li><b><?php echo $row['accessories_required'] ?></b> accessories required</li>
+                                        <li><?php echo $row['job_status'] ?></li>
+                                        <strong text-align="center" style="color:red"><?php echo $row['reason'] ?></strong>
+                                    </ul>
+                                    <div class='supports' id='support'> <?php echo $row['support'] ?></div>
                                 </div>
                                 <?php } ?>
-                        </div>
-                        
-                        <!-- Job Listing PopUp -->
-                        <div id="doubleClick-1" class="modal">
-                            <div class="tabs">
-                                <!-- Job Listing Job Info Tab -->
-                                <input type="radio" name="tabDoing" id="tabDoingOne" checked="checked">
-                                <label for="tabDoingOne" class="tabHeading">Job Info</label>
-                                <div class="tab" id="jobInfoTabs">
-                                    <div class="TechJobInfoTab">
-                                        <div class="contentTechJobInfo">
-                                            <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none';">&times</div>
-                                            <form action="homeindex.php" method="post">
-                                                <div class="tech-details">
-
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.todo').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            var type_id = $(this).data('type_id');
-                                            var customer_name = $(this).data('customer_name');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageJobinfo.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id,
-                                                                type_id: type_id,
-                                                        customer_name: customer_name},
-                                                        
-                                                success: function(response) {
-                                                    $('.tech-details').html(response);
-                                                    $('#doubleClick-1').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Job Listing Job Assign Tab -->
-                                <input type="radio" name="tabDoing" id="tabDoingTwo">
-                                <label for="tabDoingTwo" class="tabHeading"> Job Assign </label>
-                                <div class="tab">
-                                    <div class="TechJobInfoTab">
-                                        <div class="contentTechJobInfo">
-                                            <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
-                                            <form action="AdminHomepageJobassign.php" method="post">
-                                                <div class="assign-details">
-
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.todo').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageJobassign.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                        
-                                                success: function(response) {
-                                                    $('.assign-details').html(response);
-                                                    $('#doubleClick-1').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Job Listing Accessories Tab -->
-                                <input type="radio" name="tabDoing" id="tabDoingThree">
-                                <label for="tabDoingThree" class="tabHeading"> Accessories </label>
-                                <div class="tab">
-                                    <div class="TechJobInfoTab">
-                                        <div class="contentTechJobInfo">
-                                            <div style="right: 507px; top: -53px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-1').style.display='none'">&times</div>
-                                            <form action="ajaxtabaccessories.php" method="post">
-                                                <div class="acc-details">
-
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.todo').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxtabaccessories.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.acc-details').html(response);
-                                                    $('#doubleClick-1').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
                             </div>
-                        </div>
-                        <!-- End of Job Listing PopUp -->
-                        <!-- End of Job Listing -->
-                        
-                        <!-- Storekeeper -->
-                        <div class="box" id="myModal">
-                            <div class="box_topic">Store</div>
+                            <!-- End Job Listing -->
+                            
+                            <!-- Job Listing Popup Modal -->
+                            <div class="modal fade" id="joblistModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="tab-buttonsjoblist d-flex flex-wrap" role="tablist">
+                                                    <button class="btn tab-buttonjoblist active flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobInfoJoblist" aria-controls="JobInfoJoblist" aria-selected="true" id="showjobinfoJoblist">Job Info</button>
+                                                    <button class="btn tab-buttonjoblist flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobAssignJoblist" aria-controls="JobAssignJoblist" aria-selected="false" id="showjobassignJoblist">Job Assign</button>
+                                                    <button class="btn tab-buttonjoblist flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#AccessoryJoblist" aria-controls="AccessoryJoblist" aria-selected="false" id="showaccessoryJoblist">Accessory</button>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+            
+                                        <div class="modal-body">
+                                            <div class="tab-content mt-3">
+                                                <!-- Job info -->
+                                                <div class="tab-pane show active" id="JobInfoJoblist" role="tabpanel" aria-labelledby="JobInfoJoblist" style="color: black;">
+                                                    <form id="showjobinfoJoblist" action="homeindex.php" method="post">
+                                                        <div class="jobinfo-details">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.joblistPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterjoblist-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageJobinfo.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Joblist-details').html(response);
+            
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Joblist-details').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+                                                
+                                                <!-- Job Assign -->
+                                                <div class="tab-pane" id="JobAssignJoblist" role="tabpanel" aria-labelledby="JobAssignJoblist" style="color: black;">
+                                                    <form id="showjobassignJoblist" action="AdminHomepageJobassign.php" method="post">
+                                                        <div class="Joblist-JobAssign">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.joblistPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterjoblist-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageJobassign.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Joblist-JobAssign').html(response);
+            
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Joblist-JobAssign').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+            
+                                                <!-- Accessories -->
+                                                <div class="tab-pane" id="AccessoryJoblist" role="tabpanel" aria-labelledby="AccessoryJoblist" style="color: black;">
+                                                    <form id="showaccessoryJoblist" action="ajaxtabaccessories.php" method="post">
+                                                        <div class="Joblist-accessories">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.joblistPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterjoblist-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'ajaxtabaccessories.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Joblist-accessories').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Joblist-accessories').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const tabButtonsJoblist = document.querySelectorAll('.tab-buttonsjoblist .tab-buttonjoblist');
+                                    
+                                    tabButtonsJoblist.forEach((button) => {
+                                        button.addEventListener('click', (event) => {
+                                            event.preventDefault();
+                                            const targetTab = button.getAttribute('data-bs-target');
+                                            const jobregisterId = button.getAttribute('data-jobregisterjoblist-id');
+                                            const modal = new bootstrap.Modal(document.querySelector(targetTab));
+                                            
+                                            document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                                pane.classList.remove('show', 'active');
+                                            });
+                                            
+                                            document.querySelector(targetTab).classList.add('show', 'active');
+                                            
+                                            tabButtonsJoblist.forEach((btn) => {
+                                                btn.classList.remove('active');
+                                            });
+                                            
+                                            button.classList.add('active');
+                                        });
+                                    });
+                                    
+                                    const todoElements = document.querySelectorAll('.todo.card-body[data-jobregisterjoblist-id]');
+                                    todoElements.forEach((todoElement) => {
+                                        todoElement.addEventListener('click', () => {
+                                            const jobregisterId = todoElement.getAttribute('data-jobregisterjoblist-id');
+                                            const modal = new bootstrap.Modal(document.getElementById('joblistModal'));
+                                            modal.show();
+                                        });
+                                    });
+                                });
+                            </script>
+                            <!-- End of Job Listing Popup Modal -->
+
+                            <!-- Store -->
+                            <div class="box card" id="myModal">
+                                <h6 class="fw-bold mt-3 mb-3">Store</h6>
                                 <?php
                                     
                                     include 'dbconnect.php';
@@ -1236,440 +492,510 @@
                                     $numRow_run = mysqli_query($conn, $numRow);
                                     
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<h4 style="text-align:right;" >Total Job: ' . $row_Total . ' </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3 mb-3">Total Job: ' . $row_Total . ' </h6>';
                                     } 
                                     
                                     else {
-                                        echo '<h4 style="text-align:right;">No Data </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3 mb-3">No Data </h6>';
                                     }
                                     
                                     while ($row = $results->fetch_assoc()) {
-                                ?>
-                                
-                                <div class="Store" data-id="<?php echo $row['jobregister_id']; ?>" data-type_id="<?php echo $row['type_id']; ?>" data-target="doubleClick-Store" ondblclick="document.getElementById('doubleClick-Store').style.display='block';document.body.classList.add('popup-open');">
-                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                                        <ul class="b" id="draged">
-                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
-                                            <li><?php echo $row['job_priority'] ?></li>
-                                            <li><?php echo $row['customer_name'] ?></li>
-                                            <li><?php echo $row['machine_type'] ?></li>
-                                            <li><?php echo $row['job_description'] ?></li>
-                                            <li><?php echo $row['job_status'] ?></li>
-                                            <strong text-align="center" style="color:red"><?php echo $row['reason'] ?></strong>
-                                        </ul>
+                                ?> 
+                                <div class="todo card-body mb-4 storePopup" data-bs-toggle="modal" data-bs-target="#StoreModal" data-jobregisterStore-id="<?php echo $jobregister_id; ?>">
+                                    <ul class="b" id="draged">
+                                        <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                        <li><?php echo $row['job_priority'] ?></li>
+                                        <li><?php echo $row['customer_name'] ?></li>
+                                        <li><?php echo $row['machine_type'] ?></li>
+                                        <li><?php echo $row['job_description'] ?></li>
+                                        <li><?php echo $row['job_status'] ?></li>
+                                        <strong text-align="center" style="color:red"><?php echo $row['reason'] ?></strong>
+                                    </ul>
                                 </div>
                                 <?php } ?>
-                        </div>
-                        
-                        <!-- Storekeeper PopUp -->
-                        <div id="doubleClick-Store" class="modal">
-                            <div class="tabStore">
-                                <!-- Storekeeper Job Info Tab -->
-                                <input type="radio" name="tabDoingStore" id="tabDoingStore1" checked="checked">
-                                <label for="tabDoingStore1" class="tabHeadingStore"> Job Info </label>
-                                <div class="tab" id="StoreJobInfoTab">
-                                    <div class="contentStoreJobInfo" style="padding-left: 66px; margin-left: -89px; margin-top: -47px;">
-                                    <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
-                                    <form action="homeindex.php" method="post">
-                                        <div class="store-details">
+                            </div>
+                            <!-- End of Store -->
 
+                            <!-- Store Popup Modal -->
+                            <div class="modal fade" id="StoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="tab-buttonsStore d-flex flex-wrap" role="tablist">
+                                                    <button class="btn tab-buttonStore active flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobInfoStore" aria-controls="JobInfoStore" aria-selected="true" id="showjobinfoStore">Job Info</button>
+                                                    <button class="btn tab-buttonStore flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobAssignStore" aria-controls="JobAssignStore" aria-selected="false" id="showjobassignStore">Job Assign</button>
+                                                    <button class="btn tab-buttonStore flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#AccessoryStore" aria-controls="AccessoryStore" aria-selected="false" id="showaccessoryStore">Accessory</button>
+                                                    <button class="btn tab-buttonStore flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#UpdateStore" aria-controls="UpdateStore" aria-selected="false" id="showUpdateStore">Update</button>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                    </form>
+            
+                                        <div class="modal-body">
+                                            <div class="tab-content mt-3">
+                                                <!-- Job info -->
+                                                <div class="tab-pane show active" id="JobInfoJoblist" role="tabpanel" aria-labelledby="JobInfoJoblist" style="color: black;">
+                                                    <form id="showjobinfoJoblist" action="homeindex.php" method="post">
+                                                        <div class="Store-details">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.storePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterjoblist-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageJobinfoStorekeeper.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Store-details').html(response);
+            
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Store-details').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+                                                
+                                                <!-- Job Assign -->
+                                                <div class="tab-pane" id="JobAssignJoblist" role="tabpanel" aria-labelledby="JobAssignJoblist" style="color: black;">
+                                                    <form id="showjobassignJoblist" action="AdminHomepageJobassignStore.php" method="post">
+                                                        <div class="Store-JobAssign">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.storePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterjoblist-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageJobassignStore.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Store-JobAssign').html(response);
+            
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Store-JobAssign').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+            
+                                                <!-- Accessories -->
+                                                <div class="tab-pane" id="AccessoryJoblist" role="tabpanel" aria-labelledby="AccessoryJoblist" style="color: black;">
+                                                    <form id="showaccessoryJoblist" action="ajaxtabaccessories.php" method="post">
+                                                        <div class="Store-accessories">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.storePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterjoblist-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'ajaxtabaccessories.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Store-accessories').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Store-accessories').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+
+                                                <!-- Update -->
+                                                <div class="tab-pane" id="UpdateStore" role="tabpanel" aria-labelledby="UpdateStore" style="color: black;">
+                                                    <form id="showUpdateStore" action="ajaxstoreupdateADMIN.php" method="post">
+                                                        <div class="Store-update">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.storePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterjoblist-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'ajaxstoreupdateADMIN.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Store-update').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Store-update').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Store').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            var type_id = $(this).data('type_id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageJobinfoStorekeeper.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id,
-                                                                type_id: type_id},
-                                                            
-                                                success: function(response) {
-                                                    $('.store-details').html(response);
-                                                    $('#doubleClick-Store').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                            
-                                <!-- Storekeeper Job Assign Tab -->
-                                <input type="radio" name="tabDoingStore" id="tabDoingStore2">
-                                <label for="tabDoingStore2" class="tabHeadingStore">Job Assign</label>
-                                <div style="min-width: -webkit-fill-available;" class="tab">
-                                <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
-                                    <form action="AdminHomepageJobassignStore.php" method="post">
-                                        <div class="store-jobassign">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Store').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageJobassignStore.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.store-jobassign').html(response);
-                                                    $('#doubleClick-Store').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-
-                                <!-- Storekeeper Accessories Tab -->
-                                <input type="radio" name="tabDoingStore" id="tabDoingStore3">
-                                <label for="tabDoingStore3" class="tabHeadingStore"> Accessories </label>
-                                <div style="min-width: -webkit-fill-available;" class="tab">
-                                <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
-                                    <form action="ajaxtabaccessories.php" method="post">
-                                        <div class="store-accessories">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Store').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxtabaccessories.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.store-accessories').html(response);
-                                                    $('#doubleClick-Store').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Storekeeper Update Tab -->
-                                <input type="radio" name="tabDoingStore" id="tabDoingStore4">
-                                <label for="tabDoingStore4" class="tabHeadingStore"> Update </label>
-                                <div style="min-width: -webkit-fill-available;" class="tab">
-                                <div style="right: 410px;" class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Store').style.display='none'">&times</div>
-                                    <form action="ajaxstoreupdateADMIN.php" method="post">
-                                        <div class="store-update">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Store').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxstoreupdateADMIN.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.store-update').html(response);
-                                                    $('#doubleClick-Store').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
                             </div>
-                        </div>
-                        <!-- End of Storekeeper PopUp -->
-                        <!-- End of Storekeeper -->
-                        
-                        <!-- Pending -->
-                        <div class="box" id="myModal">
-                            <div class="box_topic">Pending</div>
+                            
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const tabButtonsStore = document.querySelectorAll('.tab-buttonsStore .tab-buttonStore');
+                                    
+                                    tabButtonsStore.forEach((button) => {
+                                        button.addEventListener('click', (event) => {
+                                            event.preventDefault();
+                                            const targetTab = button.getAttribute('data-bs-target');
+                                            const jobregisterId = button.getAttribute('data-jobregisterStore-id');
+                                            const modal = new bootstrap.Modal(document.querySelector(targetTab));
+                                            
+                                            document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                                pane.classList.remove('show', 'active');
+                                            });
+                                            
+                                            document.querySelector(targetTab).classList.add('show', 'active');
+                                            
+                                            tabButtonsStore.forEach((btn) => {
+                                                btn.classList.remove('active');
+                                            });
+                                            
+                                            button.classList.add('active');
+                                        });
+                                    });
+                                    
+                                    const todoElements = document.querySelectorAll('.todo.card-body[data-jobregisterStore-id]');
+                                    todoElements.forEach((todoElement) => {
+                                        todoElement.addEventListener('click', () => {
+                                            const jobregisterId = todoElement.getAttribute('data-jobregisterStore-id');
+                                            const modal = new bootstrap.Modal(document.getElementById('StoreModal'));
+                                            modal.show();
+                                        });
+                                    });
+                                });
+                            </script>
+                            <!-- End of Store Popup Modal -->
+
+                            <!-- Pending Job -->
+                            <div class="box card" id="myModal">
+                                <h6 class="fw-bold mt-3 mb-3">Pending</h6>
                                 <?php
                                     
                                     include 'dbconnect.php';
-                                    
+                                
                                     $results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '')
                                                                 OR    
-                                                            (job_status = 'Pending' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                                           (job_status = 'Pending' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
 
                                     $numRow = "SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '')
                                                     OR    
-                                                (job_status = 'Pending' AND job_cancel IS NULL)";
+                                              (job_status = 'Pending' AND job_cancel IS NULL)";
 
                                     $numRow_run = mysqli_query($conn, $numRow);
 
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<h4 style="text-align:right;">Total Job: ' . $row_Total . ' </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3 mb-3">Total Job: ' . $row_Total . ' </h6>';
                                     }
-                                    
+                                
                                     else {
-                                        echo '<h4 style="text-align:right;">No Data </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3 mb-3">No Data </h6>';
                                     }
-                                    
+                                
                                     while ($row = $results->fetch_assoc()) {
                                 ?>
-                                
-                                <div class="Pending" data-type_id="<?php echo $row['type_id']; ?>" data-id="<?php echo $row['jobregister_id']; ?>" data-target="doubleClick-Pending" ondblclick="document.body.classList.add('popup-open');document.getElementById('doubleClick-Pending').style.display='block';">
-                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                                        <ul class="b" id="draged">
-                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
-                                            <li><?php echo $row['job_priority'] ?></li>
-                                            <li><?php echo $row['customer_name'] ?></li>
-                                            <li><?php echo $row['machine_type'] ?></li>
-                                            <li><?php echo $row['job_description'] ?></li>
-                                            <li><?php echo $row['job_status'] ?></li>
-                                            <li><b>Pending Reason: </b><?php echo $row['reason'] ?></li>
-                                        </ul>
+                                <div class="todo card-body mb-4 pendingPopup" data-bs-toggle="modal" data-bs-target="#PendingModal" data-jobregisterPending-id="<?php echo $jobregister_id; ?>">
+                                    <ul class="b" id="draged">
+                                        <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                        <li><?php echo $row['job_priority'] ?></li>
+                                        <li><?php echo $row['customer_name'] ?></li>
+                                        <li><?php echo $row['machine_type'] ?></li>
+                                        <li><?php echo $row['job_description'] ?></li>
+                                        <li><?php echo $row['job_status'] ?></li>
+                                        <li><b>Pending Reason: </b><?php echo $row['reason'] ?></li>
+                                    </ul>
                                 </div>
                                 <?php } ?>
-                        </div>
-                        
-                        <!-- Pending Popup Modal -->
-                        <div id="doubleClick-Pending" class="modal">
-                            <div class="tabPending">
-                                <input type="radio" name="tabDoingPending" id="tabDoingPending1" checked="checked">
-                                <!-- Pending Job Info Tab -->
-                                <label for="tabDoingPending1" class="tabHeadingPending"> Job Info </label>
-                                <div class="tab" id="PendingJobInfoTab">
-                                    <div class="contentPendingJobInfo" style="margin-top: -27px; margin-left: -22px;">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                                    <form action="homeindex.php" method="post">
-                                        <div class="pending-details">
+                            </div>
+                            <!-- End of Pending Job -->
 
+                            <!-- Pending Job Popup Modal -->
+                            <div class="modal fade" id="PendingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="tab-buttonsPending d-flex flex-wrap gap-4" role="tablist">
+                                                    <button class="btn tab-buttonPending active flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobInfoPending" aria-controls="JobInfoPending" aria-selected="true" id="showjobinfoPending">Job Info</button>
+                                                    <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobAssignPending" aria-controls="JobAssignPending" aria-selected="false" id="showjobassignPending">Job Assign</button>
+                                                    <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#UpdatePending" aria-controls="UpdatePending" aria-selected="false" id="showUpdatePending">Update</button>
+                                                    <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#AccessoryPending" aria-controls="AccessoryPending" aria-selected="false" id="showaccessoryPending">Accessory</button>
+                                                    <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#PhotoPending" aria-controls="PhotoPending" aria-selected="false" id="showPhotoPending">Photo</button>
+                                                    <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#VideoPending" aria-controls="VideoPending" aria-selected="false" id="showVideoPending">Video</button>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                    </form>
+            
+                                        <div class="modal-body">
+                                            <div class="tab-content mt-3">
+                                                <!-- Job info -->
+                                                <div class="tab-pane show active" id="JobInfoPending" role="tabpanel" aria-labelledby="JobInfoPending" style="color: black;">
+                                                    <form id="showjobinfoPending" action="homeindex.php" method="post">
+                                                        <div class="Pending-details">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.pendingPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterPending-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageJobinfoPending.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Pending-details').html(response);
+            
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Pending-details').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+                                                
+                                                <!-- Job Assign -->
+                                                <div class="tab-pane" id="JobAssignPending" role="tabpanel" aria-labelledby="JobAssignPending" style="color: black;">
+                                                    <form id="showjobassignPending" action="AdminHomepageJobassignStore.php" method="post">
+                                                        <div class="Pending-JobAssign">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.pendingPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterPending-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageJobassign.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Pending-JobAssign').html(response);
+            
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Pending-JobAssign').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+
+                                                <!-- Update -->
+                                                <div class="tab-pane" id="UpdatePending" role="tabpanel" aria-labelledby="UpdatePending" style="color: black;">
+                                                    <form id="showUpdatePending" action="AdminHomepageUpdate.php" method="post">
+                                                        <div class="Pending-update">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.pendingPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterPending-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageUpdate.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Pending-update').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Pending-update').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+            
+                                                <!-- Accessories -->
+                                                <div class="tab-pane" id="AccessoryPending" role="tabpanel" aria-labelledby="AccessoryPending" style="color: black;">
+                                                    <form id="showaccessoryPending" action="ajaxtabaccessories.php" method="post">
+                                                        <div class="Pending-accessories">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.pendingPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterPending-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'ajaxtabaccessories.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Pending-accessories').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Pending-accessories').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+
+                                                <!-- Photo -->
+                                                <div class="tab-pane" id="PhotoPending" role="tabpanel" aria-labelledby="PhotoPending" style="color: black;">
+                                                    <form id="showPhotoPending" action="ajaxtechphtoupdt.php" method="post">
+                                                        <div class="Pending-photo">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.pendingPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterPending-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'ajaxtechphtoupdt.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Pending-photo').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Pending-photo').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+                                                
+                                                <!-- Video -->
+                                                <div class="tab-pane" id="VideoPending" role="tabpanel" aria-labelledby="VideoPending" style="color: black;">
+                                                    <form id="showVideoPending" action="ajaxtechvideoupdt.php" method="post">
+                                                        <div class="Pending-Video">
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.pendingPopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterPending-id');
+                                                            $.ajax({
+                                                                url: 'ajaxtechvideoupdt.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Pending-Video').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Pending-Video').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>                                                
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Pending').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            var type_id = $(this).data('type_id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageJobinfoPending.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id,
-                                                                type_id: type_id},
-                                                                
-                                                success: function(response) {
-                                                    $('.pending-details').html(response);
-                                                    $('#doubleClick-Pending').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Pending Job Assign tab -->
-                                <input type="radio" name="tabDoingPending" id="tabDoingPending3">
-                                <label for="tabDoingPending3" class="tabHeadingPending">Job Assign</label>
-                                <div class="tab" id="PendingJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                                    <form action="jobassignADMIN.php" method="post">
-                                        <div class="pending-assign">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('body').on('click', '.Pending', function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageJobassign.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.pending-assign').html(response);
-                                                    $('#doubleClick-Pending').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Pending Update Tab -->
-                                <input type="radio" name="tabDoingPending" id="tabDoingPending2">
-                                <label for="tabDoingPending2" class="tabHeadingPending">Update</label>
-                                <div class="tab" id="PendingJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                                    <form action="AdminHomepageUpdate.php" method="post">
-                                        <div class="pending-update">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Pending').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageUpdate.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.pending-update').html(response);
-                                                    $('#doubleClick-Pending').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Pending Accessories Tab -->
-                                <input type="radio" name="tabDoingPending" id="tabDoingPending4">
-                                <label for="tabDoingPending4" class="tabHeadingPending">Accessories</label>
-                                <div class="tab" id="PendingJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                                    <form action="ajaxtabaccessories.php" method="post">
-                                        <div class="pending-accessories">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Pending').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxtabaccessories.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.pending-accessories').html(response);
-                                                    $('#doubleClick-Pending').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Pending Photo Tab -->
-                                <input type="radio" name="tabDoingPending" id="tabDoingPending5">
-                                <label for="tabDoingPending5" class="tabHeadingPending">Photo</label>
-                                <div class="tab" id="PendingJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                                    <form action="ajaxtechphtoupdt.php" method="post">
-                                        <div class="pending-photos">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Pending').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxtechphtoupdt.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.pending-photos').html(response);
-                                                    $('#doubleClick-Pending').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Pending Video Tab -->
-                                <input type="radio" name="tabDoingPending" id="tabDoingPending7">
-                                <label for="tabDoingPending7" class="tabHeadingPending">Video</label>
-                                <div class="tab" id="PendingJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                                    <form action="ajaxtechvideoupdt.php" method="post">
-                                        <div class="pending-video">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Pending').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxtechvideoupdt.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                            
-                                                success: function(response) {
-                                                    $('.pending-video').html(response);
-                                                    $('#doubleClick-Pending').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Pending Report Tab -->
-                                <input type="radio" name="tabDoingPending" id="tabDoingPending6">
-                                <label for="tabDoingPending6" class="tabHeadingPending"> Report </label>
-                                <div class="tab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Pending').style.display='none'">&times</div>
-                                    <form action="ajaxreportadmin.php" method="post">
-                                        <div class="pending-report">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Pending').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxreportadmin.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.pending-report').html(response);
-                                                    $('#doubleClick-Pending').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
                             </div>
-                        </div>
-                        <!-- End of Pending Popup Modal -->
-                        <!-- End of Pending -->
-                        
-                        <!-- Incomplete -->
-                        <div class="box" id="myModal">
-                            <div class="box_topic">Incomplete</div>
+                            
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const tabButtonsPending = document.querySelectorAll('.tab-buttonsPending .tab-buttonPending');
+                                    
+                                    tabButtonsPending.forEach((button) => {
+                                        button.addEventListener('click', (event) => {
+                                            event.preventDefault();
+                                            const targetTab = button.getAttribute('data-bs-target');
+                                            const jobregisterId = button.getAttribute('data-jobregisterPending-id');
+                                            const modal = new bootstrap.Modal(document.querySelector(targetTab));
+                                            
+                                            document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                                pane.classList.remove('show', 'active');
+                                            });
+                                            
+                                            document.querySelector(targetTab).classList.add('show', 'active');
+                                            
+                                            tabButtonsPending.forEach((btn) => {
+                                                btn.classList.remove('active');
+                                            });
+                                            
+                                            button.classList.add('active');
+                                        });
+                                    });
+                                    
+                                    const todoElements = document.querySelectorAll('.todo.card-body[data-jobregisterPending-id]');
+                                    todoElements.forEach((todoElement) => {
+                                        todoElement.addEventListener('click', () => {
+                                            const jobregisterId = todoElement.getAttribute('data-jobregisterPending-id');
+                                            const modal = new bootstrap.Modal(document.getElementById('PendingModal'));
+                                            modal.show();
+                                        });
+                                    });
+                                });
+                            </script>
+                            <!-- End of Pending Job Popup Modal -->
+
+                            <!-- Incomplete Job -->
+                            <div class="box card" id="myModal">
+                                <h6 class="fw-bold mt-3 mb-3">Incomplete</h6>
                                 <?php
                                     
                                     include 'dbconnect.php';
@@ -1685,274 +1011,297 @@
                                     $numRow_run = mysqli_query($conn, $numRow);
                                     
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<h4 style="text-align:right;">Total Job: ' . $row_Total . ' </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3 mb-3">Total Job: ' . $row_Total . ' </h6>';
                                     } 
                                     
                                     else {
-                                        echo '<h4 style="text-align:right;">No Data </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3 mb-3">No Data </h6>';
                                     }
                                     
                                     while ($row = $results->fetch_assoc()) {
-                                ?>
-
-                                <div class="Incomplete" data-id="<?php echo $row['jobregister_id']; ?>" data-target="doubleClick-Incomplete" ondblclick="document.body.classList.add('popup-open');document.getElementById('doubleClick-Incomplete').style.display='block';">
-                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                                        <ul class="b" id="draged">
-                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
-                                            <li><?php echo $row['job_priority'] ?></li>
-                                            <li><?php echo $row['customer_name'] ?></li>
-                                            <li><?php echo $row['machine_type'] ?></li>
-                                            <li><?php echo $row['job_description'] ?></li>
-                                            <li><?php echo $row['job_status'] ?></li>
-                                            <li><b>Incomplete Reason: </b><?php echo $row['reason'] ?></li>
-                                        </ul>
+                                ?> 
+                                <div class="todo card-body mb-4 IncompletePopup" data-bs-toggle="modal" data-bs-target="#IncompleteModal" data-jobregisterIncomplete-id="<?php echo $jobregister_id; ?>">
+                                    <ul class="b" id="draged">
+                                        <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                        <li><?php echo $row['job_priority'] ?></li>
+                                        <li><?php echo $row['customer_name'] ?></li>
+                                        <li><?php echo $row['machine_type'] ?></li>
+                                        <li><?php echo $row['job_description'] ?></li>
+                                        <li><?php echo $row['job_status'] ?></li>
+                                        <li><b>Incomplete Reason: </b><?php echo $row['reason'] ?></li>
+                                    </ul>
                                 </div>
                                 <?php } ?>
-                        </div>
+                            </div>
+                            <!-- End of Incomplete Job -->
 
-                        <!-- Incomplete Popup Modal -->
-                        <div id="doubleClick-Incomplete" class="modal">
-                            <div class="tabIncomplete">
-                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete1" checked="checked">
-                                <!-- Incomplete Job Info Tab -->
-                                <label for="tabDoingIncomplete1" class="tabHeadingIncomplete"> Job Info </label>
-                                <div class="tab" id="IncompleteJobInfoTab">
-                                    <div class="contentIncompleteJobInfo" style="margin-top: -27px; margin-left: -22px;">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                                    <form action="homeindex.php" method="post">
-                                        <div class="incomplete-details">
-
+                            <!-- Incomplete Job Popup Modal -->
+                            <div class="modal fade" id="IncompleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="tab-buttonsIncomplete d-flex flex-wrap gap-4" role="tablist">
+                                                    <button class="btn tab-buttonIncomplete active flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobInfoIncomplete" aria-controls="JobInfoIncomplete" aria-selected="true" id="showjobinfoIncomplete">Job Info</button>
+                                                    <button class="btn tab-buttonIncomplete flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobAssignIncomplete" aria-controls="JobAssignIncomplete" aria-selected="false" id="showjobassignIncomplete">Job Assign</button>
+                                                    <button class="btn tab-buttonIncomplete flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#UpdateIncomplete" aria-controls="UpdateIncomplete" aria-selected="false" id="showUpdateIncomplete">Update</button>
+                                                    <button class="btn tab-buttonIncomplete flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#AccessoryIncomplete" aria-controls="AccessoryIncomplete" aria-selected="false" id="showaccessoryIncomplete">Accessory</button>
+                                                    <button class="btn tab-buttonIncomplete flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#PhotoIncomplete" aria-controls="PhotoIncomplete" aria-selected="false" id="showPhotoIncomplete">Photo</button>
+                                                    <button class="btn tab-buttonIncomplete flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#VideoIncomplete" aria-controls="VideoIncomplete" aria-selected="false" id="showVideoIncomplete">Video</button>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                    </form>
+            
+                                        <div class="modal-body">
+                                            <div class="tab-content mt-3">
+                                                <!-- Job info -->
+                                                <div class="tab-pane show active" id="JobInfoIncomplete" role="tabpanel" aria-labelledby="JobInfoIncomplete" style="color: black;">
+                                                    <form id="showjobinfoIncomplete" action="homeindex.php" method="post">
+                                                        <div class="Incomplete-details">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.IncompletePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterIncomplete-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageJobinfoIncomplete.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Incomplete-details').html(response);
+            
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Incomplete-details').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+                                                
+                                                <!-- Job Assign -->
+                                                <div class="tab-pane" id="JobAssignIncomplete" role="tabpanel" aria-labelledby="JobAssignIncomplete" style="color: black;">
+                                                    <form id="showjobassignIncomplete" action="AdminHomepageJobassign.php" method="post">
+                                                        <div class="Incomplete-JobAssign">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.IncompletePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterIncomplete-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageJobassign.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Incomplete-JobAssign').html(response);
+            
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Incomplete-JobAssign').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+
+                                                <!-- Update -->
+                                                <div class="tab-pane" id="UpdateIncomplete" role="tabpanel" aria-labelledby="UpdateIncomplete" style="color: black;">
+                                                    <form id="showUpdateIncomplete" action="AdminHomepageUpdate.php" method="post">
+                                                        <div class="Incomplete-update">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.IncompletePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterIncomplete-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'AdminHomepageUpdate.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Incomplete-update').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Incomplete-update').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+            
+                                                <!-- Accessories -->
+                                                <div class="tab-pane" id="AccessoryIncomplete" role="tabpanel" aria-labelledby="AccessoryIncomplete" style="color: black;">
+                                                    <form id="showaccessoryIncomplete" action="ajaxtabaccessories.php" method="post">
+                                                        <div class="Incomplete-accessories">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.IncompletePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterIncomplete-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'ajaxtabaccessories.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Incomplete-accessories').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Incomplete-accessories').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+
+                                                <!-- Photo -->
+                                                <div class="tab-pane" id="PhotoIncomplete" role="tabpanel" aria-labelledby="PhotoIncomplete" style="color: black;">
+                                                    <form id="showPhotoIncomplete" action="ajaxtechphtoupdt.php" method="post">
+                                                        <div class="Incomplete-photo">
+            
+                                                        </div>
+                                                    </form>
+                                                </div>
+            
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.IncompletePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterIncomplete-id');
+                                                            
+                                                            $.ajax({
+                                                                url: 'ajaxtechphtoupdt.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Incomplete-photo').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Incomplete-photo').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
+                                                
+                                                <!-- Video -->
+                                                <div class="tab-pane" id="VideoIncomplete" role="tabpanel" aria-labelledby="VideoIncomplete" style="color: black;">
+                                                    <form id="showVideoIncomplete" action="ajaxtechvideoupdt.php" method="post">
+                                                        <div class="Incomplete-Video">
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                
+                                                <script type='text/javascript'>
+                                                    $(document).ready(function() {
+                                                        $('.IncompletePopup').click(function() {
+                                                            var jobregister_id = $(this).data('jobregisterIncomplete-id');
+                                                            $.ajax({
+                                                                url: 'ajaxtechvideoupdt.php',
+                                                                type: 'post',
+                                                                data: { jobregister_id: jobregister_id },
+                                                                success: function(response) {
+                                                                    $('.Incomplete-Video').html(response);
+                                                                },
+                                                                
+                                                                error: function(xhr, status, error) {
+                                                                    console.log("An error occurred:", error);
+                                                                    $('.Incomplete-Video').html("An error occurred while fetching data.");
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                </script>                                                
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Incomplete').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageJobinfoIncomplete.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.incomplete-details').html(response);
-                                                    $('#doubleClick-Incomplete').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Incomplete Job Assign Tab -->
-                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete3">
-                                <label for="tabDoingIncomplete3" class="tabHeadingIncomplete">Job Assign</label>
-                                <div class="tab" id="IncompleteJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                                    <form action="jobassignADMIN.php" method="post">
-                                        <div class="incomplete-assign">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Incomplete').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageJobassign.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-
-                                                success: function(response) {
-                                                    $('.incomplete-assign').html(response);
-                                                    $('#doubleClick-Incomplete').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Incomplete Update Tab -->
-                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete2">
-                                <label for="tabDoingIncomplete2" class="tabHeadingIncomplete">Update</label>
-                                <div class="tab" id="IncompleteJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                                    <form action="AdminHomepageUpdate.php" method="post">
-                                        <div class="incomplete-update">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Incomplete').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'AdminHomepageUpdate.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.incomplete-update').html(response);
-                                                    $('#doubleClick-Incomplete').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Incomplete Accessories Tab -->
-                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete4">
-                                <label for="tabDoingIncomplete4" class="tabHeadingIncomplete">Accessories</label>
-                                <div class="tab" id="IncompleteJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                                    <form action="ajaxtabaccessories.php" method="post">
-                                        <div class="incomplete-accessories">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Incomplete').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxtabaccessories.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.incomplete-accessories').html(response);
-                                                    $('#doubleClick-Incomplete').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Pending Photo Tab -->
-                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete5">
-                                <label for="tabDoingIncomplete5" class="tabHeadingIncomplete">Photo</label>
-                                <div class="tab" id="IncompleteJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                                    <form action="ajaxtechphtoupdt.php" method="post">
-                                        <div class="incomplete-photos">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Incomplete').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxtechphtoupdt.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-
-                                                success: function(response) {
-                                                    $('.incomplete-photos').html(response);
-                                                    $('#doubleClick-Incomplete').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Incomplete Video Tab -->
-                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete7">
-                                <label for="tabDoingIncomplete7" class="tabHeadingIncomplete">Video</label>
-                                <div class="tab" id="IncompleteJobInfoTab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                                    <form action="ajaxtechvideoupdt.php" method="post">
-                                        <div class="incomplete-video">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Incomplete').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxtechvideoupdt.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.incomplete-video').html(response);
-                                                    $('#doubleClick-Incomplete').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-                                
-                                <!-- Incomplete Report Tab -->
-                                <input type="radio" name="tabDoingIncomplete" id="tabDoingIncomplete6">
-                                <label for="tabDoingIncomplete6" class="tabHeadingIncomplete"> Report </label>
-                                <div class="tab">
-                                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-Incomplete').style.display='none'">&times</div>
-                                    <form action="ajaxreportadmin.php" method="post">
-                                        <div class="incomplete-report">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $('.Incomplete').click(function() {
-                                            var jobregister_id = $(this).data('id');
-                                            
-                                            $.ajax({
-                                                url: 'ajaxreportadmin.php',
-                                                type: 'post',
-                                                data: {jobregister_id: jobregister_id},
-                                                
-                                                success: function(response) {
-                                                    $('.incomplete-report').html(response);
-                                                    $('#doubleClick-Incomplete').modal('show');
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
                             </div>
+                            
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const tabButtonsIncomplete = document.querySelectorAll('.tab-buttonsIncomplete .tab-buttonIncomplete');
+                                    
+                                    tabButtonsIncomplete.forEach((button) => {
+                                        button.addEventListener('click', (event) => {
+                                            event.preventDefault();
+                                            const targetTab = button.getAttribute('data-bs-target');
+                                            const jobregisterId = button.getAttribute('data-jobregisterIncomplete-id');
+                                            const modal = new bootstrap.Modal(document.querySelector(targetTab));
+                                            
+                                            document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                                pane.classList.remove('show', 'active');
+                                            });
+                                            
+                                            document.querySelector(targetTab).classList.add('show', 'active');
+                                            
+                                            tabButtonsIncomplete.forEach((btn) => {
+                                                btn.classList.remove('active');
+                                            });
+                                            
+                                            button.classList.add('active');
+                                        });
+                                    });
+                                    
+                                    const todoElements = document.querySelectorAll('.todo.card-body[data-jobregisterIncomplete-id]');
+                                    todoElements.forEach((todoElement) => {
+                                        todoElement.addEventListener('click', () => {
+                                            const jobregisterId = todoElement.getAttribute('data-jobregisterIncomplete-id');
+                                            const modal = new bootstrap.Modal(document.getElementById('IncompleteModal'));
+                                            modal.show();
+                                        });
+                                    });
+                                });
+                            </script>
+                            <!-- End of Incomplete Job Popup Modal -->
                         </div>
-                        <!-- End of Incomplete Popup Modal -->
-                        <!-- End of Incomplete -->
-                    </div>
-                    <!-- End of First row of Admin Board Card -->
-                    
-                    <!-- Technician Card -->
-                    <!-- Employee Modal Box -->
-                    <?php
-                        include 'dbconnect.php';
+                        <!-- End of First Row of Admin Board -->
+
+                        <!-- Technician Job -->
+                        <?php
+                            
+                            include 'dbconnect.php';
                         
-                        $results = $conn->query("SELECT * FROM staff_register WHERE staff_position='Leader' ORDER BY username ASC");
+                            $results = $conn->query("SELECT * FROM staff_register WHERE staff_position='Leader' ORDER BY username ASC");
                         
-                        $numsofrow = mysqli_num_rows($results);
-                        $employees = [];
-                        $i = 0;
+                            $numsofrow = mysqli_num_rows($results);
+                            $employees = [];
+                            $i = 0;
                         
-                        while ($row = $results->fetch_assoc()) {
-                            $employees[] = $row;
-                        }
-                        foreach ($employees as $employee) :
+                            while ($row = $results->fetch_assoc()) {
+                                $employees[] = $row;
+                            }
+                        
+                            foreach ($employees as $employee) :
                             $i++;
                             $username = $employee['username'];
                                 
@@ -1961,11 +1310,10 @@
                                 echo '<div class="">';
                                 echo '<div class="row">';
                             }
-                    ?>  
-
-                    <div class="box">
-                        <div class="left-side">
-                            <div class="box_topic"><?php echo $username ?></div>
+                        ?>  
+                        <div class="row mb-4">
+                            <div class="box card" id="myModal">
+                                <h6 class="fw-bold mt-3"><?php echo $username ?></h6>
                                 <?php
                                     $results = $conn->query("SELECT * FROM job_register WHERE (job_assign = '$username' AND job_status = '' AND job_cancel = '')
                                                                 OR
@@ -2002,58 +1350,538 @@
                                     $numRow_run = mysqli_query($conn, $numRow);
                                     
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<h4 style="text-align: -webkit-right;">Total Job: ' . $row_Total . ' </h4>';
+                                        echo '<h6 class="position-absolute top-0 end-0 mt-3 me-3">Total Job: ' . $row_Total . ' </h6>';
                                     }
                                     
                                     $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE username ='$username'");
 
                                     while ($data = mysqli_fetch_array($records)) {
                                         if ($data['tech_avai'] == 1) {
-                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id=' . $data['staffregister_id'] . '&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                            echo '<p class="text-end"><a href="statusadmin.php?staffregister_id=' . $data['staffregister_id'] . '&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></p>';
                                         } 
                                         
                                         else {
-                                            echo '<p style="text-align: -webkit-right;"><a href="statusadmin.php?staffregister_id=' . $data['staffregister_id'] . '&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
+                                            echo '<p class="position-absolute top-0 end-0 me-3" style="margin-top:35px"><a href="statusadmin.php?staffregister_id=' . $data['staffregister_id'] . '&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></p>';
                                         }
                                     }
 
                                     $username = str_replace(" ", "", $username);
 
                                     while ($row = $results->fetch_assoc()) {
-                                ?>
-
-                                <div class="Staff staff-card" id="<?php echo $username ?>" data-type_id="<?php echo $row['type_id']; ?>" data-id="<?php echo $row['jobregister_id']; ?>" data-customer_name="<?php echo $row['customer_name']; ?>" onclick="openPopup('staffpopup')">
-                                    <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id'] ?>" readonly>
-                                        <ul class="b" id="draged">
-                                            <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
-                                            <li><?php echo $row['job_priority'] ?></li>
-                                            <li><?php echo $row['customer_name'] ?></li>
-                                            <li><?php echo $row['machine_type'] ?></li>
-                                            <li><?php echo $row['job_description'] ?></li>
-                                            <li><?php echo $row['job_status'] ?></li>
-                                        </ul>
-                                        <div class='supports' id='support'> <?php echo $row['support'] ?></div>
+                                ?> 
+                                <div class="todo card-body mb-4 mt-4" data-bs-toggle="modal" data-bs-target="#techPopup" data-jobregister-id="<?php echo $jobregister_id; ?>">
+                                    <ul class="b" id="draged">
+                                        <strong text-align="center"><?php echo $row['job_order_number'] ?></strong>
+                                        <li><?php echo $row['job_priority'] ?></li>
+                                        <li><?php echo $row['customer_name'] ?></li>
+                                        <li><?php echo $row['machine_type'] ?></li>
+                                        <li><?php echo $row['job_description'] ?></li>
+                                        <li><?php echo $row['job_status'] ?></li>
+                                    </ul>
+                                    <div class='supports' id='support'> <?php echo $row['support'] ?></div>
                                 </div>
                                 <?php } ?>
+                            </div>
                         </div>
-                    </div>
-
-                    <?php
+                        <?php
                             // Finish Building Technician Card
                             if ($i % 4 == 0 && $i !== $numsofrow) { 
                                 echo '</div>';
                                 echo '</div>';
                             } 
+                            
                             if ($i == $numsofrow) { 
                                 echo '</div>';
                                 echo '</div>';
                             }
-                        endforeach;
-                    ?>
-                </div>
-            </div>
+                            
+                            endforeach;
+                        ?>
+                        <!-- Technician Job -->
 
-            <script type='text/javascript'>
+                        <!-- Technician Popup Modal -->
+                        <div class="modal fade" id="techPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="tab-buttons container px-4" role="tablist">
+                                            <div class="row">
+                                              <div class="col">
+                                                <button class="btn tab-button active p-1" data-bs-target="#tab1" aria-controls="tab1" aria-selected="true" id="jobInfoTab" style="border: none; font-weight: bold; white-space: nowrap;">Job Info</button>
+                                              </div>
+                                          
+                                              <div class="col">
+                                                <button class="btn tab-button p-1" data-bs-target="#tab2" aria-controls="tab2" aria-selected="false" id="jobAssignTab" style="border: none; font-weight: bold; white-space: nowrap;">Job Assign</button>
+                                              </div>
+                                          
+                                              <div class="col">
+                                                <button class="btn tab-button p-1" data-bs-target="#tab3" aria-controls="tab3" aria-selected="false" id="updateTab" style="border: none; font-weight: bold;">Update</button>
+                                              </div>
+                                          
+                                              <div class="col">
+                                                <button class="btn tab-button p-1" data-bs-target="#tab4" aria-controls="tab4" aria-selected="false" id="acessoryTab" style="border: none; font-weight: bold;">Accessory</button>
+                                              </div>
+                                          
+                                              <div class="col">
+                                                <button class="btn tab-button p-1" data-bs-target="#tab5" aria-controls="tab5" aria-selected="false" id="photoTab" style="border: none; font-weight: bold;">Photo</button>
+                                              </div>
+                                          
+                                              <div class="col">
+                                                <button class="btn tab-button p-1" data-bs-target="#tab6" aria-controls="tab6" aria-selected="false" id="videoTab" style="border: none; font-weight: bold;">Video</button>
+                                              </div>
+                                          
+                                              <div class="col">
+                                                <button class="btn tab-button p-1" data-bs-target="#tab7" aria-controls="tab7" aria-selected="false" id="reportTab" style="border: none; font-weight: bold;">Report</button>  
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="tab-content mt-3">
+                                            <!-- Job Info Tab -->
+                                            <div class="tab-pane show active" id="tab1" role="tabpanel" aria-labelledby="tab1" style="color: black;">
+                                                <form id="jobInfoForm">
+                                                    <div class="row">
+                                                        <input type="hidden" name="jobregister_id" id="jobregister_id">
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Job Priority</label>
+                                                            <input type="text" name="job_priority" id="job_priority" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Job Order Number</label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="job_order_number" id="job_order_number" class="form-control border border-dark">
+                                                                <button type="button" class="btn btn-outline-secondary" style="color: white; background-color: #081d45; border-color: #081d45; width: fit-content;" id="button-addon2">Click</button>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Job Name</label>
+                                                            <select name="job_name" id="job_name" class="form-select border border-dark"></select>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Assign Date</label>
+                                                            <input type="date" name="DateAssign" id="DateAssign" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="" class="fw-bold">Job Description</label>
+                                                            <input type="text" name="job_description" id="job_description" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Requested Date</label>
+                                                            <input type="date" name="requested_date" id="requested_date" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Delivery Date</label>
+                                                            <input type="date" name="delivery_date" id="delivery_date" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="" class="fw-bold">Customer Name</label>
+                                                            <select name="customer_name" id="customer_name" class="form-select border border-dark"></select>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="" class="fw-bold">Customer Address</label>
+                                                            <input type="text" name="delivery_date" id="delivery_date" class="form-control border border-dark">
+                                                            <div class="d-grid d-flex gap-2 mt-2">
+                                                                <input type="text" name="delivery_date" id="delivery_date" class="form-control border border-dark">
+                                                                <input type="text" name="delivery_date" id="delivery_date" class="form-control border border-dark">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Customer Grade</label>
+                                                            <input type="text" name="customer_grade" id="customer_grade" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Customer PIC</label>
+                                                            <input type="text" name="customer_PIC" id="customer_PIC" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Customer Contact Number 1</label>
+                                                            <input type="text" name="cust_phone1" id="cust_phone1" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Customer Contact Number 2</label>
+                                                            <input type="text" name="cust_phone2" id="cust_phone2" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Machine Brand</label>
+                                                            <select name="machine_brand" id="machine_brand" class="form-select border border-dark"></select>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Machine Type</label>
+                                                            <select name="machine_type" id="machine_type" class="form-select border border-dark"></select>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Serial Number</label>
+                                                            <select name="serialnumber" id="serialnumber" class="form-select border border-dark"></select>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="accessories_required" class="fw-bold">Accessory Require</label>
+                                                            <select name="accessories_required" id="accessories_required" class="form-select border border-dark" onchange="myFunctionAccessory()"></select>
+                                                        </div>
+                                                        
+                                                        <script>
+                                                            function myFunctionAccessory() {
+                                                                var accessories = document.getElementById("accessories_required").value;
+                                                                var accForDiv = document.getElementById("Accessory");
+                                                        
+                                                                if (accessories === "Yes") {
+                                                                    accForDiv.style.display = "block";  
+                                                                } else {
+                                                                    accForDiv.style.display = "none";
+                                                                }
+                                                            }
+
+                                                            myFunctionAccessory();
+                                                        </script>
+                                                        
+                                                        <div class="col-md-6 mb-3" id="Accessory">
+                                                            <label for="accessories_for" class="fw-bold">Accessory For</label>
+                                                            <select name="accessories_for" id="accessories_for" class="form-select border border-dark"></select>
+                                                        </div>
+                                                        
+                                                        
+                                                        <div class="mb-3">
+                                                            <label for="" class="fw-bold">Machine Name</label>
+                                                            <input type="text" name="machine_name" id="machine_name" class="form-control border border-dark">
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Cancel Job</label>
+                                                            <select name="job_cancel" id="job_cancel" class="form-select border border-dark"></select>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="" class="fw-bold">Job Status</label>
+                                                            <select name="job_status" id="job_status" class="form-select border border-dark" onchange="myFunctionReason()"></select>
+                                                        </div>
+
+                                                        <script>
+                                                            function myFunctionReason() {
+                                                                var status = document.getElementById("job_status").value;
+                                                                var reasonDiv = document.getElementById("giveReason");
+                                                        
+                                                                if (status === "Pending" || status === "Incomplete") {
+                                                                    reasonDiv.style.display = "block";  
+                                                                } else {
+                                                                    reasonDiv.style.display = "none";
+                                                                }
+                                                            }
+
+                                                            myFunctionReason();
+                                                        </script>
+                                                        
+                                                        <div class="mb-3" id="giveReason">
+                                                            <label for="" class="fw-bold">Reason</label>
+                                                            <input type="text" name="reason" id="reason" class="form-control border border-dark">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-grid d-flex gap-2">
+                                                        <button class="btn w-50" style="background-color: #081d45; color: #fff;" type="button">Update</button>
+                                                        <button class="btn w-50" style="background-color: #023020; color: #fff;" type="button">Support</button>
+                                                    </div>
+                                                </form>
+                                                <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+                                            </div>
+                                            <!-- End Job Info Tab -->
+
+                                            <!-- Job Assign Tab -->
+                                            <div class="tab-pane" id="tab2" role="tabpanel" aria-labelledby="tab2" style="color: black;">
+                                                <div class="card">
+                                                    <form id="assignLeader">
+                                                        <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                                        
+                                                        <div class="card-body">
+                                                            <label for="" class="fw-bold mb-3">Job Assign</label>
+                                                            <div class="input-group">
+                                                                <select name="job_assign" id="job_assign" class="form-select border border-dark"></select>
+                                                                <button type="submit" class="btn btn-outline-secondary" style="color: white; background-color: #081d45; border-color: #081d45; width: fit-content;">Update</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+                                                </div>
+
+                                                </br>
+
+                                                <div class="card">
+                                                    <form id="assignAssistant">
+                                                        <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                                        
+                                                        <div class="card-body">
+                                                            <label for="" class="fw-bold mb-3">Assistant</label>
+                                                            <div class="table-responsive">
+                                                                <table class="table border table-borderless table-striped">
+                                                                    
+                                                                </table>
+                                                            </div>
+
+                                                            <select name="username" id="username" class="form-select border border-dark" multiple></select>
+
+                                                            <div class="d-grid justify-content-end mt-3">
+                                                                <button type="button" class="btn btn-primary" style="color: white; background-color: #081d45; border-color: #081d45; width: 100px;">Update</button>
+                                                            </div>
+                                                        </div>
+
+                                                        <input type="hidden" name="ass_date" id="ass_date">
+                                                        <input type="hidden" name="cust_name" id="cust_name">
+                                                        <input type="hidden" name="requested_date" id="requested_date">
+                                                        <input type="hidden" name="machine_name" id="machine_name">
+                                                    </form>
+
+                                                    <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+                                                </div>
+                                            </div>
+                                            <!-- End of Job Assign Tab -->
+
+                                            <!-- Update Tab -->
+                                            <div class="tab-pane" id="tab3" role="tabpanel" aria-labelledby="tab3" style="color: black;">
+                                                <form id="jobUpdate">
+                                                    <input type="hidden" name="jobregister_id" id="jobregister_id">
+
+                                                    <label for="" class="fw-bold mb-2">Departure Time</label>
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" name="technician_departure" id="technician_departure" class="form-control border border-dark">
+                                                        <button type="button" class="btn btn-outline-secondary" style="color: white; background-color: #081d45; border-color: #081d45; width: 100px;">Departure</button>
+                                                    </div>
+
+                                                    <label for="" class="fw-bold mb-2">Time At Site</label>
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" name="technician_arrival" id="technician_arrival" class="form-control border border-dark">
+                                                        <button type="button" class="btn btn-outline-secondary" style="color: white; background-color: #081d45; border-color: #081d45; width: 100px;">Arrival</button>
+                                                    </div>
+
+                                                    <label for="" class="fw-bold mb-2">Leaving Time</label>
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" name="technician_leaving" id="technician_leaving" class="form-control border border-dark">
+                                                        <button type="button" class="btn btn-outline-secondary" style="color: white; background-color: #081d45; border-color: #081d45; width: 100px;">Leaving</button>
+                                                    </div>
+
+                                                    <label for="" class="fw-bold mb-2">Rest Hour</label>
+                                                    <div class="d-grid gap-2">
+                                                        <div class="input-group">
+                                                            <input type="text" name="tech_out" id="tech_out" class="form-control border border-dark">
+                                                            <button type="button" class="btn btn-outline-secondary" style="color: white; background-color: #081d45; border-color: #081d45; width: 100px;">Out</button>
+                                                        </div>
+
+                                                        <div class="input-group">
+                                                            <input type="text" name="tech_in" id="tech_in" class="form-control border border-dark">
+                                                            <button type="button" class="btn btn-outline-secondary" style="color: white; background-color: #081d45; border-color: #081d45; width: 100px;">In</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-grid justify-content-end mt-3">
+                                                        <button type="button" class="btn btn-primary" style="color: white; background-color: #081d45; border-color: #081d45; width: 100px;">Update</button>
+                                                    </div>
+                                                </form>
+                                                <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+                                            </div>
+                                            <!-- End of Update Tab -->
+
+                                            <!-- Accessory Tab -->
+                                            <div class="tab-pane" id="tab4" role="tabpanel" aria-labelledby="tab4" style="color: black;">
+                                                <form id="accessoryForm">
+                                                    <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                                    
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered table-striped table-hover">
+                                                            
+                                                        </table>
+                                                    </div>
+
+                                                    <a class="fw-bold">Add another accessory</a>
+
+                                                    <div class="d-grid justify-content-end">
+                                                        <button type="button" class="btn btn-primary" style="color: white; background-color: #081d45; border-color: #081d45; width: 100px;">Update</button>
+                                                    </div>
+                                                </form>
+                                                <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+                                            </div>
+                                            <!-- End of Accessory Tab -->
+
+                                            <!-- Photo Tab -->
+                                            <div class="tab-pane" id="tab5" role="tabpanel" aria-labelledby="tab5" style="color: black;">
+                                                <div class="card mb-3">
+                                                    <div class="card-body">
+                                                        <form id="photoMachineBefore">
+                                                            <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                                
+                                                            <label for="" class="fw-bold mb-3">Photo Before Service</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="file" name="technician_leaving" id="technician_leaving" class="form-control border border-dark">
+                                                                <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+                                                                <button type="button" class="btn" style="color: white; background-color: #081d45;">Upload</button>
+                                                            </div>
+
+                                                            <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+
+                                                            <img class="form-control" id="previewPhotoBefore">
+                                                        </form>
+                                                
+                                                        <div class="d-grid gap-2 text-center">
+                                                            <a href="image/<?php echo $res['file_name']; ?>" download><img class="img-thumbnail vw-auto vh-auto" src="<?php echo 'image/'.$res['file_name']; ?>" id="display_image"></a>
+                                                            <span class='deleted' data-id='<?php echo $res["id"]; ?>' style="color:red; cursor: pointer; font-weight:bold;">Delete</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+ 
+                                                <div class="card mt-3">
+                                                    <div class="card-body">
+                                                        <form id="photoMachineAfter">
+                                                            <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                                
+                                                            <label for="" class="fw-bold mb-3">Photo After Service</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="file" name="technician_leaving" id="technician_leaving" class="form-control border border-dark">
+                                                                <input type="hidden" id="description" name="description" value="Machine (After Service)">
+                                                                <button type="button" class="btn" style="color: white; background-color: #081d45; width: fit-content;">Upload</button>
+                                                            </div>
+
+                                                            <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+                                
+                                                            <img class="form-control" id="previewPhotoAfter">
+                                                        </form>
+                                                
+                                                        <div class="d-grid gap-2 text-center">
+                                                            <a href="image/<?php echo $res['file_name']; ?>" download>
+                                                                <img class="img-thumbnail vw-auto vh-auto" src="<?php echo 'image/'.$res['file_name']; ?>" id="display_image">
+                                                            </a>
+                                                            <span class='deleted' style="color:red; cursor: pointer; font-weight:bold;">Delete</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Photo Tab -->
+
+                                            <!-- Video Tab -->
+                                            <div class="tab-pane" id="tab6" role="tabpanel" aria-labelledby="tab6" style="color: black;">
+                                                <div class="card mt-3">
+                                                    <div class="card-body">
+                                                        <form id="videoMachineBefore">
+                                                            <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                                
+                                                            <label for="" class="fw-bold mb-3">Video Before Service</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="file" name="technician_leaving" id="technician_leaving" class="form-control border border-dark">
+                                                                <input type="hidden" id="description" name="description" value="Machine (Before Service)">
+                                                                <button type="button" class="btn" style="color: white; background-color: #081d45; width: fit-content;">Upload</button>
+                                                            </div>
+
+                                                            <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+                                                            
+                                                            <img class="form-control" id="previewVideoBefore">
+                                                        </form>
+                                                
+                                                        <div class="d-grid gap-2 justify-content-center text-center">
+                                                            <video loop class="hover-to-play vw-auto vh-auto" src="image/<?=$res['video_url']?>" controls></video>
+                                                            <span class='deletedv' style="color:red; cursor: pointer; font-weight:bold;">Delete</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card mt-3">
+                                                    <div class="card-body">
+                                                        <form id="videoMachineAfter">
+                                                            <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                                
+                                                            <label for="" class="fw-bold mb-3">Video After Service</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="file" name="technician_leaving" id="technician_leaving" class="form-control border border-dark">
+                                                                <input type="hidden" id="description" name="description" value="Machine (After Service)">
+                                                                <button type="button" class="btn" style="color: white; background-color: #081d45; width: fit-content;">Upload</button>
+                                                            </div>
+
+                                                            <p class="text-center fw-bold">Center aligned text on all viewport sizes.</p>
+                                                            
+                                                            <img class="form-control" id="previewvideoAfter">
+                                                        </form>
+                                                
+                                                        <div class="d-grid gap-2 justify-content-center text-center">
+                                                            <video loop class="hover-to-play vw-auto vh-auto" src="image/<?=$res['video_url']?>" controls></video>
+                                                            <span class='deletedv' style="color:red; cursor: pointer; font-weight:bold;" data-id='<?php echo $res["id"]; ?>'>Delete</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Video Tab -->
+
+                                            <!-- Report Tab -->
+                                            <div class="tab-pane" id="tab7" role="tabpanel" aria-labelledby="tab7" style="color: black;">
+                                                <form id="reportForm">
+                                                    <input type="hidden" name="jobregister_id" id="jobregister_id">
+
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control border border-dark">
+                                                        <button class="btn" style="width: fit-content; background-color: #081d45; color: #fff;" type="button">New</button>
+                                                        <button class="btn" style="width: fit-content; background-color: #ff0000; color: #fff;" type="button">Edit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- End of Report Tab -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const tabButtonsTech = document.querySelectorAll('.tab-buttons .tab-button');
+                                
+                                tabButtonsTech.forEach((button) => {
+                                    button.addEventListener('click', (event) => {
+                                        event.preventDefault();
+                                        const targetTab = button.getAttribute('data-bs-target');
+                                        const jobregisterId = button.getAttribute('data-jobregister-id');
+                                        const modal = new bootstrap.Modal(document.querySelector(targetTab));
+                                        
+                                        document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                            pane.classList.remove('show', 'active');
+                                        });
+                                        
+                                        document.querySelector(targetTab).classList.add('show', 'active');
+                                        
+                                        tabButtonsTech.forEach((btn) => {
+                                            btn.classList.remove('active');
+                                        });
+                                        
+                                        button.classList.add('active');
+                                    });
+                                });
+                                
+                                const todoElements = document.querySelectorAll('.todo.card-body[data-jobregister-id]');
+                                todoElements.forEach((todoElement) => {
+                                    todoElement.addEventListener('click', () => {
+                                        const jobregisterId = todoElement.getAttribute('data-jobregister-id');
+                                        const modal = new bootstrap.Modal(document.getElementById('techPopup'));
+                                        modal.show();
+                                    });
+                                });
+                            });
+                        </script>
+                        <!-- End of Technician Popup Modal -->
+
+                        <!-- Technician Form Handling Script -->
+                        <script type='text/javascript'>
                 var job_table;
                 // STAFF JOB INFO FUNCTION
                 function updateJobInfo(data2){
@@ -3197,15 +3025,11 @@
             document.getElementById(tabId).style.display = "block";
         }
     </script>
-
-
-    <!-- End of staffs modal -->
-    <!-- End of Admin Board Card -->
-        </section>
-    </main>
-
-    <!--========== MAIN JS ==========-->
-    <script src="assets/js/main.js"></script>
-</body>
-
+                        <!-- End of Technician Form Handling Script -->
+               
+                <!--========== MAIN JS ==========-->
+                <script src="assets/js/main.js"></script>
+            </section>
+        </main>        
+    </body>
 </html>
