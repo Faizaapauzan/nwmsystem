@@ -206,6 +206,7 @@
                         
                         <input type="hidden" id="type" name="machine_type" value="<?php echo $row['machine_type'] ?>">
                     </div>
+                    
                     <script>
                         function getType(){
                             for (i = 0; i < document.getElementById('machine_type').options.length; i++) {
@@ -221,6 +222,7 @@
                         <label for="">Serial Number</label>
                         <select type="text" name="serialnumber" id="serialnumber" style="width: 100%;" class="form-select"></select>
                     </div>
+                    
                     <script>
                         function getSerialNumber(){
                             for (i = 0; i < document.getElementById('serialnumber').options.length; i++) {
