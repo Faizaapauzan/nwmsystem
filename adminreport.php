@@ -1,480 +1,487 @@
 <?php session_start(); ?>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <meta name="keywords" content="" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Report</title>
-    <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
-    <link href="css/homepage.css" rel="stylesheet" />
-    <link href="css/report.css" rel="stylesheet" />
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
+
+        <title>Admin Report</title>
+
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!--========== JS ==========-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    </head>
     
-    <!-- Datatable CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <style>
+        ::-webkit-scrollbar {display: none;}
 
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
+
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
+
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
+
+        .dropdown-content {
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
+        }
+        
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
+
+        .dropdown-content a {
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }
+        
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
+    </style>
     
-    <!-- Script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+                <div class="header__search">
+                    <div class="dropdown1">
+                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <div class="dropdown-content1">
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+                
+            </div>
+        </header>
 
-    
-    <!--Boxicons link -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-</head>
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="Adminhomepage.php" class="nav__link nav__logo">
+                        <img src="neo.png" height="50" width="60"></img>
+                    </a>
 
-<style>
-    
-    #auto { counter-reset: rowNumber; }
+                    <div class="nav__list">
+                        <div class="nav__items">
 
-    #auto tr>td:first-child { counter-increment: rowNumber; }
+                            <a href="jobregister.php" class="nav__link active">
+                                <i class='bx bx-folder-plus nav__icon'></i>
+                                <span class="nav__name">New Job</span>
+                            </a>
 
-    #auto tr td:first-child::before {
-        content: counter(rowNumber);
-        min-width: 1em;
-        margin-right: 0.5em;
-    }
+                            <div class="nav__dropdown">
+                                <a href="staff.php" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Staff</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
 
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                        <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                        <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                        <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                    </div>
+                                </div>
+                            </div>
 
-</style>
+                            <a href="customer.php" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__name">Customer</span>
+                            </a>
 
-<body>
-    
-    <!-- Navigation Sidebar -->
-    <div class="sidebar close">
-        <div class="logo-details">
-            <img src="neo.png" height="65" width="75"></img>
-            <span class="logo_name">NWM SYSTEM</span>
+                            <a href="machine.php" class="nav__link">
+                                <i class='bx bx-cog nav__icon'></i>
+                                <span class="nav__name">Machine</span>
+                            </a>
+
+                            <a href="accessories.php" class="nav__link">
+                                <i class='bx bx-wrench nav__icon'></i>
+                                <span class="nav__name">Accessory</span>
+                            </a>
+
+                            <a href="jobtype.php" class="nav__link">
+                                <i class='bx bx-highlight nav__icon'></i>
+                                <span class="nav__name">Job Type</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-file nav__icon'></i>
+                                    <span class="nav__name">Record</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-task nav__icon'></i>
+                                    <span class="nav__name">Reports</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                        <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
         </div>
-        
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
-        
-        <ul class="nav-links">
-            <li>
-                <a href="jobregister.php">
-                    <i class='bx bx-registered' ></i>
-                    <span class="link_name">Register Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-                </ul>
-            </li>
 
-            <li>
-                <a href="attendanceadmin.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Attendance</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="staff.php">
-                        <i class='bx bx-id-card' ></i>
-                        <span class="link_name">Staff</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="staff.php">Staff</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="technicianlist.php">
-                    <i class='fa fa-users' ></i>
-                    <span class="link_name">Technician</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="customer.php">
-                    <i class='bx bx-user' ></i>
-                    <span class="link_name">Customers</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="customer.php">Customers</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="machine.php">
-                        <i class='fa fa-medium' ></i>
-                        <span class="link_name">Machine</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="machine.php">Machine</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="accessories.php">
-                    <i class='bx bx-wrench' ></i>
-                    <span class="link_name">Accessories</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobtype.php">
-                    <i class='bx bx-briefcase'></i>
-                    <span class="link_name">Job Type</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o' ></i>
-                    <span class="link_name">Completed Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square' ></i>
-                    <span class="link_name">Canceled Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="adminreport.php">
-                    <i class='bx bxs-report' ></i>
-                    <span class="link_name">Report</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out' ></i>
-                    <span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Navigation Sidebar -->
-    
-    <section class="home-section">
-        <!-- Home Button -->
-        <nav>
-            <div class="home-content">
-                <i class='bx bx-menu'></i>
-                <a><button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button></a>
-            </div>
-
-            <div>
-                <a href="report.php" style="color:black; float: right; margin-top:-50px;"><i class="iconify" data-icon="mdi:report-box-outline" style="font-size:34px;"></i></a>
-            </div>
-        </nav>
-        <!-- End of Home Button -->
-        
-        <div class="jobTypeList">
-            
-            <h1>Admin Report</h1>
-            
-            <form action="" method="GET" id="getRecord">
-                <!-- Search date -->
-                <div class="CodeDropdown" style="margin-right: 20px;margin-left: 21px;">
-                    <label for="date" class="details" style="padding-right: 20px;">Date</label>
-                    <input id="myInput" type="text" style="height: 36px; width: 301px;" name="DateAssign" class="form-control" onchange="changeRecord();">
-                    <input type="button" class="btn-biru" style="width: 57px;height: 35px;background: green;border-color: green;color: white;" onclick="window.open('reportadmin.php?DateAssign=' + document.getElementById('myInput').value)" value="Print">
-                </div>
-
-                <script>
-                    var date = new Date();
-                    var day = date.getDate();
-                    var month = date.getMonth() + 1;
-                    var year = date.getFullYear();
-
-                    // Ensure leading zeros for day and month if needed
-                    var formattedDay = (day < 10) ? '0' + day : day;
-                    var formattedMonth = (month < 10) ? '0' + month : month;
-
-                    var formattedDate = formattedDay + "-" + formattedMonth + "-" + year;
-                    var pattern = /DateAssign=[0-9]{2}-[0-9]{2}-[0-9]{4}/;
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section>                
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Admin Report</h4>
+                    </div>
                     
-                    $(document).ready(function() {
-                        $("#myInput").datepicker();
-                        $("#myInput").datepicker("option", "dateFormat", "dd-mm-yy");
-                        
-                        var urlParams = new URLSearchParams(window.location.search); 
-                        var dateFromUrl = urlParams.get('DateAssign');   
-                        if (!pattern.test(document.URL)) { 
-                            $("#myInput").datepicker("setDate", new Date());
-                            document.getElementById("getRecord").submit();
-                        } else {
-                            $("#myInput").datepicker("setDate", dateFromUrl);
-                        }
-
-                    });
-                    function changeRecord(){
-                        document.getElementById("getRecord").submit();
-                    }
-                </script>
-                <!-- End of Search date -->
-                
-                <!-- Remark - Total Workers -->
-                <div class="remarks-job" style="margin-top: 27px; margin: 20px;">
-                <b>Worker Assingment</b>
-                <div class="job-update" style="margin-top: 20px; margin: 20px;">
-                    <table id="auto" style="width:100%; background-color:#ffffff; box-shadow:none;">
-                        <thead style="height: 42px; box-shadow:none;">
-                            <th style="width: 2%;"></th>
-                            <th style="width: 9%;">Leader</th>
-                            <th style="width: 10%;">Assistant</th>
-                            <th style="width: 15%;">Place</th>
-                            <th style="width: 24%;">Machine</th>
-                            <th style="width: 7%;">Departure</th>
-                            <th style="width: 7%;">Arrival</th>
-                            <th style="width: 7%;">Leaving</th>
-                            <th style="width: 9%;">Working Time</th>
-                            <th style="width: 10%;">Travel Time</th>
-                        </thead>
-                        
-                        <?php
-                        
-                            include_once 'dbconnect.php';
+                    <form method="GET" id="getRecord">
+                        <div class="card-body">
+                            <!-- Date -->
+                            <div class="d-grid d-flex gap-2 mt-3" style="margin-bottom: 30px; width:fit-content;">
+                                <label for="" class="fw-bold pt-1" style="font-size: large;">Date</label>
+                                <input type="text" name="DateAssign" id="myInput" class="form-control border border-dark" onchange="changeRecord();">
+                                <button type="button" class="btn btn-primary" style="color: white; background-color: #081d45; border:none; width:max-content;" onclick="window.open('reportadmin.php?DateAssign=' + document.getElementById('myInput').value)">Print</button>
+                            </div>
                             
-                            if(isset($_GET['DateAssign']))
-                                {
-                                    $DateAssign = $_GET['DateAssign'];
-                                    $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants 
-                                                                  ON job_register.jobregister_id=assistants.jobregister_id 
-                                                                  WHERE (job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' 
-                                                                  AND (job_register.job_cancel = '' OR job_register.job_cancel IS NULL))
-                                                                  ORDER BY job_assign ASC, departure_timestamp ASC");
+                            <script>
+                                var date = new Date();
+                                var day = date.getDate();
+                                var month = date.getMonth() + 1;
+                                var year = date.getFullYear();
+                                var formattedDay = (day < 10) ? '0' + day : day;
+                                var formattedMonth = (month < 10) ? '0' + month : month;
+                                var formattedDate = formattedDay + "-" + formattedMonth + "-" + year;
+                                var pattern = /DateAssign=[0-9]{2}-[0-9]{2}-[0-9]{4}/;
+                                
+                                $(document).ready(function() {
+                                    $("#myInput").datepicker();
+                                    $("#myInput").datepicker("option", "dateFormat", "dd-mm-yy");
                                     
-                                    if(mysqli_num_rows($query) > 0)
-                                        {
-                                            foreach($query as $row)
-                                                {
-                                                    $technician_departure =$row['technician_departure'];
-                                                    $technician_arrival =$row['technician_arrival'];
-                                                    $technician_leaving =$row['technician_leaving'];
-                                                    $departure = substr($technician_departure,11);
-                                                    $arrival = substr($technician_arrival,11); 
-                                                    $leaving = substr($technician_leaving,11);
-                                                      
-                                                    if (!function_exists('difftime')) {
-                                                        function difftime($techniciandeparture, $technicianarrival) {
-                                                            $dif=array();
-                                                            $first = strtotime($techniciandeparture);
-                                                            $second = strtotime($technicianarrival);
-                                                            $TravelTime = abs($first - $second);
-                                                            $dif['s'] = floor($TravelTime);
-                                                            $dif['m'] = floor($TravelTime/(60) % 60 );
-                                                            $dif['h'] = floor($TravelTime/(60*60)); 
-                                                      
-                                                            return $dif;
-                                                        }
-                                                    }
+                                    var urlParams = new URLSearchParams(window.location.search);
+                                    var dateFromUrl = urlParams.get('DateAssign');
+                                    
+                                    if (!pattern.test(document.URL)) {
+                                        $("#myInput").datepicker("setDate", new Date());
+                                        document.getElementById("getRecord").submit();
+                                    }
+                                    
+                                    else {
+                                        $("#myInput").datepicker("setDate", dateFromUrl);
+                                    }
+                                });
+                                
+                                function changeRecord() {
+                                    document.getElementById("getRecord").submit();
+                                }
+                            </script>
+                            <!-- End of Date -->
+                            
+                            <div class="table-responsive mb-3">
+                                <label for="" class="fw-bold mb-3">Worker Assignment</label>
+                                <table id="myTable" class="table table-bordered border-dark">
+                                    <thead>
+                                        <tr>
+                                            <th style='text-align: center;'>No</th>
+                                            <th style='text-align: center;'>Leader</th>
+                                            <th style='text-align: center;'>Assistant</th>
+                                            <th style='text-align: center;'>Place</th>
+                                            <th style='text-align: center;'>Machine</th>
+                                            <th style='text-align: center;'>Departure</th>
+                                            <th style='text-align: center;'>Arrival</th>
+                                            <th style='text-align: center;'>Leaving</th>
+                                            <th style='text-align: center; white-space: nowrap;'>Working Time</th>
+                                            <th style='text-align: center; white-space: nowrap;'>Travel Time</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody id ="tbody">
+                                        <?php
+                                        
+                                            include_once 'dbconnect.php';
+                                            
+                                            if(isset($_GET['DateAssign'])) {
+                                                $DateAssign = $_GET['DateAssign'];
                                                 
-                                                    if (!function_exists('difftime2')) {
-                                                        function difftime2($technicianarrival, $technicianleaving) {
-                                                            $dif2=array();
-                                                            $first = strtotime($technicianarrival);
-                                                            $second = strtotime($technicianleaving);
-                                                            $WorkTime = abs($first - $second);
-                                                            $dif['s'] = floor($WorkTime);
-                                                            $dif['m'] = floor($WorkTime/(60) % 60 );
-                                                            $dif['h'] = floor($WorkTime/(60*60));
+                                                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants 
+                                                                              ON job_register.jobregister_id=assistants.jobregister_id 
+                                                                              WHERE (job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' 
+                                                                              AND (job_register.job_cancel = '' OR job_register.job_cancel IS NULL))
+                                                                              ORDER BY job_assign ASC, departure_timestamp ASC");
+                                            
+                                                if(mysqli_num_rows($query) > 0) {
+                                                    $counter = 1;
+                                                    
+                                                    foreach($query as $row) {
+                                                        $currentname = $row['job_assign'];
+                                                        $technician_departure =$row['technician_departure'];
+                                                        $technician_arrival =$row['technician_arrival'];
+                                                        $technician_leaving =$row['technician_leaving'];
+                                                        $departure = substr($technician_departure,11);
+                                                        $arrival = substr($technician_arrival,11); 
+                                                        $leaving = substr($technician_leaving,11);
+                                                        
+                                                        if (!function_exists('difftime')) {
+                                                            function difftime($techniciandeparture, $technicianarrival) {
+                                                                $dif=array();
+                                                                $first = strtotime($techniciandeparture);
+                                                                $second = strtotime($technicianarrival);
+                                                                $TravelTime = abs($first - $second);
+                                                                $dif['s'] = floor($TravelTime);
+                                                                $dif['m'] = floor($TravelTime/(60) % 60 );
+                                                                $dif['h'] = floor($TravelTime/(60*60)); 
+                                                      
+                                                                return $dif;
+                                                            }
+                                                        }
+                                                
+                                                        if (!function_exists('difftime2')) {
+                                                            function difftime2($technicianarrival, $technicianleaving) {
+                                                                $dif2=array();
+                                                                $first = strtotime($technicianarrival);
+                                                                $second = strtotime($technicianleaving);
+                                                                $WorkTime = abs($first - $second);
+                                                                $dif['s'] = floor($WorkTime);
+                                                                $dif['m'] = floor($WorkTime/(60) % 60 );
+                                                                $dif['h'] = floor($WorkTime/(60*60));
                                                             
-                                                            return $dif2;
+                                                                return $dif2;
+                                                            }
                                                         }
-                                                    }
-                        ?> 
-                                
-                        <tbody style="height: 38px; box-shadow:none;">
-                            <td style="text-align: center;"></td>
-                            <td style="text-align: center;"><?= $row['job_assign']; ?></td>
-                            <td style="text-align: center;"><?= $row['username']; ?></td>
-                            <td style="text-align: center;"><?= $row['customer_name']; ?></td>
-                            <td style="padding-left: 7px;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
-                            <td style="text-align: center;"><?php echo "$departure" ?></td>
-                            <td style="text-align: center;"><?php echo "$arrival" ?></td>
-                            <td style="text-align: center;"><?php echo "$leaving" ?></td>
-                            <td style="text-align: center;"><?php echo difftime($arrival, $leaving)['h']?> hrs <?php echo difftime($arrival, $leaving)['m']?> mins</td>
-                            <td style="text-align: center;"><?php echo difftime($departure, $arrival)['h']?> hrs <?php echo difftime($departure, $arrival)['m']?> mins</td>
-                        </tbody> 
+                                        ?>
                                     
-                        <?php
-                            
-                            } }
-                                else {
-                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
-                                }
-                            }
-                        ?>
-
-                    </table>
-                </div>
-                
-                <script type="text/javascript">
-                    var $textArea = $("#textarea-container");
-                    resizeTextArea($textArea);
-                    $textArea.off("keyup.textarea").on("keyup.textarea", function() {
-                        resizeTextArea($(this));
-                    });        
-                </script>
-
-                </div>
-                <!-- End of Remark - Total Workers -->
-                
-                <!-- Remark - Workers Attendance -->
-                <div class="remarks-worker" style="margin: 20px;padding-top: 70px;  margin-top:-50px">
-                <b>Technician Attendance And Rest Hour</b>
-                <div class="staff-update" style="margin-top: 50px; margin: 20px;">
-                    <table id="auto" style="width:100%; background-color:#ffffff; box-shadow:none;">
-                        <thead style="height: 42px; box-shadow:none;">
-                            <th style="width: 3%;"></th>
-                            <th style="width: 20%;">Leader</th>
-                            <th style="width: 20%;">Assistant</th>
-                            <th style="width: 10%">Clock In</th>
-                            <th style="width: 10%;">Clock Out</th>
-                            <th style="width: 10%;">Rest Out</th>
-                            <th style="width: 10%;">Rest In</th>
-                        </thead>
-                        
-                        <?php
-                            
-                            include_once 'dbconnect.php';
-                            
-                            if(isset($_GET['DateAssign']))
-                                {
-                                    $DateAssign = $_GET['DateAssign'];
+                                        <tr>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['job_assign']; ?></td>
+                                            <td style='text-align: center; vertical-align: middle;'><?= $row['username']; ?></td>
+                                            <td style="vertical-align: middle;"><?= $row['customer_name']; ?></td>
+                                            <td style="vertical-align: middle;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$departure" ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$arrival" ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$leaving" ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo difftime($arrival, $leaving)['h']?> hrs <?php echo difftime($arrival, $leaving)['m']?> mins</td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo difftime($departure, $arrival)['h']?> hrs <?php echo difftime($departure, $arrival)['m']?> mins</td>
+                                        </tr>
                                     
-                                    $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
-                                    
-                                    $result = mysqli_query($conn, $sql);
+                                        <?php
+                                            
+                                            $counter++;  
+                                                    } 
+                                                }
                                                 
-                                    if(mysqli_num_rows($result) > 0) {
-                                        foreach($result as $row)
-                                        {
-                        ?>
+                                                else {
+                                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+                                                }
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
 
-                        <tbody style="box-shadow:none;">
-                            <td style="text-align: center;"></td>
-                            <td style="padding-left: 7px;"><?php echo $row["tech_leader"]; ?></td>
-                            <td style="padding-left: 7px;"><?php echo $row["username"]; ?></td>
-                            <td style="text-align: center;"><?php echo $row["tech_clockin"]; ?></td>
-                            <td style="text-align: center;"><?php echo $row["tech_clockout"]; ?></td>
-                            <td style="text-align: center;"><?php echo $row["technician_out"]; ?></td>
-                            <td style="text-align: center;"><?php echo $row["technician_in"]; ?></td>
-                        </tbody> 
-                                    
-                        <?php
-                            } }
-                                else {
-                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
-                                }
-                            }
-                        ?>
-
-                    </table>
-                </div>
-                </div>
-                <!-- End of Remark - Workers Attendance -->
-                
-                <!-- Remark - Absent Technician -->
-                <div class="remarks-worker" style="margin: 20px;padding-top: 70px; margin-top:-50px">
-                <b>Technician On Leave</b>
-                <div class="staff-update" style="margin-top: 50px; margin: 20px;">
-                    <table id="auto" style="width:100%; background-color:#ffffff; box-shadow:none;">
-                        <thead style="height: 42px; box-shadow:none;">
-                            <th style="width: 3%;"></th>
-                            <th style="width: 20%;">Technician</th>
-                            <th style="width: 20%;"></th>
-                        </thead>
-                        
-                        <?php
+                                <script>
+                                    $(document).ready(function() {
+                                        var previousName = null;
+                                        var count = 1;
+                                        var index2;
+                                        
+                                        $("#tbody tr").each(function(index) {
+                                            index2 = index;
+                                            
+                                            var currentName = $(this).find("td:eq(1)").text();
+                                            
+                                            if (previousName !== currentName) {
+                                                if (count > 1) {
+                                                    $("#tbody tr:eq(" + (index - count) + ") td:eq(1)").attr("rowspan", count);
+                                                }
+                                                
+                                                count = 1;
+                                                
+                                                previousName = currentName;
+                                            }
+                                            
+                                            else {
+                                                count++;
+                                                
+                                                $(this).find("td:eq(1)").hide();
+                                            }
+                                        });
+                                        
+                                        if (count > 1){
+                                            $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(1)").attr("rowspan", count);
+                                        }
+                                    });
+                                </script>
+                            </div>
                             
-                            include_once 'dbconnect.php';
-                            
-                            if(isset($_GET['DateAssign'])) 
-                                {
-                                    $DateAssign = $_GET['DateAssign'];
+                            <div class="table-responsive mb-3">
+                                <label for="" class="fw-bold mb-3">Attendance And Rest Time</label>
+                                <table id="myTable" class="table table-bordered border-dark">
+                                    <thead>
+                                        <tr>
+                                            <th style='text-align: center;'>No</th>
+                                            <th style='text-align: center;'>Leader</th>
+                                            <th style='text-align: center;'>Assistant</th>
+                                            <th style='text-align: center; white-space: nowrap;'>Clock In</th>
+                                            <th style='text-align: center; white-space: nowrap;'>Clock Out</th>
+                                            <th style='text-align: center; white-space: nowrap;'>Rest Out</th>
+                                            <th style='text-align: center; white-space: nowrap;'>Rest In</th>
+                                        </tr>
+                                    </thead>
                                     
-                                    $query = mysqli_query($conn, "SELECT * FROM tech_off WHERE leave_date='$DateAssign'");
-                                    
-                                    if(mysqli_num_rows($query) > 0) {
-                                        foreach($query as $row)
-                                        { 
-                        ?> 
+                                    <tbody>
+                                        <?php
+                                            
+                                            include_once 'dbconnect.php';
+                                            
+                                            if(isset($_GET['DateAssign'])) {
+                                                $DateAssign = $_GET['DateAssign'];
+                                                
+                                                $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
+                                                
+                                                $result = mysqli_query($conn, $sql);
+                                                
+                                                if(mysqli_num_rows($result) > 0) {
+                                                    $counter = 1;
+                                                    
+                                                    foreach($result as $row) {
+                                        ?>
                                 
-                        <tbody style="box-shadow:none;">
-                            <td style="text-align: center;"></td>
-                            <td style="text-align: center;"><?= $row['tech_name']; ?></td>
-                            <td style="text-align: center; color:red;">OFF</td>
-                        </tbody> 
-                                    
-                        <?php
-                            } }
-                                else {
-                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
-                                }
-                            }
-                        ?>
+                                        <tr>
+                                            <td style='text-align: center; white-space: nowrap;'><?= $counter ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["tech_leader"]; ?></td>
+                                            <td style='text-align: center;'><?php echo $row["username"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["tech_clockin"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["tech_clockout"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["technician_out"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["technician_in"]; ?></td>
+                                        </tr>
+                                   
+                                        <?php
+                                            
+                                            $counter++;
+                                                    } 
+                                                }
+                                                
+                                                else {
+                                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+                                                }
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="table-responsive mb-3">
+                                <label for="" class="fw-bold mb-3">Technician On Leave</label>
+                                <table id="myTable" class="table table-bordered border-dark">
+                                    <thead>
+                                        <tr>
+                                            <th style='text-align: center;'>No</th>
+                                            <th style='text-align: center; white-space: nowrap;'>Technician</th>
+                                            <th style='text-align: center;'></th>
+                                        </tr>
+                                    </thead>
 
-                    </table>
+                                    <tbody>
+                                        <?php
+                                            
+                                            include_once 'dbconnect.php';
+                                            
+                                            if(isset($_GET['DateAssign'])) {
+                                                $DateAssign = $_GET['DateAssign'];
+                                                
+                                                $query = mysqli_query($conn, "SELECT * FROM tech_off WHERE leave_date='$DateAssign'");
+                                                
+                                                if(mysqli_num_rows($query) > 0) {
+                                                    $counter = 1;
+                                                    
+                                                    foreach($query as $row) {
+                                        ?>
+                                    
+                                        <tr>
+                                            <td style='text-align: center;'><?= $counter ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?= $row['tech_name']; ?></td>
+                                            <td style='text-align: center; color:red;' class="fw-bold">OFF</td>
+                                        </tr>
+                                  
+                                        <?php
+                                            
+                                            $counter++;
+                                                    } 
+                                                }
+                                                
+                                                else {
+                                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+                                                }
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                </div>
-                <!-- End of Remark - Absent Technician -->
-            </form>
-        </div>
-        
-        <script>
-            let arrow = document.querySelectorAll(".arrow");
-            for (var i = 0; i < arrow.length; i++) {
-                arrow[i].addEventListener("click", (e) => {
-                    let arrowParent = e.target.parentElement.parentElement;
-                    arrowParent.classList.toggle("showMenu");
-                    });
-                }
-                
-                let sidebar = document.querySelector(".sidebar");
-                let sidebarBtn = document.querySelector(".bx-menu");
-                console.log(sidebarBtn);
-                sidebarBtn.addEventListener("click", () => {
-                    sidebar.classList.toggle("close");
-                });
-        </script>
-</body>
-</html>
+            </section>
+        </main>        
+    </body>
+    </html>

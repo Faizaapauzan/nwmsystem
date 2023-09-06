@@ -1267,7 +1267,7 @@
                             }
                         </script>
                         <div class="card-footer d-flex justify-content-center">
-                            <button type="button" id="back_button" class="btn btn-danger w-25" style="margin-right: 10px;" onclick="back()">Back</button>
+                            <button type="button" id="back_button" class="btn btn-danger w-25" style="margin-right: 10px; background-color:#9c0101; border:none;" onclick="back()">Back</button>
                             <button type="button" id="next_button" class="btn btn-primary w-25" style="background-color: #081d45; border: none;" onclick="next()">Next</button>
                         </div>
                     </form>
