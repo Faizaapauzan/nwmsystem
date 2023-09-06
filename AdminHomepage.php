@@ -42,13 +42,47 @@
         <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
     </head>
 
+    <script>
+        $(document).ready(function() {
+            function toggleMobileView() {
+                if (window.innerWidth <= 768) {
+                    $('#home').attr('href', '#');
+                    $('#home').off('click'); // Remove any previous click event handler
+                    $('#home').click(function(e) {
+                        e.preventDefault(); // Prevent the default link behavior
+                        if ($('#mobile-view').css('display') === 'none'){
+                            $('#mobile-view').css('display', 'block');
+                        } else {
+                            $('#mobile-view').css('display', 'none');
+                        }
+                        
+                
+
+                    });
+                } else {
+                    // If the window width is greater than 768 pixels, restore the original link behavior
+                    $('#home').attr('href', 'Adminhomepage.php');
+                    $('#home').off('click'); // Remove any click event handler
+                }
+            }
+            
+            // Initial call to set up the event listener
+            toggleMobileView();
+
+            // Add a window resize event listener to update the behavior
+            $(window).resize(function() {
+                toggleMobileView();
+            });
+        });
+    </script>
+
     <body>
         <!--========== HEADER ==========-->
         <header class="header">
             <div class="header__container">
                 <div class="header__search">
                     <div class="dropdown1">
-                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <a href="Adminhomepage.php" id="home" style="font-weight: bold; font-size:25px; color:black;">Home</a>
                         <div class="dropdown-content1">
                             <a href="AdminJobTable.php">Job - Table view</a>
                             <a href="adminjoblisting.php">Job - List View</a>
@@ -60,6 +94,13 @@
                     <i class='bx bx-menu' id="header-toggle"></i>
                 </div>
                 
+            </div>
+            <div class="mobile-view" id="mobile-view">
+                <div class="dropdown-content2" id="dropdown-content2">
+                    <a href="Adminhomepage.php">Home</a>
+                    <a href="AdminJobTable.php">Table View</a>
+                    <a href="adminjoblisting.php">List View</a>
+                </div>
             </div>
         </header>
 
@@ -2100,7 +2141,7 @@
                                                     <input type="hidden" id="jobregister_idreport" name="jobregister_id" value="">
 
                                                     <div class="input-group">
-                                                        <input type="text" id="srvcreportdate" name="srvcreportdate" class="form-control border border-dark" value="<?php $date = date('d-m-Y');?>" readonly>
+                                                        <input type="text" id="srvcreportdate" name="srvcreportdate" class="form-control border border-dark" value="<?php echo date('d-m-Y');?>" readonly>
                                                         <button class="btn userinfo" id="userinfo" style="width: fit-content; background-color: #081d45; color: #fff;" type="button">New</button>
                                                         <button class="btn useredit" id="useredit" style="width: fit-content; background-color: #ff0000; color: #fff;" type="button">Edit</button>
                                                     </div>
