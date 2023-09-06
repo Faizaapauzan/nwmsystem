@@ -1,579 +1,648 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
-    <meta name="keywords" content="" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-    <title>NWM Job of The Day</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <title>Job Of The Day</title>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/styles.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-   
-    <link href="css/adminjoblistinghomepage.css" rel="stylesheet" />
-    <link href="css/adminjoblisting.css" rel="stylesheet" />
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!--========== JS ==========-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-</head>
-
-<style>
-    #auto { counter-reset: rowNumber; }
-
-    #auto tr td:first-child { counter-increment: rowNumber; }
-
-    #auto tr td:first-child::before { content: counter(rowNumber); }
-</style>
-
-<body>
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    </head>
     
-    <!-- Sidebar Navigation -->
-    <div class="sidebar close">
-        <div class="logo-details">
-            <img src="neo.png" height="65" width="75"></img>
-            <span class="logo_name">NWM SYSTEM</span>
-        </div>
-        
-        <div class="welcome" style="color: white; text-align: center; font-size:small;">Hi  <?php echo $_SESSION["username"] ?>!</div>
-        
-        <ul class="nav-links">
-            <li><a href="jobregister.php">
-                <i class='bx bx-registered'></i>
-                <span class="link_name">Register Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobregister.php">Register Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="attendanceadmin.php">
-                        <i class='bx bx-calendar-check'></i><span class="link_name">Attendance</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="attendanceadmin.php">Attendance</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="staff.php">
-                        <i class='bx bx-id-card'></i><span class="link_name">Staff</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="staff.php">Staff</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="technicianlist.php">
-                    <i class='fa fa-users'></i><span class="link_name">Technician</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="technicianlist.php">Technician</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="customer.php">
-                    <i class='bx bx-user'></i><span class="link_name">Customers</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="customer.php">Customers</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <div class="iocn-link">
-                    <a href="machine.php">
-                        <i class='fa fa-medium'></i><span class="link_name">Machine</span>
-                    </a>
-                </div>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="machine.php">Machine</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="accessories.php">
-                    <i class='bx bx-wrench'></i><span class="link_name">Accessories</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="accessories.php">Accessories</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobtype.php">
-                    <i class='bx bx-briefcase'></i><span class="link_name">Job Type</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobtype.php">Job Type</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcompleted.php">
-                    <i class='fa fa-check-square-o'></i><span class="link_name">Completed Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcompleted.php">Compeleted Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="jobcanceled.php">
-                    <i class='fa fa-minus-square'></i><span class="link_name">Canceled Job</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="jobcanceled.php">Canceled Job</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="">
-                    <i class='bx bxs-report'></i><span class="link_name">Report</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="adminreport.php">Admin Report</a></li>
-                    <li><a class="link_name" href="report.php">Service Report</a></li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="logout.php">
-                    <i class='bx bx-log-out'></i><span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Sidebar Navigation -->
-    
-    <section class="home-section">
-        <!-- Home button -->
-        <nav>
-            <div class="home-content">
-                <i class='bx bx-menu'></i>
-                <a>
-                    <button style="background-color: #ffffff; color: black; font-size: 26px; padding: 29px -49px; margin-left: -17px; border: none; cursor: pointer; width: 100%;" class="btn-reset" onclick="document.location='Adminhomepage.php'" ondblclick="document.location='adminjoblisting.php'">Home</button>
-                </a>
-            </div>
-        </nav>
-        <!-- End of Home button -->
-        
-        <div class="machineList" style="margin-top: 27px; margin: 20px;">
-            <h1>Job of The Day</h1>
-            <br/>
-            
-            <!-- Incomplete Job -->
-            <?php
-                
-                include 'dbconnect.php';
-                
-                $numRow = "SELECT * FROM job_register WHERE job_status = 'Incomplete' 
-                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
-                
-                $numRow_run = mysqli_query ($conn,$numRow);
-                
-                if ($row_Total = mysqli_num_rows($numRow_run)) {
-                    echo '<b>Incomplete Job - '.$row_Total.'</b>';
-                }
-                
-                else {
-                    echo '<b>Incomplete Job - No Data</b>';
-                }
-            ?>
+    <style>
+        ::-webkit-scrollbar {display: none;}
 
-            <br/>
-            <br/>
-            <table class="table table-bordered" id="auto" style="box-shadow:none; border-color: black; background-color:#ffffff;">
-                <thead style="box-shadow:none;">
-                    <tr>
-                        <th style="border-color: black;"></th>
-                        <th style="border-color: black;">Leader</th>
-                        <th style="border-color: black;">Place</th>
-                        <th style="border-color: black;">Machine</th>
-                        <th style="border-color: black;">Reason</th>
-                        <th style="border-color: black;">Last Update Date</th>
-                    </tr>
-                </thead>
+        .dropdown:hover .dropbtn {color:#f5f5f5}
+        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
 
-                    <?php
-                        include 'dbconnect.php';
-                        
-                        $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Incomplete' AND (job_cancel = '' OR job_cancel IS NULL)
-                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
-                    
-                        while($row = $results->fetch_assoc()) {
-                          
-                            $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
-                            $datemodify = substr($jobregisterlastmodify_at,0,11); 
-                    ?>
-                
-                <tbody>
-                    <tr>
-                        <td style="border-color: black;"></td>
-                        <td style="border-color: black;" 
-                            id="<?php echo $row["jobregister_id"]; ?>"
-                            data-id="<?php echo $row['jobregister_id'];?>"
-                            data-idlagi="<?php echo $row['job_assign'];?>"
-                            class = '<?php echo $row["jobregister_id"];?>' 
-                            onClick="document.getElementById('doubleClick-info').style.display='block'">
-                            <p style="text-decoration: none; text-align: center;" 
-                               data-id="<?php echo $row['jobregister_id'];?>" 
-                               data-idlagi="<?php echo $row['job_assign'];?>"
-                               class = 'JobInfo'><?php echo $row["job_assign"]; ?>
-                            </p>
-                        </td>
-                        <td style="border-color: black;"><?php echo $row['customer_name']?></td>
-                        <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
-                        <td style="border-color: black;"><?php echo $row['reason']?></td>
-                        <td style="border-color: black;"><?php echo $datemodify ?></td>
-                    </tr>
-                </tbody>
-                    
-                    <?php } ?>
+        .dropdown-content a:hover {background-color:#f1f1f1}
+        .dropdown-content1 a:hover {background-color:#f1f1f1}
 
-            </table>
-            <!-- End of Incomplete Job -->
+        .dropdown:hover .dropdown-content {display:block}
+        .dropdown1:hover .dropdown-content1 {display:block}
 
-            <!-- Pending Job -->
-            <?php
-                
-                include 'dbconnect.php';
-                
-                $numRow = "SELECT * FROM job_register WHERE job_status = 'Pending'
-                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
-                
-                $numRow_run = mysqli_query ($conn,$numRow);
-                
-                if ($row_Total = mysqli_num_rows($numRow_run)) {
-                    echo '<b>Pending Job - '.$row_Total.'</b>';
-                }
-                
-                else {
-                    echo '<b>Pending Job - No Data</b>';
-                }
-            ?>
-
-            <br/>
-            <br/>
-            <table class="table table-bordered" id="auto" style="box-shadow:none; border-color: black; background-color:#ffffff;">
-                <thead style="box-shadow:none;">
-                    <tr>
-                        <th style="border-color: black;"></th>
-                        <th style="border-color: black;">Leader</th>
-                        <th style="border-color: black;">Place</th>
-                        <th style="border-color: black;">Machine</th>
-                        <th style="border-color: black;">Reason</th>
-                        <th style="border-color: black;">Last Update Date</th>
-                    </tr>
-                </thead>
-
-                    <?php
-                        include 'dbconnect.php';
-                        
-                        $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending' AND (job_cancel = '' OR job_cancel IS NULL)
-                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
-                    
-                        while($row = $results->fetch_assoc()) {
-                          
-                            $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
-                            $datemodify = substr($jobregisterlastmodify_at,0,11); 
-                    ?>
-
-                <tbody>
-                    <tr>
-                        <td style="border-color: black;"></td>
-                        <td style="border-color: black;" 
-                            id="<?php echo $row["jobregister_id"]; ?>"
-                            data-id="<?php echo $row['jobregister_id'];?>"
-                            data-idlagi="<?php echo $row['job_assign'];?>"
-                            class = '<?php echo $row["jobregister_id"];?>' 
-                            onClick="document.getElementById('doubleClick-info').style.display='block'">
-                            <p style="text-decoration: none; text-align: center;" 
-                               data-id="<?php echo $row['jobregister_id'];?>" 
-                               data-idlagi="<?php echo $row['job_assign'];?>"
-                               class = 'JobInfo'><?php echo $row["job_assign"]; ?>
-                            </p>
-                        </td>
-                        <td style="border-color: black;"><?php echo $row['customer_name']?></td>
-                        <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
-                        <td style="border-color: black;"><?php echo $row['reason']?></td>
-                        <td style="border-color: black;"><?php echo $datemodify ?></td>
-                    </tr>
-                </tbody>
-
-                    <?php } ?>
-
-            </table>
-            <!-- End of Pending Job -->
-
-            <!-- Planned Job -->
-            <?php
-                
-                include 'dbconnect.php';
-                
-                $numRow = "SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
-                           AND (job_cancel IS NULL OR job_cancel = ' ')
-                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing')
-                           LIMIT 50;";
-                
-                $numRow_run = mysqli_query ($conn,$numRow);
-                
-                if ($row_Total = mysqli_num_rows($numRow_run)) {
-                    echo '<b>Planned Job For The Day - '.$row_Total.'</b>';
-                }
-                
-                else {
-                    echo '<b>Planned Job For The Day - No Data</b>';
-                }
-            ?>
-
-            <br/>
-            <br/>
-            <table class="table table-bordered" id="auto" style="box-shadow:none; border-color: black; background-color:#ffffff;">
-                <thead style="box-shadow:none;">
-                    <tr>
-                        <th style="border-color: black;"></th>
-                        <th style="border-color: black;">Leader</th>
-                        <th style="border-color: black;">Place</th>
-                        <th style="border-color: black;">Machine</th>
-                        <th style="border-color: black;">Status</th>
-                    </tr>
-                </thead>
-
-                    <?php
-                        include 'dbconnect.php';
-                        
-                        $results = $conn->query("SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
-                                                 AND (job_cancel IS NULL OR job_cancel = ' ')
-                                                 AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing')
-                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
-                    
-                        while($row = $results->fetch_assoc()) {
-                    ?>
-
-                <tbody>
-                    <tr>
-                        <td style="border-color: black;"></td>
-                        <td style="border-color: black;" 
-                            id="<?php echo $row["jobregister_id"]; ?>"
-                            data-id="<?php echo $row['jobregister_id'];?>"
-                            data-idlagi="<?php echo $row['job_assign'];?>"
-                            class = '<?php echo $row["jobregister_id"];?>' 
-                            onClick="document.getElementById('doubleClick-info').style.display='block'">
-                            <p style="text-decoration: none; text-align: center;" 
-                               data-id="<?php echo $row['jobregister_id'];?>" 
-                               data-idlagi="<?php echo $row['job_assign'];?>"
-                               class = 'JobInfo'><?php echo $row["job_assign"]; ?>
-                            </p>
-                        </td>
-                        <td style="border-color: black;"><?php echo $row['customer_name']?></td>
-                        <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
-                        <td style="border-color: black;"><?php echo $row['job_status']?></td>
-                    </tr>
-                </tbody>
-
-                    <?php } ?>
-
-            </table>
-            <!-- End of Planned Job -->
-
-            <!-- Unplanned Job -->
-            <?php
-                
-                include 'dbconnect.php';
-                
-                $numRow = "SELECT * FROM job_register WHERE
-                
-                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
-                    OR
-                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                    OR
-                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
-                    OR
-                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
-                    OR
-                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
-                    OR
-                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                    OR
-                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
-                    OR
-                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
-                    OR
-                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                    OR
-                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                    OR
-                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
-                    OR
-                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
-                    OR
-                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
-                    OR
-                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)   
-                
-                LIMIT 50";
-                
-                $numRow_run = mysqli_query ($conn,$numRow);
-                
-                if ($row_Total = mysqli_num_rows($numRow_run)) {
-                    echo '<b>Unplanned Job For The Day - '.$row_Total.'</b>';
-                }
-                
-                else {
-                    echo '<b>Unplanned Job For The Day - No Data</b>';
-                }
-            ?>
-
-            <br/>
-            <br/>
-            <table class="table table-bordered" id="auto" style="box-shadow:none; border-color: black; background-color:#ffffff;">
-                <thead style="box-shadow:none;">
-                    <tr>
-                        <th style="border-color: black;"></th>
-                        <th style="border-color: black;">Leader</th>
-                        <th style="border-color: black;">Place</th>
-                        <th style="border-color: black;">Machine</th>
-                        <th style="border-color: black;">Status</th>
-                    </tr>
-                </thead>
-
-                    <?php
-                        include 'dbconnect.php';
-                        
-                        $results = $conn->query("SELECT * FROM job_register WHERE
-                        
-                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
-                            OR
-                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                            OR
-                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
-                            OR
-                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
-                            OR
-                        (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
-                            OR
-                        (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                            OR
-                        (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
-                            OR
-                        (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
-                            OR
-                        (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                            OR
-                        (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                            OR
-                        (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
-                            OR
-                        (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
-                            OR
-                        (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
-                            OR
-                        (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)   
-                        
-                        ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
-                    
-                        while($row = $results->fetch_assoc()) {
-                    ?>
-
-                <tbody>
-                    <tr>
-                        <td style="border-color: black;"></td>
-                        <td style="border-color: black;"><?php echo $row['job_assign']?></td>
-                        <td style="border-color: black;" 
-                            id="<?php echo $row["jobregister_id"]; ?>"
-                            data-id="<?php echo $row['jobregister_id'];?>"
-                            data-idlagi="<?php echo $row['job_assign'];?>"
-                            class = '<?php echo $row["jobregister_id"];?>' 
-                            onClick="document.getElementById('doubleClick-info').style.display='block'">
-                            <p style="text-decoration: none; text-align: center;" 
-                               data-id="<?php echo $row['jobregister_id'];?>" 
-                               data-idlagi="<?php echo $row['job_assign'];?>"
-                               class = 'JobInfo'><?php echo $row["customer_name"]; ?>
-                            </p>
-                        </td>
-                        <td style="border-color: black;"><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
-                        <td style="border-color: black;"><?php echo $row['job_status']?></td>
-                    </tr>
-                </tbody>
-
-                    <?php } ?>
-
-            </table>
-            <!-- End of Unplanned Job -->
-        </div>
-    </section>
-
-    <!-- Job Listing Pop Up Modal -->
-    <div id="doubleClick-info" class="modal">
-        <div class="tabInfo">
-            <input type="radio" name="tabDoingInfo" id="tabDoingInfo1" checked="checked">
-            <label for="tabDoingInfo1" class="tabHeadingInfo">Job Info</label>
-            <div class="tab" id="JobInfoTab">
-                <div class="contentJobInfo">
-                    <div class="techClose" data-dismiss="modal" onclick="document.getElementById('doubleClick-info').style.display='none'">&times</div>
-                    <form action="homeindex.php" method="post">
-                        <div class="info-details">
-
-                        </div>
-                    </form>
-                </div>
-            </div>
-                    
-            <script type='text/javascript'>
-                $(document).ready(function () {
-                    $('body').on('click','.JobInfo',function() {
-                        var jobregister_id = $(this).data('id');
-                        $.ajax({
-                            url: 'AdminJoblistingJobinfo.php',
-                            type: 'post',
-                            data: {jobregister_id: jobregister_id},
-                            success: function (response) {
-                                $('.info-details').html(response);
-                                $('#doubleClick-info').modal('show');
-                            }
-                        });
-                    });
-                });
-            </script>
-        </div>
-    </div>
-    <!-- End of Job Listing Pop Up Modal -->
-    
-    <script>
-        let arrow = document.querySelectorAll(".arrow");
-        
-        for (var i = 0; i < arrow.length; i++) {
-                arrow[i].addEventListener("click", (e)=> {
-                        let arrowParent = e.target.parentElement.parentElement;
-                        arrowParent.classList.toggle("showMenu");
-                    });
+        .dropdown-content {
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:auto;
+            padding-left:20px;
+            bottom:55px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            z-index:1
         }
         
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
-        
-        console.log(sidebarBtn);
-        sidebarBtn.addEventListener("click", ()=> {
-                sidebar.classList.toggle("close");
-        });
-    </script>
+        .dropdown-content1{
+            display:none;
+            position:absolute;
+            background-color:#f9f9f9;
+            min-width:160px;
+            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
+            padding:12px 16px;z-index:1
+        }
 
-</body>
-</html>
+        .dropdown-content a {
+            color:#000;
+            padding:10px 10px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }
+        
+        .dropdown-content1 a{
+            color:#000;
+            padding:12px 16px;
+            text-decoration:none;
+            display:block;
+            padding-right:7px
+        }   
+    </style>
+    
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+                <div class="header__search">
+                    <div class="dropdown1">
+                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <div class="dropdown-content1">
+                            <a href="AdminJobTable.php">Job - Table view</a>
+                            <a href="adminjoblisting.php">Job - List View</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+                
+            </div>
+        </header>
+
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="Adminhomepage.php" class="nav__link nav__logo">
+                        <img src="neo.png" height="50" width="60"></img>
+                    </a>
+
+                    <div class="nav__list">
+                        <div class="nav__items">
+
+                            <a href="jobregister.php" class="nav__link active">
+                                <i class='bx bx-folder-plus nav__icon'></i>
+                                <span class="nav__name">New Job</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="staff.php" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Staff</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="staff.php" class="nav__dropdown-item">All User</a>
+                                        <a href="technicianlist.php" class="nav__dropdown-item">Technician</a>
+                                        <a href="attendanceadmin.php" class="nav__dropdown-item">Attendance</a>
+                                        <a href="AdminLeave.php" class="nav__dropdown-item">Leave</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="customer.php" class="nav__link">
+                                <i class='bx bx-buildings nav__icon'></i>
+                                <span class="nav__name">Customer</span>
+                            </a>
+
+                            <a href="machine.php" class="nav__link">
+                                <i class='bx bx-cog nav__icon'></i>
+                                <span class="nav__name">Machine</span>
+                            </a>
+
+                            <a href="accessories.php" class="nav__link">
+                                <i class='bx bx-wrench nav__icon'></i>
+                                <span class="nav__name">Accessory</span>
+                            </a>
+
+                            <a href="jobtype.php" class="nav__link">
+                                <i class='bx bx-highlight nav__icon'></i>
+                                <span class="nav__name">Job Type</span>
+                            </a>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-file nav__icon'></i>
+                                    <span class="nav__name">Record</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-task nav__icon'></i>
+                                    <span class="nav__name">Reports</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
+                                        <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Job Of The Day</h4>
+                    </div>
+                    
+                    <div class="card-body">
+                        <!-- Incomplete Job -->
+                        <div class="table-responsive">
+                            <?php
+                                
+                                include 'dbconnect.php';
+                                
+                                $numRow = "SELECT * FROM job_register WHERE job_status = 'Incomplete' 
+                                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
+                                
+                                $numRow_run = mysqli_query ($conn,$numRow);
+                                
+                                if ($row_Total = mysqli_num_rows($numRow_run)) {
+                                    echo '<label for="" class="fw-bold mb-3">Incomplete Job - '.$row_Total.'</label>';
+                                }
+                                
+                                else {
+                                    echo '<label for="" class="fw-bold mb-3">Incomplete Job - No Data</label>';
+                                }
+                            ?>
+                            
+                            <table class="table table-bordered border-dark">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'>No</th>
+                                        <th style='text-align: center;'>Leader</th>
+                                        <th style='text-align: center;'>Place</th>
+                                        <th style='text-align: center;'>Machine</th>
+                                        <th style='text-align: center;'>Reason</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Last Update Date</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                        
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Incomplete' AND (job_cancel = '' OR job_cancel IS NULL)
+                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                    
+                                        while($row = $results->fetch_assoc()) {
+                                            $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
+                                            $datemodify = substr($jobregisterlastmodify_at,0,11); 
+                                    ?>
+                                    <tr>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
+                                        <td style='text-align: center; vertical-align: middle;'>
+                                            <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
+                                        </td>
+                                        <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
+                                        <td style='vertical-align: middle;'><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
+                                        <td style='text-align: center; vertical-align: middle;'><?php echo $row['reason']?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $datemodify ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End of Incomplete Job -->
+
+                        <!-- Pending Job -->
+                        <div class="table-responsive">
+                            <?php
+                                
+                                include 'dbconnect.php';
+                                
+                                $numRow = "SELECT * FROM job_register WHERE job_status = 'Pending'
+                                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
+                
+                                $numRow_run = mysqli_query ($conn,$numRow);
+                                
+                                if ($row_Total = mysqli_num_rows($numRow_run)) {
+                                    echo '<label for="" class="fw-bold mb-3">Pending Job - '.$row_Total.'</label>';
+                                }
+                
+                                else {
+                                    echo '<label for="" class="fw-bold mb-3">Pending Job - No Data</label>';
+                                }
+                            ?>
+                            
+                            <table class="table table-bordered border-dark">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'>No</th>
+                                        <th style='text-align: center;'>Leader</th>
+                                        <th style='text-align: center;'>Place</th>
+                                        <th style='text-align: center;'>Machine</th>
+                                        <th style='text-align: center;'>Reason</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Last Update Date</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                        
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending' AND (job_cancel = '' OR job_cancel IS NULL)
+                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                    
+                                        while($row = $results->fetch_assoc()) {
+                                            $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
+                                            $datemodify = substr($jobregisterlastmodify_at,0,11); 
+                                    ?>
+                                    <tr>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
+                                        <td style='text-align: center; vertical-align: middle;'>
+                                            <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
+                                        </td>
+                                        <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
+                                        <td style='vertical-align: middle;'><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
+                                        <td style='text-align: center; vertical-align: middle;'><?php echo $row['reason']?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $datemodify ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End of Pending Job -->
+
+                        <!-- Planned Job -->
+                        <div class="table-responsive">
+                            <?php
+                                
+                                include 'dbconnect.php';
+                                
+                                $numRow = "SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
+                                           AND (job_cancel IS NULL OR job_cancel = ' ')
+                                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing') LIMIT 50;";
+                
+                                $numRow_run = mysqli_query ($conn,$numRow);
+                
+                                if ($row_Total = mysqli_num_rows($numRow_run)) {
+                                    echo '<label for="" class="fw-bold mb-3">Planned Job For The Day - '.$row_Total.'</label>';
+                                }
+                                
+                                else {
+                                    echo '<label for="" class="fw-bold mb-3">Planned Job For The Day - No Data</label>';
+                                }
+                            ?>
+
+                            <table class="table table-bordered border-dark">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'>No</th>
+                                        <th style='text-align: center;'>Leader</th>
+                                        <th style='text-align: center;'>Place</th>
+                                        <th style='text-align: center;'>Machine</th>
+                                        <th style='text-align: center;'>Status</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query("SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
+                                                                 AND (job_cancel IS NULL OR job_cancel = ' ')
+                                                                 AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing')
+                                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
+                                        
+                                        while($row = $results->fetch_assoc()) {
+                                    ?>
+                                    <tr>
+                                        <td style='text-align: center; vertical-align: middle;'></td>
+                                        <td style='text-align: center; vertical-align: middle;'>
+                                            <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
+                                        </td>
+                                        <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
+                                        <td style='vertical-align: middle;'><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row['job_status']?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End of Planned Job -->
+
+                        <!-- Unplan Job -->
+                        <div class="table-responsive">
+                            <?php
+                                
+                                include 'dbconnect.php';
+                                
+                                $numRow = "SELECT * FROM job_register WHERE 
+                                            (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
+                                                OR
+                                            (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                OR
+                                            (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                OR
+                                            (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
+                                                OR
+                                            (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
+                                                OR
+                                            (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                OR
+                                            (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
+                                                OR
+                                            (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                OR
+                                            (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                OR
+                                            (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                OR
+                                            (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
+                                                OR
+                                            (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                OR
+                                            (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+                                                OR
+                                            (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) LIMIT 50";
+                
+                                $numRow_run = mysqli_query ($conn,$numRow);
+                
+                                if ($row_Total = mysqli_num_rows($numRow_run)) {
+                                    echo '<label for="" class="fw-bold mb-3">Unplanned Job For The Day - '.$row_Total.'</label>';
+                                }
+                                
+                                else {
+                                    echo '<label for="" class="fw-bold mb-3">Unplanned Job For The Day - No Data</label>';
+                                }
+                            ?>
+
+                            <table class="table table-bordered border-dark">
+                                <thead>
+                                    <tr>
+                                        <th style='text-align: center;'>No</th>
+                                        <th style='text-align: center;'>Place</th>
+                                        <th style='text-align: center;'>Machine</th>
+                                        <th style='text-align: center;'>Status</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                        
+                                        include 'dbconnect.php';
+                                        
+                                        $results = $conn->query("SELECT * FROM job_register WHERE
+                                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
+                                                                    OR
+                                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                                    OR
+                                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                                    OR
+                                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
+                                                                    OR
+                                                                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
+                                                                    OR
+                                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                                    OR
+                                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
+                                                                    OR
+                                                                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                                    OR
+                                                                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                                    OR
+                                                                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                                    OR
+                                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
+                                                                    OR
+                                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                                    OR
+                                                                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
+                                                                    OR
+                                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
+                    
+                                        while($row = $results->fetch_assoc()) {
+                                    ?>
+
+                                    <tr>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
+                                        <td style='text-align: center; vertical-align: middle;'>
+                                            <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row["customer_name"]; ?></button>
+                                        </td>
+                                        <td style='text-align: center; vertical-align: middle;'><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row['job_status']?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End of Unplan Job -->
+
+                        <!-- Job Info Popup Modal -->
+                        <div class="modal fade" id="jobInfoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Job Info</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Job Priority</label>
+                                                <p id="view_jobPriority" class="form-control"></p>
+                                            </div>
+                                            
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Job Order Number</label>
+                                                <p id="view_JON" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Job Name</label>
+                                                <p id="view_jobName" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Job Description</label>
+                                                <p id="view_jobDesc" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Job Status</label>
+                                                <p id="view_jobStatus" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Assign Date</label>
+                                                <p id="view_assgnDate" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Delivery Date</label>
+                                                <p id="view_delDate" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Requested Date</label>
+                                                <p id="view_reqDate" class="form-control"></p>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="fw-bold">Customer Name</label>
+                                                <p id="view_custName" class="form-control"></p>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="fw-bold">Customer Address</label>
+                                                <p id="view_custAddr1" class="form-control"></p>
+                                                <div class="d-grid d-flex gap-2 mt-2">
+                                                    <p id="view_custAddr2" class="form-control"></p>
+                                                    <p id="view_custAddr3" class="form-control"></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Customer Grade</label>
+                                                <p id="view_custGrade" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Customer PIC</label>
+                                                <p id="view_custPIC" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Customer Phone Number 1</label>
+                                                <p id="view_custPhone1" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Customer Phone Number 2</label>
+                                                <p id="view_custPhone2" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Machine Brand</label>
+                                                <p id="view_machBrand" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Machine Type</label>
+                                                <p id="view_machType" class="form-control"></p>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="fw-bold">Machine Name</label>
+                                                <p id="view_machName" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Serial Number</label>
+                                                <p id="view_serNum" class="form-control"></p>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Accessory Require</label>
+                                                <p id="view_accReq" class="form-control"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            $(document).on('click', '.openModal', function () {
+                                var jobregister_id = $(this).val();
+                                
+                                $.ajax({
+                                    type: "GET",
+                                    url: "jobTableCode.php?jobregister_id=" + jobregister_id,
+                                    
+                                    success: function (response) {
+                                        var res = jQuery.parseJSON(response);
+                                        
+                                        if(res.status == 404) {
+                                            alert(res.message);
+                                        }
+                                        
+                                        else if(res.status == 200) {
+                                            $('#view_jobPriority').text(res.data.job_priority);
+                                            $('#view_JON').text(res.data.job_order_number);
+                                            $('#view_jobName').text(res.data.job_name);
+                                            $('#view_jobDesc').text(res.data.job_description);
+                                            $('#view_jobStatus').text(res.data.job_status);
+                                            $('#view_assgnDate').text(res.data.DateAssign);
+                                            $('#view_delDate').text(res.data.delivery_date);
+                                            $('#view_reqDate').text(res.data.requested_date);
+                                            $('#view_custName').text(res.data.customer_name);
+                                            $('#view_custAddr1').text(res.data.cust_address1);
+                                            $('#view_custAddr2').text(res.data.cust_address2);
+                                            $('#view_custAddr3').text(res.data.cust_address3);
+                                            $('#view_custGrade').text(res.data.customer_grade);
+                                            $('#view_custPIC').text(res.data.customer_PIC);
+                                            $('#view_custPhone1').text(res.data.cust_phone1);
+                                            $('#view_custPhone2').text(res.data.cust_phone2);
+                                            $('#view_machBrand').text(res.data.machine_brand);
+                                            $('#view_machType').text(res.data.machine_type);
+                                            $('#view_machName').text(res.data.machine_name);
+                                            $('#view_serNum').text(res.data.serialnumber);
+                                            $('#view_accReq').text(res.data.accessories_required);
+                                            
+                                            $('#jobInfoModal').modal('show');
+                                        }
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- End of Job Info Popup Modal -->
+                    </div>
+                </div>
+
+                <script src="assets/js/main.js"></script>
+
+            </section>
+        </main>        
+    </body>
+    </html>
