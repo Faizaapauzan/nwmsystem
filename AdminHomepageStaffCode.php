@@ -15,15 +15,21 @@
         $customer_name = mysqli_real_escape_string($conn, $_POST['customer_name']);
         $type_id = mysqli_real_escape_string($conn, $_POST['type_id']);
 
-        // Query 2: Using prepared statements
-        $query2 = "SELECT * FROM machine_list WHERE customer_name = ?";
+        $query2 = "SELECT * FROM machine_type WHERE brand_id = ?";
         $stmt2 = mysqli_prepare($conn, $query2);
-        mysqli_stmt_bind_param($stmt2, "s", $customer_name);
+        mysqli_stmt_bind_param($stmt2, "s", $rows['brand_id']);
         mysqli_stmt_execute($stmt2);
         $result2 = mysqli_stmt_get_result($stmt2);
         $rows2 = mysqli_fetch_all($result2);
 
-        $res = ['status' => 200, 'message' => 'Success', 'data' => $rows, 'data2' => $rows2];
+        $query3 = "SELECT * FROM machine_list WHERE type_id = ?";
+        $stmt3 = mysqli_prepare($conn, $query3);
+        mysqli_stmt_bind_param($stmt3, "s", $type_id);
+        mysqli_stmt_execute($stmt3);
+        $result3 = mysqli_stmt_get_result($stmt3);
+        $rows3 = mysqli_fetch_all($result3);
+
+        $res = ['status' => 200, 'message' => 'Success', 'data' => $rows, 'data2' => $rows2, 'data3' => $rows3];
         echo json_encode($res);
     }
 
