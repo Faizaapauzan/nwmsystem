@@ -28,6 +28,7 @@ if (isset($_POST["update"])) {
     $serialnumber = $_POST["serialnumber"];
     $machine_code = $_POST["machine_code"];
     $accessories_required = $_POST["accessories_required"];
+    $accessories_for = $_POST["accessories_for"];
     $machine_name = $_POST["machine_name"];
     $job_cancel = $_POST["job_cancel"];
     $job_status = $_POST["job_status"];
@@ -66,14 +67,15 @@ if (isset($_POST["update"])) {
             brand_id = ?,
             serialnumber = ?,
             accessories_required = ?,
+            accessories_for = ?,
             jobregisterlastmodify_by = ?
         WHERE jobregister_id = ?";
 
     // Prepare and bind parameters
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sssssssssssssssssssssssssssssss",
-        $job_name,
+    mysqli_stmt_bind_param($stmt, "ssssssssssssssssssssssssssssssss",
         $job_code,
+        $job_name,
         $job_order_number,
         $job_description,
         $DateAssign,
@@ -101,6 +103,7 @@ if (isset($_POST["update"])) {
         $brand_id,
         $serialnumber,
         $accessories_required,
+        $accessories_for,
         $jobregisterlastmodify_by,
         $jobregister_id
     );

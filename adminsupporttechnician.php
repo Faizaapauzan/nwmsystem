@@ -51,6 +51,8 @@
         &&
        isset($_POST['accessories_required']) && $_POST['accessories_required']!='' || $_POST['accessories_required']==''
         &&
+       isset($_POST['accessories_for']) && $_POST['accessories_for']!='' || $_POST['accessories_for']==''
+        &&
        isset($_POST['job_cancel']) && $_POST['job_cancel']!='' || $_POST['job_cancel']==''
         &&
        isset($_POST['jobregistercreated_by']) && $_POST['jobregistercreated_by']!='' || $_POST['jobregistercreated_by']==''
@@ -65,7 +67,7 @@
                                            job_name, job_code, job_description, requested_date, delivery_date, 
                                            customer_name, customer_code, customer_grade, cust_address1, cust_address2, 
                                            cust_address3, customer_PIC, cust_phone1, cust_phone2,
-                                           machine_name, machine_code, machine_type, serialnumber, machine_id, machine_brand, accessories_required, job_cancel, jobregistercreated_by, jobregisterlastmodify_by) 
+                                           machine_name, machine_code, machine_type, serialnumber, machine_id, machine_brand, accessories_required, accessories_for, job_cancel, jobregistercreated_by, jobregisterlastmodify_by) 
                        
                        VALUES ('".addslashes($_POST['job_priority'])."',
                                '".addslashes($_POST['support'])."',
@@ -91,6 +93,7 @@
                                  $machine_id,
                                '".addslashes($_POST['machine_brand'])."',
                                '".addslashes($_POST['accessories_required'])."',
+                               '".addslashes($_POST['accessories_for'])."',
                                '".addslashes($_POST['job_cancel'])."',
                                '".addslashes($_POST['jobregistercreated_by'])."',
                                '".addslashes($_POST['jobregisterlastmodify_by'])."')";

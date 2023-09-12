@@ -1598,7 +1598,7 @@
                                             
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="fw-bold">Job Name</label>
-                                                <select name="job_name" id="job_name" class="form-select">
+                                                <select name="job_code" id="job_code" class="form-select" onchange="GetJob(this.value)">
                                                     <option value="">
                                                         <?php
                                                             
@@ -1607,12 +1607,12 @@
                                                             $records = mysqli_query($conn, "SELECT * From jobtype_list");
                                                             
                                                             while($data = mysqli_fetch_array($records)) {
-                                                                echo "<option value='". $data['job_name'] ."'>" . $data['job_name']."</option>";
+                                                                echo "<option value='". $data['job_code'] ."'>" . $data['job_code']. "      -      " . $data['job_name']."</option>";
                                                             }
                                                         ?>
                                                     </option>
                                                 </select>
-                                                <input type="hidden" id="job_code" name="job_code" value="">
+                                                <input type="hidden" id="job_name" name="job_name" value="">
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
@@ -1810,7 +1810,10 @@
                                             
                                             <div class="col-md-6 mb-3" id="Accessory">
                                                 <label for="accessories_for" class="fw-bold">Accessory For</label>
-                                                <select name="accessories_for" id="accessories_for" class="form-select"></select>
+                                                <select name="accessories_for" id="accessories_for" class="form-select">
+                                                    <option value="Technician Use">Technician Use</option>
+                                                    <option value="Customer Request">Customer Request</option>
+                                                </select>
                                             </div>
                                             
                                             <div class="mb-3">
@@ -1877,6 +1880,7 @@
                                                 
                                                 var formData = new FormData(this);
                                                 formData.append("update", "true");
+                                              
                                                 
                                                 $.ajax({
                                                     type: "POST",
@@ -1954,16 +1958,7 @@
                                                 <p class="text-center fw-bold" id="assignupdateadminmessage"></p>
                                             </div>
                                         </div>
-
-                                        <script>
-                                            $(document).ready(function(){
-                                                $('#jobassignto').select2({
-                                                    dropdownParent: $('#assignupdate_form'),
-                                                    theme: 'bootstrap-5'
-                                                });
-                                            });
-                                        </script>
-                                        
+                    
                                         <div class="card">
                                             <div class="card-body" id="multipleassist">
                                                 <form class="form" id="adminassistant_form" method="post">
@@ -2200,8 +2195,8 @@
 
                                         <div class="card mt-3">
                                             <div class="card-body">
-                                                <form id="videoMachineAfter">
-                                                    <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                                <form id="submitAfterVideo">
+                                                    <input type="hidden" name="jobregister_id" id="jobregister_idv2" value="">
                                                     
                                                     <label for="" class="fw-bold mb-3">Video After Service</label>
                                                     <div class="input-group mb-3">
@@ -2210,7 +2205,7 @@
                                                         <button type="submit" class="btn" style="color: white; background-color: #081d45; width: fit-content;">Upload</button>
                                                     </div>
 
-                                                    <div id="previewvideoAfter"></div>
+                                                    <div id="previewAfterVideo"></div>
                                                     
                                                     <p class="text-center fw-bold" id="messageVideoAfter"></p>
                                                 </form>
@@ -2292,11 +2287,10 @@
                     function updateJobInfo(data2, data3) {
                         var i;
                         var jobregister_id = document.getElementById('jobregister_idinfo');
-                        var support = document.getElementById('support');
                         var job_priority = document.getElementById('job_priority');
                         var job_order_number = document.getElementById('job_order_number');
-                        var job_name = document.getElementById('job_name');
                         var job_code = document.getElementById('job_code');
+                        var job_name = document.getElementById('job_name');
                         var custModel = document.getElementById('custModel');
                         var customer_code = document.getElementById('customer_code');
                         var customer_name = document.getElementById('customer_name');
@@ -2320,6 +2314,7 @@
                         var machine_id = document.getElementById('machine_id');
                         var machine_code = document.getElementById('machine_code');
                         var accessories_required = document.getElementById('accessories_required');
+                        var accessories_for = document.getElementById('accessories_for');
                         var machine_name = document.getElementById('machine_name');
                         var job_cancel = document.getElementById('job_cancel');
                         var job_status = document.getElementById('job_status');
@@ -2327,11 +2322,16 @@
                         var jobregisterlastmodify_by = document.getElementById('jobregisterlastmodify_by');
                         
                         jobregister_id.value = job_table.jobregister_id;
-                        support.value = job_table.job_assign;
                         job_priority.value = job_table.job_priority;
                         job_order_number.value = job_table.job_order_number;
                         job_name.value = job_table.job_name;
-                        job_code.value = job_table.job_code;
+                        for (i = 0; i < job_code.options.length; i++) {
+                            if (job_code.options[i].text === (job_table.job_code + " - " + job_table.job_name)) {
+                                job_code.options[i].selected = true;
+                                
+                                break;
+                            }
+                        }
                         
                         for (i = 0; i < custModel.options.length; i++) {
                             if (custModel.options[i].text === job_table.customer_name) {
@@ -2402,6 +2402,13 @@
                                 break;
                             }
                         }
+                        for (i = 0; i < accessories_for.options.length; i++) {
+                            if (accessories_for.options[i].value === job_table.accessories_for) {
+                                accessories_for.options[i].selected = true;
+                                
+                                break;
+                            }
+                        }
                         
                         for (i = 0; i < job_cancel.options.length; i++) {
                             if (job_cancel.options[i].text === job_table.job_cancel) {
@@ -2421,6 +2428,34 @@
                         
                         reason.value = job_table.reason;
                         jobregisterlastmodify_by.value = '<?php echo $_SESSION["username"]?>'
+
+                        $('#job_code').select2({
+                            dropdownParent: $('#info'),
+                            theme: 'bootstrap-5'
+                        });
+
+                        $('#custModel').select2({
+                            dropdownParent: $('#info'),
+                            theme: 'bootstrap-5'
+                        });
+
+                        $('#brand_id').select2({
+                            dropdownParent: $('#info'),
+                            theme: 'bootstrap-5'
+                        });
+
+                        $('#type_id').select2({
+                            dropdownParent: $('#info'),
+                            theme: 'bootstrap-5'
+                        });
+
+                        $('#serialnumbers').select2({
+                            dropdownParent: $('#info'),
+                            theme: 'bootstrap-5'
+                        });
+
+
+                                      
                     }
                     
                     function addOptionType(element, data2) {
@@ -2471,6 +2506,30 @@
                             };
                         
                             xmlhttp.open("GET", "fetchmachine.php?machine_id=" + str, true);
+                            xmlhttp.send();
+                        }
+                    }
+
+                    function GetJob(str){
+                        if (str.length == 0){
+                            document.getElementById("job_name").value = "";
+                            document.getElementById("job_description").value = "";
+
+                            return;
+                        }
+
+                        else {
+                            var xmlhttp = new XMLHttpRequest();
+
+                            xmlhttp.onreadystatechange = function(){
+                                if (this.readyState == 4 && this.status == 200) {
+                                    var myObj = JSON.parse(this.responseText);                        
+                                    document.getElementById("job_name").value = myObj[0];
+                                    document.getElementById("job_description").value = myObj[1];
+                                }
+                            };
+
+                            xmlhttp.open("GET", "fetchjob.php?job_code=" + str, true);
                             xmlhttp.send();
                         }
                     }
@@ -2539,6 +2598,7 @@
                         var machine_id = $('input[name=machine_id]').val();
                         var machine_brand = $('input[name=machine_brand]').val();
                         var accessories_required = $('select[name=accessories_required]').val();
+                        var accessories_for = $('select[name=accessories_for]').val();
                         var job_cancel = $('select[name=job_cancel]').val();
                         var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
                         var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
@@ -2567,6 +2627,7 @@
                             machine_id != '' || machine_id == '', 
                             machine_brand != '' || machine_brand == '', 
                             accessories_required != '' || accessories_required == '', 
+                            accessories_for != '' || accessories_for == '',
                             job_cancel != '' || job_cancel == '', 
                             jobregistercreated_by != '' || jobregistercreated_by == '', 
                             jobregisterlastmodify_by != '' || jobregisterlastmodify_by == '') {
@@ -2596,6 +2657,7 @@
                                 machine_id: machine_id,
                                 machine_brand: machine_brand,
                                 accessories_required: accessories_required,
+                                accessories_for: accessories_for,
                                 job_cancel: job_cancel,
                                 jobregistercreated_by: jobregistercreated_by,
                                 jobregisterlastmodify_by: jobregisterlastmodify_by
@@ -2673,6 +2735,12 @@
 
                             tableBody.appendChild(newRow);
                         });
+
+                        $('#jobassignto').select2({
+                            dropdownParent: $('#assignupdate_form'),
+                            theme: 'bootstrap-5'
+                        });
+                                  
                     }
                     
                     function GetJobAss(str) {
@@ -3383,6 +3451,27 @@
 
                     // STAFF VIDEO TAB
                     $(document).ready(function() {
+                        function resetvideo() {
+                            var jobregister_id = job_table.jobregister_id;
+                            
+                            $.ajax({
+                                url: 'AdminHomepageStaffCode.php',
+                                type: 'post',
+                                data: {jobregister_id: jobregister_id,
+                                       video: true},
+                            
+                                success: function(response) {
+                                    var res = jQuery.parseJSON(response);
+                                    var data2 = res.data2;
+                                    var data3 = res.data3;
+                                    
+                                    updatevideotab(data2, data3);
+                                }
+                            });
+                        }
+                        function hidephotoMessage(messageContainer) {
+                            $(messageContainer).css("display", "none");
+                        }
                         function setupVideoUpload(formSelector, previewContainer, messageContainer) {
                             function previewVideos() {
                                 var $preview = $(previewContainer).empty();
@@ -3412,15 +3501,34 @@
                                     contentType: false,
                                     processData: false,
                                     data: new FormData(this),
-                                    
                                     success: function(response) {
                                         var res = JSON.parse(response);
-                                        var message = res.success ? "Video Uploaded!" : "Video cannot be Upload";
+                                        if (res.success == true) {
+                                            $(messageContainer).html("Video Uploaded");
+                                            $(messageContainer).css("color", "green");
+                                            $(messageContainer).css("display", "block");
+
+                                            setTimeout(function() {
+                                                hidephotoMessage(messageContainer);
+                                            }, 2000);
+                                            
+                                            resetvideo();
+                                            $(previewContainer).empty();
+                                        } 
+                                        else {
+                                            $(messageContainer).html("Failed to update");
+                                            $(messageContainer).css("color", "red");
+                                            $(messageContainer).css("display", "block");
+
+                                            setTimeout(function() {
+                                                hidephotoMessage(messageContainer);
+                                            }, 2000);
+                                        }
                                         
-                                        $(messageContainer).html('<span style="color: ' + (res.success ? 'green' : 'red') + '">' + message + '</span>');
                                         $(formSelector + " input[type=file]").val("");
                                     }
                                 });
+                                data = new FormData(this);
                             });
                         }
 
@@ -3432,6 +3540,7 @@
                             var el = this;
                             var deletedid = $(this).data('id');
                             var confirmalert = confirm("Are you sure?");
+                            console.log(deletedid);
                             
                             if (confirmalert == true) {
                                 $.ajax({
@@ -3461,7 +3570,9 @@
                         
                         var jobregister_idv1 = document.getElementById('jobregister_idv1');
                         var tbodyv1 = document.getElementById('tbodyv1');
-                        
+
+                        jobregister_idv1.value = job_table.jobregister_id;
+
                         data2.forEach(function(data) {
                             var newRow = document.createElement('tr');
                         
@@ -3475,7 +3586,7 @@
                             
                             videoElement.width = 170;
                             videoElement.height = 150;
-                            videoElement.src = 'image/' + data.video_url;
+                            videoElement.src = 'image/' + data[2];
                             videoElement.controls = true;
                             videoCell.appendChild(videoElement);
                         
@@ -3485,7 +3596,7 @@
                             deleteSpan.className = 'deletedv';
                             deleteSpan.style.color = 'red';
                             deleteSpan.style.cursor = 'pointer';
-                            deleteSpan.setAttribute('data-id', data.id);
+                            deleteSpan.setAttribute('data-id', data[0]);
                             deleteSpan.textContent = 'Delete';
                             deleteCell.appendChild(deleteSpan);
                         
@@ -3497,7 +3608,8 @@
 
                         var jobregister_idv2 = document.getElementById('jobregister_idv2');
                         var tbodyv2 = document.getElementById('tbodyv2');
-                        
+
+                        jobregister_idv2.value =job_table.jobregister_id;
                         data3.forEach(function(data) {
                             var newRow = document.createElement('tr');
                         
@@ -3511,7 +3623,7 @@
                         
                             videoElement.width = 170;
                             videoElement.height = 150;
-                            videoElement.src = 'image/' + data.video_url;
+                            videoElement.src = 'image/' + data[2];
                             videoElement.controls = true;
                             videoCell.appendChild(videoElement);
                         
@@ -3522,7 +3634,7 @@
                             deleteSpan.className = 'deletedv';
                             deleteSpan.style.color = 'red';
                             deleteSpan.style.cursor = 'pointer';
-                            deleteSpan.setAttribute('data-id', data.id);
+                            deleteSpan.setAttribute('data-id', data[0]);
                             deleteSpan.textContent = 'Delete';
                             deleteCell.appendChild(deleteSpan);
                         
