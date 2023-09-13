@@ -1624,7 +1624,7 @@
                                             
                                             <script>
                                                 $("#DateAssign").datepicker();
-                                                $("#DateAssign").datepicker("option", "dateFormat", "dd-mm-yy");
+                                                $("#DateAssign").datepicker("option", "dateFormat", "yy-mm-dd");
                                             </script>
                                             
                                             <div class="mb-3">
@@ -1639,7 +1639,7 @@
                                             
                                             <script>
                                                 $("#requested_date").datepicker();
-                                                $("#requested_date").datepicker("option", "dateFormat", "dd-mm-yy");
+                                                $("#requested_date").datepicker("option", "dateFormat", "yy-mm-dd");
                                             </script>
                                             
                                             <div class="col-md-6 mb-3">
@@ -1649,7 +1649,7 @@
                                             
                                             <script>
                                                 $("#delivery_date").datepicker();
-                                                $("#delivery_date").datepicker("option", "dateFormat", "dd-mm-yy");
+                                                $("#delivery_date").datepicker("option", "dateFormat", "yy-mm-dd");
                                             </script>
                                             
                                             <div class="mb-3">
@@ -2229,7 +2229,7 @@
                                             <input type="hidden" id="jobregister_idreport" name="jobregister_id" value="">
                                             
                                             <div class="input-group">
-                                                <input type="text" id="srvcreportdate" name="srvcreportdate" class="form-control border border-dark" value="<?php echo date('d-m-Y');?>" readonly>
+                                                <input type="text" id="srvcreportdate" name="srvcreportdate" class="form-control border border-dark" value="<?php echo date('Y-m-d');?>" readonly>
                                                 <button class="btn userinfo" id="userinfo" style="width: fit-content; background-color: #081d45; color: #fff;" type="button">New</button>
                                                 <button class="btn useredit" id="useredit" style="width: fit-content; background-color: #ff0000; color: #fff;" type="button">Edit</button>
                                             </div>

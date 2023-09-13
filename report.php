@@ -46,38 +46,6 @@
     
     <body>
         <!--========== HEADER ==========-->
-        <script>
-            $(document).ready(function() {
-                function toggleMobileView() {
-                    if (window.innerWidth <= 768) {
-                        $('#home').attr('href', '#');
-                        $('#home').off('click');
-                        $('#home').click(function(e) {
-                            e.preventDefault();
-                            
-                            if ($('#mobile-view').css('display') === 'none'){
-                                $('#mobile-view').css('display', 'block');
-                            }
-                            
-                            else {
-                                $('#mobile-view').css('display', 'none');
-                            }
-                        });
-                    }
-                    
-                    else {
-                        $('#home').attr('href', 'Adminhomepage.php');
-                        $('#home').off('click');
-                    }
-                }
-                
-                toggleMobileView();
-                
-                $(window).resize(function() {
-                    toggleMobileView();
-                });
-            });
-        </script>
 
         <header class="header">
             <div class="header__container">
@@ -331,7 +299,7 @@
                             <input type="text" id="min" name="min" placeholder="Start Date" class="form-control border border-dark">
                             <input type="text" id="max" name="max" placeholder="End Date" class="form-control border border-dark">
                             
-                            <button type="reset" id="refreshButton" class="btn btn-primary" style="background-color: #1a0845; color: white; border:none;" onclick="document.location='jobcompleted.php'">Refresh</button>
+                            <button type="reset" id="refreshButton" class="btn btn-primary" style="background-color: #1a0845; color: white; border:none;" onclick="document.location='report.php'">Refresh</button>
                         </div>
 
                         <div class="table-responsive">
@@ -393,6 +361,38 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
                 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
                 <script src="assets/js/main.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        function toggleMobileView() {
+                            if (window.innerWidth <= 768) {
+                                $('#home').attr('href', '#');
+                                $('#home').off('click');
+                                $('#home').click(function(e) {
+                                    e.preventDefault();
+                                    
+                                    if ($('#mobile-view').css('display') === 'none'){
+                                        $('#mobile-view').css('display', 'block');
+                                    }
+                                    
+                                    else {
+                                        $('#mobile-view').css('display', 'none');
+                                    }
+                                });
+                            }
+                            
+                            else {
+                                $('#home').attr('href', 'Adminhomepage.php');
+                                $('#home').off('click');
+                            }
+                        }
+                        
+                        toggleMobileView();
+                        
+                        $(window).resize(function() {
+                            toggleMobileView();
+                        });
+                    });
+                </script>
                 
                 <script>
                     $(document).ready(function(){
@@ -409,6 +409,9 @@
                             let min = minDate.val();
                             let max = maxDate.val();
                             let date = new Date(data[4]);
+                            console.log("MIN:" + min + "\n" + "MAX:" + max);
+                            console.log(data[4]);
+                            console.log(date);
                         
                             if ((min === null && max === null) ||
                                 (min === null && date <= max) ||
