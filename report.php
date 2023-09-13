@@ -408,10 +408,9 @@
                         DataTable.ext.search.push(function (settings, data, dataIndex) {
                             let min = minDate.val();
                             let max = maxDate.val();
-                            let date = new Date(data[4]);
-                            console.log("MIN:" + min + "\n" + "MAX:" + max);
-                            console.log(data[4]);
-                            console.log(date);
+                            let parts = data[4].split("-");
+                            var formattedDate = new Date(parts[2], parts[1] - 1, parts[0]);
+                            let date = new Date(formattedDate);
                         
                             if ((min === null && max === null) ||
                                 (min === null && date <= max) ||
