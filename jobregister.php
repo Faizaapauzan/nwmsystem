@@ -1172,8 +1172,7 @@
                                 <div class="mb-3">
                                     <label for="">Accessory Require</label>
                                     <select name="accessories_required" id="accessories_required" onchange="myFunctionAccessory()" class="form-select">
-                                        <option selected></option>
-                                        <option value="No">No</option>
+                                        <option value="No" selected>No</option>
                                         <option value="Yes">Yes</option>
                                     </select>
                                 </div>
