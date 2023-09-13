@@ -201,13 +201,12 @@
                     </div>
                     
                     <div class="card-body" >
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
                             <input type="text" id="min" name="min" placeholder="Start Date" class="form-control border border-dark">
                             <input type="text" id="max" name="max" placeholder="End Date" class="form-control border border-dark">
                             
                             <button type="reset" id="refreshButton" class="btn btn-primary" style="background-color: #1a0845; color: white; border:none;" onclick="document.location='jobcompleted.php'">Refresh</button>
                         </div>
-                        </br>
                         
                         <div class="table-responsive">
                             <table id="completeJobTable" class="table table-bordered table-striped">

@@ -261,7 +261,9 @@
                                                     OR
                                                 (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                                                     OR
-                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)";
+                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)
+                                                    OR
+                                                (accessories_required = '' AND job_status = 'NULL' AND job_assign = 'NULL' AND job_cancel = 'NULL')";
 
                                     $numRow_run = mysqli_query($conn, $numRow);
                                     
@@ -2325,6 +2327,7 @@
                         job_priority.value = job_table.job_priority;
                         job_order_number.value = job_table.job_order_number;
                         job_name.value = job_table.job_name;
+                        
                         for (i = 0; i < job_code.options.length; i++) {
                             if (job_code.options[i].text === (job_table.job_code + " - " + job_table.job_name)) {
                                 job_code.options[i].selected = true;
@@ -2452,10 +2455,7 @@
                         $('#serialnumbers').select2({
                             dropdownParent: $('#info'),
                             theme: 'bootstrap-5'
-                        });
-
-
-                                      
+                        });                                      
                     }
                     
                     function addOptionType(element, data2) {

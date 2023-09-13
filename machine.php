@@ -276,7 +276,7 @@
                                 <div class="tab-pane" id="tab2" role="tabpanel" aria-labelledby="tab2" style="color: black;">
                                     <div class="mb-3">
                                         <label for="">Machine Brand</label>
-                                        <select name="brandname" id="machineBrand" style="width: 100%;" class="form-select form-select-lg mb-3">
+                                        <select name="brandname" id="machineBrand" style="width: 100%;" class="form-select mb-3">
                                             <option value=""> Select Machine Brand</option>
                                                 <?php
                                                     

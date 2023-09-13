@@ -144,7 +144,9 @@
     // ========== View ==========
     if (isset($_GET['entry_id'])) {
         $entry_id = mysqli_real_escape_string($conn, $_GET['entry_id']);
+        
         $query = "SELECT * FROM accessories_list WHERE accessories_id='$entry_id'";
+        
         $query_run = mysqli_query($conn, $query);
         
         if (mysqli_num_rows($query_run) == 1) {
@@ -159,7 +161,7 @@
                 $accessory['file_name'] = null;
             }
             
-            $res = ['status' => 200, 'message' => 'Accessory Fetch Successfully by id', 'data' => $accessory];
+            $res = ['status' => 200, 'message' => 'Photo Fetch Successfully', 'data' => $accessory];
             
             echo json_encode($res);
             
@@ -167,7 +169,7 @@
         } 
         
         else {
-            $res = ['status' => 404, 'message' => 'Accessory Id Not Found'];
+            $res = ['status' => 404, 'message' => 'No photo for this job'];
             echo json_encode($res);
             return;
         }
