@@ -256,8 +256,6 @@
                                                 <div id="view_image_container">
                                                     <img id="view_photo" class="form-control" />
                                                 </div>
-
-                                                <p id="view_jobregisterID" class="form-control"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -471,14 +469,13 @@
                                         type: "GET",
                                         url: "reportCode.php?jobregister_id=" + jobregister_id,
                                         
-                                        success: function (imageResponse) {
-
+                                        success: function (imgresponse) {
+                                            var imageResponse = jQuery.parseJSON(imgresponse);
                                             console.log("Tab 2 Response: ", imageResponse);
+                                            console.log(imageResponse.data);
 
-                                            $('#view_jobregisterID').text(res.data.jobregister_id); 
-                                            
-                                            if (res.data.file_name) {
-                                                $('#view_photo').attr('src', res.data.file_name);
+                                            if (imageResponse.data) {
+                                                $('#view_photo').attr('src', "image/" + imageResponse.data);
                                                 $('#view_image_container').show();
                                             }
                                             
@@ -551,6 +548,7 @@
                             }
                         });
                     });
+                    
                 </script>
             </section>
         </main>        

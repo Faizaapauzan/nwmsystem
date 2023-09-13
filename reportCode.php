@@ -44,16 +44,11 @@
         if (mysqli_num_rows($query_run) == 1) {
             $photo = mysqli_fetch_assoc($query_run);
 
-            if (!empty($photo['file_name'])) {
-                $photoPath =$photo['file_name'];
-                $photo['file_name'] = $photoPath;
-            } 
-            
-            else {
+            if (empty($photo['file_name'])) {
                 $photo['file_name'] = null;
             }
             
-            $res = ['status' => 200, 'message' => 'Photo Fetch Successfully by id', 'data' => $photo];
+            $res = ['status' => 200, 'message' => 'Photo Fetch Successfully by id', 'data' => $photo['file_name']];
             
             echo json_encode($res);
             
