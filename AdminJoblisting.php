@@ -45,7 +45,7 @@ if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {
 <title>NWM Job Listing</title>
 <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
@@ -328,7 +328,7 @@ if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {
                                 ?>
                                         <tr>
                                             <td id="<?php echo $row["job_status"]; ?>"><?php echo $i; ?></td>
-                                            <td id="<?php echo $row["job_status"]; ?>" data-id="<?php echo $row['jobregister_id']; ?>" data-idupdate="<?php echo $row['customer_name']; ?>" data-idlagi="<?php echo $row['job_assign']; ?>" data-idagain="<?php echo $row['requested_date']; ?>" class='<?php echo $row["job_status"]; ?>' onClick="document.getElementById('doubleClick-info').style.display='block'">
+                                            <td id="<?php echo $row["job_status"]; ?>" data-id="<?php echo $row['jobregister_id']; ?>" data-idupdate="<?php echo $row['customer_name']; ?>" data-idlagi="<?php echo $row['job_assign']; ?>" data-idagain="<?php echo $row['requested_date']; ?>" class='<?php echo $row["job_status"]; ?>' data-bs-toggle="modal" data-bs-target="#JobListingPopup" class="joblistPopup">
                                                 <p style="cursor:pointer; text-decoration: underline; text-align: left; padding-left: 40px; height: 34px; font-weight: 400;" data-id="<?php echo $row['jobregister_id']; ?>" data-idupdate="<?php echo $row['customer_name']; ?>" data-idlagi="<?php echo $row['job_assign']; ?>" data-idagain="<?php echo $row['requested_date']; ?>" class='JobInfo'><?php echo $row["job_order_number"]; ?>
                                                 </p>
                                             </td>
@@ -393,7 +393,120 @@ if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {
                     });
                 });
             </script>
+            <!-- Job Listing Popup Modal -->
+            <div class="modal fade" id="JobListingPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="tab-buttons container px-auto" role="tablist">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn tab-button active" data-bs-target="#tab1" aria-controls="tab1" aria-selected="true" id="jobInfoTab" style="border: none; font-weight: bold;">Job Info</button>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <button class="btn tab-button" data-bs-target="#tab2" aria-controls="tab2" aria-selected="false" id="AssistantsTab" style="border: none; font-weight: bold; white-space: nowrap;">Assistants</button>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <button class="btn tab-button" data-bs-target="#tab3" aria-controls="tab3" aria-selected="false" id="updateTab" style="border: none; font-weight: bold; white-space: nowrap;">Update</button>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <button class="btn tab-button" data-bs-target="#tab4" aria-controls="tab4" aria-selected="false" id="accessoryTab" style="border: none; font-weight: bold;">Accessory</button>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <button class="btn tab-button" data-bs-target="#tab5" aria-controls="tab5" aria-selected="false" id="photoTab" style="border: none; font-weight: bold;">Photo</button>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <button class="btn tab-button" data-bs-target="#tab6" aria-controls="tab6" aria-selected="false" id="videoTab" style="border: none; font-weight: bold;">Video</button>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <button class="btn tab-button" data-bs-target="#tab7" aria-controls="tab7" aria-selected="false" id="reportTab" style="border: none; font-weight: bold;">Report</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
 
+                        <div class="modal-body">
+                            <div class="tab-content">
+                                <!--Job Info Tab-->
+                                <div class="tab-pane show active" id="tab1" role="tabpanel" aria-labelledby="tab1" style="color: black;">
+                                    <form action="homeindex.php" method="post">
+                                        <div class="info-details">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Job Info for jobinfo -->
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $('.joblistPopup').click(function() {
+                                            var jobregister_id = $(this).data('id');
+                                            // AJAX request
+                                            $.ajax({
+                                                url: 'AdminJoblistingJobinfo.php',
+                                                type: 'post',
+                                                data: {
+                                                    jobregister_id: jobregister_id
+                                                },
+                                                success: function(response) {
+                                                    // Add response in Modal body
+                                                    $('.info-details').html(response);
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const tabButtonsTech = document.querySelectorAll('.tab-buttons .tab-button');
+                    
+                    tabButtonsTech.forEach((button) => {
+                        button.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            
+                            const targetTab = button.getAttribute('data-bs-target');
+                            const jobregisterId = button.getAttribute('data-jobregister-id');
+                            const modal = new bootstrap.Modal(document.querySelector(targetTab));
+                            
+                            document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                pane.classList.remove('show', 'active');
+                            });
+                            
+                            document.querySelector(targetTab).classList.add('show', 'active');
+                            
+                            tabButtonsTech.forEach((btn) => {
+                                btn.classList.remove('active');
+                            });
+                            
+                            button.classList.add('active');
+                        });
+                    });
+                    
+                    const todoElements = document.querySelectorAll('.todo.card-body[data-jobregister-id]');
+                    
+                    todoElements.forEach((todoElement) => {
+                        todoElement.addEventListener('click', () => {
+                            const jobregisterId = todoElement.getAttribute('data-jobregister-id');
+                            const modal = new bootstrap.Modal(document.getElementById('techPopup'));
+                            modal.show();
+                        });
+                    });
+                });
+            </script>
+            
             <!-- Job Listing Pop Up Modal -->
             <div id="doubleClick-info" class="modal">
                 <div class="tabInfo">
@@ -412,144 +525,8 @@ if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {
                         </div>
                     </div>
 
-                    <!-- Job Info for Pending status -->
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-                            $('body').on('click', '.Pending', function() {
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'AdminJoblistingJobinfoPending.php',
-                                    type: 'post',
-                                    data: {
-                                        jobregister_id: jobregister_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.info-details').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
+                  
 
-                    <!-- Job Info for Doing status -->
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-                            $('body').on('click', '.Doing', function() {
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'AdminJoblistingJobInfoDoing.php',
-                                    type: 'post',
-                                    data: {
-                                        jobregister_id: jobregister_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.info-details').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-
-                    <!-- Job Info for Incomplete status -->
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-                            $('body').on('click', '.Incomplete', function() {
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'AdminJoblistingJobinfoIncomplete.php',
-                                    type: 'post',
-                                    data: {
-                                        jobregister_id: jobregister_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.info-details').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-
-                    <!-- Job Info for Ready status -->
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-                            $('body').on('click', '.Ready', function() {
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'AdminJoblistingJobinfo.php',
-                                    type: 'post',
-                                    data: {
-                                        jobregister_id: jobregister_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.info-details').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-
-                    <!-- Job Info for Not Ready status -->
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-                            $('body').on('click', '.Not Ready', function() {
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'AdminJoblistingJobinfo.php',
-                                    type: 'post',
-                                    data: {
-                                        jobregister_id: jobregister_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.info-details').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-
-                    <!-- Job Info for jobinfo -->
-                    <script type='text/javascript'>
-                        $(document).ready(function() {
-                            // $("p").click(function() {
-                            $('body').on('click', '.JobInfo', function() {
-                                var jobregister_id = $(this).data('id');
-                                // AJAX request
-                                $.ajax({
-                                    url: 'AdminJoblistingJobinfo.php',
-                                    type: 'post',
-                                    data: {
-                                        jobregister_id: jobregister_id
-                                    },
-                                    success: function(response) {
-                                        // Add response in Modal body
-                                        $('.info-details').html(response);
-                                        // Display Modal
-                                        $('#doubleClick-info').modal('show');
-                                    }
-                                });
-                            });
-                        });
-                    </script>
 
                     <!-- Job Listing Assistant Tab -->
                     <input type="radio" name="tabDoingInfo" id="tabDoingInfo2">
@@ -1485,26 +1462,71 @@ if (isset($_GET['jobregister_id']) && isset($_GET['job_assign'])) {
             </div>
 
 
-            <script>
-                let arrow = document.querySelectorAll(".arrow");
-                for (var i = 0; i < arrow.length; i++) {
-                    arrow[i].addEventListener("click", (e) => {
-                        let arrowParent = e.target.parentElement.parentElement;
-                        arrowParent.classList.toggle("showMenu");
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    function closeAllModalsAndRefresh() {
+                        $('.modal').modal('hide');
+                        
+                        location.reload();
+                    }
+                    
+                    $('.modal').on('hidden.bs.modal', function() {
+                        closeAllModalsAndRefresh();
                     });
-                }
-
-                let sidebar = document.querySelector(".sidebar");
-                let sidebarBtn = document.querySelector(".bx-menu");
-                console.log(sidebarBtn);
-                sidebarBtn.addEventListener("click", () => {
-                    sidebar.classList.toggle("close");
                 });
+                
+                function resetTabs() {
+                    var tabRadioButtons = document.getElementsByClassName("tabbutton");
+                    
+                    for (var i = 0; i < tabRadioButtons.length; i++) {
+                        tabRadioButtons[i].checked = false;
+                    }
+                    
+                    var tabContents = document.getElementsByClassName("tab");
+                    
+                    for (var i = 0; i < tabContents.length; i++) {
+                        tabContents[i].style.display = "none";
+                    }
+                }
+                
+                function openPopup(popupId) {
+                    resetTabs();
+                    
+                    document.getElementById(popupId).style.display = "block";
+                    document.body.classList.add("popup-open");
+                    
+                    var firstTabRadio = document.getElementById("tabDoing");
+                    var firstTabContent = document.getElementById("StaffJobInfoTab");
+                    
+                    if (firstTabRadio && firstTabContent) {
+                        firstTabRadio.checked = true;
+                        firstTabContent.style.display = "block";
+                    }
+                }
+                
+                function openTab(tabId) {
+                    var tabContents = document.getElementsByClassName("tab");
+                    
+                    for (var i = 0; i < tabContents.length; i++) {
+                        tabContents[i].style.display = "none";
+                    }
+                    
+                    // Uncheck all radio buttons
+                    var tabRadioButtons = document.getElementsByClassName("tabbutton");
+                    
+                    for (var i = 0; i < tabRadioButtons.length; i++) {
+                        tabRadioButtons[i].checked = false;
+                    }
+                    
+                    // Display the selected tab content
+                    document.getElementById(tabId).style.display = "block";
+                }
             </script>
 
             <!-- Script -->
 
         </section>
+        <script src="assets/js/main.js"></script>
     </main>
 </body>
 

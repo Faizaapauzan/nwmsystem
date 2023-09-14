@@ -1,3 +1,7 @@
+.row>* {
+  padding-right: 0;
+  padding-left: 1%;
+}
 table {
   border-collapse: collapse;
   box-shadow: 0 5px 10px rgb(37, 19, 19);
