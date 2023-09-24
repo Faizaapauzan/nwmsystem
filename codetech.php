@@ -2,7 +2,7 @@
     
     require 'dbconnect.php';
 
-    // ========== Update ==========
+    // ========== Update For Job ==========
     if (isset($_POST['update_entry'])) {
         $success = true;
         
@@ -17,6 +17,90 @@
     
                 echo json_encode($res);
                 $success = false; 
+                break; 
+            }
+
+            // Retrieve the current balance from the accessories_inout table
+            $balanceQuery = "SELECT balance, quantity FROM accessories_inout WHERE inout_id = '$inout_id'";
+            $balanceResult = mysqli_query($conn, $balanceQuery);
+            $balanceRow = mysqli_fetch_assoc($balanceResult);
+            $currentBalance = $balanceRow['balance'];
+            $quantity = $balanceRow['quantity'];
+            
+            if ($currentBalance !== NULL) {
+                
+                // First situation: Update balance amount when it is not null
+                // Check if the remark_quantity exceeds the current balance
+                if ($remark_quantity > $currentBalance) {
+
+                    $res = ['status' => 422, 'message' => 'Quantity returned cannot exceed the current balance'];
+                    echo json_encode($res);
+                    
+                    return;
+                }
+            }
+            
+            else {
+                
+                // Second situation: Update balance amount when it is null
+                // Check if the remark_quantity exceeds the quantity
+                if ($remark_quantity > $quantity) {
+                    $res = ['status' => 422, 'message' => 'Quantity returned cannot exceed the quantity'];
+                    echo json_encode($res);
+                    
+                    return;
+                }
+            }
+            
+            $pattern = '/.*\(request by [^)]+\)/';
+
+            if (!preg_match($pattern, $remark_note)) {
+                // Calculate the new balance
+                $newBalance = $currentBalance - $remark_quantity;
+                // Update the balance in the accessories_inout table
+                $updateQuery = "UPDATE accessories_inout SET balance = '$newBalance' WHERE inout_id = '$inout_id'";
+                mysqli_query($conn, $updateQuery);
+            }
+
+            $query = "INSERT INTO accessories_remark (remark_note, remark_date, remark_quantity, inout_id) 
+                      VALUES ('$remark_note', '$remark_date', '$remark_quantity', '$inout_id')";
+    
+            $query_run = mysqli_query($conn, $query);
+    
+            if (!$query_run) {
+                $success = false; 
+                break;
+            }
+        }
+    
+        if ($success) {
+            $res = ['status' => 200, 'message' => 'Entry Updated Successfully'];
+        } 
+        
+        else {
+            $res = ['status' => 500, 'message' => 'Entry Not Updated'];
+        }
+    
+        echo json_encode($res);
+    }
+
+    // ========== Update Request ==========
+    if (isset($_POST['update_entry2'])) {
+        $success = true;
+        
+        for ($i = 0; $i < count($_POST['remark_note']); $i++) {
+            $remark_note = mysqli_real_escape_string($conn, $_POST['remark_note'][$i]);
+            $remark_date = mysqli_real_escape_string($conn, $_POST['remark_date'][$i]);
+            $remark_quantity = mysqli_real_escape_string($conn, $_POST['remark_quantity'][$i]);
+            $inout_id = mysqli_real_escape_string($conn, $_POST['inout_id'][$i]);
+    
+            if ($remark_note == '' || $remark_date == '' || $remark_quantity == '' || $inout_id == '') {
+                $res = ['status' => 422, 'message' => 'All fields are mandatory'];
+    
+                echo json_encode($res);
+
+                $success = false;
+                 
                 break; 
             }
 

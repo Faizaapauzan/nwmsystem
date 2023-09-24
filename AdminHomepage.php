@@ -232,7 +232,7 @@
                     <div class="Box card">
                         <div class="card-body">
                             <div class="clearfix mb-2">
-                                <div class="float-start"><h6>Job Listing</h6></div>
+                                <div class="float-start"><h6 class="fw-bold">Job Listing</h6></div>
                                 <?php
                                     
                                     include 'dbconnect.php';
@@ -268,11 +268,11 @@
                                     $numRow_run = mysqli_query($conn, $numRow);
                                     
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<div class="float-end"><h6>Total Job: ' . $row_Total . '</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">Total Job: ' . $row_Total . '</h6></div>';
                                     }
                                     
                                     else {
-                                        echo '<div class="float-end"><h6>No Record</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">No Record</h6></div>';
                                     }
                                 ?>
                             </div>
@@ -307,7 +307,7 @@
                                                             OR
                                                         (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                                                             OR
-                                                        (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                                        (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC");
                                         
                                 while ($row = $results->fetch_assoc()) {
                             ?>
@@ -491,7 +491,7 @@
                     <div class="Box card">
                         <div class="card-body">
                             <div class="clearfix mb-2">
-                                <div class="float-start"><h6>Store</h6></div>
+                                <div class="float-start"><h6 class="fw-bold">Store</h6></div>
                                 <?php
                                     
                                     include 'dbconnect.php';
@@ -523,11 +523,11 @@
                                     $numRow_run = mysqli_query($conn, $numRow);
                                     
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<div class="float-end"><h6>Total Job: ' . $row_Total . '</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">Total Job: ' . $row_Total . '</h6></div>';
                                     } 
                                     
                                     else {
-                                        echo '<div class="float-end"><h6>No Data</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">No Data</h6></div>';
                                     }
                                 
                                 ?>
@@ -559,7 +559,7 @@
                                                     OR
                                                 (staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel = '')
                                                     OR
-                                                (staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                                (staff_position = 'Storekeeper' AND job_status = 'Pending' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC");
 
                                 while ($row = $results->fetch_assoc()) {
                             ?> 
@@ -598,7 +598,7 @@
                             </div>
                             
                             <div class="modal-body">
-                                <div class="tab-content mt-3">
+                                <div class="tab-content">
                                     <!-- Job info -->
                                     <div class="tab-pane show active" id="JobInfoStore" role="tabpanel" aria-labelledby="JobInfoStore" style="color: black;">
                                         <form id="showjobinfoJoblist" action="homeindex.php" method="post">
@@ -735,37 +735,34 @@
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         const tabButtonsStore = document.querySelectorAll('.tab-buttonsStore .tab-buttonStore');
+                        const todoElements = document.querySelectorAll('.Job.card-body[data-jobregisterjoblist-id]');
+                        const storeModal = new bootstrap.Modal(document.getElementById('StoreModal'));
+                        
+                        function setActiveTab(button, targetTab) {
+                            document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                pane.classList.remove('show', 'active');
+                            });
+                            
+                            document.querySelector(targetTab).classList.add('show', 'active');
+                            
+                            tabButtonsStore.forEach((btn) => {
+                                btn.classList.remove('active');
+                            });
+                            
+                            button.classList.add('active');
+                        }
                         
                         tabButtonsStore.forEach((button) => {
                             button.addEventListener('click', (event) => {
                                 event.preventDefault();
-                                
                                 const targetTab = button.getAttribute('data-bs-target');
-                                const jobregisterId = button.getAttribute('data-jobregisterstore-id');
-                                const modal = new bootstrap.Modal(document.querySelector(targetTab));
-                                
-                                document.querySelectorAll('.tab-pane').forEach((pane) => {
-                                    pane.classList.remove('show', 'active');
-                                });
-                                
-                                document.querySelector(targetTab).classList.add('show', 'active');
-                                
-                                tabButtonsStore.forEach((btn) => {
-                                    btn.classList.remove('active');
-                                });
-                                
-                                button.classList.add('active');
+                                setActiveTab(button, targetTab);
                             });
                         });
                         
-                        const todoElements = document.querySelectorAll('.todo.card-body[data-jobregisterstore-id]');
-                        
                         todoElements.forEach((todoElement) => {
                             todoElement.addEventListener('click', () => {
-                                const jobregisterId = todoElement.getAttribute('data-jobregisterstore-id');
-                                const modal = new bootstrap.Modal(document.getElementById('StoreModal'));
-                                
-                                modal.show();
+                                storeModal.show();
                             });
                         });
                     });
@@ -778,22 +775,22 @@
                     <div class="Box card">
                         <div class="card-body">
                             <div class="clearfix mb-2">
-                                <div class="float-start"><h6>Pending</h6></div>
+                                <div class="float-start"><h6 class="fw-bold">Pending</h6></div>
                                 <?php
                                     include 'dbconnect.php';
 
                                     $numRow = "SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '')
                                                     OR    
-                                              (job_status = 'Pending' AND job_cancel IS NULL)";
+                                               (job_status = 'Pending' AND job_cancel IS NULL)";
 
                                     $numRow_run = mysqli_query($conn, $numRow);
 
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<div class="float-end"><h6>Total Job: ' . $row_Total . '</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">Total Job: ' . $row_Total . '</h6></div>';
                                     }
                                 
                                     else {
-                                        echo '<div class="float-end"><h6>No Data</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">No Data</h6></div>';
                                     }
                                 ?>
                             </div>
@@ -804,7 +801,7 @@
                                 
                                 $results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '')
                                                             OR    
-                                                        (job_status = 'Pending' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                                        (job_status = 'Pending' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC");
 
                                 while ($row = $results->fetch_assoc()) {
                             ?>
@@ -831,21 +828,38 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="tab-buttonsPending d-flex flex-wrap gap-4" role="tablist">
-                                        <button class="btn tab-buttonPending active flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobInfoPending" aria-controls="JobInfoPending" aria-selected="true" id="showjobinfoPending">Job Info</button>
-                                        <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobAssignPending" aria-controls="JobAssignPending" aria-selected="false" id="showjobassignPending">Job Assign</button>
-                                        <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#UpdatePending" aria-controls="UpdatePending" aria-selected="false" id="showUpdatePending">Update</button>
-                                        <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#AccessoryPending" aria-controls="AccessoryPending" aria-selected="false" id="showaccessoryPending">Accessory</button>
-                                        <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#PhotoPending" aria-controls="PhotoPending" aria-selected="false" id="showPhotoPending">Photo</button>
-                                        <button class="btn tab-buttonPending flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#VideoPending" aria-controls="VideoPending" aria-selected="false" id="showVideoPending">Video</button>
+                                <div class="tab-buttonsPending container m-auto" role="tablist">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn tab-buttonPending active" data-bs-target="#JobInfoPending" aria-controls="JobInfoPending" aria-selected="true" id="showjobinfoPending" style="border: none; font-weight: bold;">Job Info</button>
+                                        </div>
+                                        
+                                        <div class="col">
+                                            <button class="btn tab-buttonPending" data-bs-target="#JobAssignPending" aria-controls="JobAssignPending" aria-selected="false" id="showjobassignPending" style="border: none; font-weight: bold; white-space: nowrap;">Job Assign</button>
+                                        </div>
+                                        
+                                        <div class="col">
+                                            <button class="btn tab-buttonPending" data-bs-target="#UpdatePending" aria-controls="UpdatePending" aria-selected="false" id="showUpdatePending" style="border: none; font-weight: bold; white-space: nowrap;">Update</button>
+                                        </div>
+                                        
+                                        <div class="col">
+                                            <button class="btn tab-buttonPending" data-bs-target="#AccessoryPending" aria-controls="AccessoryPending" aria-selected="false" id="showaccessoryPending" style="border: none; font-weight: bold;">Accessory</button>
+                                        </div>
+                                        
+                                        <div class="col">
+                                            <button class="btn tab-buttonPending" data-bs-target="#PhotoPending" aria-controls="PhotoPending" aria-selected="false" id="showPhotoPending" style="border: none; font-weight: bold;">Photo</button>
+                                        </div>
+                                        
+                                        <div class="col">
+                                            <button class="btn tab-buttonPending" data-bs-target="#VideoPending" aria-controls="VideoPending" aria-selected="false" id="showVideoPending" style="border: none; font-weight: bold;">Video</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             
                             <div class="modal-body">
-                                <div class="tab-content mt-3">
+                                <div class="tab-content">
                                     <!-- Job info -->
                                     <div class="tab-pane show active" id="JobInfoPending" role="tabpanel" aria-labelledby="JobInfoPending" style="color: black;">
                                         <form id="showjobinfoPending" action="homeindex.php" method="post">
@@ -880,7 +894,7 @@
                                                 
                                     <!-- Job Assign -->
                                     <div class="tab-pane" id="JobAssignPending" role="tabpanel" aria-labelledby="JobAssignPending" style="color: black;">
-                                        <form id="showjobassignPending" action="AdminHomepageJobassignStore.php" method="post">
+                                        <form id="showjobassignPending" action="AdminHomepageJobassign.php" method="post">
                                             <div class="Pending-JobAssign">
             
                                             </div>
@@ -1042,41 +1056,38 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         const tabButtonsPending = document.querySelectorAll('.tab-buttonsPending .tab-buttonPending');
+                        const todoElements = document.querySelectorAll('.Job.card-body[data-jobregisterjoblist-id]');
+                        const pendingModal = new bootstrap.Modal(document.getElementById('PendingModal'));
+                        
+                        function setActiveTab(button, targetTab) {
+                            document.querySelectorAll('.tab-pane').forEach((pane) => {
+                                pane.classList.remove('show', 'active');
+                            });
+                            
+                            document.querySelector(targetTab).classList.add('show', 'active');
+                            
+                            tabButtonsPending.forEach((btn) => {
+                                btn.classList.remove('active');
+                            });
+                            
+                            button.classList.add('active');
+                        }
                         
                         tabButtonsPending.forEach((button) => {
                             button.addEventListener('click', (event) => {
                                 event.preventDefault();
-                                
                                 const targetTab = button.getAttribute('data-bs-target');
-                                const jobregisterId = button.getAttribute('data-jobregisterpending-id');
-                                const modal = new bootstrap.Modal(document.querySelector(targetTab));
-                                
-                                document.querySelectorAll('.tab-pane').forEach((pane) => {
-                                    pane.classList.remove('show', 'active');
-                                });
-                                
-                                document.querySelector(targetTab).classList.add('show', 'active');
-                                
-                                tabButtonsPending.forEach((btn) => {
-                                    btn.classList.remove('active');
-                                });
-                                
-                                button.classList.add('active');
+                                setActiveTab(button, targetTab);
                             });
                         });
                         
-                        const todoElements = document.querySelectorAll('.todo.card-body[data-jobregisterPending-id]');
-                        
                         todoElements.forEach((todoElement) => {
                             todoElement.addEventListener('click', () => {
-                                const jobregisterId = todoElement.getAttribute('data-jobregisterpending-id');
-                                const modal = new bootstrap.Modal(document.getElementById('PendingModal'));
-                                
-                                modal.show();
+                                pendingModal.show();
                             });
                         });
                     });
@@ -1089,7 +1100,7 @@
                     <div class="Box card">
                         <div class="card-body">
                             <div class="clearfix mb-2">
-                                <div class="float-start"><h6>Incomplete</h6></div>
+                                <div class="float-start"><h6 class="fw-bold">Incomplete</h6></div>
                                 <?php
                                     
                                     include 'dbconnect.php';
@@ -1101,11 +1112,11 @@
                                     $numRow_run = mysqli_query($conn, $numRow);
                                     
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<div class="float-end"><h6>Total Job: ' . $row_Total . '</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">Total Job: ' . $row_Total . '</h6></div>';
                                     }
                                     
                                     else {
-                                        echo '<div class="float-end"><h6>No Data</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">No Data</h6></div>';
                                     }
                                 ?> 
                             </div>
@@ -1116,7 +1127,7 @@
                                 
                                 $results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Incomplete' AND job_cancel = '')
                                                             OR    
-                                                        (job_status = 'Incomplete' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                                        (job_status = 'Incomplete' AND job_cancel IS NULL) ORDER BY jobregisterlastmodify_at DESC");
 
                                 while ($row = $results->fetch_assoc()) {
                             ?> 
@@ -1422,7 +1433,7 @@
                     <div class="Box card">
                         <div class="card-body">
                             <div class="clearfix">
-                                <div class="float-start"><h6><?php echo $username ?></h6></div>
+                                <div class="float-start"><h6 class="fw-bold"><?php echo $username ?></h6></div>
                                 <?php
                                     $numRow = "SELECT * FROM job_register WHERE (job_assign = '$username' AND job_status = '' AND job_cancel = '')
                                                     OR
@@ -1443,11 +1454,11 @@
                                     $numRow_run = mysqli_query($conn, $numRow);
                 
                                     if ($row_Total = mysqli_num_rows($numRow_run)) {
-                                        echo '<div class="float-end"><h6>Total Job: ' . $row_Total . '</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">Total Job: ' . $row_Total . '</h6></div>';
                                     }
 
                                     else {
-                                        echo '<div class="float-end"><h6>No Record</h6></div>';
+                                        echo '<div class="float-end"><h6 class="fw-bold">No Record</h6></div>';
                                     }
 
                                     echo '</div>';
@@ -1457,13 +1468,13 @@
                                     while ($data = mysqli_fetch_array($records)) {
                                         if ($data['tech_avai'] == 1) {
                                             echo '<div class="Off clearfix mb-2">
-                                                    <div class="float-end"><h6><a href="statusadmin.php?staffregister_id=' . $data['staffregister_id'] . '&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></h6></div>
+                                                    <div class="float-end"><h6 class="fw-bold"><a href="statusadmin.php?staffregister_id=' . $data['staffregister_id'] . '&tech_avai=0" style="color:red; font-weight: bold; text-decoration:none;">Off</a></h6></div>
                                                   </div>';
                                         } 
                                 
                                         else {
                                             echo '<div class="Off clearfix mb-2">
-                                                    <div class="float-end"><h6><a href="statusadmin.php?staffregister_id=' . $data['staffregister_id'] . '&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></h6></div>
+                                                    <div class="float-end"><h6 class="fw-bold"><a href="statusadmin.php?staffregister_id=' . $data['staffregister_id'] . '&tech_avai=1" style="color:#B2BEB5; font-weight: bold; text-decoration:none;">Off</a></h6></div>
                                                   </div>';
                                         }
                                     }
@@ -1482,7 +1493,7 @@
                                                                 OR
                                                             (job_assign = '$username' AND job_status = 'Ready' AND job_cancel IS NULL)
                                                                 OR
-                                                            (job_assign = '$username' AND job_status IS NULL AND job_cancel = '') ORDER BY jobregisterlastmodify_at DESC LIMIT 50");
+                                                            (job_assign = '$username' AND job_status IS NULL AND job_cancel = '') ORDER BY jobregisterlastmodify_at DESC");
                                 
                                     $username = str_replace(" ", "", $username);
 
@@ -1639,7 +1650,7 @@
                                             
                                             <script>
                                                 $("#requested_date").datepicker();
-                                                $("#requested_date").datepicker("option", "dateFormat", "dd-mm-yy");
+                                                $("#requested_date").datepicker("option", "dateFormat", "dd/mm/yy");
                                             </script>
                                             
                                             <div class="col-md-6 mb-3">
@@ -1649,7 +1660,7 @@
                                             
                                             <script>
                                                 $("#delivery_date").datepicker();
-                                                $("#delivery_date").datepicker("option", "dateFormat", "dd-mm-yy");
+                                                $("#delivery_date").datepicker("option", "dateFormat", "dd/mm/yy");
                                             </script>
                                             
                                             <div class="mb-3">
@@ -1660,7 +1671,7 @@
                                                         
                                                         include "dbconnect.php";
                                                         
-                                                        $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");  // Use select query here
+                                                        $records = mysqli_query($conn, "SELECT customer_id, customer_code, customer_name From customer_list ORDER BY customerlasmodify_at ASC");
                                                         
                                                         while($data = mysqli_fetch_array($records)) {
                                                             echo "<option value='". $data['customer_id'] ."'>" . $data['customer_name']."</option>";
@@ -1810,7 +1821,7 @@
                                                 }
                                             </script>
                                             
-                                            <div class="col-md-6 mb-3" id="Accessory">
+                                            <div class="mb-3" id="Accessory">
                                                 <label for="accessories_for" class="fw-bold">Accessory For</label>
                                                 <select name="accessories_for" id="accessories_for" class="form-select">
                                                     <option value="Technician Use">Technician Use</option>
@@ -1941,7 +1952,7 @@
                                                                                                                 OR
                                                                                                             technician_rank = '2nd Leader' AND tech_avai = '0'
                                                                                                                 OR
-                                                                                                            staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");  // Use select query here
+                                                                                                            staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");
                                                                             echo "<option></option>";
                                                                             
                                                                             while($data = mysqli_fetch_array($records))
@@ -2577,12 +2588,12 @@
                         var job_priority = $('input[name=job_priority]').val();
                         var support = $('input[name=support]').val();
                         var job_order_number = $('input[name=job_order_number]').val();
-                        var job_name = $('input[name=job_name]').val();
+                        var job_name = $('select[name=job_name]').val();
                         var job_code = $('input[name=job_code]').val();
                         var job_description = $('input[name=job_description]').val();
                         var requested_date = $('input[name=requested_date]').val();
                         var delivery_date = $('input[name=delivery_date]').val();
-                        var customer_name = $('input[name=customer_name]').val();
+                        var customer_name = $('select[name=customer_name]').val();
                         var customer_code = $('input[name=customer_code]').val();
                         var customer_grade = $('input[name=customer_grade]').val();
                         var cust_address1 = $('input[name=cust_address1]').val();

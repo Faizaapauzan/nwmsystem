@@ -270,7 +270,7 @@
                 <?php } } } ?>
                 
                 </br>
-                <select id="select_box" name="accessoriesModel[]" class="form-select">
+                <select id="select_box" name="accessoriesModel[]" class="form-select mb-3">
                   <option value="">Select Accessories Code</option>
                     <?php
                         
@@ -282,7 +282,6 @@
                         }
                     ?>
                 </select>
-                </br>
                 
                 <div id="results">
                   <input type="hidden" name="accessories_id[]" class="accessories_id">
