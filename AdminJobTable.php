@@ -278,7 +278,7 @@
                                     ?>
                                     <tr>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
-                                        <td style='text-align: center; vertical-align: middle;'>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
                                         <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
@@ -340,7 +340,7 @@
                                     ?>
                                     <tr>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
-                                        <td style='text-align: center; vertical-align: middle;'>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
                                         <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
@@ -401,8 +401,8 @@
                                             
                                     ?>
                                     <tr>
-                                        <td style='text-align: center; vertical-align: middle;'><?= $counter ?></td>
-                                        <td style='text-align: center; vertical-align: middle;'>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
                                         <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
@@ -512,7 +512,7 @@
 
                                     <tr>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
-                                        <td style='text-align: center; vertical-align: middle;'>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row["customer_name"]; ?></button>
                                         </td>
                                         <td style='text-align: center; vertical-align: middle;'><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
@@ -553,16 +553,6 @@
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="fw-bold">Job Description</label>
                                                 <p id="view_jobDesc" class="form-control"></p>
-                                            </div>
-
-                                            <div class="col-md-6 mb-3">
-                                                <label for="" class="fw-bold">Job Status</label>
-                                                <p id="view_jobStatus" class="form-control"></p>
-                                            </div>
-
-                                            <div class="col-md-6 mb-3">
-                                                <label for="" class="fw-bold">Assign Date</label>
-                                                <p id="view_assgnDate" class="form-control"></p>
                                             </div>
 
                                             <div class="col-md-6 mb-3">
@@ -633,6 +623,16 @@
                                                 <label for="" class="fw-bold">Accessory Require</label>
                                                 <p id="view_accReq" class="form-control"></p>
                                             </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Job Status</label>
+                                                <p id="view_jobStatus" class="form-control"></p>
+                                            </div> 
+                                            
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Reason</label>
+                                                <p id="view_reason" class="form-control"></p>
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
@@ -660,7 +660,6 @@
                                             $('#view_jobName').text(res.data.job_name);
                                             $('#view_jobDesc').text(res.data.job_description);
                                             $('#view_jobStatus').text(res.data.job_status);
-                                            $('#view_assgnDate').text(res.data.DateAssign);
                                             $('#view_delDate').text(res.data.delivery_date);
                                             $('#view_reqDate').text(res.data.requested_date);
                                             $('#view_custName').text(res.data.customer_name);
@@ -676,6 +675,7 @@
                                             $('#view_machName').text(res.data.machine_name);
                                             $('#view_serNum').text(res.data.serialnumber);
                                             $('#view_accReq').text(res.data.accessories_required);
+                                            $('#view_reason').text(res.data.reason);
                                             
                                             $('#jobInfoModal').modal('show');
                                         }
