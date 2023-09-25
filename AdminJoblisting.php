@@ -251,7 +251,7 @@
                                 <td style='text-align: center; white-space: nowrap;' id="<?php echo $row["job_status"]; ?>"><?= $job['job_name'] ?></td>
                                 <td style='text-align: center; white-space: nowrap;' id="<?php echo $row["job_status"]; ?>"><?= $job['machine_code'] ?></td>
                                 <td id="<?php echo $row["job_status"]; ?>">
-                                    <select class="form-select form-select-sm technician w-75" onchange="status_update(this.options[this.selectedIndex].value,'<?= $job['jobregister_id'] ?>')">
+                                    <select class="form-select form-select-sm technician" onchange="status_update(this.options[this.selectedIndex].value,'<?= $job['jobregister_id'] ?>')">
                                         <option value=""><?= $job['job_assign'] ?></option>
                                             <?php
                                                 include "dbconnect.php";  
