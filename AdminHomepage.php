@@ -1617,16 +1617,6 @@
                                                 <input type="hidden" id="job_name" name="job_name" value="">
                                             </div>
                                             
-                                            <div class="col-md-6 mb-3">
-                                                <label for="" class="fw-bold">Assign Date</label>
-                                                <input type="text" name="DateAssign" id="DateAssign" class="form-control" value="">
-                                            </div>
-                                            
-                                            <script>
-                                                $("#DateAssign").datepicker();
-                                                $("#DateAssign").datepicker("option", "dateFormat", "dd-mm-yy");
-                                            </script>
-                                            
                                             <div class="mb-3">
                                                 <label for="" class="fw-bold">Job Description</label>
                                                 <input type="text" name="job_description" id="job_description" class="form-control" value="">
@@ -2031,6 +2021,7 @@
                                     <div class="tab-pane" id="tab3" role="tabpanel" aria-labelledby="tab3" style="color: black;">
                                         <form id="jobUpdate">
                                             <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                            <input type="hidden" name="DateAssign" id="DateAssign">
                                             
                                             <label for="" class="fw-bold mb-2">Departure Time</label>
                                             <div class="input-group mb-2">
@@ -2297,7 +2288,6 @@
                         var customer_code = document.getElementById('customer_code');
                         var customer_name = document.getElementById('customer_name');
                         var job_description = document.getElementById('job_description');
-                        var assign_date = document.getElementById('DateAssign');
                         var delivery_date = document.getElementById('delivery_date');
                         var requested_date = document.getElementById('requested_date');
                         var customer_grade = document.getElementById('customer_grade');
@@ -2349,7 +2339,6 @@
                         customer_grade.value = job_table.customer_grade;
                         customer_PIC.value = job_table.customer_PIC;
                         job_description.value = job_table.job_description;
-                        assign_date.value = job_table.DateAssign;
                         delivery_date.value = job_table.delivery_date;
                         requested_date.value = job_table.requested_date;
                         cust_phone1.value = job_table.cust_phone1;
@@ -2575,10 +2564,9 @@
                     
                     function submitFormSupportAdmin() {
                         var job_priority = $('input[name=job_priority]').val();
-                        var support = $('input[name=support]').val();
                         var job_order_number = $('input[name=job_order_number]').val();
                         var job_name = $('input[name=job_name]').val();
-                        var job_code = $('input[name=job_code]').val();
+                        var job_code = document.getElementById('job_code').value;
                         var job_description = $('input[name=job_description]').val();
                         var requested_date = $('input[name=requested_date]').val();
                         var delivery_date = $('input[name=delivery_date]').val();
@@ -2600,11 +2588,9 @@
                         var accessories_required = $('select[name=accessories_required]').val();
                         var accessories_for = $('select[name=accessories_for]').val();
                         var job_cancel = $('select[name=job_cancel]').val();
-                        var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
                         var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
                         
                         if (job_priority != '' || job_priority == '', 
-                            support != '' || support == '', 
                             job_order_number != '' || job_order_number == '', 
                             job_name != '' || job_name == '', 
                             job_code != '' || job_code == '', 
@@ -2629,12 +2615,10 @@
                             accessories_required != '' || accessories_required == '', 
                             accessories_for != '' || accessories_for == '',
                             job_cancel != '' || job_cancel == '', 
-                            jobregistercreated_by != '' || jobregistercreated_by == '', 
                             jobregisterlastmodify_by != '' || jobregisterlastmodify_by == '') {
                                 
                             var formData = {
                                 job_priority: job_priority,
-                                support: support,
                                 job_order_number: job_order_number,
                                 job_name: job_name,
                                 job_code: job_code,
@@ -2659,16 +2643,15 @@
                                 accessories_required: accessories_required,
                                 accessories_for: accessories_for,
                                 job_cancel: job_cancel,
-                                jobregistercreated_by: jobregistercreated_by,
                                 jobregisterlastmodify_by: jobregisterlastmodify_by
                             };
-                                
+
                             $.ajax({
                                 url: "adminsupporttechnician.php",
                                 type: 'POST',
-                                data: formData,
-                                    
+                                data: formData,      
                                 success: function(response) {
+                                    
                                     var res = JSON.parse(response);
                                     if (res.success == true) 
                                         $('#messageSupportAdmin').html('<span style="color: green">Succesfully Request for Support!</span>');
@@ -2894,12 +2877,14 @@
                 
                     // STAFF UPDATE TAB
                     function updateJobUpdate(){
+                        var dateassign = document.getElementById('DateAssign');
                         var technician_departure = document.getElementById('technician_departure');
                         var technician_arrival = document.getElementById('technician_arrival');
                         var technician_leaving = document.getElementById('technician_leaving');
                         var tech_out = document.getElementById('tech_out');
                         var tech_in = document.getElementById('tech_in');
 
+                        dateassign.value = job_table.DateAssign;
                         technician_departure.value = job_table.technician_departure;
                         technician_arrival.value = job_table.technician_arrival;
                         technician_leaving.value = job_table.technician_leaving;
@@ -2915,10 +2900,21 @@
                             hour: '2-digit',
                             minute: '2-digit',
                             hour12: true
-                        };
-                        
+                        };  
                         var textchange = document.getElementById(textid);
                         var formattedDateTime = new Date().toLocaleString('en-SG', options);
+
+                        if(textid == "technician_departure"){
+                            var dateassign = document.getElementById("DateAssign");
+                            var currentDate = new Date();
+                            
+                            var day = currentDate.getDate().toString().padStart(2, '0');
+                            var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+                            var year = currentDate.getFullYear(); 
+                            const formattedDate = `${day}-${month}-${year}`;
+
+                            dateassign.value = formattedDate;
+                        }
                         
                         textchange.value = formattedDateTime;
                     }
@@ -2942,6 +2938,7 @@
                     
                     $(function() {
                         $('#update_tech').click(function() {
+                            var dateassign = $('#DateAssign').val();
                             var technician_departure = $('#technician_departure').val();
                             var technician_arrival = $('#technician_arrival').val();
                             var technician_leaving = $('#technician_leaving').val();
@@ -2952,7 +2949,9 @@
                             $.ajax({
                                 type: 'POST',
                                 url: 'techupdateindex.php',
-                                data: {technician_departure: technician_departure,
+                                data: {
+                                         dateassign: dateassign,
+                                         technician_departure: technician_departure,
                                          technician_arrival: technician_arrival,
                                          technician_leaving: technician_leaving,
                                                    tech_out: tech_out,

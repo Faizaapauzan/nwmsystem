@@ -7,7 +7,6 @@ if (isset($_POST["update"])) {
     $job_order_number = $_POST["job_order_number"];
     $job_name = $_POST["job_name"];
     $job_code = $_POST["job_code"];
-    $DateAssign = $_POST["DateAssign"];
     $job_description = $_POST["job_description"];
     $requested_date = $_POST["requested_date"];
     $delivery_date = $_POST["delivery_date"];
@@ -42,7 +41,6 @@ if (isset($_POST["update"])) {
             job_name = ?,   
             job_order_number = ?,
             job_description = ?,
-            DateAssign = ?,
             job_cancel = ?,
             job_status = ?,
             reason = ?,
@@ -73,12 +71,11 @@ if (isset($_POST["update"])) {
 
     // Prepare and bind parameters
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssssssssssssssssssssssssssssssss",
+    mysqli_stmt_bind_param($stmt, "sssssssssssssssssssssssssssssss",
         $job_code,
         $job_name,
         $job_order_number,
         $job_description,
-        $DateAssign,
         $job_cancel,
         $job_status,
         $reason,
