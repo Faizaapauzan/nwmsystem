@@ -322,7 +322,7 @@
                                         $query = "SELECT * FROM job_register 
                                                   INNER JOIN servicereport 
                                                   ON job_register.jobregister_id = servicereport.jobregister_id 
-                                                  ORDER BY job_register.jobregister_id DESC";
+                                                  ORDER BY job_register.job_order_number DESC";
                                         $query_run = mysqli_query($conn, $query);
 
                                         $counter = 1;

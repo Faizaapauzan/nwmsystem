@@ -19,8 +19,7 @@
                 if ($query_run) {
                     while ($row = mysqli_fetch_array($query_run)) {
         ?>
-
-        <form action="homeindex.php" method="post" id="adminJobInfo">
+        <form action="homeindex.php" method="post" id="adminJobInfo" class="mx-2">
             <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
             <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>">
 
@@ -80,14 +79,30 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="" class="fw-bold">Delivery date</label>
-                    <input type="date" name="delivery_date" id="delivery_date" value="<?php echo $row['delivery_date']?>" class="form-control">
+                    <label for="" class="fw-bold">Delivery Date</label>
+                    <input type="text" name="delivery_date" id="delivery_date" class="form-control" value="<?php echo $row['delivery_date']?>">
                 </div>
+                                            
+                <script>
+                      $(document).ready(function () {
+                        $("#delivery_date").datepicker({
+                            dateFormat: "dd/mm/yy"
+                        });
+                    });
+                </script>
 
                 <div class="col-md-6 mb-3">
-                    <label for="" class="fw-bold">Requested date</label>
-                    <input type="date" name="requested_date" id="requested_date" value="<?php echo $row['requested_date']?>" class="form-control">
+                    <label for="" class="fw-bold">Requested Date</label>
+                    <input type="text" name="requested_date" id="requested_date" class="form-control" value="<?php echo $row['requested_date']?>">
                 </div>
+                                            
+                <script>
+                    $(document).ready(function () {
+                        $("#requested_date").datepicker({
+                            dateFormat: "dd/mm/yy"
+                        });
+                    });
+                </script>
 
                 <div class="mb-3">
                     <label for="" class="fw-bold">Customer Name</label>
@@ -221,6 +236,14 @@
                 </script>
 
                 <div class="mb-3">
+                    <label for="" class="fw-bold">Machine Name</label>
+                    <input type="text" name="machine_name" id="machine_name" class="form-control">
+                        
+                    <input type="hidden" name="machine_code" id="machine_code">
+                    <input type="hidden" name="machine_id" id="machine_id">
+                </div>
+
+                <div class="col-md-6 mb-3">
                     <label for="" class="fw-bold">Serial Number</label>
                     <select type="text" name="serialnumber" id="serialnumber" style="width: 100%;" class="form-select"></select>
                 </div>
@@ -237,13 +260,41 @@
                     }
                 </script>
 
-                <div class="mb-3">
-                    <label for="" class="fw-bold">Machine Name</label>
-                    <input type="text" name="machine_name" id="machine_name" class="form-control">
-                        
-                    <input type="hidden" name="machine_code" id="machine_code">
-                    <input type="hidden" name="machine_id" id="machine_id">
+                <div class="col-md-6 mb-3">
+                    <label for="accessories_required" class="fw-bold">Accessory Required</label>
+                    <select name="accessories_required" id="accessories_required" class="form-select" onchange="myFunctionAccessory()">
+                        <option value='' <?php if ($row['accessories_required'] == '') {echo "SELECTED";} ?>></option>
+                        <option value='YES' <?php if ($row['accessories_required'] == 'YES') {echo "SELECTED";} ?>>YES</option>
+                        <option value='No' <?php if ($row['accessories_required'] == 'No') {echo "SELECTED";} ?>>No</option>
+                    </select>
                 </div>
+                     
+                <!-- Accessory For -->
+                <script>
+                    function myFunctionAccessory() {
+                        var accessories = document.getElementById("accessories_required").value;
+                        var accForDiv = document.getElementById("Accessory");
+                                                    
+                        if (accessories === "Yes") {
+                            accForDiv.style.display = "block";
+                        }
+                        
+                        else {
+                            accForDiv.style.display = "none";
+                            document.getElementById("accessories_for").value = "";
+                        }
+                    }
+                </script>
+                                            
+                <div class="mb-3" id="Accessory" style="display: none;">
+                    <label for="accessories_for" class="fw-bold">Accessory For</label>
+                    <select name="accessories_for" id="accessories_for" class="form-select">
+                        <option value='' <?php if ($row["accessories_for"] == "") {echo "SELECTED";} ?>></option>
+                        <option value='Technician Use' <?php if ($row["accessories_for"] == "Technician Use") {echo "SELECTED";} ?>>Technician Use</option>
+                        <option value='Customer Request' <?php if ($row["accessories_for"] == "Customer Request") {echo "SELECTED";} ?>>Customer Request</option>
+                    </select>
+                </div>
+                <!-- End of Accessory For -->
 
                 <div class="col-md-6 mb-3">
                     <label for="" class="fw-bold">Cancel Job</label>
@@ -254,15 +305,6 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="" class="fw-bold">Accessories Required</label>
-                    <select id="accessories_required" name="accessories_required" class="form-select">
-                        <option value='' <?php if ($row['accessories_required'] == '') {echo "SELECTED";} ?>></option>
-                        <option value="Yes" <?php if ($row['accessories_required'] == "Yes") {echo "SELECTED";} ?>>Yes</option>
-                        <option value="No" <?php if ($row['accessories_required'] == "No") {echo "SELECTED";} ?>>No</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
                     <label for="" class="fw-bold">Job Status</label>
                     <select type="text" id="job_status" name="job_status" class="form-select" onchange="myFunction()">
                         <option value='' <?php if ($row["job_status"] == "") {echo "SELECTED";} ?>></option>
@@ -304,7 +346,7 @@
                 </div>        
             </div>
         </form>
-
+        
         <?php } } } ?>
 
         <!-- Populate machine_type dropdown -->

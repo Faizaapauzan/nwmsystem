@@ -47,6 +47,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="assets/css/styles.css">
 
@@ -54,6 +55,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 
@@ -62,91 +64,46 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     </head>
     
-    <style>
-        ::-webkit-scrollbar {display: none;}
-
-        .dropdown:hover .dropbtn {color:#f5f5f5}
-        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
-
-        .dropdown-content a:hover {background-color:#f1f1f1}
-        .dropdown-content1 a:hover {background-color:#f1f1f1}
-
-        .dropdown:hover .dropdown-content {display:block}
-        .dropdown1:hover .dropdown-content1 {display:block}
-
-        .dropdown-content {
-            display:none;
-            position:absolute;
-            background-color:#f9f9f9;
-            min-width:auto;
-            padding-left:20px;
-            bottom:55px;
-            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
-            z-index:1
-        }
-        
-        .dropdown-content1{
-            display:none;
-            position:absolute;
-            background-color:#f9f9f9;
-            min-width:160px;
-            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
-            padding:12px 16px;z-index:1
-        }
-
-        .dropdown-content a {
-            color:#000;
-            padding:10px 10px;
-            text-decoration:none;
-            display:block;
-            padding-right:7px
-        }
-        
-        .dropdown-content1 a{
-            color:#000;
-            padding:12px 16px;
-            text-decoration:none;
-            display:block;
-            padding-right:7px
-        }
-
-        
-    @media (min-width: 769px) {
-        .mobile-view {
-            display: none;
-        }
-    }
-
-    /* Styles for phone and smaller screens */
-    @media (max-width: 768px) {
-        .mobile-view {
-            display: block;
-            position: relative;
-            top: -10px;
-        }
-
-        .dropdown-content1 {
-            display: none;
-        }
-
-        .dropdown1:hover .dropdown-content1 {
-            display: none;
-        }
-    }
-
-    .mobile-view a {
-        color: black;
-        margin-left: 10px;
-    }
-    </style>
-    
     <body>
         <!--========== HEADER ==========-->
+        <script>
+            $(document).ready(function() {
+                function toggleMobileView() {
+                    if (window.innerWidth <= 768) {
+                        $('#home').attr('href', '#');
+                        $('#home').off('click');
+                        $('#home').click(function(e) {
+                            e.preventDefault();
+                            
+                            if ($('#mobile-view').css('display') === 'none'){
+                                $('#mobile-view').css('display', 'block');
+                            }
+                            
+                            else {
+                                $('#mobile-view').css('display', 'none');
+                            }
+                        });
+                    }
+                    
+                    else {
+                        $('#home').attr('href', 'Adminhomepage.php');
+                        $('#home').off('click');
+                    }
+                }
+                
+                toggleMobileView();
+                
+                $(window).resize(function() {
+                    toggleMobileView();
+                });
+            });
+        </script>
+        
         <header class="header">
             <div class="header__container">
                 <div class="header__search">
                     <div class="dropdown1">
-                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <a href="Adminhomepage.php" id="home" style="font-weight: bold; font-size:25px; color:black;">Home</a>
                         <div class="dropdown-content1">
                             <a href="AdminJobTable.php">Job - Table view</a>
                             <a href="adminjoblisting.php">Job - List View</a>
@@ -158,9 +115,13 @@
                     <i class='bx bx-menu' id="header-toggle"></i>
                 </div>
             </div>
-            <div class="mobile-view">
-                <a href="AdminJobTable.php">Table View</a>
-                <a href="adminjoblisting.php">List View</a>
+            
+            <div class="mobile-view" id="mobile-view">
+                <div class="dropdown-content2" id="dropdown-content2">
+                    <a href="Adminhomepage.php">Home</a>
+                    <a href="AdminJobTable.php">Table View</a>
+                    <a href="adminjoblisting.php">List View</a>
+                </div>
             </div>
         </header>
 
@@ -1014,38 +975,56 @@
 
                                 <div class="mb-3">
                                     <label for="">Requested Date</label>
-                                    <input type="date" name="requested_date" class="form-control">
+                                    <input type="text" name="requested_date" id="requested_date" class="form-control" autocomplete="off">
                                 </div>
+                                            
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#requested_date").datepicker({
+                                            dateFormat: "dd/mm/yy"
+                                        });
+                                    });
+                                </script>
 
                                 <div class="mb-3">
                                     <label for="">Delivery Date</label>
-                                    <input type="date" name="delivery_date" class="form-control">
+                                    <input type="text" name="delivery_date" id="delivery_date" class="form-control" autocomplete="off">
                                 </div>
+                                            
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#delivery_date").datepicker({
+                                            dateFormat: "dd/mm/yy"
+                                        });
+                                    });
+                                </script>
                             </div>
 
                             <script>
-                                    function GetJob(str) {
-                                        if (str.length == 0) {
-                                            document.getElementById("job_name").value = "";
-                                            document.getElementById("job_description").value = "";
-                                            return;
-                                        } 
+                                function GetJob(str) {
+                                    if (str.length == 0) {
+                                        document.getElementById("job_name").value = "";
+                                        document.getElementById("job_description").value = "";
                                         
-                                        else {
-                                            var xmlhttp = new XMLHttpRequest();
-                                            xmlhttp.onreadystatechange = function() {
-                                                if (this.readyState == 4 && this.status == 200) {
-                                                    var myObj = JSON.parse(this.responseText);
-                                                    document.getElementById("job_name").value = myObj[0];
-                                                    document.getElementById("job_description").value = myObj[1];
-                                                }
-                                            };
+                                        return;
+                                    } 
+                                        
+                                    else {
+                                        var xmlhttp = new XMLHttpRequest();
+                                            
+                                        xmlhttp.onreadystatechange = function() {
+                                            if (this.readyState == 4 && this.status == 200) {
+                                                var myObj = JSON.parse(this.responseText);
+                                                document.getElementById("job_name").value = myObj[0];
+                                                document.getElementById("job_description").value = myObj[1];
+                                            }
+                                        };
 
-                                            xmlhttp.open("GET", "fetchjob.php?job_code=" + str, true);
-                                            xmlhttp.send();
-                                        }
+                                        xmlhttp.open("GET", "fetchjob.php?job_code=" + str, true);
+                                        xmlhttp.send();
                                     }
-                                </script>
+                                }
+                            </script>
                             <!-- End of Job Tab -->
                             
                             <!-- Machine Tab -->

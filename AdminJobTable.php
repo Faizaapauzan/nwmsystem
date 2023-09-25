@@ -18,63 +18,67 @@
         <!--========== BOX ICONS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     </head>
-    
+
     <style>
-        ::-webkit-scrollbar {display: none;}
+        ::-webkit-scrollbar {
+            display: none;
+        }
 
-        .dropdown:hover .dropbtn {color:#f5f5f5}
-        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
-
-        .dropdown-content a:hover {background-color:#f1f1f1}
-        .dropdown-content1 a:hover {background-color:#f1f1f1}
-
-        .dropdown:hover .dropdown-content {display:block}
-        .dropdown1:hover .dropdown-content1 {display:block}
-
-        .dropdown-content {
-            display:none;
-            position:absolute;
-            background-color:#f9f9f9;
-            min-width:auto;
-            padding-left:20px;
-            bottom:55px;
-            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
-            z-index:1
+        /* Back To Top Button */
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 15px;
+            right:15px;
+            z-index: 99;
+            cursor: pointer;
         }
         
-        .dropdown-content1{
-            display:none;
-            position:absolute;
-            background-color:#f9f9f9;
-            min-width:160px;
-            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
-            padding:12px 16px;z-index:1
+        #myBtn:hover {
+            background-color: #555;
         }
-
-        .dropdown-content a {
-            color:#000;
-            padding:10px 10px;
-            text-decoration:none;
-            display:block;
-            padding-right:7px
-        }
-        
-        .dropdown-content1 a{
-            color:#000;
-            padding:12px 16px;
-            text-decoration:none;
-            display:block;
-            padding-right:7px
-        }   
     </style>
-    
+
     <body>
         <!--========== HEADER ==========-->
+        <script>
+            $(document).ready(function() {
+                function toggleMobileView() {
+                    if (window.innerWidth <= 768) {
+                        $('#home').attr('href', '#');
+                        $('#home').off('click');
+                        $('#home').click(function(e) {
+                            e.preventDefault();
+                            
+                            if ($('#mobile-view').css('display') === 'none'){
+                                $('#mobile-view').css('display', 'block');
+                            }
+                            
+                            else {
+                                $('#mobile-view').css('display', 'none');
+                            }
+                        });
+                    }
+                    
+                    else {
+                        $('#home').attr('href', 'Adminhomepage.php');
+                        $('#home').off('click');
+                    }
+                }
+                
+                toggleMobileView();
+                
+                $(window).resize(function() {
+                    toggleMobileView();
+                });
+            });
+        </script>
+        
         <header class="header">
             <div class="header__container">
                 <div class="header__search">
                     <div class="dropdown1">
-                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <a href="Adminhomepage.php" id="home" style="font-weight: bold; font-size:25px; color:black;">Home</a>
                         <div class="dropdown-content1">
                             <a href="AdminJobTable.php">Job - Table view</a>
                             <a href="adminjoblisting.php">Job - List View</a>
@@ -85,7 +89,14 @@
                 <div class="header__toggle">
                     <i class='bx bx-menu' id="header-toggle"></i>
                 </div>
-                
+            </div>
+            
+            <div class="mobile-view" id="mobile-view">
+                <div class="dropdown-content2" id="dropdown-content2">
+                    <a href="Adminhomepage.php">Home</a>
+                    <a href="AdminJobTable.php">Table View</a>
+                    <a href="adminjoblisting.php">List View</a>
+                </div>
             </div>
         </header>
 
@@ -186,6 +197,33 @@
         <!--========== CONTENTS ==========-->
         <main>
             <section>
+                <!-- Back to top Button -->
+                <button onclick="topFunction()" id="myBtn" class="btn btn-lg rounded-3 pb-1" style="border:none; background-color: #081d45; color: #fff; width:max-content; height:max-content;"><i class='bx bxs-to-top'></i></button>
+        
+                <script>
+                    var mybutton = document.getElementById("myBtn");
+            
+                    window.onscroll = function() {
+                        scrollFunction()
+                    };
+            
+                    function scrollFunction() {
+                        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                            mybutton.style.display = "block";
+                        }
+                
+                        else {
+                            mybutton.style.display = "none";
+                        }
+                    }
+            
+                    function topFunction() {
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                    }
+                </script>
+                <!-- End Back to top Button -->
+
                 <div class="card mb-3">
                     <div class="card-header">
                         <h4>Job Of The Day</h4>
@@ -199,7 +237,7 @@
                                 include 'dbconnect.php';
                                 
                                 $numRow = "SELECT * FROM job_register WHERE job_status = 'Incomplete' 
-                                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
+                                           AND (job_cancel = '' OR job_cancel IS NULL)";
                                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 
@@ -230,15 +268,17 @@
                                         include 'dbconnect.php';
                                         
                                         $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Incomplete' AND (job_cancel = '' OR job_cancel IS NULL)
-                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC");
                     
+                                        $counter = 1;
+
                                         while($row = $results->fetch_assoc()) {
                                             $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
                                             $datemodify = substr($jobregisterlastmodify_at,0,11); 
                                     ?>
                                     <tr>
-                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
-                                        <td style='text-align: center; vertical-align: middle;'>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
                                         <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
@@ -246,7 +286,7 @@
                                         <td style='text-align: center; vertical-align: middle;'><?php echo $row['reason']?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $datemodify ?></td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php $counter++; }?>
                                 </tbody>
                             </table>
                         </div>
@@ -259,7 +299,7 @@
                                 include 'dbconnect.php';
                                 
                                 $numRow = "SELECT * FROM job_register WHERE job_status = 'Pending'
-                                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
+                                           AND (job_cancel = '' OR job_cancel IS NULL)";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 
@@ -290,15 +330,17 @@
                                         include 'dbconnect.php';
                                         
                                         $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending' AND (job_cancel = '' OR job_cancel IS NULL)
-                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC");
                     
+                                        $counter = 1;
+
                                         while($row = $results->fetch_assoc()) {
                                             $jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
                                             $datemodify = substr($jobregisterlastmodify_at,0,11); 
                                     ?>
                                     <tr>
-                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
-                                        <td style='text-align: center; vertical-align: middle;'>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
                                         <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
@@ -306,7 +348,7 @@
                                         <td style='text-align: center; vertical-align: middle;'><?php echo $row['reason']?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $datemodify ?></td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php $counter++; }?>
                                 </tbody>
                             </table>
                         </div>
@@ -320,7 +362,7 @@
                                 
                                 $numRow = "SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
                                            AND (job_cancel IS NULL OR job_cancel = ' ')
-                                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing') LIMIT 50;";
+                                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing');";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -347,24 +389,27 @@
                                 <tbody>
                                     <?php
                                         include 'dbconnect.php';
-                                        
+
                                         $results = $conn->query("SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
-                                                                 AND (job_cancel IS NULL OR job_cancel = ' ')
+                                                                 AND (job_cancel IS NULL OR job_cancel = '')
                                                                  AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing')
-                                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
-                                        
+                                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
+
+                                        $counter = 1;
+
                                         while($row = $results->fetch_assoc()) {
+                                            
                                     ?>
                                     <tr>
-                                        <td style='text-align: center; vertical-align: middle;'></td>
-                                        <td style='text-align: center; vertical-align: middle;'>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
                                         <td style='vertical-align: middle;'><?php echo $row['customer_name']?></td>
                                         <td style='vertical-align: middle;'><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row['job_status']?></td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php $counter++; } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -403,7 +448,7 @@
                                                 OR
                                             (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                                                 OR
-                                            (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) LIMIT 50";
+                                            (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -458,20 +503,22 @@
                                                                     OR
                                                                 (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                                                                     OR
-                                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
+                                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
                     
+                                        $counter = 1;
+
                                         while($row = $results->fetch_assoc()) {
                                     ?>
 
                                     <tr>
-                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
-                                        <td style='text-align: center; vertical-align: middle;'>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row["customer_name"]; ?></button>
                                         </td>
                                         <td style='text-align: center; vertical-align: middle;'><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row['job_status']?></td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php $counter++; } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -506,16 +553,6 @@
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="fw-bold">Job Description</label>
                                                 <p id="view_jobDesc" class="form-control"></p>
-                                            </div>
-
-                                            <div class="col-md-6 mb-3">
-                                                <label for="" class="fw-bold">Job Status</label>
-                                                <p id="view_jobStatus" class="form-control"></p>
-                                            </div>
-
-                                            <div class="col-md-6 mb-3">
-                                                <label for="" class="fw-bold">Assign Date</label>
-                                                <p id="view_assgnDate" class="form-control"></p>
                                             </div>
 
                                             <div class="col-md-6 mb-3">
@@ -586,6 +623,16 @@
                                                 <label for="" class="fw-bold">Accessory Require</label>
                                                 <p id="view_accReq" class="form-control"></p>
                                             </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Job Status</label>
+                                                <p id="view_jobStatus" class="form-control"></p>
+                                            </div> 
+                                            
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="fw-bold">Reason</label>
+                                                <p id="view_reason" class="form-control"></p>
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
@@ -613,7 +660,6 @@
                                             $('#view_jobName').text(res.data.job_name);
                                             $('#view_jobDesc').text(res.data.job_description);
                                             $('#view_jobStatus').text(res.data.job_status);
-                                            $('#view_assgnDate').text(res.data.DateAssign);
                                             $('#view_delDate').text(res.data.delivery_date);
                                             $('#view_reqDate').text(res.data.requested_date);
                                             $('#view_custName').text(res.data.customer_name);
@@ -629,6 +675,7 @@
                                             $('#view_machName').text(res.data.machine_name);
                                             $('#view_serNum').text(res.data.serialnumber);
                                             $('#view_accReq').text(res.data.accessories_required);
+                                            $('#view_reason').text(res.data.reason);
                                             
                                             $('#jobInfoModal').modal('show');
                                         }

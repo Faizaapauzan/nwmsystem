@@ -41,6 +41,7 @@ if (isset($_POST["update"])) {
             job_name = ?,   
             job_order_number = ?,
             job_description = ?,
+            DateAssign = ?,
             job_cancel = ?,
             job_status = ?,
             reason = ?,
@@ -71,11 +72,12 @@ if (isset($_POST["update"])) {
 
     // Prepare and bind parameters
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sssssssssssssssssssssssssssssss",
+    mysqli_stmt_bind_param($stmt, "ssssssssssssssssssssssssssssssss",
         $job_code,
         $job_name,
         $job_order_number,
         $job_description,
+        $DateAssign,
         $job_cancel,
         $job_status,
         $reason,
@@ -105,17 +107,23 @@ if (isset($_POST["update"])) {
         $jobregister_id
     );
 
-    // Execute the statement
-    if (mysqli_stmt_execute($stmt)) {
-        echo "success";
-    } else {
-        echo "error";
+        if (mysqli_stmt_execute($stmt)) {
+            header("Location: AdminHomepage.php");
+            
+            exit();
+        }
+        
+        else {
+            echo "error";
+        }
+
+        mysqli_stmt_close($stmt);
     }
 
-    // Close statement
-    mysqli_stmt_close($stmt);
-}
-
-// Close connection
-mysqli_close($conn);
+    mysqli_close($conn);
 ?>
+
+
+
+
+

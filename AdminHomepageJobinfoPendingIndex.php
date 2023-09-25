@@ -22,8 +22,6 @@
             &&
          isset($_POST['support']) && $_POST['support']!='' || $_POST['support']==''
             &&
-         isset($_POST['job_status']) && $_POST['job_status']!='' || $_POST['job_status']==''
-            &&
          isset($_POST['reason']) && $_POST['reason']!='' || $_POST['reason']==''
             &&
          isset($_POST['customer_code']) && $_POST['customer_code']!='' || $_POST['customer_code']==''
@@ -79,7 +77,7 @@
        
         $sql = "INSERT INTO job_register (today_date, job_code, job_name, job_order_number, job_description,
                                           technician_rank, staff_position, job_cancel, support,
-                                          job_status, reason, customer_code, customer_name, customer_grade,
+                                          reason, customer_code, customer_name, customer_grade,
                                           job_priority, requested_date, delivery_date, customer_PIC, cust_phone1,
                                           cust_phone2, cust_address1, cust_address2, cust_address3, machine_id,
                                           machine_code, machine_name, machine_type, type_id, machine_brand,
@@ -94,7 +92,6 @@
                                '".addslashes($_POST['staff_position'])."',
                                '".addslashes($_POST['job_cancel'])."',
                                '".addslashes($_POST['support'])."',
-                               '".addslashes($_POST['job_status'])."',
                                '".addslashes($_POST['reason'])."',
                                '".addslashes($_POST['customer_code'])."',
                                '".addslashes($_POST['customer_name'])."',
