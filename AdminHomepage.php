@@ -500,6 +500,8 @@
                                                     OR
                                                 (accessories_required = 'Yes' AND job_status IS NULL AND job_cancel IS NULL)
                                                     OR
+                                                (accessories_required = 'Yes' AND job_status IS NULL AND job_cancel = '')
+                                                    OR
                                                 (accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel = '')
                                                     OR
                                                 (accessories_required = 'Yes' AND job_status = 'Not Ready' AND job_cancel IS NULL)
@@ -1868,7 +1870,7 @@
                                         
                                         <div class="d-flex">
                                             <button class="btn" style="background-color: #081d45; color: #fff; border:none; width:54%; margin-right:1%;" type="submit" id="submit" name="update">Update</button>
-                                            <button class="btn" style="background-color: #023020; color: #fff; border:none; width:54%; margin-left:1%;" id="duplicate" name="duplicate" onclick="submitFormSupportAdmin();">Support</button>
+                                            <button class="btn" style="background-color: #023020; color: #fff; border:none; width:54%; margin-left:1%;" type="button" id="duplicate" name="duplicate" onclick="submitFormSupportAdmin();">Support</button>
                                         </div>
                                     </form>
                                     
@@ -1894,7 +1896,8 @@
                                                     dataType: "text",
                                                     
                                                     success: function(response) {
-                                                        if (response === "success") {
+                                                        response = response.trim();
+                                                        if (response == "success") {
                                                             $("#updatetextinfo").html("Updated Successfully");
                                                             $("#updatetextinfo").css("color", "green");
                                                             $("#updatetextinfo").css("display", "block");
@@ -1912,7 +1915,7 @@
                                                     },
                                                     
                                                     error: function(xhr, textStatus, errorThrown) {
-                                                        console.error("AJAX error:", errorThrown);
+                                                        console.error("AJAX errorr:", errorThrown);
                                                     }
                                                 });
                                             });
@@ -2581,7 +2584,7 @@
                         var job_description = $('input[name=job_description]').val();
                         var requested_date = $('input[name=requested_date]').val();
                         var delivery_date = $('input[name=delivery_date]').val();
-                        var customer_name = $('select[name=customer_name]').val();
+                        var customer_name = document.getElementById('customer_name').value;
                         var customer_code = $('input[name=customer_code]').val();
                         var customer_grade = $('input[name=customer_grade]').val();
                         var cust_address1 = $('input[name=cust_address1]').val();
@@ -2592,9 +2595,11 @@
                         var cust_phone2 = $('input[name=cust_phone2]').val();
                         var machine_name = $('input[name=machine_name]').val();
                         var machine_code = $('input[name=machine_code]').val();
+                        var type_id = document.getElementById('type_id').value;
                         var machine_type = $('input[name=machine_type]').val();
                         var serialnumber = $('input[name=serialnumber]').val();
                         var machine_id = $('input[name=machine_id]').val();
+                        var brand_id = document.getElementById('brand_id').value;
                         var machine_brand = $('input[name=machine_brand]').val();
                         var accessories_required = $('select[name=accessories_required]').val();
                         var accessories_for = $('select[name=accessories_for]').val();
@@ -2619,9 +2624,11 @@
                             cust_phone2 != '' || cust_phone2 == '', 
                             machine_name != '' || machine_name == '', 
                             machine_code != '' || machine_code == '', 
+                            type_id != '' || type_id == '', 
                             machine_type != '' || machine_type == '', 
                             serialnumber != '' || serialnumber == '', 
                             machine_id != '' || machine_id == '', 
+                            brand_id != '' || brand_id == '', 
                             machine_brand != '' || machine_brand == '', 
                             accessories_required != '' || accessories_required == '', 
                             accessories_for != '' || accessories_for == '',
@@ -2647,15 +2654,18 @@
                                 cust_phone2: cust_phone2,
                                 machine_name: machine_name,
                                 machine_code: machine_code,
+                                type_id: type_id,
                                 machine_type: machine_type,
                                 serialnumber: serialnumber,
                                 machine_id: machine_id,
+                                brand_id: brand_id,
                                 machine_brand: machine_brand,
                                 accessories_required: accessories_required,
                                 accessories_for: accessories_for,
                                 job_cancel: job_cancel,
                                 jobregisterlastmodify_by: jobregisterlastmodify_by
                             };
+                            console.log(formData);
 
                             $.ajax({
                                 url: "adminsupporttechnician.php",
@@ -2688,12 +2698,14 @@
                             }
                         }
                         
+                        var job_assign = document.getElementById('username');
                         var jobregister_id3 = document.getElementById('jobregister_id3');
                         var tech_leader = document.getElementById('tech_leader');
                         var cust_name = document.getElementById('cust_name');
                         var requested_date2 = document.getElementById('requested_date2');
                         var machine_name = document.getElementById('machine_name2');
 
+                        job_assign.value = job_table.job_assign;
                         jobregister_id3.value = job_table.jobregister_id;
                         tech_leader.value = job_table.technician_rank;
                         cust_name.value = job_table.customer_name;

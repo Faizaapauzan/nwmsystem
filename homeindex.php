@@ -27,7 +27,7 @@ if (isset($_POST["update"])) {
     $serialnumber = $_POST["serialnumber"];
     $machine_code = $_POST["machine_code"];
     $accessories_required = $_POST["accessories_required"];
-    $accessories_for = $_POST["accessories_for"];
+    $accessories_for = !empty($_POST["accessories_for"]) ? $_POST["accessories_for"] : null;
     $machine_name = $_POST["machine_name"];
     $job_cancel = $_POST["job_cancel"];
     $job_status = $_POST["job_status"];
@@ -108,9 +108,7 @@ if (isset($_POST["update"])) {
     );
 
         if (mysqli_stmt_execute($stmt)) {
-            header("Location: AdminHomepage.php");
-            
-            exit();
+            echo "success";
         }
         
         else {

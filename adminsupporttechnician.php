@@ -39,11 +39,15 @@
         &&
        isset($_POST['machine_code']) && $_POST['machine_code']!='' || $_POST['machine_code']==''
         &&
+       isset($_POST['type_id']) && $_POST['type_id']!='' || $_POST['type_id']==''
+        &&
        isset($_POST['machine_type']) && $_POST['machine_type']!='' || $_POST['machine_type']==''
         &&
        isset($_POST['serialnumber']) && $_POST['serialnumber']!='' || $_POST['serialnumber']==''
         &&
        isset($_POST['machine_id']) && $_POST['machine_id']!='' || $_POST['machine_id']==''
+        &&
+       isset($_POST['brand_id']) && $_POST['brand_id']!='' || $_POST['brand_id']==''
         &&
        isset($_POST['machine_brand']) && $_POST['machine_brand']!='' || $_POST['machine_brand']==''
         &&
@@ -55,15 +59,13 @@
         &&
        isset($_POST['jobregisterlastmodify_by']) && $_POST['jobregisterlastmodify_by']!='' || $_POST['jobregisterlastmodify_by']=='')
         
-       {
-
-         $machine_id = !empty($machine_id) ? "'$machine_id'" : "NULL";
+       {  
         
          $sql = "INSERT INTO job_register (job_priority, job_order_number,
                                            job_name, job_code, job_description, requested_date, delivery_date, 
                                            customer_name, customer_code, customer_grade, cust_address1, cust_address2, 
                                            cust_address3, customer_PIC, cust_phone1, cust_phone2,
-                                           machine_name, machine_code, machine_type, serialnumber, machine_id, machine_brand, accessories_required, accessories_for, job_cancel, jobregisterlastmodify_by) 
+                                           machine_name, machine_code, type_id, machine_type, serialnumber, machine_id, brand_id, machine_brand, accessories_required, accessories_for, job_cancel, jobregisterlastmodify_by) 
                        
                        VALUES ('".addslashes($_POST['job_priority'])."',
                                '".addslashes($_POST['job_order_number'])."',
@@ -83,9 +85,11 @@
                                '".addslashes($_POST['cust_phone2'])."',
                                '".addslashes($_POST['machine_name'])."',
                                '".addslashes($_POST['machine_code'])."',
+                               '".addslashes($_POST['type_id'])."',
                                '".addslashes($_POST['machine_type'])."',
                                '".addslashes($_POST['serialnumber'])."',
-                                 $machine_id,
+                               '".addslashes($_POST['machine_id'])."',
+                               '".addslashes($_POST['brand_id'])."',
                                '".addslashes($_POST['machine_brand'])."',
                                '".addslashes($_POST['accessories_required'])."',
                                '".addslashes($_POST['accessories_for'])."',
