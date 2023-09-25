@@ -226,7 +226,7 @@
                                         
                                         require 'dbconnect.php';
                                         
-                                        $query = "SELECT * FROM job_register WHERE job_status = 'Completed' ORDER BY today_date ASC";
+                                        $query = "SELECT * FROM job_register WHERE job_status = 'Completed' ORDER BY jobregisterlastmodify_at DESC";
                                         $query_run = mysqli_query($conn, $query);
 
                                         $counter = 1;
