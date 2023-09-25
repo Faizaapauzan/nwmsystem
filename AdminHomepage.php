@@ -1872,6 +1872,7 @@
                                             <button class="btn" style="background-color: #081d45; color: #fff; border:none; width:54%; margin-right:1%;" type="submit" id="submit" name="update">Update</button>
                                             <button class="btn" style="background-color: #023020; color: #fff; border:none; width:54%; margin-left:1%;" type="button" id="duplicate" name="duplicate" onclick="submitFormSupportAdmin();">Support</button>
                                         </div>
+                                        <div id="messageSupportAdmin"></div>
                                     </form>
                                     
                                     <script>
