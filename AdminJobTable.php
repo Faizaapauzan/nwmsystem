@@ -237,7 +237,7 @@
                                 include 'dbconnect.php';
                                 
                                 $numRow = "SELECT * FROM job_register WHERE job_status = 'Incomplete' 
-                                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
+                                           AND (job_cancel = '' OR job_cancel IS NULL)";
                                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 
@@ -268,7 +268,7 @@
                                         include 'dbconnect.php';
                                         
                                         $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Incomplete' AND (job_cancel = '' OR job_cancel IS NULL)
-                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC");
                     
                                         $counter = 1;
 
@@ -277,7 +277,7 @@
                                             $datemodify = substr($jobregisterlastmodify_at,0,11); 
                                     ?>
                                     <tr>
-                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
                                         <td style='text-align: center; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
@@ -299,7 +299,7 @@
                                 include 'dbconnect.php';
                                 
                                 $numRow = "SELECT * FROM job_register WHERE job_status = 'Pending'
-                                           AND (job_cancel = '' OR job_cancel IS NULL) LIMIT 50";
+                                           AND (job_cancel = '' OR job_cancel IS NULL)";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 
@@ -330,7 +330,7 @@
                                         include 'dbconnect.php';
                                         
                                         $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending' AND (job_cancel = '' OR job_cancel IS NULL)
-                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC LIMIT 50");
+                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC");
                     
                                         $counter = 1;
 
@@ -339,7 +339,7 @@
                                             $datemodify = substr($jobregisterlastmodify_at,0,11); 
                                     ?>
                                     <tr>
-                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
                                         <td style='text-align: center; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
@@ -362,7 +362,7 @@
                                 
                                 $numRow = "SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
                                            AND (job_cancel IS NULL OR job_cancel = ' ')
-                                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing') LIMIT 50;";
+                                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing');";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -391,9 +391,9 @@
                                         include 'dbconnect.php';
 
                                         $results = $conn->query("SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
-                                                                 AND (job_cancel IS NULL OR job_cancel = ' ')
+                                                                 AND (job_cancel IS NULL OR job_cancel = '')
                                                                  AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing')
-                                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
+                                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
 
                                         $counter = 1;
 
@@ -401,7 +401,7 @@
                                             
                                     ?>
                                     <tr>
-                                        <td style='text-align: center; vertical-align: middle;'></td>
+                                        <td style='text-align: center; vertical-align: middle;'><?= $counter ?></td>
                                         <td style='text-align: center; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row['job_assign']?></button>
                                         </td>
@@ -448,7 +448,7 @@
                                                 OR
                                             (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                                                 OR
-                                            (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) LIMIT 50";
+                                            (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -503,7 +503,7 @@
                                                                     OR
                                                                 (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
                                                                     OR
-                                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY job_assign ASC, jobregisterlastmodify_at DESC LIMIT 50");
+                                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
                     
                                         $counter = 1;
 
@@ -511,14 +511,14 @@
                                     ?>
 
                                     <tr>
-                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
                                         <td style='text-align: center; vertical-align: middle;'>
                                             <button type="button" value="<?php echo $row['jobregister_id'];?>" class="openModal btn fw-bold" style="border: none;"><?php echo $row["customer_name"]; ?></button>
                                         </td>
                                         <td style='text-align: center; vertical-align: middle;'><?php echo $row['machine_type']?> - <?php echo $row['job_description']?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row['job_status']?></td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php $counter++; } ?>
                                 </tbody>
                             </table>
                         </div>
