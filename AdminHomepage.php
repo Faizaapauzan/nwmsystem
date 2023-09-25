@@ -323,6 +323,13 @@
                                         <li><?php echo $row['job_status'] ?></li>
                                     </ul>
                                     <p class="fw-bold ms-3" style="color: red;"><?php echo $row['reason'] ?></p>
+                                    <?php
+                                        if($row['support'] != "" || $row['support'] != NULL) {
+                                            echo '<div class="badge bg-secondary text-wrap float-end" id="support" style="width:fit-content;">';
+                                            echo '' .$row['support'] ;
+                                            echo '</div>';
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <?php } ?>
@@ -1630,7 +1637,7 @@
                                                 <input type="hidden" id="job_name" name="job_name" value="">
                                             </div>
                                             
-                                            <div class="mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <label for="" class="fw-bold">Job Description</label>
                                                 <input type="text" name="job_description" id="job_description" class="form-control" value="">
                                             </div>
@@ -1872,7 +1879,7 @@
                                             <button class="btn" style="background-color: #081d45; color: #fff; border:none; width:54%; margin-right:1%;" type="submit" id="submit" name="update">Update</button>
                                             <button class="btn" style="background-color: #023020; color: #fff; border:none; width:54%; margin-left:1%;" type="button" id="duplicate" name="duplicate" onclick="submitFormSupportAdmin();">Support</button>
                                         </div>
-                                        <div id="messageSupportAdmin"></div>
+                                        <div class="fw-bold mt-2" id="messageSupportAdmin"></div>
                                     </form>
                                     
                                     <script>
