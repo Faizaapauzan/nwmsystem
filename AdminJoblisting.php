@@ -197,7 +197,7 @@
             
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="jobListTable" class="table table-bordered table-striped" style="font-size: small;">
+                    <table id="jobListTable" class="table table-bordered" style="font-size: small;">
                         <thead>
                             <tr>
                                 <th style='text-align: center;'>No</th>
@@ -226,8 +226,9 @@
                                 
                                 if(mysqli_num_rows($query_run) > 0) {
                                     foreach($query_run as $job) {
+                                        $color = ($job['staff_position'] == 'Storekeeper') ? 'table-primary' : (($job['job_status'] == 'Doing') ? 'table-success' : (($job['job_status'] == 'Incomplete') ? 'table-warning' : (($job['job_status'] == 'Pending') ? 'table-danger' : '')));
                             ?>
-                            <tr>
+                            <tr class="<?php echo $color?>">
                                 <td style='text-align: center; white-space: nowrap;'><?= $counter ?></td>
                                 <td style='text-align: center; white-space: nowrap;'>
                                     <button type="button" data-jobregister-id="<?=$job['jobregister_id'];?>" class="openModal btn btn-sm fw-bold" style="border: none;"><?= $job['job_order_number'] ?></button>
@@ -258,7 +259,7 @@
                                     </select>
                                 </td>
                             </tr>
-                            <?php $counter++; } } ?>
+                            <?php $counter++; }} ?>
                         </tbody>
                     </table>
                 </div>
