@@ -3254,7 +3254,7 @@
                                         </div>
                                     </div>
                                     
-                                    <a href="javascript:void(0);" class="remove_button" title="Add field">Remove</a>
+                                    <a href="javascript:void(0);" class="remove_button fw-bold" title="Add field">Remove</a>
                                 </div>
                             </div>`;
                             
