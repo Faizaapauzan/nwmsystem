@@ -96,14 +96,6 @@
     <!-- Add more accessory form -->
     <script>
       $(document).ready(function () {
-        $('.model').on('change', '.form-select', function () {
-          $(this).select2({
-            theme: 'bootstrap-5',
-            width: '100%',
-            allowClear: true,
-            dropdownParent: $(this).parent(),
-          });
-        });
         
         var maxField = 100;
         var addButton = $('.add_button');
@@ -111,7 +103,7 @@
         var fieldHTML = `
           <div class="field-element mb-3">
             <div class="model">
-              <select id="select_box" class="accessoriesModel form-select" name="accessoriesModel[]">
+              <select class="accessoriesModel form-select" name="accessoriesModel[]">
                 <option value="">Select Accessories Code</option>
                   <!-- Options will be dynamically added using PHP -->
                   <?php
@@ -148,7 +140,7 @@
               
               $(wrapper).append(fieldHTML);
               
-              $('.field-element:last-child .form-select').select2({
+              $('.field-element .form-select').select2({
                 theme: 'bootstrap-5',
                 width: '100%',
                 allowClear: true,
@@ -193,7 +185,6 @@
       $(document).ready(function () {
         $('#update_acc').click(function () {
           var data = $('#adminacc_form').serialize() + '&update_acc=update_acc';
-          console.log(data);
           $.ajax({
             url: 'addaccessoriesindex.php',
             type: 'post',
