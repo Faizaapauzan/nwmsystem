@@ -2,12 +2,10 @@
     include 'dbconnect.php';
 
     $jobregister_id = mysqli_real_escape_string($conn, $_POST['jobregister_id']);
-    $DateAssign = mysqli_real_escape_string($conn, $_POST['DateAssign']);
     $job_status = mysqli_real_escape_string($conn, $_POST['job_status']);
     $departure_timestamp = mysqli_real_escape_string($conn, $_POST['departure_timestamp']);
 
     $sql = "UPDATE job_register SET 
-            DateAssign='$DateAssign', 
             job_status='$job_status', 
             departure_timestamp='$departure_timestamp' 
             WHERE jobregister_id='$jobregister_id'";

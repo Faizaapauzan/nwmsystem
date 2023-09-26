@@ -108,11 +108,11 @@ if (isset($_POST["update"])) {
     );
 
         if (mysqli_stmt_execute($stmt)) {
-            echo "success";
+            header("Location:" . $_SERVER["HTTP_REFERER"]);
         }
         
         else {
-            echo "error";
+            echo "error: $sql. " . mysqli_error($conn);;
         }
 
         mysqli_stmt_close($stmt);

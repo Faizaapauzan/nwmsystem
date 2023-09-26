@@ -47,7 +47,7 @@
     <label>Departure time</label>
     <form id="TechnicianDepartureTime">
         <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
-        <input type="hidden" name="DateAssign" value="<?php echo date('d-m-Y'); ?>">
+        <input type="hidden" name="DateAssign" id="DateAssign" value="<?php echo date('d-m-Y'); ?>">
         <input type="hidden" name="job_status" value="Doing">
         <input type="hidden" name="departure_timestamp" value="<?php echo date('H:i:s'); ?>">
         
@@ -229,6 +229,7 @@
                 var technician_departure = $('#technician_departure').val();
                 var technician_arrival = $('#technician_arrival').val();
                 var technician_leaving = $('#technician_leaving').val();
+                var DateAssign = $('#DateAssign').val();
                 var tech_out = $('#tech_out').val();
                 var tech_in = $('#tech_in').val();
                 var jobregister_id = $('#jobregister_id').val();
@@ -240,6 +241,7 @@
                         technician_departure: technician_departure,
                         technician_arrival: technician_arrival,
                         technician_leaving: technician_leaving,
+                        DateAssign: DateAssign,
                         tech_out: tech_out,
                         tech_in: tech_in,
                         jobregister_id: jobregister_id

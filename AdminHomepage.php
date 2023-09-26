@@ -655,7 +655,7 @@
                                                 var jobregister_id = $(this).data('jobregisterstore-id');
                                                 
                                                 $.ajax({
-                                                    url: 'AdminHomepageJobassignStore.php',
+                                                    url: 'AdminHomepageJobassign.php',
                                                     type: 'post',
                                                     data: { jobregister_id: jobregister_id },
                                                     

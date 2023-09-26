@@ -1,7 +1,7 @@
 <?php
     include 'dbconnect.php';
 
-    $DateAssign = mysqli_real_escape_string($conn, $_POST['dateassign']);
+    $DateAssign = mysqli_real_escape_string($conn, $_POST['DateAssign']);
     $technician_departure = mysqli_real_escape_string($conn, $_POST['technician_departure']);
     $technician_arrival = mysqli_real_escape_string($conn, $_POST['technician_arrival']);
     $technician_leaving = mysqli_real_escape_string($conn, $_POST['technician_leaving']);

@@ -1159,13 +1159,11 @@
                                 <div class="mb-3" id="Accessory">
                                     <label for="">Accessory For</label>
                                     <select id="accessories_for" name="accessories_for" class="form-select">
-                                        <option value="Technician">Technician Use</option>
-                                        <option value="Customer">Customer Request</option>
+                                        <option value="Technician Use">Technician Use</option>
+                                        <option value="Customer Request">Customer Request</option>
                                     </select>
                                 </div>
-                                <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-                                <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
-
+                                
                                 <script>
                                     function myFunctionAccessory() {
                                         var accessories = document.getElementById("accessories_required").value;
@@ -1183,6 +1181,9 @@
                                     
                                     myFunctionAccessory();
                                 </script>
+
+                                <input type="hidden" name="jobregistercreated_by" id="jobregistercreated_by" value="<?php echo $_SESSION["username"] ?>" readonly>
+                                <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>" readonly>
                             </div>
                             <!-- End Machine Tab -->
                         </div>

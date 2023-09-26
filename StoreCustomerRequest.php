@@ -135,7 +135,7 @@
                                    AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing' OR job_status = 'Incomplete')
                                    AND (job_cancel='' OR job_cancel IS NULL)
                                    AND accessories_for = 'Customer Request'
-			              ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
+			              ORDER BY jobregisterlastmodify_at DESC";
 
 			    $result = mysqli_query($conn, $query);
 
