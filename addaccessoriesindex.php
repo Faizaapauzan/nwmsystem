@@ -8,13 +8,13 @@
     
     if(isset($_POST['update_acc'])) {
       $jobid = $_POST['jobregister_id'];
-      parse_str($_POST['data'], $formData);
+
       
-      $accessories_id = $formData['accessories_id'];
-      $accessories_code = $formData['accessories_code'];
-      $accessories_name = $formData['accessories_name'];
-      $accessories_uom = $formData['accessories_uom'];
-      $accessories_quantity = $formData['accessories_quantity'];
+      $accessories_id = $_POST['accessories_id'];
+      $accessories_code =$_POST['accessories_code'];
+      $accessories_name = $_POST['accessories_name'];
+      $accessories_uom = $_POST['accessories_uom'];
+      $accessories_quantity = $_POST['accessories_quantity'];
       
       foreach ($accessories_id as $index => $accessories_ids) {
         $s_accessories_id = $accessories_ids;

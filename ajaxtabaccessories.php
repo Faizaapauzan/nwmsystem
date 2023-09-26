@@ -193,6 +193,7 @@
       $(document).ready(function () {
         $('#update_acc').click(function () {
           var data = $('#adminacc_form').serialize() + '&update_acc=update_acc';
+          console.log(data);
           $.ajax({
             url: 'addaccessoriesindex.php',
             type: 'post',

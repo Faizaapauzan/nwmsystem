@@ -304,7 +304,7 @@
                             <button class="btn tab-button mx-3 fw-bold active" data-bs-toggle="tab" data-target="#JobInfo" data-action="AdminHomepageJobinfo.php">Job Info</button>
                             <button class="btn tab-button mx-3 fw-bold" data-bs-toggle="tab" data-target="#JobAssign" data-action="AdminHomepageJobassign.php">Job Assign</button>
                             <button class="btn tab-button mx-3 fw-bold" data-bs-toggle="tab" data-target="#Update" data-action="AdminHomepageUpdate.php">Update</button>
-                            <button class="btn tab-button mx-3 fw-bold" data-bs-toggle="tab" data-target="#Accessory" data-action="ajaxtabaccessories.php">Accessory</button>
+                            <button class="btn tab-button mx-3 fw-bold" data-bs-toggle="tab" data-target="#Accessories" data-action="ajaxtabaccessories.php">Accessory</button>
                             <button class="btn tab-button mx-3 fw-bold" data-bs-toggle="tab" data-target="#Photo" data-action="ajaxtechphtoupdt.php">Photo</button>
                             <button class="btn tab-button mx-3 fw-bold" data-bs-toggle="tab" data-target="#Video" data-action="ajaxtechvideoupdt.php">Video</button>
                         </div>
@@ -405,7 +405,7 @@
                             </script>
 
                             <!-- Accessories -->
-                            <div class="tab-pane" id="Accessory" role="tabpanel" aria-labelledby="Accessory" style="color: black;">
+                            <div class="tab-pane" id="Accessories" role="tabpanel" aria-labelledby="Accessories" style="color: black;">
                                 <form id="showaccessory" action="ajaxtabaccessories.php" method="post">
                                     <div class="completed-accessories"></div>
                                 </form>
