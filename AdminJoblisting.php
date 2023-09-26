@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -287,11 +290,35 @@
                 });
             });
         </script>
+        
 
         <script>
             function status_update(value, jobregister_id) {
                 let url = "adminjoblisting.php";
                 window.location.href = url + "?jobregister_id=" + jobregister_id + "&job_assign=" + value;
+            }
+            function status_update(value, jobregister_id) {
+                lastmodify_by = "<?php echo $_SESSION['username']?>";
+                $.ajax({
+                    url: 'assigntechindex.php',
+                    type: 'get',
+                    data: {
+                        value: value,
+                        jobregister_id: jobregister_id,
+                        lastmodify_by: lastmodify_by,
+                        jobstatus: true
+                    },
+                
+                    success: function(response) {
+                        var res = JSON.parse(response);
+                        console.log(res);
+
+                        if (res.success == true) 
+                            window.location.reload();
+                        else 
+                            alert("Failed to update");
+                    }
+                });
             }
         </script>
 
