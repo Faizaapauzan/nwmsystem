@@ -468,7 +468,7 @@
                         </div>
                         
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-primary" onclick="saveEntry()">Save</button>
                         </div>
                     </form>
 
@@ -922,9 +922,9 @@
 
         <script>
             // <!-- Add -->
-            $(document).on('submit', '#saveEntry', function(e) {
-                e.preventDefault();
-                var formData = new FormData(this);
+            function saveEntry(){
+                alert();
+                var formData = new FormData(document.getElementById('saveEntry'));
                 formData.append("save_entry", true);
                 
                 $.ajax({
@@ -958,7 +958,7 @@
                         }
                     }
                 });
-            });
+            }
 
             // <!-- View -->
             $(document).on('click', '.viewEntryBtn', function() {
