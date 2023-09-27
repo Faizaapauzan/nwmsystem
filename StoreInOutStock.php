@@ -257,6 +257,65 @@
 
                                         <button type="button" id="toggleButton" class="btn" style="background-color: #081d45; color:white; border:none;"><i class="iconify" data-icon="fluent:add-12-filled"></i></button>
                                     </div>
+
+                                     <!-- Add More Accessory -->
+                    <div class="card m-3" id="contentDiv" style="display: none;">
+                        <div class="card-body">
+                            <form id="addMoreAccessory">
+                                <label for="" class="fw-bold mb-3">Add More Accessory</label>
+                                <select class="form-select" id="addAcc">
+                                    <option value="">Select Accessories Code</option>
+                                        <?php
+                                            include "dbconnect.php";
+                                            
+                                            $records = mysqli_query($conn, "SELECT * FROM accessories_list ORDER BY accessories_code ASC");
+                                            
+                                            while($data = mysqli_fetch_array($records)) {
+                                                echo "<option value='". $data['accessories_id'] ."'>" .$data['accessories_code']. " - " . $data['accessories_name']."</option>";
+                                            }
+                                        ?>
+                                </select>
+                                
+                                <input type="text" name="" class="form-control mt-2" value="">
+                                
+                                <div class="d-flex gap-2 mt-2 mb-2">
+                                    <input type="text" class="form-control" name="" value="">
+                                    <input type="number" class="form-control" name="" value="">
+                                </div>
+                                
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn" style="color: white; background-color:#081d45; border:none;">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <script>
+                        $(document).ready(function(){
+                            $('#addAcc').select2({
+                                dropdownParent: $('#addMoreAccessory'),
+                                theme: 'bootstrap-5'
+                            });
+                        });
+                    </script>
+                                
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const toggleButton = document.getElementById("toggleButton");
+                            const contentDiv = document.getElementById("contentDiv");
+                                        
+                            toggleButton.addEventListener("click", function () {
+                                if (contentDiv.style.display === "none") {
+                                    contentDiv.style.display = "block";
+                                }
+                                
+                                else {
+                                    contentDiv.style.display = "none";
+                                }
+                            });
+                        });
+                    </script>
+
                                 </div>
 
                                 <script>
@@ -325,63 +384,7 @@
                         </div>
                     </form>
 
-                    <!-- Add More Accessory -->
-                    <div class="card m-3" id="contentDiv" style="display: none;">
-                        <div class="card-body">
-                            <form id="addMoreAccessory">
-                                <label for="" class="fw-bold mb-3">Add More Accessory</label>
-                                <select class="form-select" id="addAcc">
-                                    <option value="">Select Accessories Code</option>
-                                        <?php
-                                            include "dbconnect.php";
-                                            
-                                            $records = mysqli_query($conn, "SELECT * FROM accessories_list ORDER BY accessories_code ASC");
-                                            
-                                            while($data = mysqli_fetch_array($records)) {
-                                                echo "<option value='". $data['accessories_id'] ."'>" .$data['accessories_code']. " - " . $data['accessories_name']."</option>";
-                                            }
-                                        ?>
-                                </select>
-                                
-                                <input type="text" name="" class="form-control mt-2" value="">
-                                
-                                <div class="d-flex gap-2 mt-2 mb-2">
-                                    <input type="text" class="form-control" name="" value="">
-                                    <input type="number" class="form-control" name="" value="">
-                                </div>
-                                
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn" style="color: white; background-color:#081d45; border:none;">Update</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <script>
-                        $(document).ready(function(){
-                            $('#addAcc').select2({
-                                dropdownParent: $('#addMoreAccessory'),
-                                theme: 'bootstrap-5'
-                            });
-                        });
-                    </script>
-                                
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            const toggleButton = document.getElementById("toggleButton");
-                            const contentDiv = document.getElementById("contentDiv");
-                                        
-                            toggleButton.addEventListener("click", function () {
-                                if (contentDiv.style.display === "none") {
-                                    contentDiv.style.display = "block";
-                                }
-                                
-                                else {
-                                    contentDiv.style.display = "none";
-                                }
-                            });
-                        });
-                    </script>
+                    
                 </div>
             </div>
         </div>
