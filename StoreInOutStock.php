@@ -735,16 +735,61 @@
             <div class="card-header">
                 <h4>Accessory In and Out</h4>
             </div>
+            <?php
+                $recordcount = 0;
+                $queryRequest = "SELECT * FROM accessories_remark";
+    
+                $queryRequest_run = mysqli_query($conn, $queryRequest);
+        
+                $pattern = '/.*\(request by [^)]+\)/';
             
+                if (mysqli_num_rows($queryRequest_run) > 0) {
+                    $resultsRequest = array();
+                    
+                    while ($row = mysqli_fetch_assoc($queryRequest_run)) {
+                        if (preg_match($pattern, $row['remark_note'])) {
+                            $resultsRequest[] = $row;
+                        }
+                    }
+                    
+                    $recordcount = count($resultsRequest);
+                } 
+            ?>
+            <style>
+                .notification-badge {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 10px;
+                    height: 10px;
+                    background-color: red;
+                    border-radius: 50%;
+                }
+            </style>
+ 
             <div class="card-body">
                 <div class="clearfix mb-3">
                     <button type="button" class="btn btn-outline-secondary btn-sm rounded float-start switch-table me-2" data-table-id="myTable">Job Requirement</button>
                     <button type="button" class="btn btn-outline-secondary btn-sm rounded float-start switch-table" data-table-id="myTable-2">Technician Request</button>
 
                     <button type="button" class="btn btn-sm rounded float-end" style="background-color: #006400;"><a href="techaccessorysummary.php" style="text-decoration: none; color:white">Summary</a></button>
-                    <button type="button" class="requestBtn btn btn-secondary btn-sm rounded float-end me-2">Request</button>
+                    <button type="button" style="position: relative"id="requestbtn" class="requestBtn btn btn-secondary btn-sm rounded float-end me-2">Request</button>
                     <button type="button" class="btn btn-primary btn-sm rounded float-end me-2" data-bs-toggle="modal" data-bs-target="#entryAddModal">Add</button>
                 </div>
+                <script>
+                    function showNotificationBadge() {
+                        if (<?= $recordcount ?> > 0) {
+                            var badge = document.createElement('div');
+                            badge.className = 'notification-badge';
+                            
+                            var requestBtn = document.getElementById('requestbtn');
+                            requestBtn.appendChild(badge);
+                        }
+                    }
+
+                    showNotificationBadge();
+                </script>
+
 
                 <div class="table-responsive">
                     <table id="myTable" class="display table table-bordered table-striped">
@@ -923,7 +968,6 @@
         <script>
             // <!-- Add -->
             function saveEntry(){
-                alert();
                 var formData = new FormData(document.getElementById('saveEntry'));
                 formData.append("save_entry", true);
                 
