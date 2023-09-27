@@ -1,6 +1,43 @@
 <?php
     
     require 'dbconnect.php';
+
+    // ======== More Acc ========
+    if(isset($_POST['moreacc'])){
+        $jobregister_id = mysqli_real_escape_string($conn, $_POST['jobregister_id']);
+        $accessoriesid = mysqli_real_escape_string($conn, $_POST['accessories_id']);
+        $accessoriescode = mysqli_real_escape_string($conn, $_POST['accessories_code']);
+        $accessoriesname = mysqli_real_escape_string($conn, $_POST['accessories_name']);
+        $accessoriesuom = mysqli_real_escape_string($conn, $_POST['accessories_uom']);
+        $accessoriesquantity = mysqli_real_escape_string($conn, $_POST['accessories_quantity']);
+
+        if($accessoriesid  == NULL ||  $accessoriescode == NULL || $accessoriesname == NULL || $accessoriesuom == NULL || $accessoriesquantity == NULL) {
+            return;
+        }
+
+        $query = "INSERT INTO job_accessories (jobregister_id, accessories_id, accessories_code, accessories_name, accessories_uom, accessories_quantity)
+                  VALUES ('$jobregister_id', '$accessoriesid', '$accessoriescode', '$accessoriesname', '$accessoriesuom', '$accessoriesquantity')";
+
+        $query_run = mysqli_query($conn, $query);  
+        
+        if($query_run) {
+            
+            $res = ['status' => 200, 'message'=> "good"];
+            
+            echo json_encode($res);
+            
+            return;
+        }
+        
+        else {
+            
+            $res = ['status' => 500, 'message'=> "bad"];
+            
+            echo json_encode($res);
+            
+            return;
+        }
+    }
     
     // ========== Save ==========
     if(isset($_POST['save_entry'])) {

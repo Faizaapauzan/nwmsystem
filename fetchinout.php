@@ -33,5 +33,19 @@ if (isset($_REQUEST['jobregister_id'])) {
 
     echo json_encode($quantity);
     exit;
+}else if (isset($_REQUEST['accessory_id'])){
+    $entry = $_REQUEST['accessory_id'];
+    include 'dbconnect.php';
+
+    $query = mysqli_query($conn, "SELECT * FROM accessories_list WHERE accessories_id='$entry'");
+    $row = mysqli_fetch_array($query);
+    $code = $row['accessories_code'];
+    $name = $row['accessories_name'];
+    $uom = $row['accessories_uom'];
+
+    $res = ['status' => 200, 'code' => $code, 'name' => $name, 'uom' => $uom];
+
+    echo json_encode($res);
+    exit;
 }
 ?>

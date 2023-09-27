@@ -72,7 +72,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Add New Entry</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    
+                    <script>let selectedjobregister_id = null;</script>
                     <form id="saveEntry">
                         <div class="modal-body">
                             <div class="row">
@@ -102,7 +102,7 @@
                                 <script>
                                     $(document).ready(function(){
                                         $('#AddJob').select2({
-                                            dropdownParent: $('#entryAddModal'),
+                                            dropdownParent: $('#saveEntry'),
                                             theme: 'bootstrap-5'
                                         });
                                     });
@@ -117,13 +117,17 @@
                                     function toggleJobSelect() {
                                         var checkbox = document.getElementById("enableJobSelect");
                                         var jobSelect = document.getElementById("AddJob");
+                                        var addbutton = document.getElementById("toggleButton")
                                         
                                         if (checkbox.checked) {
                                             jobSelect.removeAttribute("disabled");
+                                            $('#toggleButton').prop("disabled", false);
                                         }
                                         
                                         else {
                                             jobSelect.setAttribute("disabled", "disabled");
+                                            addbutton.setAttribute("disabled", "disabled");
+                                            $('#contentDiv').css('display', 'none');
                                             jobSelect.selectedIndex = 0;
                                             document.getElementById("AddAccessory").innerHTML = 
                                                 `<option value="">-- Select Accessory --</option>
@@ -149,6 +153,7 @@
                                 <script>
                                     function GetDetail(str) {
                                         if (str.length == 0) {
+                                            selectedjobregister_id = null;
                                             document.getElementById("AddAccessory").innerHTML = 
                                                 `<option value="">-- Select Accessory --</option>
                                                     
@@ -168,6 +173,7 @@
                                         }
                                         
                                         else {
+                                            selectedjobregister_id = str;
                                             var xmlhttp = new XMLHttpRequest();
                                             
                                             xmlhttp.onreadystatechange = function() {
@@ -232,7 +238,7 @@
                                 <script>
                                     $(document).ready(function(){
                                         $('#Addtechnician').select2({
-                                            dropdownParent: $('#entryAddModal'),
+                                            dropdownParent: $('#saveEntry'),
                                             theme: 'bootstrap-5'
                                         });
                                     });
@@ -259,69 +265,151 @@
                                     </div>
 
                                      <!-- Add More Accessory -->
-                    <div class="card m-3" id="contentDiv" style="display: none;">
-                        <div class="card-body">
-                            <form id="addMoreAccessory">
-                                <label for="" class="fw-bold mb-3">Add More Accessory</label>
-                                <select class="form-select" id="addAcc">
-                                    <option value="">Select Accessories Code</option>
-                                        <?php
-                                            include "dbconnect.php";
+                                <div class="card m-3" id="contentDiv" style="display: none;">
+                                    <div class="card-body">
+                                        <form id="moreaddaccessory">
+                                            <label for="" class="fw-bold mb-3">Add More Accessory</label>
+                                            <select class="form-select" id="addAcc" name="accessories_id" onchange="getAcc(this.value)">
+                                                <option value="">Select Accessories Code</option>
+                                                    <?php
+                                                        include "dbconnect.php";
+                                                        
+                                                        $records = mysqli_query($conn, "SELECT * FROM accessories_list ORDER BY accessories_code ASC");
+                                                        
+                                                        while($data = mysqli_fetch_array($records)) {
+                                                            echo "<option value='". $data['accessories_id'] ."'>" .$data['accessories_code']. " - " . $data['accessories_name']."</option>";
+                                                        }
+                                                    ?>
+                                            </select>
                                             
-                                            $records = mysqli_query($conn, "SELECT * FROM accessories_list ORDER BY accessories_code ASC");
+                                            <input type="text" name="accessories_code" id="moreaccessories_code" class="form-control mt-2" value="">
                                             
-                                            while($data = mysqli_fetch_array($records)) {
-                                                echo "<option value='". $data['accessories_id'] ."'>" .$data['accessories_code']. " - " . $data['accessories_name']."</option>";
-                                            }
-                                        ?>
-                                </select>
-                                
-                                <input type="text" name="" class="form-control mt-2" value="">
-                                
-                                <div class="d-flex gap-2 mt-2 mb-2">
-                                    <input type="text" class="form-control" name="" value="">
-                                    <input type="number" class="form-control" name="" value="">
+                                            <div class="d-flex gap-2 mt-2 mb-2">
+                                                <input type="text" id="moreaccessories_name" class="form-control" name="accessories_name" value="">
+                                                <input type="number" class="form-control" id="moreaccessories_quantity" name="accessories_quantity" value="">
+                                                <input type="hidden" id="moreaccessories_uom" name="accessories_uom" value="">
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn" style="color: white; background-color:#081d45; border:none;" onclick="submitForm();">Update</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn" style="color: white; background-color:#081d45; border:none;">Update</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <script>
-                        $(document).ready(function(){
-                            $('#addAcc').select2({
-                                dropdownParent: $('#addMoreAccessory'),
-                                theme: 'bootstrap-5'
-                            });
-                        });
-                    </script>
-                                
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            const toggleButton = document.getElementById("toggleButton");
-                            const contentDiv = document.getElementById("contentDiv");
+                                <script>
+                                    function getAcc(str) {
+                                        if (str.length == 0) {
+                                            document.getElementById('moreaccessories_code').value = "";
+                                            document.getElementById('moreaccessories_name').value = "";
+                                            document.getElementById('moreaccessories_quantity').value = "";
+                                            document.getElementById('moreaccessories_uom').value = "";
+                                            
+                                            return;
+                                        }
                                         
-                            toggleButton.addEventListener("click", function () {
-                                if (contentDiv.style.display === "none") {
-                                    contentDiv.style.display = "block";
-                                }
-                                
-                                else {
-                                    contentDiv.style.display = "none";
-                                }
-                            });
-                        });
-                    </script>
+                                        else {
+                                            var xmlhttp = new XMLHttpRequest();
+                                            
+                                            xmlhttp.onreadystatechange = function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                    var myObj = JSON.parse(this.responseText);
+                                                    
+                                                    document.getElementById('moreaccessories_code').value = myObj.code;
+                                                    document.getElementById('moreaccessories_name').value = myObj.name;
+                                                    document.getElementById('moreaccessories_uom').value = myObj.uom;
+                                                }
+                                            };
+                                            
+                                            xmlhttp.open("GET", "fetchinout.php?accessory_id=" + str, true);
+                                            xmlhttp.send();
+                                        }
+                                    }
+                                </script>
+                                <script>
+                                   function submitForm() {
+                                        accessories_id = document.getElementById('addAcc').value;
+                                        accessories_code = document.getElementById('moreaccessories_code').value;
+                                        accessories_name = document.getElementById('moreaccessories_name').value;
+                                        accessories_quantity = document.getElementById('moreaccessories_quantity').value;
+                                        accessories_uom = document.getElementById('moreaccessories_uom').value;
+
+
+                                        $.ajax({
+                                            url: "code.php",
+                                            type: "POST",
+                                            data: {
+                                                accessories_id:accessories_id,
+                                                accessories_code:accessories_code,
+                                                accessories_name:accessories_name,
+                                                accessories_quantity:accessories_quantity,
+                                                accessories_uom:accessories_uom,
+                                                jobregister_id:selectedjobregister_id,
+                                                moreacc: true
+                                            },
+
+                                            success: function (response) {
+                                                console.log(response);
+                                                var res = JSON.parse(response);
+                                                if (res.status == 200) {
+                                                    var acc = document.getElementById("AddAccessory")
+                                                    var option = document.createElement("option");
+
+                                                    option.value = document.getElementById('moreaccessories_name').value;
+                                                    option.text = document.getElementById('moreaccessories_name').value;
+                                                    acc.appendChild(option);
+                                                    document.querySelector("#AddAccessory option[value='" + option.value +"']").selected = true;
+
+                                                    document.getElementById('quantity').value = document.getElementById('moreaccessories_quantity').value;
+                                                    document.getElementById('contentDiv').style.display = "none";
+                                                    document.getElementById('addAcc').selectedIndex = 0;
+                                                    document.getElementById('moreaccessories_code').value = "";
+                                                    document.getElementById('moreaccessories_name').value = "";
+                                                    document.getElementById('moreaccessories_quantity').value = "";
+                                                    document.getElementById('moreaccessories_uom').value = "";
+
+
+                                                }
+                                            },
+                                            error: function (xhr, status, error) {
+                                                console.error(error);
+                                            },
+                                        });
+                                    }
+                                </script>
+
+                                <script>
+                                    $(document).ready(function(){
+                                        $('#addAcc').select2({
+                                            theme: 'bootstrap-5'
+                                        });
+                                    });
+                                </script>
+                                            
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                    
+                                        const toggleButton = document.getElementById("toggleButton");
+                                        const contentDiv = document.getElementById("contentDiv");
+
+                                                    
+                                        toggleButton.addEventListener("click", function () {
+                                            if (contentDiv.style.display === "none") {
+                                                contentDiv.style.display = "block";
+                                            }
+                                            
+                                            else {
+                                                contentDiv.style.display = "none";
+                                            }
+                                        });
+                                    });
+                                </script>
 
                                 </div>
 
                                 <script>
                                     $(document).ready(function(){
                                         $('#AddAccessory').select2({
-                                            dropdownParent: $('#entryAddModal'),
+                                            dropdownParent: $('#saveEntry'),
                                             theme: 'bootstrap-5'
                                         });
                                     });
