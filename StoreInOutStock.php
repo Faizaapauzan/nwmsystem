@@ -734,6 +734,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Request</h5>
                         <button type="button" onclick="location.reload();" class="btn-close" data-bs-dismiss="modal" ></button>
+                        
                     </div>
                             
                     <div class="modal-body">
