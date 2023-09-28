@@ -417,7 +417,8 @@
                                         
                                 <script>
                                     function changeQuantity(str) {
-                                        if (str.length == 0) {
+                                        if (document.getElementById("enableJobSelect").checked){
+                                            if (str.length == 0) {
                                             document.getElementById("quantity").value = "";
                                             
                                             return;
@@ -436,6 +437,7 @@
                                             
                                             xmlhttp.open("GET", "fetchinout.php?accessory_name=" + str, true);
                                             xmlhttp.send();
+                                        }
                                         }
                                     }
                                 </script>
@@ -814,11 +816,12 @@
                                 
                                 require 'dbconnect.php';
                                                     
-                                $query = "SELECT * FROM accessories_inout ORDER BY CreatedTime_inout";
+                                $query = "SELECT * FROM accessories_inout WHERE technician_request ='No' ORDER BY CreatedTime_inout";
                                                     
                                 $query_run = mysqli_query($conn, $query);
                                                     
                                 if (mysqli_num_rows($query_run) > 0) {
+                                    $counter = 1;
                                     foreach ($query_run as $entry) {
                                         $query2 = "SELECT job_order_number, job_name, customer_name 
                                                    FROM accessories_inout, job_accessories, job_register 
@@ -828,7 +831,7 @@
                                                    
                                         $query_run2 = mysqli_query($conn, $query2);
 
-                                        $counter = 1;
+                                        
                                         
                                         if (mysqli_num_rows($query_run2) > 0) {
                                             $entry2 = mysqli_fetch_array($query_run2);
@@ -875,23 +878,14 @@
                             
                                 require 'dbconnect.php';
                                 
-                                $query = "SELECT * FROM accessories_inout ORDER BY CreatedTime_inout";
+                                $query = "SELECT * FROM accessories_inout WHERE technician_request ='Yes' ORDER BY CreatedTime_inout";
                                                     
                                 $query_run = mysqli_query($conn, $query);
                                                     
                                 if (mysqli_num_rows($query_run) > 0) {
+                                    $counter = 1;
                                     foreach ($query_run as $entry) {
-                                        $query2 = "SELECT job_order_number, job_name, customer_name 
-                                                   FROM accessories_inout, job_accessories, job_register 
-                                                   WHERE accessories_inout.accessoriesname = '$entry[accessoriesname]' 
-                                                   AND accessories_inout.accessoriesname = job_accessories.accessories_name 
-                                                   AND job_accessories.jobregister_id=job_register.jobregister_id";
-                                                            
-                                        $query_run2 = mysqli_query($conn, $query2);
-                                        
-                                        $counter = 1;
-
-                                if (mysqli_num_rows($query_run2) == 0) {
+    
                                                                 
                             ?>
                             <tr>
@@ -910,7 +904,7 @@
                                     <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-danger btn-sm'>Delete</button>
                                 </td>
                             </tr>
-                            <?php $counter++; } } } ?>
+                            <?php $counter++;  } } ?>
                         </tbody>
                     </table>
                 </div>     
@@ -968,8 +962,17 @@
         <script>
             // <!-- Add -->
             function saveEntry(){
+                var checkbox = document.getElementById("enableJobSelect");
+                var technician_request = null;
+                if (checkbox.checked){
+                    technician_request = 'No'
+                } else {
+                    technician_request = 'Yes'
+                }
                 var formData = new FormData(document.getElementById('saveEntry'));
                 formData.append("save_entry", true);
+                formData.append("technician_request", technician_request);
+                
                 
                 $.ajax({
                     type: "POST",

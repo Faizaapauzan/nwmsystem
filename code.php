@@ -45,6 +45,7 @@
         $techname = mysqli_real_escape_string($conn, $_POST['techname']);
         $out_date = mysqli_real_escape_string($conn, $_POST['out_date']);
         $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+        $technician_request = mysqli_real_escape_string($conn, $_POST['technician_request']);
         
         if($accessoriesname == NULL || $techname == NULL || $out_date == NULL || $quantity == NULL) {
             $res = ['status' => 422, 'message' => 'All fields are mandatory'];
@@ -54,8 +55,8 @@
             return;
         }
         
-        $query = "INSERT INTO accessories_inout (accessoriesname, techname,out_date,quantity,balance) 
-                  VALUES ('$accessoriesname','$techname','$out_date','$quantity','$quantity')";
+        $query = "INSERT INTO accessories_inout (accessoriesname, techname,out_date,quantity,balance, technician_request) 
+                  VALUES ('$accessoriesname','$techname','$out_date','$quantity','$quantity', '$technician_request')";
         
         $query_run = mysqli_query($conn, $query);
         
