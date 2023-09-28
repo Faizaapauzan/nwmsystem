@@ -10,11 +10,12 @@ if (isset($_REQUEST['jobregister_id'])) {
     include 'dbconnect.php';
 
     if ($entry !== "") {
-        $query = mysqli_query($conn, "SELECT accessories_name,accessories_quantity FROM job_register,job_accessories WHERE job_register.jobregister_id= job_accessories.jobregister_id AND job_register.jobregister_id='$entry';");
+        $query = mysqli_query($conn, "SELECT job_assign, accessories_name,accessories_quantity FROM job_register,job_accessories WHERE job_register.jobregister_id= job_accessories.jobregister_id AND job_register.jobregister_id='$entry';");
 
         while ($row = mysqli_fetch_array($query)) {
             $accessories[] = array(
                 "name" => $row["accessories_name"],
+                "jobassign" => $row["job_assign"]
             );
         }
     }

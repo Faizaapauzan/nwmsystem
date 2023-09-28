@@ -156,7 +156,6 @@
                                             selectedjobregister_id = null;
                                             document.getElementById("AddAccessory").innerHTML = 
                                                 `<option value="">-- Select Accessory --</option>
-                                                    
                                                     <?php
                                                         include "dbconnect.php";
                                                         
@@ -179,8 +178,18 @@
                                             xmlhttp.onreadystatechange = function() {
                                                 if (this.readyState == 4 && this.status == 200) {
                                                     var myObj = JSON.parse(this.responseText);
+                                                    var technician = document.getElementById("Addtechnician");
+                    
+                                                    console.log("Before: "+ technician.value);
                                                     
                                                     if (myObj.length > 0) {
+                                                        for (i = 0; i < technician.options.length; i++){
+                                                            if (technician.options[i].text === myObj[0].jobassign) {
+                                                                technician.options[i].selected = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                        console.log("After: "+ technician.value);
                                                         var accessoriesHtml = "<option value=''>-- Select Accessory --</option>";
                                                         
                                                         for (var i = 0; i < myObj.length; i++) {
@@ -236,12 +245,12 @@
                                 </div>
                                         
                                 <script>
-                                    $(document).ready(function(){
-                                        $('#Addtechnician').select2({
-                                            dropdownParent: $('#saveEntry'),
-                                            theme: 'bootstrap-5'
-                                        });
-                                    });
+                                    // $(document).ready(function(){
+                                    //     $('#Addtechnician').select2({
+                                    //         dropdownParent: $('#saveEntry'),
+                                    //         theme: 'bootstrap-5'
+                                    //     });
+                                    // });
                                 </script>
                                         
                                 <div class="mb-3">
