@@ -45,7 +45,6 @@
         $techname = mysqli_real_escape_string($conn, $_POST['techname']);
         $out_date = mysqli_real_escape_string($conn, $_POST['out_date']);
         $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
-        $technician_request = mysqli_real_escape_string($conn, $_POST['technician_request']);
         
         if($accessoriesname == NULL || $techname == NULL || $out_date == NULL || $quantity == NULL) {
             $res = ['status' => 422, 'message' => 'All fields are mandatory'];
@@ -55,8 +54,8 @@
             return;
         }
         
-        $query = "INSERT INTO accessories_inout (accessoriesname, techname,out_date,quantity,balance, technician_request) 
-                  VALUES ('$accessoriesname','$techname','$out_date','$quantity','$quantity', '$technician_request')";
+        $query = "INSERT INTO accessories_inout (accessoriesname, techname,out_date,quantity,balance) 
+                  VALUES ('$accessoriesname','$techname','$out_date','$quantity','$quantity')";
         
         $query_run = mysqli_query($conn, $query);
         
@@ -323,6 +322,48 @@
     
         echo json_encode($res);
         return;
+    }
+
+    if (isset($_POST['return'])){
+        $inout_id = $_POST['inout_id'];
+        $remark_note = $_POST['remark_note'];
+        $remark_date = $_POST['remark_date'];
+        $remark_quantity = $_POST['remark_quantity'];
+        $verified_by = $_POST['verified_by'];
+        $total = 0;
+
+        foreach ($remark_note as $index => $remark_note_value) {
+            $s_remark_note = $remark_note_value;
+            $s_remark_date = $remark_date[$index];
+            $s_remark_quantity = $remark_quantity[$index];
+            $s_verified_by = $verified_by[$index];
+        
+            $sql = "INSERT INTO `accessories_remark`(`inout_id`, `remark_note`, `remark_date`,`remark_quantity`,`verified_by`) VALUES ('$inout_id','$s_remark_note','$s_remark_date','$s_remark_quantity','$s_verified_by')";
+   
+            $query=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+
+            $total += $s_remark_quantity;
+
+        }
+
+        if ($query) {
+            $query2_run = mysqli_query($conn, "SELECT * FROM accessories_inout WHERE inout_id='$inout_id'");
+            $result = mysqli_fetch_assoc($query2_run);
+            $curbalance = $result['balance'];
+
+            $newbalance = $curbalance - $total;
+
+            $query3_run = mysqli_query($conn, "UPDATE accessories_inout set balance='$newbalance' WHERE inout_id='$inout_id'");
+            $response['success'] = true;
+        } 
+        
+        else {
+            $response['error'] = mysqli_error($conn);
+        }
+        
+        echo json_encode($response);
+
+
     }
     
 ?>

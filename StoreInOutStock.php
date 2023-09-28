@@ -655,8 +655,8 @@
                     
                     <div class="card m-3" id="returnForm" style="display: none;">
                         <div class="card-body">
-                            <form id="updateEntry">
-                                <input type="hidden" name="inout_id" id="inout_id">
+                            <form id="remarkEntry">
+                                <input type="hidden" name="inout_id" id="inout_idremark">
                                 
                                 <div class="row mb-3">    
                                     <div class="col-sm">
@@ -691,6 +691,7 @@
                                 <div id="next" class="mb-3"></div>
                             
                                 <button type="button" name="addrow" id="addrow" class="btn btn-success">Add</button>
+                                <input type="hidden" name="verified_by" id="verified_by" value="<?php echo $_SESSION['username']?>">
                             
                                 <div class="clearfix me-3">
                                     <div class="float-end">
@@ -732,7 +733,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Request</h5>
-                        <button type="button" onclick="location.reload('StoreInOutStock.php');" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" onclick="location.reload();" class="btn-close" data-bs-dismiss="modal" ></button>
                     </div>
                             
                     <div class="modal-body">
@@ -1079,6 +1080,46 @@
                 var formData = new FormData(this);
                 formData.append("update_entry", true);
                 
+                
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                            
+                    success: function(response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 422) {
+                            $('#errorMessageUpdate').removeClass('d-none');
+                            $('#errorMessageUpdate').text(res.message);
+                        }
+                        
+                        else if (res.status == 200) {
+                            $('#errorMessageUpdate').addClass('d-none');
+                            
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.success(res.message);
+                            
+                            setTimeout(function() {
+                                location.reload();
+                            }, 700);
+                        }
+                        
+                        else if (res.status == 500) {
+                            alert(res.message);
+                        }
+                    }
+                });
+            });
+
+            $(document).on('submit', '#remarkEntry', function(e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("return", true);
+                
                 for (var p of formData) {
                     let name = p[0];
                     let value = p[1];
@@ -1159,6 +1200,7 @@
             $(document).on('click', '.RemarkBtn', function() {
                 var entry_idRemark = $(this).val();
                 
+                
                 $.ajax({
                     type: "GET",
                     url: "code.php?entry_idRemark=" + entry_idRemark,
@@ -1172,6 +1214,7 @@
                         
                         else if (res.status == 200) {
                             var remarks = res.data;
+                            document.getElementById("inout_idremark").value = entry_idRemark;
                             
                             $('#remarkContainer').empty();
                             
