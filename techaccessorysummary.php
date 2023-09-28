@@ -51,17 +51,60 @@
 
                                     
                                 $counter = 1;
+                                $data = array();
+                                $previousItem = [];
+                                $previousName = null;
+                                $firstOccurrenceIndex;
+                                $i = 0;
                                 
                                 if(mysqli_num_rows($query_run) > 0) {
-                                    foreach($query_run as $item) {
+                                    while ($row = $query_run->fetch_assoc()) {
+                                        $data[] = array(
+                                            'accessoriesname' => $row['accessoriesname'],
+                                            'techname' => $row['techname'],
+                                            'balance' => $row['balance']
+                                        );
+                                    }
+                                    // echo "<script>console.log(" . json_encode($data) . ")</script>";
+
+                                }
+                                foreach($data as $item) {
+                                    $currentItem = $item['accessoriesname'];
+                                    $currentName = $item['techname'];
+                        
+                                    if ($previousName != $currentName){
+                                        // echo "<script>console.log(" . json_encode($previousItem) . ")</script>";
+                                        $previousName = $currentName;
+                                        $previousItem = [];
+                                    }
+                                    $firstOccurrenceIndex = array_search($currentItem, $previousItem);
+                                    echo "<script>console.log(" . json_encode($firstOccurrenceIndex) . ")</script>";
+
+
+                                    if ($firstOccurrenceIndex !== false || $firstOccurrenceIndex === 0) {
+                                        $previousBalance = $data[$i - count($previousItem) + $firstOccurrenceIndex]['balance'];
+                                        $currentBalance = $item['balance'];
+                                        $previousBalance += $currentBalance;
+                                        $data[$i - count($previousItem) + $firstOccurrenceIndex]['balance'] = $previousBalance;
+                                        echo "<script>console.log(" . json_encode($data[$i]) . ")</script>";
+
+                                        unset($data[$i]);
+                                    }
+                                    $previousItem[] = $currentItem;
+                                    $i++;
+                                } 
+                                foreach($data as $item){
+                                    echo "<tr>";
+                                    echo "    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>$counter</td>";
+                                    echo "    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>{$item['techname']}</td>";
+                                    echo "    <td style='vertical-align: middle;'>{$item['accessoriesname']}</td>";
+                                    echo "    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>{$item['balance']}</td>";
+                                    echo "</tr>";
+                                    
+                                    $counter++; 
+                                }
+                            
                             ?>
-                            <tr>
-                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
-                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $item['techname'] ?></td>
-                                <td style='vertical-align: middle;'><?= $item['accessoriesname'] ?></td>
-                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $item['balance'] ?></td>
-                            </tr>
-                            <?php $counter++; } } ?>
                         </tbody>
                     </table>
 
@@ -72,8 +115,11 @@
                             var index2;
                             
                             $("#tbody tr").each(function(index) {
+
                                 index2 = index;
                                 var currentName = $(this).find("td:eq(1)").text();
+                                var currentItem = $("#tbody tr:eq(" + (index) + ") td:eq(2)").html();
+                                
                                 
                                 if (previousName !== currentName) {
                                     if (count > 1) {
@@ -83,6 +129,7 @@
                                     count = 1;
                                     
                                     previousName = currentName;
+                                    
                                 }
                                 
                                 else {
@@ -95,6 +142,7 @@
                             if (count > 1) {
                                 $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(1)").attr("rowspan", count);
                             }
+                            
                         });
                     </script>
                 </div>
