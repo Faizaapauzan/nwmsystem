@@ -78,7 +78,7 @@
                             <div class="row">
                                 <div class="mb-3">
                                     <label for="">Job</label>
-                                    <select name="jobname" id="AddJob" onchange="GetDetail(this.value)" class="form-select" style="width: 100%;">
+                                    <select name="jobregister_id" id="AddJob" onchange="GetDetail(this.value)" class="form-select" style="width: 100%;">
                                         <option value="">-- Select Job --</option>
                                             <?php
                                             
@@ -827,7 +827,7 @@
                                 
                                 require 'dbconnect.php';
                                                     
-                                $query = "SELECT * FROM accessories_inout WHERE technician_request ='No' ORDER BY CreatedTime_inout";
+                                $query = "SELECT * FROM accessories_inout WHERE jobregister_id !='' ORDER BY CreatedTime_inout";
                                                     
                                 $query_run = mysqli_query($conn, $query);
                                                     
@@ -889,7 +889,7 @@
                             
                                 require 'dbconnect.php';
                                 
-                                $query = "SELECT * FROM accessories_inout WHERE technician_request ='Yes' ORDER BY CreatedTime_inout";
+                                $query = "SELECT * FROM accessories_inout WHERE jobregister_id IS NULL ORDER BY CreatedTime_inout";
                                                     
                                 $query_run = mysqli_query($conn, $query);
                                                     
@@ -974,17 +974,12 @@
             // <!-- Add -->
             function saveEntry(){
                 var checkbox = document.getElementById("enableJobSelect");
-                var technician_request = null;
-                if (checkbox.checked){
-                    technician_request = 'No'
-                } else {
-                    technician_request = 'Yes'
-                }
                 var formData = new FormData(document.getElementById('saveEntry'));
                 formData.append("save_entry", true);
-                formData.append("technician_request", technician_request);
                 
-                
+                for (d of formData.entries()){
+                    console.log(d);
+                }
                 $.ajax({
                     type: "POST",
                     url: "code.php",

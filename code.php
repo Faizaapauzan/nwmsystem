@@ -41,10 +41,12 @@
     
     // ========== Save ==========
     if(isset($_POST['save_entry'])) {
-        $accessoriesname = mysqli_real_escape_string($conn, $_POST['accessoriesname']);
-        $techname = mysqli_real_escape_string($conn, $_POST['techname']);
-        $out_date = mysqli_real_escape_string($conn, $_POST['out_date']);
-        $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+        $jobregister_id = $_POST['jobregister_id'] ?? NULL;
+        $accessoriesname = $_POST['accessoriesname'];
+        $techname = $_POST['techname'];
+        $out_date = $_POST['out_date'];
+        $quantity = $_POST['quantity'];
+        
         
         if($accessoriesname == NULL || $techname == NULL || $out_date == NULL || $quantity == NULL) {
             $res = ['status' => 422, 'message' => 'All fields are mandatory'];
@@ -52,30 +54,31 @@
             echo json_encode($res);
             
             return;
-        }
+        }   
         
-        $query = "INSERT INTO accessories_inout (accessoriesname, techname,out_date,quantity,balance) 
-                  VALUES ('$accessoriesname','$techname','$out_date','$quantity','$quantity')";
-        
-        $query_run = mysqli_query($conn, $query);
-        
-        if($query_run) {
-            
-            $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">New Entry Inserted</span>'];
-            
+        $query = "INSERT INTO accessories_inout (jobregister_id, accessoriesname, techname, out_date, quantity, balance) 
+        VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "isssii", $jobregister_id, $accessoriesname, $techname, $out_date, $quantity, $quantity);
+                
+            $query_run = mysqli_stmt_execute($stmt);
+
+            if ($query_run) {
+                $res = ['status' => 200, 'message' => '<span style="white-space: nowrap;">New Entry Inserted</span>'];
+            } else {
+                $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Entry Not Inserted</span>'];
+            }
+
             echo json_encode($res);
-            
-            return;
-        }
-        
-        else {
-            
+
+            mysqli_stmt_close($stmt);
+            } else {
             $res = ['status' => 500, 'message' => '<span style="white-space: nowrap;">Entry Not Inserted</span>'];
-            
             echo json_encode($res);
-            
-            return;
         }
+
     }
 
     // ========== View ==========
