@@ -1209,11 +1209,7 @@
                     success: function(response) {
                         var res = jQuery.parseJSON(response);
                         
-                        if (res.status == 404) {
-                            alert(res.message);
-                        }
-                        
-                        else if (res.status == 200) {
+                        if (res.status == 200) {
                             var remarks = res.data;
                             document.getElementById("inout_idremark").value = entry_idRemark;
                             
@@ -1242,7 +1238,8 @@
                                     
                                 $('#remarkContainer').append(inputGroup);
                             });
-                          
+                        
+  
                         }
                         $('#RemarkViewModal').modal('show');
                     }
