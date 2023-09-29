@@ -1871,6 +1871,7 @@
                                                 <label for="" class="fw-bold">Reason</label>
                                                 <input type="text" name="reason" id="reason" class="form-control">
                                             </div>
+                                            
                                             <div class="mb-3">
                                                 <label for="" class="fw-bold">Assign To</label>
                                                 <select name="jobassignsupport" id="jobassignsupport" class="form-control">

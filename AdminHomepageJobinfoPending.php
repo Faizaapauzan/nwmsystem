@@ -39,32 +39,17 @@
                 <div class="col-md-6 mb-3">
                     <label for="" class="fw-bold">Job Order Number</label>
                     <div class="input-group">
-                        <input type="text" name="job_order_number" id="job_order_number" class="form-control" value="<?php echo $row['job_order_number']?>" readonly>
-                        <button type="button" class="btn" style="color: white; background-color: #081d45; border:none; width: fit-content;" id="button-addon2" onclick="buttonClick()">Click</button>
+                        <input type="text" name="job_order_number" id="job_order_number" class="form-control" value="<?php echo $row['job_order_number']?>">
+                        <button type="button" class="btn" style="color: white; background-color: #081d45; border:none; width: fit-content;" onclick="buttonClick();">Click</button>
                     </div>
                 </div>
 
                 <script>
-                    var i = 1;
-                    var jobordernumber2;
-                                                        
+                    var i = 0;
+                    var jobordernumber = document.getElementById('job_order_number').value;
+
                     function buttonClick() {
-                        if (i == 1){
-                            var jobordernumber = document.getElementById('job_order_number').value;
-                            jobordernumber2 = jobordernumber;
-                        }
-                        
-                        var parts = jobordernumber2.split('-');
-                        var newNumber = parts[parts.length-1] + "-" + i;
-                        var newJobOrderNumber = parts[0];
-                        
-                        for (var j = 1; j < parts.length-1; j++){
-                            newJobOrderNumber = newJobOrderNumber + "-" + parts[j];
-                        }
-                        
-                        newJobOrderNumber = newJobOrderNumber + "-" + newNumber;
-                        document.getElementById('job_order_number').value = newJobOrderNumber;
-                        
+                        document.getElementById('job_order_number').value = jobordernumber + '-' + i;
                         i++;
                     }
                 </script>
@@ -300,17 +285,17 @@
                     <label for="accessories_required" class="fw-bold">Accessory Required</label>
                     <select name="accessories_required" id="accessories_required" class="form-select" onchange="myFunctionAccessory()">
                         <option value='' <?php if ($row['accessories_required'] == '') {echo "SELECTED";} ?>></option>
-                        <option value='YES' <?php if ($row['accessories_required'] == 'YES') {echo "SELECTED";} ?>>YES</option>
+                        <option value='Yes' <?php if ($row['accessories_required'] == 'Yes') {echo "SELECTED";} ?>>Yes</option>
                         <option value='No' <?php if ($row['accessories_required'] == 'No') {echo "SELECTED";} ?>>No</option>
                     </select>
                 </div>
-                     
+                                            
                 <!-- Accessory For -->
                 <script>
                     function myFunctionAccessory() {
                         var accessories = document.getElementById("accessories_required").value;
                         var accForDiv = document.getElementById("Accessory");
-                                                    
+                        
                         if (accessories === "Yes") {
                             accForDiv.style.display = "block";
                         }
@@ -321,15 +306,6 @@
                         }
                     }
                 </script>
-                                            
-                <div class="mb-3" id="Accessory" style="display: none;">
-                    <label for="accessories_for" class="fw-bold">Accessory For</label>
-                    <select name="accessories_for" id="accessories_for" class="form-select">
-                        <option value='' <?php if ($row["accessories_for"] == "") {echo "SELECTED";} ?>></option>
-                        <option value='Technician Use' <?php if ($row["accessories_for"] == "Technician Use") {echo "SELECTED";} ?>>Technician Use</option>
-                        <option value='Customer Request' <?php if ($row["accessories_for"] == "Customer Request") {echo "SELECTED";} ?>>Customer Request</option>
-                    </select>
-                </div>
                 <!-- End of Accessory For -->
 
                 <div class="col-md-6 mb-3">

@@ -290,7 +290,6 @@
                 <div class="mb-3" id="Accessory" style="display:none">
                     <label for="accessories_for" class="fw-bold">Accessory For</label>
                     <select name="accessories_for" id="accessories_for" class="form-select">
-                        <option value='' <?php if ($row["accessories_for"] == "") {echo "SELECTED";} ?>></option>
                         <option value='Technician Use' <?php if ($row["accessories_for"] == "Technician Use") {echo "SELECTED";} ?>>Technician Use</option>
                         <option value='Customer Request' <?php if ($row["accessories_for"] == "Customer Request") {echo "SELECTED";} ?>>Customer Request</option>
                     </select>

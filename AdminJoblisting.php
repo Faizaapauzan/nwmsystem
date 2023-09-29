@@ -230,7 +230,7 @@
                             ?>
                             <tr class="<?php echo $color?>">
                                 <td style='text-align: center; white-space: nowrap;'><?= $counter ?></td>
-                                <td style='text-align: center; white-space: nowrap;'>
+                                <td style='text-align: center; white-space: nowrap;' class = '<?= $job['job_status'] ?>'>
                                     <button type="button" data-jobregister-id="<?=$job['jobregister_id'];?>" class="openModal btn btn-sm fw-bold" style="border: none;"><?= $job['job_order_number'] ?></button>
                                 </td>
                                 <td style='text-align: center; white-space: nowrap;'><?= $job['job_priority'] ?></td>
@@ -298,17 +298,17 @@
                 let url = "adminjoblisting.php";
                 window.location.href = url + "?jobregister_id=" + jobregister_id + "&job_assign=" + value;
             }
+            
             function status_update(value, jobregister_id) {
                 lastmodify_by = "<?php echo $_SESSION['username']?>";
+                
                 $.ajax({
                     url: 'assigntechindex.php',
                     type: 'get',
-                    data: {
-                        value: value,
-                        jobregister_id: jobregister_id,
-                        lastmodify_by: lastmodify_by,
-                        jobstatus: true
-                    },
+                    data: {value: value,
+                           jobregister_id: jobregister_id,
+                           lastmodify_by: lastmodify_by,
+                           jobstatus: true},
                 
                     success: function(response) {
                         var res = JSON.parse(response);
@@ -349,9 +349,130 @@
                                 </form>
                             </div>
 
+                            <!-- Doing -->
                             <script>
                                 $(document).ready(function() {
-                                    $('.openModal').click(function() {
+                                    $('.openModal','.Doing').click(function() {
+                                        var jobregister_id = $(this).data('jobregister-id');
+                                        
+                                        $.ajax({
+                                            url: 'AdminJoblistingJobInfoDoing.php',
+                                            type: 'post',
+                                            data: { jobregister_id: jobregister_id },
+                                            
+                                            success: function(response) {
+                                                $('.completed-details').html(response);
+                                            },
+                                            
+                                            error: function(xhr, status, error) {
+                                                console.log("AJAX Error:", xhr, status, error);
+                                                $('.completed-details').html("An error occurred while fetching data.");
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+
+                            <!-- Pending -->
+                            <script>
+                                $(document).ready(function() {
+                                    $('.openModal','.Pending').click(function() {
+                                        var jobregister_id = $(this).data('jobregister-id');
+                                        
+                                        $.ajax({
+                                            url: 'AdminHomepageJobinfoPending.php',
+                                            type: 'post',
+                                            data: { jobregister_id: jobregister_id },
+                                            
+                                            success: function(response) {
+                                                $('.completed-details').html(response);
+                                            },
+                                            
+                                            error: function(xhr, status, error) {
+                                                console.log("AJAX Error:", xhr, status, error);
+                                                $('.completed-details').html("An error occurred while fetching data.");
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+
+                            <!-- Incomplete -->
+                            <script>
+                                $(document).ready(function() {
+                                    $('.openModal','.Incomplete').click(function() {
+                                        var jobregister_id = $(this).data('jobregister-id');
+                                        
+                                        $.ajax({
+                                            url: 'AdminHomepageJobinfoIncomplete.php',
+                                            type: 'post',
+                                            data: { jobregister_id: jobregister_id },
+                                            
+                                            success: function(response) {
+                                                $('.completed-details').html(response);
+                                            },
+                                            
+                                            error: function(xhr, status, error) {
+                                                console.log("AJAX Error:", xhr, status, error);
+                                                $('.completed-details').html("An error occurred while fetching data.");
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+
+                            <!-- Ready -->
+                            <script>
+                                $(document).ready(function() {
+                                    $('.openModal','.Ready').click(function() {
+                                        var jobregister_id = $(this).data('jobregister-id');
+                                        
+                                        $.ajax({
+                                            url: 'AdminHomepageJobinfo.php',
+                                            type: 'post',
+                                            data: { jobregister_id: jobregister_id },
+                                            
+                                            success: function(response) {
+                                                $('.completed-details').html(response);
+                                            },
+                                            
+                                            error: function(xhr, status, error) {
+                                                console.log("AJAX Error:", xhr, status, error);
+                                                $('.completed-details').html("An error occurred while fetching data.");
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+
+                            <!-- Not Ready -->
+                            <script>
+                                $(document).ready(function() {
+                                    $('.openModal','.Not Ready').click(function() {
+                                        var jobregister_id = $(this).data('jobregister-id');
+                                        
+                                        $.ajax({
+                                            url: 'AdminHomepageJobinfo.php',
+                                            type: 'post',
+                                            data: { jobregister_id: jobregister_id },
+                                            
+                                            success: function(response) {
+                                                $('.completed-details').html(response);
+                                            },
+                                            
+                                            error: function(xhr, status, error) {
+                                                console.log("AJAX Error:", xhr, status, error);
+                                                $('.completed-details').html("An error occurred while fetching data.");
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+
+                            <!-- Other Status -->
+                            <script>
+                                $(document).ready(function() {
+                                    $('.openModal', '[class=""]').click(function() {
                                         var jobregister_id = $(this).data('jobregister-id');
                                         
                                         $.ajax({
