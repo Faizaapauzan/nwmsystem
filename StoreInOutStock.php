@@ -1137,7 +1137,6 @@
                             
                     success: function(response) {
                         var res = jQuery.parseJSON(response);
-                        alert(res.status);
                         
                         if (res.status == 422) {
                             $('#errorMessageUpdate').removeClass('d-none');
