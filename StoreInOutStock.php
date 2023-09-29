@@ -1242,9 +1242,9 @@
                                     
                                 $('#remarkContainer').append(inputGroup);
                             });
-                        
-                            $('#RemarkViewModal').modal('show');
+                          
                         }
+                        $('#RemarkViewModal').modal('show');
                     }
                 });
             });
