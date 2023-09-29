@@ -354,11 +354,11 @@
             $newbalance = $curbalance - $total;
 
             $query3_run = mysqli_query($conn, "UPDATE accessories_inout set balance='$newbalance' WHERE inout_id='$inout_id'");
-            $response['success'] = true;
+            $response = ['status' => 200, 'message' => 'Successfully Updated'];
         } 
         
         else {
-            $response['error'] = mysqli_error($conn);
+            $response = ['status' => 500, 'message' => 'Failed to Update'];
         }
         
         echo json_encode($response);
