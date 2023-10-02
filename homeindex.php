@@ -108,7 +108,7 @@ if (isset($_POST["update"])) {
     );
 
         if (mysqli_stmt_execute($stmt)) {
-            header("Location:" . $_SERVER["HTTP_REFERER"]);
+            echo "success";
         }
         
         else {
