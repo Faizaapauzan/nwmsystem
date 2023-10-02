@@ -1915,8 +1915,6 @@
                                                     type: "POST",
                                                     url: "homeindex.php",
                                                     data: formData,
-                                                    contentType: false,
-                                                    processData: false,
                                                     dataType: "text",
                                                     
                                                     success: function(response) {
