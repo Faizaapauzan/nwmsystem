@@ -1874,7 +1874,7 @@
                                             
                                             <div class="mb-3">
                                                 <label for="" class="fw-bold">Assign To</label>
-                                                <select name="jobassignsupport" id="jobassignsupport" class="form-control">
+                                                <select name="job_assign" id="jobassignsupport" class="form-control">
                                                     <option value=""></option>
                                                         <?php
                                                       
@@ -2643,7 +2643,7 @@
                         var accessories_required = $('select[name=accessories_required]').val();
                         var accessories_for = $('select[name=accessories_for]').val();
                         var job_cancel = $('select[name=job_cancel]').val();
-                        var jobassignsupport = $('select[name=jobassignsupport]').val();
+                        var jobassignsupport = $('select[name=job_assign]').val();
                         var infosupport = $('input[name=support]').val();
                         var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
                         
