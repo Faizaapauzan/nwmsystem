@@ -1872,7 +1872,7 @@
                                                 <input type="text" name="reason" id="reason" class="form-control">
                                             </div>
                                             
-                                            <div class="mb-3">
+                                            <!-- <div class="mb-3"></div>
                                                 <label for="" class="fw-bold">Assign To</label>
                                                 <select name="job_assign" id="jobassignsupport" class="form-control">
                                                     <option value=""></option>
@@ -1886,7 +1886,7 @@
                                                         ?>
                                                 </select>
                                                 <input type="hidden" name="support" id="infosupport" value="">
-                                            </div>
+                                            </div> -->
                                         </div>
                                         
                                         <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
