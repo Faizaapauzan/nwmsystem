@@ -19,7 +19,7 @@
                 if ($query_run) {
                     while ($row = mysqli_fetch_array($query_run)) {
         ?>
-        <form action="homeindex.php" method="post" id="adminJobInfo" class="mx-2">
+        <form method="post" id="adminJobInfo" class="mx-2">
             <input type="hidden" name="jobregister_id" value="<?php echo $row['jobregister_id'] ?>">
             <input type="hidden" name="DateAssign" value="<?php echo $row['DateAssign'] ?>">
 
@@ -260,7 +260,7 @@
                     }
                 </script>
 
-<div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-3">
                     <label for="accessories_required" class="fw-bold">Accessory Required</label>
                     <select name="accessories_required" id="accessories_required" class="form-select" onchange="myFunctionAccessory()">
                         <option value='' <?php if ($row['accessories_required'] == '') {echo "SELECTED";} ?>></option>
@@ -342,12 +342,62 @@
                 <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
 
                 <div class="d-grid">
-                    <button type="submit" name="update" class="btn btn-primary" class="btn btn-primary" style="color: white; background-color: #081d45; border-color: #081d45;" onclick="updtMchn();">Update</button>
-                </div>        
+                    <button type="submit" id="submit" name="update" class="btn btn-primary" class="btn btn-primary" style="color: white; background-color: #081d45; border-color: #081d45;" onclick="updtMchn();">Update</button>
+                </div>
+                
+                <p class="text-center fw-bold" id="updatetextinfo" style="display: none;"></p>
             </div>
         </form>
         
         <?php } } } ?>
+
+        <!-- Submit Update Form -->
+        <script>
+            $(document).ready(function() {
+                function hideSuccessMessage() {
+                    document.getElementById("updatetextinfo").style.display = "none";
+                }
+                
+                $("#adminJobInfo").submit(function(e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+                    formData.append("update", "true");
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "homeindex.php",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        dataType: "text",
+                        
+                        success: function(response) {
+                            response = response.trim();
+                            if (response == "success") {
+                                $("#updatetextinfo").html("Updated Successfully");
+                                $("#updatetextinfo").css("color", "green");
+                                $("#updatetextinfo").css("display", "block");
+                                
+                                setTimeout(hideSuccessMessage, 2000);
+                            }
+                            
+                            else {
+                                console.error("AJAX error:", response);
+                                $("#updatetextinfo").html("Failed to update");
+                                $("#updatetextinfo").css("color", "red");
+                                $("#updatetextinfo").css("display", "block");
+                                
+                                setTimeout(hideSuccessMessage, 2000);
+                            }
+                        },
+                        
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.error("AJAX errorr:", errorThrown);
+                        }
+                    });
+                });
+            });
+        </script>
 
         <!-- Populate machine_type dropdown -->
         <script>

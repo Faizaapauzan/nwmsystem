@@ -17,9 +17,10 @@
                 if ($query_run) {
                     while ($row = mysqli_fetch_array($query_run)) {
         ?>
-        <form action="homeindex.php" method="post" id="doingJobInfo">
+        <form method="post" id="doingJobInfo">
             <div class="row">
                 <input type="hidden" name="support" id="support" value="Support for <?php echo $row['job_assign']?>">
+                <input type="hidden" name="jobregister_id" id="jobregister_id" value="<?php echo $row['jobregister_id']?>">
 
                 <div class="col-md-6 mb-3">
                     <label for="" class="fw-bold">Job Priority</label>
@@ -400,9 +401,58 @@
                 </div>
 
                 <p class="control"><b id="messageSupport"></b></p>
+                <p class="text-center fw-bold" id="updatetextinfo" style="display: none;"></p>
             </div>
         </form>
         <?php } } } ?>
+
+        <!-- Submit Update Form -->
+        <script>
+            $(document).ready(function() {
+                function hideSuccessMessage() {
+                    document.getElementById("updatetextinfo").style.display = "none";
+                }
+                
+                $("#doingJobInfo").submit(function(e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+                    formData.append("update", "true");
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "homeindex.php",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        dataType: "text",
+                        
+                        success: function(response) {
+                            response = response.trim();
+                            
+                            if (response == "success") {
+                                $("#updatetextinfo").html("Updated Successfully");
+                                $("#updatetextinfo").css("color", "green");
+                                $("#updatetextinfo").css("display", "block");
+                                
+                                setTimeout(hideSuccessMessage, 2000);
+                            }
+                            
+                            else {
+                                console.error("AJAX error:", response);
+                                $("#updatetextinfo").html("Failed to update");
+                                $("#updatetextinfo").css("color", "red");
+                                $("#updatetextinfo").css("display", "block");
+                                setTimeout(hideSuccessMessage, 2000);
+                            }
+                        },
+                        
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.error("AJAX errorr:", errorThrown);
+                        }
+                    });
+                });
+            });
+        </script>
 
         <!-- Populate machine_type dropdown -->
         <script>
