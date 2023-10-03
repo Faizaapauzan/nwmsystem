@@ -1872,8 +1872,8 @@
                                                 <input type="text" name="reason" id="reason" class="form-control">
                                             </div>
                                             
-                                            <!-- <div class="mb-3"></div>
-                                                <label for="" class="fw-bold">Assign To</label>
+                                            <!-- <div class="mb-3">
+                                            <label for="" class="fw-bold">Assign To</label>
                                                 <select name="job_assign" id="jobassignsupport" class="form-control">
                                                     <option value=""></option>
                                                         <?php
@@ -1887,7 +1887,9 @@
                                                 </select>
                                                 <input type="hidden" name="support" id="infosupport" value="">
                                             </div> -->
-                                        </div>
+                                                
+                                            </div>
+                                        
                                         
                                         <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
                                         
@@ -2349,8 +2351,8 @@
                         var job_cancel = document.getElementById('job_cancel');
                         var job_status = document.getElementById('job_status');
                         var reason = document.getElementById('reason');
-                        var jobassignsupport = document.getElementById('jobassignsupport');
-                        var support = document.getElementById('infosupport');
+                        // var jobassignsupport = document.getElementById('jobassignsupport');
+                        // var support = document.getElementById('infosupport');
                         var jobregisterlastmodify_by = document.getElementById('jobregisterlastmodify_by');
                         
                         jobregister_id.value = job_table.jobregister_id;
@@ -2458,13 +2460,13 @@
                             }
                         }
 
-                        for (i = 0; i < jobassignsupport.options.length; i++) {
-                            if (jobassignsupport.options[i].text === job_table.job_status) {
-                                jobassignsupport.options[i].selected = true;
+                        // for (i = 0; i < jobassignsupport.options.length; i++) {
+                        //     if (jobassignsupport.options[i].text === job_table.job_status) {
+                        //         jobassignsupport.options[i].selected = true;
                                 
-                                break;
-                            }
-                        }
+                        //         break;
+                        //     }
+                        // }
                         
                         reason.value = job_table.reason;
                         support.value = "Support For " + job_table.job_assign;
@@ -2494,10 +2496,11 @@
                             dropdownParent: $('#info'),
                             theme: 'bootstrap-5'
                         });  
-                        $('#jobassignsupport').select2({
-                            dropdownParent: $('#info'),
-                            theme: 'bootstrap-5'
-                        });                                    
+                        
+                        // $('#jobassignsupport').select2({
+                        //     dropdownParent: $('#info'),
+                        //     theme: 'bootstrap-5'
+                        // });                                    
                     }
                     
                     function addOptionType(element, data2) {
@@ -2643,8 +2646,8 @@
                         var accessories_required = $('select[name=accessories_required]').val();
                         var accessories_for = $('select[name=accessories_for]').val();
                         var job_cancel = $('select[name=job_cancel]').val();
-                        var jobassignsupport = $('select[name=job_assign]').val();
-                        var infosupport = $('input[name=support]').val();
+                        // var jobassignsupport = $('select[name=job_assign]').val();
+                        // var infosupport = $('input[name=support]').val();
                         var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
                         
                         if (job_priority != '' || job_priority == '', 
@@ -2674,8 +2677,8 @@
                             accessories_required != '' || accessories_required == '', 
                             accessories_for != '' || accessories_for == '',
                             job_cancel != '' || job_cancel == '', 
-                            jobassignsupport != '' || jobassignsupport == '', 
-                            infosupport != '' || infosupport == '', 
+                            // jobassignsupport != '' || jobassignsupport == '', 
+                            // infosupport != '' || infosupport == '', 
                             jobregisterlastmodify_by != '' || jobregisterlastmodify_by == '') {
                                 
                             var formData = {
@@ -2706,8 +2709,8 @@
                                 accessories_required: accessories_required,
                                 accessories_for: accessories_for,
                                 job_cancel: job_cancel,
-                                jobassignsupport: jobassignsupport,
-                                infosupport: infosupport,
+                                // jobassignsupport: jobassignsupport,
+                                // infosupport: infosupport,
                                 jobregisterlastmodify_by: jobregisterlastmodify_by
                             };
                             console.log(formData);
