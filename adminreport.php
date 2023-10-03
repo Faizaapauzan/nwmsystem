@@ -519,6 +519,8 @@
                                                                 if (<?=$totalworkinghr?> < 6){
                                                                     $row.find("td").css("color", "red");
                                                                 }
+                                                            }else{
+                                                                $row.find("td").css("color", "red");
                                                             }
                                                             
                                                         }
