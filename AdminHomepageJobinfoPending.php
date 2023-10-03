@@ -365,7 +365,7 @@
                 </div>
 
                 <p class="control"><b id="messageDuplicatelist"></b></p>
-                <p class="text-center fw-bold" id="updatetextinfo" style="display: none;"></p>
+                <p class="text-center fw-bold" id="updatetextinfoPending" style="display: none;"></p>
             </div>
         </form>
         <?php } } } ?>
@@ -374,7 +374,7 @@
         <script>
             $(document).ready(function() {
                 function hideSuccessMessage() {
-                    document.getElementById("updatetextinfo").style.display = "none";
+                    document.getElementById("updatetextinfoPending").style.display = "none";
                 }
             
                 $("#pendingJobinfo").submit(function(e) {
@@ -395,9 +395,9 @@
                             response = response.trim();
                             
                             if (response == "success") {
-                                $("#updatetextinfo").html("Updated Successfully");
-                                $("#updatetextinfo").css("color", "green");
-                                $("#updatetextinfo").css("display", "block");
+                                $("#updatetextinfoPending").html("Updated Successfully");
+                                $("#updatetextinfoPending").css("color", "green");
+                                $("#updatetextinfoPending").css("display", "block");
                             
                                 setTimeout(hideSuccessMessage, 2000);
                             }
@@ -405,9 +405,9 @@
                             else {
                                 console.error("AJAX error:", response);
                                 
-                                $("#updatetextinfo").html("Failed to update");
-                                $("#updatetextinfo").css("color", "red");
-                                $("#updatetextinfo").css("display", "block");
+                                $("#updatetextinfoPending").html("Failed to update");
+                                $("#updatetextinfoPending").css("color", "red");
+                                $("#updatetextinfoPending").css("display", "block");
                             
                                 setTimeout(hideSuccessMessage, 2000);
                             }

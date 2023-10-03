@@ -372,7 +372,7 @@
             </div>
 
             <p class="control"><b id="messageDuplicatelist"></b></p>
-            <p class="text-center fw-bold" id="updatetextinfo" style="display: none;"></p>
+            <p class="text-center fw-bold" id="updatetextinfoIncomplete" style="display: none;"></p>
         </div>
     </form>
     <?php } } } ?>
@@ -381,7 +381,7 @@
     <script>
         $(document).ready(function() {
             function hideSuccessMessage() {
-                document.getElementById("updatetextinfo").style.display = "none";
+                document.getElementById("updatetextinfoIncomplete").style.display = "none";
             }
             
             $("#incompleteJobinfo").submit(function(e) {
@@ -401,9 +401,9 @@
                     success: function(response) {
                         response = response.trim();
                         if (response == "success") {
-                            $("#updatetextinfo").html("Updated Successfully");
-                            $("#updatetextinfo").css("color", "green");
-                            $("#updatetextinfo").css("display", "block");
+                            $("#updatetextinfoIncomplete").html("Updated Successfully");
+                            $("#updatetextinfoIncomplete").css("color", "green");
+                            $("#updatetextinfoIncomplete").css("display", "block");
                             
                             setTimeout(hideSuccessMessage, 2000);
                         }
@@ -411,9 +411,9 @@
                         else {
                             console.error("AJAX error:", response);
                                 
-                            $("#updatetextinfo").html("Failed to update");
-                            $("#updatetextinfo").css("color", "red");
-                            $("#updatetextinfo").css("display", "block");
+                            $("#updatetextinfoIncomplete").html("Failed to update");
+                            $("#updatetextinfoIncomplete").css("color", "red");
+                            $("#updatetextinfoIncomplete").css("display", "block");
                             
                             setTimeout(hideSuccessMessage, 2000);
                         }
