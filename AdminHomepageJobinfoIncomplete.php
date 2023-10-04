@@ -1,8 +1,4 @@
-<?php
-    session_start();
-
-    if (isset($_SESSION["username"]))
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -287,7 +283,7 @@
                     }
                 }
             </script>
-
+            
             <div class="col-md-6 mb-3">
                 <label for="accessories_required" class="fw-bold">Accessory Required</label>
                 <select name="accessories_required" id="accessories_required" class="form-select" onchange="myFunctionAccessory()">
@@ -296,7 +292,7 @@
                     <option value='No' <?php if ($row['accessories_required'] == 'No') {echo "SELECTED";} ?>>No</option>
                 </select>
             </div>
-                                            
+            
             <!-- Accessory For -->
             <script>
                 function myFunctionAccessory() {
@@ -304,7 +300,7 @@
                     var accForDiv = document.getElementById("Accessory");
                         
                     if (accessories === "Yes") {
-                            accForDiv.style.display = "block";
+                        accForDiv.style.display = "block";
                     }
                         
                     else {
@@ -313,6 +309,15 @@
                     }
                 }
             </script>
+                                     
+            <div class="mb-3" id="Accessory" style="display: none;">
+                <label for="accessories_for" class="fw-bold">Accessory For</label>
+                <select name="accessories_for" id="accessories_for" class="form-select">
+                    <option value='' <?php if ($row['accessories_for'] == '') {echo "SELECTED";} ?>></option>
+                    <option value='Technician Use' <?php if ($row['accessories_for'] == "Technician Use") {echo "SELECTED";} ?>>Technician Use</option>
+                    <option value='Customer Request' <?php if ($row['accessories_for'] == "Customer Request") {echo "SELECTED";} ?>>Customer Request</option>
+                </select>
+            </div>
             <!-- End of Accessory For -->
 
             <div class="col-md-6 mb-3">
@@ -419,8 +424,8 @@
                         }
                     },
                     
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.error("AJAX errorr:", errorThrown);
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
                     }
                 });
             });
@@ -513,12 +518,12 @@
                 
         $(document).ready(function() {
             $('#machine_brand').select2({
-                dropdownParent: $('#pendingJobinfo'),
+                dropdownParent: $('#incompleteJobinfo'),
                 theme: 'bootstrap-5'
             });
                 
             $('#machine_type').select2({
-                dropdownParent: $('#pendingJobinfo'),
+                dropdownParent: $('#incompleteJobinfo'),
                 theme: 'bootstrap-5'
             });
             
@@ -554,7 +559,7 @@
     <script>
         $(document).ready(function() {
             $('#serialnumber').select2({
-                dropdownParent: $('#pendingJobinfo'),
+                dropdownParent: $('#incompleteJobinfo'),
                 dropdownPosition: 'below',
                 theme: 'bootstrap-5'
             });

@@ -285,8 +285,7 @@
                         }
                     }
                 </script>
-                <!-- End of Accessory For -->
-                                            
+                                     
                 <div class="mb-3" id="Accessory" style="display: none;">
                     <label for="accessories_for" class="fw-bold">Accessory For</label>
                     <select name="accessories_for" id="accessories_for" class="form-select">

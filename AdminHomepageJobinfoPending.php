@@ -1,12 +1,4 @@
-<?php
-    session_start();
-
-    date_default_timezone_set('Asia/Kuala_Lumpur');
-    
-    if (isset($_SESSION["username"])) {
-        $username = $_SESSION["username"];
-      }
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -228,7 +220,7 @@
                                 if ($result->num_rows > 0) {
                                     while ($rows = mysqli_fetch_assoc($result)) {
                             ?>
-                        <option value="<?php echo $rows['brand_id']; ?>"><?php echo $rows['brandname']; ?></option>
+                            <option value="<?php echo $rows['brand_id']; ?>"><?php echo $rows['brandname']; ?></option>
                             <?php } } ?>
                         
                         <input type="hidden" id="brand" name="machine_brand" value="<?php echo $row['machine_brand'] ?>">
@@ -239,7 +231,9 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="" class="fw-bold">Machine Type</label>
-                    <select type="text" name="type_id" id="machine_type" style="width: 100%;" class="form-select"></select>
+                    <select type="text" name="type_id" id="machine_type" style="width: 100%;" class="form-select">
+                    
+                    </select>
                     
                     <input type="hidden" id="type" name="machine_type" value="<?php echo $row['machine_type'] ?>">
                 </div>
@@ -306,6 +300,15 @@
                         }
                     }
                 </script>
+                                     
+                <div class="mb-3" id="Accessory" style="display: none;">
+                    <label for="accessories_for" class="fw-bold">Accessory For</label>
+                    <select name="accessories_for" id="accessories_for" class="form-select">
+                        <option value='' <?php if ($row['accessories_for'] == '') {echo "SELECTED";} ?>></option>
+                        <option value='Technician Use' <?php if ($row['accessories_for'] == "Technician Use") {echo "SELECTED";} ?>>Technician Use</option>
+                        <option value='Customer Request' <?php if ($row['accessories_for'] == "Customer Request") {echo "SELECTED";} ?>>Customer Request</option>
+                    </select>
+                </div>
                 <!-- End of Accessory For -->
 
                 <div class="col-md-6 mb-3">
@@ -413,8 +416,8 @@
                             }
                         },
                     
-                        error: function(xhr, textStatus, errorThrown) {
-                            console.error("AJAX errorr:", errorThrown);
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
                         }
                     });
                 });
