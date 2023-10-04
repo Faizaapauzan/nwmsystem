@@ -52,6 +52,10 @@
         table .table-responsive {
             page-break-inside: avoid;
         }
+
+        .pre{
+            font-family: var(--body-font);
+        }
     </style>
         
     <body>
@@ -229,16 +233,22 @@
                                                 $counter = 1;
                                                 
                                                 foreach($result as $row) {
+                                                    $username = $row['username'];   
+                                                    $usernamesArray = explode(",", $username);
+                                                    $formattedUsernames = '';
+                                                    foreach ($usernamesArray as $name) {
+                                                        $formattedUsernames .= $name . "\n";
+                                                    }
                                     ?> 
                                     
                                     <tr>
                                         <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?= $counter ?></td>
                                         <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?php echo $row["tech_leader"]; ?></td>
-                                        <td style='text-align: center; vertical-align: middle;'><?php echo $row["username"]; ?></td>
-                                        <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?php echo $row["tech_clockin"]; ?></td>
-                                        <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?php echo $row["tech_clockout"]; ?></td>
-                                        <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?php echo $row["technician_out"]; ?></td>
-                                        <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?php echo $row["technician_in"]; ?></td>
+                                        <td style='text-align: center; vertical-align: middle;'><?= $formattedUsernames; ?></td>
+                                        <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><pre class="pre"><?php echo $row["tech_clockin"]; ?></pre></td>
+                                        <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><pre class="pre"><?php echo $row["tech_clockout"]; ?></pre></td>
+                                        <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><pre class="pre"><?php echo $row["technician_out"]; ?></pre></td>
+                                        <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><pre class="pre"><?php echo $row["technician_in"]; ?></pre></td>
                                     </tr>
                                     
                                     <?php   
