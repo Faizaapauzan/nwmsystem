@@ -41,7 +41,7 @@
     
     <body>
         <!--========== NAV ==========-->
-        <!-- <nav class="nav">
+        <nav class="nav">
             <div class="nav__link nav__link dropdown">
                 <i class="material-icons">list_alt</i>
                 <span class="nav__text">Preparing</span>
@@ -70,7 +70,7 @@
                 <i class="material-icons">check_circle</i>
                 <span class="nav__text">In/Out Stock</span>
             </a>
-        </nav> -->
+        </nav>
 
         <!--========== CONTENTS ==========-->
         <main>

@@ -112,47 +112,47 @@
     }
 
     // ========== Update ==========
-    if(isset($_POST['update_entry'])) {
+    // if(isset($_POST['update_entry'])) {
         
-        $entry_id = mysqli_real_escape_string($conn, $_POST['inout_id']);
-        $techname = mysqli_real_escape_string($conn, $_POST['techname']);
-        $out_date = mysqli_real_escape_string($conn, $_POST['out_date']);
-        $balance = mysqli_real_escape_string($conn, $_POST['balance']);
+    //     $entry_id = mysqli_real_escape_string($conn, $_POST['inout_id']);
+    //     $techname = mysqli_real_escape_string($conn, $_POST['techname']);
+    //     $out_date = mysqli_real_escape_string($conn, $_POST['out_date']);
+    //     $balance = mysqli_real_escape_string($conn, $_POST['balance']);
         
-        if( $techname == NULL || $out_date == NULL || $balance == NULL) {
-            $res = ['status' => 422, 'message' => 'All fields are mandatory'];
+    //     if( $techname == NULL || $out_date == NULL || $balance == NULL) {
+    //         $res = ['status' => 422, 'message' => 'All fields are mandatory'];
             
-            echo json_encode($res);
+    //         echo json_encode($res);
             
-            return;
-        }
+    //         return;
+    //     }
         
-        $query = "UPDATE accessories_inout SET 
-                         techname='$techname', 
-                         out_date='$out_date',
-                         balance='$balance'
-                  WHERE inout_id='$entry_id'";
+    //     $query = "UPDATE accessories_inout SET 
+    //                      techname='$techname', 
+    //                      out_date='$out_date',
+    //                      balance='$balance'
+    //               WHERE inout_id='$entry_id'";
         
-        $query_run = mysqli_query($conn, $query);
+    //     $query_run = mysqli_query($conn, $query);
         
-        if($query_run) {
+    //     if($query_run) {
             
-            $res = ['status' => 200, 'message' => 'Entry Updated Successfully'];
+    //         $res = ['status' => 200, 'message' => 'Entry Updated Successfully'];
             
-            echo json_encode($res);
+    //         echo json_encode($res);
             
-            return;
-        }
+    //         return;
+    //     }
         
-        else {
+    //     else {
             
-            $res = ['status' => 500,'message' => 'Entry Not Updated'];
+    //         $res = ['status' => 500,'message' => 'Entry Not Updated'];
             
-            echo json_encode($res);
+    //         echo json_encode($res);
             
-            return;
-        }
-    }
+    //         return;
+    //     }
+    // }
     
     // ========== Delete ==========
     if(isset($_POST['delete_entry'])) {
