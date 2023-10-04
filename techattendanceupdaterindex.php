@@ -17,10 +17,29 @@ if(isset($_POST['tech_leader']) && $_POST['tech_leader']!='' || $_POST['tech_lea
    isset($_POST['attendancecreated_by']) && $_POST['attendancecreated_by']!='' || $_POST['attendancecreated_by']=='')
 
     {
+        $techLeader = $_POST['tech_leader'];
+        $techupdate_date = $_POST['techupdate_date'];
+        $newClockin = $_POST['tech_clockin'];
+        $newClockout = $_POST['tech_clockout']; 
+
+        $techClockinFromDB = ""; 
+        $techClockoutFromDB = "";
+
+        $stmt = mysqli_prepare($conn, "SELECT tech_clockin, tech_clockout FROM tech_update WHERE tech_leader = ? and techupdate_date = ?");
+        mysqli_stmt_bind_param($stmt, "ss", $techLeader, $techupdate_date);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $techClockinFromDB, $techClockoutFromDB);
+        while (mysqli_stmt_fetch($stmt)) {
+            $techClockinFromDB .= $newClockin ."\n";
+            $techClockoutFromDB .= $newClockout . "\n" ;
+        }
+
+
+
         
         $sql = "UPDATE tech_update SET
-                       tech_clockin ='".addslashes($_POST['tech_clockin'])."',
-                       tech_clockout ='".addslashes($_POST['tech_clockout'])."',
+                       tech_clockin ='".$techClockinFromDB."',
+                       tech_clockout ='".$techClockoutFromDB."',
                        attendancecreated_by ='".addslashes($_POST['attendancecreated_by'])."'
 
                        WHERE tech_leader='".addslashes($_POST['tech_leader'])."'

@@ -225,6 +225,7 @@
             var tech_clockout = $('input[name=tech_clockout]').val();
             var techupdate_id = $('input[name=techupdate_id]').val();
             var attendancecreated_by = $('input[name=attendancecreated_by]').val();
+            var techdate = <?=$techupdate_date?>;
             
             if (tech_leader !== '' || tech_leader === '',
             techupdate_date !== '' || techupdate_date === '',

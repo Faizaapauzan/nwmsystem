@@ -620,10 +620,10 @@
                                             <td style='text-align: center; white-space: nowrap;'><?= $counter ?></td>
                                             <td style='text-align: center; white-space: nowrap;'><?php echo $row["tech_leader"]; ?></td>
                                             <td style='text-align: center;'><?php echo $row["username"]; ?></td>
-                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["tech_clockin"]; ?></td>
-                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["tech_clockout"]; ?></td>
-                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["technician_out"]; ?></td>
-                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["technician_in"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><pre><?php echo $row["tech_clockin"]; ?></pre></td>
+                                            <td style='text-align: center; white-space: nowrap;'><pre><?php echo $row["tech_clockout"]; ?></pre></td>
+                                            <td style='text-align: center; white-space: nowrap;'><pre><?php echo $row["technician_out"]; ?></pre></td>
+                                            <td style='text-align: center; white-space: nowrap;'><pre><?php echo $row["technician_in"]; ?></pre></td>
                                         </tr>
                                    
                                         <?php
