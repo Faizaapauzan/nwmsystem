@@ -313,6 +313,10 @@
                                                                 return $dif2;
                                                             }
                                                         }
+                                                $wh = difftime($arrival, $leaving)['h'];
+                                                $wm = difftime($arrival, $leaving)['m'];
+                                                $th = difftime($departure, $arrival)['h'];
+                                                $tm = difftime($departure, $arrival)['m'];
                                                 $username = $row['username'];   
                                                 $usernamesArray = explode(",", $username);
                                                 $formattedUsernames = '';
@@ -330,8 +334,14 @@
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$departure" ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$arrival" ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$leaving" ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo difftime($arrival, $leaving)['h']?> hrs <?php echo difftime($arrival, $leaving)['m']?> mins</td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo difftime($departure, $arrival)['h']?> hrs <?php echo difftime($departure, $arrival)['m']?> mins</td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
+                                                <span class="hours-print"><?php echo ($wh <= 24) ? $wh . ' hrs ': '';?></span>
+                                                <span class="minutes-print"><?php echo ($wh <= 24) ? $wm . ' mins ': '';?></span>
+                                            </td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
+                                                <span class="hours-print"><?php  echo ($th <= 24) ? $th . ' hrs ': '';?></span>
+                                                <span class="minutes-print"><?php  echo ($th <= 24) ? $tm . ' mins ': '';?></span>
+                                            </td>
                                         </tr>
                                     
                                         <?php
@@ -442,8 +452,10 @@
                                                             $countrecords++;
                                                             $rest1 = strtotime('13:00:00');
                                                             $rest2 = strtotime('14:00:00');
-                                                            $workingtimehr = difftime($record['technician_leaving'], $record['technician_arrival'])['h'];
-                                                            $workingtimemin = difftime($record['technician_leaving'], $record['technician_arrival'])['m'];
+                                                            $workingtimehr = (difftime($record['technician_leaving'], $record['technician_arrival'])['h'] <= 24) ? 
+                                                                                difftime($record['technician_leaving'], $record['technician_arrival'])['h'] : 0;
+                                                            $workingtimemin = (difftime($record['technician_leaving'], $record['technician_arrival'])['h'] <= 24) ?
+                                                                                difftime($record['technician_leaving'], $record['technician_arrival'])['m'] : 0;
                                                             $workinghrArray[] = $workingtimehr;
                                                             $workingminArray[] = $workingtimemin;
 
@@ -470,8 +482,8 @@
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username'] ?></td>
                                             <td style="text-align: center; white-space: nowrap; vertical-align: middle;"><?= $record['customer_name'] ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $workingtimehr . 'hrs ' . $workingtimemin . 'mins' ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins'?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $resttime . 'mins'?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins'?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                         </tr>
