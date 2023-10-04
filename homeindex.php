@@ -21,10 +21,10 @@ if (isset($_POST["update"])) {
     $cust_phone2 = $_POST["cust_phone2"];
     $brand_id = $_POST["brand_id"];
     $machine_brand = $_POST["machine_brand"];
-    $type_id = $_POST["type_id"];
-    $machine_type = $_POST["machine_type"];
+    $type_id = !empty($_POST["type_id"]) ? $_POST["type_id"] : null;
+    $machine_type = !empty($_POST["machine_type"]) ? $_POST["machine_type"] : null;
     $machine_id = $_POST["machine_id"];
-    $serialnumber = $_POST["serialnumber"];
+    $serialnumber = !empty($_POST["serialnumber"]) ? $_POST["serialnumber"] : null;
     $machine_code = $_POST["machine_code"];
     $accessories_required = $_POST["accessories_required"];
     $accessories_for = !empty($_POST["accessories_for"]) ? $_POST["accessories_for"] : null;
