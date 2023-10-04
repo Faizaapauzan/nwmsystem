@@ -1890,21 +1890,26 @@
                                         </div>
 
                                         <div class="custom-select-prompt" id="custom-select-prompt">
-                                            <label for="" class="fw-bold">Assign To</label>
-                                            <select name="job_assign" id="jobassignsupport" class="form-control">
-                                                <option value=""></option>
-                                                    <?php
+                                            <label for="" class="form-label fw-bold">Assign To</label>
+                                            <div class="input-group">
+                                                <select name="job_assign" id="jobassignsupport" class="form-select">
+                                                    <option value=""></option>
+                                                        <?php
                                                     
-                                                        $results = mysqli_query($conn, "SELECT * From staff_register WHERE staff_position = 'Leader'");
+                                                            $results = mysqli_query($conn, "SELECT * From staff_register WHERE staff_position = 'Leader'");
                                                         
-                                                        while($data = mysqli_fetch_array($results)) {
-                                                            echo "<option value='". $data['username'] ."'>" . $data['username']."</option>";
-                                                        }
-                                                    ?>
-                                            </select>
-                                            <input type="hidden" name="support" id="infosupport" value="">
-                                            <button id="selectButton" onclick="submitFormSupportAdmin();">Select</button>
+                                                            while($data = mysqli_fetch_array($results)) {
+                                                                echo "<option value='". $data['username'] ."'>" . $data['username']."</option>";
+                                                            }
+                                                        ?>
+                                                </select>
+                                                
+                                                <input type="hidden" name="support" id="infosupport" value="">
+                                            
+                                                <button class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;" id="selectButton" onclick="submitFormSupportAdmin();">Select</button>
+                                            </div>
                                         </div>
+                                        
                                         <script>
                                             document.addEventListener("DOMContentLoaded", function() {
                                                 var openButton = document.getElementById("openCustomSelect");
@@ -1915,7 +1920,6 @@
                                                 });
                                             });
                                         </script>
-                                        
                                         
                                         <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
                                         

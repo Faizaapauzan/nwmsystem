@@ -102,7 +102,7 @@
             </div>
         </div>
                 
-        <!-- Update For Job Modal -->
+        <!-- Update Accessory For Job Modal -->
         <div class="modal fade" id="entryEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
@@ -111,15 +111,109 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
-                    <form id="updateEntry">
+                    <form id="updateEntry2">
                         <div class="modal-body">
                             <div id="errorMessageUpdate" class="alert alert-warning d-none">
-                                <span id="errorStatus"></span> <span id="errorMessage"></span>
+                                <span id="errorStatus"></span> 
+                                <span id="errorMessage"></span>
                             </div>
                             
-                            <input type="hidden" name="inout_id[]" id="inout_id" class="prime-row-inout-id">
+                            <input type="hidden" name="inout_id[]" id="inout_id2" class="prime-row-inout-id">
                             
-                            <div class="row mb-3">    
+                            <script>
+                                function toggleJobSelect(checkbox) {
+                                    var remarkNoteField = $(checkbox).closest('.row').find('.form-control[name="remark_note[]"]');
+                                    
+                                    if (checkbox.checked) {
+                                        remarkNoteField.val(remarkNoteField.val() + " (request by <?php echo $_SESSION['username']; ?>)");
+                                    }
+                                    
+                                    else {
+                                        remarkNoteField.val(remarkNoteField.val().replace(" (request by <?php echo $_SESSION['username']; ?>)", ""));
+                                    }
+                                }
+                            </script>
+                            
+                            <div class="row mb-3">
+                                <div class="mb-3">
+                                    <label for="">Send To Other Technician</label>
+                                    <input type="checkbox" class="enableJobSelect form-check-input border border-dark" onchange="toggleJobSelect(this)" />
+                                </div>
+                                    
+                                <div class="mb-2">
+                                    <label for="Remark">Remark</label>
+                                    <input type="text" class="form-control" name="remark_note[]" id="remark_note">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="DateofBirth">Date</label>
+                                    <div class="input-group">
+                                        <input type="text" id="remark_date2" name="remark_date[]" class="form-control" autocomplete="off" />
+                                        <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal(event, 'remark_date2')"><i class="iconify" data-icon="clarity:cursor-hand-click-line" ></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="Phone">Quantity</label>
+                                    <input type="number" class="form-control" name="remark_quantity[]" id="remark_quantity">
+                                </div>
+                            </div>
+                            
+                            <div id="next" class="mb-3"></div>
+                            
+                            <div class="d-grid justify-content-end mt-3">
+                                <button type="button" name="addrow" id="addrow" class="btn btn-success">Add</button>
+                            </div>
+                            
+                            <div id="errorMessageUpdate" class="alert alert-warning d-none" style="text-align: center;"></div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Update Accessory Request Modal -->
+        <div class="modal fade" id="entryEdit2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Accessory On Hand</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <form id="updateEntry2">
+                        <div class="modal-body">
+                            <div id="errorMessageUpdate" class="alert alert-warning d-none">
+                                <span id="errorStatus"></span> 
+                                <span id="errorMessage"></span>
+                            </div>
+                            
+                            <input type="hidden" name="inout_id[]" id="inout_id2" class="prime-row-inout-id">
+                            
+                            <script>
+                                function toggleJobSelect(checkbox) {
+                                    var remarkNoteField = $(checkbox).closest('.row').find('.form-control[name="remark_note[]"]');
+                                    
+                                    if (checkbox.checked) {
+                                        remarkNoteField.val(remarkNoteField.val() + " (request by <?php echo $_SESSION['username']; ?>)");
+                                    }
+                                    
+                                    else {
+                                        remarkNoteField.val(remarkNoteField.val().replace(" (request by <?php echo $_SESSION['username']; ?>)", ""));
+                                    }
+                                }
+                            </script>
+                            
+                            <div class="row mb-3">
+                                <div class="">
+                                    <label for="">Send To Other Technician</label>
+                                    <input type="checkbox" class="enableJobSelect form-check-input border border-dark" onchange="toggleJobSelect(this)" />
+                                </div>
+                                    
                                 <div class="col-sm">
                                     <label for="Phone">Remark</label>
                                     <input type="text" class="form-control" name="remark_note[]" id="remark_note">
@@ -128,20 +222,10 @@
                                 <div class="col-sm">
                                     <label for="DateofBirth">Date</label>
                                     <div style="display: flex; align-items: center;">
-                                        <input type="text" id="remark_date" name="remark_date[]" class="form-control" autocomplete="off" />
-                                        <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal(event, 'remark_date')"><i class="iconify" data-icon="clarity:cursor-hand-click-line" ></i></button>
+                                        <input type="text" id="remark_date2" name="remark_date[]" class="form-control" autocomplete="off" />
+                                        <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal(event, 'remark_date2')"><i class="iconify" data-icon="clarity:cursor-hand-click-line" ></i></button>
                                     </div>
                                 </div>
-                                    
-                                <script type="text/javascript">
-                                    function RemarkDateAsal(event, id) {
-                                        event.preventDefault();
-                                        
-                                        fetch("AccessoryHandoverDate.php").then(response => response.text()).then(result => {
-                                            document.getElementById(id).value = result;
-                                        });
-                                    }
-                                </script>
                                     
                                 <div class="col-sm-2">
                                     <label for="Phone">Quantity</label>
@@ -206,80 +290,6 @@
                 $(this).closest('div').remove();
             });
         </script>
-
-        <!-- Update Request Modal -->
-        <div class="modal fade" id="entryEdit2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Update Accessory On Hand</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    
-                    <form id="updateEntry2">
-                        <div class="modal-body">
-                            <div id="errorMessageUpdate" class="alert alert-warning d-none">
-                                <span id="errorStatus"></span> 
-                                <span id="errorMessage"></span>
-                            </div>
-                            
-                            <input type="hidden" name="inout_id[]" id="inout_id2" class="prime-row-inout-id">
-                            
-                            <script>
-                                function toggleJobSelect(checkbox) {
-                                    var remarkNoteField = $(checkbox).closest('.row').find('.form-control[name="remark_note[]"]');
-                                    
-                                    if (checkbox.checked) {
-                                        remarkNoteField.val(remarkNoteField.val() + " (request by <?php echo $_SESSION['username']; ?>)");
-                                    }
-                                    
-                                    else {
-                                        remarkNoteField.val(remarkNoteField.val().replace(" (request by <?php echo $_SESSION['username']; ?>)", ""));
-                                    }
-                                    
-                                    //updateRequestStyle(remarkNoteField);
-                                }
-                            </script>
-                            
-                            <div class="row mb-3">
-                                <div class="">
-                                    <label for="">Send To Other Technician</label>
-                                    <input type="checkbox" class="enableJobSelect" onchange="toggleJobSelect(this)" />
-                                </div>
-                                    
-                                <div class="col-sm">
-                                    <label for="Phone">Remark</label>
-                                    <input type="text" class="form-control" name="remark_note[]" id="remark_note">
-                                </div>
-                                    
-                                <div class="col-sm">
-                                    <label for="DateofBirth">Date</label>
-                                    <div style="display: flex; align-items: center;">
-                                        <input type="text" id="remark_date2" name="remark_date[]" class="form-control" autocomplete="off" />
-                                        <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal(event, 'remark_date2')"><i class="iconify" data-icon="clarity:cursor-hand-click-line" ></i></button>
-                                    </div>
-                                </div>
-                                    
-                                <div class="col-sm-2">
-                                    <label for="Phone">Quantity</label>
-                                    <input type="number" class="form-control" name="remark_quantity[]" id="remark_quantity">
-                                </div>
-                            </div>
-                            
-                            <div id="next" class="mb-3"></div>
-                            
-                            <button type="button" name="addrow" id="addrow" class="btn btn-success">Add</button>
-                            
-                            <div id="errorMessageUpdate" class="alert alert-warning d-none" style="text-align: center;"></div>
-                        </div>
-                        
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         
         <!-- Print date -->
         <script type="text/javascript">
@@ -330,7 +340,7 @@
                             
                             require 'dbconnect.php';
                             
-                            $query = "SELECT * FROM accessories_inout WHERE techname ='$_SESSION[username]' ORDER BY out_date DESC LIMIT 50";
+                            $query = "SELECT * FROM accessories_inout WHERE techname ='$_SESSION[username]' AND (jobregister_id !='' OR jobregister_id !='NULL') ORDER BY ModifyTime_inou DESC";
                             
                             $query_run = mysqli_query($conn, $query);
 
@@ -345,7 +355,7 @@
                             <td style="text-align: center; white-space: nowrap;"><button type="button" value="<?= $entry['inout_id']; ?>" id="RemarkButton" class="RemarkBtn btn btn-sm" style="border: none; color:white; background-color: #081d45;">Remark</button></td>
                             <td style="text-align: center; white-space: nowrap;">
                                 <button type="button" value="<?= $entry['inout_id']; ?>" class="viewEntryBtn btn btn-info btn-sm">View</button>
-                                <button type="button" value="<?= $entry['inout_id']; ?>" class="editEntryBtn btn btn-success btn-sm">Edit</button>
+                                <button type="button" value="<?= $entry['inout_id']; ?>" class="editEntryBtn btn btn-success btn-sm">Update</button>
                             </td>
                         </tr>
                         <?php } } ?>
@@ -372,7 +382,7 @@
                             
                             require 'dbconnect.php';
                                                     
-                            $query = "SELECT * FROM accessories_inout WHERE techname ='$_SESSION[username]' ORDER BY out_date DESC LIMIT 50";
+                            $query = "SELECT * FROM accessories_inout WHERE techname ='$_SESSION[username]' AND jobregister_id IS NULL ORDER BY ModifyTime_inou DESC";
                             
                             $query_run = mysqli_query($conn, $query);
 
@@ -388,7 +398,7 @@
                             <td style="text-align: center; white-space: nowrap;"><button type="button" value="<?= $entry['inout_id']; ?>" id="RemarkButton" class="RemarkBtn btn btn-sm" style="border: none; color:white; background-color: #081d45;">Remark</button></td>
                             <td style="text-align: center; white-space: nowrap;">
                                 <button type="button" value="<?= $entry['inout_id']; ?>" class="viewEntryBtn btn btn-info btn-sm">View</button>
-                                <button type="button" value="<?= $entry['inout_id']; ?>" class="editEntry2Btn btn btn-success btn-sm">Edit</button>
+                                <button type="button" value="<?= $entry['inout_id']; ?>" class="editEntry2Btn btn btn-success btn-sm">Update</button>
                             </td>
                         </tr>
                         <?php } } ?>

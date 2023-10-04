@@ -72,7 +72,9 @@
                         <h5 class="modal-title" id="exampleModalLabel">Add New Entry</h5>
                         <button type="button" onclick="location.reload()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    
                     <script>let selectedjobregister_id = null;</script>
+                    
                     <form id="saveEntry">
                         <div class="modal-body">
                             <div class="row">
@@ -243,16 +245,7 @@
                                             ?>
                                     </select>
                                 </div>
-                                        
-                                <script>
-                                    // $(document).ready(function(){
-                                    //     $('#Addtechnician').select2({
-                                    //         dropdownParent: $('#saveEntry'),
-                                    //         theme: 'bootstrap-5'
-                                    //     });
-                                    // });
-                                </script>
-                                        
+                                                
                                 <div class="mb-3">
                                     <label for="">Item</label>
                                     <div class="input-group">
@@ -273,146 +266,145 @@
                                         <button type="button" id="toggleButton" class="btn" style="background-color: #081d45; color:white; border:none;"><i class="iconify" data-icon="fluent:add-12-filled"></i></button>
                                     </div>
 
-                                     <!-- Add More Accessory -->
-                                <div class="card m-3" id="contentDiv" style="display: none;">
-                                    <div class="card-body">
-                                        <form id="moreaddaccessory">
-                                            <label for="" class="fw-bold mb-3">Add More Accessory</label>
-                                            <select class="form-select" id="addAcc" name="accessories_id" onchange="getAcc(this.value)">
-                                                <option value="">Select Accessories Code</option>
-                                                    <?php
-                                                        include "dbconnect.php";
+                                    <!-- Add More Accessory -->
+                                    <div class="card mt-3" id="contentDiv" style="display: none;">
+                                        <div class="card-body">
+                                            <form id="moreaddaccessory">
+                                                <label for="" class="fw-bold mb-3">Add More Accessory</label>
+                                                <select class="form-select" id="addAcc" name="accessories_id" onchange="getAcc(this.value)">
+                                                    <option value="">Select Accessories Code</option>
+                                                        <?php
+                                                            include "dbconnect.php";
                                                         
-                                                        $records = mysqli_query($conn, "SELECT * FROM accessories_list ORDER BY accessories_code ASC");
+                                                            $records = mysqli_query($conn, "SELECT * FROM accessories_list ORDER BY accessories_code ASC");
                                                         
-                                                        while($data = mysqli_fetch_array($records)) {
-                                                            echo "<option value='". $data['accessories_id'] ."'>" .$data['accessories_code']. " - " . $data['accessories_name']."</option>";
-                                                        }
-                                                    ?>
-                                            </select>
+                                                            while($data = mysqli_fetch_array($records)) {
+                                                                echo "<option value='". $data['accessories_id'] ."'>" .$data['accessories_code']. " - " . $data['accessories_name']."</option>";
+                                                            }
+                                                        ?>
+                                                </select>
                                             
-                                            <input type="text" name="accessories_code" id="moreaccessories_code" class="form-control mt-2" value="">
+                                                <input type="text" name="accessories_code" id="moreaccessories_code" class="form-control mt-2" value="">
                                             
-                                            <div class="d-flex gap-2 mt-2 mb-2">
-                                                <input type="text" id="moreaccessories_name" class="form-control" name="accessories_name" value="">
-                                                <input type="number" class="form-control" id="moreaccessories_quantity" name="accessories_quantity" value="">
-                                                <input type="hidden" id="moreaccessories_uom" name="accessories_uom" value="">
-                                            </div>
+                                                <div class="d-flex gap-2 mt-2 mb-2">
+                                                    <input type="text" id="moreaccessories_name" class="form-control" name="accessories_name" value="">
+                                                    <input type="number" class="form-control" id="moreaccessories_quantity" name="accessories_quantity" value="">
+                                                    <input type="hidden" id="moreaccessories_uom" name="accessories_uom" value="">
+                                                </div>
                                             
-                                            <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn" style="color: white; background-color:#081d45; border:none;" onclick="submitForm();">Update</button>
-                                            </div>
-                                        </form>
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="button" class="btn" style="color: white; background-color:#081d45; border:none;" onclick="submitForm();">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <script>
-                                    function getAcc(str) {
-                                        if (str.length == 0) {
-                                            document.getElementById('moreaccessories_code').value = "";
-                                            document.getElementById('moreaccessories_name').value = "";
-                                            document.getElementById('moreaccessories_quantity').value = "";
-                                            document.getElementById('moreaccessories_uom').value = "";
-                                            
-                                            return;
-                                        }
-                                        
-                                        else {
-                                            var xmlhttp = new XMLHttpRequest();
-                                            
-                                            xmlhttp.onreadystatechange = function() {
-                                                if (this.readyState == 4 && this.status == 200) {
-                                                    var myObj = JSON.parse(this.responseText);
-                                                    
-                                                    document.getElementById('moreaccessories_code').value = myObj.code;
-                                                    document.getElementById('moreaccessories_name').value = myObj.name;
-                                                    document.getElementById('moreaccessories_uom').value = myObj.uom;
-                                                }
-                                            };
-                                            
-                                            xmlhttp.open("GET", "fetchinout.php?accessory_id=" + str, true);
-                                            xmlhttp.send();
-                                        }
-                                    }
-                                </script>
-                                <script>
-                                   function submitForm() {
-                                        accessories_id = document.getElementById('addAcc').value;
-                                        accessories_code = document.getElementById('moreaccessories_code').value;
-                                        accessories_name = document.getElementById('moreaccessories_name').value;
-                                        accessories_quantity = document.getElementById('moreaccessories_quantity').value;
-                                        accessories_uom = document.getElementById('moreaccessories_uom').value;
-
-
-                                        $.ajax({
-                                            url: "code.php",
-                                            type: "POST",
-                                            data: {
-                                                accessories_id:accessories_id,
-                                                accessories_code:accessories_code,
-                                                accessories_name:accessories_name,
-                                                accessories_quantity:accessories_quantity,
-                                                accessories_uom:accessories_uom,
-                                                jobregister_id:selectedjobregister_id,
-                                                moreacc: true
-                                            },
-
-                                            success: function (response) {
-                                                console.log(response);
-                                                var res = JSON.parse(response);
-                                                if (res.status == 200) {
-                                                    var acc = document.getElementById("AddAccessory")
-                                                    var option = document.createElement("option");
-
-                                                    option.value = document.getElementById('moreaccessories_name').value;
-                                                    option.text = document.getElementById('moreaccessories_name').value;
-                                                    acc.appendChild(option);
-                                                    document.querySelector("#AddAccessory option[value='" + option.value +"']").selected = true;
-
-                                                    document.getElementById('quantity').value = document.getElementById('moreaccessories_quantity').value;
-                                                    document.getElementById('contentDiv').style.display = "none";
-                                                    document.getElementById('addAcc').selectedIndex = 0;
-                                                    document.getElementById('moreaccessories_code').value = "";
-                                                    document.getElementById('moreaccessories_name').value = "";
-                                                    document.getElementById('moreaccessories_quantity').value = "";
-                                                    document.getElementById('moreaccessories_uom').value = "";
-
-
-                                                }
-                                            },
-                                            error: function (xhr, status, error) {
-                                                console.error(error);
-                                            },
-                                        });
-                                    }
-                                </script>
-
-                                <script>
-                                    $(document).ready(function(){
-                                        $('#addAcc').select2({
-                                            theme: 'bootstrap-5'
-                                        });
-                                    });
-                                </script>
-                                            
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", function () {
                                     
-                                        const toggleButton = document.getElementById("toggleButton");
-                                        const contentDiv = document.getElementById("contentDiv");
-
-                                                    
-                                        toggleButton.addEventListener("click", function () {
-                                            if (contentDiv.style.display === "none") {
-                                                contentDiv.style.display = "block";
-                                            }
+                                    <script>
+                                        function getAcc(str) {
+                                            if (str.length == 0) {
+                                                document.getElementById('moreaccessories_code').value = "";
+                                                document.getElementById('moreaccessories_name').value = "";
+                                                document.getElementById('moreaccessories_quantity').value = "";
+                                                document.getElementById('moreaccessories_uom').value = "";
                                             
-                                            else {
-                                                contentDiv.style.display = "none";
+                                                return;
                                             }
-                                        });
-                                    });
-                                </script>
+                                        
+                                            else {
+                                                var xmlhttp = new XMLHttpRequest();
+                                                
+                                                xmlhttp.onreadystatechange = function() {
+                                                    if (this.readyState == 4 && this.status == 200) {
+                                                        var myObj = JSON.parse(this.responseText);
+                                                        
+                                                        document.getElementById('moreaccessories_code').value = myObj.code;
+                                                        document.getElementById('moreaccessories_name').value = myObj.name;
+                                                        document.getElementById('moreaccessories_uom').value = myObj.uom;
+                                                    }
+                                                };
+                                            
+                                                xmlhttp.open("GET", "fetchinout.php?accessory_id=" + str, true);
+                                                xmlhttp.send();
+                                            }
+                                        }
+                                    </script>
+                                
+                                    <script>
+                                        function submitForm() {
+                                            accessories_id = document.getElementById('addAcc').value;
+                                            accessories_code = document.getElementById('moreaccessories_code').value;
+                                            accessories_name = document.getElementById('moreaccessories_name').value;
+                                            accessories_quantity = document.getElementById('moreaccessories_quantity').value;
+                                            accessories_uom = document.getElementById('moreaccessories_uom').value;
+                                            
+                                            $.ajax({
+                                                url: "code.php",
+                                                type: "POST",
+                                                data: {
+                                                    accessories_id:accessories_id,
+                                                    accessories_code:accessories_code,
+                                                    accessories_name:accessories_name,
+                                                    accessories_quantity:accessories_quantity,
+                                                    accessories_uom:accessories_uom,
+                                                    jobregister_id:selectedjobregister_id,
+                                                    moreacc: true
+                                                },
+                                                
+                                                success: function (response) {
+                                                    console.log(response);
+                                                    
+                                                    var res = JSON.parse(response);
+                                                    
+                                                    if (res.status == 200) {
+                                                        var acc = document.getElementById("AddAccessory")
+                                                        var option = document.createElement("option");
+                                                        
+                                                        option.value = document.getElementById('moreaccessories_name').value;
+                                                        option.text = document.getElementById('moreaccessories_name').value;
+                                                        acc.appendChild(option);
+                                                        document.querySelector("#AddAccessory option[value='" + option.value +"']").selected = true;
 
+                                                        document.getElementById('quantity').value = document.getElementById('moreaccessories_quantity').value;
+                                                        document.getElementById('contentDiv').style.display = "none";
+                                                        document.getElementById('addAcc').selectedIndex = 0;
+                                                        document.getElementById('moreaccessories_code').value = "";
+                                                        document.getElementById('moreaccessories_name').value = "";
+                                                        document.getElementById('moreaccessories_quantity').value = "";
+                                                        document.getElementById('moreaccessories_uom').value = "";
+                                                    }
+                                                },
+                                            
+                                                error: function (xhr, status, error) {
+                                                    console.error(error);
+                                                },
+                                            });
+                                        }
+                                    </script>
+                                    
+                                    <script>
+                                        $(document).ready(function(){
+                                            $('#addAcc').select2({
+                                                theme: 'bootstrap-5'
+                                            });
+                                        });
+                                    </script>
+                                            
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            const toggleButton = document.getElementById("toggleButton");
+                                            const contentDiv = document.getElementById("contentDiv");
+                                            
+                                            toggleButton.addEventListener("click", function () {
+                                                if (contentDiv.style.display === "none") {
+                                                    contentDiv.style.display = "block";
+                                                }
+                                            
+                                                else {
+                                                    contentDiv.style.display = "none";
+                                                }
+                                            });
+                                        });
+                                    </script>
                                 </div>
 
                                 <script>
@@ -482,8 +474,6 @@
                             <button type="button" class="btn btn-primary" onclick="saveEntry()">Save</button>
                         </div>
                     </form>
-
-                    
                 </div>
             </div>
         </div>
@@ -531,7 +521,7 @@
         </div>
         
         <!-- Update Modal -->
-        <div class="modal fade" id="entryEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="entryEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -546,36 +536,13 @@
                                 
                                 <div class="mb-3">
                                     <label for="">Item</label>
-                                    <input type="text" name="accessoriesname" id="EditAccessory" class="form-control" disabled />
+                                    <input type="text" name="accessoriesname" id="EditAccessory" class="form-control" disabled readonly />
                                 </div>
     
                                 <div class="mb-3">
                                     <label for="">Technician</label>
-                                    <select type="text" name="techname" id="EditTechnician" style="width: 100%;" class="form-select">
-                                        <option value="">-- Select Technician --</option>
-                                            <?php
-                                                
-                                                include "dbconnect.php";
-                                                        
-                                                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE tech_avai = '0' 
-                                                                                AND (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')
-                                                                                ORDER BY username ASC");
-
-                                                while ($data = mysqli_fetch_array($records)) {
-                                                    echo "<option value='" . $data['username'] . "'>" . $data['username'] . "</option>";
-                                                }
-                                            ?>
-                                    </select>
+                                    <input type="text" name="techname" id="EditTechnician" class="form-control" disabled readonly />
                                 </div>
-
-                                <script>
-                                    $(document).ready(function(){
-                                        $('#EditTechnician').select2({
-                                            dropdownParent: $('#entryEditModal'),
-                                            theme: 'bootstrap-5'
-                                        });
-                                    });
-                                </script>
 
                                 <div class="mb-3">
                                     <label for="">Out Date Time</label>
@@ -596,12 +563,12 @@
                                 
                                 <div class="mb-3">
                                     <label for="">Quantity</label>
-                                    <input type="number" name="quantity" id="quantity1" class="form-control" disabled />
+                                    <input type="number" name="quantity" id="quantity1" class="form-control" disabled readonly/>
                                 </div>
                                         
                                 <div class="mb-3">
                                     <label for="">Remaining</label>
-                                    <input type="number" name="balance" id="balance" class="form-control" />
+                                    <input type="number" name="balance" id="balance" class="form-control"/>
                                 </div>
                             </div>
                             
@@ -614,7 +581,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
                 
         <!-- Delete Modal -->
         <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -659,13 +626,13 @@
                                 <input type="hidden" name="inout_id" id="inout_idremark">
                                 
                                 <div class="row mb-3">    
-                                    <div class="col-sm">
-                                        <label for="Phone">Remark</label>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="">Remark</label>
                                         <input type="text" class="form-control" name="remark_note[]" id="remark_note" value="Return to Store">
                                     </div>
                                     
-                                    <div class="col-sm">
-                                        <label for="DateofBirth">Date</label>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="">Date</label>
                                         <div class="input-group">
                                             <input type="text" id="remark_date" name="remark_date[]" class="form-control" autocomplete="off" />
                                             <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;"><i class="iconify" data-icon="clarity:cursor-hand-click-line" onclick="RemarkDateAsal(event)"></i></button>
@@ -682,22 +649,20 @@
                                         }
                                     </script>
                                     
-                                    <div class="col-sm-2">
-                                        <label for="Phone">Quantity</label>
+                                    <div class="col-md-6">
+                                        <label for="">Quantity</label>
                                         <input type="number" class="form-control" name="remark_quantity[]" id="remark_quantity">
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <label for="">Verify By</label>
+                                        <input type="text" class="form-control" name="verified_by" id="verified_by" value="<?php echo $_SESSION['username']?>">
+                                    </div>
                                 </div>
-                            
-                                <div id="next" class="mb-3"></div>
-                            
-                                <button type="button" name="addrow" id="addrow" class="btn btn-success">Add</button>
-                                <input type="hidden" name="verified_by" id="verified_by" value="<?php echo $_SESSION['username']?>">
-                            
-                                <div class="clearfix me-3">
-                                    <div class="float-end">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </div>  
-                                </div>
+                                
+                                <div class="d-grid justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>  
                             </form>
                         </div>
                     </div>
@@ -748,6 +713,7 @@
             <div class="card-header">
                 <h4>Accessory In and Out</h4>
             </div>
+            
             <?php
                 $recordcount = 0;
                 $queryRequest = "SELECT * FROM accessories_remark";
@@ -768,6 +734,7 @@
                     $recordcount = count($resultsRequest);
                 } 
             ?>
+
             <style>
                 .notification-badge {
                     position: absolute;
@@ -787,8 +754,9 @@
 
                     <button type="button" class="btn btn-sm rounded float-end" style="background-color: #006400;"><a href="techaccessorysummary.php" style="text-decoration: none; color:white">Summary</a></button>
                     <button type="button" style="position: relative"id="requestbtn" class="requestBtn btn btn-secondary btn-sm rounded float-end me-2">Request</button>
-                    <button type="button" class="btn btn-primary btn-sm rounded float-end me-2" data-bs-toggle="modal" data-bs-target="#entryAddModal">Add</button>
+                    <button type="button" class="btn btn-sm rounded float-end me-2" style="background-color: #081d45; color:white; border:none;" data-bs-toggle="modal" data-bs-target="#entryAddModal">Add</button>
                 </div>
+                
                 <script>
                     function showNotificationBadge() {
                         if (<?= $recordcount ?> > 0) {
@@ -803,7 +771,6 @@
                     showNotificationBadge();
                 </script>
 
-
                 <div class="table-responsive">
                     <table id="myTable" class="display table table-bordered table-striped">
                         <thead>
@@ -817,7 +784,6 @@
                                 <th style="text-align: center; white-space: nowrap;">Out Date</th>
                                 <th style="text-align: center; white-space: nowrap;">Quantity</th>
                                 <th style="text-align: center; white-space: nowrap;">Remaining</th>
-                                <th style="text-align: center; white-space: nowrap;">Remark</th>
                                 <th style="text-align: center; white-space: nowrap;">Action</th>
                             </tr>
                         </thead>
@@ -827,7 +793,7 @@
                                 
                                 require 'dbconnect.php';
                                                     
-                                $query = "SELECT * FROM accessories_inout WHERE jobregister_id !='' ORDER BY CreatedTime_inout";
+                                $query = "SELECT * FROM accessories_inout WHERE jobregister_id !='' ORDER BY ModifyTime_inou DESC";
                                                     
                                 $query_run = mysqli_query($conn, $query);
                                                     
@@ -842,8 +808,6 @@
                                                    
                                         $query_run2 = mysqli_query($conn, $query2);
 
-                                        
-                                        
                                         if (mysqli_num_rows($query_run2) > 0) {
                                             $entry2 = mysqli_fetch_array($query_run2);
                             ?>
@@ -858,12 +822,10 @@
                                 <td style='text-align: center;'><?= $entry['quantity'] ?></td>
                                 <td style='text-align: center;'><?= $entry['balance'] ?></td>
                                 <td style='text-align: center; white-space: nowrap;'>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
-                                </td>
-                                <td style='text-align: center; white-space: nowrap;'>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-info btn-sm'>View</button>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-danger btn-sm'>Delete</button>
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-sm' style="background-color: #191970; color:white; border:none">View</button>
+                                    <!-- <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button> -->
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-sm' style="background-color: #301934; color:white; border:none">Update</button>
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-sm' style="background-color: #800000; color:white; border:none">Delete</button>
                                 </td>
                             </tr>
                             <?php $counter++; } } } ?>
@@ -879,7 +841,6 @@
                                 <th style="text-align: center; white-space: nowrap;">Out Date</th>
                                 <th style="text-align: center; white-space: nowrap;">Quantity</th>
                                 <th style="text-align: center; white-space: nowrap;">Remaining</th>
-                                <th style="text-align: center; white-space: nowrap;">Remark</th>
                                 <th style="text-align: center; white-space: nowrap;">Action</th>
                             </tr>
                         </thead>
@@ -889,7 +850,7 @@
                             
                                 require 'dbconnect.php';
                                 
-                                $query = "SELECT * FROM accessories_inout WHERE jobregister_id IS NULL ORDER BY CreatedTime_inout";
+                                $query = "SELECT * FROM accessories_inout WHERE jobregister_id IS NULL ORDER BY ModifyTime_inou DESC";
                                                     
                                 $query_run = mysqli_query($conn, $query);
                                                     
@@ -903,16 +864,14 @@
                                 <td style='text-align: center;'><?= $counter ?></td>
                                 <td style='text-align: center; white-space: nowrap;'><?= $entry['techname'] ?></td>
                                 <td><?= $entry['accessoriesname'] ?></td>
-                                <td style='white-space: nowrap;'><?= $entry['out_date'] ?></td>
+                                <td style='text-align: center; white-space: nowrap;'><?= $entry['out_date'] ?></td>
                                 <td style='text-align: center;'><?= $entry['quantity'] ?></td>
                                 <td style='text-align: center;'><?= $entry['balance'] ?></td>
                                 <td style='text-align: center; white-space: nowrap;'>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
-                                </td>
-                                <td style='text-align: center; white-space: nowrap;'>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-info btn-sm'>View</button>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-danger btn-sm'>Delete</button>
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-sm' style="background-color: #191970; color:white; border:none">View</button>
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-sm' style="background-color: #301934; color:white; border:none">Update</button>
+                                    <!-- <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button> -->
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-sm' style="background-color: #800000; color:white; border:none">Delete</button>
                                 </td>
                             </tr>
                             <?php $counter++;  } } ?>
