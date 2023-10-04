@@ -41,6 +41,22 @@
    
         <!--========== ICONS ==========-->
         <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
+        <style>
+            /* Styles for the custom select prompt */
+            .custom-select-prompt {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+        </style>
     </head>
 
     <body>
@@ -1870,32 +1886,42 @@
                                             <div class="mb-3" id="giveReason">
                                                 <label for="" class="fw-bold">Reason</label>
                                                 <input type="text" name="reason" id="reason" class="form-control">
-                                            </div>
-                                            
-                                            <div class="mb-3">
+                                            </div>                       
+                                        </div>
+
+                                        <div class="custom-select-prompt" id="custom-select-prompt">
                                             <label for="" class="fw-bold">Assign To</label>
-                                                <select name="job_assign" id="jobassignsupport" class="form-control">
-                                                    <option value=""></option>
-                                                        <?php
-                                                      
-                                                            $results = mysqli_query($conn, "SELECT * From staff_register WHERE staff_position = 'Leader'");
-                                                            
-                                                            while($data = mysqli_fetch_array($results)) {
-                                                                echo "<option value='". $data['username'] ."'>" . $data['username']."</option>";
-                                                            }
-                                                        ?>
-                                                </select>
-                                                <input type="hidden" name="support" id="infosupport" value="">
-                                            </div>
-                                                
-                                            </div>
+                                            <select name="job_assign" id="jobassignsupport" class="form-control">
+                                                <option value=""></option>
+                                                    <?php
+                                                    
+                                                        $results = mysqli_query($conn, "SELECT * From staff_register WHERE staff_position = 'Leader'");
+                                                        
+                                                        while($data = mysqli_fetch_array($results)) {
+                                                            echo "<option value='". $data['username'] ."'>" . $data['username']."</option>";
+                                                        }
+                                                    ?>
+                                            </select>
+                                            <input type="hidden" name="support" id="infosupport" value="">
+                                            <button id="selectButton" onclick="submitFormSupportAdmin();">Select</button>
+                                        </div>
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", function() {
+                                                var openButton = document.getElementById("openCustomSelect");
+                                                var customSelectPrompt = document.getElementById("custom-select-prompt");
+
+                                                openButton.addEventListener("click", function() {
+                                                    customSelectPrompt.style.display = "block";
+                                                });
+                                            });
+                                        </script>
                                         
                                         
                                         <input type="hidden" name="jobregisterlastmodify_by" id="jobregisterlastmodify_by" value="" readonly>
                                         
                                         <div class="d-flex">
                                             <button class="btn" style="background-color: #081d45; color: #fff; border:none; width:54%; margin-right:1%;" type="submit" id="submit" name="update">Update</button>
-                                            <button class="btn" style="background-color: #023020; color: #fff; border:none; width:54%; margin-left:1%;" type="button" id="duplicate" name="duplicate" onclick="submitFormSupportAdmin();">Support</button>
+                                            <button class="btn" style="background-color: #023020; color: #fff; border:none; width:54%; margin-left:1%;" type="button" id="openCustomSelect" name="duplicate" >Support</button>
                                         </div>
                                         <div class="fw-bold mt-2" id="messageSupportAdmin"></div>
                                     </form>
