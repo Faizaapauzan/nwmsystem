@@ -324,7 +324,7 @@
                                         <tr>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['job_assign']; ?></td>
-                                            <td style='text-align: center; vertical-align: middle;'><?= $formattedUsernames; ?></td>
+                                            <td style='text-align: center; vertical-align: middle;'><pre class="pre"><?= $formattedUsernames; ?></pre></td>
                                             <td style="vertical-align: middle;"><?= $row['customer_name']; ?></td>
                                             <td style="vertical-align: middle;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$departure" ?></td>
@@ -623,12 +623,18 @@
                                                     $counter = 1;
                                                     
                                                     foreach($result as $row) {
+                                                        $username = $row['username'];   
+                                                        $usernamesArray = explode(",", $username);
+                                                        $formattedUsernames = '';
+                                                        foreach ($usernamesArray as $name) {
+                                                            $formattedUsernames .= $name . "\n";
+                                                        }
                                         ?>
                                 
                                         <tr>
                                             <td style='text-align: center; white-space: nowrap;'><?= $counter ?></td>
                                             <td style='text-align: center; white-space: nowrap;'><?php echo $row["tech_leader"]; ?></td>
-                                            <td style='text-align: center;'><?php echo $row["username"]; ?></td>
+                                            <td style='text-align: center;'><?= $formattedUsernames?></td>
                                             <td style='text-align: center; white-space: nowrap;'><pre class="pre"><?php echo $row["tech_clockin"]; ?></pre></td>
                                             <td style='text-align: center; white-space: nowrap;'><pre class="pre"><?php echo $row["tech_clockout"]; ?></pre></td>
                                             <td style='text-align: center; white-space: nowrap;'><pre class="pre"><?php echo $row["technician_out"]; ?></pre></td>
