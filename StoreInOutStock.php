@@ -521,7 +521,7 @@
         </div>
         
         <!-- Update Modal -->
-        <!-- <div class="modal fade" id="entryEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="entryEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -581,7 +581,7 @@
                     </form>
                 </div>
             </div>
-        </div> -->
+        </div>
                 
         <!-- Delete Modal -->
         <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -784,6 +784,7 @@
                                 <th style="text-align: center; white-space: nowrap;">Out Date</th>
                                 <th style="text-align: center; white-space: nowrap;">Quantity</th>
                                 <th style="text-align: center; white-space: nowrap;">Remaining</th>
+                                <th style="text-align: center; white-space: nowrap;">Remark</th>
                                 <th style="text-align: center; white-space: nowrap;">Action</th>
                             </tr>
                         </thead>
@@ -822,9 +823,11 @@
                                 <td style='text-align: center;'><?= $entry['quantity'] ?></td>
                                 <td style='text-align: center;'><?= $entry['balance'] ?></td>
                                 <td style='text-align: center; white-space: nowrap;'>
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
+                                </td>
+                                <td style='text-align: center; white-space: nowrap;'>
                                     <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-sm' style="background-color: #191970; color:white; border:none">View</button>
-                                    <!-- <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button> -->
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-sm' style="background-color: #301934; color:white; border:none">Update</button>
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button>
                                     <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-sm' style="background-color: #800000; color:white; border:none">Delete</button>
                                 </td>
                             </tr>
@@ -841,6 +844,7 @@
                                 <th style="text-align: center; white-space: nowrap;">Out Date</th>
                                 <th style="text-align: center; white-space: nowrap;">Quantity</th>
                                 <th style="text-align: center; white-space: nowrap;">Remaining</th>
+                                <th style="text-align: center; white-space: nowrap;">Remark</th>
                                 <th style="text-align: center; white-space: nowrap;">Action</th>
                             </tr>
                         </thead>
@@ -868,9 +872,11 @@
                                 <td style='text-align: center;'><?= $entry['quantity'] ?></td>
                                 <td style='text-align: center;'><?= $entry['balance'] ?></td>
                                 <td style='text-align: center; white-space: nowrap;'>
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-warning btn-sm'>Remark</button>
+                                </td>
+                                <td style='text-align: center; white-space: nowrap;'>
                                     <button type='button' value='<?= $entry['inout_id'] ?>' class='viewEntryBtn btn btn-sm' style="background-color: #191970; color:white; border:none">View</button>
-                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='RemarkBtn btn btn-sm' style="background-color: #301934; color:white; border:none">Update</button>
-                                    <!-- <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Edit</button> -->
+                                    <button type='button' value='<?= $entry['inout_id'] ?>' class='editEntryBtn btn btn-success btn-sm'>Update</button>
                                     <button type='button' value='<?= $entry['inout_id'] ?>' class='deleteEntryBtn btn btn-sm' style="background-color: #800000; color:white; border:none">Delete</button>
                                 </td>
                             </tr>
