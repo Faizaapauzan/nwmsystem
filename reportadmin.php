@@ -137,11 +137,18 @@
                                                             return $dif2;
                                                         }
                                                     }
-                                                    $wh = difftime($arrival, $leaving)['h'];
-                                                    $wm = difftime($arrival, $leaving)['m'];
-                                                    $th = difftime($departure, $arrival)['h'];
-                                                    $tm = difftime($departure, $arrival)['m'];
-
+                                                    $wh = '';
+                                                    $wm = '';
+                                                    $th = '';
+                                                    $tm = '';
+                                                    if ($arrival != '' && $leaving != ''){
+                                                        $wh = difftime($arrival, $leaving)['h'];
+                                                        $wm = difftime($arrival, $leaving)['m'];
+                                                    }
+                                                    if ($departure != '' && $arrival != ''){
+                                                        $th = difftime($departure, $arrival)['h'];
+                                                        $tm = difftime($departure, $arrival)['m'];
+                                                    }
                                                     $username = $row['username'];  
                                                     $usernamesArray = explode(",", $username);
                                                     $formattedUsernames = '';
@@ -160,12 +167,12 @@
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$arrival" ?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$leaving" ?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
-                                            <span class="hours-print"><?php echo ($wh <= 24) ? $wh . ' hrs ': '';?></span>
-                                            <span class="minutes-print"><?php echo ($wh <= 24) ? $wm . ' mins ': '';?></span>
+                                            <span class="hours-print"><?php echo($wh != '' && $wm != '') ? $wh . ' hrs ': '';?></span>
+                                            <span class="minutes-print"><?php echo($wh != '' && $wm != '') ? $wm . ' mins ': '';?></span>
                                         </td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
-                                            <span class="hours-print"><?php  echo ($th <= 24) ? $th . ' hrs ': '';?></span>
-                                            <span class="minutes-print"><?php  echo ($th <= 24) ? $tm . ' mins ': '';?></span>
+                                            <span class="hours-print"><?php  echo ($th != '' && $tm != '') ? $th . ' hrs ': '';?></span>
+                                            <span class="minutes-print"><?php  echo ($th != '' && $tm != '') ? $tm . ' mins ': '';?></span>
                                         </td>
                                     </tr>
                                     
@@ -273,8 +280,10 @@
                                                             $countrecords++;
                                                             $rest1 = strtotime('13:00:00');
                                                             $rest2 = strtotime('14:00:00');
-                                                            $workingtimehr = difftime($record['technician_leaving'], $record['technician_arrival'])['h'];
-                                                            $workingtimemin = difftime($record['technician_leaving'], $record['technician_arrival'])['m'];
+                                                            $workingtimehr = (difftime($record['technician_leaving'], $record['technician_arrival'])['h'] <= 24) ? 
+                                                                                difftime($record['technician_leaving'], $record['technician_arrival'])['h'] : 0;
+                                                            $workingtimemin = (difftime($record['technician_leaving'], $record['technician_arrival'])['h'] <= 24) ?
+                                                                                difftime($record['technician_leaving'], $record['technician_arrival'])['m'] : 0;
                                                             $workinghrArray[] = $workingtimehr;
                                                             $workingminArray[] = $workingtimemin;
 
@@ -285,8 +294,11 @@
                                                             $resttime = !empty($resttimeArray) ? max($resttimeArray) : 0;
                                                             
 
-                                                            $TravelTimehr = difftime($record['technician_arrival'], $record['technician_departure'])['h'];
-                                                            $TravelTimemin = difftime($record['technician_arrival'], $record['technician_departure'])['m']; 
+
+                                                            $TravelTimehr = (difftime($record['technician_arrival'], $record['technician_departure'])['h'] <= 24) ?
+                                                                                difftime($record['technician_arrival'], $record['technician_departure'])['h'] : 0;
+                                                            $TravelTimemin = (difftime($record['technician_arrival'], $record['technician_departure'])['m'] <= 24) ?
+                                                                                difftime($record['technician_arrival'], $record['technician_departure'])['m'] : 0; 
                                                             $totaltravelhr += $TravelTimehr;
                                                             $totaltravelmin += $TravelTimemin;
                                                             if ($totaltravelmin >= 60){
@@ -300,9 +312,9 @@
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter2 ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username'] ?></td>
                                             <td style="text-align: center; white-space: nowrap; vertical-align: middle;"><?= $record['customer_name'] ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $workingtimehr . 'hrs ' . $workingtimemin . 'mins' ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($workingtimehr != 0 && $workingtimemin != 0) ? $workingtimehr . 'hrs ' . $workingtimemin . 'mins' : '' ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $resttime . 'mins'?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins'?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($TravelTimehr != 0 && $TravelTimemin != 0) ? $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins' : '' ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                         </tr>
