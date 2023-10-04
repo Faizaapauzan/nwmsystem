@@ -2741,6 +2741,8 @@
                             };
                             console.log(formData);
 
+                            var customSelectPrompt = document.getElementById("custom-select-prompt");
+
                             $.ajax({
                                 url: "adminsupporttechnician.php",
                                 type: 'POST',
@@ -2752,6 +2754,7 @@
                                         $('#messageSupportAdmin').html('<span style="color: green">Succesfully Request for Support!</span>');
                                     else 
                                         $('#messageSupportAdmin').html('<span style="color: red">Request for support failed</span>');
+                                    customSelectPrompt.style.display = "none";
                                 }
                             });
                         }
