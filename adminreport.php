@@ -474,12 +474,14 @@
                                                             }
                                                             
                                                             $resttime = !empty($resttimeArray) ? max($resttimeArray) : 0;
+                                                            ?><script>console.log('<?=$resttime?>')</script><?php
                                                             
 
                                                             $TravelTimehr = (difftime($record['technician_arrival'], $record['technician_departure'])['h'] <= 24) ?
                                                                                 difftime($record['technician_arrival'], $record['technician_departure'])['h'] : 0;
-                                                            $TravelTimemin = (difftime($record['technician_arrival'], $record['technician_departure'])['m'] <= 24) ?
+                                                            $TravelTimemin = (difftime($record['technician_arrival'], $record['technician_departure'])['h'] <= 24) ?
                                                                                 difftime($record['technician_arrival'], $record['technician_departure'])['m'] : 0; 
+                                                            ?><script>console.log('<?=$TravelTimehr . 'hr' . $TravelTimemin?>')</script><?php
                                                             $totaltravelhr += $TravelTimehr;
                                                             $totaltravelmin += $TravelTimemin;
                                                             if ($totaltravelmin >= 60){
@@ -493,9 +495,9 @@
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter2 ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username'] ?></td>
                                             <td style="text-align: center; white-space: nowrap; vertical-align: middle;"><?= $record['customer_name'] ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($workingtimehr != 0 && $workingtimemin != 0) ? $workingtimehr . 'hrs ' . $workingtimemin . 'mins' : '' ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= (($workingtimehr == 0 && $workingtimemin != 0) || ($workingtimehr != 0 && $workingtimemin == 0) || ($workingtimehr != 0 && $workingtimemin != 0)) ? $workingtimehr . 'hrs ' . $workingtimemin . 'mins' : '' ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($resttime != 0)? $resttime . 'mins': ''?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($TravelTimehr != 0 && $TravelTimemin != 0) ? $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins' : '' ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= (($TravelTimehr == 0 && $TravelTimemin != 0) || ($TravelTimehr != 0 && $TravelTimemin == 0) || ($TravelTimehr != 0 && $TravelTimemin != 0)) ? $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins' : '' ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                         </tr>
@@ -582,7 +584,7 @@
                                             if (previousName !== currentName) {
                                                 if (count > 1) {
                                                     $("#tbody2 tr:eq(" + (index - count) + ") td:eq(1)").attr("rowspan", count);
-                                                    $("#tbody2 tr:eq(" + (index - count) + ") td:eq(5)").attr("rowspan", count);
+                                                    $("#tbody2 tr:eq(" + (index - count) + ") td:eq(4)").attr("rowspan", count);
                                                     $("#tbody2 tr:eq(" + (index - count) + ") td:eq(6)").attr("rowspan", count);
                                                     $("#tbody2 tr:eq(" + (index - count) + ") td:eq(7)").attr("rowspan", count);
 
@@ -598,7 +600,7 @@
                                                 count++;
                                                 
                                                 $(this).find("td:eq(1)").hide();
-                                                $(this).find("td:eq(5)").hide();
+                                                $(this).find("td:eq(4)").hide();
                                                 $(this).find("td:eq(6)").hide();
                                                 $(this).find("td:eq(7)").hide();
 
@@ -607,7 +609,7 @@
                                         
                                         if (count > 1){
                                             $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(1)").attr("rowspan", count);
-                                            $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(5)").attr("rowspan", count);
+                                            $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(4)").attr("rowspan", count);
                                             $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(6)").attr("rowspan", count);
                                             $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(7)").attr("rowspan", count);
                                         }
