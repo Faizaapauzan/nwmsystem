@@ -313,7 +313,7 @@
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username'] ?></td>
                                             <td style="text-align: center; white-space: nowrap; vertical-align: middle;"><?= $record['customer_name'] ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($workingtimehr != 0 && $workingtimemin != 0) ? $workingtimehr . 'hrs ' . $workingtimemin . 'mins' : '' ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $resttime . 'mins'?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($resttime != 0)? $resttime . 'mins': ''?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($TravelTimehr != 0 && $TravelTimemin != 0) ? $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins' : '' ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
