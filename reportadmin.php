@@ -159,20 +159,20 @@
                                     
                                     <tr>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
-                                        <td style="text-align: center; white-space: nowrap; vertical-align: middle;"><?= $row['job_assign']; ?></td>
-                                        <td style="text-align: center; vertical-align: middle;"><?=$formattedUsernames; ?></td>
+                                        <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= strtoupper($row['job_assign']); ?></td>
+                                        <td style='text-align: center; vertical-align: middle;'><pre class="pre"><?= strtoupper($formattedUsernames); ?></pre></td>
                                         <td style="vertical-align: middle;"><?= $row['customer_name']; ?></td>
                                         <td style="vertical-align: middle;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$departure" ?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$arrival" ?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$leaving" ?></td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
-                                            <span class="hours-print"><?php echo($wh != '' && $wm != '') ? $wh . ' hrs ': '';?></span>
-                                            <span class="minutes-print"><?php echo($wh != '' && $wm != '') ? $wm . ' mins ': '';?></span>
+                                        <span class="hours-print"><?php echo(($wh != '' && $wm != '') && ($wh != 0 || $wm != 0)) ? $wh . ' hrs ': '';?></span>
+                                                <span class="minutes-print"><?php echo(($wh != '' && $wm != '') && ($wh != 0 || $wm != 0)) ? $wm . ' mins ': '';?></span>
                                         </td>
                                         <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
-                                            <span class="hours-print"><?php  echo ($th != '' && $tm != '') ? $th . ' hrs ': '';?></span>
-                                            <span class="minutes-print"><?php  echo ($th != '' && $tm != '') ? $tm . ' mins ': '';?></span>
+                                        <span class="hours-print"><?php  echo (($th != '' && $tm != '') && ($th != 0 || $tm != 0)) ? $th . ' hrs ': '';?></span>
+                                                <span class="minutes-print"><?php  echo (($th != '' && $tm != '') && ($th != 0 || $tm != 0)) ? $tm . ' mins ': '';?></span>
                                         </td>
                                     </tr>
                                     
@@ -259,8 +259,7 @@
                                                     }
                                                     mysqli_free_result($query);
                                                 }
-
-                                                $staff_query = mysqli_query($conn, "SELECT * FROM staff_register WHERE staff_position = 'Leader'
+                                                $staff_query = mysqli_query($conn, "SELECT * FROM staff_register WHERE staff_position = 'Leader' and tech_avai = 0
                                                                             ORDER BY username ASC");
 
                                                 foreach($staff_query as $row){
@@ -335,7 +334,7 @@
                                                             $totalworkinghr += 1;
                                                         }
                                                     }
-                                                    if (($totalworkinghr == 0 && $totalworkingmin > 0) || ($totalworkinghr > 0 && $totalworkingmin == 0)){
+                                                    if (($totalworkinghr == 0 && $totalworkingmin > 0) || ($totalworkinghr > 0 && $totalworkingmin == 0) || ($totalworkinghr > 0 && $totalworkingmin > 0)){
                                                         if (($totalworkingmin - $resttime) < 0) {
                                                             $totalworkingmin = 60 + $totalworkingmin - $resttime;
                                                             $totalworkinghr -= 1;
@@ -367,7 +366,8 @@
                                                             var $row = $table2.find("td:contains('<?php echo $row['username']; ?>')").closest("tr");
                                                             if (<?=$totalworkinghr?> != 0 || <?=$totalworkingmin?> != 0){
                                                                 $row.find("td:nth-last-child(2)").text("<?=$totalworkinghr . "hrs " . $totalworkingmin . "mins"?>");
-                                                                $row.find("td:last-child").text("<?=$totaltravelhr . "hrs " . $totaltravelmin . "mins"?>");
+                                                                if (<?=$totaltravelhr?> != 0 || <?=$totaltravelmin?> != 0)
+                                                                    $row.find("td:last-child").text("<?=$totaltravelhr . "hrs " . $totaltravelmin . "mins"?>");
                                                                 if (<?=$totalworkinghr?> < 6){
                                                                     $row.find("td").css("color", "red");
                                                                 }
