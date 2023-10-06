@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="clearfix mb-3">
                     <div class="float-start">
-                        <button type="button" class="btn" style="color: white; background-color:#081d45; border:none"><a href="StoreInOutStock.php" style="text-decoration: none;"><i class="bi bi-arrow-left" style="font-size: 1rem; color:white; font-weight: bold;"></i></a></button>
+                        <a type="button" class="btn" style="color: white; background-color:#081d45; border:none" href="StoreInOutStock.php" style="text-decoration: none;"><i class="bi bi-arrow-left" style="font-size: 1rem; color:white; font-weight: bold;"></i></a>
                     </div>  
                 </div>
 
