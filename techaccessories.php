@@ -118,7 +118,7 @@
                                 <span id="errorMessage"></span>
                             </div>
                             
-                            <input type="hidden" name="inout_id[]" id="inout_id2" class="prime-row-inout-id">
+                            <input type="text" name="inout_id[]" id="inout_id2" class="prime-row-inout-id">
                             
                             <script>
                                 function toggleJobSelect(checkbox) {
@@ -149,9 +149,19 @@
                                     <label for="DateofBirth">Date</label>
                                     <div class="input-group">
                                         <input type="text" id="remark_date2" name="remark_date[]" class="form-control" autocomplete="off" />
-                                        <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal(event, 'remark_date2')"><i class="iconify" data-icon="clarity:cursor-hand-click-line" ></i></button>
+                                        <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal2(event, 'remark_date2')"><i class="iconify" data-icon="clarity:cursor-hand-click-line"></i></button>
                                     </div>
                                 </div>
+
+                                <script type="text/javascript">
+                                    function RemarkDateAsal2(event) {
+                                        event.preventDefault();
+                                        
+                                        fetch("AccessoryHandoverDate.php").then(response => response.text()).then(result => {
+                                            document.getElementById("remark_date2").value = result;
+                                        });
+                                    }
+                                </script>
 
                                 <div class="col-md-6">
                                     <label for="Phone">Quantity</label>
@@ -192,7 +202,7 @@
                                 <span id="errorMessage"></span>
                             </div>
                             
-                            <input type="hidden" name="inout_id[]" id="inout_id2" class="prime-row-inout-id">
+                            <input type="text" name="inout_id[]" id="inout_id2" class="prime-row-inout-id">
                             
                             <script>
                                 function toggleJobSelect(checkbox) {
@@ -209,7 +219,7 @@
                             </script>
                             
                             <div class="row mb-3">
-                                <div class="">
+                                <div class="mb-3">
                                     <label for="">Send To Other Technician</label>
                                     <input type="checkbox" class="enableJobSelect form-check-input border border-dark" onchange="toggleJobSelect(this)" />
                                 </div>
@@ -221,11 +231,21 @@
                                     
                                 <div class="col-sm">
                                     <label for="DateofBirth">Date</label>
-                                    <div style="display: flex; align-items: center;">
-                                        <input type="text" id="remark_date2" name="remark_date[]" class="form-control" autocomplete="off" />
-                                        <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal(event, 'remark_date2')"><i class="iconify" data-icon="clarity:cursor-hand-click-line" ></i></button>
+                                    <div class="input-group">
+                                        <input type="text" id="remark_date" name="remark_date[]" class="form-control" autocomplete="off" />
+                                        <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal(event, 'remark_date')"><i class="iconify" data-icon="clarity:cursor-hand-click-line"></i></button>
                                     </div>
                                 </div>
+
+                                <script type="text/javascript">
+                                    function RemarkDateAsal(event) {
+                                        event.preventDefault();
+                                        
+                                        fetch("AccessoryHandoverDate.php").then(response => response.text()).then(result => {
+                                            document.getElementById("remark_date").value = result;
+                                        });
+                                    }
+                                </script>
                                     
                                 <div class="col-sm-2">
                                     <label for="Phone">Quantity</label>
