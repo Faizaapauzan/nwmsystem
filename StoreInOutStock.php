@@ -604,6 +604,27 @@
             </div>
         </div>
 
+        <!-- Delete Remark -->
+        <div class="modal fade" id="deleteRemarkConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:10000">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <p style="text-align: center;">Are you sure you want to delete this accessory?</p>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteRemarkBtn">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- View Remark -->
         <div class="modal fade" id="RemarkViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -1192,9 +1213,10 @@
                                                          
                                             '<div class="col-sm-3" style="text-align:center;">' +
                                                 '<label for="Quantity">Quantity</label>' +
-                                                '<input type="text" value="' + remark.remark_quantity + '" style="text-align:center; background:none;" class="form-control" oninput="updatequantity(' + entry_idRemark + ', \'' + remark.remark_note + '\', \'' + remark.remark_date + '\', this.value)"></input>'
+                                                '<input type="text" value="' + remark.remark_quantity + '" style="text-align:center; background:none;" class="form-control" oninput="updatequantity(' + entry_idRemark + ', \'' + remark.remark_note + '\', \'' + remark.remark_date + '\', this.value)"></input>' +
                                             '</div>' +
-                                        '</div>'
+                                            '<button type="button" value="'+ remark.remarkid +'" class="deleteRemarkBtn btn btn-sm" style="background-color: #800000; color:white; border:none">Delete</button>' +
+                                        '</div>' + 
                                     '</div>';
                                     
                                 $('#remarkContainer').append(inputGroup);
@@ -1203,6 +1225,41 @@
   
                         }
                         $('#RemarkViewModal').modal('show');
+                    }
+                });
+            });
+            $(document).on('click', '.deleteRemarkBtn', function() {
+                var entry_id = $(this).val();
+                
+                $('#confirmDeleteRemarkBtn').val(entry_id);
+                $('#deleteRemarkConfirmationModal').modal('show'); 
+            });
+
+            $(document).on('click', '#confirmDeleteRemarkBtn', function() {
+                var entry_id = $(this).val();
+                console.log(entry_id);
+                
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {'delete_remark': true,
+                               'entry_id': entry_id},
+                                    
+                    success: function(response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 500) {
+                            alert(res.message);
+                        }
+                        
+                        else {
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.success(res.message);
+                            
+                            setTimeout(function() {
+                                location.reload();
+                            }, 700);
+                        }
                     }
                 });
             });

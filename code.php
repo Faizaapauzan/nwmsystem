@@ -215,6 +215,43 @@
             echo json_encode($res);
         }
     }
+    // ========== Delete Remark ==========
+    if (isset($_POST['delete_remark'])) {
+        $entry_idRemark = mysqli_real_escape_string($conn, $_POST['entry_id']);
+
+        $queryremark = mysqli_query($conn, "SELECT * FROM accessories_remark WHERE remarkid=$entry_idRemark");
+        $row = mysqli_fetch_assoc($queryremark);
+        $inout_id = $row['inout_id'];
+        $quantity = $row['remark_quantity'];
+
+        $queryinout = mysqli_query($conn, "SELECT * FROM accessories_inout WHERE inout_id=$inout_id");
+        $row2 = mysqli_fetch_assoc($queryinout);
+        $curbalance = $row2['balance'];
+
+        $newbalance = $curbalance + $quantity;
+
+        $querynew = mysqli_query($conn, "UPDATE accessories_inout SET balance='$newbalance' WHERE inout_id=$inout_id");
+
+        if ($querynew) {
+            $queryRemark_run = mysqli_query($conn, "DELETE FROM accessories_remark WHERE remarkid='$entry_idRemark'");
+            if($queryRemark_run){
+                $res = ['status' => 200, 'message' => 'Successfully Deleted'];
+    
+                echo json_encode($res);
+            }else {
+                $res = ['status' => 404, 'message' => 'Failed to delete'];
+        
+                echo json_encode($res);
+            }
+
+        } 
+        
+        else {
+            $res = ['status' => 404, 'message' => 'Failed to delete'];
+    
+            echo json_encode($res);
+        }
+    }
 
     // ========== Request ==========
     if (isset($_GET['Request'])) {

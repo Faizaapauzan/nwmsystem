@@ -118,7 +118,7 @@
                                 <span id="errorMessage"></span>
                             </div>
                             
-                            <input type="text" name="inout_id[]" id="inout_id2" class="prime-row-inout-id">
+                            <input type="text" name="inout_id[]" id="inout_id" class="prime-row-inout-id">
                             
                             <script>
                                 function toggleJobSelect(checkbox) {
@@ -340,6 +340,27 @@
             </div>
         </div>
 
+        <!-- Delete Remark -->
+        <div class="modal fade" id="deleteRemarkConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:10000">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <p style="text-align: center;">Are you sure you want to delete this accessory?</p>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteRemarkBtn">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="m-3">
             <div class="table-responsive mb-3">
                 <label for="" class="fw-bold mb-3">Accessory For Job</label>
@@ -472,7 +493,7 @@
                         }
                         
                         else if (res.status == 200) {
-                            $('#inout_id2').val(res.data.inout_id);
+                            $('#inout_id').val(res.data.inout_id);
                             $('#remark_note').val(res.datajob.customer_name);
                             $('#remark_date').val(res.data.remark_date);
                             $('#remark_quatity').val(res.data.remark_quantity);
@@ -635,9 +656,10 @@
 
                                             '<div class="col-sm-3" style="text-align:center;">' +
                                                 '<label for="Quantity">Quantity</label>' +
-                                                '<input type="text" value="' + remark.remark_quantity + '" style="text-align:center; background:none;" class="form-control" Readonly></input>' +
+                                                '<input type="text" value="' + remark.remark_quantity + '" style="text-align:center; background:none;" class="form-control" oninput="updatequantity(' + entry_idRemark + ', \'' + remark.remark_note + '\', \'' + remark.remark_date + '\', this.value)"></input>' + 
                                             '</div>' +
-                                        '</div>'
+                                            '<button type="button" value="'+ remark.remarkid +'" class="deleteRemarkBtn btn btn-sm" style="background-color: #800000; color:white; border:none">Delete</button>' +
+                                        '</div>' +
                                     '</div>';
                                     
                                 $('#remarkContainer').append(inputGroup);
@@ -648,6 +670,72 @@
                     }
                 });
             });
+
+            $(document).on('click', '.deleteRemarkBtn', function() {
+                var entry_id = $(this).val();
+                
+                $('#confirmDeleteRemarkBtn').val(entry_id);
+                $('#deleteRemarkConfirmationModal').modal('show'); 
+            });
+
+            $(document).on('click', '#confirmDeleteRemarkBtn', function() {
+                var entry_id = $(this).val();
+                console.log(entry_id);
+                
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {'delete_remark': true,
+                               'entry_id': entry_id},
+                                    
+                    success: function(response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 500) {
+                            alert(res.message);
+                        }
+                        
+                        else {
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.success(res.message);
+                            
+                            setTimeout(function() {
+                                location.reload();
+                            }, 700);
+                        }
+                    }
+                });
+            });
+
+            function updatequantity(entry_idRemark, remark_note, remark_date, remark_quantity){
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {
+                        update_remark: true,
+                        inout_id:entry_idRemark,
+                        remark_note:remark_note,
+                        remark_date:remark_date,
+                        remark_quantity:remark_quantity
+                    },
+
+                    success: function(response){
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status == 404) {
+                            alert(res.message);
+                        }else if (res.status == 200) {
+
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.success(res.message);
+                            setTimeout(function() {
+                                alertify.closeAll();
+                            }, 2000); // 2000 milliseconds (2 seconds)
+                        }
+                    }
+
+                });
+            }
         </script>
     </body>
 </html>
