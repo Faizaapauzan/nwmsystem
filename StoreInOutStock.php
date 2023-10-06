@@ -1192,7 +1192,7 @@
                                                          
                                             '<div class="col-sm-3" style="text-align:center;">' +
                                                 '<label for="Quantity">Quantity</label>' +
-                                                '<input type="text" value="' + remark.remark_quantity + '" style="text-align:center; background:none;" class="form-control" Readonly></input>' +
+                                                '<input type="text" value="' + remark.remark_quantity + '" style="text-align:center; background:none;" class="form-control" oninput="updatequantity(' + entry_idRemark + ', \'' + remark.remark_note + '\', \'' + remark.remark_date + '\', this.value)"></input>'
                                             '</div>' +
                                         '</div>'
                                     '</div>';
@@ -1206,6 +1206,37 @@
                     }
                 });
             });
+
+            function updatequantity(entry_idRemark, remark_note, remark_date, remark_quantity){
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {
+                        update_remark: true,
+                        inout_id:entry_idRemark,
+                        remark_note:remark_note,
+                        remark_date:remark_date,
+                        remark_quantity:remark_quantity
+                    },
+
+                    success: function(response){
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status == 404) {
+                            alert(res.message);
+                        }else if (res.status == 200) {
+
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.success(res.message);
+                            setTimeout(function() {
+                                alertify.closeAll();
+                            }, 2000); // 2000 milliseconds (2 seconds)
+                        }
+                    }
+
+                });
+            }
+            
         
             // <!-- Request -->
             $(document).on('click', '.requestBtn', function() {

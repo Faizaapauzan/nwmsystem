@@ -368,5 +368,38 @@
 
 
     }
+
+    if (isset($_POST['update_remark'])) {
+        $inoutid = mysqli_real_escape_string($conn, $_POST['inout_id']);
+        $remark_note = mysqli_real_escape_string($conn, $_POST['remark_note']);
+        $remark_date = mysqli_real_escape_string($conn, $_POST['remark_date']);
+        $remark_quantity = mysqli_real_escape_string($conn, $_POST['remark_quantity']);
+
+        $query_run = mysqli_query($conn, "SELECT * FROM accessories_remark WHERE inout_id='$inoutid' and remark_note='$remark_note' and remark_date='$remark_date'");
+        $result = mysqli_fetch_assoc($query_run);
+        $curquantity = $result['remark_quantity'];
+
+        $query2_run = mysqli_query($conn, "SELECT * FROM accessories_inout WHERE inout_id='$inoutid'");
+        $result = mysqli_fetch_assoc($query2_run);
+        $curbalance = $result['balance'];
+
+        $newbalance = $curbalance + $curquantity - $remark_quantity;
+
+
+        if (mysqli_query($conn, "UPDATE accessories_inout set balance='$newbalance' WHERE inout_id='$inoutid'")) {
+            $query3_run = mysqli_query($conn, "UPDATE accessories_remark set remark_quantity='$remark_quantity' WHERE inout_id='$inoutid' and remark_note='$remark_note' and remark_date='$remark_date'");
+            if ($query3_run)
+                $res = ['status' => 200, 'message' => 'Successfully Updated'];
+            else
+                $res = ['status' => 404, 'message' => 'Failed to update'];
+        } 
+        
+        else {
+            $res = ['status' => 404, 'message' => 'Failed to update'];
+        }
+    
+        echo json_encode($res);
+        return;
+    }
     
 ?>
