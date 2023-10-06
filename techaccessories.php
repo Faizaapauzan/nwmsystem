@@ -236,7 +236,7 @@
                                         <button type="button" class="btn btn-primary" style="background-color: #081d45; border:none;" onclick="RemarkDateAsal(event, 'remark_date')"><i class="iconify" data-icon="clarity:cursor-hand-click-line"></i></button>
                                     </div>
                                 </div>
-
+                                
                                 <script type="text/javascript">
                                     function RemarkDateAsal(event) {
                                         event.preventDefault();
@@ -472,8 +472,8 @@
                         }
                         
                         else if (res.status == 200) {
-                            $('#inout_id').val(res.data.inout_id);
-                            $('#remark_note').val(res.data.remark_note);
+                            $('#inout_id2').val(res.data.inout_id);
+                            $('#remark_note').val(res.datajob.customer_name);
                             $('#remark_date').val(res.data.remark_date);
                             $('#remark_quatity').val(res.data.remark_quantity);
                             
@@ -558,6 +558,9 @@
                 
                 var formData = new FormData(this);
                 formData.append("update_entry2", true);
+                for (d of formData.entries()){
+                    console.log(d);
+                }
                 
                 $.ajax({
                     type: "POST",

@@ -179,8 +179,12 @@
     
         if (mysqli_num_rows($query_run) == 1) {
             $result = mysqli_fetch_assoc($query_run);
+            $jobregister_id = $result['jobregister_id'];
+
+            $query2_run = mysqli_query($conn, "SELECT * FROM job_register WHERE jobregister_id='$jobregister_id'");
+            $result2 = mysqli_fetch_assoc($query2_run);
     
-            $res = ['status' => 200, 'message' => 'Successfully fetch by id', 'data' => $result];
+            $res = ['status' => 200, 'message' => 'Successfully fetch by id', 'data' => $result, 'datajob' => $result2];
     
             echo json_encode($res);
         } 
