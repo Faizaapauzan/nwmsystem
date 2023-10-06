@@ -1168,10 +1168,11 @@
                     
                     success: function(response) {
                         var res = jQuery.parseJSON(response);
+                        document.getElementById("inout_idremark").value = entry_idRemark;
                         
                         if (res.status == 200) {
                             var remarks = res.data;
-                            document.getElementById("inout_idremark").value = entry_idRemark;
+                            
                             
                             $('#remarkContainer').empty();
                             
