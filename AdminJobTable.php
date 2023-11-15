@@ -1,3 +1,20 @@
+<?php
+    
+    session_start();
+    
+    if (session_status() == PHP_SESSION_NONE) {
+        header("location: index.php?error=session");
+    }
+    
+    if (!isset($_SESSION['username'])) {
+        header("location: index.php?error=login");
+    } 
+    
+    elseif ($_SESSION['staff_position'] != 'Admin' && $_SESSION['staff_position'] != 'Manager') {
+        header("location: index.php?error=permission");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,12 +25,12 @@
         <title>Job Of The Day</title>
 
         <!--========== CSS ==========-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/styles.css">
 
         <!--========== JS ==========-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <!--========== BOX ICONS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -229,15 +246,20 @@
                         <h4>Job Of The Day</h4>
                     </div>
                     
-                    <div class="card-body">
+                    <div class="card-body" id="livesearch">
+                        <!-- Search function -->
+                        <input type="text" id="myInput" placeholder="Search" class="form-control mb-3">
+
                         <!-- Incomplete Job -->
                         <div class="table-responsive">
                             <?php
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE job_status = 'Incomplete' 
-                                           AND (job_cancel = '' OR job_cancel IS NULL)";
+                                $numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
+                                           AND (staff_position != 'Storekeeper')
+                                           AND job_status = 'Incomplete' 
+                                           AND (job_cancel IS NULL OR job_cancel = '')";
                                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 
@@ -267,7 +289,10 @@
                                         
                                         include 'dbconnect.php';
                                         
-                                        $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Incomplete' AND (job_cancel = '' OR job_cancel IS NULL)
+                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
+                                                                 AND (staff_position != 'Storekeeper')
+                                                                 AND job_status = 'Incomplete' 
+                                                                 AND (job_cancel IS NULL OR job_cancel = '')
                                                                  ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC");
                     
                                         $counter = 1;
@@ -298,8 +323,10 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE job_status = 'Pending'
-                                           AND (job_cancel = '' OR job_cancel IS NULL)";
+                                $numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
+                                           AND (staff_position != 'Storekeeper')
+                                           AND job_status = 'Pending' 
+                                           AND (job_cancel IS NULL OR job_cancel = '')";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 
@@ -329,7 +356,10 @@
                                         
                                         include 'dbconnect.php';
                                         
-                                        $results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Pending' AND (job_cancel = '' OR job_cancel IS NULL)
+                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
+                                                                 AND (staff_position != 'Storekeeper') 
+                                                                 AND job_status = 'Pending' 
+                                                                 AND (job_cancel IS NULL OR job_cancel = '')
                                                                  ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC");
                     
                                         $counter = 1;
@@ -360,9 +390,9 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
-                                           AND (job_cancel IS NULL OR job_cancel = ' ')
-                                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing');";
+                                $numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
+                                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Ready' OR job_status = 'Doing') 
+                                           AND (job_cancel = '' OR job_cancel IS NULL)";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -390,9 +420,9 @@
                                     <?php
                                         include 'dbconnect.php';
 
-                                        $results = $conn->query("SELECT * FROM job_register WHERE job_assign IS NOT NULL AND TRIM(job_assign) != ''
-                                                                 AND (job_cancel IS NULL OR job_cancel = '')
-                                                                 AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing')
+                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
+                                                                 AND (job_status = '' OR job_status IS NULL OR job_status = 'Ready' OR job_status = 'Doing') 
+                                                                 AND (job_cancel = '' OR job_cancel IS NULL)
                                                                  ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
 
                                         $counter = 1;
@@ -421,34 +451,10 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE 
-                                            (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
-                                                OR
-                                            (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                                                OR
-                                            (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
-                                                OR
-                                            (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
-                                                OR
-                                            (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
-                                                OR
-                                            (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                                                OR
-                                            (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
-                                                OR
-                                            (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
-                                                OR
-                                            (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                                                OR
-                                            (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                                                OR
-                                            (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
-                                                OR
-                                            (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
-                                                OR
-                                            (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
-                                                OR
-                                            (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL)";
+                                $numRow = "SELECT * FROM job_register WHERE (job_assign ='' OR job_assign IS NULL)
+                                           AND (staff_position != 'Storekeeper' OR staff_position = '' OR staff_position IS NULL) 
+                                           AND (job_status ='' OR job_status IS NULL OR job_status ='Ready')
+                                           AND (job_cancel IS NULL OR job_cancel = '')";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -476,34 +482,11 @@
                                         
                                         include 'dbconnect.php';
                                         
-                                        $results = $conn->query("SELECT * FROM job_register WHERE
-                                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
-                                                                    OR
-                                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                                                                    OR
-                                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
-                                                                    OR
-                                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
-                                                                    OR
-                                                                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
-                                                                    OR
-                                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                                                                    OR
-                                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
-                                                                    OR
-                                                                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
-                                                                    OR
-                                                                (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
-                                                                    OR
-                                                                (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
-                                                                    OR
-                                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
-                                                                    OR
-                                                                (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel IS NULL)
-                                                                    OR
-                                                                (job_assign = '' AND job_status = 'Ready' AND job_cancel = '')
-                                                                    OR
-                                                                (job_assign IS NULL AND job_status = 'Ready' AND job_cancel IS NULL) ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
+                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_assign ='' OR job_assign IS NULL)
+                                                                 AND (staff_position != 'Storekeeper' OR staff_position = '' OR staff_position IS NULL) 
+                                                                 AND (job_status ='' OR job_status IS NULL OR job_status ='Ready')
+                                                                 AND (job_cancel IS NULL OR job_cancel = '')
+                                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
                     
                                         $counter = 1;
 
@@ -523,6 +506,36 @@
                             </table>
                         </div>
                         <!-- End of Unplan Job -->
+
+                        <!-- Search Function -->
+                        <script>
+                            $(document).ready(function() {
+                                $("#myInput").on("keyup", function() {
+                                    var value = $(this).val().toLowerCase();
+                                    
+                                    $("#livesearch .table-responsive").each(function() {
+                                        var table = $(this).find("table tbody");
+                                        var hasMatch = false;
+                                        
+                                        table.find("tr").each(function() {
+                                            var rowText = $(this).text().toLowerCase();
+                                            
+                                            if (rowText.indexOf(value) > -1) {
+                                                hasMatch = true;
+                                                $(this).show();
+                                            } 
+                                            
+                                            else {
+                                                $(this).hide();
+                                            }
+                                        });
+                                        
+                                        $(this).toggle(hasMatch);
+                                    });
+                                });
+                            });
+                        </script>
+                        <!-- End of Search Function -->
 
                         <!-- Job Info Popup Modal -->
                         <div class="modal fade" id="jobInfoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

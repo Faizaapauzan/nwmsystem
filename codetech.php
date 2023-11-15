@@ -222,4 +222,19 @@
             echo json_encode($res);
         }
     }
+    if (isset($_POST['statusupdate'])){
+        $jobregister_id = mysqli_real_escape_string($conn, $_POST['jobregister_id']);
+        $job_status = mysqli_real_escape_string($conn, $_POST['job_status']);
+        $reason = mysqli_real_escape_string($conn, $_POST['reason']);
+
+        $query_run = mysqli_query($conn, "UPDATE job_register set job_status='$job_status', reason='$reason' WHERE jobregister_id='$jobregister_id'");
+        if ($query_run){
+            $res = ['status' => 200];
+        }
+        else{
+            $res = ['status' => 404];
+        }
+        echo json_encode($res);
+
+    }
 ?>

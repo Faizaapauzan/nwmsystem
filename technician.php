@@ -1,983 +1,3706 @@
 <?php
-session_start();
-// cek apakah yang mengakses halaman ini sudah login
-	if($_SESSION['staff_position']=="" AND $_SESSION['technician_rank']=="" ){
+
+	session_start();
+
+    include "dbconnect.php";
+	
+	if($_SESSION['staff_position']=="" AND $_SESSION['technician_rank']=="" ) {
 		header("location:index.php?error");
 	}
 	
-	if(!isset($_SESSION['username']))
-	{
+	if(!isset($_SESSION['username'])) {
 		header("location:index.php?error");
 	}
-	
-	elseif($_SESSION['staff_position']== 'Leader')
-	{
+
+    elseif (isset($_SESSION["username"])) {
+        $techName = $_SESSION["username"];
+        
+        $query_run = mysqli_query($conn, "SELECT * FROM staff_register WHERE username='$techName'");
+        
+        $row = mysqli_fetch_assoc($query_run);
+        $username = $row["username"];
+
+        echo "<script>var usernameValue = '" . $username . "';</script>";
+    }
+
+	elseif($_SESSION['staff_position']== 'Leader') {
 
 	}
 	
-	else
-	{
+	else {
 		header("location:index.php?error");
 	}
+
 ?>
 
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
 
-<html>
+        <title>Technician</title>
 
-<head>
-	<meta name="keywords" content=""/>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Technician</title>
-	<link rel = "icon" href = "https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type = "image/x-icon">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <link href="css/technicianmain.css" rel="stylesheet" />
-    <!-- Script -->
-	  
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+        <link rel="stylesheet" href="css/technicianStyle.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>   
+    </head>
+    
+    <body>
+        <!--========== Header ==========-->
+        <header>
+            <nav class="navbar navbar-light position-fixed top-0 w-100" style="background-color: #C0C0C0; z-index: 2;">
+                <ul class="nav start-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="iconify" data-icon="dashicons:welcome-widgets-menus" style="font-size:200%; color: #081d45;"></i></a>
+                        <ul class="dropdown-menu ms-3">
+                            <li><a class="dropdown-item" href="techattendance.php">Attendance</a></li>
+                            <li><a class="dropdown-item" href="techresthour.php">Rest Hour</a></li>
+                            <li><a class="dropdown-item" href="technicianLeave.php">Leave</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="jobregistertechnician.php">Job Register</a></li>
+                            <!-- <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="techaccessories.php">Accessory</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
 
-    <!-- Select2 JS --> 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <!--Boxicons link -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/cd421cdcf3.js" crossorigin="anonymous"></script>
-	<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-</head>
+                <nav class="nav ms-auto">
+                    <span class="fw-bold">Hi <?=$username?>!</span>
+                </nav>
+                
+                <nav class="nav ms-auto">
+                    <a class="nav-link" href="logout.php"><i class="iconify" data-icon="heroicons-outline:logout" style="font-size:200%; color: #081d45;"></i></a>
+                </nav>
+            </nav>            
+        </header>
+        
+        <!--========== Content ==========-->
+        <div class="container p-3" style="margin-top: 70px; margin-bottom: 100px;">
+            <!-- Todo -->
+            <div class="Box card" style="margin-bottom: 30px;">
+                <div class="card-body">
+                    <div class="clearfix mb-2">
+                        <div class="float-start"><h6 class="fw-bold" style="color: #081d45;">Todo</h6></div>
+						<?php
+							
+							include 'dbconnect.php';
+							
+							$numRow = "SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}'
+									   AND (job_status = '' OR job_status IS NULL OR job_status = 'Ready') 
+									   AND (job_cancel = '' OR job_cancel IS NULL)
+									   ORDER BY jobregisterlastmodify_at DESC";
 
-
-<body>
-	
-	<nav class="navbar1">
-		<div class="wrapper">
-			<ul class="main-nav" id="js-menu">
-				<div class="icons" style="flex: auto; display: inline-flex;">
-				<div class="dropdown1">
-					<a class="nav1-links"><i class="iconify" data-icon="mdi:calendar-clock" style="font-size:37px;"></i></a>
-					<div class="dropdown-content1">
-						<a href="techattendance.php">Attendance</a>
-						<a href="techresthour.php">Rest Hour</a>
-					</div>
-				</div>
-				&nbsp;&nbsp;&nbsp;
-				<div class="dropdown1">
-					<a class="icon2"><i class="iconify" data-icon="mdi:application-import" style="font-size:37px;"></i></a>
-					<div class="dropdown-content1">
-						<a href="jobregistertechnician.php">Job Register</a>
-						<a href="techaccessories.php">Accessories</a>
-					</div>
-				</div>
-				</div>
-			</ul>
-			
-			<!-- AVAILABLE UNAVAILABLE BUTTON -->
-			<!-- <div>
-				<?php
-					include 'dbconnect.php';
-					$query = "SELECT * FROM staff_register WHERE username ='{$_SESSION['username']}'";
-					$data = mysqli_query($conn, $query);
-					while ($row = mysqli_fetch_array($data)) {
-				?>
-					<?php
-						if ($row['tech_avai']==1){
-							echo '<p><a href="status.php?staffregister_id='.$row['staffregister_id'].'&tech_avai=0" class="badge badge-danger" style="font-size:20px;">
-									  Unvailable</a></p>';
-						}
-						else {
-							echo '<p><a href="status.php?staffregister_id='.$row['staffregister_id'].'&tech_avai=1" class="badge badge-success" style="font-size:20px;">
-									  Available</a></p>';
-						}
-					?>
-				<?php } ?>
-			</div> -->
-			<!-- AVAILABLE UNAVAILABLE BUTTON -->
-			<div class="ul2">
-				<a href="logout.php" class="nav1-links"><i class="iconify" data-icon="icon-park:logout" style="font-size:32px;"></i></a>
-			</div>
-
-		</div>
-	</nav>
-
-	<nav class="nav">
-		<div class="nav__link nav__link dropdown">
-			<i class="material-icons">list_alt</i>
-			<span class="nav__text">Job Listing</span>
-			<div class="dropdown-content">
-				<a href="assignedjob.php">Assigned Job</a>
-				<a href="unassignedjob.php">Unassigned Job</a>
-			</div>
-		</div>
-		
-		<a href="pendingjoblistst.php" class="nav__link">
-			<i class="material-icons">pending_actions</i>
-			<span class="nav__text">Pending</span>
-		</a>
-		
-		<a href="technician.php" class="nav__link">
-			<i class="material-icons">home</i>
-			<span class="nav__text">Home</span>
-		</a>
-		
-		<a href="incompletejoblistst.php" class="nav__link">
-			<i class="material-icons">do_not_disturb_on</i>
-			<span class="nav__text">Incomplete</span>
-		</a>
-		
-		<a href="completejoblistst.php" class="nav__link">
-			<i class="material-icons">check_circle</i>
-			<span class="nav__text">Complete</span>
-		</a>
-	</nav>
-	
-	<!--TODO-->
-		<div class="container">
-			<div style="text-align: center; font-size: 35px; font-weight: bold; margin-top: -29px;" class="welcome">Welcome <?php echo $_SESSION['username'] ?>!</div>
-			<div class="column" >
-				<p class="column-title"id="doing" >Todo</p>
-					<?php
-						include 'dbconnect.php';
-						
-						$query = "SELECT * FROM job_register
-						WHERE
-						job_assign ='{$_SESSION['username']}' AND  job_status = '' AND job_cancel = ''
-						OR
-						job_assign ='{$_SESSION['username']}' AND  job_status IS NULL AND job_cancel = ''
-						OR
-						job_assign ='{$_SESSION['username']}' AND  job_status IS NULL AND job_cancel IS NULL
-						OR
-						job_assign ='{$_SESSION['username']}' AND  job_status = '' AND job_cancel IS NULL
-						OR
-						job_assign ='{$_SESSION['username']}' AND  job_status = 'Ready' AND job_cancel IS NULL
-						ORDER BY jobregisterlastmodify_at
-						DESC LIMIT 50";
-						$result = mysqli_query($conn, $query);
-						
-						$customer_name = '';
-						while ($row = mysqli_fetch_assoc($result)) {
-							// only show artist when it's an other artist then the previous one
-							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate' data-id='".$row['jobregister_id']."' data-customer_name='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-toggle='modal' data-target='#myModalupdate'>
-										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
-									  </div>";
-								$customer_name = $row['customer_name'];
-							}
-							    echo "<nav id='mainNav'>
-								      <div class='cards'>
-									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-customer_name='".$row['customer_name']."' data-toggle='modal' data-target='#myModal'>
-									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
-									  	<!-- Modal-->
-										<ul class='b' id='draged'>
-											<strong text-align='center'>".$row['job_priority']."</strong>
-											<li>".$row['job_order_number']."</li>
-											<li>".$row['job_description']."</li>
-											<li>".$row['machine_type']."</li>
-											<li>".$row['machine_name']."</li>
-											<li>".$row['serialnumber']."</li>
-											<p style='color:red;'>".$row['reason']."</p>
-										</ul>
-										<div class='supports'  id='support'>
-											".$row['support']."
-										</div>
-										</div>
-										</div>
-									  </nav>";
-						}
-					?>
-					
-			</div>
-				
-	<!--DOING-->				
-				
-			<div class="column">
-				<p class="column-title"id="doing">Doing</p>
-					<?php
-						include 'dbconnect.php';
-						
-						$query = "SELECT * FROM job_register
-						WHERE
-						(job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing' AND job_cancel IS NULL)
-						OR
-						(job_assign ='{$_SESSION['username']}' AND  job_status = 'Doing' AND job_cancel = '')
-						ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
-						$result = mysqli_query($conn, $query);
-						
-						$customer_name = '';
-						while ($row = mysqli_fetch_assoc($result)) {
-							// only show artist when it's an other artist then the previous one
-							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate'>
-										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
-									  </div>";
-								$customer_name = $row['customer_name'];
+                            $numRow_run = mysqli_query($conn, $numRow);
+                                    
+                            if ($row_Total = mysqli_num_rows($numRow_run)) {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #081d45;">Total Job: '. $row_Total .'</h6></div> ';
 							}
 							
-								echo "<nav id='mainNav'>
-									  <div class='cards' style='display: flex; align-items: stretch;''>
-									  <div style='width: 90%;' class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-type_id='".$row['type_id']."' data-customer_name='".$row['customer_name']."' data-toggle='modal' data-target='#myModal'>
-									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
-									  	<!-- Modal-->
-										<ul class='b' id='draged'>
-											<strong text-align='center'>".$row['job_priority']."</strong>
-											<li>".$row['job_order_number']."</li>
-											<li>".$row['job_description']."</li>
-											<li>".$row['machine_type']."</li>
-											<li>".$row['machine_name']."</li>
-											<li>".$row['serialnumber']."</li>
-										</ul>
-										<div class='supports'  id='support'>
-											".$row['support']."
-										</div>
-										<div class='status'  id='doingStatus'>
-											".$row['job_status']."
-										</div>
-									  </div>
-									  <div class='cardsupport' data-id='".$row['jobregister_id']."' data-toggle='modal' data-target='#myModalsupport'>
-									  <button type='button' style='background-color: firebrick;color: #f8f9fa; height: -webkit-fill-available;'' class='btn btn-light text-left font-weight-bold font-color-black'>SUPPORT</button>
-									  </div>
-									  </nav>";
-						}
-					?>
-			</div>
-			
-	<!--PENDING-->
-
-			<div class="column">
-				<p class="column-title"id="pending" >Pending</p>
+							else {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #081d45;">No Record</h6></div>';
+							}
+                        ?>
+                    </div>
+                    
 					<?php
+						
 						include 'dbconnect.php';
 						
-						$query = "SELECT * FROM job_register
-						WHERE
-						job_assign ='{$_SESSION['username']}' AND  job_status = 'Pending'
-						ORDER BY jobregisterlastmodify_at
-						DESC LIMIT 50";
-						$result = mysqli_query($conn, $query);
-						
-						$customer_name = '';
-						while ($row = mysqli_fetch_assoc($result)) {
-							// only show artist when it's an other artist then the previous one
-							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate'>
-										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
-									  </div>";
-								$customer_name = $row['customer_name'];
-							}						
-								echo "<nav id='mainNav'>
-								      <div class='cards'>
-									  <div class='card' id='notYetStatus' data-id='".$row['jobregister_id']."' data-customer_name='".$row['customer_name']."' data-requested_date='".$row['requested_date']."' data-toggle='modal' data-target='#myModal'>
-									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
-									  	<!-- Modal-->
-										<ul class='b' id='draged'>
-											<strong text-align='center'>".$row['job_priority']."</strong>
-											<li>".$row['job_order_number']."</li>
-											<li>".$row['job_description']."</li>
-											<li>".$row['machine_type']."</li>
-											<li>".$row['machine_name']."</li>
-											<li>".$row['serialnumber']."</li>
-											<p style='color:red;'>".$row['reason']."</p>
-										</ul>
-										<div class='supports'  id='support'>
-											".$row['support']."
-										</div>
-										<div class='status'  id='pendingStatus'>
-											".$row['job_status']."
-										</div>
-									  </div>
-									  </div>
-									  </nav>";
-						}
-					?>
-			</div>
+						$results = $conn->query("SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}'
+                                                 AND (job_status = '' OR job_status IS NULL OR job_status = 'Ready') 
+                                                 AND (job_cancel = '' OR job_cancel IS NULL)
+                                                 ORDER BY jobregisterlastmodify_at DESC");
+                                        
+                    	while ($row = $results->fetch_assoc()) {
+                    ?>
+                    <div class="Job card mb-3" data-bs-toggle="modal" data-bs-target="#popUpModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>" data-jobAssign="<?php echo $row['job_assign']; ?>">
+                        <div class="card-header">
+                            <h6 class="card-title fw-bold m-2"><?php echo $row['customer_name'] ?> [<?php echo $row['customer_grade'] ?>]</h6>
+                        </div>
 
-				<!-- Support Modal -->
-			<div id="myModalsupport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
-				<div role="document" class="modal-dialog">
-					<div style="padding-bottom: 26px;" class="modal-content">
-					<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-							<h6 class="font-weight-bold">Support</h6>
-
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" style="font-size:20px;"></i></button>
-						<!--TOP BAR-->
-						<div class="line">
-
-						</div>
-						
-						<br>
-						
-						<div class="modal-body p-0">
-						
-								<form action="ajaxtechniciansupport.php" method="post">
-									<div class="techsupport-details">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.cardsupport').click(function() {
-											var jobregister_id = $(this).data('id');
-											// AJAX request
-											$.ajax({
-												url:'ajaxtechniciansupport.php',
-												type:'post',
-												data: {jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.techsupport-details').html(response);
-													// Display Modal
-													$('#myModalsupport').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
-
-			
-		
-			
-			<!-- Job info modal -->
-			<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
-				<div role="document" class="modal-dialog">
-					<div style="padding-bottom: 26px;" class="modal-content">
-					<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-						<div class="tabs active" id="tab01">
-						<h6 class="font-weight-bold">Update</h6>
-						</div>
-
-						<div class="tabs" id="tab02">
-							<h6 class="text-muted">Job Info</h6>
-						</div>
-						
-						<div class="tabs" id="tab03">
-							<h6 class="text-muted">Job Assign</h6>
-						</div>
-						
-						<div class="tabs" id="tab04">
-							<h6 class="text-muted">Accessories</h6>
-						</div>
-						
-						<div class="tabs" id="tab05">
-							<h6 class="text-muted">Photo</h6>
-						</div>
-						
-						<div class="tabs" id="tab06">
-							<h6 class="text-muted">Video</h6>
-						</div>
-						
-						<div class="tabs" id="tab07">
-							<h6 class="text-muted">Job Status</h6>
-						</div>
-						
-						<div class="tabs" id="tab08">
-							<h6 class="text-muted">Report</h6>
-						</div>
-						
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" style="font-size:20px;"></i></button>
-						
-						<!--TOP BAR-->
-						<div class="line">
-
-						</div>
-						
-						<div class="line"></div>
-							<br>
-						<div class="modal-body p-0">
-							<!--JOB UPDATE-->
-							<fieldset class="show" id="tab011">
-								<form action="ajaxtechupdate.php" method="post">
-									<div class="techupdate-details">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card').click(function() {
-											var jobregister_id = $(this).data('id');
-											
-											// AJAX request
-											$.ajax({
-												url:'ajaxtechupdate.php',
-												type:'post',
-												data:{jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.techupdate-details').html(response);
-													// Display Modal
-													$('#myModal').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-							</fieldset>
-
-							<!--Job info-->
+                        <div class="card-body">
+                            <ul>
+                                <li><?php echo $row['job_priority'] ?></li>
+                                <li><?php echo $row['job_order_number'] ?></li>
+                                <li><?php echo $row['job_description'] ?></li>
+                                <li><?php echo $row['machine_brand'] ?></li>
+                                <li><?php echo $row['machine_type'] ?></li>
+                                <li><?php echo $row['machine_name'] ?></li>
+                                <li><?php echo $row['serialnumber'] ?></li>
+								<?php
+									if($row['reason'] != "" || $row['reason'] != NULL) {
+										echo'<li class="fw-bold" style="color: red;">'.$row['reason'].'</li>';
+									}
+                            	?>
+                            </ul>
 							
-							<fieldset id="tab021">
-								<form action="" method="post">
-									<div class="tech-details">
+							<?php
+								if($row['support'] != "" || $row['support'] != NULL) {
+									echo'<div class="d-grid justify-content-end">
+										 	<h6 class="badge bg-secondary text-wrap fw-bold ms-3" style="font-size: 0.7rem; width: 5rem;">'.$row['support'].'</h6>
+                            			 </div>';
+								}
+                            ?>
+                        </div>
+                    </div>
+					<?php } ?>
+                </div>
+            </div>
 
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card').click(function() {
-											var jobregister_id = $(this).data('id');
-											var type_id = $(this).data('type_id');
-											var customer_name = $(this).data('customer_name');
-											// AJAX request
-											$.ajax({
-												url: 'ajaxtechnician.php',
-												type: 'post',
-												data: {jobregister_id: jobregister_id,
-															  type_id: type_id,
-															  customer_name: customer_name},
-												success: function(response) {
-													// Add response in Modal body
-													$('.tech-details').html(response);
-													// Display Modal
-													$('#myModal').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-
-							</fieldset>
+            <!-- Doing -->
+            <div class="Box card" style="margin-bottom: 30px;">
+                <div class="card-body">
+                    <div class="clearfix mb-2">
+                        <div class="float-start"><h6 class="fw-bold" style="color: #228B22;">Doing</h6></div>
+						<?php
 							
-
+							include 'dbconnect.php';
 							
-							<!--Job assign-->
-							
-							<fieldset id="tab031">
-								<form action="jobassignnd.php" method="post">
-									<div class="remark-details">
+							$numRow = "SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}' 
+							           AND job_status = 'Doing' 
+									   AND (job_cancel IS NULL OR job_cancel = '')
+									   ORDER BY jobregisterlastmodify_at DESC";
 
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card').click(function() {
-											var jobregister_id = $(this).data('id');
-											// AJAX request
-											$.ajax({
-												url:'jobassignnd.php',
-												type:'post',
-												data: {jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.remark-details').html(response);
-													// Display Modal
-													$('#myModal').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-
-							</fieldset>
-							
-							<!--ACCESSORIES-->
-							
-							<fieldset id="tab041">
-								<form action="ajaxtabaccessoriestech.php" method="post">
-									<div class="acc-details">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card').click(function() {
-											var jobregister_id = $(this).data('id');
-											// AJAX request
-											$.ajax({
-												url: 'ajaxtabaccessoriestech.php',
-												type: 'post',
-												data: {jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.acc-details').html(response);
-													// Display Modal
-													$('#myModal').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-
-							</fieldset>
-							
-							<!--PHOTOS-->
-							
-							<fieldset id="tab051">
-								<form action="ajaxtechnicianphoto.php" method="post">
-									<div class="photo-details">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card').click(function() {
-											var jobregister_id = $(this).data('id');
-											// AJAX request
-											$.ajax({
-												url:'ajaxtechnicianphoto.php',
-												type:'post',
-												data:{jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.photo-details').html(response);
-													// Display Modal
-													$('#myModal').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-
-							</fieldset>
-							
-							<!--Video-->
-							
-							<fieldset id="tab061">
-								<form action="ajaxtechnicianvideo.php" method="post">
-									<div class="video-details">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card').click(function() {
-											var jobregister_id = $(this).data('id');
-											// AJAX request
-											$.ajax({
-												url:'ajaxtechnicianvideo.php',
-												type:'post',
-												data: {jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.video-details').html(response);
-													// Display Modal
-													$('#myModal').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-
-							</fieldset>
-							
-							<!--JOB STATUS-->
-							
-							<fieldset id="tab071">
-								<form action="ajaxtechjobstatus.php" method="post">
-									<div class="techjobstatus-details">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card').click(function() {
-											var jobregister_id = $(this).data('id');
-											// AJAX request
-											$.ajax({
-												url: 'ajaxtechjobstatus.php',
-												type: 'post',
-												data: {jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.techjobstatus-details').html(response);
-													// Display Modal
-													$('#myModal').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-
-							</fieldset>
-							
-							<!--REPORT-->
-							
-							<fieldset id="tab081">
-								<form action="ajaxreport.php" method="post">
-									<div class="report-details">
-
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card').click(function() {
-											var jobregister_id = $(this).data('id');
-											// AJAX request
-											$.ajax({
-												url: 'ajaxreport.php',
-												type: 'post',
-												data: {jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.report-details').html(response);
-													// Display Modal
-													$('#myModal').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-								
-							</fieldset>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
-			
-	<!-- Completed Job -->
-	
-			<div class="column">
-				<p class="column-title"id="done">Completed</p>
-					<?php
-						include 'dbconnect.php';
-						
-						$query = "SELECT * FROM job_register
-						WHERE job_assign ='{$_SESSION['username']}' AND  job_status = 'Completed'
-						ORDER BY jobregisterlastmodify_at DESC LIMIT 50";
-						$result = mysqli_query($conn, $query);
-						
-						$customer_name = '';
-						while ($row = mysqli_fetch_assoc($result)) {
-							// only show artist when it's an other artist then the previous one
-							if ($row['customer_name'] != $customer_name){
-								echo "<div class='cardupdate-complete'>
-										<button id='navToggle' class='navbar-toggle'>".$row['customer_name']." [".$row['customer_grade']."]</button>
-							  		 </div>";
-								$customer_name = $row['customer_name'];
+                            $numRow_run = mysqli_query($conn, $numRow);
+                                    
+                            if ($row_Total = mysqli_num_rows($numRow_run)) {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #228B22;">Total Job: '. $row_Total .'</h6></div> ';
 							}
 							
-								echo "<nav id='mainNav'>
-									  <div class='cards'>
-									  <div class='card-complete' id='notYetStatus' data-id-complete='".$row['jobregister_id']."' data-toggle='modal' data-target='#myModal-completed'>
-									  <button type='button' class='btn btn-light text-left font-weight-bold font-color-black'>
-									  	<!-- Modal-->
-										<ul class='b' id='draged'>
-											<strong text-align='center'>".$row['job_priority']."</strong>
-											<li>".$row['job_order_number']."</li>
-											<li>".$row['job_description']."</li>
-											<li>".$row['machine_type']."</li>
-											<li>".$row['machine_name']."</li>
-											<li>".$row['serialnumber']."</li>
-										</ul>
-									  <div class='supports'  id='support'>
-									  	".$row['support']."
-									  </div>
-									  <div class='status'  id='completedStatus'>
-									  	".$row['job_status']."
-									  </div>
-									  </div>
-									  </div>
-									  </nav>";
-						}
-					?>
-			</div>
-		</div>
-
-		
-	
-			<!-- Completed modal -->
-			<div id="myModal-completed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal text-left">
-				<div role="document" class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header row d-flex justify-content-between mx-1 mx-sm-3 mb-0 pb-0 border-0">
-							<div class="tabs active" id="tab11">
-								<h6 class="font-weight-bold">Update</h6>
-							</div>
-
-							<div class="tabs" id="tab12">
-								<h6 class="text-muted">Job Info</h6>
-							</div>
-
-							<div class="tabs" id="tab13">
-								<h6 class="text-muted">Job Assign</h6>
-							</div>
+							else {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #228B22;">No Record</h6></div>';
+							}
+                        ?>
+                    </div>
+                    
+					<?php
 						
-							<div class="tabs" id="tab14">
-								<h6 class="text-muted">Accessories</h6>
-							</div>
-							<div class="tabs" id="tab15">
-								<h6 class="text-muted">Photo</h6>
-							</div>
-							<div class="tabs" id="tab16">
-								<h6 class="text-muted">Video</h6>
-							</div>
-							<div class="tabs" id="tab17">
-								<h6 class="text-muted">Job Status</h6>
-							</div>
-							<div class="tabs" id="tab18">
-								<h6 class="text-muted">Report</h6>
-							</div>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+						include 'dbconnect.php';
+						
+						$results = $conn->query("SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}'
+												 AND job_status = 'Doing' 
+												 AND (job_cancel IS NULL OR job_cancel = '')
+												 ORDER BY jobregisterlastmodify_at DESC");
+                                        
+                    	while ($row = $results->fetch_assoc()) {
+                    ?>
+					<div class="card mb-3">
+                        <div class="card-header">
+                            <h6 class="card-title fw-bold m-2"><?php echo $row['customer_name'] ?> [<?php echo $row['customer_grade'] ?>]</h6>
+                        </div>
+
+                        <div class="Job card-body" data-bs-toggle="modal" data-bs-target="#popUpModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>" data-jobAssign="<?php echo $row['job_assign']; ?>">
+                            <ul>
+                                <li><?php echo $row['job_priority'] ?></li>
+                                <li><?php echo $row['job_order_number'] ?></li>
+                                <li><?php echo $row['job_description'] ?></li>
+								<li><?php echo $row['machine_brand'] ?></li>
+                                <li><?php echo $row['machine_type'] ?></li>
+                                <li><?php echo $row['machine_name'] ?></li>
+                                <li><?php echo $row['serialnumber'] ?></li>
+                            </ul>
+
+                            <?php
+								if($row['support'] != "" || $row['support'] != NULL) {
+									echo'<div class="d-grid justify-content-end">
+										 	<h6 class="badge bg-secondary text-wrap fw-bold ms-3" style="font-size: 0.7rem; width: 5rem;">'.$row['support'].'</h6>
+                            			 </div>';
+								}
+                            ?>
+                        </div>
+                        
+                        <div class="JobSupport card-footer" style="background-color: #b11226;" data-bs-toggle="modal" data-bs-target="#supportPopupModal" data-supportID="<?php echo $row['jobregister_id']; ?>">
+                            <h6 class="fw-bold" style="color: white; text-align: center;">Support</h6>
+                        </div>
+                    </div>
+					<?php } ?>
+                </div>
+            </div>
+
+            <!-- Pending -->
+            <div class="Box card" style="margin-bottom: 30px;">
+                <div class="card-body">
+                    <div class="clearfix mb-2">
+                        <div class="float-start"><h6 class="fw-bold" style="color: #D2042D;">Pending</h6></div>
+						<?php
 							
-							<!--TOP BAR-->
-							<div class="line"></div>
+							include 'dbconnect.php';
 							
-							<br>
+							$numRow = "SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}' 
+							           AND job_status = 'Pending'
+									   AND (job_cancel IS NULL OR job_cancel = '')
+							           ORDER BY jobregisterlastmodify_at DESC";
+
+                            $numRow_run = mysqli_query($conn, $numRow);
+                                    
+                            if ($row_Total = mysqli_num_rows($numRow_run)) {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #D2042D;">Total Job: '. $row_Total .'</h6></div> ';
+							}
 							
-							<div class="modal-body p-0">
+							else {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #D2042D;">No Record</h6></div>';
+							}
+                        ?> 
+                    </div>
 
-								<!--Job Info Completed-->
+					<?php
+						
+						include 'dbconnect.php';
+						
+						$results = $conn->query("SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}' 
+												 AND job_status = 'Pending'
+												 AND (job_cancel IS NULL OR job_cancel = '')
+												 ORDER BY jobregisterlastmodify_at DESC");
+                                        
+                    	while ($row = $results->fetch_assoc()) {
+                    ?>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6 class="card-title fw-bold m-2"><?php echo $row['customer_name'] ?> [<?php echo $row['customer_grade'] ?>]</h6>
+                        </div>
 
-								<fieldset class="show" id="tab111">
-									<form action="ajaxtechupdate.php" method="post">
-									<div class="techupdate-details-completed">
+                        <div class="Job card-body" data-bs-toggle="modal" data-bs-target="#popUpModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>" data-jobAssign="<?php echo $row['job_assign']; ?>">
+                            <ul>
+								<li><?php echo $row['job_priority'] ?></li>
+                                <li><?php echo $row['job_order_number'] ?></li>
+                                <li><?php echo $row['job_description'] ?></li>
+								<li><?php echo $row['machine_brand'] ?></li>
+                                <li><?php echo $row['machine_type'] ?></li>
+                                <li><?php echo $row['machine_name'] ?></li>
+                                <li><?php echo $row['serialnumber'] ?></li>
+								<?php
+									if($row['reason'] != "" || $row['reason'] != NULL) {
+										echo'<li class="fw-bold" style="color: red;">'.$row['reason'].'</li>';
+									}
+                            	?>
+                            </ul>
 
-									</div>
-								</form>
-								
-								<script type='text/javascript'>
-									$(document).ready(function() {
-										$('.card-complete').click(function() {
-											var jobregister_id = $(this).data('id-complete');
-											// AJAX request
-											$.ajax({
-												url:'ajaxtechupdate-completed.php',
-												type:'post',
-											data: {jobregister_id: jobregister_id},
-												success: function(response) {
-													// Add response in Modal body
-													$('.techupdate-details-completed').html(response);
-													// Display Modal
-													$('#myModal-completed').modal('show');
-												}
-											});
-										});
-									});
-								</script>
-								</fieldset>
+                            <?php
+								if($row['support'] != "" || $row['support'] != NULL) {
+									echo'<div class="d-grid justify-content-end">
+										 	<h6 class="badge bg-secondary text-wrap fw-bold ms-3" style="font-size: 0.7rem; width: 5rem;">'.$row['support'].'</h6>
+                            			 </div>';
+								}
+                            ?>
+                        </div>
+                        
+                        <div class="JobDuplicate card-footer" style="background-color: #b11226;" data-bs-toggle="modal" data-bs-target="#DuplicatePopupModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>">
+                            <h6 class="fw-bold" style="color: white; text-align: center;">Duplicate</h6>
+                        </div>
+                    </div>
+					<?php } ?>
+                </div>
+            </div>
 
-								<!--Job assign-->
-								
-								<fieldset id="tab121">
-									<form action="" method="post">
-										<div class="tech-details-completed">
+            <!-- Incomplete -->
+            <div class="Box card" style="margin-bottom: 30px;">
+                <div class="card-body">
+                    <div class="clearfix mb-2">
+                        <div class="float-start"><h6 class="fw-bold" style="color: #FF5F1F;">Incomplete</h6></div>
+						<?php
+							
+							include 'dbconnect.php';
+							
+							$numRow = "SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}' 
+							           AND job_status = 'Incomplete'
+									   AND (job_cancel IS NULL OR job_cancel = '')
+							           ORDER BY jobregisterlastmodify_at DESC";
 
-										</div>
-									</form>
-									
-									<script type='text/javascript'>
-										$(document).ready(function() {
-											$('.card-complete').click(function() {
-												var jobregister_id = $(this).data('id-complete');
-												$.ajax({
-													url: 'ajaxtechnician-completed.php',
-													type: 'post',
-													data: {jobregister_id: jobregister_id},
-													success: function(response) {
-														$('.tech-details-completed').html(response);
-														$('#myModal-completed').modal('show');
-													}
-												});
-											});
-										});
-									</script>
-								</fieldset>
-								
+                            $numRow_run = mysqli_query($conn, $numRow);
+                                    
+                            if ($row_Total = mysqli_num_rows($numRow_run)) {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #FF5F1F;">Total Job: '. $row_Total .'</h6></div> ';
+							}
+							
+							else {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #FF5F1F;">No Record</h6></div>';
+							}
+                        ?> 
+                    </div>
 
-								
-								<!--Job assign-->
-								
-								<fieldset id="tab131">
-									<form action="jobassignst-completed.php" method="post">
-										<div class="techupdate-assign-completed">
+					<?php
+						
+						include 'dbconnect.php';
+						
+						$results = $conn->query("SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}' 
+												 AND job_status = 'Incomplete'
+												 AND (job_cancel IS NULL OR job_cancel = '')
+												 ORDER BY jobregisterlastmodify_at DESC");
+                                        
+                    	while ($row = $results->fetch_assoc()) {
+                    ?>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6 class="card-title fw-bold m-2"><?php echo $row['customer_name'] ?> [<?php echo $row['customer_grade'] ?>]</h6>
+                        </div>
 
-										</div>
-									</form>
-									
-									<script type='text/javascript'>
-										$(document).ready(function() {
-											$('.card-complete').click(function() {
-												var jobregister_id = $(this).data('id-complete');
-												$.ajax({
-													url:'jobassignst-completed.php',
-													type:'post',
-													data:{jobregister_id: jobregister_id},
-													success: function(response) {
-														$('.techupdate-assign-completed').html(response);
-														$('#myModal-completed').modal('show');
-													}
-												});
-											});
-										});
-									</script>
-									
-								</fieldset>
-								
-								
-								<!--Accessories Completed-->
-								
-								<fieldset id="tab141">
-									<form action="ajaxtabaccessoriestech-completed.php" method="post">
-										<div class="acc-details-completed">
+                        <div class="Job card-body" data-bs-toggle="modal" data-bs-target="#popUpModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>" data-jobAssign="<?php echo $row['job_assign']; ?>">
+                            <ul>
+								<li><?php echo $row['job_priority'] ?></li>
+                                <li><?php echo $row['job_order_number'] ?></li>
+                                <li><?php echo $row['job_description'] ?></li>
+								<li><?php echo $row['machine_brand'] ?></li>
+                                <li><?php echo $row['machine_type'] ?></li>
+                                <li><?php echo $row['machine_name'] ?></li>
+                                <li><?php echo $row['serialnumber'] ?></li>
+								<?php
+									if($row['reason'] != "" || $row['reason'] != NULL) {
+										echo'<li class="fw-bold" style="color: red;">'.$row['reason'].'</li>';
+									}
+                            	?>
+                            </ul>
 
-										</div>
-									</form>
-									
-									<script type='text/javascript'>
-										$(document).ready(function() {
-											$('.card-complete').click(function() {
-												var jobregister_id = $(this).data('id-complete');
-												$.ajax({
-													url:'ajaxtabaccessoriestech-completed.php',
-													type:'post',
-													data: {jobregister_id: jobregister_id},
-													success: function(response) {
-														// Add response in Modal body
-														$('.acc-details-completed').html(response);
-														// Display Modal
-														$('#myModal-completed').modal('show');
-													}
-												});
-											});
-										});
-									</script>
-									
-								</fieldset>
-								
-								<!--Photos Completed-->
-								
-								<fieldset id="tab151">
-									<form action="ajaxtechnicianphoto-completed.php" method="post">
-										<div class="photo-details-completed">
+                            <?php
+								if($row['support'] != "" || $row['support'] != NULL) {
+									echo'<div class="d-grid justify-content-end">
+										 	<h6 class="badge bg-secondary text-wrap fw-bold ms-3" style="font-size: 0.7rem; width: 5rem;">'.$row['support'].'</h6>
+                            			 </div>';
+								}
+                            ?>
+                        </div>
+                        
+                        <div class="JobDuplicate card-footer" style="background-color: #b11226;" data-bs-toggle="modal" data-bs-target="#DuplicatePopupModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>">
+                            <h6 class="fw-bold" style="color: white; text-align: center;">Duplicate</h6>
+                        </div>
+                    </div>
+					<?php } ?>
+                </div>
+            </div>
 
-										</div>
-									</form>
-									
-									<script type='text/javascript'>
-										$(document).ready(function() {
-											$('.card-complete').click(function() {
-												var jobregister_id = $(this).data('id-complete');
-												$.ajax({
-													url:'ajaxtechnicianphoto-completed.php',
-													type:'post',
-													data:{jobregister_id: jobregister_id},
-													success: function(response) {
-														$('.photo-details-completed').html(response);
-														$('#myModal-completed').modal('show');
-													}
-												});
-											});
-										});
-									</script>
-									
-								</fieldset>
-								
-								<!--Video Completed-->
-								
-								<fieldset id="tab161">
-									<form action="ajaxtechnicianvideo-completed.php" method="post">
-										<div class="video-details-completed">
+            <!-- Completed -->
+            <div class="Box card">
+                <div class="card-body">
+                    <div class="clearfix mb-2">
+                        <div class="float-start"><h6 class="fw-bold" style="color: #0047AB;">Completed</h6></div>
+						<?php
+							
+							include 'dbconnect.php';
+							
+							$numRow = "SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}' 
+                                                                  AND job_status = 'Completed'
+                                                                  AND (job_cancel IS NULL OR job_cancel = '')
+                                                                  AND MONTH(today_date) = MONTH(CURDATE())
+                                       ORDER BY jobregisterlastmodify_at DESC";
 
-										</div>
-									</form>
-									
-									<script type='text/javascript'>
-										$(document).ready(function() {
-											$('.card-complete').click(function() {
-												var jobregister_id = $(this).data('id-complete');
-												$.ajax({
-													url: 'ajaxtechnicianvideo-completed.php',
-													type: 'post',
-													data: {jobregister_id: jobregister_id},
-													success: function(response) {
-														$('.video-details-completed').html(response);
-														$('#myModal-completed').modal('show');
-													}
-												});
-											});
-										});
-									</script>
-									
-								</fieldset>
-								
-								<!--Job Status Completed-->
-								
-								<fieldset id="tab171">
-									<form action="ajaxtechjobstatus-completed.php" method="post">
-										<div class="techjobstatus-details-completed">
+                            $numRow_run = mysqli_query($conn, $numRow);
+                                    
+                            if ($row_Total = mysqli_num_rows($numRow_run)) {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #0047AB;">Total Job: '. $row_Total .'</h6></div> ';
+							}
+							
+							else {
+								echo '<div class="float-end"><h6 class="fw-bold" style="color: #0047AB;">No Record</h6></div>';
+							}
+                        ?>
+                    </div>
 
-										</div>
-									</form>
-									
-									<script type='text/javascript'>
-										$(document).ready(function() {
-											$('.card-complete').click(function() {
-												var jobregister_id = $(this).data('id-complete');
-												$.ajax({
-													url: 'ajaxtechjobstatus-completed.php',
-													type: 'post',
-													data: {jobregister_id: jobregister_id},
-													success: function(response) {
-														$('.techjobstatus-details-completed').html(response);
-														$('#myModal-completed').modal('show');
-													}
-												});
-											});
-										});
-									</script>
-									
-								</fieldset>
-								
-								<!--Report Completed-->
-								
-								<fieldset id="tab181">
-									<form action="ajaxreport.php" method="post">
-										<div class="report-details-completed">
+					<?php
+						
+						include 'dbconnect.php';
+						
+						$results = $conn->query("SELECT * FROM job_register WHERE job_assign ='{$_SESSION['username']}' 
+												                            AND job_status = 'Completed'
+												                            AND (job_cancel IS NULL OR job_cancel = '')
+                                                                            AND MONTH(today_date) = MONTH(CURDATE())
+												 ORDER BY jobregisterlastmodify_at DESC");
+                                        
+                    	while ($row = $results->fetch_assoc()) {
+                    ?>
+                    <div class="JobCompleted card mb-3" data-bs-toggle="modal" data-bs-target="#completedPopupModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>">
+                        <div class="card-header">
+                            <h6 class="card-title fw-bold m-2"><?php echo $row['customer_name'] ?> [<?php echo $row['customer_grade'] ?>]</h6>
+                        </div>
 
-										</div>
-									</form>
-									
-									<script type='text/javascript'>
-										$(document).ready(function() {
-											$('.card-complete').click(function() {
-												var jobregister_id = $(this).data('id-complete');
-												$.ajax({
-													url:'ajaxreport.php',
-													type:'post',
-													data:{jobregister_id: jobregister_id},
-													success: function(response) {
-														$('.report-details-completed').html(response);
-														$('#myModal-completed').modal('show');
-													}
-												});
-											});
-										});
-									</script>
-									
-								</fieldset>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Completed Job -->
-</body>
+                        <div class="card-body">
+                            <ul>
+								<li><?php echo $row['job_priority'] ?></li>
+                                <li><?php echo $row['job_order_number'] ?></li>
+                                <li><?php echo $row['job_description'] ?></li>
+								<li><?php echo $row['machine_brand'] ?></li>
+                                <li><?php echo $row['machine_type'] ?></li>
+                                <li><?php echo $row['machine_name'] ?></li>
+                                <li><?php echo $row['serialnumber'] ?></li>
+                            </ul>
+
+                            <?php
+								if($row['support'] != "" || $row['support'] != NULL) {
+									echo'<div class="d-grid justify-content-end">
+										 	<h6 class="badge bg-secondary text-wrap fw-bold ms-3" style="font-size: 0.7rem; width: 5rem;">'.$row['support'].'</h6>
+                            			 </div>';
+								}
+                            ?>
+                        </div>
+                    </div>
+					<?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <!--========== Popup Modal ==========-->
+        <div class="modal fade" id="popUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header p-1">
+                        <ul class="nav nav-pills justify-content-center m-1" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active p-1 fw-bold" id="pills-Update-tab" data-bs-toggle="pill" data-bs-target="#pills-Update" type="button" role="tab" aria-controls="pills-Update" aria-selected="true">Update</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link p-1 fw-bold" id="pills-JobInfo-tab" data-bs-toggle="pill" data-bs-target="#pills-JobInfo" type="button" role="tab" aria-controls="pills-JobInfo" aria-selected="false">Job Info</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link p-1 fw-bold" id="pills-JobAssign-tab" data-bs-toggle="pill" data-bs-target="#pills-JobAssign" type="button" role="tab" aria-controls="pills-JobAssign" aria-selected="false">Job Assign</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 fw-bold" id="pills-Accessories-tab" data-bs-toggle="pill" data-bs-target="#pills-Accessories" type="button" role="tab" aria-controls="pills-Accessories" aria-selected="false">Accessories</button>
+                            </li>
+                            
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 fw-bold" id="pills-Photo-tab" data-bs-toggle="pill" data-bs-target="#pills-Photo" type="button" role="tab" aria-controls="pills-Photo" aria-selected="false">Photo</button>
+                            </li>
+                              
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 fw-bold" id="pills-Video-tab" data-bs-toggle="pill" data-bs-target="#pills-Video" type="button" role="tab" aria-controls="pills-Video" aria-selected="false">Video</button>
+                            </li>
+                            
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 fw-bold" id="pills-JobStatus-tab" data-bs-toggle="pill" data-bs-target="#pills-JobStatus" type="button" role="tab" aria-controls="pills-JobStatus" aria-selected="false">Job Status</button>
+                            </li>
+                              
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 fw-bold" id="pills-Report-tab" data-bs-toggle="pill" data-bs-target="#pills-Report" type="button" role="tab" aria-controls="pills-Report" aria-selected="false">Report</button>
+                            </li>
+                        </ul>
+                        
+                        <button type="button" class="btn-close m-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="tab-content" id="pills-tabContent">
+                            <!-- Update -->
+                            <div class="tab-pane show active" id="pills-Update" role="tabpanel" aria-labelledby="pills-Update-tab">
+                                <div class="container" id="jobUpdateTab">
+                                    <input type="hidden" name="DateAssign" id="DateAssign">
+                                    <input type="hidden" name="job_status" id="job_status">
+                                    <input type="hidden" name="departure_timestamp" id="departure_timestamp">
+
+                                    <input type="hidden" name="techupdate_date" id="techupdate_date">
+                                    <input type="hidden" name="tech_leader" id="tech_leader">
+                                    <input type="hidden" name="technician_out" id="technician_out">
+                                    <input type="hidden" name="technician_in" id="technician_in">
+
+                                    <form id="techJobUpdateForm">
+                                        <input type="hidden" name="jobregister_id" id="jobregisterID_jobUpdate">
+
+                                        <!-- Departure Time -->
+                                        <label for="" class="form-label fw-bold">Departure Time</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="technician_departure" id="technician_departure" class="form-control" readonly>
+                                            <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="departureButton">Departure</button>
+                                        </div>
+
+                                        <script>
+                                            const jobCards = document.querySelectorAll('.Job');
+                                            
+                                            jobCards.forEach(jobCard => {
+                                                jobCard.addEventListener('click', function () {
+                                                    const jobRegisterID = jobCard.getAttribute('data-jobRegisterID');
+                                                    const jobregister_idInput = document.getElementById("jobregisterID_jobUpdate");
+                                                    
+                                                    jobregister_idInput.value = jobRegisterID;
+                                                });
+                                            });
+                                            
+                                            $(document).on('click', '#departureButton', function () {
+                                                const currentDateTime = new Date();
+                                                const formattedDateTime = currentDateTime.toLocaleString('en-US', {
+                                                    day: 'numeric',
+                                                    month: 'numeric',
+                                                    year: 'numeric',
+                                                    hour: 'numeric',
+                                                    minute: 'numeric',
+                                                    hour12: true
+                                                }).replace(',', '');
+                                                
+                                                document.getElementById('technician_departure').value = formattedDateTime;
+                                                
+                                                const jobregister_idInput = document.getElementById("jobregisterID_jobUpdate");
+                                                const currentDate = new Date();
+                                                const day = String(currentDate.getDate()).padStart(2, '0');
+                                                const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                                                const year = currentDate.getFullYear();
+                                                const hours = String(currentDate.getHours()).padStart(2, '0');
+                                                const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+                                                const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+                                                
+                                                const jobregister_id = jobregister_idInput.value;
+                                                const job_status = "Doing";
+                                                const DateAssign = day + '-' + month + '-' + year;
+                                                const departure_timestamp = hours + ':' + minutes + ':' + seconds;
+                                                
+                                                const xhr = new XMLHttpRequest();
+                                                xhr.open("POST", "departureupdate.php", true);
+                                                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                
+                                                xhr.onreadystatechange = function () {
+                                                    if (xhr.readyState === 4 && xhr.status === 200) {
+                                                        const response = xhr.responseText;
+                                                        
+                                                        if (response === "success") {
+                                                            console.log("Update successful");
+                                                        } 
+                                                        
+                                                        else {
+                                                            console.error("Update failed");
+                                                        }
+                                                    }
+                                                };
+                                                
+                                                const data = `jobregister_id=${jobregister_id}&DateAssign=${DateAssign}&job_status=${job_status}&departure_timestamp=${departure_timestamp}`;
+                                                xhr.send(data);
+                                            });
+                                        </script>
+
+                                        <!-- Arrival Time -->
+                                        <label for="" class="form-label fw-bold">Time At Site</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="technician_arrival" id="technician_arrival" class="form-control" readonly>
+                                            <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="arrivalButton">Arrival</button>
+                                        </div>
+
+                                        <script>
+                                            $(document).on('click', '#arrivalButton', function () {
+                                                const currentDateTime = new Date();
+                                                const formattedDateTime = currentDateTime.toLocaleString('en-US', {
+                                                    day: 'numeric',
+                                                    month: 'numeric',
+                                                    year: 'numeric',
+                                                    hour: 'numeric',
+                                                    minute: 'numeric',
+                                                    hour12: true
+                                                }).replace(',', ''); 
+                                                
+                                                document.getElementById('technician_arrival').value = formattedDateTime;
+                                            });
+                                        </script>
+
+                                        <!-- Leaving Time -->
+                                        <label for="" class="form-label fw-bold">Return Time</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="technician_leaving" id="technician_leaving" class="form-control" readonly>
+                                            <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="returnButton">Return</button>
+                                        </div>
+
+                                        <script>
+                                            $(document).on('click', '#returnButton', function () {
+                                                const currentDateTime = new Date();
+                                                const formattedDateTime = currentDateTime.toLocaleString('en-US', {
+                                                    day: 'numeric',
+                                                    month: 'numeric',
+                                                    year: 'numeric',
+                                                    hour: 'numeric',
+                                                    minute: 'numeric',
+                                                    hour12: true
+                                                }).replace(',', ''); 
+                                                
+                                                document.getElementById('technician_leaving').value = formattedDateTime;
+                                            });
+                                        </script>
+
+                                        <!-- Rest Time -->
+                                        <label for="" class="form-label fw-bold">Rest Hour</label>
+                                        <div class="d-grid gap-3 mb-3">
+                                            <!-- Rest Out -->
+                                            <div class="input-group">
+                                                <input type="text" name="tech_out" id="tech_out" class="form-control" readonly>
+                                                <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="outButton">Out</button>
+                                            </div>
+
+                                            <script>
+                                                jobCards.forEach(jobCard => {
+                                                    jobCard.addEventListener('click', function () {
+                                                        const jobAssign = jobCard.getAttribute('data-jobAssign');
+                                                        const techLeaderInput = document.getElementById("tech_leader");
+                                                        
+                                                        techLeaderInput.value = jobAssign;
+                                                    });
+                                                });
+                                            
+                                                $(document).on('click', '#outButton', function () {
+                                                    const currentDateTime = new Date();
+                                                    
+                                                    const formattedDateTime = currentDateTime.toLocaleString('en-US', {
+                                                        hour: 'numeric',
+                                                        minute: 'numeric',
+                                                        hour12: true
+                                                    }); 
+                                            
+                                                    document.getElementById('tech_out').value = formattedDateTime;
+                                                
+                                                    const techLeaderInput = document.getElementById("tech_leader");
+                                                
+                                                    const currentDate = new Date();
+                                                    const day = String(currentDate.getDate()).padStart(2, '0');
+                                                    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                                                    const year = currentDate.getFullYear();
+                                                    const hours = String(currentDate.getHours()).padStart(2, '0');
+                                                    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+                                                    const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+                                                    const amOrPm = hours >= 12 ? 'PM' : 'AM';
+                                                    const formattedHours = hours % 12 || 12;
+                                                
+                                                    const technician_out = formattedHours + ':' + minutes + ' ' + amOrPm;
+                                                    const tech_leader = techLeaderInput.value;
+                                                    const techupdate_date = day + '-' + month + '-' + year;
+
+                                                    const xhr = new XMLHttpRequest();
+                                                    xhr.open("POST", "techoutupdate.php", true);
+                                                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                
+                                                    xhr.onreadystatechange = function () {
+                                                        if (xhr.readyState === 4 && xhr.status === 200) {
+                                                            const response = xhr.responseText;
+                                                            
+                                                            if (response === "success") {
+                                                                console.log("Update successful");
+                                                            } 
+                                                        
+                                                            else {
+                                                                console.error("Update failed");
+                                                            }
+                                                        }
+                                                    };
+                                                
+                                                    const data = `technician_out=${formattedDateTime}&tech_leader=${techLeaderInput.value}&techupdate_date=${techupdate_date}`;
+                                                    xhr.send(data);
+                                                });
+                                            </script>
+
+                                            <!-- Rest In -->
+                                            <div class="input-group">
+                                                <input type="text" name="tech_in" id="tech_in" class="form-control" readonly>
+                                                <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="inButton">In</button>
+                                            </div>
+
+                                            <script>
+                                                jobCards.forEach(jobCard => {
+                                                    jobCard.addEventListener('click', function () {
+                                                        const jobAssign = jobCard.getAttribute('data-jobAssign');
+                                                        const techLeaderInput = document.getElementById("tech_leader");
+                                                        
+                                                        techLeaderInput.value = jobAssign;
+                                                    });
+                                                });
+                                            
+                                                $(document).on('click', '#inButton', function () {
+                                                    const currentDateTime = new Date();
+                                                    const formattedDateTime = currentDateTime.toLocaleString('en-US', {
+                                                        hour: 'numeric',
+                                                        minute: 'numeric',
+                                                        hour12: true
+                                                    }); 
+                                                
+                                                    document.getElementById('tech_in').value = formattedDateTime;
+                                                
+                                                    const techLeaderInput = document.getElementById("tech_leader");
+                                                
+                                                    const currentDate = new Date();
+                                                    const day = String(currentDate.getDate()).padStart(2, '0');
+                                                    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                                                    const year = currentDate.getFullYear();
+                                                    const hours = String(currentDate.getHours()).padStart(2, '0');
+                                                    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+                                                    const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+                                                    const amOrPm = hours >= 12 ? 'PM' : 'AM';
+                                                    const formattedHours = hours % 12 || 12;
+                                                
+                                                    const technician_in = formattedHours + ':' + minutes + ' ' + amOrPm;
+                                                    const tech_leader = techLeaderInput.value;
+                                                    const techupdate_date = day + '-' + month + '-' + year;
+
+                                                    const xhr = new XMLHttpRequest();
+                                                    xhr.open("POST", "techinupdate.php", true);
+                                                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                
+                                                    xhr.onreadystatechange = function () {
+                                                        if (xhr.readyState === 4 && xhr.status === 200) {
+                                                            const response = xhr.responseText;
+                                                            
+                                                            if (response === "success") {
+                                                                console.log("Update successful");
+                                                            } 
+                                                        
+                                                            else {
+                                                                console.error("Update failed");
+                                                            }
+                                                        }
+                                                    };
+                                                
+                                                    const data = `technician_in=${formattedDateTime}&tech_leader=${techLeaderInput.value}&techupdate_date=${techupdate_date}`;
+                                                    xhr.send(data);
+                                                });
+                                            </script>
+                                        </div>
+                                    
+                                        <div id="JobUpdateMessage"></div>
+
+                                        <div class="d-grid justify-content-end mb-3">
+                                            <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Job Info -->
+                            <div class="tab-pane" id="pills-JobInfo" role="tabpanel" aria-labelledby="pills-JobInfo-tab">
+                                <div class="container" id="jobInfoTab">
+                                    <form id="techJobInfoForm">
+                                        <input type="hidden" name="jobregister_id" id="jobregisterID_jobInfo">
+                                       
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Job Priority</label>
+                                                <input type="text" name="job_priority" id="job_priority" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Job Order Number</label>
+                                                <input type="text" name="job_order_number" id="job_order_number" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Job Name</label>
+                                                <input type="text" name="job_name" id="job_name" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Job Description</label>
+                                                <input type="text" name="job_description" id="job_description" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Requested Date</label>
+                                                <input type="text" name="requested_date" id="requested_date" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Delivery Date</label>
+                                                <input type="text" name="delivery_date" id="delivery_date" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="fw-bold mb-2">Customer Name</label>
+                                                <input type="text" name="customer_name" id="customer_name" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="form-label fw-bold">Customer Address</label>
+                                                <input type="text" name="cust_address1" id="cust_address1" class="form-control" readonly>
+                                                <div class="d-grid d-flex gap-2 mt-2">
+                                                    <input type="text" name="cust_address2" id="cust_address2" class="form-control" readonly>
+                                                    <input type="text" name="cust_address3" id="cust_address3" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Customer Grade</label>
+                                                <input type="text" name="customer_grade" id="customer_grade" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Customer PIC</label>
+                                                <input type="text" name="customer_PIC" id="customer_PIC" class="form-control" readonly>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="form-label fw-bold">Customer Phone Number</label>
+                                                <div class="d-grid d-flex gap-2 mt-2">
+                                                    <input type="text" name="cust_phone1" id="cust_phone1" class="form-control" readonly>
+                                                    <input type="text" name="cust_phone2" id="cust_phone2" class="form-control" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Machine Brand</label>
+                                                <select name="machine_brand" id="machine_brand" class="form-select" onchange="GetBrandID(this.value)">
+                                                    <?php
+                                                        
+                                                        include "dbconnect.php";
+                                                    
+                                                        $records = mysqli_query($conn, "SELECT * FROM machine_brand");
+                                                            
+                                                        echo"<option value=''>Select Machine Brand</option>";
+                                                            
+                                                        while($data = mysqli_fetch_array($records)) {
+                                                                echo "<option value='". $data['brandname'] ."' data-brandID='". $data['brand_id'] ."'>" .$data['brandname']. "</option>";
+                                                        }
+                                                        
+                                                        mysqli_close($conn);
+                                                    ?>
+                                                </select>
+
+                                                <script>
+                                                    function GetBrandID(value) {
+                                                        var selectedOption = document.querySelector('#machine_brand option[value="' + value + '"]');
+                                                        var brandID = selectedOption.getAttribute('data-brandID');
+                                                        
+                                                        document.querySelector('input[name="brand_id"]').value = brandID;
+                                                    }
+                                                </script>
+
+                                                <input type="hidden" id="brand_id" name="brand_id">
+
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                            $("#machine_brand").select2({
+                                                                dropdownParent: $('#techJobInfoForm'),
+                                                                matcher: oldMatcher(matchStart),
+                                                                theme: 'bootstrap-5'
+                                                            })
+                                                        });
+                                
+                                                        function matchStart (term, text) {
+                                                            if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                                return true;
+                                                            }
+                                                            
+                                                            return false;
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label for="" class="form-label fw-bold">Machine Type</label>
+                                                <select name="machine_type" id="machine_type" style="width: 100%;" class="form-select" onchange="GetTypeID(this.value)">
+                                                    <?php
+                                                        
+                                                        include "dbconnect.php";
+                                                    
+                                                        $records = mysqli_query($conn, "SELECT * FROM machine_type");
+                                                            
+                                                        echo"<option value=''>Select Machine Brand</option>";
+                                                            
+                                                        while($data = mysqli_fetch_array($records)) {
+                                                                echo "<option value='". $data['type_name'] ."' data-typeID='". $data['type_id'] ."'>" .$data['type_name']. "</option>";
+                                                        }
+                                                        
+                                                        mysqli_close($conn);
+                                                    ?>
+                                                </select>
+
+                                                <script>
+                                                    function GetTypeID(value) {
+                                                        var selectedOption = document.querySelector('#machine_type option[value="' + value + '"]');
+                                                        var typeID = selectedOption.getAttribute('data-typeID');
+                                                        
+                                                        document.querySelector('input[name="type_id"]').value = typeID;
+                                                    }
+                                                </script>
+
+                                                <input type="hidden" id="type_id" name="type_id">
+
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                            $("#machine_type").select2({
+                                                                dropdownParent: $('#techJobInfoForm'),
+                                                                matcher: oldMatcher(matchStart),
+                                                                theme: 'bootstrap-5'
+                                                            })
+                                                        });
+                                
+                                                        function matchStart (term, text) {
+                                                            if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                                return true;
+                                                            }
+                                                            
+                                                            return false;
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="form-label fw-bold">Machine Name</label>
+                                                <input type="text" id="machine_name" name="machine_name" class="form-control" readonly>
+                                                <input type="hidden" id="machine_id" name="machine_id">
+                                                <input type="hidden" id="machine_code" name="machine_code">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="form-label fw-bold">Serial Number</label>
+                                                <select name="serialnumber" id="serialnumber" style="width: 100%;" class="form-select" onchange="GetMachineDetails(this.value)">
+                                                    <?php
+                                                        
+                                                        include "dbconnect.php";
+                                                    
+                                                        $records = mysqli_query($conn, "SELECT * FROM machine_list");
+                                                            
+                                                        echo"<option value=''>Select Serial Number</option>";
+                                                            
+                                                        while($data = mysqli_fetch_array($records)) {
+                                                            echo "<option value='". $data['serialnumber'] ."' data-machineName='". $data['machine_name'] ."' data-machineCode='". $data['machine_code'] ."' data-machineID='". $data['machine_id'] ."'>" .$data['serialnumber']. " - " .$data['customer_name']. "</option>";
+                                                        }	
+                                                    ?>
+                                                </select>
+
+                                                <script>
+                                                    function GetMachineDetails(value) {
+                                                        var selectedOption = document.querySelector('#serialnumber option[value="' + value + '"]');
+                                                        var machineName = selectedOption.getAttribute('data-machineName');
+                                                        var machineCode = selectedOption.getAttribute('data-machineCode');
+                                                        var machineID = selectedOption.getAttribute('data-machineID');
+                                                        
+                                                        document.querySelector('input[name="machine_name"]').value = machineName;
+                                                        document.querySelector('input[name="machine_code"]').value = machineCode;
+                                                        document.querySelector('input[name="machine_id"]').value = machineID;
+                                                    }
+                                                </script>
+
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                            $("#serialnumber").select2({
+                                                                dropdownParent: $('#techJobInfoForm'),
+                                                                matcher: oldMatcher(matchStart),
+                                                                theme: 'bootstrap-5'
+                                                            })
+                                                        });
+                                
+                                                        function matchStart (term, text) {
+                                                            if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                                return true;
+                                                            }
+                                                            
+                                                            return false;
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+
+                                            <input type="hidden" id="jobregisterlastmodify_by" name="jobregisterlastmodify_by">
+                                           
+                                            <div class="mb-3">
+                                                <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width:100%">Update</button>
+                                            </div>
+                                            
+                                            <div id="JobInfoMessage"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Job Assign -->
+                            <div class="tab-pane" id="pills-JobAssign" role="tabpanel" aria-labelledby="pills-JobAssign-tab">
+                                <div class="container" id="jobAssignTab">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div id="jobAssignData"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold">Assistant</label>
+                                            
+                                            <div class="table-responsive mb-3">
+                                                <table class="table border table-borderless table-striped" id="assistantTable">
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+
+                                            <form id="techJobAssistantForm">
+                                                <input type="hidden" name="jobregister_id" id="jobregisterID_assistant">
+                                                <input type="hidden" name="ass_date" id="ass_date">
+                                                <input type="hidden" name="cust_name" id="cust_name">
+                                                <input type="hidden" name="requested_date" id="requestedDate">
+                                                <input type="hidden" name="machine_name" id="machineName">
+                                                
+                                                <select name="username[]" id="username" class="form-select mb-3" multiple="multiple">
+                                                    <?php
+
+                                                        $query = "SELECT * FROM staff_register WHERE staff_group = 'Technician' AND tech_avai = '0' ORDER BY username ASC";
+                                                        $query_run = mysqli_query($conn, $query);
+
+                                                        if(mysqli_num_rows($query_run) > 0) {
+                                                            foreach ($query_run as $rowstaff) {
+                                                    ?> 
+    
+                                                    <option value="<?php echo $rowstaff["username"]; ?>"><?php echo $rowstaff["username"]; ?></option>
+
+                                                    <?php } } else {echo "No Record Found";} ?> 
+                                                </select>
+
+                                                <div id="assistantMessage"></div>
+
+                                                <div class="d-grid justify-content-end mt-3">
+                                                    <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Update</button>
+                                                </div>
+                                            </form>
+
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                        $("#username").select2({
+                                                            dropdownParent: $('#techJobAssistantForm'),
+                                                            matcher: oldMatcher(matchStart),
+                                                            theme: 'bootstrap-5'
+                                                        })
+                                                    });
+                                                    
+                                                    function matchStart (term, text) {
+                                                        if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                            return true;
+                                                        }
+                                                        
+                                                        return false;
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accessories -->
+                            <div class="tab-pane" id="pills-Accessories" role="tabpanel" aria-labelledby="pills-Accessories-tab">
+                                <div class="container" id="jobAccessoriesTab">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-hover" id="accessoryTable">
+                                            <thead>
+                                                <tr>
+                                                    <th style='text-align: center;'>No</th>
+                                                    <th style='text-align: center;'>Code</th>
+                                                    <th style='text-align: center;'>Name</th>
+                                                    <th style='text-align: center;'>UOM</th>
+                                                    <th style='text-align: center;'>Quantity</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Photo -->
+                            <div class="tab-pane" id="pills-Photo" role="tabpanel" aria-labelledby="pills-Photo-tab">
+                                <div class="container" id="jobPhotoTab">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold">Photo Before Service</label>
+                                            <form class="photoBefore" id="techJobPhotoBeforeForm">
+                                                <input type="hidden" name="jobregister_id" id="jobregisterID_photoBefore">
+
+                                                <div class="input-group mb-3">
+                                                    <input type="file" name="file_name[]" id="fileName_before" class="form-control" multiple>
+                                                    <input type="Hidden" name="description" id="descriptionBefore" value="Machine (Before Service)">
+                                                    <button type="submit" name="upload" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
+                                                </div>
+
+                                                <div id="photoBeforeMessage"></div>
+                                            
+                                                <div id="previewPhotoBefore" style="display: flex; flex-wrap: wrap;">
+                                                    <script>
+                                                        document.getElementById("fileName_before").addEventListener("change", function (event) {
+                                                            const imagePreview = document.getElementById("previewPhotoBefore");
+                                                            imagePreview.innerHTML = "";
+                                                            const files = event.target.files;
+                                                        
+                                                            for (let i = 0; i < files.length; i++) {
+                                                                const file = files[i];
+                                                                const reader = new FileReader();
+                                                            
+                                                                reader.onload = function (e) {
+                                                                    const img = document.createElement("img");
+                                                                    img.src = e.target.result;
+                                                                    img.classList.add("preview-image");
+                                                                    img.style.width = "270px"; 
+                                                                    img.style.height = "200px";
+                                                                    img.style.margin = "10px";
+                                                                    imagePreview.appendChild(img);
+                                                                };
+                                                            
+                                                                reader.readAsDataURL(file);
+                                                            }
+                                                        });
+                                                    </script>
+                                                </div>
+                                            </form>
+
+                                            <div class="container">
+                                                <div class="row" id="photoBeforeService"></div>
+                                            </div> 
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold" >Photo After Service</label>
+                                            <form id="techJobPhotoAfterForm">
+                                                <input type="hidden" name="jobregister_id" id="jobregisterID_photoAfter">
+                                            
+                                                <div class="input-group mb-3">
+                                                <input type="file" name="file_name[]" id="fileName_after" class="form-control" multiple>
+                                                    <input type="Hidden" name="description" id="descriptionAfter" value="Machine (After Service)">
+                                                    <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
+                                                </div>
+
+                                                <div id="photoAfterMessage"></div>
+
+                                                <div id="previewPhotoAfter" style="display: flex; flex-wrap: wrap;">
+                                                    <script>
+                                                        document.getElementById("fileName_after").addEventListener("change", function (event) {
+                                                            const imagePreview = document.getElementById("previewPhotoAfter");
+                                                            imagePreview.innerHTML = "";
+                                                            const files = event.target.files;
+                                                        
+                                                            for (let i = 0; i < files.length; i++) {
+                                                                const file = files[i];
+                                                                const reader = new FileReader();
+                                                            
+                                                                reader.onload = function (e) {
+                                                                    const img = document.createElement("img");
+                                                                    img.src = e.target.result;
+                                                                    img.classList.add("preview-image");
+                                                                    img.style.width = "270px"; 
+                                                                    img.style.height = "200px";
+                                                                    img.style.margin = "10px";
+                                                                    imagePreview.appendChild(img);
+                                                                };
+                                                            
+                                                                reader.readAsDataURL(file);
+                                                            }
+                                                        });
+                                                    </script>
+                                                </div>
+                                            </form>
+
+                                            <div class="container">
+                                                <div class="row" id="photoAfterService"></div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Video -->
+                            <div class="tab-pane" id="pills-Video" role="tabpanel" aria-labelledby="pills-Video-tab">
+                                <div class="container" id="jobVideoTab">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold" >Video Before Service</label>
+                                            <form id="techJobVideoBeforeForm">
+                                                <input type="hidden" name="jobregister_id" id="jobregisterID_videoBefore">
+
+                                                <div class="input-group mb-3">
+                                                    <input type="file" name="video_url[]" id="videoBefore" accept="video/*" multiple class="form-control">
+                                                    <input type="hidden" name="description" id="descriptionVideoBefore" value="Machine (Before Service)">
+                                                    <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
+                                                </div>
+
+                                                <div id="videoBeforeMessage"></div>
+
+                                                <div id="previewVideoBefore">
+                                                    <script>
+                                                        document.getElementById("videoBefore").addEventListener("change", function (event) {
+                                                            const videoPreview = document.getElementById("previewVideoBefore");
+                                                            videoPreview.innerHTML = "";
+                                                            const files = event.target.files;
+                                                            
+                                                            for (let i = 0; i < files.length; i++) {
+                                                                const file = files[i];
+                                                                const video = document.createElement("video");
+                                                                
+                                                                video.controls = true;
+                                                                video.style.width = "270px";
+                                                                video.style.height = "200px";
+                                                                video.style.margin = "10px";
+                                                                
+                                                                const source = document.createElement("source");
+                                                                source.src = URL.createObjectURL(file);
+                                                                source.type = file.type;
+                                                                
+                                                                video.appendChild(source);
+                                                                videoPreview.appendChild(video);
+                                                            }
+                                                        });
+                                                    </script>
+                                                </div>
+                                            </form>
+
+                                            <div class="container">
+                                                <div class="row" id="videoBeforeService"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold" >Video After Service</label>
+                                            <form id="techJobVideoAfterForm">
+                                                <input type="hidden" name="jobregister_id" id="jobregisterID_videoAfter">
+                                                
+                                                <div class="input-group mb-3">
+                                                    <input type="file" name="video_url[]" id="videoAfter" accept="video/*" multiple class="form-control">
+                                                    <input type="hidden" id="description" name="description" value="Machine (After Service)">
+                                                    <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
+                                                </div>
+
+                                                <div id="videoAfterMessage"></div>
+
+                                                <div id="previewVideoAfter">
+                                                    <script>
+                                                        document.getElementById("videoAfter").addEventListener("change", function (event) {
+                                                            const videoPreview = document.getElementById("previewVideoAfter");
+                                                            videoPreview.innerHTML = "";
+                                                            const files = event.target.files;
+                                                            
+                                                            for (let i = 0; i < files.length; i++) {
+                                                                const file = files[i];
+                                                                const video = document.createElement("video");
+                                                                
+                                                                video.controls = true;
+                                                                video.style.width = "270px";
+                                                                video.style.height = "200px";
+                                                                video.style.margin = "10px";
+                                                                
+                                                                const source = document.createElement("source");
+                                                                source.src = URL.createObjectURL(file);
+                                                                source.type = file.type;
+                                                                
+                                                                video.appendChild(source);
+                                                                videoPreview.appendChild(video);
+                                                            }
+                                                        });
+                                                    </script>
+                                                </div>
+                                            </form>
+
+                                            <div class="container">
+                                                <div class="row" id="videoAfterService"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Job Status -->
+                            <div class="tab-pane" id="pills-JobStatus" role="tabpanel" aria-labelledby="pills-JobStatus-tab">
+                                <div class="container" id="jobStatusTab">
+                                    <form id="techJobStatusForm">
+                                        <input type="hidden" name="jobregister_id" id="jobregisterID_jobStatus">
+                                        <input type="hidden" name="technician_departure" id="jobStatus_departure">
+                                        <input type="hidden" name="technician_arrival" id="jobStatus_arrival">
+                                        <input type="hidden" name="technician_leaving" id="jobStatus_leaving">
+                                        
+                                        <label for="job_statusChange" class="form-label fw-bold">Job Status</label>
+                                        <div class="input-group mb-3">
+                                            <select name="job_status" id="job_statusChange" class="form-select" onchange="myFunctionReason()">
+                                                <option value=''></option>
+                                                <option value='Doing'>Doing</option>
+                                                <option value='Pending'>Pending</option>
+                                                <option value='Incomplete'>Incomplete</option>
+                                                <option value='Completed'>Completed</option>
+                                            </select>
+                                            
+                                            <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Update</button>
+                                        </div>
+                                        
+                                        <script>
+                                            function myFunctionReason() {
+                                                var status = document.getElementById("job_statusChange").value;
+                                                var reasonDiv = document.getElementById("giveReason");
+                                                var reasonInput = document.getElementById("reason");
+                                                
+                                                if (status === "Pending" || status === "Incomplete") {
+                                                    reasonDiv.style.display = "block";
+                                                    reasonInput.required = true;
+                                                } 
+                                                
+                                                else {
+                                                    reasonDiv.style.display = "none";
+                                                    reasonInput.required = false;
+                                                    reasonInput.value = "";
+                                                }
+                                            }
+                                        </script>
+                                        
+                                        <div class="mb-3" id="giveReason" style="display: none;">
+                                            <label for="reason" class="form-label fw-bold">Reason</label>
+                                            <input type="text" name="reason" id="reason" class="form-control">
+                                        </div>
+                                        
+                                        <div id="statusUpdateMessage"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <!-- Report -->
+                            <div class="tab-pane" id="pills-Report" role="tabpanel" aria-labelledby="pills-Report-tab">
+                                <div class="container" id="jobReportTab">
+                                    <form id="techJobReportForm">
+                                        <input type="hidden" name="jobregister_id" id="jobregisterID_jobReport">
+
+                                        <label for="" class="form-label fw-bold">Service Report Date:</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" id="serviceReport_Date" class="form-control">
+                                            <button type="button" class="NewServiceReport btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">New</button>
+                                            <button type="button" class="EditServiceReport btn" style="border: none; background-color: #790604; color: #FFFFFF; width: fit-content;">Edit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // Fetch Username
+            function fetchUsername() {
+                $('#jobregisterlastmodify_by').val(usernameValue);
+            }
+
+            // Fetch Job Update Tab
+            function fetchJobUpdateData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            // Job Update
+                            $('#jobregisterID_jobUpdate').val(res.data.jobregister_id);
+                            $('#technician_departure').val(res.data.technician_departure);
+                            $('#technician_arrival').val(res.data.technician_arrival);
+                            $('#technician_leaving').val(res.data.technician_leaving);
+                            $('#tech_out').val(res.data.tech_out);
+                            $('#tech_in').val(res.data.tech_in);
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Job Info Tab
+            function fetchJobInfoData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            $('#jobregisterID_jobInfo').val(res.data.jobregister_id);
+                            $('#job_priority').val(res.data.job_priority);
+                            $('#job_order_number').val(res.data.job_order_number);
+                            $('#job_name').val(res.data.job_name);
+                            $('#job_description').val(res.data.job_description);
+                            $('#requested_date').val(res.data.requested_date);
+                            $('#delivery_date').val(res.data.delivery_date);
+                            $('#customer_name').val(res.data.customer_name);
+                            $('#cust_address1').val(res.data.cust_address1);
+                            $('#cust_address2').val(res.data.cust_address2);
+                            $('#cust_address3').val(res.data.cust_address3);
+                            $('#customer_grade').val(res.data.customer_grade);
+                            $('#customer_PIC').val(res.data.customer_PIC);
+                            $('#cust_phone1').val(res.data.cust_phone1);
+                            $('#cust_phone2').val(res.data.cust_phone2);
+                            $('#brand_id').val(res.data.brand_id);
+                            $('#type_id').val(res.data.type_id);
+                            $('#machine_id').val(res.data.machine_id);
+                            $('#machine_code').val(res.data.machine_code);
+                            $('#machine_brand').val(res.data.machine_brand).trigger('change');
+                            $('#machine_type').val(res.data.machine_type).trigger('change');
+                            $('#machine_name').val(res.data.machine_name).trigger('change');
+                            $('#serialnumber').val(res.data.serialnumber).trigger('change');
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // fetch Job Assign Tab
+            function fetchJobAssignData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            // Job Assign
+                            $('#jobAssignData').html('<label for="" class="form-label fw-bold">Job Assign: '+ res.data.job_assign +'</label>');
+                            
+                            // Assistant form
+                            $('#ass_date').val(res.data.DateAssign);
+                            $('#cust_name').val(res.data.customer_name);
+                            $('#requestedDate').val(res.data.requested_date);
+                            $('#machineName').val(res.data.machine_name);
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Assistant Data
+            function fetchAssistantData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var jobregister_id = $('#jobregisterID_assistant').val(res.data.jobregister_id);
+                        var tableBody = $('#assistantTable tbody');
+                        
+                        tableBody.empty();
+                        
+                        if (res.status == 200) {
+                            var assistantData = res.assistant;
+                    
+                            if (assistantData.length > 0) {
+                                assistantData.forEach(function (assistant) {
+                                    var row = "<tr data-id='" + assistant.id + "'>" +
+                                                "<td style='text-align: center; vertical-align: middle;'>" + assistant.username + "</td>" +
+                                                "<td style='text-align: center;'><button class='delete-button btn fw-bold' style='color:red; border:none;'>Delete</button></td>" +
+                                              "</tr>";
+
+                                    tableBody.append(row);
+                                });
+                            } 
+                            
+                            else {
+                                tableBody.append('<tr><td style="text-align: center;">No Assistant</td></tr>');
+                            }
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Accessory Data
+            function fetchAccessoryData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var tableBody = $('#accessoryTable tbody');
+                        
+                        tableBody.empty();
+                        
+                        if (res.status == 200) {
+                            var accessoriesData = res.jobAccessories;
+                            
+                            if (accessoriesData.length > 0) {
+                                var counter = 1;
+                                
+                                accessoriesData.forEach(function (jobAccessories) {
+                                    var row = "<tr>" +
+                                                "<td style='text-align: center;'>" + counter + "</td>" +
+                                                "<td>" + jobAccessories.accessories_code + "</td>" +
+                                                "<td>" + jobAccessories.accessories_name + "</td>" +
+                                                "<td style='text-align: center;'>" + jobAccessories.accessories_uom + "</td>" +
+                                                "<td style='text-align: center;'>" + jobAccessories.accessories_quantity + "</td>" +
+                                              "</tr>";
+                                    
+                                    tableBody.append(row);
+                                    counter++;
+                                });
+                            } 
+                            
+                            else {
+                                tableBody.append('<tr><td style="text-align: center;" colspan="5">No Accessory</td></tr>');
+                            }
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Photo Before Service Data
+            function fetchPhotoBeforeData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var jobregister_id = $('#jobregisterID_photoBefore').val(res.data.jobregister_id);
+                        var photoCard = $('#photoBeforeService');
+                    
+                        photoCard.empty();
+                        
+                        if (res.status == 200) {
+                            var photosBeforeData = res.photosBefore;
+                            
+                            if (photosBeforeData.length > 0) {
+                                
+                                photosBeforeData.forEach(function (photosBefore) {
+                                    var row = "<div class='photoBeforeContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + photosBefore.id + "'>" +
+                                                "<div class='card'>" +
+                                                    "<a href='image/" + photosBefore.file_name + "' download>" +
+                                                        "<img src='image/" + photosBefore.file_name + "' class='rounded img-fluid' alt='Photo uploaded by technician'>" +
+                                                    "</a>" +
+                                                    "<button type='button' class='photoBeforeDelete btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'><i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i></button>" +
+                                                "</div>" +
+                                              "</div>";
+
+                                    photoCard.append(row);
+                                });
+                            } 
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Photo After Service Data
+            function fetchPhotoAfterData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var jobregister_id = $('#jobregisterID_photoAfter').val(res.data.jobregister_id);
+                        var photoCardAfter = $('#photoAfterService');
+                        
+                        photoCardAfter.empty();
+                        
+                        if (res.status == 200) {
+                            var photosAfterData = res.photosAfter;
+                            
+                            if (photosAfterData.length > 0) {
+                                
+                                photosAfterData.forEach(function (photosAfter) {
+                                    var row = "<div class='photoAfterContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + photosAfter.id + "'>" +
+                                                "<div class='card'>" +
+                                                    "<a href='image/" + photosAfter.file_name + "' download>" +
+                                                        "<img src='image/" + photosAfter.file_name + "' class='rounded img-fluid' alt='Photo uploaded by technician'>" +
+                                                    "</a>" +
+                                                    "<button type='button' class='photoAfterDelete btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'>" +
+                                                        "<i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i>" +
+                                                    "</button>" +
+                                                "</div>" +
+                                              "</div>";
+                                    
+                                    photoCardAfter.append(row);
+                                });
+                            } 
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Video Before Service Data
+            function fetchVideoBeforeData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var jobregister_id = $('#jobregisterID_videoBefore').val(res.data.jobregister_id);
+                        var videoCard = $('#videoBeforeService');
+                        
+                        videoCard.empty();
+                        
+                        if (res.status == 200) {
+                            var videosBeforeData = res.videosBefore;
+                            
+                            if (videosBeforeData.length > 0) {
+                                
+                                videosBeforeData.forEach(function (videosBefore) {
+                                    var row = "<div class='videoBeforeContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + videosBefore.id + "'>" +
+                                                "<div class='card'>" +
+                                                    "<video class='rounded card-img-top' controls>" +
+                                                        "<source src='image/" + videosBefore.video_url + "' type='video/mp4'>" +
+                                                    "</video>" +
+                                                    "<button type='button' class='videoBeforeDeletebtn btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'>" +
+                                                        "<i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i>" +
+                                                    "</button>" +
+                                                "</div>" +
+                                              "</div>";
+
+                                    videoCard.append(row);
+                                });
+                            } 
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch  Video After Service Data
+            function fetchVideoAfterData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var jobregister_id = $('#jobregisterID_videoAfter').val(res.data.jobregister_id);
+                        var videoCardAfter = $('#videoAfterService');
+                        
+                        videoCardAfter.empty();
+                        
+                        if (res.status == 200) {
+                            var videosAfterData = res.videosAfter;
+                            
+                            if (videosAfterData.length > 0) {
+                                
+                                videosAfterData.forEach(function (videosAfter) {
+                                    var row = "<div class='videoAfterContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + videosAfter.id + "'>" +
+                                                "<div class='card'>" +
+                                                    "<video class='rounded card-img-top' controls>" +
+                                                        "<source src='image/" + videosAfter.video_url + "' type='video/mp4'>" +
+                                                    "</video>" +
+                                                    "<button type='button' class='videoAfterDeletebtn btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'>" +
+                                                        "<i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i>" +
+                                                    "</button>" +
+                                                "</div>" +
+                                              "</div>";
+                                    
+                                    videoCardAfter.append(row);
+                                });
+                            } 
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // fetch Job Status Tab
+            function fetchJobStatusData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            $('#jobregisterID_jobStatus').val(res.data.jobregister_id);
+                            
+                            $('#jobStatus_departure').val(res.data.technician_departure);
+                            $('#jobStatus_arrival').val(res.data.technician_arrival);
+                            $('#jobStatus_leaving').val(res.data.technician_leaving);
+                            
+                            $('#job_statusChange').val(res.data.job_status).trigger('change');
+                            $('#reason').val(res.data.reason); 
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            function fetchJobReporData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            $('#jobregisterID_jobReport').val(res.data.jobregister_id);
+                            $('#serviceReport_Date').val(res.data.DateAssign);
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch All Tab Data
+            $(document).on('click', '.Job', function () {
+                var jobregister_id = $(this).data('jobregisterid');
+                
+                fetchUsername();
+                fetchJobUpdateData(jobregister_id)
+                fetchJobInfoData(jobregister_id)
+                fetchJobAssignData(jobregister_id)
+                fetchAssistantData(jobregister_id)
+                fetchAccessoryData(jobregister_id)
+                fetchPhotoBeforeData(jobregister_id)
+                fetchPhotoAfterData(jobregister_id)
+                fetchVideoBeforeData(jobregister_id)
+                fetchVideoAfterData(jobregister_id)
+                fetchJobStatusData(jobregister_id)
+                fetchJobReporData(jobregister_id)
+                
+                $('#popUpModal').modal('show');
+            });
+
+            // Hide respond message
+            function hideElementById(elementId) {
+                document.getElementById(elementId).style.display = "none";
+            }
+
+            // Update job update tab
+            $(document).on('submit', '#techJobUpdateForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("update_jobUpdate", true);
+
+                var jobregister_id = $("#jobregisterID_jobUpdate").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false, 
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status === 200) {
+                            $('#JobUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("JobUpdateMessage");
+                            }, 2000);
+                            
+                            fetchJobInfoData(jobregister_id)
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#JobUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("JobUpdateMessage");
+                            }, 2000);
+
+                            fetchJobInfoData(jobregister_id)
+                        }
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#JobUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        setTimeout(function () {
+                            hideElementById("JobUpdateMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+
+            // Update job info tab
+            $(document).on('submit', '#techJobInfoForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("update_jobInfo", true);
+
+                var jobregister_id = $("#jobregisterID_jobInfo").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false, 
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status === 200) {
+                            $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("JobInfoMessage");
+                            }, 2000);
+                            
+                            fetchJobInfoData(jobregister_id)
+                            fetchUsername()
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("JobInfoMessage");
+                            }, 2000);
+
+                            fetchJobInfoData(jobregister_id);
+                            fetchUsername();
+                        }
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                          
+                        setTimeout(function () {
+                            hideElementById("JobInfoMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+
+            // Add Assistant
+            $(document).on('submit', '#techJobAssistantForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("submit_Assistant", true);
+
+                var jobregister_id = $("#jobregisterID_assistant").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false, 
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                       
+                        if (res.status === 200) {
+                            $('#assistantMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                            
+                            $('#username').val(null).trigger('change');
+
+                            setTimeout(function () {
+                                hideElementById("assistantMessage");
+                            }, 2000);
+
+                            fetchAssistantData(jobregister_id);                            
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#assistantMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
+                            
+                            $('#username').val(null).trigger('change');
+
+                            setTimeout(function () {
+                                hideElementById("assistantMessage");
+                            }, 2000);
+                        }
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#assistantMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        $('#username').val(null).trigger('change');
+                        
+                        setTimeout(function () {
+                            hideElementById("assistantMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);                        
+                    }
+                });
+            });
+
+            // Delete Assistant
+            $('#assistantTable').on('click', '.delete-button', function () {
+                var row = $(this).closest('tr');
+                var assistantId = row.data('id');
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: {id: assistantId},
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status == 200) {
+                            row.remove();
+                        }
+                        
+                        else {
+                            console.log("Error deleting assistant.");
+                        }
+                    }
+                });
+            });
+
+            // Upload Photo Before
+            $(document).on('submit', '#techJobPhotoBeforeForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("upload_photoBefore", true);
+
+                var jobregister_id = $("#jobregisterID_photoBefore").val();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status === 200) {
+                            $('#photoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#photoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                        }
+
+                        $('#previewPhotoBefore').empty();
+                        $('#techJobPhotoBeforeForm')[0].reset();
+
+                        setTimeout(function () {
+                            hideElementById("photoBeforeMessage");
+                        }, 2000);
+
+                        fetchPhotoBeforeData(jobregister_id);
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#photoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+
+                        $('#previewPhotoBefore').empty();
+                        $('#techJobPhotoBeforeForm')[0].reset();
+
+                        setTimeout(function () {
+                            hideElementById("photoBeforeMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+
+            // Delete Photo Before
+            $('#photoBeforeService').on('click', '.photoBeforeDelete', function () {
+                var photoBefore = $(this).closest('.photoBeforeContainer');
+                var photoId = photoBefore.data('id');
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: {'delete_photoBefore': true,
+                           'id': photoId},
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status == 200) {
+                            photoBefore.remove();
+                        }
+                        
+                        else {
+                            console.log("Error deleting assistant.");
+                        }
+                    }
+                });
+            });
+
+            // Upload Photo After
+            $(document).on('submit', '#techJobPhotoAfterForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("upload_photoAfter", true);
+
+                var jobregister_id = $("#jobregisterID_photoAfter").val();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status === 200) {
+                            $('#photoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#photoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                        }
+
+                        $('#previewPhotoAfter').empty();
+                        $('#techJobPhotoAfterForm')[0].reset();
+
+                        setTimeout(function () {
+                            hideElementById("photoAfterMessage");
+                        }, 2000);
+                        
+                        fetchPhotoAfterData(jobregister_id)
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#photoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        $('#previewPhotoAfter').empty();
+                        $('#techJobPhotoAfterForm')[0].reset();
+
+                        setTimeout(function () {
+                            hideElementById("photoAfterMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+
+            // Delete Photo After
+            $('#photoAfterService').on('click', '.photoAfterDelete', function () {
+                var photoAfter = $(this).closest('.photoAfterContainer');
+                var photoIdAfter = photoAfter.data('id');
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: {'delete_photoAfter': true,
+                           'id': photoIdAfter},
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status == 200) {
+                            photoAfter.remove();
+                        }
+                        
+                        else {
+                            console.log("Error deleting assistant.");
+                        }
+                    }
+                });
+            });
+
+            // Upload Video Before
+            $(document).on('submit', '#techJobVideoBeforeForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("upload_videoBefore", true);
+
+                var jobregister_id = $("#jobregisterID_videoBefore").val();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status === 200) {
+                            $('#videoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#videoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                        }
+
+                        $('#previewVideoBefore').empty();
+                        $('#techJobVideoBeforeForm')[0].reset();
+
+                        setTimeout(function () {
+                            hideElementById("videoBeforeMessage");
+                        }, 2000);
+                        
+                        fetchVideoBeforeData(jobregister_id)
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#videoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        $('#previewVideoBefore').empty();
+                        $('#techJobVideoBeforeForm')[0].reset();
+
+                        setTimeout(function () {
+                            hideElementById("videoBeforeMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+
+            // Delete Video Before
+            $('#videoBeforeService').on('click', '.videoBeforeDeletebtn', function () {
+                var videoBefore = $(this).closest('.videoBeforeContainer');
+                var videoIdBefore = videoBefore.data('id');
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: {'delete_videoBefore': true,
+                           'id': videoIdBefore},
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status == 200) {
+                            videoBefore.remove();
+                        }
+                        
+                        else {
+                            console.log("Error deleting video.");
+                        }
+                    }
+                });
+            });
+
+            // Upload Video After
+            $(document).on('submit', '#techJobVideoAfterForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("upload_videoAfter", true);
+
+                var jobregister_id = $("#jobregisterID_videoAfter").val();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status === 200) {
+                            $('#videoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#videoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                        }
+
+                        $('#previewVideoAfter').empty();
+                        $('#techJobVideoAfterForm')[0].reset();
+
+                        setTimeout(function () {
+                            hideElementById("videoAfterMessage");
+                        }, 2000);
+
+                        fetchVideoAfterData(jobregister_id)
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#videoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+
+                        $('#previewVideoAfter').empty();
+                        $('#techJobVideoAfterForm')[0].reset();
+
+                        setTimeout(function () {
+                            hideElementById("videoAfterMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+
+            // Delete Video After
+            $('#videoAfterService').on('click', '.videoAfterDeletebtn', function () {
+                var videoAfter = $(this).closest('.videoAfterContainer');
+                var videoIdAfter = videoAfter.data('id');
+                
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: {'delete_videoAfter': true,
+                           'id': videoIdAfter},
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status == 200) {
+                            videoAfter.remove();
+                        }
+                        
+                        else {
+                            console.log("Error deleting video.");
+                        }
+                    }
+                });
+            });
+
+            // Update job status tab
+            $(document).on('submit', '#techJobStatusForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("update_jobStatus", true);
+
+                var jobregister_id = $("#jobregisterID_jobStatus").val();
+                var technician_departure = $("#jobStatus_departure").val();
+                var technician_arrival = $("#jobStatus_arrival").val();
+                var technician_leaving = $("#jobStatus_leaving").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false, 
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+ 
+                        if (res.status === 200) {
+                            $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p');
+                            
+                            setTimeout(function () {
+                                hideElementById("statusUpdateMessage");
+                            }, 2000);
+                        
+                        } 
+                        
+                        else if (res.status === 400) {
+                            $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: #C41E3A; display:block;">' + res.message + '</p');
+                            
+                            setTimeout(function () {
+                                hideElementById("statusUpdateMessage");
+                            }, 3000);
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p');
+                            
+                            setTimeout(function () {
+                                hideElementById("statusUpdateMessage");
+                            }, 2000);
+                        }
+                    },
+
+                    error: function (xhr, status, error) {
+                        $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        setTimeout(function () {
+                                hideElementById("statusUpdateMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+
+            // New Service Report
+            function newServiceReport(jobregister_id) {
+                $.ajax({
+                    url: 'servicereport.php',
+                    type: 'POST',
+                    data: {jobregister_id: jobregister_id},
+                    
+                    success: function (data) {
+                        var win = window.open('servicereport.php');
+                        win.document.write(data);
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        console.error("AJAX request error: " + error);
+                    }
+                });
+            }
+            
+            $('.NewServiceReport').click(function () {
+                var jobregister_id = $("#jobregisterID_jobReport").val();
+                
+                newServiceReport(jobregister_id);
+            });
+
+            // Edit Service Report
+            function editServiceReport(jobregister_id) {
+                $.ajax({
+                    url: 'servicereportEDIT.php',
+                    type: 'POST',
+                    data: { jobregister_id: jobregister_id },
+                    
+                    success: function (data) {
+                        var win = window.open('servicereportEDIT.php');
+                        win.document.write(data);
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        console.error("AJAX request error: " + error);
+                    }
+                });
+            }
+            
+            $('.EditServiceReport').click(function () {
+                var jobregister_id = $("#jobregisterID_jobReport").val();
+                
+                editServiceReport(jobregister_id);
+            });
+        </script>
+		<!-- End of Popup Modal -->
+
+        <!-- Completed Popup Modal -->
+        <div class="modal fade" id="completedPopupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <ul class="nav nav-pills mb-3" id="pills-tab-Completed" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active p-1 me-1 fw-bold" id="pills-UpdateCompleted-tab" data-bs-toggle="pill" data-bs-target="#pills-UpdateCompleted" type="button" role="tab" aria-controls="pills-UpdateCompleted" aria-selected="true">Update</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link p-1 me-1 fw-bold" id="pills-JobInfoCompleted-tab" data-bs-toggle="pill" data-bs-target="#pills-JobInfoCompleted" type="button" role="tab" aria-controls="pills-JobInfoCompleted" aria-selected="false">Job Info</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link p-1 me-1 fw-bold" id="pills-JobAssignCompleted-tab" data-bs-toggle="pill" data-bs-target="#pills-JobAssignCompleted" type="button" role="tab" aria-controls="pills-JobAssignCompleted" aria-selected="false">Job Assign</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 me-1 fw-bold" id="pills-AccessoriesCompleted-tab" data-bs-toggle="pill" data-bs-target="#pills-AccessoriesCompleted" type="button" role="tab" aria-controls="pills-AccessoriesCompleted" aria-selected="false">Accessories</button>
+                            </li>
+                            
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 me-1 fw-bold" id="pills-PhotoCompleted-tab" data-bs-toggle="pill" data-bs-target="#pills-PhotoCompleted" type="button" role="tab" aria-controls="pills-PhotoCompleted" aria-selected="false">Photo</button>
+                            </li>
+                              
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 me-1 fw-bold" id="pills-VideoCompleted-tab" data-bs-toggle="pill" data-bs-target="#pills-VideoCompleted" type="button" role="tab" aria-controls="pills-VideoCompleted" aria-selected="false">Video</button>
+                            </li>
+                              
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-1 me-1 fw-bold" id="pills-ReportCompleted-tab" data-bs-toggle="pill" data-bs-target="#pills-ReportCompleted" type="button" role="tab" aria-controls="pills-ReportCompleted" aria-selected="false">Report</button>
+                            </li>
+                        </ul>
+                        
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="tab-content" id="pills-tabContent-Completed">
+                            <!-- Update -->
+                            <div class="tab-pane show active" id="pills-UpdateCompleted" role="tabpanel" aria-labelledby="pills-UpdateCompleted-tab">
+                                <div class="container">
+                                    <!-- Departure Time -->
+                                    <label for="" class="form-label fw-bold">Departure Time</label>
+                                    <input type="text" name="technician_departure" id="techdeparture_completed" class="form-control mb-3" readonly>
+                                    
+                                    <!-- Arrival Time -->
+                                    <label for="" class="form-label fw-bold">Time At Site</label>
+                                    <input type="text" name="technician_arrival" id="techarrival_completed" class="form-control mb-3" readonly>
+                                    
+                                    <!-- Leaving Time -->
+                                    <label for="" class="form-label fw-bold">Return Time</label>
+                                    <input type="text" name="technician_leaving" id="techleaving_completed" class="form-control mb-3" readonly>
+                                    
+                                    <!-- Rest Time -->
+                                    <label for="" class="form-label fw-bold">Rest Hour</label>
+                                    <div class="d-grid gap-3 mb-3">
+                                        <!-- Rest Out -->
+                                        <input type="text" name="tech_out" id="techOut_completed" class="form-control" readonly>
+                                        <!-- Rest In -->
+                                        <input type="text" name="tech_in" id="techIn_completed" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Job Info -->
+                            <div class="tab-pane" id="pills-JobInfoCompleted" role="tabpanel" aria-labelledby="pills-JobInfoCompleted-tab">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Job Priority</label>
+                                            <input type="text" name="job_priority" id="jobPriority_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Job Order Number</label>
+                                            <input type="text" name="job_order_number" id="JON_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Job Name</label>
+                                            <input type="text" name="job_name" id="jobName_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Job Description</label>
+                                            <input type="text" name="job_description" id="jobDesc_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Requested Date</label>
+                                            <input type="text" name="requested_date" id="reqDate_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Delivery Date</label>
+                                            <input type="text" name="delivery_date" id="delDate_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="" class="fw-bold mb-2">Customer Name</label>
+                                            <input type="text" name="customer_name" id="custName_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="" class="form-label fw-bold">Customer Address</label>
+                                            <input type="text" name="cust_address1" id="custAddr1_completed" class="form-control" readonly>
+                                            <div class="d-grid d-flex gap-2 mt-2">
+                                                <input type="text" name="cust_address2" id="custAddr2_completed" class="form-control" readonly>
+                                                <input type="text" name="cust_address3" id="custAddr3_completed" class="form-control" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Customer Grade</label>
+                                            <input type="text" name="customer_grade" id="custGrade_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Customer PIC</label>
+                                            <input type="text" name="customer_PIC" id="custPIC_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="" class="form-label fw-bold">Customer Phone Number</label>
+                                            <div class="d-grid d-flex gap-2 mt-2">
+                                                <input type="text" name="cust_phone1" id="custPhone1_completed" class="form-control" readonly>
+                                                <input type="text" name="cust_phone2" id="custPhone2_completed" class="form-control" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Machine Brand</label>
+                                            <input type="text" name="machine_brand" id="machBrand_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="" class="form-label fw-bold">Machine Type</label>
+                                            <input type="text" name="machine_type" id="machType_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="" class="form-label fw-bold">Machine Name</label>
+                                            <input type="text" name="machine_name" id="machName_completed" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="" class="form-label fw-bold">Serial Number</label>
+                                            <input type="text" name="serialnumber" id="serNum_completed" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Job Assign -->
+                            <div class="tab-pane" id="pills-JobAssignCompleted" role="tabpanel" aria-labelledby="pills-JobAssignCompleted-tab">
+                                <div class="container">
+                                    <div class="card mb-3">
+                                        <div class="card-body" id="jobAsgn_completed"></div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold">Assistant</label>
+                                            
+                                            <div class="table-responsive mb-3">
+                                                <table class="table border table-borderless table-striped" id="assistant_completed">
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accessories -->
+                            <div class="tab-pane" id="pills-AccessoriesCompleted" role="tabpanel" aria-labelledby="pills-AccessoriesCompleted-tab">
+                                <div class="container">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-hover" id="accessory_completed">
+                                            <thead>
+                                                <tr>
+                                                    <th style='text-align: center;'>No</th>
+                                                    <th style='text-align: center;'>Code</th>
+                                                    <th style='text-align: center;'>Name</th>
+                                                    <th style='text-align: center;'>UOM</th>
+                                                    <th style='text-align: center;'>Quantity</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Photo -->
+                            <div class="tab-pane" id="pills-PhotoCompleted" role="tabpanel" aria-labelledby="pills-PhotoCompleted-tab">
+                                <div class="container">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold">Photo Before Service</label>
+                                            <div class="container">
+                                                <div class="row" id="photoBefore_completed"></div>
+                                            </div> 
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold" >Photo After Service</label>
+                                            <div class="container">
+                                                <div class="row" id="photoAfter_completed"></div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Video -->
+                            <div class="tab-pane" id="pills-VideoCompleted" role="tabpanel" aria-labelledby="pills-VideoCompleted-tab">
+                                <div class="container">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold" >Video Before Service</label>
+                                            
+                                            <div class="container">
+                                                <div class="row" id="videoBefore_completed"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <label for="" class="form-label fw-bold" >Video After Service</label>
+                                            
+                                            <div class="container">
+                                                <div class="row" id="videoAfter_completed"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <!-- Report -->
+                            <div class="tab-pane" id="pills-ReportCompleted" role="tabpanel" aria-labelledby="pills-ReportCompleted-tab">
+                                <div class="container">
+                                    <label for="" class="form-label fw-bold">Service Report Date:</label>
+                                    <div class="input-group mb-3">
+                                        <input type="hidden" name="jobregister_id" id="jobRegID_completed" class="form-control">
+                                        <input type="text" name="DateAssign" id="DateAssign_completed" class="form-control">
+                                        <button type="button" class="CompletedNewServiceReport btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">New</button>
+                                        <button type="button" class="CompletedEditServiceReport btn" style="border: none; background-color: #790604; color: #FFFFFF; width: fit-content;">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Fetch completed job update, job info, job asssign and report
+            function fetchCompletedJobData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            // Job Update
+                            $('#techdeparture_completed').val(res.data.technician_departure);
+                            $('#techarrival_completed').val(res.data.technician_arrival);
+                            $('#techleaving_completed').val(res.data.technician_leaving);
+                            $('#techOut_completed').val(res.data.tech_out);
+                            $('#techIn_completed').val(res.data.tech_in);
+
+                            // Job Info
+                            $('#jobPriority_completed').val(res.data.job_priority);
+                            $('#JON_completed').val(res.data.job_order_number);
+                            $('#jobName_completed').val(res.data.job_name);
+                            $('#jobDesc_completed').val(res.data.job_description);
+                            $('#reqDate_completed').val(res.data.requested_date);
+                            $('#delDate_completed').val(res.data.delivery_date);
+                            $('#custName_completed').val(res.data.customer_name);
+                            $('#custAddr1_completed').val(res.data.cust_address1);
+                            $('#custAddr2_completed').val(res.data.cust_address2);
+                            $('#custAddr3_completed').val(res.data.cust_address3);
+                            $('#custGrade_completed').val(res.data.customer_grade);
+                            $('#custPIC_completed').val(res.data.customer_PIC);
+                            $('#custPhone1_completed').val(res.data.cust_phone1);
+                            $('#custPhone2_completed').val(res.data.cust_phone2);
+                            $('#machBrand_completed').val(res.data.machine_brand);
+                            $('#machType_completed').val(res.data.machine_type);
+                            $('#machName_completed').val(res.data.machine_name);
+                            $('#serNum_completed').val(res.data.serialnumber);
+
+                            // Job Assign
+                            $('#jobAsgn_completed').html('<label for="" class="form-label fw-bold">Job Assign: '+ res.data.job_assign +'</label>');
+
+                            // Report
+                            $('#DateAssign_completed').val(res.data.DateAssign);
+                            $('#jobRegID_completed').val(res.data.jobregister_id);
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Completed Job Assistant Data
+            function fetchCompletedAssistantData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var tableBodyCompleted = $('#assistant_completed tbody');
+                        
+                        tableBodyCompleted.empty();
+                        
+                        if (res.status == 200) {
+                            var assistantData = res.assistant;
+                    
+                            if (assistantData.length > 0) {
+                                assistantData.forEach(function (assistant) {
+                                    var row = "<tr data-id='" + assistant.id + "'>" +
+                                                "<td style='text-align: center; vertical-align: middle;'>" + assistant.username + "</td>" +
+                                              "</tr>";
+
+                                    tableBodyCompleted.append(row);
+                                });
+                            } 
+                            
+                            else {
+                                tableBodyCompleted.append('<tr><td style="text-align: center;">No Assistant</td></tr>');
+                            }
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Completed Accessory Data
+            function fetchCompletedAccessoryData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var tableBodyCompleted = $('#accessory_completed tbody');
+                        
+                        tableBodyCompleted.empty();
+                        
+                        if (res.status == 200) {
+                            var accessoriesData = res.jobAccessories;
+                            
+                            if (accessoriesData.length > 0) {
+                                var counter = 1;
+                                
+                                accessoriesData.forEach(function (jobAccessories) {
+                                    var row = "<tr>" +
+                                                "<td style='text-align: center;'>" + counter + "</td>" +
+                                                "<td>" + jobAccessories.accessories_code + "</td>" +
+                                                "<td>" + jobAccessories.accessories_name + "</td>" +
+                                                "<td style='text-align: center;'>" + jobAccessories.accessories_uom + "</td>" +
+                                                "<td style='text-align: center;'>" + jobAccessories.accessories_quantity + "</td>" +
+                                              "</tr>";
+                                    
+                                    tableBodyCompleted.append(row);
+                                    counter++;
+                                });
+                            } 
+                            
+                            else {
+                                tableBodyCompleted.append('<tr><td style="text-align: center;" colspan="5">No Accessory</td></tr>');
+                            }
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Completed Photo Before Service Data
+            function fetchCompletedPhotoBeforeData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var photoCard = $('#photoBefore_completed');
+                    
+                        photoCard.empty();
+                        
+                        if (res.status == 200) {
+                            var photosBeforeData = res.photosBefore;
+                            
+                            if (photosBeforeData.length > 0) {
+                                
+                                photosBeforeData.forEach(function (photosBefore) {
+                                    var row = "<div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-3'>" +
+                                                "<div class='card'>" +
+                                                    "<a href='image/" + photosBefore.file_name + "' download>" +
+                                                        "<img src='image/" + photosBefore.file_name + "' class='rounded img-fluid' alt='Photo uploaded by technician'>" +
+                                                    "</a>" +
+                                                "</div>" +
+                                              "</div>";
+
+                                    photoCard.append(row);
+                                });
+                            } 
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Completed Photo After Service Data
+            function fetchCompletedPhotoAfterData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var photoCardAfter = $('#photoAfter_completed');
+                        
+                        photoCardAfter.empty();
+                        
+                        if (res.status == 200) {
+                            var photosAfterData = res.photosAfter;
+                            
+                            if (photosAfterData.length > 0) {
+                                
+                                photosAfterData.forEach(function (photosAfter) {
+                                    var row = "<div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + photosAfter.id + "'>" +
+                                                "<div class='card'>" +
+                                                    "<a href='image/" + photosAfter.file_name + "' download>" +
+                                                        "<img src='image/" + photosAfter.file_name + "' class='rounded img-fluid' alt='Photo uploaded by technician'>" +
+                                                    "</a>" +
+                                                "</div>" +
+                                              "</div>";
+                                    
+                                    photoCardAfter.append(row);
+                                });
+                            } 
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Completed Video Before Service Data
+            function fetchCompletedVideoBeforeData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var videoCard = $('#videoBefore_completed');
+                        
+                        videoCard.empty();
+                        
+                        if (res.status == 200) {
+                            var videosBeforeData = res.videosBefore;
+                            
+                            if (videosBeforeData.length > 0) {
+                                
+                                videosBeforeData.forEach(function (videosBefore) {
+                                    var row = "<div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + videosBefore.id + "'>" +
+                                                "<div class='card'>" +
+                                                    "<video class='rounded card-img-top' controls>" +
+                                                        "<source src='image/" + videosBefore.video_url + "' type='video/mp4'>" +
+                                                    "</video>" +
+                                                "</div>" +
+                                              "</div>";
+
+                                    videoCard.append(row);
+                                });
+                            } 
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Completed Video After Service Data
+            function fetchCompletedVideoAfterData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        var videoCardAfter = $('#videoAfter_completed');
+                        
+                        videoCardAfter.empty();
+                        
+                        if (res.status == 200) {
+                            var videosAfterData = res.videosAfter;
+                            
+                            if (videosAfterData.length > 0) {
+                                
+                                videosAfterData.forEach(function (videosAfter) {
+                                    var row = "<div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + videosAfter.id + "'>" +
+                                                "<div class='card'>" +
+                                                    "<video class='rounded card-img-top' controls>" +
+                                                        "<source src='image/" + videosAfter.video_url + "' type='video/mp4'>" +
+                                                    "</video>" +
+                                                "</div>" +
+                                              "</div>";
+                                    
+                                    videoCardAfter.append(row);
+                                });
+                            } 
+                        } 
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            $(document).on('click', '.JobCompleted', function () {
+                var jobregister_id = $(this).data('jobregisterid');
+                
+                fetchCompletedJobData(jobregister_id)
+                fetchCompletedAssistantData(jobregister_id)
+                fetchCompletedAccessoryData(jobregister_id)
+                fetchCompletedPhotoBeforeData(jobregister_id)
+                fetchCompletedPhotoAfterData(jobregister_id)
+                fetchCompletedVideoBeforeData(jobregister_id)
+                fetchCompletedVideoAfterData(jobregister_id)
+            
+                $('#completedPopupModal').modal('show');
+            });
+
+            // Completed New Service Report
+            function newServiceReportCompleted(jobregister_id) {
+                $.ajax({
+                    url: 'servicereport.php',
+                    type: 'POST',
+                    data: {jobregister_id: jobregister_id},
+                    
+                    success: function (data) {
+                        var win = window.open('servicereport.php');
+                        win.document.write(data);
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        console.error("AJAX request error: " + error);
+                    }
+                });
+            }
+            
+            $('.CompletedNewServiceReport').click(function () {
+                var jobregister_id = $("#jobRegID_completed").val();
+                
+                newServiceReportCompleted(jobregister_id);
+            });
+
+            // Completed Edit Service Report
+            function editServiceReportCompleted(jobregister_id) {
+                $.ajax({
+                    url: 'servicereportEDIT.php',
+                    type: 'POST',
+                    data: {jobregister_id: jobregister_id},
+                    
+                    success: function (data) {
+                        var win = window.open('servicereportEDIT.php');
+                        win.document.write(data);
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        console.error("AJAX request error: " + error);
+                    }
+                });
+            }
+            
+            $('.CompletedEditServiceReport').click(function () {
+                var jobregister_id = $("#jobRegID_completed").val();
+                
+                editServiceReportCompleted(jobregister_id);
+            });
+        </script>
+		<!-- End of Completed Popup Modal -->
+
+        <!-- Support Popup Modal -->
+        <div class="modal fade" id="supportPopupModal" tabindex="-1" aria-labelledby="supportPopupModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="supportPopupModalLabel">Support</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="container">
+                            <form id="jobSupportForm">
+                                <input type="hidden" name="today_date" id="todayDate_Support">
+                                <input type="hidden" name="accessories_required" id="accsReq_Support">
+                                <input type="hidden" name="accessories_for" id="accsFor_Support">
+                                <input type="hidden" name="support" id="support">
+                            
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Priority</label>
+                                        <input type="text" name="job_priority" id="jobPriority_Support" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Order Number</label>
+                                        <input type="text" name="job_order_number" id="JON_Support" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Name</label>
+                                        <input type="text" name="job_name" id="jobName_Support" class="form-control" readonly>
+                                        <input type="hidden" name="job_code" id="jobCode_Support">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Description</label>
+                                        <input type="text" name="job_description" id="jobDesc_Support" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Requested Date</label>
+                                        <input type="text" name="requested_date" id="reqDate_Support" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Delivery Date</label>
+                                        <input type="text" name="delivery_date" id="delDate_Support" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Name</label>
+                                        <input type="text" name="customer_name" id="custName_Support" class="form-control" readonly>
+                                        <input type="hidden" name="customer_code" id="custCode_Support">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Address</label>
+                                        <input type="text" name="cust_address1" id="custAddr1_Support" class="form-control" readonly>
+                                        <div class="d-grid d-flex gap-2 mt-2">
+                                            <input type="text" name="cust_address2" id="custAddr2_Support" class="form-control" readonly>
+                                            <input type="text" name="cust_address3" id="custAddr3_Support" class="form-control" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Grade</label>
+                                        <input type="text" name="customer_grade" id="custGrade_Support" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Customer PIC</label>
+                                        <input type="text" name="customer_PIC" id="custPIC_Support" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Phone Number</label>
+                                        <div class="d-grid d-flex gap-2 mt-2">
+                                            <input type="text" name="cust_phone1" id="custPhone1_Support" class="form-control" readonly>
+                                            <input type="text" name="cust_phone2" id="custPhone2_Support" class="form-control" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Brand</label>
+                                        <input type="text" name="machine_brand" id="machBrand_Support" class="form-control" readonly>
+                                        <input type="hidden" name="brand_id" id="brandID_Support">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Type</label>
+                                        <input type="text" name="machine_type" id="machType_Support" class="form-control" readonly>
+                                        <input type="hidden" name="type_id" id="typeID_Support">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Name</label>
+                                        <input type="text" name="machine_name" id="machName_Support" class="form-control" readonly>
+                                        <input type="hidden" name="machine_id" id="machID_Support">
+                                        <input type="hidden" name="machine_code" id="machCode_Support">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Serial Number</label>
+                                        <input type="text" name="serialnumber" id="serNum_Support" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Ask support from:</label>
+                                        <select name="job_assign" id="jobAss_Support" onchange="GetAssignDetails(this.value)" class="form-select">
+                                            <?php
+                                            
+                                                include "dbconnect.php";
+                                            
+                                                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE staff_position = 'Leader' AND tech_avai = '0' ORDER BY username ASC");
+                                            
+                                                echo "<option value=''>Select Technician</option>";
+                                            
+                                                if (mysqli_num_rows($records) > 0) {
+                                                    while ($data = mysqli_fetch_array($records)) {
+                                                        echo "<option value='" . $data['username'] . "'
+                                                                      data-rank='". $data['technician_rank'] ."'
+                                                                      data-position='". $data['staff_position'] ."'>" . $data['username'] . "</option>";
+                                                    }
+                                                } 
+                                            
+                                                else {
+                                                    echo "No Record Found";
+                                                }
+                                            
+                                                mysqli_close($conn);
+                                            ?>
+                                        </select>
+
+                                        <script>
+                                            $(document).ready(function() {
+                                                $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                    $("#jobAss_Support").select2({
+                                                        dropdownParent: $('#jobSupportForm'),
+                                                        matcher: oldMatcher(matchStart),
+                                                        theme: 'bootstrap-5'
+                                                    })
+                                                });
+                                                
+                                                function matchStart (term, text) {
+                                                    if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                        return true;
+                                                    }
+                                                    
+                                                    return false;
+                                                }
+                                            });
+                                        </script>
+                                        
+                                        <script>
+                                            function GetAssignDetails(value) {
+                                                var selectedOption = document.querySelector('#jobAss_Support option[value="' + value + '"]');
+                                                var rank = selectedOption.getAttribute('data-rank');
+                                                var position = selectedOption.getAttribute('data-position');
+                            
+                                                document.querySelector('input[name="technician_rank"]').value = rank;
+                                                document.querySelector('input[name="staff_position"]').value = position;
+                                            }
+                                        </script>
+                                        
+                                        <input type="hidden" name="technician_rank" id="techRank_Support">
+                                        <input type="hidden" name="staff_position" id="staffPos_Support">
+                                    </div>
+
+                                    <input type="hidden" name="jobregistercreated_by" id="jobRegBy_Support">
+                                    <input type="hidden" name="jobregisterlastmodify_by" id="jobLastModBy_Support">
+
+                                    <div class="mb-3 mt-3">
+                                        <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width:100%">Submit</button>
+                                    </div>
+
+                                    <div id="jobSupportMessage"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Get Support Job Info Value
+            function fetchJobInfoDataSupport(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            $('#todayDate_Support').val(new Date().toISOString().slice(0, 10));
+                            $('#accsReq_Support').val(res.data.accessories_required);
+                            $('#accsFor_Support').val(res.data.accessories_for);
+                            $('#support').val('Support for ' + res.data.job_assign);
+                            $('#jobPriority_Support').val(res.data.job_priority);
+                            $('#JON_Support').val(res.data.job_order_number + -1);
+                            $('#jobName_Support').val(res.data.job_name);
+                            $('#jobCode_Support').val(res.data.job_code);
+                            $('#jobDesc_Support').val(res.data.job_description);
+                            $('#reqDate_Support').val(res.data.requested_date);
+                            $('#delDate_Support').val(res.data.delivery_date);
+                            $('#custName_Support').val(res.data.customer_name);
+                            $('#custCode_Support').val(res.data.customer_code);
+                            $('#custAddr1_Support').val(res.data.cust_address1);
+                            $('#custAddr2_Support').val(res.data.cust_address2);
+                            $('#custAddr3_Support').val(res.data.cust_address3);
+                            $('#custGrade_Support').val(res.data.customer_grade);
+                            $('#custPIC_Support').val(res.data.customer_PIC);
+                            $('#custPhone1_Support').val(res.data.cust_phone1);
+                            $('#custPhone2_Support').val(res.data.cust_phone2);
+                            $('#machBrand_Support').val(res.data.machine_brand);
+                            $('#brandID_Support').val(res.data.brand_id);
+                            $('#machType_Support').val(res.data.machine_type);
+                            $('#typeID_Support').val(res.data.type_id);
+                            $('#machName_Support').val(res.data.machine_name);
+                            $('#machID_Support').val(res.data.machine_id);
+                            $('#machCode_Support').val(res.data.machine_code);
+                            $('#serNum_Support').val(res.data.serialnumber);
+                            $('#jobAss_Support').val(res.data.job_assign).trigger('change');
+                            $('#techRank_Support').val(res.data.technician_rank);
+                            $('#staffPos_Support').val(res.data.staff_position);
+                            $('#jobRegBy_Support').val(usernameValue);
+                            $('#jobLastModBy_Support').val(usernameValue);
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Support Job info data
+            $(document).on('click', '.JobSupport.card-footer', function () {
+                var jobregister_id = $(this).data('supportid');
+                
+                fetchJobInfoDataSupport(jobregister_id)
+            
+                $('#supportPopupModal').modal('show');
+            });
+
+            // Hide respond message
+            function hideElementById(elementId) {
+                document.getElementById(elementId).style.display = "none";
+            }
+
+            // Submit Support form to database
+            $(document).on('submit', '#jobSupportForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("submit_jobSupport", true);
+
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false, 
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status === 200) {
+                            $('#jobSupportMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("jobSupportMessage");
+                            }, 2000);
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#jobSupportMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("jobSupportMessage");
+                            }, 2000);
+                        }
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#jobSupportMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        setTimeout(function () {
+                            hideElementById("jobSupportMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+        </script>
+		<!-- End of Support Popup Modal -->
+
+        <!-- Duplicate Popup Modal -->
+        <div class="modal fade" id="DuplicatePopupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Duplicate</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="container">
+                            <form id="jobDuplicateForm">
+                                <input type="hidden" name="today_date" id="todayDate_Duplicate">
+                                <input type="hidden" name="accessories_required" id="accsReq_Duplicate">
+                                <input type="hidden" name="accessories_for" id="accsFor_Duplicate">
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Priority</label>
+                                        <input type="text" name="job_priority" id="jobPriority_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Order Number</label>
+                                        <input type="text" name="job_order_number" id="JON_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Name</label>
+                                        <input type="text" name="job_name" id="jobName_Duplicate" class="form-control">
+                                        <input type="hidden" name="job_code" id="jobCode_Duplicate">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Description</label>
+                                        <input type="text" name="job_description" id="jobDesc_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Requested Date</label>
+                                        <input type="text" name="requested_date" id="reqDate_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Delivery Date</label>
+                                        <input type="text" name="delivery_date" id="delDate_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Name</label>
+                                        <input type="text" name="customer_name" id="custName_Duplicate" class="form-control">
+                                        <input type="hidden" name="customer_code" id="custCode_Duplicate">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Address</label>
+                                        <input type="text" name="cust_address1" id="custAddr1_Duplicate" class="form-control">
+                                        <div class="d-grid d-flex gap-2 mt-2">
+                                            <input type="text" name="cust_address2" id="custAddr2_Duplicate" class="form-control">
+                                            <input type="text" name="cust_address3" id="custAddr3_Duplicate" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Grade</label>
+                                        <input type="text" name="customer_grade" id="custGrade_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Customer PIC</label>
+                                        <input type="text" name="customer_PIC" id="custPIC_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Phone Number</label>
+                                        <div class="d-grid d-flex gap-2 mt-2">
+                                            <input type="text" name="cust_phone1" id="custPhone1_Duplicate" class="form-control">
+                                            <input type="text" name="cust_phone2" id="custPhone2_Duplicate" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Brand</label>
+                                        <input type="text" name="machine_brand" id="machBrand_Duplicate" class="form-control">
+                                        <input type="hidden" name="brand_id" id="brandID_Duplicate">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Type</label>
+                                        <input type="text" name="machine_type" id="machType_Duplicate" class="form-control">
+                                        <input type="hidden" name="type_id" id="typeID_Duplicate">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Name</label>
+                                        <input type="text" name="machine_name" id="machName_Duplicate" class="form-control">
+                                        <input type="hidden" name="machine_id" id="machID_Duplicate">
+                                        <input type="hidden" name="machine_code" id="machCode_Duplicate">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Serial Number</label>
+                                        <input type="text" name="serialnumber" id="serNum_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Assign To:</label>
+                                       
+                                        <select name="job_assign" id="jobAss_Duplicate" onchange="GetAssignDuplicateDetails(this.value)" class="form-select">
+                                            <?php
+                                            
+                                                include "dbconnect.php";
+                                            
+                                                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE staff_position = 'Leader' AND tech_avai = '0' ORDER BY username ASC");
+                                            
+                                                echo "<option value=''>Select Technician</option>";
+                                            
+                                                if (mysqli_num_rows($records) > 0) {
+                                                    while ($data = mysqli_fetch_array($records)) {
+                                                        echo "<option value='" . $data['username'] . "'
+                                                                      data-rankDup='". $data['technician_rank'] ."'
+                                                                      data-positionDup='". $data['staff_position'] ."'>" . $data['username'] . "</option>";
+                                                    }
+                                                } 
+                                            
+                                                else {
+                                                    echo "No Record Found";
+                                                }
+                                            
+                                                mysqli_close($conn);
+                                            ?>
+                                        </select>
+
+                                        <script>
+                                            $(document).ready(function() {
+                                                $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                    $("#jobAss_Duplicate").select2({
+                                                        dropdownParent: $('#jobDuplicateForm'),
+                                                        matcher: oldMatcher(matchStart),
+                                                        theme: 'bootstrap-5'
+                                                    })
+                                                });
+                                                
+                                                function matchStart (term, text) {
+                                                    if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                        return true;
+                                                    }
+                                                    
+                                                    return false;
+                                                }
+                                            });
+                                        </script>
+                                        
+                                        <script>
+                                            function GetAssignDuplicateDetails(value) {
+                                                var selectedOption = document.querySelector('#jobAss_Duplicate option[value="' + value + '"]');
+                                                var rankDup = selectedOption.getAttribute('data-rankDup');
+                                                var positionDup = selectedOption.getAttribute('data-positionDup');
+                            
+                                                document.querySelector('input[name="technician_rank"]').value = rankDup;
+                                                document.querySelector('input[name="staff_position"]').value = positionDup;
+                                            }
+                                        </script>
+
+                                        <input type="hidden" name="technician_rank" id="techRank_Duplicate">
+                                        <input type="hidden" name="staff_position" id="staffPos_Duplicate">
+                                    </div>
+
+                                    <input type="hidden" name="reason" id="reason_Duplicate">
+                                    <input type="hidden" name="jobregistercreated_by" id="jobRegBy_Duplicate">
+                                    <input type="hidden" name="jobregisterlastmodify_by" id="jobLastModBy_Duplicate">
+
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width:100%">Update</button>
+                                    </div>
+
+                                    <div id="duplicateJobMessage"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Get Duplicate Job Info Value
+            function fetchJobInfoDataDuplicate(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            $('#todayDate_Duplicate').val(new Date().toISOString().slice(0, 10));
+                            $('#accsReq_Duplicate').val(res.data.accessories_required);
+                            $('#accsFor_Duplicate').val(res.data.accessories_for);
+                            $('#jobPriority_Duplicate').val(res.data.job_priority);
+                            $('#JON_Duplicate').val(res.data.job_order_number + -1);
+                            $('#jobName_Duplicate').val(res.data.job_name);
+                            $('#jobCode_Duplicate').val(res.data.job_code);
+                            $('#jobDesc_Duplicate').val(res.data.job_description);
+                            $('#reqDate_Duplicate').val(res.data.requested_date);
+                            $('#delDate_Duplicate').val(res.data.delivery_date);
+                            $('#custName_Duplicate').val(res.data.customer_name);
+                            $('#custCode_Duplicate').val(res.data.customer_code);
+                            $('#custAddr1_Duplicate').val(res.data.cust_address1);
+                            $('#custAddr2_Duplicate').val(res.data.cust_address2);
+                            $('#custAddr3_Duplicate').val(res.data.cust_address3);
+                            $('#custGrade_Duplicate').val(res.data.customer_grade);
+                            $('#custPIC_Duplicate').val(res.data.customer_PIC);
+                            $('#custPhone1_Duplicate').val(res.data.cust_phone1);
+                            $('#custPhone2_Duplicate').val(res.data.cust_phone2);
+                            $('#machBrand_Duplicate').val(res.data.machine_brand);
+                            $('#brandID_Duplicate').val(res.data.brand_id);
+                            $('#machType_Duplicate').val(res.data.machine_type);
+                            $('#typeID_Duplicate').val(res.data.type_id);
+                            $('#machName_Duplicate').val(res.data.machine_name);
+                            $('#machID_Duplicate').val(res.data.machine_id);
+                            $('#machCode_Duplicate').val(res.data.machine_code);
+                            $('#serNum_Duplicate').val(res.data.serialnumber);
+                            $('#jobAss_Duplicate').val(res.data.job_assign).trigger('change');
+                            $('#techRank_Duplicate').val(res.data.technician_rank);
+                            $('#staffPos_Duplicate').val(res.data.staff_position);
+                            $('#reason_Duplicate').val(res.data.reason);
+                            $('#jobRegBy_Duplicate').val(usernameValue);
+                            $('#jobLastModBy_Duplicate').val(usernameValue);
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Duplicate Job info data
+            $(document).on('click', '.JobDuplicate', function () {
+                var jobregister_id = $(this).data('jobregisterid');
+                
+                fetchJobInfoDataDuplicate(jobregister_id)
+            
+                $('#DuplicatePopupModal').modal('show');
+            });
+
+            // Hide respond message
+            function hideElementById(elementId) {
+                document.getElementById(elementId).style.display = "none";
+            }
+
+            // Submit Duplicate form to database
+            $(document).on('submit', '#jobDuplicateForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("submit_jobDuplicate", true);
+
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false, 
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status === 200) {
+                            $('#duplicateJobMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("duplicateJobMessage");
+                            }, 2000);
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#duplicateJobMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("duplicateJobMessage");
+                            }, 2000);
+                        }
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#duplicateJobMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        setTimeout(function () {
+                            hideElementById("duplicateJobMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+        </script>
+		<!-- End of Duplicate Popup Modal -->
+
+        <!-- Refresh page when close modal -->
+        <script>
+            $(document).ready(function() {
+                function closeAllModalsAndRefresh() {
+                    $('.modal').modal('hide');
+                    
+                    location.reload();
+                }
+                
+                $('.modal').on('hidden.bs.modal', function() {
+                    closeAllModalsAndRefresh();
+                });
+            });
+        </script>
+
+        <!--========== Footer ==========-->
+        <footer>
+            <nav class="navbar navbar-light position-fixed bottom-0 w-100 justify-content-center" style="background-color: #C0C0C0; z-index: 2">
+                <ul class="nav">
+                    <li class="nav-item dropup">
+                        <div class="text-center">
+                            <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="iconify" data-icon="ep:list" style="font-size:180%; color: #081d45;"></i></a>
+                            <span>Job List</span> 
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assignedjob.php">Assigned Job</a></li>
+                                <li><a class="dropdown-item" href="unassignedjob.php">Unassigned Job</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="text-center">
+                            <a class="nav-link" href="pendingjoblistst.php"><i class="iconify" data-icon="carbon:warning-filled" style="font-size:180%; color: #081d45;"></i></a>
+                            <span>Pending</span>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <div class="text-center">
+                            <a class="nav-link" href="technician.php"><i class="iconify" data-icon="ant-design:home-filled" style="font-size:180%; color: #081d45;"></i></a>
+                            <span>Home</span>
+                        </div>
+                    </li>
+
+                    <li class="nav-item me-2">
+                        <div class="text-center">
+                            <a class="nav-link" href="incompletejoblistst.php"><i class="iconify" data-icon="fluent-emoji-high-contrast:no-entry" style="font-size:180%; color: #081d45;"></i></a>
+                            <span>Incomplete</span>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="text-center">
+                            <a class="nav-link" href="completejoblistst.php"><i class="iconify" data-icon="fluent-mdl2:completed-solid" style="font-size:180%; color: #081d45;"></i></a>
+                            <span>Completed</span>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+    </body>
 </html>

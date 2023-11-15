@@ -1,22 +1,36 @@
 <?php
+    
     include 'dbconnect.php';
-
-    $jobregister_id = mysqli_real_escape_string($conn, $_POST['jobregister_id']);
-    $job_status = mysqli_real_escape_string($conn, $_POST['job_status']);
-    $departure_timestamp = mysqli_real_escape_string($conn, $_POST['departure_timestamp']);
-
-    $sql = "UPDATE job_register SET 
-            job_status='$job_status', 
-            departure_timestamp='$departure_timestamp' 
-            WHERE jobregister_id='$jobregister_id'";
     
-    if (mysqli_query($conn, $sql)) {
-       
-    } 
-    
-    else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $jobregister_id = $_POST["jobregister_id"];
+        $DateAssign = $_POST["DateAssign"];
+        $job_status = $_POST["job_status"];
+        $departure_timestamp = $_POST["departure_timestamp"];
+        
+        $sql = "UPDATE job_register SET 
+                       DateAssign = ?, 
+                       job_status = ?, 
+                       departure_timestamp = ? 
+                WHERE jobregister_id = ?";
+        
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("sssi", $DateAssign, $job_status, $departure_timestamp, $jobregister_id);
+            
+            if ($stmt->execute()) {
+                echo "success";
+            } 
+            
+            else {
+                echo "error";
+            }
+            
+            $stmt->close();
+        } 
+        
+        else {
+            echo "error";
+        }
     }
 
-    mysqli_close($conn);
 ?>

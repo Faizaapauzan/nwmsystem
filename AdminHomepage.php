@@ -1892,16 +1892,27 @@
                                         <div class="custom-select-prompt" id="custom-select-prompt">
                                             <label for="" class="form-label fw-bold">Assign To</label>
                                             <div class="input-group">
-                                                <select name="job_assign" id="jobassignsupport" class="form-select">
-                                                    <option value=""></option>
-                                                        <?php
-                                                    
-                                                            $results = mysqli_query($conn, "SELECT * From staff_register WHERE staff_position = 'Leader'");
+                                                <select id="job_assignsupport" class="form-select" onchange="GetStaffSupport(this.value)">
+                                                    <option value=""></option> 
+                                                    <?php
+                                                        include "dbconnect.php";
                                                         
-                                                            while($data = mysqli_fetch_array($results)) {
-                                                                echo "<option value='". $data['username'] ."'>" . $data['username']."</option>";
-                                                            }
-                                                        ?>
+                                                        $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE 
+                                                                                        technician_rank = '1st Leader' AND tech_avai = '0'
+                                                                                            OR
+                                                                                        technician_rank = '2nd Leader' AND tech_avai = '0'
+                                                                                            OR
+                                                                                        staff_position='Storekeeper' AND tech_avai = '0' ORDER BY staffregister_id ASC");
+                                                        echo "<option></option>";
+                                                        
+                                                        while($data = mysqli_fetch_array($records))
+                                                            {echo "<option value='". $data['staffregister_id'] ."'>" .$data['username']. "      -      " . $data['technician_rank']." </option>";}	
+                                                    ?> 
+                                                            
+                                                    <input type="hidden" id='jobassign' onchange="GetStaffSupport(this.value)">
+                                                    <input type="hidden" name="jobassignsupport" id='usernamesupport' value="">
+                                                    <input type="hidden" name="technician_rank" id='technician_ranksupport' value="" readonly>
+                                                    <input type="hidden" name="staff_position" id='staff_positionsupport' value="" readonly>
                                                 </select>
                                                 
                                                 <input type="hidden" name="support" id="infosupport" value="">
@@ -1911,6 +1922,34 @@
                                         </div>
                                         
                                         <script>
+                                            function GetStaffSupport(str) {
+                                                if (str.length == 0) {
+                                                    
+                                                    document.getElementById("usernamesupport").value = "";
+                                                    document.getElementById("technician_ranksupport").value = "";
+                                                    document.getElementById("staff_positionsupport").value = "";
+                                                    
+                                                    return;
+                                                }
+                                                
+                                                else {
+                                                    alert(str);
+                                                    var xmlhttp = new XMLHttpRequest();
+                                                    
+                                                    xmlhttp.onreadystatechange = function() {
+                                                        if (this.readyState == 4 && this.status == 200) {
+                                                            var myObj = JSON.parse(this.responseText);
+                                                            
+                                                            document.getElementById("usernamesupport").value = myObj[0];
+                                                            document.getElementById("technician_ranksupport").value = myObj[1];
+                                                            document.getElementById("staff_positionsupport").value = myObj[2];
+                                                        }
+                                                    };
+                                                    
+                                                    xmlhttp.open("GET", "fetchtechnicianrank.php?staffregister_id=" + str, true);
+                                                    xmlhttp.send();
+                                                }
+                                            }
                                             document.addEventListener("DOMContentLoaded", function() {
                                                 var openButton = document.getElementById("openCustomSelect");
                                                 var customSelectPrompt = document.getElementById("custom-select-prompt");
@@ -2381,7 +2420,6 @@
                         var job_cancel = document.getElementById('job_cancel');
                         var job_status = document.getElementById('job_status');
                         var reason = document.getElementById('reason');
-                        var jobassignsupport = document.getElementById('jobassignsupport');
                         var support = document.getElementById('infosupport');
                         var jobregisterlastmodify_by = document.getElementById('jobregisterlastmodify_by');
                         
@@ -2489,14 +2527,6 @@
                                 break;
                             }
                         }
-
-                        for (i = 0; i < jobassignsupport.options.length; i++) {
-                            if (jobassignsupport.options[i].text === job_table.job_assign) {
-                                jobassignsupport.options[i].selected = true;
-                                
-                                break;
-                            }
-                        }
                         
                         reason.value = job_table.reason;
                         support.value = "Support For " + job_table.job_assign;
@@ -2527,7 +2557,7 @@
                             theme: 'bootstrap-5'
                         });  
                         
-                        $('#jobassignsupport').select2({
+                        $('#usernamesupport').select2({
                             dropdownParent: $('#info'),
                             theme: 'bootstrap-5'
                         });                                    
@@ -2676,7 +2706,9 @@
                         var accessories_required = $('select[name=accessories_required]').val();
                         var accessories_for = $('select[name=accessories_for]').val();
                         var job_cancel = $('select[name=job_cancel]').val();
-                        var jobassignsupport = $('select[name=job_assign]').val();
+                        var jobassignsupport = $('#usernamesupport').val();
+                        var technician_rank = $('#technician_ranksupport').val();
+                        var staff_position = $('#staff_positionsupport').val();
                         var infosupport = $('input[name=support]').val();
                         var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
                         
@@ -2708,6 +2740,8 @@
                             accessories_for != '' || accessories_for == '',
                             job_cancel != '' || job_cancel == '', 
                             jobassignsupport != '' || jobassignsupport == '', 
+                            technician_rank != '' || technician_rank == '',
+                            staff_position != '' || staff_position == '',
                             infosupport != '' || infosupport == '', 
                             jobregisterlastmodify_by != '' || jobregisterlastmodify_by == '') {
                                 
@@ -2740,6 +2774,8 @@
                                 accessories_for: accessories_for,
                                 job_cancel: job_cancel,
                                 jobassignsupport: jobassignsupport,
+                                technician_rank: technician_rank,
+                                staff_position: staff_position,
                                 infosupport: infosupport,
                                 jobregisterlastmodify_by: jobregisterlastmodify_by
                             };

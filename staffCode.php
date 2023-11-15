@@ -3,6 +3,7 @@
     
     // ========== Add ==========
     if(isset($_POST['save_staff'])) {
+        $tech_avai = mysqli_real_escape_string($conn, $_POST['tech_avai']);
         $staff_fullname = mysqli_real_escape_string($conn, $_POST['staff_fullname']);
         $employee_id = mysqli_real_escape_string($conn, $_POST['employee_id']);
         $staff_phone = mysqli_real_escape_string($conn, $_POST['staff_phone']);
@@ -31,12 +32,12 @@
             return;
         }
         
-        $query = "INSERT INTO staff_register (staff_fullname, employee_id, staff_phone, staff_email, 
+        $query = "INSERT INTO staff_register (tech_avai, staff_fullname, employee_id, staff_phone, staff_email, 
                                       staff_department, staff_position, staff_group, technician_group, 
                                       technician_rank, username, password, 
                                       staffregistercreated_by, staffregisterlastmodify_by) 
 
-                  VALUES ('$staff_fullname','$employee_id','$staff_phone','$staff_email', 
+                  VALUES (0, '$staff_fullname','$employee_id','$staff_phone','$staff_email', 
                           '$staff_department','$staff_position','$staff_group','$technician_group', 
                           '$technician_rank','$username','$password',
                           '$staffregistercreated_by','$staffregisterlastmodify_by')";

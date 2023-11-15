@@ -1,23 +1,31 @@
 <?php
-
-    include 'dbconnect.php';
+  
+  include 'dbconnect.php';
+  
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $technician_out = $_POST["technician_out"];
+    $tech_leader = $_POST["tech_leader"];
+    $techupdate_date = $_POST["techupdate_date"];
     
-    $tech_out = $jobregister_id = "";
+    $sql = "UPDATE tech_update SET technician_out = ? WHERE tech_leader = ? AND techupdate_date = ?";
     
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $tech_out = $conn->real_escape_string($_POST['tech_out']);
-      $jobregister_id = $conn->real_escape_string($_POST['jobregister_id']);
+    if ($stmt = $conn->prepare($sql)) {
+      $stmt->bind_param("sss", $technician_out, $tech_leader, $techupdate_date);
       
-      $query = "UPDATE job_register SET tech_out='$tech_out' WHERE jobregister_id='$jobregister_id'";
-      if ($conn->query($query) === TRUE) {
-        echo json_encode(array("status" => "success"));
+      if ($stmt->execute()) {
+        echo "success";
       } 
       
       else {
-        echo json_encode(array("status" => "error", "message" => $conn->error));
+        echo "Error: " . $stmt->error;
       }
-    }
+      
+      $stmt->close();
+    } 
     
-    $conn->close();
-
+    else {
+      echo "Error: " . $conn->error;
+    }
+  }
+  
 ?>

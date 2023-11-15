@@ -63,4 +63,44 @@
             return;
         }
     }
+
+    // ========== Update (for technician) ==========
+    if (isset($_POST['update_record'])) {
+        $techOFF_id = $_POST['techOFF_id'];
+        $leave_date = $_POST['date'];
+        $reason = $_POST['reason'];
+    
+        $query = "UPDATE tech_off SET leave_date=?, reason=? WHERE techOFF_id=?";
+        $stmt = mysqli_prepare($conn, $query);
+    
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, 'ssi', $leave_date, $reason, $techOFF_id);
+            $result = mysqli_stmt_execute($stmt);
+    
+            if ($result) {
+                $res = ['status' => 200,
+                        'message' => 'Updated Successfully!'];
+    
+                echo json_encode($res);
+            } 
+            
+            else {
+                $res = ['status' => 500,
+                        'message' => 'Error updating record: ' . mysqli_error($conn)];
+    
+                echo json_encode($res);
+            }
+    
+            mysqli_stmt_close($stmt);
+        } 
+        
+        else {
+            $res = ['status' => 500,
+                    'message' => 'Error preparing statement: ' . mysqli_error($conn)];
+    
+            echo json_encode($res);
+        }
+    }
+    
+    mysqli_close($conn);
 ?>

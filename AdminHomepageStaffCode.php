@@ -9,6 +9,10 @@
     mysqli_stmt_execute($stmt);
     $result1 = mysqli_stmt_get_result($stmt);
     $rows = mysqli_fetch_array($result1);
+    if (isset($_POST['support'])){
+        $res = ['status' => 200, 'message' => 'Success', 'data' => $rows];
+        echo json_encode($res);
+    }
 
     if (isset($_POST['jobinfo'])) {
         
@@ -97,5 +101,17 @@
 
         $res = ['status' => 200, 'message' => 'Success', 'data2' => $rows2, 'data3' => $rows3];
         echo json_encode($res);
+    }
+    if(isset($_POST['report'])){
+        $query2 = "SELECT * FROM servicereport WHERE jobregister_id = ?";
+        $stmt2 = mysqli_prepare($conn, $query2);
+        mysqli_stmt_bind_param($stmt2, "s", $jobregister_id);
+        mysqli_stmt_execute($stmt2);
+        $result2 = mysqli_stmt_get_result($stmt2);
+        $rows2 = mysqli_fetch_all($result2);
+
+        $res = ['status' => 200, 'message' => 'Success', 'data' => $rows2];
+        echo json_encode($res);
+
     }
 ?>

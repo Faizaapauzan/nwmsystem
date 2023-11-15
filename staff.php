@@ -201,6 +201,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form id="addStaff">
+                                <input type="hidden" name="tech_avai">
+
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">

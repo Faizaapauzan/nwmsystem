@@ -64,7 +64,7 @@
                                            job_name, job_code, job_description, requested_date, delivery_date, 
                                            customer_name, customer_code, customer_grade, cust_address1, cust_address2, 
                                            cust_address3, customer_PIC, cust_phone1, cust_phone2,
-                                           machine_name, machine_code, type_id, machine_type, serialnumber, machine_id, brand_id, machine_brand, accessories_required, accessories_for, job_cancel, job_assign, support, jobregisterlastmodify_by) 
+                                           machine_name, machine_code, type_id, machine_type, serialnumber, machine_id, brand_id, machine_brand, accessories_required, accessories_for, job_cancel, job_assign, support, technician_rank, staff_position, jobregisterlastmodify_by) 
                        
                        VALUES ('".addslashes($_POST['job_priority'])."',
                                '".addslashes($_POST['job_order_number'])."',
@@ -95,6 +95,8 @@
                                '".addslashes($_POST['job_cancel'])."',
                                '".addslashes($_POST['jobassignsupport'])."',
                                '".addslashes($_POST['infosupport'])."',
+                               '".addslashes($_POST['technician_rank'])."',
+                               '".addslashes($_POST['staff_position'])."',
                                '".addslashes($_POST['jobregisterlastmodify_by'])."')";
         
         if($conn->query($sql))

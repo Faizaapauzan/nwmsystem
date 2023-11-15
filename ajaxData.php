@@ -20,4 +20,14 @@ if (!empty($_POST["id"])) {
             echo '<option value="' . $row['machine_id'] . '">' . $row['serialnumber'] .  ' -   ' . $row['customer_name'].'</option>';
         }
     }
+} elseif (!empty($_POST['idname'])){
+    $id = $_POST['idname'];
+    $query1 = "select * from machine_list where type_id=$id";
+    $result1 = mysqli_query($conn, $query1);
+    if ($result1->num_rows > 0) {
+        echo '<option value="">Select Machine Name</option>';
+        while ($row = mysqli_fetch_assoc($result1)) {
+            echo '<option value="' . $row['machine_id'] . '">' . $row['machine_name'] .'</option>';
+        }
+    }
 }
