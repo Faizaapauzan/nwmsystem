@@ -78,8 +78,8 @@
 							
 							include 'dbconnect.php';
 							
-							$numRow = "SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '' AND staff_position != 'Storekeeper') 
-                                       OR (job_status = 'Pending' AND job_cancel IS NULL AND staff_position != 'Storekeeper')";
+							$numRow = "SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '') 
+                                       OR (job_status = 'Pending' AND job_cancel IS NULL)";
 
                             $numRow_run = mysqli_query($conn, $numRow);
                                     
@@ -97,8 +97,8 @@
 						
 						include 'dbconnect.php';
 						
-						$results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '' AND staff_position != 'Storekeeper') 
-                                                 OR (job_status = 'Pending' AND job_cancel IS NULL AND staff_position != 'Storekeeper')
+						$results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '') 
+                                                 OR (job_status = 'Pending' AND job_cancel IS NULL)
                                                  ORDER BY jobregisterlastmodify_at DESC");
                                         
                     	while ($row = $results->fetch_assoc()) {
