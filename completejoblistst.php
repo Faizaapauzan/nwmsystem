@@ -78,12 +78,8 @@
                             
                             include 'dbconnect.php';
                             
-                            $numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                                                  AND (staff_position != 'Storekeeper')
-                                                                  AND job_status = 'Completed' 
-                                                                  AND (job_cancel IS NULL OR job_cancel = '')
-                                                                  AND YEAR(jobregisterlastmodify_at) = YEAR(CURDATE())
-                                                                  AND MONTH(jobregisterlastmodify_at) = MONTH(CURDATE())";
+                            $numRow = "SELECT * FROM job_register WHERE (job_status = 'Completed' AND job_cancel = '' AND YEAR(jobregisterlastmodify_at) = YEAR(CURDATE()) AND MONTH(jobregisterlastmodify_at) = MONTH(CURDATE()))
+                                       OR (job_status = 'Completed' AND job_cancel IS NULL AND YEAR(jobregisterlastmodify_at) = YEAR(CURDATE()) AND MONTH(jobregisterlastmodify_at) = MONTH(CURDATE()))";
 
                             $numRow_run = mysqli_query($conn, $numRow);
                                     
@@ -101,12 +97,8 @@
                         
                         include 'dbconnect.php';
                         
-                        $results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-																			AND (staff_position != 'Storekeeper')
-																			AND job_status = 'Completed' 
-																			AND (job_cancel IS NULL OR job_cancel = '')
-                                                                            AND YEAR(jobregisterlastmodify_at) = YEAR(CURDATE())
-                                                                            AND MONTH(jobregisterlastmodify_at) = MONTH(CURDATE())
+                        $results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Completed' AND job_cancel = '' AND YEAR(jobregisterlastmodify_at) = YEAR(CURDATE()) AND MONTH(jobregisterlastmodify_at) = MONTH(CURDATE()))
+                                                 OR (job_status = 'Completed' AND job_cancel IS NULL AND YEAR(jobregisterlastmodify_at) = YEAR(CURDATE()) AND MONTH(jobregisterlastmodify_at) = MONTH(CURDATE()))
 												 ORDER BY jobregisterlastmodify_at DESC");
                                         
                     	  while ($row = $results->fetch_assoc()) {
