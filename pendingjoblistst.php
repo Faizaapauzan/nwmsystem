@@ -78,9 +78,7 @@
 							
 							include 'dbconnect.php';
 							
-							$numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-																  AND (staff_position != 'Storekeeper')
-																  AND job_status = 'Pending' 
+							$numRow = "SELECT * FROM job_register WHERE staff_position != 'Storekeeper' AND job_status = 'Pending' 
 																  AND (job_cancel IS NULL OR job_cancel = '')";
 
                             $numRow_run = mysqli_query($conn, $numRow);
@@ -99,10 +97,8 @@
 						
 						include 'dbconnect.php';
 						
-						$results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-																			AND (staff_position != 'Storekeeper')
-																			AND job_status = 'Pending' 
-																			AND (job_cancel IS NULL OR job_cancel = '')
+						$results = $conn->query("SELECT * FROM job_register WHERE staff_position != 'Storekeeper' AND job_status = 'Pending' 
+                                                 AND (job_cancel IS NULL OR job_cancel = '')
 												 ORDER BY jobregisterlastmodify_at DESC");
                                         
                     	while ($row = $results->fetch_assoc()) {
