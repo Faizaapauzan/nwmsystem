@@ -382,8 +382,14 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE (job_status = '' OR job_status IS NULL OR job_status = 'Ready' OR job_status = 'Doing') 
-                                           AND (job_cancel = '' OR job_cancel IS NULL)";
+                                $numRow = "SELECT * FROM job_register WHERE (job_status = '' AND job_cancel = '')
+                                           OR (job_status = '' AND job_cancel IS NULL)
+                                           OR (job_status IS NULL AND job_cancel = '')
+                                           OR (job_status IS NULL AND job_cancel IS NULL)
+                                           OR (job_status = 'Ready' AND job_cancel = '')
+                                           OR (job_status = 'Ready' AND job_cancel IS NULL)
+                                           OR (job_status = 'Doing' AND job_cancel = '')
+                                           OR (job_status = 'Doing' AND job_cancel IS NULL)";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                 
@@ -411,9 +417,14 @@
                                     <?php
                                         include 'dbconnect.php';
 
-                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                                                 AND (job_status = '' OR job_status IS NULL OR job_status = 'Ready' OR job_status = 'Doing') 
-                                                                 AND (job_cancel = '' OR job_cancel IS NULL)
+                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_status = '' AND job_cancel = '')
+                                                                 OR (job_status = '' AND job_cancel IS NULL)
+                                                                 OR (job_status IS NULL AND job_cancel = '')
+                                                                 OR (job_status IS NULL AND job_cancel IS NULL)
+                                                                 OR (job_status = 'Ready' AND job_cancel = '')
+                                                                 OR (job_status = 'Ready' AND job_cancel IS NULL)
+                                                                 OR (job_status = 'Doing' AND job_cancel = '')
+                                                                 OR (job_status = 'Doing' AND job_cancel IS NULL)
                                                                  ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
 
                                         $counter = 1;
