@@ -82,7 +82,8 @@
                                                                   AND (staff_position != 'Storekeeper')
                                                                   AND job_status = 'Completed' 
                                                                   AND (job_cancel IS NULL OR job_cancel = '')
-                                                                  AND MONTH(today_date) = MONTH(CURDATE())";
+                                                                  AND YEAR(jobregisterlastmodify_at) = YEAR(CURDATE())
+                                                                  AND MONTH(jobregisterlastmodify_at) = MONTH(CURDATE())";
 
                             $numRow_run = mysqli_query($conn, $numRow);
                                     
@@ -104,7 +105,8 @@
 																			AND (staff_position != 'Storekeeper')
 																			AND job_status = 'Completed' 
 																			AND (job_cancel IS NULL OR job_cancel = '')
-                                                                            AND MONTH(today_date) = MONTH(CURDATE())
+                                                                            AND YEAR(jobregisterlastmodify_at) = YEAR(CURDATE())
+                                                                            AND MONTH(jobregisterlastmodify_at) = MONTH(CURDATE())
 												 ORDER BY jobregisterlastmodify_at DESC");
                                         
                     	  while ($row = $results->fetch_assoc()) {
