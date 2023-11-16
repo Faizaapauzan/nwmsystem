@@ -1844,7 +1844,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#JobUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            $('#JobUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                             
                             setTimeout(function () {
                                 hideElementById("JobUpdateMessage");
@@ -1897,7 +1897,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                             
                             setTimeout(function () {
                                 hideElementById("JobInfoMessage");
@@ -2024,7 +2024,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#photoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            $('#photoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                         }
 
                         $('#previewPhotoBefore').empty();
@@ -2101,7 +2101,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#photoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            $('#photoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                         }
 
                         $('#previewPhotoAfter').empty();
@@ -2178,7 +2178,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#videoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            $('#videoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                         }
 
                         $('#previewVideoBefore').empty();
@@ -2255,7 +2255,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#videoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            $('#videoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                         }
 
                         $('#previewVideoAfter').empty();
@@ -2348,7 +2348,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p');
+                            $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p');
                             
                             setTimeout(function () {
                                 hideElementById("statusUpdateMessage");
@@ -3317,7 +3317,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#jobSupportMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            $('#jobSupportMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                             
                             setTimeout(function () {
                                 hideElementById("jobSupportMessage");
@@ -3621,7 +3621,7 @@
                         } 
                         
                         else if (res.status === 500) {
-                            $('#duplicateJobMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">Error: ' + res.message + '</p>');
+                            $('#duplicateJobMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                             
                             setTimeout(function () {
                                 hideElementById("duplicateJobMessage");
