@@ -256,10 +256,8 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                           AND (staff_position != 'Storekeeper')
-                                           AND job_status = 'Incomplete' 
-                                           AND (job_cancel IS NULL OR job_cancel = '')";
+                                $numRow = "SELECT * FROM job_register WHERE (job_status = 'Incomplete' AND job_cancel = '')
+                                           OR (job_status = 'Incomplete' AND job_cancel IS NULL)";
                                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 
@@ -289,11 +287,9 @@
                                         
                                         include 'dbconnect.php';
                                         
-                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                                                 AND (staff_position != 'Storekeeper')
-                                                                 AND job_status = 'Incomplete' 
-                                                                 AND (job_cancel IS NULL OR job_cancel = '')
-                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC");
+                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Incomplete' AND job_cancel = '')
+                                                                 OR (job_status = 'Incomplete' AND job_cancel IS NULL)
+                                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
                     
                                         $counter = 1;
 
@@ -323,10 +319,8 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                           AND (staff_position != 'Storekeeper')
-                                           AND job_status = 'Pending' 
-                                           AND (job_cancel IS NULL OR job_cancel = '')";
+                                $numRow = "SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '')
+                                           OR (job_status = 'Pending' AND job_cancel IS NULL)";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                                 
@@ -356,11 +350,9 @@
                                         
                                         include 'dbconnect.php';
                                         
-                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                                                 AND (staff_position != 'Storekeeper') 
-                                                                 AND job_status = 'Pending' 
-                                                                 AND (job_cancel IS NULL OR job_cancel = '')
-                                                                 ORDER BY job_register.job_assign ASC, job_register.jobregisterlastmodify_at DESC");
+                                        $results = $conn->query("SELECT * FROM job_register WHERE (job_status = 'Pending' AND job_cancel = '')
+                                                                 OR (job_status = 'Pending' AND job_cancel IS NULL)
+                                                                 ORDER BY job_assign ASC, jobregisterlastmodify_at DESC");
                     
                                         $counter = 1;
 
