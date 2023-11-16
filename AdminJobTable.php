@@ -382,8 +382,7 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                           AND (job_status = '' OR job_status IS NULL OR job_status = 'Ready' OR job_status = 'Doing') 
+                                $numRow = "SELECT * FROM job_register WHERE (job_status = '' OR job_status IS NULL OR job_status = 'Ready' OR job_status = 'Doing') 
                                            AND (job_cancel = '' OR job_cancel IS NULL)";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
