@@ -176,17 +176,6 @@
         $customer_name = mysqli_real_escape_string($conn, $_POST['customer_name']);
         $machinelistlastmodify_by = mysqli_real_escape_string($conn, $_POST['machinelistlastmodify_by']);
         
-        if($machine_code == NULL || $machine_name == NULL || $machine_brand == NULL || $brand_id == NULL ||
-           $machine_type == NULL || $type_id == NULL || $serialnumber == NULL || $machine_description == NULL || 
-           $purchase_date == NULL || $customer_name == NULL || $machinelistlastmodify_by == NULL) {
-            
-            $res = ['status' => 422, 'message' => 'All fields are mandatory'];
-        
-            echo json_encode($res);
-            
-            return;
-        }
-        
         $query = "UPDATE machine_list SET 
                     machine_code='$machine_code', 
                     machine_name='$machine_name', 
