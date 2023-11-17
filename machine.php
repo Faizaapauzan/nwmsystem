@@ -447,8 +447,42 @@
 
                                             <div class="col-md-6 mb-3">
                                                 <label for="">Customer Name</label>
-                                                <input type="text" name="customer_name" class="form-control" />
+                                                <select name="customer_name" id="customerName" class="form-select">
+                                                    <option value="">Select Customer Name</option>
+                                                    <?php
+                                                
+                                                        include "dbconnect.php";
+                                                                
+                                                        $query = "SELECT * FROM customer_list ORDER BY customer_name ASC";
+                                                                
+                                                        $result = $conn->query($query);
+                                                                
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . $row['customer_name'] . "'>" . $row['customer_name'] . "</option>";
+                                                        }
+                                                    ?>
+                                                </select>
                                             </div>
+
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                        $("#customerName").select2({
+                                                            dropdownParent: $('#machineAddModal'),
+                                                            matcher: oldMatcher(matchStart),
+                                                            theme: 'bootstrap-5'
+                                                        })
+                                                    });
+                                
+                                                    function matchStart (term, text) {
+                                                        if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                            return true;
+                                                        }
+                                    
+                                                        return false;
+                                                    }
+                                                });
+                                            </script>
 
                                             <?php if (isset($_SESSION["username"])) { ?>
                                                 <input type="hidden" name="machinelistcreated_by" value="<?php echo $_SESSION["username"] ?>">
@@ -742,14 +776,13 @@
                                 
                                             function matchStart (term, text) {
                                                 if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
-                                        
-                                                return true;
-                                    }
+                                                    return true;
+                                                }
                                     
-                                    return false;
-                                }
-                            });
-                        </script>
+                                                return false;
+                                            }
+                                        });
+                                    </script>
 
                                     <?php if (isset($_SESSION["username"])) { ?>
                                         <input type="hidden" name="machinelistlastmodify_by" id="staffregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
