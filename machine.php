@@ -30,12 +30,14 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 
     <!--========== JS ==========-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
     <!--========== BOX ICONS ==========-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -591,15 +593,103 @@
 
                                     <div class="col-md-6 mb-3">
                                         <label for="">Machine Brand</label>
-                                        <input type="text" name="machine_brand" id="machine_brand" class="form-control" />
-                                        <input type="hidden" name="brand_id" id="brand_id" />
+                                        <select name="machine_brand" id="machine_brand" class="form-select">
+                                            <option value="">Select Machine Brand</option>
+                                            <?php
+                                                
+                                                include "dbconnect.php";
+                                                                
+                                                $query = "SELECT * FROM machine_brand ORDER BY brandname ASC";
+                                                                
+                                                $result = $conn->query($query);
+                                                                
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<option value='" . $row['brandname'] . "' data-brandID='". $row['brand_id'] ."'>" . $row['brandname'] . "</option>";
+                                                }
+                                            ?>
+                                        </select>
+
+                                        <input type="hidden" name="brand_id" id="brand_id">
                                     </div>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                $("#machine_brand").select2({
+                                                    dropdownParent: $('#updateMachine'),
+                                                    matcher: oldMatcher(matchStart),
+                                                    theme: 'bootstrap-5'
+                                                });
+                                                
+                                                $("#machine_brand").on("change", function () {
+                                                    var value = $(this).val();
+                                                    
+                                                    GetMachineBrand(value);
+                                                });
+                                            });
+                                            
+                                            function matchStart(term, text) {
+                                                return text.toUpperCase().indexOf(term.toUpperCase()) === 0;
+                                            }
+                                            
+                                            function GetMachineBrand(value) {
+                                                var selectedOption = $('#machine_brand option[value="' + value + '"]');
+                                                var brandID = selectedOption.data('brandid');
+                                                
+                                                $('input[name="brand_id"]').val(brandID);
+                                            }
+                                        });
+                                    </script>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="">Machine Type</label>
-                                        <input type="text" name="machine_type" id="machine_type" class="form-control" />
-                                        <input type="hidden" name="type_id" id="type_id" />
+                                        <select name="machine_type" id="machine_type" class="form-select">
+                                            <option value="">Select Machine Type</option>
+                                            <?php
+                                                
+                                                include "dbconnect.php";
+                                                                
+                                                $query = "SELECT * FROM machine_type ORDER BY type_name ASC";
+                                                                
+                                                $result = $conn->query($query);
+                                                                
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<option value='" . $row['type_name'] . "' data-typeID='". $row['type_id'] ."'>" . $row['type_name'] . "</option>";
+                                                }
+                                            ?>
+                                        </select>
+
+                                        <input type="hidden" name="type_id" id="type_id">
                                     </div>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                $("#machine_type").select2({
+                                                    dropdownParent: $('#updateMachine'),
+                                                    matcher: oldMatcher(matchStart),
+                                                    theme: 'bootstrap-5'
+                                                });
+                                                
+                                                $("#machine_type").on("change", function () {
+                                                    var value = $(this).val();
+                                                    
+                                                    GetMachineType(value);
+                                                });
+                                            });
+                                            
+                                            function matchStart(term, text) {
+                                                return text.toUpperCase().indexOf(term.toUpperCase()) === 0;
+                                            }
+                                            
+                                            function GetMachineType(value) {
+                                                var selectedOption = $('#machine_type option[value="' + value + '"]');
+                                                var typeID = selectedOption.data('typeid');
+                                                
+                                                $('input[name="type_id"]').val(typeID);
+                                            }
+                                        });
+                                    </script>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="">Serial Number</label>
@@ -613,13 +703,53 @@
 
                                     <div class="col-md-6 mb-3">
                                         <label for="">Puchase Date</label>
-                                        <input type="text" name="purchase_date" id="purchase_date" class="form-control" />
+                                        <input type="text" name="purchase_date" id="purchase_date" class="form-control" autocomplete="off" />
                                     </div>
+
+                                    <script>
+                                        $("#purchase_date").datepicker();
+                                        $("#purchase_date").datepicker("option", "dateFormat", "dd/mm/yy");
+                                    </script>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="">Customer Name</label>
-                                        <input type="text" name="customer_name" id="customer_name" class="form-control" />
+                                        <select name="customer_name" id="customer_name" class="form-select">
+                                            <option value="">Select Customer Name</option>
+                                            <?php
+                                                
+                                                include "dbconnect.php";
+                                                                
+                                                $query = "SELECT * FROM customer_list ORDER BY customer_name ASC";
+                                                                
+                                                $result = $conn->query($query);
+                                                                
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<option value='" . $row['customer_name'] . "'>" . $row['customer_name'] . "</option>";
+                                                }
+                                            ?>
+                                        </select>
                                     </div>
+
+                                    <script>
+                                        $(document).ready(function() {
+                                            $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                $("#customer_name").select2({
+                                                    dropdownParent: $('#updateMachine'),
+                                                    matcher: oldMatcher(matchStart),
+                                                    theme: 'bootstrap-5'
+                                                })
+                                            });
+                                
+                                            function matchStart (term, text) {
+                                                if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                        
+                                                return true;
+                                    }
+                                    
+                                    return false;
+                                }
+                            });
+                        </script>
 
                                     <?php if (isset($_SESSION["username"])) { ?>
                                         <input type="hidden" name="machinelistlastmodify_by" id="staffregisterlastmodify_by" value="<?php echo $_SESSION["username"] ?>">
@@ -820,14 +950,14 @@
                                 $('#machine_id').val(res.data.machine_id);
                                 $('#machine_code').val(res.data.machine_code);
                                 $('#machine_name').val(res.data.machine_name);
-                                $('#machine_brand').val(res.data.machine_brand);
+                                $('#machine_brand').val(res.data.machine_brand).trigger('change');
                                 $('#brand_id').val(res.data.brand_id);
-                                $('#machine_type').val(res.data.machine_type);
+                                $('#machine_type').val(res.data.machine_type).trigger('change');
                                 $('#type_id').val(res.data.type_id);
                                 $('#serialnumber').val(res.data.serialnumber);
                                 $('#machine_description').val(res.data.machine_description);
                                 $('#purchase_date').val(res.data.purchase_date);
-                                $('#customer_name').val(res.data.customer_name);
+                                $('#customer_name').val(res.data.customer_name).trigger('change');
                                 $('#machinelistlastmodify_by').val(res.data.machinelistlastmodify_by);
 
                                 $('#machineEditModal').modal('show');
