@@ -137,28 +137,39 @@
         $technician_leaving = $_POST['technician_leaving'];
         $tech_out = $_POST['tech_out'];
         $tech_in = $_POST['tech_in'];
+    
+        $query = "UPDATE job_register SET technician_departure=?, 
+                                          technician_arrival=?, 
+                                          technician_leaving=?, 
+                                          tech_out=?, tech_in=? 
+                  WHERE jobregister_id=?";
         
-        $query = "UPDATE job_register SET technician_departure=?, technician_arrival=?, technician_leaving=?, tech_out=?, tech_in=? WHERE jobregister_id=?";
-        $queryResult = mysqli_prepare($conn, $query);
+        $stmt = $conn->prepare($query);
         
-        mysqli_stmt_bind_param($queryResult, 'sssssi', $technician_departure, $technician_arrival, $technician_leaving, $tech_out, $tech_in, $jobregister_id);
-        mysqli_stmt_execute($queryResult);
-
-        if (mysqli_stmt_affected_rows($queryResult) > 0) {
-            $res = ['status' => 200,
-                    'message' => 'Job update successfully updated'];
-
-            echo json_encode($res);
+        $stmt->bind_param('sssssi', $technician_departure, $technician_arrival, $technician_leaving, $tech_out, $tech_in, $jobregister_id);
+        
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
+                $res = ['status' => 200, 
+                        'message' => 'Time successfully updated'];
+            } 
+            
+            else {
+                $res = ['status' => 200, 
+                        'message' => 'No changes made'];
+            }
         } 
         
         else {
-            $res = ['status' => 500,
-                    'message' => 'Update error: ' . $conn->error];
-
-            echo json_encode($res);
+            $res = ['status' => 500, 
+                    'message' => 'Update error: ' . $stmt->error];
         }
+    
+        $stmt->close();
+    
+        echo json_encode($res);
     }
-
+    
     // Update Job Info
     if (isset($_POST['update_jobInfo'])) {
         $jobregister_id = $_POST['jobregister_id'];
@@ -181,26 +192,32 @@
                          machine_code=?,
                          serialnumber=? 
                   WHERE jobregister_id=?";
-
-        $queryResult = mysqli_prepare($conn, $query);
+                  
+        $stmt = $conn->prepare($query);
         
-        mysqli_stmt_bind_param($queryResult, 'ssssssssi', $machine_brand, $brand_id, $machine_type, 
-                               $type_id, $machine_name, $machine_id, $machine_code, $serialnumber, $jobregister_id);
-        mysqli_stmt_execute($queryResult);
-
-        if (mysqli_stmt_affected_rows($queryResult) > 0) {
-            $res = ['status' => 200,
-                    'message' => 'Job info successfully updated'];
-
-            echo json_encode($res);
-        } 
+        $stmt->bind_param('ssssssssi', $machine_brand, $brand_id, $machine_type, $type_id, $machine_name, 
+                                       $machine_id, $machine_code, $serialnumber, $jobregister_id);
+                                    
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
+                $res = ['status' => 200, 
+                        'message' => 'Job successfully updated'];
+            }
+            
+            else {
+                $res = ['status' => 200, 
+                        'message' => 'No changes made'];
+            }
+        }
         
         else {
-            $res = ['status' => 500,
-                    'message' => 'Update error: ' . $conn->error];
-
-            echo json_encode($res);
+            $res = ['status' => 500, 
+                    'message' => 'Update error: ' . $stmt->error];
         }
+        
+        $stmt->close();
+        
+        echo json_encode($res);
     }
 
     // Update Job Assign
@@ -210,102 +227,110 @@
         $technician_rank = $_POST['technician_rank'];
         $staff_position = $_POST['staff_position'];
         
-        $query = "UPDATE job_register SET job_assign=?, technician_rank=?, staff_position=? WHERE jobregister_id=?";
-        $queryResult = mysqli_prepare($conn, $query);
+        $query = "UPDATE job_register SET job_assign=?, 
+                                          technician_rank=?, 
+                                          staff_position=? 
+                  WHERE jobregister_id=?";
+
+        $stmt = $conn->prepare($query);
         
-        mysqli_stmt_bind_param($queryResult, 'sssi', $job_assign, $technician_rank, $staff_position, $jobregister_id);
-        mysqli_stmt_execute($queryResult);
-
-        if (mysqli_stmt_affected_rows($queryResult) > 0) {
-            $res = ['status' => 200,
-                    'message' => 'Job assigned updated'];
-
-            echo json_encode($res);
-        } 
+        $stmt->bind_param('sssi', $job_assign, $technician_rank, $staff_position, $jobregister_id);
+                                    
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
+                $res = ['status' => 200, 
+                        'message' => 'Job assign successfully updated'];
+            }
+            
+            else {
+                $res = ['status' => 200, 
+                        'message' => 'No changes made'];
+            }
+        }
         
         else {
-            $res = ['status' => 500,
-                    'message' => 'Update error: ' . $conn->error];
-
-            echo json_encode($res);
+            $res = ['status' => 500, 
+                    'message' => 'Update error: ' . $stmt->error];
         }
+        
+        $stmt->close();
+        
+        echo json_encode($res);
     }
 
     // Submit Assistant
     if (isset($_POST['submit_Assistant'])) {
         $jobregister_id = $_POST['jobregister_id'];
-        $username = $_POST['username'];
-        $assistantname = implode(", ", $username);
+        $usernames = $_POST['username'];
         $ass_date = $_POST['ass_date'];
         $cust_name = $_POST['cust_name'];
         $requested_date = $_POST['requested_date'];
         $machine_name = $_POST['machine_name'];
-        
-        $query = "INSERT INTO assistants (jobregister_id, username, ass_date, cust_name, 
-                                          requested_date, machine_name) 
+    
+        $usernameString = implode(", ", $usernames);
+    
+        $query = "INSERT INTO assistants (jobregister_id, username, ass_date, cust_name, requested_date, machine_name) 
                   VALUES (?, ?, ?, ?, ?, ?)";
     
-        $stmt = mysqli_prepare($conn, $query);
+        $stmt = $conn->prepare($query);
     
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, 'ssssss', $jobregister_id, $assistantname, $ass_date, 
-                                   $cust_name, $requested_date, $machine_name);
-            
-            if (mysqli_stmt_execute($stmt)) {
+        $stmt->bind_param('ssssss', $jobregister_id, $usernameString, $ass_date, 
+                                    $cust_name, $requested_date, $machine_name);
+    
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
                 $res = ['status' => 200, 
                         'message' => 'Assistant successfully added'];
             } 
             
             else {
-                $res = ['status' => 500, 
-                        'message' => 'Submit error: ' . mysqli_error($conn)];
+                $res = ['status' => 200, 
+                        'message' => 'No changes made'];
             }
-            
-            mysqli_stmt_close($stmt);
         } 
         
         else {
             $res = ['status' => 500, 
-                    'message' => 'Prepare error: ' . mysqli_error($conn)];
+                    'message' => 'Submit error: ' . $stmt->error];
         }
-
+    
+        $stmt->close();
+    
         echo json_encode($res);
     }
-    
+        
     // Delete Assistant
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
         
         $sql = "DELETE FROM assistants WHERE id = ?";
+    
+        $stmt = $conn->prepare($sql);
+    
+        $stmt->bind_param('i', $id);
         
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("i", $id);
-            
-            if ($stmt->execute()) {
-                $res = array('status' => 200, 
-                             'message' => 'Assistant deleted successfully');
-
-                echo json_encode($res);
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
+                $res = ['status' => 200, 
+                        'message' => 'Assistant deleted successfully'];
             } 
             
             else {
-                $res = array('status' => 500, 
-                             'message' => 'Error deleting assistant: ' . $stmt->error);
-
-                echo json_encode($res);
+                $res = ['status' => 200, 
+                        'message' => 'No changes made'];
             }
-            
-            $stmt->close();
-        }
+        } 
         
         else {
-            $res = array('status' => 500, 
-                         'message' => 'Error preparing the statement: ' . $conn->error);
-
-            echo json_encode($res);
+            $res = ['status' => 500, 
+                    'message' => 'Deleting error: ' . $stmt->error];
         }
-    }
     
+        $stmt->close();
+    
+        echo json_encode($res);
+    }
+        
     // Upload photo Before
     if (isset($_POST['upload_photoBefore'])) {
         try {
@@ -313,41 +338,41 @@
             $description = $_POST['description'];
             $allowImg = array('png', 'jpeg', 'jpg', 'jfif');
             $target_dir = 'image/';
-            
+    
             foreach ($_FILES['file_name']['name'] as $key => $value) {
                 $fileExnt = pathinfo($_FILES['file_name']['name'][$key], PATHINFO_EXTENSION);
-                
+    
                 if (in_array($fileExnt, $allowImg) &&
                     $_FILES['file_name']['size'][$key] > 0 &&
                     $_FILES['file_name']['error'][$key] == 0) {
-                    
+    
                     $originalFileName = $_FILES['file_name']['name'][$key];
-                    
+    
                     if (move_uploaded_file($_FILES['file_name']['tmp_name'][$key], $target_dir . $originalFileName)) {
                         $photoInsertQuery = "INSERT INTO technician_photoupdate (jobregister_id, file_name, description) 
                                              VALUES (?, ?, ?)";
-                        
+    
                         $stmt = mysqli_prepare($conn, $photoInsertQuery);
-                        
+    
                         if ($stmt) {
                             mysqli_stmt_bind_param($stmt, 'iss', $jobregister_id, $originalFileName, $description);
-                            
+    
                             if (mysqli_stmt_execute($stmt)) {
-                                $res = ['status' => 200, 
+                                $res = ['status' => 200,
                                         'message' => 'Photo uploaded successfully'];
                             } 
                             
                             else {
-                                $res = ['status' => 500, 
-                                        'message' => 'Error uploading photos: ' . mysqli_error($conn)];
+                                $res = ['status' => 500,
+                                        'message' => 'Error uploading photos: ' . $stmt->error];
                             }
-                            
+    
                             mysqli_stmt_close($stmt);
                         } 
                         
                         else {
-                            $res = ['status' => 500, 
-                                    'message' => 'Error: ' . mysqli_error($conn)];
+                            $res = ['status' => 500,
+                                    'message' => 'Error: ' . $conn->error];
                         }
                     }
                 }
@@ -355,18 +380,19 @@
         } 
         
         catch (Exception $e) {
-            $res = ['status' => 500, 
+            $res = ['status' => 500,
                     'message' => 'Submit error: ' . $e->getMessage()];
         }
     
         echo json_encode($res);
     }
-
+    
     // Delete Photo Before 
     if(isset($_POST['delete_photoBefore'])) {
         $id = mysqli_real_escape_string($conn, $_POST['id']);
         
         $query = "DELETE FROM technician_photoupdate WHERE id = ?";
+        
         $stmt = mysqli_prepare($conn, $query);
     
         if ($stmt) {
@@ -399,41 +425,41 @@
             $description = $_POST['description'];
             $allowImg = array('png', 'jpeg', 'jpg', 'jfif');
             $target_dir = 'image/';
-            
+    
             foreach ($_FILES['file_name']['name'] as $key => $value) {
                 $fileExnt = pathinfo($_FILES['file_name']['name'][$key], PATHINFO_EXTENSION);
-                
+    
                 if (in_array($fileExnt, $allowImg) &&
                     $_FILES['file_name']['size'][$key] > 0 &&
                     $_FILES['file_name']['error'][$key] == 0) {
-                    
+    
                     $originalFileName = $_FILES['file_name']['name'][$key];
-                    
+    
                     if (move_uploaded_file($_FILES['file_name']['tmp_name'][$key], $target_dir . $originalFileName)) {
                         $photoInsertQuery = "INSERT INTO technician_photoupdate (jobregister_id, file_name, description) 
                                              VALUES (?, ?, ?)";
-                        
+    
                         $stmt = mysqli_prepare($conn, $photoInsertQuery);
-                        
+    
                         if ($stmt) {
                             mysqli_stmt_bind_param($stmt, 'iss', $jobregister_id, $originalFileName, $description);
-                            
+    
                             if (mysqli_stmt_execute($stmt)) {
-                                $res = ['status' => 200, 
+                                $res = ['status' => 200,
                                         'message' => 'Photo uploaded successfully'];
                             } 
                             
                             else {
-                                $res = ['status' => 500, 
-                                        'message' => 'Error uploading photos: ' . mysqli_error($conn)];
+                                $res = ['status' => 500,
+                                        'message' => 'Error uploading photos: ' . $stmt->error];
                             }
-                            
+    
                             mysqli_stmt_close($stmt);
                         } 
                         
                         else {
-                            $res = ['status' => 500, 
-                                    'message' => 'Error: ' . mysqli_error($conn)];
+                            $res = ['status' => 500,
+                                    'message' => 'Error: ' . $conn->error];
                         }
                     }
                 }
@@ -441,7 +467,7 @@
         } 
         
         catch (Exception $e) {
-            $res = ['status' => 500, 
+            $res = ['status' => 500,
                     'message' => 'Submit error: ' . $e->getMessage()];
         }
     
@@ -485,46 +511,46 @@
             $description = $_POST['description'];
             $allowImg = array('mp4', '3gp', 'webm', 'mov', 'avi', 'mkv');
             $target_dir = 'image/';
-            
+    
             foreach ($_FILES['video_url']['name'] as $key => $value) {
                 $fileExnt = pathinfo($_FILES['video_url']['name'][$key], PATHINFO_EXTENSION);
-                
+    
                 if (in_array($fileExnt, $allowImg) &&
                     $_FILES['video_url']['size'][$key] > 0 &&
                     $_FILES['video_url']['error'][$key] == 0) {
-                    
+    
                     $originalFileName = $_FILES['video_url']['name'][$key];
-                    
+    
                     if (move_uploaded_file($_FILES['video_url']['tmp_name'][$key], $target_dir . $originalFileName)) {
                         $photoInsertQuery = "INSERT INTO technician_videoupdate (jobregister_id, video_url, description) 
                                              VALUES (?, ?, ?)";
-                        
+    
                         $stmt = mysqli_prepare($conn, $photoInsertQuery);
-                        
+    
                         if ($stmt) {
                             mysqli_stmt_bind_param($stmt, 'iss', $jobregister_id, $originalFileName, $description);
-                            
+    
                             if (mysqli_stmt_execute($stmt)) {
                                 $res = ['status' => 200, 
                                         'message' => 'Video uploaded successfully'];
-                            } 
+                            }
                             
                             else {
                                 $res = ['status' => 500, 
-                                        'message' => 'Error uploading Videos: ' . mysqli_error($conn)];
+                                        'message' => 'Error uploading Videos: ' . $stmt->error];
                             }
-                            
+    
                             mysqli_stmt_close($stmt);
-                        } 
+                        }
                         
                         else {
                             $res = ['status' => 500, 
-                                    'message' => 'Error: ' . mysqli_error($conn)];
+                                    'message' => 'Error: ' . $conn->error];
                         }
                     }
                 }
             }
-        } 
+        }
         
         catch (Exception $e) {
             $res = ['status' => 500, 
@@ -533,7 +559,7 @@
     
         echo json_encode($res);
     }
-
+    
     // Delete Video Before 
     if(isset($_POST['delete_videoBefore'])) {
         $id = mysqli_real_escape_string($conn, $_POST['id']);
@@ -571,46 +597,46 @@
             $description = $_POST['description'];
             $allowImg = array('mp4', '3gp', 'webm', 'mov', 'avi', 'mkv');
             $target_dir = 'image/';
-            
+    
             foreach ($_FILES['video_url']['name'] as $key => $value) {
                 $fileExnt = pathinfo($_FILES['video_url']['name'][$key], PATHINFO_EXTENSION);
-                
+    
                 if (in_array($fileExnt, $allowImg) &&
                     $_FILES['video_url']['size'][$key] > 0 &&
                     $_FILES['video_url']['error'][$key] == 0) {
-                    
+    
                     $originalFileName = $_FILES['video_url']['name'][$key];
-                    
+    
                     if (move_uploaded_file($_FILES['video_url']['tmp_name'][$key], $target_dir . $originalFileName)) {
                         $photoInsertQuery = "INSERT INTO technician_videoupdate (jobregister_id, video_url, description) 
                                              VALUES (?, ?, ?)";
-                        
+    
                         $stmt = mysqli_prepare($conn, $photoInsertQuery);
-                        
+    
                         if ($stmt) {
                             mysqli_stmt_bind_param($stmt, 'iss', $jobregister_id, $originalFileName, $description);
-                            
+    
                             if (mysqli_stmt_execute($stmt)) {
                                 $res = ['status' => 200, 
                                         'message' => 'Video uploaded successfully'];
-                            } 
+                            }
                             
                             else {
                                 $res = ['status' => 500, 
-                                        'message' => 'Error uploading Videos: ' . mysqli_error($conn)];
+                                        'message' => 'Error uploading Videos: ' . $stmt->error];
                             }
-                            
+    
                             mysqli_stmt_close($stmt);
-                        } 
+                        }
                         
                         else {
                             $res = ['status' => 500, 
-                                    'message' => 'Error: ' . mysqli_error($conn)];
+                                    'message' => 'Error: ' . $conn->error];
                         }
                     }
                 }
             }
-        } 
+        }
         
         catch (Exception $e) {
             $res = ['status' => 500, 
