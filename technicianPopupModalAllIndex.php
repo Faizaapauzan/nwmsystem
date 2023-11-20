@@ -267,7 +267,7 @@
         $requested_date = $_POST['requested_date'];
         $machine_name = $_POST['machine_name'];
     
-        $usernameString = implode(", ", $usernames);
+        $usernameString = implode("\n", $usernames);
     
         $query = "INSERT INTO assistants (jobregister_id, username, ass_date, cust_name, requested_date, machine_name) 
                   VALUES (?, ?, ?, ?, ?, ?)";
