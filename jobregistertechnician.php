@@ -68,7 +68,7 @@
         </header>
         
         <!--========== Content ==========-->
-        <div class="container p-3" style="margin-top: 70px; margin-bottom: 100px;">
+        <div class="container p-3" style="margin-top: 70px; margin-bottom: 300px;">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title text-center">Job Register</h5>
@@ -88,7 +88,7 @@
                         <input type="hidden" name="accessories_required" id="accessories_required" value="No">
 
                         <label for="customerName" class="form-label fw-bold">Customer Name</label>
-                        <select name="customer_name" id="customer_name" class="form-select" style="width: 100%;" onchange="GetCustDetails(this.value); updateMachineNames(this.value)">>
+                        <select name="customer_name" id="customer_name" class="form-select" style="width: 100%;" onchange="GetCustDetails(this.value); updateMachineNames(this.value)">
                             <option value="">Select Customer Name</option>
                             <?php
                                 
@@ -178,12 +178,11 @@
                                         success: function(data) {
                                             machineData = JSON.parse(data);
                                             
-                                            $('#machine_name').empty();
-                                            $('#machine_name').append('<option value="">Select Machine</option>');
+                                            $('#serialnumber').empty();
+                                            $('#serialnumber').append('<option value="">Select Machine</option>');
                                             
                                             $.each(machineData, function(index, machine) {
-                                                var optionText = machine.machine_name + ' - ' + machine.serialnumber + ' - ' + machine.customer_name;
-                                                $('#machine_name').append('<option value="' + machine.machine_name + '">' + optionText + '</option>');
+                                                $('#serialnumber').append('<option value="' + machine.serialnumber + '">' + machine.serialnumber + '</option>');
                                             });
                                         },
                                         
@@ -193,21 +192,21 @@
                                     });
                                 }
                                 
-                                // Function to autofill machine-related information based on the selected machine_name.
-                                $('#machine_name').on('change', function() {
+                                // Function to autofill machine-related information based on the selected serial number.
+                                $('#serialnumber').on('change', function() {
                                     var selectedMachineName = $(this).val();
                                     var selectedMachine = machineData.find(function(machine) {
-                                        return machine.machine_name === selectedMachineName;
+                                        return machine.serialnumber === selectedMachineName;
                                     });
                                     
                                     if (selectedMachine) {
                                         $('#machine_brand').val(selectedMachine.machine_brand);
-                                        $('#brand_id').val(selectedMachine.brand_id);
-                                        $('#machine_type').val(selectedMachine.machine_type);
+                                        $('#brand_id').val(selectedMachine.brand_id).trigger('change');
+                                        $('#machine_type').val(selectedMachine.machine_type).trigger('change');
                                         $('#type_id').val(selectedMachine.type_id);
                                         $('#machine_id').val(selectedMachine.machine_id);
                                         $('#machine_code').val(selectedMachine.machine_code);
-                                        $('#serialnumber').val(selectedMachine.serialnumber);
+                                        $('#machine_name').val(selectedMachine.machine_name);
                                     }
                                 });
                                 
@@ -292,19 +291,20 @@
                             }
                         </script>
 
-                        <!-- Hidden job_code -->
                         <input type="hidden" name="job_code" id="job_code">
                         
                         <label for="" class="form-label fw-bold mt-3">Job Description</label>
                         <input type="text" name="job_description" id="job_description" class="form-control mb-3">
 
-                        <label for="" class="form-label fw-bold">Machine</label>
-                        <select name="machine_name" id="machine_name" style="width: 100%;" class="form-select"></select>
-
+                        <label for="" class="form-label fw-bold">Serial Number</label>
+                        <select name="serialnumber" id="serialnumber"  style="width: 100%;" class="form-select">
+                            <option value="">Select Serial Number</option>
+                        </select>
+                    
                         <script>
                             $(document).ready(function() {
                                 $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-                                    $("#machine_name").select2({
+                                    $("#serialnumber").select2({
                                         dropdownParent: $('#techJobRegForm'),
                                         matcher: oldMatcher(matchStart),
                                         theme: 'bootstrap-5'
@@ -321,15 +321,97 @@
                             });
                         </script>
 
-                        <!-- Machine hidden info -->
-                        <input type="hidden" name="machine_brand" id="machine_brand">
-                        <input type="hidden" name="brand_id" id="brand_id">
-                        <input type="hidden" name="machine_type" id="machine_type">
-                        <input type="hidden" name="type_id" id="type_id">
+                        <label for="" class="form-label fw-bold mt-3">Machine Name</label>
+                        <input type="text" name="machine_name" id="machine_name" class="form-control mb-3">
                         <input type="hidden" name="machine_id" id="machine_id">
                         <input type="hidden" name="machine_code" id="machine_code">
-                        <input type="hidden" name="serialnumber" id="serialnumber">
+
+                        <label for="" class="form-label fw-bold">Machine Brand</label>
+                        <select name="brand_id" id="brand_id"  style="width: 100%;" class="form-select">
+                            <option value="">Select Machine Brand</option>
+                            <?php
+                                
+                                include "dbconnect.php";
+                                    
+                                $records = mysqli_query($conn, "SELECT * FROM machine_brand ORDER BY brandname ASC");
+                                    
+                                while ($data = mysqli_fetch_array($records)) {
+                                    echo "<option value='".$data['brand_id']."' data-machBrand='". $data['brandname'] ."'>".$data['brandname']."</option>";
+                                }
+                            ?>
+                        </select>
                         
+                        <input type="hidden" name="machine_brand" id="machine_brand">
+
+                        <script>
+                            $(document).ready(function () {
+                                $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                    $("#brand_id").select2({
+                                        dropdownParent: $('#techJobRegForm'),
+                                        matcher: oldMatcher(matchStart),
+                                        theme: 'bootstrap-5'
+                                    });
+                                });
+                                
+                                function matchStart(term, text) {
+                                    return text.toUpperCase().indexOf(term.toUpperCase()) === 0;
+                                }
+
+                                $("#brand_id").on("change", function () {
+                                    var value = $(this).val();
+                                    var selectedOption = $('#brand_id option[value="' + value + '"]');
+                                    var machBrand = selectedOption.data('machbrand');
+                                        
+                                    $('input[name="machine_brand"]').val(machBrand);
+                                });
+                            });
+                        </script>
+
+                        <label for="" class="form-label fw-bold mt-3">Machine Type</label>
+                        <select name="machine_type" id="machine_type"  style="width: 100%;" class="form-select">
+                            <option value="">Select Machine Type</option>
+                            <?php
+                                
+                                include "dbconnect.php";
+                                    
+                                $records = mysqli_query($conn, "SELECT * FROM machine_type ORDER BY type_name ASC");
+                                    
+                                while ($data = mysqli_fetch_array($records)) {
+                                    echo "<option value='".$data['type_name']."' data-typeID='". $data['type_id'] ."'>".$data['type_name']."</option>";
+                                }
+                            ?>
+                        </select>
+                        
+                        <input type="hidden" name="type_id" id="type_id">
+
+                        <script>
+                            $(document).ready(function() {
+                                $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                    $("#machine_type").select2({
+                                        dropdownParent: $('#techJobRegForm'),
+                                        matcher: oldMatcher(matchStart),
+                                        theme: 'bootstrap-5'
+                                    })
+                                });
+                                
+                                function matchStart (term, text) {
+                                    if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                        return true;
+                                    }
+                                    
+                                    return false;
+                                }
+
+                                $("#machine_type").on("change", function () {
+                                    var value = $(this).val();
+                                    var selectedOption = $('#machine_type option[value="' + value + '"]');
+                                    var typeID = selectedOption.data('typeid');
+                                        
+                                    $('input[name="type_id"]').val(typeID);
+                                });
+                            });
+                        </script>
+
                         <button type="submit" id="submitform" class="btn mt-3" style="border: none; background-color: #081d45; color: #FFFFFF; width: 100%;">Submit</button>
                     </form>
 

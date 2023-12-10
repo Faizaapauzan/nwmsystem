@@ -182,6 +182,10 @@
         $machine_code = $_POST['machine_code'];
         $serialnumber = $_POST['serialnumber'];
         
+        $brand_id = !empty($brand_id) ? $brand_id : null;
+        $type_id = !empty($type_id) ? $type_id : null;
+        $machine_id = !empty($machine_id) ? $machine_id : null;
+
         $query = "UPDATE job_register SET 
                          machine_brand=?, 
                          brand_id=?, 
@@ -192,12 +196,12 @@
                          machine_code=?,
                          serialnumber=? 
                   WHERE jobregister_id=?";
-                  
+
         $stmt = $conn->prepare($query);
         
-        $stmt->bind_param('ssssssssi', $machine_brand, $brand_id, $machine_type, $type_id, $machine_name, 
+        $stmt->bind_param('ssssssssi', $machine_brand, $brand_id, $machine_type, $type_id, $machine_name,
                                        $machine_id, $machine_code, $serialnumber, $jobregister_id);
-                                    
+
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
                 $res = ['status' => 200, 
@@ -214,9 +218,9 @@
             $res = ['status' => 500, 
                     'message' => 'Update error: ' . $stmt->error];
         }
-        
+
         $stmt->close();
-        
+
         echo json_encode($res);
     }
 
@@ -267,7 +271,7 @@
         $requested_date = $_POST['requested_date'];
         $machine_name = $_POST['machine_name'];
     
-        $usernameString = implode("\n", $usernames);
+        $usernameString = implode("\n\n", $usernames);
     
         $query = "INSERT INTO assistants (jobregister_id, username, ass_date, cust_name, requested_date, machine_name) 
                   VALUES (?, ?, ?, ?, ?, ?)";
