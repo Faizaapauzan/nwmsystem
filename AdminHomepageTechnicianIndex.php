@@ -129,81 +129,72 @@
         }
     }
 
-    // Update Job Update
-    if (isset($_POST['update_jobUpdate'])) {
-        $jobregister_id = $_POST['jobregister_id'];
-        $technician_departure = $_POST['technician_departure'];
-        $technician_arrival = $_POST['technician_arrival'];
-        $technician_leaving = $_POST['technician_leaving'];
-        $tech_out = $_POST['tech_out'];
-        $tech_in = $_POST['tech_in'];
-    
-        $query = "UPDATE job_register SET technician_departure=?, 
-                                          technician_arrival=?, 
-                                          technician_leaving=?, 
-                                          tech_out=?, 
-                                          tech_in=? 
-                                          
-                  WHERE jobregister_id=?";
-        
-        $queryResult = mysqli_prepare($conn, $query);
-    
-        if ($queryResult) {
-            mysqli_stmt_bind_param($queryResult, 'sssssi', $technician_departure, $technician_arrival, 
-                                   $technician_leaving, $tech_out, $tech_in, $jobregister_id);
-            
-            $success = mysqli_stmt_execute($queryResult);
-    
-            if ($success) {
-                $res = ['status' => 200,
-                        'message' => 'Time successfully updated'];
-    
-                echo json_encode($res);
-            }
-            
-            else {
-                $res = ['status' => 500,
-                        'message' => 'Error: ' . mysqli_error($conn)];
-    
-                echo json_encode($res);
-            }
-    
-            mysqli_stmt_close($queryResult);
-        }
-        
-        else {
-            $res = ['status' => 500,
-                    'message' => 'Error: ' . mysqli_error($conn)];
-    
-            echo json_encode($res);
-        }
-    }
-    
     // Update Job Info
     if (isset($_POST['update_jobInfo'])) {
         $jobregister_id = $_POST['jobregister_id'];
-        $machine_brand = $_POST['machine_brand'];
-        $brand_id = $_POST['brand_id'];
-        $machine_type = $_POST['machine_type'];
-        $type_id = $_POST['type_id'];
-        $machine_name = $_POST['machine_name'];
+        $job_code = $_POST['job_code'];
+        $job_name = $_POST['job_name'];
+        $job_order_number = $_POST['job_order_number'];
+        $job_description = $_POST['job_description'];
+        $job_cancel = $_POST['job_cancel'];
+        $job_status = $_POST['job_status'];
+        $reason = $_POST['reason'];
+        $customer_code = $_POST['customer_code'];
+        $customer_name = $_POST['customer_name'];
+        $customer_grade = $_POST['customer_grade'];
+        $job_priority = $_POST['job_priority'];
+        $requested_date = $_POST['requested_date'];
+        $delivery_date = $_POST['delivery_date'];
+        $customer_PIC = $_POST['customer_PIC'];
+        $cust_phone1 = $_POST['cust_phone1'];
+        $cust_phone2 = $_POST['cust_phone2'];
+        $cust_address1 = $_POST['cust_address1'];
+        $cust_address2 = $_POST['cust_address2'];
+        $cust_address3 = $_POST['cust_address3'];
         $machine_id = $_POST['machine_id'];
         $machine_code = $_POST['machine_code'];
+        $machine_name = $_POST['machine_name'];
+        $machine_type = $_POST['machine_type'];
+        $type_id = $_POST['type_id'];
+        $machine_brand = $_POST['machine_brand'];
+        $brand_id = $_POST['brand_id'];
         $serialnumber = $_POST['serialnumber'];
+        $accessories_required = $_POST['accessories_required'];
+        $accessories_for = $_POST['accessories_for'];
+        $jobregistercreated_by = $_POST['jobregistercreated_by'];
+        $jobregisterlastmodify_by = $_POST['jobregisterlastmodify_by'];
         
-        $brand_id = !empty($brand_id) ? $brand_id : null;
-        $type_id = !empty($type_id) ? $type_id : null;
-        $machine_id = !empty($machine_id) ? $machine_id : null;
-
-        $query = "UPDATE job_register SET 
-                         machine_brand=?, 
-                         brand_id=?, 
-                         machine_type=?,
-                         type_id=?, 
-                         machine_name=?, 
+        $query = "UPDATE job_register SET
+                         job_code=?,
+                         job_name=?,
+                         job_order_number=?,
+                         job_description=?,
+                         job_cancel=?,
+                         job_status=?,
+                         reason=?,
+                         customer_code=?,
+                         customer_name=?,
+                         customer_grade=?,
+                         job_priority=?,
+                         requested_date=?,
+                         delivery_date=?,
+                         customer_PIC=?,
+                         cust_phone1=?, 
+                         cust_phone2=?,
+                         cust_address1=?,
+                         cust_address2=?,
+                         cust_address3=?,
                          machine_id=?,
                          machine_code=?,
-                         serialnumber=? 
+                         machine_name=?,
+                         machine_type=?,
+                         type_id=?,
+                         machine_brand=?,
+                         brand_id=?,
+                         serialnumber=?,
+                         accessories_required=?,
+                         accessories_for=?,
+                         jobregisterlastmodify_by=?
                   WHERE jobregister_id=?";
 
         $queryResult = mysqli_prepare($conn, $query);
@@ -213,8 +204,14 @@
             $type_id = $type_id ?: null;
             $brand_id = $brand_id ?: null;
 
-            mysqli_stmt_bind_param($queryResult, 'ssssssssi', $machine_brand, $brand_id, $machine_type, $type_id, $machine_name,
-                                                              $machine_id, $machine_code, $serialnumber, $jobregister_id);
+            mysqli_stmt_bind_param($queryResult, 'ssssssssssssssssssssssssssssssi', $job_code,
+                                   $job_name, $job_order_number, $job_description, $job_cancel,
+                                   $job_status, $reason, $customer_code, $customer_name, $customer_grade,
+                                   $job_priority, $requested_date, $delivery_date, $customer_PIC,
+                                   $cust_phone1, $cust_phone2, $cust_address1, $cust_address2, $cust_address3,
+                                   $machine_id, $machine_code, $machine_name, $machine_type, $type_id, 
+                                   $machine_brand, $brand_id, $serialnumber, $accessories_required,
+                                   $accessories_for, $jobregisterlastmodify_by, $jobregister_id);
     
             $success = mysqli_stmt_execute($queryResult);
 
@@ -239,6 +236,92 @@
             $res = ['status' => 500,
                     'message' => 'Error: ' . mysqli_error($conn)];
 
+            echo json_encode($res);
+        }
+    }
+
+    // Job Support
+    if (isset($_POST['submit_jobSupport'])) {
+        $today_date = $_POST['today_date'];
+        $job_code = $_POST['job_code'];
+        $job_name = $_POST['job_name'];
+        $job_order_number = $_POST['job_order_number'];
+        $job_description = $_POST['job_description'];
+        $job_assign = $_POST['job_assign'];
+        $technician_rank = $_POST['technician_rank'];
+        $staff_position = $_POST['staff_position'];
+        $support = $_POST['support'];
+        $customer_code = $_POST['customer_code'];
+        $customer_name = $_POST['customer_name'];
+        $customer_grade = $_POST['customer_grade'];
+        $job_priority = $_POST['job_priority'];
+        $requested_date = $_POST['requested_date'];
+        $delivery_date = $_POST['delivery_date'];
+        $customer_PIC = $_POST['customer_PIC'];
+        $cust_phone1 = $_POST['cust_phone1'];
+        $cust_phone2 = $_POST['cust_phone2'];
+        $cust_address1 = $_POST['cust_address1'];
+        $cust_address2 = $_POST['cust_address2'];
+        $cust_address3 = $_POST['cust_address3'];
+        $machine_id = $_POST['machine_id'];
+        $machine_code = $_POST['machine_code'];
+        $machine_name = $_POST['machine_name'];
+        $machine_type = $_POST['machine_type'];
+        $type_id = $_POST['type_id'];
+        $machine_brand = $_POST['machine_brand'];
+        $brand_id = $_POST['brand_id'];
+        $serialnumber = $_POST['serialnumber'];
+        $accessories_required = $_POST['accessories_required'];
+        $accessories_for = $_POST['accessories_for'];
+        $jobregistercreated_by = $_POST['jobregistercreated_by'];
+        $jobregisterlastmodify_by = $_POST['jobregisterlastmodify_by'];
+
+        $query = "INSERT INTO job_register (today_date, job_code, job_name, job_order_number, job_description,
+                                            job_assign, technician_rank, staff_position, support, customer_code,
+                                            customer_name, customer_grade, job_priority, requested_date, delivery_date,
+                                            customer_PIC, cust_phone1, cust_phone2, cust_address1, cust_address2, cust_address3,
+                                            machine_id, machine_code, machine_name, machine_type, type_id, machine_brand,
+                                            brand_id, serialnumber, accessories_required, accessories_for,
+                                            jobregistercreated_by, jobregisterlastmodify_by) 
+            
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                          ?, ?, ?)";
+                          
+        $queryResult = mysqli_prepare($conn, $query);
+        
+        if ($queryResult) {
+            mysqli_stmt_bind_param($queryResult, 'sssssssssssssssssssssssssssssssss', $today_date, $job_code,
+                                   $job_name, $job_order_number, $job_description, $job_assign, $technician_rank,
+                                   $staff_position, $support, $customer_code, $customer_name, $customer_grade,
+                                   $job_priority, $requested_date, $delivery_date, $customer_PIC, $cust_phone1, 
+                                   $cust_phone2, $cust_address1, $cust_address2, $cust_address3, $machine_id,
+                                   $machine_code, $machine_name, $machine_type, $type_id, $machine_brand, $brand_id,
+                                   $serialnumber, $accessories_required, $accessories_for, $jobregistercreated_by, 
+                                   $jobregisterlastmodify_by);
+                                  
+            if (mysqli_stmt_execute($queryResult)) {
+                $res = ['status' => 200, 
+                        'message' => 'Support Job Successfully Registered'];
+                        
+                echo json_encode($res);
+            } 
+            
+            else {
+                $res = ['status' => 500, 
+                        'message' => 'Error: ' . mysqli_error($conn)];
+                
+                echo json_encode($res);
+            }
+            
+            mysqli_stmt_close($queryResult);
+        } 
+        
+        else {
+            $res = ['status' => 500, 
+                    'message' => 'Error: ' . mysqli_error($conn)];
+            
             echo json_encode($res);
         }
     }
@@ -374,6 +457,56 @@
         }
     }
 
+    // Update Job Update
+    if (isset($_POST['update_jobUpdate'])) {
+        $jobregister_id = $_POST['jobregister_id'];
+        $technician_departure = $_POST['technician_departure'];
+        $technician_arrival = $_POST['technician_arrival'];
+        $technician_leaving = $_POST['technician_leaving'];
+        $tech_out = $_POST['tech_out'];
+        $tech_in = $_POST['tech_in'];
+    
+        $query = "UPDATE job_register SET technician_departure=?, 
+                                          technician_arrival=?, 
+                                          technician_leaving=?, 
+                                          tech_out=?, 
+                                          tech_in=? 
+                                          
+                  WHERE jobregister_id=?";
+        
+        $queryResult = mysqli_prepare($conn, $query);
+    
+        if ($queryResult) {
+            mysqli_stmt_bind_param($queryResult, 'sssssi', $technician_departure, $technician_arrival, 
+                                   $technician_leaving, $tech_out, $tech_in, $jobregister_id);
+            
+            $success = mysqli_stmt_execute($queryResult);
+    
+            if ($success) {
+                $res = ['status' => 200,
+                        'message' => 'Time successfully updated'];
+    
+                echo json_encode($res);
+            }
+            
+            else {
+                $res = ['status' => 500,
+                        'message' => 'Error: ' . mysqli_error($conn)];
+    
+                echo json_encode($res);
+            }
+    
+            mysqli_stmt_close($queryResult);
+        }
+        
+        else {
+            $res = ['status' => 500,
+                    'message' => 'Error: ' . mysqli_error($conn)];
+    
+            echo json_encode($res);
+        }
+    }
+   
     // Upload photo Before
     if (isset($_POST['upload_photoBefore'])) {
         try {
@@ -806,90 +939,6 @@
             $res = ['status' => 500,
                     'message' => 'Error: ' . mysqli_error($conn)];
 
-            echo json_encode($res);
-        }
-    }
-
-    // Job Support
-    if (isset($_POST['submit_jobSupport'])) {
-        $today_date = $_POST['today_date'];
-        $accessories_required = $_POST['accessories_required'];
-        $accessories_for = $_POST['accessories_for'];
-        $support = $_POST['support'];
-        $job_priority = $_POST['job_priority'];
-        $job_order_number = $_POST['job_order_number'];
-        $job_name = $_POST['job_name'];
-        $job_code = $_POST['job_code'];
-        $job_description = $_POST['job_description'];
-        $requested_date = $_POST['requested_date'];
-        $delivery_date = $_POST['delivery_date'];
-        $customer_name = $_POST['customer_name'];
-        $customer_code = $_POST['customer_code'];
-        $cust_address1 = $_POST['cust_address1'];
-        $cust_address2 = $_POST['cust_address2'];
-        $cust_address3 = $_POST['cust_address3'];
-        $customer_grade = $_POST['customer_grade'];
-        $customer_PIC = $_POST['customer_PIC'];
-        $cust_phone1 = $_POST['cust_phone1'];
-        $cust_phone2 = $_POST['cust_phone2'];
-        $machine_brand = $_POST['machine_brand'];
-        $brand_id = $_POST['brand_id'];
-        $machine_type = $_POST['machine_type'];
-        $type_id = $_POST['type_id'];
-        $machine_name = $_POST['machine_name'];
-        $machine_id = $_POST['machine_id'];
-        $machine_code = $_POST['machine_code'];
-        $serialnumber = $_POST['serialnumber'];
-        $job_assign = $_POST['job_assign'];
-        $technician_rank = $_POST['technician_rank'];
-        $staff_position = $_POST['staff_position'];
-        $jobregistercreated_by = $_POST['jobregistercreated_by'];
-        $jobregisterlastmodify_by = $_POST['jobregisterlastmodify_by'];
-        
-        $query = "INSERT INTO job_register (today_date, accessories_required, accessories_for, support, job_priority,
-                                            job_order_number, job_name, job_code, job_description, requested_date,
-                                            delivery_date, customer_name, customer_code, cust_address1, cust_address2,
-                                            cust_address3, customer_grade, customer_PIC, cust_phone1, cust_phone2,
-                                            machine_brand, brand_id, machine_type, type_id, machine_name,
-                                            machine_id, machine_code, serialnumber, job_assign, technician_rank,
-                                            staff_position, jobregistercreated_by, jobregisterlastmodify_by) 
-            
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                          
-        $queryResult = mysqli_prepare($conn, $query);
-        
-        if ($queryResult) {
-            mysqli_stmt_bind_param($queryResult, 'sssssssssssssssssssssssssssssssss',
-                                  $today_date, $accessories_required, $accessories_for, $support, $job_priority,
-                                  $job_order_number, $job_name, $job_code, $job_description, $requested_date,
-                                  $delivery_date, $customer_name, $customer_code, $cust_address1, $cust_address2,
-                                  $cust_address3, $customer_grade, $customer_PIC, $cust_phone1, $cust_phone2,
-                                  $machine_brand, $brand_id, $machine_type, $type_id, $machine_name,
-                                  $machine_id, $machine_code, $serialnumber, $job_assign, $technician_rank,
-                                  $staff_position, $jobregistercreated_by, $jobregisterlastmodify_by);
-                                  
-            if (mysqli_stmt_execute($queryResult)) {
-                $res = ['status' => 200, 
-                        'message' => 'Support Job Successfully Submitted'];
-                        
-                echo json_encode($res);
-            } 
-            
-            else {
-                $res = ['status' => 500, 
-                        'message' => 'Error: ' . mysqli_error($conn)];
-                
-                echo json_encode($res);
-            }
-            
-            mysqli_stmt_close($queryResult);
-        } 
-        
-        else {
-            $res = ['status' => 500, 
-                    'message' => 'Error: ' . mysqli_error($conn)];
             echo json_encode($res);
         }
     }

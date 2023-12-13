@@ -137,7 +137,7 @@
                                 <li><?php echo $row['serialnumber'] ?></li>
 								<?php
 									if($row['reason'] != "" || $row['reason'] != NULL) {
-										echo'<li class="fw-bold" style="color: red;">'.$row['reason'].'</li>';
+										echo'<li><span class="fw-bold" style="color: red;">'.$row['reason'].'</span></li>';
 									}
                             	?>
                             </ul>
@@ -278,7 +278,7 @@
                                 <li><?php echo $row['serialnumber'] ?></li>
 								<?php
 									if($row['reason'] != "" || $row['reason'] != NULL) {
-										echo'<li class="fw-bold" style="color: red;">'.$row['reason'].'</li>';
+										echo'<li><span class="fw-bold" style="color: red;">'.$row['reason'].'</span></li>';
 									}
                             	?>
                             </ul>
@@ -353,7 +353,7 @@
                                 <li><?php echo $row['serialnumber'] ?></li>
 								<?php
 									if($row['reason'] != "" || $row['reason'] != NULL) {
-										echo'<li class="fw-bold" style="color: red;">'.$row['reason'].'</li>';
+										echo'<li><span class="fw-bold" style="color: red;">'.$row['reason'].'</span></li>';
 									}
                             	?>
                             </ul>
@@ -768,239 +768,241 @@
                             <div class="tab-pane" id="pills-JobInfo" role="tabpanel" aria-labelledby="pills-JobInfo-tab">
                                 <div class="container" id="jobInfoTab">
                                     <form id="techJobInfoForm">
-                                        <input type="hidden" name="jobregister_id" id="jobregisterID_jobInfo">
-                                       
+                                        <input type="hidden" name="jobregister_id" id="jobregisterID_jobInfo" readonly>
+                                        
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Job Priority</label>
-                                                <input type="text" name="job_priority" id="job_priority" class="form-control" readonly>
+                                                <input type="text" name="job_priority" id="job_priority" class="form-control">
                                             </div>
-
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Job Order Number</label>
-                                                <input type="text" name="job_order_number" id="job_order_number" class="form-control" readonly>
+                                                <input type="text" name="job_order_number" id="job_order_number" class="form-control">
                                             </div>
-
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Job Name</label>
-                                                <input type="text" name="job_name" id="job_name" class="form-control" readonly>
+                                                <input type="text" name="job_name" id="job_name" class="form-control">
                                             </div>
-
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Job Description</label>
-                                                <input type="text" name="job_description" id="job_description" class="form-control" readonly>
+                                                <input type="text" name="job_description" id="job_description" class="form-control">
                                             </div>
-
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Requested Date</label>
-                                                <input type="text" name="requested_date" id="requested_date" class="form-control" readonly>
+                                                <input type="text" name="requested_date" id="requested_date" class="form-control" autocomplete="off">
                                             </div>
-
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Delivery Date</label>
-                                                <input type="text" name="delivery_date" id="delivery_date" class="form-control" readonly>
+                                                <input type="text" name="delivery_date" id="delivery_date" class="form-control" autocomplete="off">
                                             </div>
-
+                                            
                                             <div class="mb-3">
                                                 <label for="" class="fw-bold mb-2">Customer Name</label>
-                                                <input type="text" name="customer_name" id="customer_name" class="form-control" readonly>
+                                                <input type="text" name="customer_name" id="customer_name" class="form-control">
                                             </div>
-
+                                            
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Customer Address</label>
-                                                <input type="text" name="cust_address1" id="cust_address1" class="form-control" readonly>
+                                                <input type="text" name="cust_address1" id="cust_address1" class="form-control">
                                                 <div class="d-grid d-flex gap-2 mt-2">
-                                                    <input type="text" name="cust_address2" id="cust_address2" class="form-control" readonly>
-                                                    <input type="text" name="cust_address3" id="cust_address3" class="form-control" readonly>
+                                                    <input type="text" name="cust_address2" id="cust_address2" class="form-control">
+                                                    <input type="text" name="cust_address3" id="cust_address3" class="form-control">
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Customer Grade</label>
-                                                <input type="text" name="customer_grade" id="customer_grade" class="form-control" readonly>
+                                                <input type="text" name="customer_grade" id="customer_grade" class="form-control">
                                             </div>
-
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Customer PIC</label>
-                                                <input type="text" name="customer_PIC" id="customer_PIC" class="form-control" readonly>
+                                                <input type="text" name="customer_PIC" id="customer_PIC" class="form-control">
                                             </div>
-
+                                            
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Customer Phone Number</label>
                                                 <div class="d-grid d-flex gap-2 mt-2">
-                                                    <input type="text" name="cust_phone1" id="cust_phone1" class="form-control" readonly>
-                                                    <input type="text" name="cust_phone2" id="cust_phone2" class="form-control" readonly>
+                                                    <input type="text" name="cust_phone1" id="cust_phone1" class="form-control">
+                                                    <input type="text" name="cust_phone2" id="cust_phone2" class="form-control">
                                                 </div>
                                             </div>
-
+                                            
+                                            <div class="mb-3">
+                                                <label for="" class="form-label fw-bold">Serial Number</label>
+                                                <select name="serialnumber" id="serialnumber" style="width: 100%;" class="form-select">
+                                                    <option value="">Select Serial Number</option>
+                                                    <?php
+                                                        
+                                                        include "dbconnect.php";
+                                                        
+                                                        $query = "SELECT * FROM machine_list ORDER BY machine_id ASC";
+                                                        
+                                                        $result = $conn->query($query);
+                                                        
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . $row['serialnumber'] . "'>" . $row['serialnumber'] . "</option>";
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                        $("#serialnumber").select2({
+                                                            dropdownParent: $('#techJobInfoForm'),
+                                                            matcher: oldMatcher(matchStart),
+                                                            theme: 'bootstrap-5'
+                                                        })
+                                                    });
+                                                    
+                                                    function matchStart (term, text) {
+                                                        if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                            return true;
+                                                        }
+                                                        
+                                                        return false;
+                                                    }
+                                                    
+                                                    $("#serialnumber").change(function() {
+                                                        var serialnumber = $(this).val();
+                                                        
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: 'GETSerialNumber.php',
+                                                            data: { serialnumber: serialnumber },
+                                                            dataType: 'json',
+                                                            
+                                                            success: function(response) {
+                                                                if (!response.error) {
+                                                                    $("#machine_id").val(response.machine_id);
+                                                                    $("#machine_code").val(response.machine_code);
+                                                                    $("#machine_name").val(response.machine_name);
+                                                                    $("#machine_type").val(response.machine_type).trigger('change');
+                                                                    $("#type_id").val(response.type_id);
+                                                                    $("#machine_brand").val(response.machine_brand).trigger('change');
+                                                                    $("#brand_id").val(response.brand_id);
+                                                                }
+ 
+                                                                else {
+                                                                    console.error(response.error);
+                                                                }
+                                                            },
+                                                            
+                                                            error: function(xhr, status, error) {
+                                                                console.error(xhr.responseText);
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                            </script>
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Machine Brand</label>
-                                                <select name="machine_brand" id="machine_brand" class="form-select" onchange="GetBrandID(this.value)">
+                                                <select name="machine_brand" id="machine_brand" style="width: 100%;" class="form-select">
+                                                    <option value="">Select Machine Brand</option>
                                                     <?php
                                                         
                                                         include "dbconnect.php";
-                                                    
-                                                        $records = mysqli_query($conn, "SELECT * FROM machine_brand");
-                                                            
-                                                        echo"<option value=''>Select Machine Brand</option>";
-                                                            
-                                                        while($data = mysqli_fetch_array($records)) {
-                                                                echo "<option value='". $data['brandname'] ."' data-brandID='". $data['brand_id'] ."'>" .$data['brandname']. "</option>";
-                                                        }
                                                         
-                                                        mysqli_close($conn);
+                                                        $query = "SELECT * FROM machine_brand ORDER BY brandname ASC";
+                                                        
+                                                        $result = $conn->query($query);
+                                                        
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . $row['brandname'] . "'>" . $row['brandname'] . "</option>";
+                                                        }
                                                     ?>
                                                 </select>
-
-                                                <script>
-                                                    function GetBrandID(value) {
-                                                        var selectedOption = document.querySelector('#machine_brand option[value="' + value + '"]');
-                                                        var brandID = selectedOption.getAttribute('data-brandID');
-                                                        
-                                                        document.querySelector('input[name="brand_id"]').value = brandID;
-                                                    }
-                                                </script>
-
-                                                <input type="hidden" id="brand_id" name="brand_id">
-
-                                                <script>
-                                                    $(document).ready(function() {
-                                                        $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-                                                            $("#machine_brand").select2({
-                                                                dropdownParent: $('#techJobInfoForm'),
-                                                                matcher: oldMatcher(matchStart),
-                                                                theme: 'bootstrap-5'
-                                                            })
-                                                        });
-                                
-                                                        function matchStart (term, text) {
-                                                            if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
-                                                                return true;
-                                                            }
-                                                            
-                                                            return false;
-                                                        }
-                                                    });
-                                                </script>
+                                                
+                                                <input type="hidden" name="brand_id" id="brand_id">
                                             </div>
 
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                        $("#machine_brand").select2({
+                                                            dropdownParent: $('#techJobInfoForm'),
+                                                            dropdownCssClass: 'select2-dropup',
+                                                            matcher: oldMatcher(matchStart),
+                                                            theme: 'bootstrap-5'
+                                                        })
+                                                    });
+                                                    
+                                                    function matchStart (term, text) {
+                                                        if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                            return true;
+                                                        }
+                                                        
+                                                        return false;
+                                                    }
+                                                });
+                                            </script>
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Machine Type</label>
-                                                <select name="machine_type" id="machine_type" style="width: 100%;" class="form-select" onchange="GetTypeID(this.value)">
+                                                <select name="machine_type" id="machine_type" style="width: 100%;" class="form-select">
+                                                    <option value="">Select Machine Type</option>
                                                     <?php
                                                         
                                                         include "dbconnect.php";
-                                                    
-                                                        $records = mysqli_query($conn, "SELECT * FROM machine_type");
-                                                            
-                                                        echo"<option value=''>Select Machine Brand</option>";
-                                                            
-                                                        while($data = mysqli_fetch_array($records)) {
-                                                                echo "<option value='". $data['type_name'] ."' data-typeID='". $data['type_id'] ."'>" .$data['type_name']. "</option>";
-                                                        }
                                                         
-                                                        mysqli_close($conn);
+                                                        $query = "SELECT * FROM machine_type ORDER BY type_name ASC";
+                                                        
+                                                        $result = $conn->query($query);
+                                                        
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . $row['type_name'] . "'>" . $row['type_name'] . "</option>";
+                                                        }
                                                     ?>
                                                 </select>
-
-                                                <script>
-                                                    function GetTypeID(value) {
-                                                        var selectedOption = document.querySelector('#machine_type option[value="' + value + '"]');
-                                                        var typeID = selectedOption.getAttribute('data-typeID');
-                                                        
-                                                        document.querySelector('input[name="type_id"]').value = typeID;
-                                                    }
-                                                </script>
-
-                                                <input type="hidden" id="type_id" name="type_id">
-
-                                                <script>
-                                                    $(document).ready(function() {
-                                                        $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-                                                            $("#machine_type").select2({
-                                                                dropdownParent: $('#techJobInfoForm'),
-                                                                matcher: oldMatcher(matchStart),
-                                                                theme: 'bootstrap-5'
-                                                            })
-                                                        });
-                                
-                                                        function matchStart (term, text) {
-                                                            if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
-                                                                return true;
-                                                            }
-                                                            
-                                                            return false;
-                                                        }
-                                                    });
-                                                </script>
+                                                
+                                                <input type="hidden" name="type_id" id="type_id">
                                             </div>
 
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                        $("#machine_type").select2({
+                                                            dropdownParent: $('#techJobInfoForm'),
+                                                            dropdownCssClass: 'select2-dropup',
+                                                            matcher: oldMatcher(matchStart),
+                                                            theme: 'bootstrap-5'
+                                                        })
+                                                    });
+                                                    
+                                                    function matchStart (term, text) {
+                                                        if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                            return true;
+                                                        }
+                                                        
+                                                        return false;
+                                                    }
+                                                });
+                                            </script>
+                                            
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Machine Name</label>
-                                                <input type="text" id="machine_name" name="machine_name" class="form-control" readonly>
+                                                <input type="text" id="machine_name" name="machine_name" class="form-control">
                                                 <input type="hidden" id="machine_id" name="machine_id">
                                                 <input type="hidden" id="machine_code" name="machine_code">
                                             </div>
-
-                                            <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Serial Number</label>
-                                                <select name="serialnumber" id="serialnumber" style="width: 100%;" class="form-select" onchange="GetMachineDetails(this.value)">
-                                                    <?php
-                                                        
-                                                        include "dbconnect.php";
-                                                    
-                                                        $records = mysqli_query($conn, "SELECT * FROM machine_list");
-                                                            
-                                                        echo"<option value=''>Select Serial Number</option>";
-                                                            
-                                                        while($data = mysqli_fetch_array($records)) {
-                                                            echo "<option value='". $data['serialnumber'] ."' data-machineName='". $data['machine_name'] ."' data-machineCode='". $data['machine_code'] ."' data-machineID='". $data['machine_id'] ."'>" .$data['serialnumber']. " - " .$data['customer_name']. "</option>";
-                                                        }	
-                                                    ?>
-                                                </select>
-
-                                                <script>
-                                                    function GetMachineDetails(value) {
-                                                        var selectedOption = document.querySelector('#serialnumber option[value="' + value + '"]');
-                                                        var machineName = selectedOption.getAttribute('data-machineName');
-                                                        var machineCode = selectedOption.getAttribute('data-machineCode');
-                                                        var machineID = selectedOption.getAttribute('data-machineID');
-                                                        
-                                                        document.querySelector('input[name="machine_name"]').value = machineName;
-                                                        document.querySelector('input[name="machine_code"]').value = machineCode;
-                                                        document.querySelector('input[name="machine_id"]').value = machineID;
-                                                    }
-                                                </script>
-
-                                                <script>
-                                                    $(document).ready(function() {
-                                                        $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-                                                            $("#serialnumber").select2({
-                                                                dropdownParent: $('#techJobInfoForm'),
-                                                                matcher: oldMatcher(matchStart),
-                                                                theme: 'bootstrap-5'
-                                                            })
-                                                        });
-                                
-                                                        function matchStart (term, text) {
-                                                            if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
-                                                                return true;
-                                                            }
-                                                            
-                                                            return false;
-                                                        }
-                                                    });
-                                                </script>
-                                            </div>
-
-                                            <input type="hidden" id="jobregisterlastmodify_by" name="jobregisterlastmodify_by">
-                                           
-                                            <div class="mb-3">
-                                                <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width:100%">Update</button>
-                                            </div>
                                             
-                                            <div id="JobInfoMessage"></div>
+                                            <input type="hidden" id="jobregistercreated_by" name="jobregistercreated_by">
+                                            <input type="hidden" id="jobregisterlastmodify_by" name="jobregisterlastmodify_by">
                                         </div>
+                                        
+                                        <div class="mt-2">
+                                            <button type="submit" id="updtInfo" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width:100%">Update</button>
+                                        </div>
+                                        
+                                        <div class="mt-3" id="JobInfoMessage"></div>
                                     </form>
                                 </div>
                             </div>
@@ -1108,7 +1110,7 @@
                                                 <input type="hidden" name="jobregister_id" id="jobregisterID_photoBefore">
 
                                                 <div class="input-group mb-3">
-                                                    <input type="file" name="file_name[]" id="fileName_before" class="form-control" multiple>
+                                                    <input type="file" name="file_name[]" id="fileName_before" class="form-control" accept="image/*" multiple>
                                                     <input type="Hidden" name="description" id="descriptionBefore" value="Machine (Before Service)">
                                                     <button type="submit" name="upload" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
                                                 </div>
@@ -1156,7 +1158,7 @@
                                                 <input type="hidden" name="jobregister_id" id="jobregisterID_photoAfter">
                                             
                                                 <div class="input-group mb-3">
-                                                <input type="file" name="file_name[]" id="fileName_after" class="form-control" multiple>
+                                                <input type="file" name="file_name[]" id="fileName_after" class="form-control" accept="image/*" multiple>
                                                     <input type="Hidden" name="description" id="descriptionAfter" value="Machine (After Service)">
                                                     <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
                                                 </div>
@@ -1209,7 +1211,7 @@
                                                 <input type="hidden" name="jobregister_id" id="jobregisterID_videoBefore">
 
                                                 <div class="input-group mb-3">
-                                                    <input type="file" name="video_url[]" id="videoBefore" accept="video/*" multiple class="form-control">
+                                                    <input type="file" name="video_url[]" id="videoBefore" class="form-control" accept="video/*" multiple>
                                                     <input type="hidden" name="description" id="descriptionVideoBefore" value="Machine (Before Service)">
                                                     <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
                                                 </div>
@@ -1257,7 +1259,7 @@
                                                 <input type="hidden" name="jobregister_id" id="jobregisterID_videoAfter">
                                                 
                                                 <div class="input-group mb-3">
-                                                    <input type="file" name="video_url[]" id="videoAfter" accept="video/*" multiple class="form-control">
+                                                    <input type="file" name="video_url[]" id="videoAfter" class="form-control" accept="video/*" multiple>
                                                     <input type="hidden" id="description" name="description" value="Machine (After Service)">
                                                     <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
                                                 </div>
@@ -1408,6 +1410,36 @@
                 });
             }
 
+            // Populate serial number dropdown
+            function fetchSerialNumbersByCustomerName(customerName) {
+                $.ajax({
+                    type: "POST",
+                    url: "getAllMachineDetails.php",
+                    data: { customer_name: customerName },
+                    
+                    success: function (response) {
+                        var machineData = jQuery.parseJSON(response);
+                        
+                        $('#serialnumber').empty();
+                        
+                        if (machineData.length > 0) {
+                            $('#serialnumber').append('<option value="">Select Serial Number</option>');
+                            for (var i = 0; i < machineData.length; i++) {
+                                var data = machineData[i];
+                                
+                                $('#serialnumber').append('<option value="' + data.serialnumber + '" data-machineName="' + data.machine_name + '" data-machineCode="' + data.machine_code + '" data-machineID="' + data.machine_id + '">' + data.serialnumber + '</option>');
+                            }
+                        }
+                        
+                        else {
+                            $('#serialnumber').append('<option value="">No Serial Numbers available</option>');
+                        }
+                        
+                        $('#serialnumber').val(data.serialnumber).trigger('change');
+                    }
+                });
+            }
+
             // Fetch Job Info Tab
             function fetchJobInfoData(jobregister_id) {
                 $.ajax({
@@ -1439,12 +1471,14 @@
                             $('#cust_phone2').val(res.data.cust_phone2);
                             $('#brand_id').val(res.data.brand_id);
                             $('#type_id').val(res.data.type_id);
+                            $('#machine_name').val(res.data.machine_name);
                             $('#machine_id').val(res.data.machine_id);
                             $('#machine_code').val(res.data.machine_code);
+                            $('#serialnumber').val(res.data.serialnumber).trigger('change');
                             $('#machine_brand').val(res.data.machine_brand).trigger('change');
                             $('#machine_type').val(res.data.machine_type).trigger('change');
-                            $('#machine_name').val(res.data.machine_name).trigger('change');
-                            $('#serialnumber').val(res.data.serialnumber).trigger('change');
+
+                            fetchSerialNumbersByCustomerName(res.data.customer_name);
                         }
                         
                         else {
@@ -1504,8 +1538,8 @@
                             if (assistantData.length > 0) {
                                 assistantData.forEach(function (assistant) {
                                     var row = "<tr data-id='" + assistant.id + "'>" +
-                                                "<td style='text-align: center; vertical-align: middle;'>" + assistant.username + "</td>" +
-                                                "<td style='text-align: center;'><button class='delete-button btn fw-bold' style='color:red; border:none;'>Delete</button></td>" +
+                                                "<td style='text-align: center; vertical-align: middle;'>" + assistant.username.replace(/\n/g, "<br>") + "</td>" +
+                                                "<td style='text-align: center; vertical-align: middle;'><button class='delete-button btn fw-bold' style='color:red; border:none;'>Delete</button></td>" +
                                               "</tr>";
 
                                     tableBody.append(row);
@@ -1805,7 +1839,7 @@
                 fetchVideoAfterData(jobregister_id)
                 fetchJobStatusData(jobregister_id)
                 fetchJobReporData(jobregister_id)
-                
+    
                 $('#popUpModal').modal('show');
             });
 
@@ -1832,16 +1866,14 @@
                     
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
-
+                        
                         if (res.status === 200) {
                             $('#JobUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
                             
                             setTimeout(function () {
                                 hideElementById("JobUpdateMessage");
                             }, 2000);
-                            
-                            fetchJobInfoData(jobregister_id)
-                        } 
+                        }
                         
                         else if (res.status === 500) {
                             $('#JobUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
@@ -1849,8 +1881,6 @@
                             setTimeout(function () {
                                 hideElementById("JobUpdateMessage");
                             }, 2000);
-
-                            fetchJobInfoData(jobregister_id)
                         }
                     },
                     
@@ -1884,39 +1914,33 @@
                     
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
-
+                        
                         if (res.status === 200) {
                             $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
                             
                             setTimeout(function () {
-                                hideElementById("JobInfoMessage");
-                            }, 2000);
+                                        hideElementById("JobInfoMessage");
+                                    }, 2000);
+                                }
+                                
+                                else if (res.status === 500) {
+                                    $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
+                                    
+                                    setTimeout(function () {
+                                        hideElementById("JobInfoMessage");
+                                    }, 2000);
+                                }
+                            },
                             
-                            fetchJobInfoData(jobregister_id)
-                            fetchUsername()
-                        } 
-                        
-                        else if (res.status === 500) {
-                            $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
-                            
-                            setTimeout(function () {
-                                hideElementById("JobInfoMessage");
-                            }, 2000);
-
-                            fetchJobInfoData(jobregister_id);
-                            fetchUsername();
-                        }
-                    },
-                    
-                    error: function (xhr, status, error) {
-                        $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
-                          
-                        setTimeout(function () {
-                            hideElementById("JobInfoMessage");
-                        }, 2000);
-                        
-                        console.error('AJAX Error:', status, error);
-                    }
+                            error: function (xhr, status, error) {
+                                $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                                
+                                setTimeout(function () {
+                                    hideElementById("JobInfoMessage");
+                                }, 2000);
+                                
+                                console.error('AJAX Error:', status, error);
+                            }
                 });
             });
 
@@ -2662,7 +2686,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             
                             <!-- Report -->
                             <div class="tab-pane" id="pills-ReportCompleted" role="tabpanel" aria-labelledby="pills-ReportCompleted-tab">

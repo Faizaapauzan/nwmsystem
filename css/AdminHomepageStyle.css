@@ -22,6 +22,13 @@
   font-family: "Poppins", sans-serif;
 }
 
+.JobTech {
+  background-color: #f7f7f7ab;
+  cursor: pointer;
+  font-size:14px;
+  font-family: "Poppins", sans-serif;
+}
+
 /* Back To Top Button */
 #myBtn {
   display: none;
