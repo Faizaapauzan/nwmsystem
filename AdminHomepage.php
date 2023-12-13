@@ -1279,7 +1279,7 @@
                                                 var jobregister_id = $(this).data('jobregisterincomplete-id');
                                                 
                                                 $.ajax({
-                                                    url: 'AdminHomepageJobassign.php',
+                                                    url: 'AdminHomepageJobassignAsisstant.php',
                                                     type: 'post',
                                                     data: {jobregister_id: jobregister_id},
                                                     
