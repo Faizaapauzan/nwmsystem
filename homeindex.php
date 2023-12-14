@@ -19,22 +19,20 @@ if (isset($_POST["update"])) {
     $customer_PIC = $_POST["customer_PIC"];
     $cust_phone1 = $_POST["cust_phone1"];
     $cust_phone2 = $_POST["cust_phone2"];
-    $brand_id = $_POST["brand_id"];
     $machine_brand = $_POST["machine_brand"];
+    $brand_id = !empty($_POST["brand_id"]) ? $_POST["brand_id"] : null;
+    $machine_type = $_POST["machine_type"];
     $type_id = !empty($_POST["type_id"]) ? $_POST["type_id"] : null;
-    $machine_type = !empty($_POST["machine_type"]) ? $_POST["machine_type"] : null;
-    $machine_id = $_POST["machine_id"];
-    $serialnumber = !empty($_POST["serialnumber"]) ? $_POST["serialnumber"] : null;
+    $serialnumber = $_POST["serialnumber"];
     $machine_code = $_POST["machine_code"];
     $accessories_required = $_POST["accessories_required"];
     $accessories_for = !empty($_POST["accessories_for"]) ? $_POST["accessories_for"] : null;
     $machine_name = $_POST["machine_name"];
+    $machine_id = !empty($machine_id) ? $machine_id : null;
     $job_cancel = $_POST["job_cancel"];
     $job_status = $_POST["job_status"];
     $reason = $_POST["reason"];
     $jobregisterlastmodify_by = $_POST["jobregisterlastmodify_by"];
-
-    $machine_id = !empty($machine_id) ? $machine_id : null;
 
     $sql = "UPDATE job_register SET
             job_code = ?,
