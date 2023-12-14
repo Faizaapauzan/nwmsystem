@@ -1,27 +1,37 @@
 <?php
-include 'dbconnect.php';
-
-    $response = array('success' => false);
-
-    if (isset($_POST['updateassign'])) {
-
-        $tech_leader = $_POST['tech_leader'];
-        $username = $_POST['username'];
-        $techupdate_date = $_POST['techupdate_date'];
     
-       $techassistant=implode(",",$username);
-    {
-     
-       $sql = "UPDATE tech_update SET username='$techassistant' WHERE techupdate_date='$techupdate_date' AND tech_leader='$tech_leader'";
-       
- if($conn->query($sql))
-        {
-            $response['success'] = true;
+    include 'dbconnect.php';
+    
+    $response = array('success' => false);
+    
+    if (isset($_POST['updateassign'])) {
+        $tech_leader = $_POST['job_assign'];
+        $techupdate_date = $_POST['ass_date'];
+        $username = $_POST['username'];
+        
+        $stmt = $conn->prepare("UPDATE tech_update SET username=? WHERE techupdate_date=? AND tech_leader=?");
+        
+        if ($stmt) {
+            $techassistant = implode("\n", $_POST['username']);
+            $stmt->bind_param("sss", $techassistant, $techupdate_date, $tech_leader);
+            
+            if ($stmt->execute()) {
+                $response['success'] = true;
+            }
+            
+            else {
+                $response['error'] = $stmt->error;
+            }
+            
+            $stmt->close();
         }
         
+        else {
+            $response['error'] = $conn->error;
         }
     }
-
-echo json_encode($response);
+    
+    ob_clean();
+    echo json_encode($response);
 
 ?>

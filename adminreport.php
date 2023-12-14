@@ -115,7 +115,7 @@
                             </a>
 
                             <div class="nav__dropdown">
-                                <a href="staff.php" class="nav__link">
+                                <a href="#" class="nav__link">
                                     <i class='bx bx-group nav__icon'></i>
                                     <span class="nav__name">Staff</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -313,32 +313,27 @@
                                                                 return $dif2;
                                                             }
                                                         }
+
                                                         $wh = '';
                                                         $wm = '';
                                                         $th = '';
                                                         $tm = '';
+                                                        
                                                         if ($arrival != '' && $leaving != ''){
                                                             $wh = difftime($arrival, $leaving)['h'];
                                                             $wm = difftime($arrival, $leaving)['m'];
                                                         }
+                                                        
                                                         if ($departure != '' && $arrival != ''){
                                                             $th = difftime($departure, $arrival)['h'];
                                                             $tm = difftime($departure, $arrival)['m'];
-                                                        }
-                                
-                                  
-                                                        $username = $row['username'];   
-                                                        $usernamesArray = explode(",", $username);
-                                                        $formattedUsernames = '';
-                                                        foreach ($usernamesArray as $name) {
-                                                            $formattedUsernames .= $name . "\n";
                                                         }
                                         ?>
                                     
                                         <tr>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= strtoupper($row['job_assign']); ?></td>
-                                            <td style='text-align: center; vertical-align: middle;'><pre class="pre"><?= strtoupper($formattedUsernames); ?></pre></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['job_assign']; ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= nl2br($row['username']); ?></td>
                                             <td style="vertical-align: middle;"><?= $row['customer_name']; ?></td>
                                             <td style="vertical-align: middle;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$departure" ?></td>
@@ -430,10 +425,9 @@
                                                 $records = array();
 
                                                 $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants 
-                                                                        ON job_register.jobregister_id=assistants.jobregister_id 
-                                                                        WHERE (job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' 
-                                                                        AND (job_register.job_cancel = '' OR job_register.job_cancel IS NULL))
-                                                                        ORDER BY job_assign ASC");
+                                                                              ON job_register.jobregister_id=assistants.jobregister_id 
+                                                                              WHERE (job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' 
+                                                                              AND (job_register.job_cancel = '' OR job_register.job_cancel IS NULL))");
 
                                                 if ($query) {
                                                     while ($row1 = mysqli_fetch_assoc($query)) {
@@ -443,7 +437,7 @@
                                                 }
 
                                                 $staff_query = mysqli_query($conn, "SELECT * FROM staff_register WHERE staff_position = 'Leader' and tech_avai = 0
-                                                                            ORDER BY username ASC");
+                                                                                    ORDER BY username ASC");
 
                                                 foreach($staff_query as $row){
                                                     $countrecords = 0;
@@ -456,39 +450,36 @@
                                                     $totaltravelhr = 0;
                                                     $totaltravelmin = 0;
                                                     
-                                                    
                                                     foreach ($records as $record) {
                                                         if ($row['username'] == strtoupper($record['job_assign'])){
                                                             $countrecords++;
-                                                            $rest1 = strtotime('13:00:00');
-                                                            $rest2 = strtotime('14:00:00');
+                                                            
                                                             $workingtimehr = (difftime($record['technician_leaving'], $record['technician_arrival'])['h'] <= 24) ? 
-                                                                                difftime($record['technician_leaving'], $record['technician_arrival'])['h'] : 0;
+                                                                              difftime($record['technician_leaving'], $record['technician_arrival'])['h'] : 0;
+                                                            
                                                             $workingtimemin = (difftime($record['technician_leaving'], $record['technician_arrival'])['h'] <= 24) ?
-                                                                                difftime($record['technician_leaving'], $record['technician_arrival'])['m'] : 0;
+                                                                               difftime($record['technician_leaving'], $record['technician_arrival'])['m'] : 0;
+                                                            
                                                             $workinghrArray[] = $workingtimehr;
                                                             $workingminArray[] = $workingtimemin;
 
-                                                            if (strtotime($record['tech_out']) >= $rest1 && strtotime($record['tech_out']) < $rest2 && difftime($record['tech_in'], '14:00:00')['h'] <= 0){
-                                                                $resttimeArray[] = difftime($record['tech_in'], $record['tech_out'])['m'];
-                                                            }
+                                                            $resttime = (difftime($record['tech_in'], $record['tech_out'])['h'] <= 24) ?
+                                                                         difftime($record['tech_in'], $record['tech_out'])['m'] : 0;
                                                             
-                                                            $resttime = !empty($resttimeArray) ? max($resttimeArray) : 0;
-                                                            
-
                                                             $TravelTimehr = (difftime($record['technician_arrival'], $record['technician_departure'])['h'] <= 24) ?
-                                                                                difftime($record['technician_arrival'], $record['technician_departure'])['h'] : 0;
+                                                                             difftime($record['technician_arrival'], $record['technician_departure'])['h'] : 0;
+                                                            
                                                             $TravelTimemin = (difftime($record['technician_arrival'], $record['technician_departure'])['h'] <= 24) ?
-                                                                                difftime($record['technician_arrival'], $record['technician_departure'])['m'] : 0; 
+                                                                              difftime($record['technician_arrival'], $record['technician_departure'])['m'] : 0; 
+                                                            
                                                             $totaltravelhr += $TravelTimehr;
                                                             $totaltravelmin += $TravelTimemin;
+                                                            
                                                             if ($totaltravelmin >= 60){
                                                                 $totaltravelmin -= 60;
                                                                 $totaltravelhr += 1;
                                                             }
                                         ?>
-                                        
-                                        
                                         <tr>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter2 ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username'] ?></td>
@@ -499,33 +490,40 @@
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                         </tr>
-                                    
                                         <?php
                                             
-                                                        $counter2++; 
+                                            $counter2++; 
                                                         }
                                                     }
-                                                    $noloop = true;
-                                                    foreach ($workinghrArray as $wh){
-                                                        $totalworkinghr += $wh;
-                                                    }
-                                                    foreach ($workingminArray as $wm){
-                                                        $totalworkingmin += $wm;
-                                                        if ($totalworkingmin >= 60){
-                                                            $totalworkingmin -= 60;
-                                                            $totalworkinghr += 1;
-                                                        }
-                                                    }
-                                                    if (($totalworkinghr == 0 && $totalworkingmin > 0) || ($totalworkinghr > 0 && $totalworkingmin == 0) || ($totalworkinghr > 0 && $totalworkingmin > 0)){
-                                                        if (($totalworkingmin - $resttime) < 0) {
-                                                            $totalworkingmin = 60 + $totalworkingmin - $resttime;
-                                                            $totalworkinghr -= 1;
-                                                        } else {
-                                                            $totalworkingmin = $totalworkingmin - $resttime;
-                                                        }
-                                                    }
-
-                                                    if ($countrecords == 0){ ?>
+                                                    
+                                            $noloop = true;
+                                            
+                                            foreach ($workinghrArray as $wh){
+                                                $totalworkinghr += $wh;
+                                            }
+                                            
+                                            foreach ($workingminArray as $wm){
+                                                $totalworkingmin += $wm;
+                                                
+                                                if ($totalworkingmin >= 60){
+                                                    $totalworkingmin -= 60;
+                                                    $totalworkinghr += 1;
+                                                }
+                                            }
+                                            
+                                            if (($totalworkinghr == 0 && $totalworkingmin > 0) || ($totalworkinghr > 0 && $totalworkingmin == 0) || ($totalworkinghr > 0 && $totalworkingmin > 0)){
+                                                if (($totalworkingmin - $resttime) < 0) {
+                                                    $totalworkingmin = 60 + $totalworkingmin - $resttime;
+                                                    $totalworkinghr -= 1;
+                                                }
+                                                
+                                                else {
+                                                    $totalworkingmin = $totalworkingmin - $resttime;
+                                                }
+                                            }
+                                            
+                                            if ($countrecords == 0){ 
+                                        ?>
                                         <tr>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter2 ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username']; ?></td>
@@ -536,84 +534,82 @@
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                         </tr>
-
-                                                    <?php  
-                                                    $counter2++;  
-                                                    }
-                                                    ?>
-                                                    <!-- INSERT TOTAL WORKING TIME -->
-                                                    <script>
-                                                        if (<?=$noloop?>){
-                                                            var $table2 = $('#myTable2');
-                                                            var $row = $table2.find("td:contains('<?php echo $row['username']; ?>')").closest("tr");
-                                                            if (<?=$totalworkinghr?> != 0 || <?=$totalworkingmin?> != 0){
-                                                                $row.find("td:nth-last-child(2)").text("<?=$totalworkinghr . "hrs " . $totalworkingmin . "mins"?>");
-                                                                if (<?=$totaltravelhr?> != 0 || <?=$totaltravelmin?> != 0)
-                                                                    $row.find("td:last-child").text("<?=$totaltravelhr . "hrs " . $totaltravelmin . "mins"?>");
-                                                                if (<?=$totalworkinghr?> < 6){
-                                                                    $row.find("td").css("color", "red");
-                                                                }
-                                                            }else{
-                                                                $row.find("td").css("color", "red");
-                                                            }
-                                                            
+                                        <?php $counter2++; } ?>
+                                                    
+                                        <!-- INSERT TOTAL WORKING TIME -->
+                                        <script>
+                                            if (<?=$noloop?>) {
+                                                var $table2 = $('#myTable2');
+                                                var $row = $table2.find("td:contains('<?php echo $row['username']; ?>')").closest("tr");
+                                                
+                                                if (<?=$totalworkinghr?> != 0 || <?=$totalworkingmin?> != 0){
+                                                    $row.find("td:nth-last-child(2)").text("<?=$totalworkinghr . "hrs " . $totalworkingmin . "mins"?>");
+                                                    
+                                                    if (<?=$totaltravelhr?> != 0 || <?=$totaltravelmin?> != 0)
+                                                        $row.find("td:last-child").text("<?=$totaltravelhr . "hrs " . $totaltravelmin . "mins"?>");
+                                                        
+                                                        if (<?=$totalworkinghr?> < 6){
+                                                            $row.find("td").css("color", "red");
                                                         }
-                                                    </script>
-                                                    <?php
                                                 }
-                                            }
                                                 
                                                 else {
-                                                    echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+                                                    $row.find("td").css("color", "red");
+                                                }            
+                                            }
+                                        </script>
+                                        <?php
                                                 }
+                                            }
+                                            
+                                            else {
+                                                echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+                                            }
                                         ?>
                                     </tbody>
 
                                     <script>
-                                    $(document).ready(function() {
-                                        var previousName = null;
-                                        var count = 1;
-                                        var index2;
-                                        
-                                        $("#tbody2 tr").each(function(index) {
-                                            index2 = index;
+                                        $(document).ready(function() {
+                                            var previousName = null;
+                                            var count = 1;
+                                            var index2;
                                             
-                                            var currentName = $(this).find("td:eq(1)").text();
-                                            
-                                            if (previousName !== currentName) {
-                                                if (count > 1) {
-                                                    $("#tbody2 tr:eq(" + (index - count) + ") td:eq(1)").attr("rowspan", count);
-                                                    $("#tbody2 tr:eq(" + (index - count) + ") td:eq(4)").attr("rowspan", count);
-                                                    $("#tbody2 tr:eq(" + (index - count) + ") td:eq(6)").attr("rowspan", count);
-                                                    $("#tbody2 tr:eq(" + (index - count) + ") td:eq(7)").attr("rowspan", count);
-
-
+                                            $("#tbody2 tr").each(function(index) {
+                                                index2 = index;
+                                                
+                                                var currentName = $(this).find("td:eq(1)").text();
+                                                
+                                                if (previousName !== currentName) {
+                                                    if (count > 1) {
+                                                        $("#tbody2 tr:eq(" + (index - count) + ") td:eq(1)").attr("rowspan", count);
+                                                        $("#tbody2 tr:eq(" + (index - count) + ") td:eq(4)").attr("rowspan", count);
+                                                        $("#tbody2 tr:eq(" + (index - count) + ") td:eq(6)").attr("rowspan", count);
+                                                        $("#tbody2 tr:eq(" + (index - count) + ") td:eq(7)").attr("rowspan", count);
+                                                    }
+                                                    
+                                                    count = 1;
+                                                    
+                                                    previousName = currentName;
                                                 }
                                                 
-                                                count = 1;
-                                                
-                                                previousName = currentName;
-                                            }
+                                                else {
+                                                    count++;
+                                                    
+                                                    $(this).find("td:eq(1)").hide();
+                                                    $(this).find("td:eq(4)").hide();
+                                                    $(this).find("td:eq(6)").hide();
+                                                    $(this).find("td:eq(7)").hide();
+                                                }
+                                            });
                                             
-                                            else {
-                                                count++;
-                                                
-                                                $(this).find("td:eq(1)").hide();
-                                                $(this).find("td:eq(4)").hide();
-                                                $(this).find("td:eq(6)").hide();
-                                                $(this).find("td:eq(7)").hide();
-
+                                            if (count > 1){
+                                                $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(1)").attr("rowspan", count);
+                                                $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(4)").attr("rowspan", count);
+                                                $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(6)").attr("rowspan", count);
+                                                $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(7)").attr("rowspan", count);
                                             }
                                         });
-                                        
-                                        if (count > 1){
-                                            $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(1)").attr("rowspan", count);
-                                            $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(4)").attr("rowspan", count);
-                                            $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(6)").attr("rowspan", count);
-                                            $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(7)").attr("rowspan", count);
-                                        }
-                                    });
-                                </script>
+                                    </script>
                                 </table>
                             </div>
                             
@@ -640,32 +636,22 @@
                                             if(isset($_GET['DateAssign'])) {
                                                 $DateAssign = $_GET['DateAssign'];
                                                 
-                                                $sql = "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'";
+                                                $query = mysqli_query($conn, "SELECT * FROM tech_update WHERE techupdate_date='$DateAssign'");
                                                 
-                                                $result = mysqli_query($conn, $sql);
-                                                
-                                                if(mysqli_num_rows($result) > 0) {
+                                                if(mysqli_num_rows($query) > 0) {
                                                     $counter = 1;
                                                     
-                                                    foreach($result as $row) {
-                                                        $username = $row['username'];   
-                                                        $usernamesArray = explode(",", $username);
-                                                        $formattedUsernames = '';
-                                                        foreach ($usernamesArray as $name) {
-                                                            $formattedUsernames .= $name . "\n";
-                                                        }
+                                                    foreach($query as $row) {
                                         ?>
-                                
                                         <tr>
-                                            <td style='text-align: center; white-space: nowrap;'><?= $counter ?></td>
-                                            <td style='text-align: center; white-space: nowrap;'><?php echo $row["tech_leader"]; ?></td>
-                                            <td style='text-align: center;'><?= $formattedUsernames?></td>
-                                            <td style='text-align: center; white-space: nowrap;'><pre class="pre"><?php echo $row["tech_clockin"]; ?></pre></td>
-                                            <td style='text-align: center; white-space: nowrap;'><pre class="pre"><?php echo $row["tech_clockout"]; ?></pre></td>
-                                            <td style='text-align: center; white-space: nowrap;'><pre class="pre"><?php echo $row["technician_out"]; ?></pre></td>
-                                            <td style='text-align: center; white-space: nowrap;'><pre class="pre"><?php echo $row["technician_in"]; ?></pre></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row["tech_leader"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap;vertical-align: middle;'><?= nl2br($row['username']); ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row["tech_clockin"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row["tech_clockout"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row["technician_out"]; ?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo $row["technician_in"]; ?></td>
                                         </tr>
-                                   
                                         <?php
                                             
                                             $counter++;
@@ -707,13 +693,11 @@
                                                     
                                                     foreach($query as $row) {
                                         ?>
-                                    
                                         <tr>
                                             <td style='text-align: center;'><?= $counter ?></td>
                                             <td style='text-align: center; white-space: nowrap;'><?= $row['tech_name']; ?></td>
                                             <td style='text-align: center; color:red;' class="fw-bold">OFF</td>
                                         </tr>
-                                  
                                         <?php
                                             
                                             $counter++;

@@ -1032,6 +1032,7 @@
                                                 <input type="hidden" name="cust_name" id="cust_name">
                                                 <input type="hidden" name="requested_date" id="requestedDate">
                                                 <input type="hidden" name="machine_name" id="machineName">
+                                                <input type="hidden" name="job_assign" id="jobAssignAssistant">
                                                 
                                                 <select name="username[]" id="username" class="form-select mb-3" multiple="multiple">
                                                     <?php
@@ -1051,7 +1052,7 @@
                                                 <div id="assistantMessage"></div>
 
                                                 <div class="d-grid justify-content-end mt-3">
-                                                    <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Update</button>
+                                                    <button type="submit" id="updateassign" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Update</button>
                                                 </div>
                                             </form>
 
@@ -1074,6 +1075,39 @@
                                                     }
                                                 });
                                             </script>
+
+                                            <!-- Update Assistant in technician Update table -->
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $('#updateassign').click(function() {
+                                                        var data = $('#techJobAssistantForm').serialize() + '&updateassign=updateassign';
+                                                        
+                                                        $.ajax({
+                                                            url: 'assistantupdate.php',
+                                                            type: 'POST',
+                                                            data: data,
+                                                            dataType: 'json',
+                                                            
+                                                            success: function(response) {
+                                                                console.log(response);
+                                                                
+                                                                if (response.success) {
+                                                                    console.log('Update Saved!');
+                                                                }
+                                                                
+                                                                else {
+                                                                    console.error('Data Cannot Be Saved');
+                                                                }
+                                                            },
+                                                            
+                                                            error: function(xhr, status, error) {
+                                                                console.error('Error:', error);
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                            </script>
+                                            <!-- Update Assistant in technician Update table -->
                                         </div>
                                     </div>
                                 </div>
@@ -1510,6 +1544,7 @@
                             $('#cust_name').val(res.data.customer_name);
                             $('#requestedDate').val(res.data.requested_date);
                             $('#machineName').val(res.data.machine_name);
+                            $('#jobAssignAssistant').val(res.data.job_assign);
                         }
                         
                         else {
