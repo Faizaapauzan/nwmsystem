@@ -259,10 +259,10 @@
                                 ?>
                             
                                 <tr>
-                                    <td style='text-align: center; vertical-align: middle;'><?= $counter ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
                                     <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['techupdate_date'] ?></td>
-                                    <td style='text-align: center; vertical-align: middle;'><?= $staff['tech_leader'] ?></td>
-                                    <td style='text-align: center; vertical-align: middle;'><?= nl2br($staff['username']) ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['tech_leader'] ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= nl2br($staff['username']) ?></td>
                                     <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['tech_clockin'] ?></td>
                                     <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['tech_clockout'] ?></td>
                                     <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['technician_out'] ?></td>
