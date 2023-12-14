@@ -206,7 +206,7 @@
                                 <th style='text-align: center; white-space: nowrap;'>Job Status</th>
                                 <th style='text-align: center; white-space: nowrap;'>Customer Name</th>
                                 <th style='text-align: center; white-space: nowrap;'>Job Name</th>
-                                <th style='text-align: center; white-space: nowrap;'>Machine Code</th>
+                                <th style='text-align: center; white-space: nowrap;'>Machine Name</th>
                                 <th style='text-align: center; white-space: nowrap;'>Job Assign</th>
                             </tr>
                         </thead>
@@ -237,7 +237,7 @@
                                 <td style='text-align: center; white-space: nowrap;'><?= $job['job_status'] ?></td>
                                 <td><?= $job['customer_name'] ?></td>
                                 <td style='text-align: center; white-space: nowrap;'><?= $job['job_name'] ?></td>
-                                <td style='text-align: center; white-space: nowrap;'><?= $job['machine_code'] ?></td>
+                                <td style='text-align: center; white-space: nowrap;'><?= $job['machine_name'] ?></td>
                                 <td>
                                     <select class="form-select form-select-sm technician" style="width: 100%;" onchange="status_update(this.options[this.selectedIndex].value,'<?= $job['jobregister_id'] ?>')">
                                         <option value=""><?= $job['job_assign'] ?></option>
