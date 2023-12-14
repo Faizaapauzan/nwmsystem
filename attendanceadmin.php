@@ -233,14 +233,14 @@
                                 <thead>
                                     <tr>
                                         <th style='text-align: center;'>No</th>
-                                        <th style='text-align: center;'>Date</th>
-                                        <th style='text-align: center;'>Technician</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Date</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Technician</th>
                                         <th style='text-align: center;'>Assistant</th>
-                                        <th style='text-align: center;'>Clock In</th>
-                                        <th style='text-align: center;'>Clock Out</th>
-                                        <th style='text-align: center;'>Rest In</th>
-                                        <th style='text-align: center;'>Rest Out</th>
-                                        <th style='text-align: center;'>Action</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Clock In</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Clock Out</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Rest In</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Rest Out</th>
+                                        <th style='text-align: center; white-space: nowrap;'>Action</th>
                                     </tr>
                                 </thead>
                                 
@@ -259,15 +259,15 @@
                                 ?>
                             
                                 <tr>
-                                    <td style='text-align: center;'><?= $counter ?></td>
-                                    <td style='text-align: center;'><?= $staff['techupdate_date'] ?></td>
-                                    <td style='text-align: center;'><?= $staff['tech_leader'] ?></td>
-                                    <td style='text-align: center;'><?= $staff['username'] ?></td>
-                                    <td style='text-align: center;'><?= $staff['tech_clockin'] ?></td>
-                                    <td style='text-align: center;'><?= $staff['tech_clockout'] ?></td>
-                                    <td style='text-align: center;'><?= $staff['technician_out'] ?></td>
-                                    <td style='text-align: center;'><?= $staff['technician_in'] ?></td>
-                                    <td style='text-align: center; white-space: nowrap;'>
+                                    <td style='text-align: center; vertical-align: middle;'><?= $counter ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['techupdate_date'] ?></td>
+                                    <td style='text-align: center; vertical-align: middle;'><?= $staff['tech_leader'] ?></td>
+                                    <td style='text-align: center; vertical-align: middle;'><?= nl2br($staff['username']) ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['tech_clockin'] ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['tech_clockout'] ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['technician_out'] ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $staff['technician_in'] ?></td>
+                                    <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
                                         <button type="button" value="<?=$staff['techupdate_id'];?>" class="deleteAttendanceBtn btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
