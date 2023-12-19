@@ -269,7 +269,7 @@
                             </a>
 
                             <div class="nav__dropdown">
-                                <a href="staff.php" class="nav__link">
+                                <a href="#" class="nav__link">
                                     <i class='bx bx-group nav__icon'></i>
                                     <span class="nav__name">Staff</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>

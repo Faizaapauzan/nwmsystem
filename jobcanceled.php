@@ -48,63 +48,47 @@
         <!--========== BOX ICONS ==========-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     </head>
-    
-    <style>
-        ::-webkit-scrollbar {display: none;}
-              
-        .dropdown:hover .dropbtn {color:#f5f5f5}
-        .dropdown1:hover .dropbtn1 {color:#f5f5f5}
 
-        .dropdown-content a:hover {background-color:#f1f1f1}
-        .dropdown-content1 a:hover {background-color:#f1f1f1}
-
-        .dropdown:hover .dropdown-content {display:block}
-        .dropdown1:hover .dropdown-content1 {display:block}
-
-        .dropdown-content {
-            display:none;
-            position:absolute;
-            background-color:#f9f9f9;
-            min-width:auto;
-            padding-left:20px;
-            bottom:55px;
-            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
-            z-index:1
-        }
-        
-        .dropdown-content1{
-            display:none;
-            position:absolute;
-            background-color:#f9f9f9;
-            min-width:160px;
-            box-shadow:0 8px 16px 0 rgba(0,0,0,.2);
-            padding:12px 16px;z-index:1
-        }
-
-        .dropdown-content a {
-            color:#000;
-            padding:10px 10px;
-            text-decoration:none;
-            display:block;
-            padding-right:7px
-        }
-        
-        .dropdown-content1 a{
-            color:#000;
-            padding:12px 16px;
-            text-decoration:none;
-            display:block;
-            padding-right:7px
-        }   
-    </style>
-    
     <body>
         <!--========== HEADER ==========-->
+        <script>
+            $(document).ready(function() {
+                function toggleMobileView() {
+                    if (window.innerWidth <= 768) {
+                        $('#home').attr('href', '#');
+                        $('#home').off('click');
+                        $('#home').click(function(e) {
+                            e.preventDefault();
+                            
+                            if ($('#mobile-view').css('display') === 'none'){
+                                $('#mobile-view').css('display', 'block');
+                            }
+                            
+                            else {
+                                $('#mobile-view').css('display', 'none');
+                            }
+                        });
+                    }
+                    
+                    else {
+                        $('#home').attr('href', 'Adminhomepage.php');
+                        $('#home').off('click');
+                    }
+                }
+                
+                toggleMobileView();
+                
+                $(window).resize(function() {
+                    toggleMobileView();
+                });
+            });
+        </script>
+        
         <header class="header">
             <div class="header__container">
                 <div class="header__search">
                     <div class="dropdown1">
-                        <a href="Adminhomepage.php" style="font-weight: bold; font-size:25px; color:black;">Home</a>
+                        <a href="Adminhomepage.php" id="home" style="font-weight: bold; font-size:25px; color:black;">Home</a>
                         <div class="dropdown-content1">
                             <a href="AdminJobTable.php">Job - Table view</a>
                             <a href="adminjoblisting.php">Job - List View</a>
@@ -115,7 +99,14 @@
                 <div class="header__toggle">
                     <i class='bx bx-menu' id="header-toggle"></i>
                 </div>
-                
+            </div>
+            
+            <div class="mobile-view" id="mobile-view">
+                <div class="dropdown-content2" id="dropdown-content2">
+                    <a href="Adminhomepage.php">Home</a>
+                    <a href="AdminJobTable.php">Table View</a>
+                    <a href="adminjoblisting.php">List View</a>
+                </div>
             </div>
         </header>
 
@@ -136,7 +127,7 @@
                             </a>
 
                             <div class="nav__dropdown">
-                                <a href="staff.php" class="nav__link">
+                                <a href="#" class="nav__link">
                                     <i class='bx bx-group nav__icon'></i>
                                     <span class="nav__name">Staff</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -157,10 +148,21 @@
                                 <span class="nav__name">Customer</span>
                             </a>
 
-                            <a href="machine.php" class="nav__link">
-                                <i class='bx bx-cog nav__icon'></i>
-                                <span class="nav__name">Machine</span>
-                            </a>
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Machine</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="machine.php" class="nav__dropdown-item">Machine</a>
+                                        <a href="machineBrand.php" class="nav__dropdown-item">Machine Brand</a>
+                                        <a href="machineType.php" class="nav__dropdown-item">Machine Type</a>
+                                    </div>
+                                </div>
+                            </div>
 
                             <a href="accessories.php" class="nav__link">
                                 <i class='bx bx-wrench nav__icon'></i>

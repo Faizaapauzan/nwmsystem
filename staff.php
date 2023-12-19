@@ -112,7 +112,7 @@
                             </a>
 
                             <div class="nav__dropdown">
-                                <a href="staff.php" class="nav__link">
+                                <a href="#" class="nav__link">
                                     <i class='bx bx-group nav__icon'></i>
                                     <span class="nav__name">Staff</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -133,10 +133,21 @@
                                 <span class="nav__name">Customer</span>
                             </a>
 
-                            <a href="machine.php" class="nav__link">
-                                <i class='bx bx-cog nav__icon'></i>
-                                <span class="nav__name">Machine</span>
-                            </a>
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Machine</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="machine.php" class="nav__dropdown-item">Machine</a>
+                                        <a href="machineBrand.php" class="nav__dropdown-item">Machine Brand</a>
+                                        <a href="machineType.php" class="nav__dropdown-item">Machine Type</a>
+                                    </div>
+                                </div>
+                            </div>
 
                             <a href="accessories.php" class="nav__link">
                                 <i class='bx bx-wrench nav__icon'></i>

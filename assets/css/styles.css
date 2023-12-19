@@ -332,6 +332,7 @@ img {
   }
 }
 
+/* ========== Home Button ==========*/
 /* Home Button */
 .dropdown:hover .dropbtn {color:#f5f5f5}
 .dropdown1:hover .dropbtn1 {color:#f5f5f5}
@@ -405,4 +406,5 @@ img {
 .mobile-view a {
   color: black;
   margin-left: 10px;
-}
+} 
+

@@ -46,7 +46,39 @@
     
     <body>
         <!--========== HEADER ==========-->
-
+        <script>
+            $(document).ready(function() {
+                function toggleMobileView() {
+                    if (window.innerWidth <= 768) {
+                        $('#home').attr('href', '#');
+                        $('#home').off('click');
+                        $('#home').click(function(e) {
+                            e.preventDefault();
+                            
+                            if ($('#mobile-view').css('display') === 'none'){
+                                $('#mobile-view').css('display', 'block');
+                            }
+                            
+                            else {
+                                $('#mobile-view').css('display', 'none');
+                            }
+                        });
+                    }
+                    
+                    else {
+                        $('#home').attr('href', 'Adminhomepage.php');
+                        $('#home').off('click');
+                    }
+                }
+                
+                toggleMobileView();
+                
+                $(window).resize(function() {
+                    toggleMobileView();
+                });
+            });
+        </script>
+        
         <header class="header">
             <div class="header__container">
                 <div class="header__search">
@@ -89,7 +121,7 @@
                             </a>
                             
                             <div class="nav__dropdown">
-                                <a href="staff.php" class="nav__link">
+                                <a href="#" class="nav__link">
                                     <i class='bx bx-group nav__icon'></i>
                                     <span class="nav__name">Staff</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -110,10 +142,21 @@
                                 <span class="nav__name">Customer</span>
                             </a>
 
-                            <a href="machine.php" class="nav__link">
-                                <i class='bx bx-cog nav__icon'></i>
-                                <span class="nav__name">Machine</span>
-                            </a>
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-group nav__icon'></i>
+                                    <span class="nav__name">Machine</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="machine.php" class="nav__dropdown-item">Machine</a>
+                                        <a href="machineBrand.php" class="nav__dropdown-item">Machine Brand</a>
+                                        <a href="machineType.php" class="nav__dropdown-item">Machine Type</a>
+                                    </div>
+                                </div>
+                            </div>
 
                             <a href="accessories.php" class="nav__link">
                                 <i class='bx bx-wrench nav__icon'></i>
