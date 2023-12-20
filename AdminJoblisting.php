@@ -221,8 +221,8 @@
                                         
                                 require 'dbconnect.php';
                                         
-                                $query = "SELECT * FROM job_register  
-                                          WHERE (job_cancel = '' OR job_cancel IS NULL) AND job_status != 'Completed' 
+                                $query = "SELECT * FROM job_register WHERE (job_cancel = '' OR job_cancel IS NULL) 
+                                          AND (job_status = '' OR job_status = 'Doing' OR job_status = 'Incomplete' OR job_status = 'Ready' OR OR job_status = 'Not Ready')
                                           ORDER BY jobregisterlastmodify_at DESC";
 
                                 $query_run = mysqli_query($conn, $query);
@@ -234,15 +234,15 @@
                                         $color = ($job['staff_position'] == 'Storekeeper') ? 'table-primary' : (($job['job_status'] == 'Doing') ? 'table-success' : (($job['job_status'] == 'Incomplete') ? 'table-warning' : (($job['job_status'] == 'Pending') ? 'table-danger' : '')));
                             ?>
                             <tr class="<?php echo $color?>">
-                                <td style='text-align: center; white-space: nowrap;'><?= $counter ?></td>
-                                <td style='text-align: center; white-space: nowrap;' class = '<?= $job['job_status'] ?>'>
+                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
+                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;' class = '<?= $job['job_status'] ?>'>
                                     <button type="button" data-jobregister-id="<?=$job['jobregister_id'];?>" class="openModal btn btn-sm fw-bold" style="border: none;"><?= $job['job_order_number'] ?></button>
                                 </td>
-                                <td style='text-align: center; white-space: nowrap;'><?= $job['job_priority'] ?></td>
-                                <td style='text-align: center; white-space: nowrap;'><?= $job['job_status'] ?></td>
-                                <td><?= $job['customer_name'] ?></td>
-                                <td style='text-align: center; white-space: nowrap;'><?= $job['job_name'] ?></td>
-                                <td style='text-align: center; white-space: nowrap;'><?= $job['machine_name'] ?></td>
+                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $job['job_priority'] ?></td>
+                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $job['job_status'] ?></td>
+                                <td style='vertical-align: middle;'><?= $job['customer_name'] ?></td>
+                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $job['job_name'] ?></td>
+                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $job['machine_name'] ?></td>
                                 <td>
                                     <select class="form-select form-select-sm technician" style="width: 100%;" onchange="status_update(this.options[this.selectedIndex].value,'<?= $job['jobregister_id'] ?>')">
                                         <option value=""><?= $job['job_assign'] ?></option>
