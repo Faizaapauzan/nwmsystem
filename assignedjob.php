@@ -78,10 +78,10 @@
 							
 							include 'dbconnect.php';
 							
-							$numRow = "SELECT * FROM job_register WHERE (job_assign =! '' OR job_assign IS NOT NULL) 
-                                       AND (job_status = '' OR job_status IS NULL OR job_status = 'Ready') 
-                                       AND (job_cancel = '' OR job_cancel IS NULL)
-                                       ORDER BY jobregisterlastmodify_at DESC";
+							$numRow = "SELECT * FROM job_register WHERE (job_status = '' OR job_status IS NULL OR job_status = 'Ready') 
+                                       AND (job_cancel = '' OR job_cancel IS NULL) 
+                                       AND (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')
+                                       AND staff_position = 'Leader'";
 
                             $numRow_run = mysqli_query($conn, $numRow);
                                     
@@ -99,11 +99,11 @@
 						
 						include 'dbconnect.php';
 						
-						$results = $conn->query("SELECT * FROM job_register WHERE (job_assign =! '' OR job_assign IS NOT NULL) 
-                                                 AND (job_status = '' OR job_status IS NULL OR job_status = 'Ready') 
-                                                 AND (job_cancel = '' OR job_cancel IS NULL)
-                                                 ORDER BY jobregisterlastmodify_at DESC");
-                                        
+						$results = $conn->query("SELECT * FROM job_register WHERE (job_status = '' OR job_status IS NULL OR job_status = 'Ready') 
+                                                 AND (job_cancel = '' OR job_cancel IS NULL) 
+                                                 AND (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')
+                                                 AND staff_position = 'Leader' ORDER BY jobregisterlastmodify_at DESC");
+
                     	while ($row = $results->fetch_assoc()) {
 							$jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
 							$updatedate = substr($jobregisterlastmodify_at,0,10);
@@ -155,10 +155,10 @@
 							
 							include 'dbconnect.php';
 							
-							$numRow = "SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                                                  AND job_status = 'Doing' 
-                                                                  AND (job_cancel IS NULL OR job_cancel = '')
-                                                                  ORDER BY jobregisterlastmodify_at DESC";
+							$numRow = "SELECT * FROM job_register WHERE job_status = 'Doing' 
+                                       AND (job_cancel = '' OR job_cancel IS NULL) 
+                                       AND (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')
+                                       AND staff_position = 'Leader'";
 
                             $numRow_run = mysqli_query($conn, $numRow);
                                     
@@ -176,10 +176,10 @@
 						
 						include 'dbconnect.php';
 						
-						$results = $conn->query("SELECT * FROM job_register WHERE (job_assign !='' OR job_assign IS NOT NULL) 
-                                                                            AND job_status = 'Doing' 
-                                                                            AND (job_cancel IS NULL OR job_cancel = '')
-                                                                            ORDER BY jobregisterlastmodify_at DESC");
+						$results = $conn->query("SELECT * FROM job_register WHERE job_status = 'Doing' 
+                                                 AND (job_cancel = '' OR job_cancel IS NULL) 
+                                                 AND (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')
+                                                 AND staff_position = 'Leader' ORDER BY jobregisterlastmodify_at DESC");
                                         
                     	while ($row = $results->fetch_assoc()) {
 							$jobregisterlastmodify_at = $row['jobregisterlastmodify_at'];
