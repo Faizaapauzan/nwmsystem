@@ -222,7 +222,7 @@
                                 require 'dbconnect.php';
                                         
                                 $query = "SELECT * FROM job_register WHERE (job_cancel = '' OR job_cancel IS NULL) 
-                                          AND (job_status = '' OR job_status = 'Doing' OR job_status = 'Incomplete' OR job_status = 'Ready' OR job_status = 'Not Ready')
+                                          AND (job_status = '' OR job_status IS NULL OR job_status = 'Doing' OR job_status = 'Pending' OR job_status = 'Incomplete' OR job_status = 'Ready' OR job_status = 'Not Ready')
                                           ORDER BY jobregisterlastmodify_at DESC";
 
                                 $query_run = mysqli_query($conn, $query);
