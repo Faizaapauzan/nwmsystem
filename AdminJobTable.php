@@ -393,22 +393,10 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $numRow = "SELECT * FROM job_register WHERE (job_status = '' AND job_cancel = '' AND job_assign IS NOT NULL)
-                                           OR (job_status = '' AND job_cancel = '' AND TRIM(job_assign) != '')
-                                           OR (job_status = '' AND job_cancel IS NULL AND job_assign IS NOT NULL)
-                                           OR (job_status = '' AND job_cancel IS NULL AND TRIM(job_assign) != '')
-                                           OR (job_status IS NULL AND job_cancel = '' AND job_assign IS NOT NULL)
-                                           OR (job_status IS NULL AND job_cancel = '' AND TRIM(job_assign) != '')
-                                           OR (job_status IS NULL AND job_cancel IS NULL AND job_assign IS NOT NULL)
-                                           OR (job_status IS NULL AND job_cancel IS NULL AND TRIM(job_assign) != '')
-                                           OR (job_status = 'Ready' AND job_cancel = '' AND job_assign IS NOT NULL)
-                                           OR (job_status = 'Ready' AND job_cancel = '' AND TRIM(job_assign) != '')
-                                           OR (job_status = 'Ready' AND job_cancel IS NULL AND job_assign IS NOT NULL)
-                                           OR (job_status = 'Ready' AND job_cancel IS NULL AND TRIM(job_assign) != '')
-                                           OR (job_status = 'Doing' AND job_cancel = '' AND job_assign IS NOT NULL)
-                                           OR (job_status = 'Doing' AND job_cancel = '' AND TRIM(job_assign) != '')
-                                           OR (job_status = 'Doing' AND job_cancel IS NULL AND job_assign IS NOT NULL)
-                                           OR (job_status = 'Doing' AND job_cancel IS NULL AND TRIM(job_assign) != '')";
+                                $numRow = "SELECT * FROM job_register WHERE (job_status = '' OR job_status IS NULL OR job_status = 'Doing') 
+                                           AND (job_cancel = '' OR job_cancel IS NULL) 
+                                           AND (technician_rank = '1st Leader' OR technician_rank = '2nd Leader')
+                                           AND staff_position = 'Leader'";
                 
                                 $numRow_run = mysqli_query ($conn,$numRow);
                 

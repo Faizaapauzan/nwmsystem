@@ -105,7 +105,7 @@
         
         if ($query_run) {
             $res = ['status' => 200, 
-                    'message' => 'Machine Brand Deleted Successfully'];
+                    'message' => 'Machine Type Deleted Successfully'];
             
             echo json_encode($res);
             
@@ -114,7 +114,7 @@
         
         else {
             $res = ['status' => 500, 
-                    'message' => '>Machine Brand Not Deleted'];
+                    'message' => '>Machine Type Not Deleted'];
         
             echo json_encode($res);
             
