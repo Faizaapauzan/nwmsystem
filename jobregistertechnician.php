@@ -374,7 +374,7 @@
                                 
                                 include "dbconnect.php";
                                     
-                                $records = mysqli_query($conn, "SELECT * FROM machine_type ORDER BY type_name ASC");
+                                $records = mysqli_query($conn, "SELECT DISTINCT type_name FROM machine_type ORDER BY type_name ASC");
                                     
                                 while ($data = mysqli_fetch_array($records)) {
                                     echo "<option value='".$data['type_name']."' data-typeID='". $data['type_id'] ."'>".$data['type_name']."</option>";
