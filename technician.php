@@ -1029,6 +1029,7 @@
                                             <form id="techJobAssistantForm">
                                                 <input type="hidden" name="jobregister_id" id="jobregisterID_assistant">
                                                 <input type="hidden" name="ass_date" id="ass_date">
+                                                <input type="hidden" name="techupdate_date" id="assistantDate">
                                                 <input type="hidden" name="cust_name" id="cust_name">
                                                 <input type="hidden" name="requested_date" id="requestedDate">
                                                 <input type="hidden" name="machine_name" id="machineName">
@@ -1538,9 +1539,13 @@
                         else if (res.status == 200) {
                             // Job Assign
                             $('#jobAssignData').html('<label for="" class="form-label fw-bold">Job Assign: '+ res.data.job_assign +'</label>');
+
+                            var currentDate = new Date();
+                            var formattedDate = ("0" + currentDate.getDate()).slice(-2) + "-" + ("0" + (currentDate.getMonth() + 1)).slice(-2) + "-" + currentDate.getFullYear();
                             
                             // Assistant form
-                            $('#ass_date').val(res.data.DateAssign);
+                            $('#ass_date').val(res.data.DateAssign); 
+                            $('#assistantDate').val(formattedDate);
                             $('#cust_name').val(res.data.customer_name);
                             $('#requestedDate').val(res.data.requested_date);
                             $('#machineName').val(res.data.machine_name);

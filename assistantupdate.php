@@ -6,7 +6,7 @@
     
     if (isset($_POST['updateassign'])) {
         $tech_leader = $_POST['job_assign'];
-        $techupdate_date = $_POST['ass_date'];
+        $techupdate_date = $_POST['techupdate_date'];
         $username = $_POST['username'];
         
         $stmt = $conn->prepare("UPDATE tech_update SET username=? WHERE techupdate_date=? AND tech_leader=?");
