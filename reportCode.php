@@ -33,32 +33,31 @@
     }
 
     // ========== View Media ==========
-    if(isset($_GET['jobregister_id'])) {
-        
-        $jobregister_id = mysqli_real_escape_string($conn, $_GET['jobregister_id']);
-        
+    if (isset($_POST['jobregister_id'])) {
+        $jobregister_id = mysqli_real_escape_string($conn, $_POST['jobregister_id']);
+    
         $query = "SELECT * FROM technician_photoupdate WHERE jobregister_id='$jobregister_id'";
-        
         $query_run = mysqli_query($conn, $query);
-
-        if (mysqli_num_rows($query_run) == 1) {
-            $photo = mysqli_fetch_assoc($query_run);
-
-            if (empty($photo['file_name'])) {
-                $photo['file_name'] = null;
+    
+        if ($query_run && mysqli_num_rows($query_run) > 0) {
+            $photos = [];
+    
+            while ($photo = mysqli_fetch_assoc($query_run)) {
+                $photos[] = ['file_name' => $photo['file_name']];
             }
-            
-            $res = ['status' => 200, 'message' => 'Photo Fetch Successfully by id', 'data' => $photo['file_name']];
-            
+    
+            $res = ['status' => 200, 
+                    'message' => 'Photos Fetch Successfully', 
+                    'photos' => $photos];
+
             echo json_encode($res);
-            
-            return;
         }
         
         else {
-            $res = ['status' => 404, 'message' => 'No photo for this job'];
+            $res = ['status' => 404, 
+                    'message' => 'No photos for this job'];
+                    
             echo json_encode($res);
-            return;
         }
     }
 

@@ -294,12 +294,14 @@
                                     
                                     <!-- Tab 2 Content -->
                                     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab" style="color: black;">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div id="view_image_container">
-                                                    <img id="view_photo" class="form-control" />
-                                                </div>
+                                        <div class="container">
+                                            <input type="hidden" name="jobregister_id" id="jobregister_id">
+                                            
+                                            <div class="d-flex justify-content-end mb-3">
+                                                <button type="button" class="btn btn-primary me-2" onclick="printJobPhotos()">Print</button>
                                             </div>
+                                            
+                                            <div id="view_image_container" class="row"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -436,6 +438,19 @@
                 </script>
                 
                 <script>
+                    function printJobPhotos() {
+                        var jobregister_id = $('#jobregister_id').val();
+                        var printWindow = window.open('', '_blank');
+                        
+                        if (jobregister_id) {
+                            printWindow.location.href = 'printphoto.php?jobregister_id=' + jobregister_id;
+                        }
+                        
+                        else {
+                            console.error('jobregister_id is missing.');
+                        }
+                    }
+
                     $(document).ready(function(){
                         let table = $('#serviceReportTable').DataTable({
                             responsive:true,
@@ -504,29 +519,52 @@
                                     $('#view_retTime').text(res.data.technician_leaving);
                                     $('#view_machName').text(res.data.machine_name);
                                     $('#view_serNum').text(res.data.serialnumber);
+                                    $('#jobregister_id').val(res.data.jobregister_id);
 
                                     // Media Tab
                                     var jobregister_id = res.data.jobregister_id;
                                     
                                     $.ajax({
-                                        type: "GET",
-                                        url: "reportCode.php?jobregister_id=" + jobregister_id,
+                                        type: "POST",
+                                        url: "reportCode.php",
+                                        data: { jobregister_id: jobregister_id },
+                                        dataType: 'json',
                                         
-                                        success: function (imgresponse) {
-                                            var imageResponse = jQuery.parseJSON(imgresponse);
-                                            console.log("Tab 2 Response: ", imageResponse);
-                                            console.log(imageResponse.data);
-
-                                            if (imageResponse.data) {
-                                                $('#view_photo').attr('src', "image/" + imageResponse.data);
-                                                $('#view_image_container').show();
+                                        success: function (res) {
+                                            var photoCardAfter = $('#view_image_container');
+                                            
+                                            photoCardAfter.empty();
+                                            
+                                            if (res.status == 200) {
+                                                var photos = res.photos;
+                                                
+                                                if (photos && photos.length > 0) {
+                                                    photos.forEach(function (photo) {
+                                                        var row = `<div class='photoAfterContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3'>
+                                                                    <div class='card'>
+                                                                        <img src='image/${photo.file_name}' class='rounded img-fluid' alt='Photo uploaded by technician'>
+                                                                    </div>
+                                                                  </div>`;
+                                                                  
+                                                        photoCardAfter.append(row);
+                                                    });
+                                                }
+                                                
+                                                else {
+                                                    console.log("No photos received from the server.");
+                                                }
                                             }
                                             
                                             else {
-                                                $('#view_image_container').hide();
+                                                console.log("Server response status:", res.status);
+                                                console.log("Server response message:", res.message);
                                             }
                                             
                                             $('#SReportViewModal').modal('show');
+                                        },
+                                        
+                                        error: function (jqXHR, textStatus, errorThrown) {
+                                            console.error("AJAX Error:", textStatus, errorThrown);
                                         }
                                     });
                                 }
