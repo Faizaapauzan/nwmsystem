@@ -281,9 +281,9 @@
                                                         $technician_departure =$row['technician_departure'];
                                                         $technician_arrival =$row['technician_arrival'];
                                                         $technician_leaving =$row['technician_leaving'];
-                                                        $departure = substr($technician_departure,11);
-                                                        $arrival = substr($technician_arrival,11); 
-                                                        $leaving = substr($technician_leaving,11);
+                                                        $departure = substr($technician_departure,10);
+                                                        $arrival = substr($technician_arrival,10); 
+                                                        $leaving = substr($technician_leaving,10);
                                                         
                                                         if (!function_exists('difftime')) {
                                                             function difftime($techniciandeparture, $technicianarrival) {
@@ -482,7 +482,7 @@
                                         <tr>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter2 ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username'] ?></td>
-                                            <td style="text-align: center; white-space: nowrap; vertical-align: middle;"><?= $record['customer_name'] ?></td>
+                                            <td style="text-align: center; vertical-align: middle;"><?= $record['customer_name'] ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= (($workingtimehr == 0 && $workingtimemin != 0) || ($workingtimehr != 0 && $workingtimemin == 0) || ($workingtimehr != 0 && $workingtimemin != 0)) ? $workingtimehr . 'hrs ' . $workingtimemin . 'mins' : '' ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($resttime != 0)? $resttime . 'mins': ''?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= (($TravelTimehr == 0 && $TravelTimemin != 0) || ($TravelTimehr != 0 && $TravelTimemin == 0) || ($TravelTimehr != 0 && $TravelTimemin != 0)) ? $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins' : '' ?></td>
@@ -571,42 +571,40 @@
                                         $(document).ready(function() {
                                             var previousName = null;
                                             var count = 1;
-                                            var index2;
                                             
                                             $("#tbody2 tr").each(function(index) {
-                                                index2 = index;
-                                                
                                                 var currentName = $(this).find("td:eq(1)").text();
                                                 
-                                                if (previousName !== currentName) {
-                                                    if (count > 1) {
-                                                        $("#tbody2 tr:eq(" + (index - count) + ") td:eq(1)").attr("rowspan", count);
-                                                        $("#tbody2 tr:eq(" + (index - count) + ") td:eq(4)").attr("rowspan", count);
-                                                        $("#tbody2 tr:eq(" + (index - count) + ") td:eq(6)").attr("rowspan", count);
-                                                        $("#tbody2 tr:eq(" + (index - count) + ") td:eq(7)").attr("rowspan", count);
-                                                    }
+                                                if (currentName === previousName) {
+                                                    count++;
                                                     
-                                                    count = 1;
-                                                    
-                                                    previousName = currentName;
+                                                    $(this).find("td:eq(1), td:eq(4), td:eq(6), td:eq(7)").hide();
                                                 }
                                                 
                                                 else {
-                                                    count++;
+                                                    if (count > 1) {
+                                                        var firstRow = $("#tbody2 tr").eq(index - count);
+                                                            
+                                                            firstRow.find("td:eq(1)").attr("rowspan", count);
+                                                            firstRow.find("td:eq(4)").attr("rowspan", count);
+                                                            firstRow.find("td:eq(6)").attr("rowspan", count);
+                                                            firstRow.find("td:eq(7)").attr("rowspan", count);
+                                                    }
+                                                        
+                                                    count = 1;
+                                                        
+                                                    previousName = currentName;
+                                                }
                                                     
-                                                    $(this).find("td:eq(1)").hide();
-                                                    $(this).find("td:eq(4)").hide();
-                                                    $(this).find("td:eq(6)").hide();
-                                                    $(this).find("td:eq(7)").hide();
+                                                if (index + 1 === $("#tbody2 tr").length && count > 1) {
+                                                    var lastFirstRow = $("#tbody2 tr").eq(index - count + 1);
+                                                        
+                                                        lastFirstRow.find("td:eq(1)").attr("rowspan", count);
+                                                        lastFirstRow.find("td:eq(4)").attr("rowspan", count);
+                                                        lastFirstRow.find("td:eq(6)").attr("rowspan", count);
+                                                        lastFirstRow.find("td:eq(7)").attr("rowspan", count);
                                                 }
                                             });
-                                            
-                                            if (count > 1){
-                                                $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(1)").attr("rowspan", count);
-                                                $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(4)").attr("rowspan", count);
-                                                $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(6)").attr("rowspan", count);
-                                                $("#tbody tr:eq(" + (index2 - count + 1) + ") td:eq(7)").attr("rowspan", count);
-                                            }
                                         });
                                     </script>
                                 </table>
