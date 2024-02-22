@@ -681,24 +681,24 @@
                                             include_once 'dbconnect.php';
                                             
                                             if(isset($_GET['DateAssign'])) {
-                                                $DateAssign = $_GET['DateAssign'];
+                                                $DateAssign = mysqli_real_escape_string($conn, $_GET['DateAssign']);
                                                 
-                                                $query = mysqli_query($conn, "SELECT * FROM tech_off WHERE leave_date='$DateAssign'");
+                                                $query = mysqli_query($conn, "SELECT * FROM tech_off WHERE leave_date='$DateAssign' AND tech_leader <> 'Ithink'");
                                                 
                                                 if(mysqli_num_rows($query) > 0) {
                                                     $counter = 1;
                                                     
-                                                    foreach($query as $row) {
+                                                    while($row = mysqli_fetch_assoc($query)) {
                                         ?>
                                         <tr>
                                             <td style='text-align: center;'><?= $counter ?></td>
-                                            <td style='text-align: center; white-space: nowrap;'><?= $row['tech_name']; ?></td>
+                                            <td style='text-align: center; white-space: nowrap;'><?= htmlspecialchars($row['tech_name'], ENT_QUOTES, 'UTF-8'); ?></td>
                                             <td style='text-align: center; color:red;' class="fw-bold">OFF</td>
                                         </tr>
                                         <?php
                                             
-                                            $counter++;
-                                                    } 
+                                                        $counter++;
+                                                    }
                                                 }
                                                 
                                                 else {
