@@ -1,70 +1,57 @@
 <?php session_start(); ?>
 
 <!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NWM Management System">
-  <title>NWM Management System</title>
-  <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
-  <link href="css/layout.css" rel="stylesheet" />
-  <link href="css/login.css" rel="stylesheet" />
-  <script src="js/password.js" type="text/javascript" defer></script>
-</head>
-
-<body>
-
-    <?php
-        if(isset($_GET['error'])==true){
-        echo'<font color="#FF0000"><p align="center">Wrong Username or Password</p></font>';
-        }
-    ?>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="NWM Management System">
+        <link rel="icon" href="https://i.ibb.co/ngKJ7c4/android-chrome-512x512.png" type="image/x-icon">
         
-    <div class="container" id="container">
+        <title>NWM Management System</title>
 
-        <div class="form-container sign-in-container">
-            <form action="dblogin.php" method="post">
-                  <h3>NWM Management System</h3>
-                <img src="image/neowood.png" alt="user icon" width="170" height="100">
-                <!-- <h2>Login</h2> -->
-
-                <label for="login_id"></label>
-                <input type="hidden" id="DEFAULT" name="login_id">
-
-                <label for="Username"></label>
-                <input type="text" placeholder="Username" id="username" name="username">
-
-                <input type="password" value="" id="myInput" placeholder="Password" name="password">
-		
-				<br>
-				
-                <label>
-                    <input type="checkbox" onclick="myFunction()">Show Password
-                </label>
-
-                <label for="log_in_at"></label>
-                <input type="hidden" id="now()" name="log_in_at">
-                <button input class="btn btn-primary btn-user btn-block" type="submit" name="submit" value="Sign In">Sign In</button>
-            </form>
-        </div>
-
-        <!-- <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Welcome!</h1><br>
-                    <button class="ghost" id="signIn">Sign In</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>NWM Management System</h1>
-                    Sign in to continue access page.<br><br>
-                </div>
-            </div>
-        </div> -->
-
-    </div>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="js/password.js" type="text/javascript" defer></script>
+    </head>
     
-</body>
-</html>
+    <body>  
+        <div class="d-flex justify-content-center align-items-center vh-100">
+            <div class="text-center">
+                <?php
+                    if(isset($_GET['error'])==true){
+                        echo '<div class="text-danger fw-bold mb-3">Wrong Username or Password</div>';
+                    }
+                ?>
 
+                <form action="dblogin.php" method="post" class="form-signin text-center">
+                    <img src="image/neowood.png" alt="user icon" style="width: 170px; height: 100px;">
+                    
+                    <h3 class="fw-bold" style="margin-bottom: 30px;">NWM Management System</h3>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" placeholder="Username" id="username" name="username">
+                        <label for="Username">Username</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" placeholder="Password" id="myInput" name="password">
+                        <label for="Password">Password</label>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input border border-dark me-2 " onclick="myFunction()">Show Password
+                        </label>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" name="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF;">Sign In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

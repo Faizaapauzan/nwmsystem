@@ -183,18 +183,15 @@
     if (isset($_POST['update_jobInfo'])) {
         $jobregister_id = $_POST['jobregister_id'];
         $machine_brand = $_POST['machine_brand'];
-        $brand_id = $_POST['brand_id'];
         $machine_type = $_POST['machine_type'];
-        $type_id = $_POST['type_id'];
         $machine_name = $_POST['machine_name'];
-        $machine_id = $_POST['machine_id'];
         $machine_code = $_POST['machine_code'];
         $serialnumber = $_POST['serialnumber'];
         
-        $brand_id = !empty($brand_id) ? $brand_id : null;
-        $type_id = !empty($type_id) ? $type_id : null;
-        $machine_id = !empty($machine_id) ? $machine_id : null;
-
+        $brand_id = $_POST['brand_id'] ?? null;
+        $type_id = $_POST['type_id'] ?? null;
+        $machine_id = $_POST['machine_id'] ?? null;
+    
         $query = "UPDATE job_register SET 
                          machine_brand=?, 
                          brand_id=?, 
@@ -205,44 +202,33 @@
                          machine_code=?,
                          serialnumber=? 
                   WHERE jobregister_id=?";
-
+    
         $queryResult = mysqli_prepare($conn, $query);
     
         if ($queryResult) {
-            $machine_id = $machine_id ?: null;
-            $type_id = $type_id ?: null;
-            $brand_id = $brand_id ?: null;
-
             mysqli_stmt_bind_param($queryResult, 'ssssssssi', $machine_brand, $brand_id, $machine_type, $type_id, $machine_name,
                                                               $machine_id, $machine_code, $serialnumber, $jobregister_id);
     
-            $success = mysqli_stmt_execute($queryResult);
-
-            if ($success) {
-                $res = ['status' => 200,
+            if (mysqli_stmt_execute($queryResult)) {
+                $res = ['status' => 200, 
                         'message' => 'Job info successfully updated'];
-
-                echo json_encode($res);
             }
-    
+            
             else {
-                $res = ['status' => 500,
+                $res = ['status' => 500, 
                         'message' => 'Error: ' . mysqli_error($conn)];
-
-                echo json_encode($res);
             }
-
+            
             mysqli_stmt_close($queryResult);
         }
-
+        
         else {
-            $res = ['status' => 500,
-                    'message' => 'Error: ' . mysqli_error($conn)];
-
-            echo json_encode($res);
+            $res = ['status' => 500, 'message' => 'Prepare failed: ' . mysqli_error($conn)];
         }
+    
+        echo json_encode($res);
     }
-
+    
     // Update Job Assign
     if (isset($_POST['update_jobAssign'])) {
         $jobregister_id = $_POST['jobregister_id'];

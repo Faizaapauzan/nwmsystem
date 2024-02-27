@@ -773,63 +773,63 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Job Priority</label>
-                                                <input type="text" name="job_priority" id="job_priority" class="form-control">
+                                                <input type="text" name="job_priority" id="job_priority" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Job Order Number</label>
-                                                <input type="text" name="job_order_number" id="job_order_number" class="form-control">
+                                                <input type="text" name="job_order_number" id="job_order_number" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Job Name</label>
-                                                <input type="text" name="job_name" id="job_name" class="form-control">
+                                                <input type="text" name="job_name" id="job_name" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Job Description</label>
-                                                <input type="text" name="job_description" id="job_description" class="form-control">
+                                                <input type="text" name="job_description" id="job_description" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Requested Date</label>
-                                                <input type="text" name="requested_date" id="requested_date" class="form-control" autocomplete="off">
+                                                <input type="text" name="requested_date" id="requested_date" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Delivery Date</label>
-                                                <input type="text" name="delivery_date" id="delivery_date" class="form-control" autocomplete="off">
+                                                <input type="text" name="delivery_date" id="delivery_date" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="mb-3">
                                                 <label for="" class="fw-bold mb-2">Customer Name</label>
-                                                <input type="text" name="customer_name" id="customer_name" class="form-control">
+                                                <input type="text" name="customer_name" id="customer_name" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Customer Address</label>
-                                                <input type="text" name="cust_address1" id="cust_address1" class="form-control">
+                                                <input type="text" name="cust_address1" id="cust_address1" class="form-control" readonly>
                                                 <div class="d-grid d-flex gap-2 mt-2">
-                                                    <input type="text" name="cust_address2" id="cust_address2" class="form-control">
-                                                    <input type="text" name="cust_address3" id="cust_address3" class="form-control">
+                                                    <input type="text" name="cust_address2" id="cust_address2" class="form-control" readonly>
+                                                    <input type="text" name="cust_address3" id="cust_address3" class="form-control" readonly>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Customer Grade</label>
-                                                <input type="text" name="customer_grade" id="customer_grade" class="form-control">
+                                                <input type="text" name="customer_grade" id="customer_grade" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Customer PIC</label>
-                                                <input type="text" name="customer_PIC" id="customer_PIC" class="form-control">
+                                                <input type="text" name="customer_PIC" id="customer_PIC" class="form-control" readonly>
                                             </div>
                                             
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Customer Phone Number</label>
                                                 <div class="d-grid d-flex gap-2 mt-2">
-                                                    <input type="text" name="cust_phone1" id="cust_phone1" class="form-control">
-                                                    <input type="text" name="cust_phone2" id="cust_phone2" class="form-control">
+                                                    <input type="text" name="cust_phone1" id="cust_phone1" class="form-control" readonly>
+                                                    <input type="text" name="cust_phone2" id="cust_phone2" class="form-control" readonly>
                                                 </div>
                                             </div>
                                             
@@ -837,156 +837,37 @@
                                                 <label for="" class="form-label fw-bold">Serial Number</label>
                                                 <select name="serialnumber" id="serialnumber" style="width: 100%;" class="form-select">
                                                     <option value="">Select Serial Number</option>
-                                                    <?php
-                                                        
-                                                        include "dbconnect.php";
-                                                        
-                                                        $query = "SELECT * FROM machine_list ORDER BY machine_id ASC";
-                                                        
-                                                        $result = $conn->query($query);
-                                                        
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . $row['serialnumber'] . "'>" . $row['serialnumber'] . "</option>";
-                                                        }
-                                                    ?>
                                                 </select>
                                             </div>
                                             
-                                            <script>
-                                                $(document).ready(function() {
-                                                    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-                                                        $("#serialnumber").select2({
-                                                            dropdownParent: $('#techJobInfoForm'),
-                                                            matcher: oldMatcher(matchStart),
-                                                            theme: 'bootstrap-5'
-                                                        })
-                                                    });
-                                                    
-                                                    function matchStart (term, text) {
-                                                        if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
-                                                            return true;
-                                                        }
-                                                        
-                                                        return false;
-                                                    }
-                                                    
-                                                    $("#serialnumber").change(function() {
-                                                        var serialnumber = $(this).val();
-                                                        
-                                                        $.ajax({
-                                                            type: 'POST',
-                                                            url: 'GETSerialNumber.php',
-                                                            data: { serialnumber: serialnumber },
-                                                            dataType: 'json',
-                                                            
-                                                            success: function(response) {
-                                                                if (!response.error) {
-                                                                    $("#machine_id").val(response.machine_id);
-                                                                    $("#machine_code").val(response.machine_code);
-                                                                    $("#machine_name").val(response.machine_name);
-                                                                    $("#machine_type").val(response.machine_type).trigger('change');
-                                                                    $("#type_id").val(response.type_id);
-                                                                    $("#machine_brand").val(response.machine_brand).trigger('change');
-                                                                    $("#brand_id").val(response.brand_id);
-                                                                }
- 
-                                                                else {
-                                                                    console.error(response.error);
-                                                                }
-                                                            },
-                                                            
-                                                            error: function(xhr, status, error) {
-                                                                console.error(xhr.responseText);
-                                                            }
-                                                        });
-                                                    });
-                                                });
-                                            </script>
-                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Machine Brand</label>
-                                                <select name="machine_brand" id="machine_brand" style="width: 100%;" class="form-select">
+                                                <select name="brand_id" id="brand_id" style="width: 100%;" class="form-select">
                                                     <option value="">Select Machine Brand</option>
                                                     <?php
                                                         
                                                         include "dbconnect.php";
                                                         
-                                                        $query = "SELECT * FROM machine_brand ORDER BY brandname ASC";
+                                                        $records = mysqli_query($conn, "SELECT * FROM machine_brand ORDER BY brandname ASC");
                                                         
-                                                        $result = $conn->query($query);
-                                                        
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . $row['brandname'] . "'>" . $row['brandname'] . "</option>";
+                                                        while ($data = mysqli_fetch_array($records)) {
+                                                            echo "<option value='".$data['brand_id']."' data-machBrand='". $data['brandname'] ."'>".$data['brandname']."</option>";
                                                         }
                                                     ?>
                                                 </select>
                                                 
-                                                <input type="hidden" name="brand_id" id="brand_id">
+                                                <input type="hidden" name="machine_brand" id="machine_brand">
                                             </div>
 
-                                            <script>
-                                                $(document).ready(function() {
-                                                    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-                                                        $("#machine_brand").select2({
-                                                            dropdownParent: $('#techJobInfoForm'),
-                                                            dropdownCssClass: 'select2-dropup',
-                                                            matcher: oldMatcher(matchStart),
-                                                            theme: 'bootstrap-5'
-                                                        })
-                                                    });
-                                                    
-                                                    function matchStart (term, text) {
-                                                        if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
-                                                            return true;
-                                                        }
-                                                        
-                                                        return false;
-                                                    }
-                                                });
-                                            </script>
-                                            
                                             <div class="col-md-6 mb-3">
                                                 <label for="" class="form-label fw-bold">Machine Type</label>
                                                 <select name="machine_type" id="machine_type" style="width: 100%;" class="form-select">
                                                     <option value="">Select Machine Type</option>
-                                                    <?php
-                                                        
-                                                        include "dbconnect.php";
-                                                        
-                                                        $query = "SELECT * FROM machine_type ORDER BY type_name ASC";
-                                                        
-                                                        $result = $conn->query($query);
-                                                        
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . $row['type_name'] . "'>" . $row['type_name'] . "</option>";
-                                                        }
-                                                    ?>
                                                 </select>
                                                 
                                                 <input type="hidden" name="type_id" id="type_id">
                                             </div>
 
-                                            <script>
-                                                $(document).ready(function() {
-                                                    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
-                                                        $("#machine_type").select2({
-                                                            dropdownParent: $('#techJobInfoForm'),
-                                                            dropdownCssClass: 'select2-dropup',
-                                                            matcher: oldMatcher(matchStart),
-                                                            theme: 'bootstrap-5'
-                                                        })
-                                                    });
-                                                    
-                                                    function matchStart (term, text) {
-                                                        if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
-                                                            return true;
-                                                        }
-                                                        
-                                                        return false;
-                                                    }
-                                                });
-                                            </script>
-                                            
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Machine Name</label>
                                                 <input type="text" id="machine_name" name="machine_name" class="form-control">
@@ -1429,7 +1310,6 @@
                         } 
                         
                         else if (res.status == 200) {
-                            // Job Update
                             $('#jobregisterID_jobUpdate').val(res.data.jobregister_id);
                             $('#technician_departure').val(res.data.technician_departure);
                             $('#technician_arrival').val(res.data.technician_arrival);
@@ -1445,34 +1325,21 @@
                 });
             }
 
-            // Populate serial number dropdown
-            function fetchSerialNumbersByCustomerName(customerName) {
-                $.ajax({
-                    type: "POST",
-                    url: "getAllMachineDetails.php",
-                    data: { customer_name: customerName },
-                    
-                    success: function (response) {
-                        var machineData = jQuery.parseJSON(response);
-                        
-                        $('#serialnumber').empty();
-                        
-                        if (machineData.length > 0) {
-                            $('#serialnumber').append('<option value="">Select Serial Number</option>');
-                            for (var i = 0; i < machineData.length; i++) {
-                                var data = machineData[i];
-                                
-                                $('#serialnumber').append('<option value="' + data.serialnumber + '" data-machineName="' + data.machine_name + '" data-machineCode="' + data.machine_code + '" data-machineID="' + data.machine_id + '">' + data.serialnumber + '</option>');
-                            }
-                        }
-                        
-                        else {
-                            $('#serialnumber').append('<option value="">No Serial Numbers available</option>');
-                        }
-                        
-                        $('#serialnumber').val(data.serialnumber).trigger('change');
-                    }
+            // dropdown with select2
+            function initializeSelect2(selectors) {
+                $.fn.select2.amd.require(['select2/compat/matcher'], function(oldMatcher) {
+                    selectors.forEach(function(selector) {
+                        $(selector).select2({
+                            dropdownParent: $('#techJobInfoForm'),
+                            matcher: oldMatcher(matchStart),
+                            theme: 'bootstrap-5'
+                        });
+                    });
                 });
+                
+                function matchStart(term, text) {
+                    return text.toUpperCase().indexOf(term.toUpperCase()) === 0;
+                }
             }
 
             // Fetch Job Info Tab
@@ -1484,11 +1351,7 @@
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
                         
-                        if (res.status == 404) {
-                            console.log(res.message);
-                        } 
-                        
-                        else if (res.status == 200) {
+                        if (res.status == 200) {
                             $('#jobregisterID_jobInfo').val(res.data.jobregister_id);
                             $('#job_priority').val(res.data.job_priority);
                             $('#job_order_number').val(res.data.job_order_number);
@@ -1504,24 +1367,184 @@
                             $('#customer_PIC').val(res.data.customer_PIC);
                             $('#cust_phone1').val(res.data.cust_phone1);
                             $('#cust_phone2').val(res.data.cust_phone2);
+                            $('#serialnumber').val(res.data.serialnumber);
+                            $('#machine_brand').val(res.data.machine_brand);
                             $('#brand_id').val(res.data.brand_id);
                             $('#type_id').val(res.data.type_id);
+                            $('#machine_type').val(res.data.machine_type);
                             $('#machine_name').val(res.data.machine_name);
                             $('#machine_id').val(res.data.machine_id);
                             $('#machine_code').val(res.data.machine_code);
-                            $('#serialnumber').val(res.data.serialnumber).trigger('change');
-                            $('#machine_brand').val(res.data.machine_brand).trigger('change');
-                            $('#machine_type').val(res.data.machine_type).trigger('change');
 
-                            fetchSerialNumbersByCustomerName(res.data.customer_name);
+                            initializeSelect2(['#serialnumber', '#brand_id', '#machine_type']);
+
+                            populateSerialNumberDropdown(res.data.customer_name, res.data.serialnumber, function() {
+                                populateMachineTypeDropdown(res.data.brand_id, res.data.machine_type);
+                            });
                         }
                         
                         else {
-                            console.log(res.message);
-                        }
+                            console.error(res.message);
+                        }   
+                    },
+                    
+                    error: function() {
+                        console.error('Error fetching job info.');
                     }
                 });
             }
+
+            // populate serial number dropdown
+            function populateSerialNumberDropdown(customerName, currentSerialNumber, callback) {
+                if (!customerName) return;
+                
+                $.ajax({
+                    type: "POST",
+                    url: "getAllMachineDetails.php",
+                    data: { customer_name: customerName },
+                    
+                    success: function(response) {
+                        var machines = JSON.parse(response);
+                        var serialNumberDropdown = $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
+                        
+                        machines.forEach(function(machine) {
+                            serialNumberDropdown.append($('<option>', {
+                                value: machine.serialnumber,
+                                text: machine.serialnumber
+                            }));
+                        });
+                        
+                        serialNumberDropdown.val(currentSerialNumber).trigger('change');
+                        
+                        if (typeof callback === "function") {
+                            callback();
+                        }
+                    },
+                    
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching serial numbers:", error);
+                    }
+                });
+            }
+
+            // Function to populate machine type dropdown
+            function populateMachineTypeDropdown(brandId, selectedMachineType = null) {
+                if (!brandId) return;
+                
+                $.ajax({
+                    type: "POST",
+                    url: "getMachineTypesByBrand.php",
+                    data: { brand_id: brandId },
+                    
+                    success: function(response) {
+                        var types = JSON.parse(response);
+                        var machineTypeDropdown = $('#machine_type').empty().append('<option value="">Select Machine Type</option>');
+                        
+                        types.forEach(function(type) {
+                            machineTypeDropdown.append($('<option>', {
+                                value: type.type_name,
+                                text: type.type_name,
+                                'data-typeid': type.type_id
+                            }));
+                        });
+                        
+                        if (selectedMachineType) {
+                            machineTypeDropdown.val(selectedMachineType).trigger('change');
+                            
+                            $('#type_id').val($('option:selected', machineTypeDropdown).attr('data-typeid'));
+                        }
+                        
+                        initializeSelect2(['#machine_type']);
+                    },
+                    
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching machine types:", error);
+                    }
+                });
+            }
+
+            $(document).ready(function() {
+                initializeSelect2(['#serialnumber', '#brand_id', '#machine_type']);
+
+                var customerName = $('#customer_name').val();
+                populateSerialNumberDropdown(customerName);
+
+                // Auto-fill machine details
+                $('#serialnumber').change(function() {
+                    var serialNumber = $(this).val();
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "getMachineDetailsBySerial.php",
+                        data: { serial_number: serialNumber },
+            
+                        success: function(response) {
+                            var machineDetails = JSON.parse(response);
+                            
+                            if (!machineDetails.error) {
+                                $('#machine_name').val(machineDetails.machine_name);$('#machine_name').val(machineDetails.machine_name);
+                                $('#machine_id').val(machineDetails.machine_id);
+                                $('#machine_code').val(machineDetails.machine_code);
+                                $('#machine_brand').val(machineDetails.machine_brand);
+                                $('#machine_type').val(machineDetails.machine_type).trigger('change');
+                                $('#type_id').val(machineDetails.type_id);
+                    
+                                initializeSelect2(['#brand_id']);
+                    
+                                $('#brand_id').val(machineDetails.brand_id);
+                                
+                                populateMachineTypeDropdown(machineDetails.brand_id, machineDetails.machine_type);
+                            }
+                        },
+                        
+                        error: function(xhr, status, error) {
+                            console.error("AJAX Error: ", error);
+                        }
+                    });
+                });
+                
+                // Auto-fill machine_brand
+                $('#brand_id').change(function() {
+                    var brandId = $(this).val();
+                    
+                    $('#machine_brand').val($(this).find('option:selected').text());
+                    
+                    populateMachineTypeDropdown(brandId);
+                });
+
+                // Auto-fill type_id
+                $('#machine_type').change(function() {
+                    var selected = $(this).find('option:selected');
+                    
+                   
+                    $('#type_id').val(selected.data('typeid'));
+                    
+                    var machineType = $(this).val();
+                    
+                    // Auto-fill machine_name
+                    $.ajax({
+                        type: "POST",
+                        url: "getMachineNameAndTypeIdByType.php",
+                        data: { machine_type: machineType },
+                        
+                        success: function(response) {
+                            var parsedResponse = JSON.parse(response); 
+                            
+                            $('#machine_name').val(parsedResponse.machine_name);
+                        },
+                        
+                        error: function(xhr, status, error) {
+                            console.error("Error fetching machine name:", error);
+                        }
+                    });
+                });
+                
+                var jobregister_id = $('#jobregisterID_jobInfo').val();
+                
+                if (jobregister_id) {
+                    fetchJobInfoData(jobregister_id);
+                }
+            });
 
             // fetch Job Assign Tab
             function fetchJobAssignData(jobregister_id) {
@@ -1867,7 +1890,7 @@
             $(document).on('click', '.Job', function () {
                 var jobregister_id = $(this).data('jobregisterid');
                 
-                fetchUsername();
+                fetchUsername()
                 fetchJobUpdateData(jobregister_id)
                 fetchJobInfoData(jobregister_id)
                 fetchJobAssignData(jobregister_id)
@@ -1941,7 +1964,7 @@
                 e.preventDefault();
                 
                 var formData = new FormData(this);
-                formData.append("update_jobInfo", true);
+                    formData.append("update_jobInfo", true);
 
                 var jobregister_id = $("#jobregisterID_jobInfo").val();
 
@@ -1959,28 +1982,28 @@
                             $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
                             
                             setTimeout(function () {
-                                        hideElementById("JobInfoMessage");
-                                    }, 2000);
-                                }
-                                
-                                else if (res.status === 500) {
-                                    $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
-                                    
-                                    setTimeout(function () {
-                                        hideElementById("JobInfoMessage");
-                                    }, 2000);
-                                }
-                            },
+                                hideElementById("JobInfoMessage");
+                            }, 2000);
+                        }
+                        
+                        else if (res.status === 500) {
+                            $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                             
-                            error: function (xhr, status, error) {
-                                $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
-                                
-                                setTimeout(function () {
-                                    hideElementById("JobInfoMessage");
-                                }, 2000);
-                                
-                                console.error('AJAX Error:', status, error);
-                            }
+                            setTimeout(function () {
+                                hideElementById("JobInfoMessage");
+                            }, 2000);
+                        }
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#JobInfoMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        setTimeout(function () {
+                            hideElementById("JobInfoMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
                 });
             });
 
