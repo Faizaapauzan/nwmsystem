@@ -553,7 +553,7 @@
                                                 var totalRestTimeInMinutes = (<?= array_sum($resttimehrArray); ?> * 60) + <?= array_sum($resttimeminArray); ?>;
                                                 var totalTime = totalWorkingTimeInMinutes + totalTravelTimeInMinutes - totalRestTimeInMinutes;
                                                 
-                                                if (totalTime > 420) {
+                                                if (totalTime > 480) {
                                                     $row.find("td").css("color", "");
                                                 }
                                                 
