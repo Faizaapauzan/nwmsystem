@@ -281,9 +281,10 @@
                                                         $technician_departure =$row['technician_departure'];
                                                         $technician_arrival =$row['technician_arrival'];
                                                         $technician_leaving =$row['technician_leaving'];
-                                                        $departure = substr($technician_departure,10);
-                                                        $arrival = substr($technician_arrival,10); 
-                                                        $leaving = substr($technician_leaving,10);
+                                                        
+                                                        $departure = (new DateTime($technician_departure))->format('h:i A');
+                                                        $arrival = (new DateTime($technician_arrival))->format('h:i A');
+                                                        $leaving = (new DateTime($technician_leaving))->format('h:i A');
                                                         
                                                         if (!function_exists('difftime')) {
                                                             function difftime($techniciandeparture, $technicianarrival) {
