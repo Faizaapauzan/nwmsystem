@@ -442,7 +442,8 @@
                                                     $countrecords = 0;
                                                     $workinghrArray = array();
                                                     $workingminArray = array();
-                                                    $resttimeArray = array();
+                                                    $resttimehrArray = array();
+                                                    $resttimeminArray = array();
                                                     $totalworkinghr = 0;
                                                     $totalworkingmin = 0;
                                                     $noloop = false;
@@ -462,8 +463,14 @@
                                                             $workinghrArray[] = $workingtimehr;
                                                             $workingminArray[] = $workingtimemin;
 
-                                                            $resttime = (difftime($record['tech_in'], $record['tech_out'])['h'] <= 24) ?
-                                                                         difftime($record['tech_in'], $record['tech_out'])['m'] : 0;
+                                                            $resttimehr = (difftime($record['tech_in'], $record['tech_out'])['h'] <= 24) ?
+                                                                           difftime($record['tech_in'], $record['tech_out'])['h'] : 0;
+
+                                                            $resttimemin = (difftime($record['tech_in'], $record['tech_out'])['h'] <= 24) ?
+                                                                           difftime($record['tech_in'], $record['tech_out'])['m'] : 0;
+                                                                         
+                                                            $resttimehrArray[] = $resttimehr; 
+                                                            $resttimeminArray[] = $resttimemin;
                                                             
                                                             $TravelTimehr = (difftime($record['technician_arrival'], $record['technician_departure'])['h'] <= 24) ?
                                                                              difftime($record['technician_arrival'], $record['technician_departure'])['h'] : 0;
@@ -484,7 +491,7 @@
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username'] ?></td>
                                             <td style="text-align: center; vertical-align: middle;"><?= $record['customer_name'] ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= (($workingtimehr == 0 && $workingtimemin != 0) || ($workingtimehr != 0 && $workingtimemin == 0) || ($workingtimehr != 0 && $workingtimemin != 0)) ? $workingtimehr . 'hrs ' . $workingtimemin . 'mins' : '' ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($resttime != 0)? $resttime . 'mins': ''?></td>
+                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($resttimehr > 0 || $resttimemin > 0) ? $resttimehr . 'hrs ' . $resttimemin . 'mins' : '' ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= (($TravelTimehr == 0 && $TravelTimemin != 0) || ($TravelTimehr != 0 && $TravelTimemin == 0) || ($TravelTimehr != 0 && $TravelTimemin != 0)) ? $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins' : '' ?></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
                                             <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
@@ -511,13 +518,13 @@
                                             }
                                             
                                             if (($totalworkinghr == 0 && $totalworkingmin > 0) || ($totalworkinghr > 0 && $totalworkingmin == 0) || ($totalworkinghr > 0 && $totalworkingmin > 0)){
-                                                if (($totalworkingmin - $resttime) < 0) {
-                                                    $totalworkingmin = 60 + $totalworkingmin - $resttime;
+                                                if (($totalworkingmin - $resttimehr) < 0) {
+                                                    $totalworkingmin = 60 + $totalworkingmin - $resttimehr;
                                                     $totalworkinghr -= 1;
                                                 }
                                                 
                                                 else {
-                                                    $totalworkingmin = $totalworkingmin - $resttime;
+                                                    $totalworkingmin = $totalworkingmin - $resttimehr;
                                                 }
                                             }
                                             
@@ -535,26 +542,36 @@
                                         </tr>
                                         <?php $counter2++; } ?>
                                                     
-                                        <!-- INSERT TOTAL WORKING TIME -->
+                                        <!-- Insert Total Working Time and Total Travel Time and change font color -->
                                         <script>
-                                            if (<?=$noloop?>) {
+                                            if (<?= $noloop ?>) {
                                                 var $table2 = $('#myTable2');
-                                                var $row = $table2.find("td:contains('<?php echo $row['username']; ?>')").closest("tr");
+                                                var $row = $table2.find("td:contains('<?= $row['username']; ?>')").closest("tr");
+                                                var totalWorkingTimeInMinutes = (<?= $totalworkinghr ?> * 60) + <?= $totalworkingmin ?>;
+                                                var totalTravelTimeInMinutes = (<?= $totaltravelhr ?> * 60) + <?= $totaltravelmin ?>;
+                                                var totalRestTimeInMinutes = (<?= array_sum($resttimehrArray); ?> * 60) + <?= array_sum($resttimeminArray); ?>;
+                                                var totalTime = totalWorkingTimeInMinutes + totalTravelTimeInMinutes - totalRestTimeInMinutes;
                                                 
-                                                if (<?=$totalworkinghr?> != 0 || <?=$totalworkingmin?> != 0){
-                                                    $row.find("td:nth-last-child(2)").text("<?=$totalworkinghr . "hrs " . $totalworkingmin . "mins"?>");
-                                                    
-                                                    if (<?=$totaltravelhr?> != 0 || <?=$totaltravelmin?> != 0)
-                                                        $row.find("td:last-child").text("<?=$totaltravelhr . "hrs " . $totaltravelmin . "mins"?>");
-                                                        
-                                                        if (<?=$totalworkinghr?> < 6){
-                                                            $row.find("td").css("color", "red");
-                                                        }
+                                                if (totalTime > 420) {
+                                                    $row.find("td").css("color", "");
                                                 }
                                                 
                                                 else {
                                                     $row.find("td").css("color", "red");
-                                                }            
+                                                }
+                                                
+                                                var totalWorkingHours = Math.floor(totalWorkingTimeInMinutes / 60);
+                                                var totalWorkingMinutes = totalWorkingTimeInMinutes % 60;
+                                                var totalTravelHours = Math.floor(totalTravelTimeInMinutes / 60);
+                                                var totalTravelMinutes = totalTravelTimeInMinutes % 60;
+                                                
+                                                if (totalWorkingTimeInMinutes > 0) {
+                                                    $row.find("td:nth-last-child(2)").text(totalWorkingHours + "hrs " + totalWorkingMinutes + "mins");
+                                                }
+                                                
+                                                if (totalTravelTimeInMinutes > 0) {
+                                                    $row.find("td:last-child").text(totalTravelHours + "hrs " + totalTravelMinutes + "mins");
+                                                }
                                             }
                                         </script>
                                         <?php
@@ -567,13 +584,35 @@
                                         ?>
                                     </tbody>
 
+                                    <!-- Merge cell -->
                                     <script>
                                         $(document).ready(function() {
                                             var previousName = null;
                                             var count = 1;
+                                            var restTimeAccumulator = {};
                                             
                                             $("#tbody2 tr").each(function(index) {
                                                 var currentName = $(this).find("td:eq(1)").text();
+                                                var restTimeText = $(this).find("td:eq(4)").text();
+                                                
+                                                if (!restTimeAccumulator[currentName]) {
+                                                    restTimeAccumulator[currentName] = {
+                                                        hours: 0,
+                                                        minutes: 0
+                                                    };
+                                                }
+                                                
+                                                var restTimeParts = restTimeText.match(/(\d+)hrs\s+(\d+)mins/);
+                                                
+                                                if (restTimeParts) {
+                                                    restTimeAccumulator[currentName].hours += parseInt(restTimeParts[1]);
+                                                    restTimeAccumulator[currentName].minutes += parseInt(restTimeParts[2]);
+                                                    
+                                                    if (restTimeAccumulator[currentName].minutes >= 60) {
+                                                        restTimeAccumulator[currentName].hours += Math.floor(restTimeAccumulator[currentName].minutes / 60);
+                                                        restTimeAccumulator[currentName].minutes %= 60;
+                                                    }
+                                                }
                                                 
                                                 if (currentName === previousName) {
                                                     count++;
@@ -584,25 +623,24 @@
                                                 else {
                                                     if (count > 1) {
                                                         var firstRow = $("#tbody2 tr").eq(index - count);
-                                                            
-                                                            firstRow.find("td:eq(1)").attr("rowspan", count);
-                                                            firstRow.find("td:eq(4)").attr("rowspan", count);
-                                                            firstRow.find("td:eq(6)").attr("rowspan", count);
-                                                            firstRow.find("td:eq(7)").attr("rowspan", count);
+                                                        
+                                                        firstRow.find("td:eq(1)").attr("rowspan", count);
+                                                        firstRow.find("td:eq(4)").attr("rowspan", count).text(restTimeAccumulator[previousName].hours + 'hrs ' + restTimeAccumulator[previousName].minutes + 'mins');
+                                                        firstRow.find("td:eq(6)").attr("rowspan", count);
+                                                        firstRow.find("td:eq(7)").attr("rowspan", count);
                                                     }
-                                                        
+                                                    
                                                     count = 1;
-                                                        
                                                     previousName = currentName;
                                                 }
-                                                    
+                                                
                                                 if (index + 1 === $("#tbody2 tr").length && count > 1) {
                                                     var lastFirstRow = $("#tbody2 tr").eq(index - count + 1);
-                                                        
-                                                        lastFirstRow.find("td:eq(1)").attr("rowspan", count);
-                                                        lastFirstRow.find("td:eq(4)").attr("rowspan", count);
-                                                        lastFirstRow.find("td:eq(6)").attr("rowspan", count);
-                                                        lastFirstRow.find("td:eq(7)").attr("rowspan", count);
+                                                    
+                                                    lastFirstRow.find("td:eq(1)").attr("rowspan", count);
+                                                    lastFirstRow.find("td:eq(4)").attr("rowspan", count).text(restTimeAccumulator[currentName].hours + 'hrs ' + restTimeAccumulator[currentName].minutes + 'mins');
+                                                    lastFirstRow.find("td:eq(6)").attr("rowspan", count);
+                                                    lastFirstRow.find("td:eq(7)").attr("rowspan", count);
                                                 }
                                             });
                                         });
