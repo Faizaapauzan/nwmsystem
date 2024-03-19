@@ -1651,9 +1651,9 @@
                                     <div class="tab-pane show active" id="tab1" role="tabpanel" aria-labelledby="tab1" style="color: black;">
                                         <div class="container" id="jobInfoTab">
                                             <form id="techJobInfoForm">
-                                                <input type="hidden" name="today_date" id="todayDate_Support" readonly>
-                                                <input type="hidden" name="jobregister_id" id="jobregisterID_jobInfo" readonly>
-                                                <input type="hidden" name="support" id="support" readonly>
+                                                <input type="hidden" name="today_date" id="todayDate_Support">
+                                                <input type="hidden" name="jobregister_id" id="jobregisterID_jobInfo">
+                                                <input type="hidden" name="support" id="support">
                                                 
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
@@ -2128,7 +2128,7 @@
                                                 <!-- Departure Time -->
                                                 <label for="" class="form-label fw-bold">Departure Time</label>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="technician_departure" id="technician_departure" class="form-control" readonly>
+                                                    <input type="text" name="technician_departure" id="technician_departure" class="form-control" autocomplete="off">
                                                     <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="departureButton">Departure</button>
                                                 </div>
 
@@ -2197,7 +2197,7 @@
                                                 <!-- Arrival Time -->
                                                 <label for="" class="form-label fw-bold">Time At Site</label>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="technician_arrival" id="technician_arrival" class="form-control" readonly>
+                                                    <input type="text" name="technician_arrival" id="technician_arrival" class="form-control" autocomplete="off">
                                                     <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="arrivalButton">Arrival</button>
                                                 </div>
 
@@ -2220,7 +2220,7 @@
                                                 <!-- Leaving Time -->
                                                 <label for="" class="form-label fw-bold">Return Time</label>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="technician_leaving" id="technician_leaving" class="form-control" readonly>
+                                                    <input type="text" name="technician_leaving" id="technician_leaving" class="form-control" autocomplete="off">
                                                     <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="returnButton">Return</button>
                                                 </div>
 
@@ -2245,7 +2245,7 @@
                                                 <div class="d-grid gap-3 mb-3">
                                                     <!-- Rest Out -->
                                                     <div class="input-group">
-                                                        <input type="text" name="tech_out" id="tech_out" class="form-control" readonly>
+                                                        <input type="text" name="tech_out" id="tech_out" class="form-control" autocomplete="off">
                                                         <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="outButton">Out</button>
                                                     </div>
 
@@ -2302,7 +2302,7 @@
 
                                                     <!-- Rest In -->
                                                     <div class="input-group">
-                                                        <input type="text" name="tech_in" id="tech_in" class="form-control" readonly>
+                                                        <input type="text" name="tech_in" id="tech_in" class="form-control" autocomplete="off">
                                                         <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: 95px;" id="inButton">In</button>
                                                     </div>
 

@@ -241,6 +241,7 @@
                             </script>
                             <!-- End of Date -->
                             
+                            <!-- Worker Assignment -->
                             <div class="table-responsive mb-3">
                                 <label for="" class="fw-bold mb-3">Worker Assignment</label>
                                 <table id="myTable" class="table table-bordered border-dark">
@@ -259,9 +260,9 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tbody id ="tbody">
+                                    <tbody id="tbody">
                                         <?php
-                                        
+                                            
                                             include_once 'dbconnect.php';
                                             
                                             if(isset($_GET['DateAssign'])) {
@@ -272,87 +273,46 @@
                                                                               WHERE (job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' 
                                                                               AND (job_register.job_cancel = '' OR job_register.job_cancel IS NULL))
                                                                               ORDER BY job_assign ASC, departure_timestamp ASC");
-                                            
+                
                                                 if(mysqli_num_rows($query) > 0) {
                                                     $counter = 1;
                                                     
                                                     foreach($query as $row) {
-                                                        $currentname = $row['job_assign'];
-                                                        $technician_departure =$row['technician_departure'];
-                                                        $technician_arrival =$row['technician_arrival'];
-                                                        $technician_leaving =$row['technician_leaving'];
+                                                        $technician_departure = $row['technician_departure'] ? DateTime::createFromFormat('m/d/Y h:i A', $row['technician_departure']) : null;
+                                                        $technician_arrival = $row['technician_arrival'] ? DateTime::createFromFormat('m/d/Y h:i A', $row['technician_arrival']) : null;
+                                                        $technician_leaving = $row['technician_leaving'] ? DateTime::createFromFormat('m/d/Y h:i A', $row['technician_leaving']) : null;
                                                         
-                                                        $departure = (new DateTime($technician_departure))->format('h:i A');
-                                                        $arrival = (new DateTime($technician_arrival))->format('h:i A');
-                                                        $leaving = (new DateTime($technician_leaving))->format('h:i A');
+                                                        $departure = $technician_departure ? $technician_departure->format('h:i A') : '';
+                                                        $arrival = $technician_arrival ? $technician_arrival->format('h:i A') : '';
+                                                        $leaving = $technician_leaving ? $technician_leaving->format('h:i A') : '';
                                                         
-                                                        if (!function_exists('difftime')) {
-                                                            function difftime($techniciandeparture, $technicianarrival) {
-                                                                $dif=array();
-                                                                $first = strtotime($techniciandeparture);
-                                                                $second = strtotime($technicianarrival);
-                                                                $TravelTime = abs($first - $second);
-                                                                $dif['s'] = floor($TravelTime);
-                                                                $dif['m'] = floor($TravelTime/(60) % 60 );
-                                                                $dif['h'] = floor($TravelTime/(60*60)); 
-                                                      
-                                                                return $dif;
-                                                            }
-                                                        }
-                                                
-                                                        if (!function_exists('difftime2')) {
-                                                            function difftime2($technicianarrival, $technicianleaving) {
-                                                                $dif2=array();
-                                                                $first = strtotime($technicianarrival);
-                                                                $second = strtotime($technicianleaving);
-                                                                $WorkTime = abs($first - $second);
-                                                                $dif['s'] = floor($WorkTime);
-                                                                $dif['m'] = floor($WorkTime/(60) % 60 );
-                                                                $dif['h'] = floor($WorkTime/(60*60));
-                                                            
-                                                                return $dif2;
-                                                            }
-                                                        }
-
-                                                        $wh = '';
-                                                        $wm = '';
-                                                        $th = '';
-                                                        $tm = '';
+                                                        $workingTime = $technician_leaving && $technician_arrival ? $technician_leaving->diff($technician_arrival) : null;
+                                                        $travelTime = $technician_arrival && $technician_departure ? $technician_arrival->diff($technician_departure) : null;
                                                         
-                                                        if ($arrival != '' && $leaving != ''){
-                                                            $wh = difftime($arrival, $leaving)['h'];
-                                                            $wm = difftime($arrival, $leaving)['m'];
-                                                        }
-                                                        
-                                                        if ($departure != '' && $arrival != ''){
-                                                            $th = difftime($departure, $arrival)['h'];
-                                                            $tm = difftime($departure, $arrival)['m'];
-                                                        }
+                                                        $wh = $workingTime ? $workingTime->h : '';
+                                                        $wm = $workingTime ? $workingTime->i : '';
+                                                        $th = $travelTime ? $travelTime->h : '';
+                                                        $tm = $travelTime ? $travelTime->i : '';
                                         ?>
-                                    
                                         <tr>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['job_assign']; ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= nl2br($row['username']); ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?= $counter; ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?= $row['job_assign']; ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= nl2br($row['username']); ?></td>
                                             <td style="vertical-align: middle;"><?= $row['customer_name']; ?></td>
                                             <td style="vertical-align: middle;"><?= $row['machine_type']; ?> - <?= $row['job_description']; ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$departure" ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$arrival" ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?php echo "$leaving" ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
-                                                <span class="hours-print"><?php echo(($wh != '' && $wm != '') && ($wh != 0 || $wm != 0)) ? $wh . ' hrs ': '';?></span>
-                                                <span class="minutes-print"><?php echo(($wh != '' && $wm != '') && ($wh != 0 || $wm != 0)) ? $wm . ' mins ': '';?></span>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap;'><?= $departure; ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= $arrival; ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= $leaving; ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '>
+                                                <?= $wh !== '' || $wm !== '' ? "{$wh} hrs {$wm} mins" : ''; ?>
                                             </td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'>
-                                                <span class="hours-print"><?php  echo (($th != '' && $tm != '') && ($th != 0 || $tm != 0)) ? $th . ' hrs ': '';?></span>
-                                                <span class="minutes-print"><?php  echo (($th != '' && $tm != '') && ($th != 0 || $tm != 0)) ? $tm . ' mins ': '';?></span>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '>
+                                                <?= $th !== '' || $tm !== '' ? "{$th} hrs {$tm} mins" : ''; ?>
                                             </td>
                                         </tr>
-                                    
                                         <?php
-                                            
-                                            $counter++;  
-                                                    } 
+                                                        $counter++;  
+                                                    }
                                                 }
                                                 
                                                 else {
@@ -398,6 +358,7 @@
                                 </script>
                             </div>
 
+                            <!-- Total Working Time -->
                             <div class="table-responsive mb-3">
                                 <label for="" class="fw-bold mb-3">Total Working Time</label>
                                 <table id="myTable2" class="table table-bordered border-dark">
@@ -416,239 +377,186 @@
                                     
                                     <tbody id ="tbody2">
                                         <?php
-                                            $counter2 = 1;
+                                            
                                             include_once 'dbconnect.php';
                                             
-                                            if(isset($_GET['DateAssign'])) {
-                                                $DateAssign = $_GET['DateAssign'];
-
-                                                $records = array();
-
-                                                $query = mysqli_query($conn, "SELECT * FROM job_register LEFT JOIN assistants 
-                                                                              ON job_register.jobregister_id=assistants.jobregister_id 
-                                                                              WHERE (job_register.DateAssign='$DateAssign' AND job_register.job_assign !='' 
-                                                                              AND (job_register.job_cancel = '' OR job_register.job_cancel IS NULL))");
-
-                                                if ($query) {
-                                                    while ($row1 = mysqli_fetch_assoc($query)) {
-                                                        $records[] = $row1;
-                                                    }
-                                                    mysqli_free_result($query);
-                                                }
-
-                                                $staff_query = mysqli_query($conn, "SELECT * FROM staff_register WHERE staff_position = 'Leader' and tech_avai = 0
-                                                                                    ORDER BY username ASC");
-
-                                                foreach($staff_query as $row){
-                                                    $countrecords = 0;
-                                                    $workinghrArray = array();
-                                                    $workingminArray = array();
-                                                    $resttimehrArray = array();
-                                                    $resttimeminArray = array();
-                                                    $totalworkinghr = 0;
-                                                    $totalworkingmin = 0;
-                                                    $noloop = false;
-                                                    $totaltravelhr = 0;
-                                                    $totaltravelmin = 0;
-                                                    
-                                                    foreach ($records as $record) {
-                                                        if ($row['username'] == strtoupper($record['job_assign'])){
-                                                            $countrecords++;
-                                                            
-                                                            $workingtimehr = (difftime($record['technician_leaving'], $record['technician_arrival'])['h'] <= 24) ? 
-                                                                              difftime($record['technician_leaving'], $record['technician_arrival'])['h'] : 0;
-                                                            
-                                                            $workingtimemin = (difftime($record['technician_leaving'], $record['technician_arrival'])['h'] <= 24) ?
-                                                                               difftime($record['technician_leaving'], $record['technician_arrival'])['m'] : 0;
-                                                            
-                                                            $workinghrArray[] = $workingtimehr;
-                                                            $workingminArray[] = $workingtimemin;
-
-                                                            $resttimehr = (difftime($record['tech_in'], $record['tech_out'])['h'] <= 24) ?
-                                                                           difftime($record['tech_in'], $record['tech_out'])['h'] : 0;
-
-                                                            $resttimemin = (difftime($record['tech_in'], $record['tech_out'])['h'] <= 24) ?
-                                                                           difftime($record['tech_in'], $record['tech_out'])['m'] : 0;
-                                                                         
-                                                            $resttimehrArray[] = $resttimehr; 
-                                                            $resttimeminArray[] = $resttimemin;
-                                                            
-                                                            $TravelTimehr = (difftime($record['technician_arrival'], $record['technician_departure'])['h'] <= 24) ?
-                                                                             difftime($record['technician_arrival'], $record['technician_departure'])['h'] : 0;
-                                                            
-                                                            $TravelTimemin = (difftime($record['technician_arrival'], $record['technician_departure'])['h'] <= 24) ?
-                                                                              difftime($record['technician_arrival'], $record['technician_departure'])['m'] : 0; 
-                                                            
-                                                            $totaltravelhr += $TravelTimehr;
-                                                            $totaltravelmin += $TravelTimemin;
-                                                            
-                                                            if ($totaltravelmin >= 60){
-                                                                $totaltravelmin -= 60;
-                                                                $totaltravelhr += 1;
-                                                            }
+                                            $DateAssign = $_GET['DateAssign'] ?? date('Y-m-d');
+                                            
+                                            $technicians = [];
+                                            
+                                            $staff_query = mysqli_query($conn, "SELECT * FROM staff_register WHERE staff_position = 'Leader' AND tech_avai = 0 ORDER BY username ASC");
+                                            
+                                            while ($staff = mysqli_fetch_assoc($staff_query)) {
+                                                $technicians[$staff['username']] = ['total_working_time' => 0, 'total_travel_time' => 0, 'details' => []];
+                                            }
+                                            
+                                            $job_query = mysqli_query($conn, "SELECT * FROM job_register WHERE DateAssign='$DateAssign' AND job_assign != '' AND job_cancel IS NULL");
+                                            
+                                            while ($job = mysqli_fetch_assoc($job_query)) {
+                                                $tech_username = $job['job_assign'];
+                                                
+                                                $technician_departure = $job['technician_departure'] ? DateTime::createFromFormat('n/j/Y g:i A', $job['technician_departure']) : null;
+                                                $technician_arrival = $job['technician_arrival'] ? DateTime::createFromFormat('n/j/Y g:i A', $job['technician_arrival']) : null;
+                                                $technician_leaving = $job['technician_leaving'] ? DateTime::createFromFormat('n/j/Y g:i A', $job['technician_leaving']) : null;
+                                                $tech_out = $job['tech_out'] ? DateTime::createFromFormat('g:i A', $job['tech_out']) : null;
+                                                $tech_in = $job['tech_in'] ? DateTime::createFromFormat('g:i A', $job['tech_in']) : null;
+                                                
+                                                $workingTime = $technician_leaving && $technician_arrival ? $technician_leaving->diff($technician_arrival) : null;
+                                                $restTime = $tech_in && $tech_out ? $tech_in->diff($tech_out) : null;
+                                                $travelTime = $technician_arrival && $technician_departure ? $technician_arrival->diff($technician_departure) : null;
+                                                
+                                                $workingMinutes = $workingTime ? ($workingTime->h * 60 + $workingTime->i) : 0;
+                                                $restMinutes = $restTime ? ($restTime->h * 60 + $restTime->i) : 0;
+                                                $travelMinutes = $travelTime ? ($travelTime->h * 60 + $travelTime->i) : 0;
+ 
+                                                $technicians[$tech_username]['total_working_time'] += $workingMinutes;
+                                                $technicians[$tech_username]['total_travel_time'] += $travelMinutes;
+                                                
+                                                $technicians[$tech_username]['details'][] = ['place' => $job['customer_name'],
+                                                                                             'working_time' => $workingTime ? $workingTime->format('%h hrs %i mins') : '',
+                                                                                             'rest_time' => $restTime ? $restTime->format('%h hrs %i mins') : '',
+                                                                                             'travel_time' => $travelTime ? $travelTime->format('%h hrs %i mins') : ''];
+                                            }
+                                            
+                                            $counter2 = 1;
+                                            
+                                            foreach ($technicians as $username => $tech_data) {
+                                                if (empty($tech_data['details'])) {
                                         ?>
                                         <tr>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter2 ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username'] ?></td>
-                                            <td style="text-align: center; vertical-align: middle;"><?= $record['customer_name'] ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= (($workingtimehr == 0 && $workingtimemin != 0) || ($workingtimehr != 0 && $workingtimemin == 0) || ($workingtimehr != 0 && $workingtimemin != 0)) ? $workingtimehr . 'hrs ' . $workingtimemin . 'mins' : '' ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= ($resttimehr > 0 || $resttimemin > 0) ? $resttimehr . 'hrs ' . $resttimemin . 'mins' : '' ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= (($TravelTimehr == 0 && $TravelTimemin != 0) || ($TravelTimehr != 0 && $TravelTimemin == 0) || ($TravelTimehr != 0 && $TravelTimemin != 0)) ? $TravelTimehr . 'hrs ' . $TravelTimemin . 'mins' : '' ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= $counter2 ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= htmlspecialchars($username) ?></td>
+                                            <td style='text-align: center; vertical-align: middle;'></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '></td>
                                         </tr>
                                         <?php
-                                            
-                                            $counter2++; 
-                                                        }
-                                                    }
-                                                    
-                                            $noloop = true;
-                                            
-                                            foreach ($workinghrArray as $wh){
-                                                $totalworkinghr += $wh;
-                                            }
-                                            
-                                            foreach ($workingminArray as $wm){
-                                                $totalworkingmin += $wm;
-                                                
-                                                if ($totalworkingmin >= 60){
-                                                    $totalworkingmin -= 60;
-                                                    $totalworkinghr += 1;
+                                                    $counter2++;
                                                 }
-                                            }
-                                            
-                                            if (($totalworkinghr == 0 && $totalworkingmin > 0) || ($totalworkinghr > 0 && $totalworkingmin == 0) || ($totalworkinghr > 0 && $totalworkingmin > 0)){
-                                                if (($totalworkingmin - $resttimehr) < 0) {
-                                                    $totalworkingmin = 60 + $totalworkingmin - $resttimehr;
-                                                    $totalworkinghr -= 1;
-                                                }
-                                                
+
                                                 else {
-                                                    $totalworkingmin = $totalworkingmin - $resttimehr;
-                                                }
-                                            }
-                                            
-                                            if ($countrecords == 0){ 
+                                                    foreach ($tech_data['details'] as $index => $detail) {
                                         ?>
                                         <tr>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $counter2 ?></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $row['username']; ?></td>
-                                            <td style="vertical-align: middle;"></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
-                                            <td style='text-align: center; white-space: nowrap; vertical-align: middle;'></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= $counter2 ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= htmlspecialchars($username) ?></td>
+                                            <td style='text-align: center; vertical-align: middle;'><?= htmlspecialchars($detail['place']) ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= htmlspecialchars($detail['working_time']) ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= htmlspecialchars($detail['rest_time']) ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= htmlspecialchars($detail['travel_time']) ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= formatMinutes($tech_data['total_working_time']) ?></td>
+                                            <td style='text-align: center; vertical-align: middle; white-space: nowrap; '><?= formatMinutes($tech_data['total_travel_time']) ?></td>
                                         </tr>
-                                        <?php $counter2++; } ?>
-                                                    
-                                        <!-- Insert Total Working Time and Total Travel Time and change font color -->
-                                        <script>
-                                            if (<?= $noloop ?>) {
-                                                var $table2 = $('#myTable2');
-                                                var $row = $table2.find("td:contains('<?= $row['username']; ?>')").closest("tr");
-                                                var totalWorkingTimeInMinutes = (<?= $totalworkinghr ?> * 60) + <?= $totalworkingmin ?>;
-                                                var totalTravelTimeInMinutes = (<?= $totaltravelhr ?> * 60) + <?= $totaltravelmin ?>;
-                                                var totalRestTimeInMinutes = (<?= array_sum($resttimehrArray); ?> * 60) + <?= array_sum($resttimeminArray); ?>;
-                                                var totalTime = totalWorkingTimeInMinutes + totalTravelTimeInMinutes - totalRestTimeInMinutes;
-                                                
-                                                if (totalTime > 480) {
-                                                    $row.find("td").css("color", "");
-                                                }
-                                                
-                                                else {
-                                                    $row.find("td").css("color", "red");
-                                                }
-                                                
-                                                var totalWorkingHours = Math.floor(totalWorkingTimeInMinutes / 60);
-                                                var totalWorkingMinutes = totalWorkingTimeInMinutes % 60;
-                                                var totalTravelHours = Math.floor(totalTravelTimeInMinutes / 60);
-                                                var totalTravelMinutes = totalTravelTimeInMinutes % 60;
-                                                
-                                                if (totalWorkingTimeInMinutes > 0) {
-                                                    $row.find("td:nth-last-child(2)").text(totalWorkingHours + "hrs " + totalWorkingMinutes + "mins");
-                                                }
-                                                
-                                                if (totalTravelTimeInMinutes > 0) {
-                                                    $row.find("td:last-child").text(totalTravelHours + "hrs " + totalTravelMinutes + "mins");
-                                                }
-                                            }
-                                        </script>
                                         <?php
+                                                       $counter2++; 
+                                                    }
                                                 }
                                             }
-                                            
-                                            else {
-                                                echo "<p style='color:red; text-align:center; font-weight:bold'>No record found</p>";
+
+                                            function formatMinutes($minutes) {
+                                                if ($minutes == 0) {
+
+                                                    return '';
+                                                }
+
+                                                $hours = floor($minutes / 60);
+                                                $mins = $minutes % 60;
+                                                
+                                                return "{$hours} hrs {$mins} mins";
                                             }
                                         ?>
                                     </tbody>
+                                </table>
 
-                                    <!-- Merge cell -->
-                                    <script>
-                                        $(document).ready(function() {
-                                            var previousName = null;
-                                            var count = 1;
-                                            var restTimeAccumulator = {};
+                                <!-- Script to change font color -->
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#myTable2 tbody tr").each(function() {
+                                            var $this = $(this);
+                                            var totalWorkingTimeText = $this.find("td:nth-last-child(3)").text();
+                                            var totalTravelTimeText = $this.find("td:nth-last-child(1)").text();
+                                            var restTimeText = $this.find("td:nth-child(5)").text();
                                             
-                                            $("#tbody2 tr").each(function(index) {
-                                                var currentName = $(this).find("td:eq(1)").text();
-                                                var restTimeText = $(this).find("td:eq(4)").text();
+                                            function toMinutes(timeText) {
+                                                var parts = timeText.match(/(\d+)\s*hrs\s*(\d+)\s*mins/);
                                                 
-                                                if (!restTimeAccumulator[currentName]) {
-                                                    restTimeAccumulator[currentName] = {
-                                                        hours: 0,
-                                                        minutes: 0
-                                                    };
-                                                }
+                                                return parts ? (parseInt(parts[1]) * 60 + parseInt(parts[2])) : 0;
+                                            }
+                                            
+                                            var totalWorkingMinutes = toMinutes(totalWorkingTimeText);
+                                            var totalTravelMinutes = toMinutes(totalTravelTimeText);
+                                            var restMinutes = toMinutes(restTimeText);
+                                            
+                                            if ((totalWorkingMinutes + totalTravelMinutes - restMinutes) < 480) {
+                                                $this.find("td").css("color", "red");
+                                            }
+                                        });
+                                    });
+                                </script>
+
+                                <!-- Script to Merge cell -->
+                                <script>
+                                    $(document).ready(function() {
+                                        var previousName = null;
+                                        var count = 1;
+                                        
+                                        $("#tbody2 tr").each(function(index) {
+                                            var currentName = $(this).find("td:eq(1)").text();
+                                            var restTimeCell = $(this).find("td:eq(4)");
+                                            var restTimeValue = restTimeCell.text();
+                                            var isFirstInstanceOfName = currentName !== previousName;
+                                            var isLastRow = index + 1 === $("#tbody2 tr").length;
+                                            
+                                            if (isFirstInstanceOfName && previousName !== null && count > 1) {
+                                                var firstRow = $("#tbody2 tr").eq(index - count);
                                                 
-                                                var restTimeParts = restTimeText.match(/(\d+)hrs\s+(\d+)mins/);
-                                                
-                                                if (restTimeParts) {
-                                                    restTimeAccumulator[currentName].hours += parseInt(restTimeParts[1]);
-                                                    restTimeAccumulator[currentName].minutes += parseInt(restTimeParts[2]);
+                                                    firstRow.find("td:eq(1)").attr("rowspan", count);
+                                                    firstRow.find("td:eq(4)").attr("rowspan", count);
+                                                    firstRow.find("td:eq(6)").attr("rowspan", count);
+                                                    firstRow.find("td:eq(7)").attr("rowspan", count);
                                                     
-                                                    if (restTimeAccumulator[currentName].minutes >= 60) {
-                                                        restTimeAccumulator[currentName].hours += Math.floor(restTimeAccumulator[currentName].minutes / 60);
-                                                        restTimeAccumulator[currentName].minutes %= 60;
-                                                    }
-                                                }
+                                                count = 1;
+                                            }
+                                            
+                                            if (currentName === previousName) {
+                                                count++;
                                                 
-                                                if (currentName === previousName) {
-                                                    count++;
-                                                    
-                                                    $(this).find("td:eq(1), td:eq(4), td:eq(6), td:eq(7)").hide();
-                                                }
+                                                $(this).find("td:eq(1)").hide();
+                                                restTimeCell.hide();
+                                                $(this).find("td:eq(6)").hide();
+                                                $(this).find("td:eq(7)").hide();
+                                            }
+                                            
+                                            else {
+                                                previousName = currentName;
+                                            }
+                                            
+                                            if (isLastRow && count > 1) {
+                                                var lastFirstRow = $("#tbody2 tr").eq(index - count + 1);
                                                 
-                                                else {
-                                                    if (count > 1) {
-                                                        var firstRow = $("#tbody2 tr").eq(index - count);
-                                                        
-                                                        firstRow.find("td:eq(1)").attr("rowspan", count);
-                                                        firstRow.find("td:eq(4)").attr("rowspan", count).text(restTimeAccumulator[previousName].hours + 'hrs ' + restTimeAccumulator[previousName].minutes + 'mins');
-                                                        firstRow.find("td:eq(6)").attr("rowspan", count);
-                                                        firstRow.find("td:eq(7)").attr("rowspan", count);
-                                                    }
-                                                    
-                                                    count = 1;
-                                                    previousName = currentName;
-                                                }
-                                                
-                                                if (index + 1 === $("#tbody2 tr").length && count > 1) {
-                                                    var lastFirstRow = $("#tbody2 tr").eq(index - count + 1);
-                                                    
                                                     lastFirstRow.find("td:eq(1)").attr("rowspan", count);
-                                                    lastFirstRow.find("td:eq(4)").attr("rowspan", count).text(restTimeAccumulator[currentName].hours + 'hrs ' + restTimeAccumulator[currentName].minutes + 'mins');
+                                                    lastFirstRow.find("td:eq(4)").attr("rowspan", count);
                                                     lastFirstRow.find("td:eq(6)").attr("rowspan", count);
                                                     lastFirstRow.find("td:eq(7)").attr("rowspan", count);
-                                                }
-                                            });
+                                            }
                                         });
-                                    </script>
-                                </table>
+                                        
+                                        $("#tbody2 tr").each(function() {
+                                            var restTimeCell = $(this).find("td:eq(4)");
+                                            var restTimeValue = restTimeCell.text();
+                                            
+                                            if (restTimeValue.startsWith("0 hrs") && !restTimeCell.is(':visible')) {
+                                                $(this).prevAll("tr:has(td[rowspan]):first").find("td:eq(4)").text(restTimeValue);
+                                            }
+                                        });
+                                    });
+                                </script>
                             </div>
                             
+                            <!-- Attendance And Rest Time -->
                             <div class="table-responsive mb-3">
                                 <label for="" class="fw-bold mb-3">Attendance And Rest Time</label>
                                 <table id="myTable" class="table table-bordered border-dark">
