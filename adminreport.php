@@ -490,7 +490,7 @@
                                             var totalTravelMinutes = toMinutes(totalTravelTimeText);
                                             var restMinutes = toMinutes(restTimeText);
                                             
-                                            if ((totalWorkingMinutes + totalTravelMinutes - restMinutes) < 480) {
+                                            if (((totalWorkingMinutes + totalTravelMinutes) - restMinutes) < 480) {
                                                 $this.find("td").css("color", "red");
                                             }
                                         });
