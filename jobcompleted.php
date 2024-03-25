@@ -265,31 +265,194 @@
                 <script src="assets/js/main.js"></script>
                 
                 <script>
-                    $(document).ready(function(){
+                    $(document).ready(function() {
                         let table = $('#completeJobTable').DataTable({
                             responsive:true,
-                            language: {search:"_INPUT_",
-                                       searchPlaceholder:"Search"},
+                            language: {search:"_INPUT_", searchPlaceholder:"Search"},
                             pagingType: 'full_numbers'
                         });
                         
+                        let currentJobId = null;
+                        
+                        $('#completeJobTable tbody').on('click', '.viewJobBtn', function() {
+                            currentJobId = $(this).data('jobregister-id');
+                            console.log("jobregister_id:", currentJobId);
+                            
+                            var modal = $('#JobModal');
+                            
+                            modal.modal('show');
+                            
+                            var firstTab = $('#modalTabs .tab-switch').first();
+                            
+                            activateTab(firstTab.data('bs-target'));
+                        });
+                        
+                        $('.tab-switch').click(function() {
+                            var target = $(this).data('bs-target');
+                            
+                            activateTab(target);
+                        });
+                        
+                        function activateTab(tabId) {
+                            $('.tab-switch').removeClass('active');
+                            $('.tab-switch[data-bs-target="' + tabId + '"]').addClass('active');
+                            $('.tab-pane').removeClass('show active');
+                            
+                            $(tabId).addClass('show active');
+                            
+                            if(tabId === '#tab1') {
+                                loadJobDetails(currentJobId);
+                            }
+                            
+                            else if(tabId === '#tab2') {
+                                loadJobAssign(currentJobId);
+                            }
+
+                            else if(tabId === '#tab3') {
+                                loadJobUpdate(currentJobId);
+                            }
+
+                            else if(tabId === '#tab4') {
+                                loadJobAccessories(currentJobId);
+                            }
+
+                            else if(tabId === '#tab5') {
+                                loadJobPhoto(currentJobId);
+                            }
+
+                            else if(tabId === '#tab6') {
+                                loadJobVideo(currentJobId);
+                            }
+                        }
+                        
+                        // Job Info Tab
+                        function loadJobDetails(jobId) {
+                            $.ajax({
+                                url: 'AdminCompletedJobInfo.php',
+                                type: 'POST',
+                                data: { jobregister_id: jobId },
+                                
+                                success: function(response) {
+                                    $('.completed-details').html(response);
+                                },
+                                
+                                error: function(xhr, status, error) {
+                                    console.log("An error occurred:", error);
+                                    
+                                    $('.completed-details').html("An error occurred while fetching data.");
+                                }
+                            });
+                        }
+                        
+                        // Job Assign Tab
+                        function loadJobAssign(jobId) {
+                            $.ajax({
+                                url: 'jobassignAdminCOMPLETED.php',
+                                type: 'POST',
+                                data: { jobregister_id: jobId },
+                                
+                                success: function(response) {
+                                    $('.completed-JobAssign').html(response);
+                                },
+                                
+                                error: function(xhr, status, error) {
+                                    console.log("An error occurred:", error);
+                                    
+                                    $('.completed-JobAssign').html("An error occurred while fetching data.");
+                                }
+                            });
+                        }
+
+                        // Job Update Tab
+                        function loadJobUpdate(jobId) {
+                            $.ajax({
+                                url: 'ajaxtechupdatecomplete.php',
+                                type: 'POST',
+                                data: { jobregister_id: jobId },
+                                
+                                success: function(response) {
+                                    $('.completed-update').html(response);
+                                },
+                                
+                                error: function(xhr, status, error) {
+                                    console.log("An error occurred:", error);
+                                    
+                                    $('.completed-update').html("An error occurred while fetching data.");
+                                }
+                            });
+                        }
+
+                        // Job Accessories Tab
+                        function loadJobAccessories(jobId) {
+                            $.ajax({
+                                url: 'ajaxtabaccessories.php',
+                                type: 'POST',
+                                data: { jobregister_id: jobId },
+                                
+                                success: function(response) {
+                                    $('.completed-accessories').html(response);
+                                },
+                                
+                                error: function(xhr, status, error) {
+                                    console.log("An error occurred:", error);
+                                    
+                                    $('.completed-accessories').html("An error occurred while fetching data.");
+                                }
+                            });
+                        }
+
+                        // Job Photo Tab
+                        function loadJobPhoto(jobId) {
+                            $.ajax({
+                                url: 'ajaxtechphtoupdtcomplete.php',
+                                type: 'POST',
+                                data: { jobregister_id: jobId },
+                                
+                                success: function(response) {
+                                    $('.completed-photos').html(response);
+                                },
+                                
+                                error: function(xhr, status, error) {
+                                    console.log("An error occurred:", error);
+                                    
+                                    $('.completed-photos').html("An error occurred while fetching data.");
+                                }
+                            });
+                        }
+
+                        // Job Video Tab
+                        function loadJobVideo(jobId) {
+                            $.ajax({
+                                url: 'ajaxtechvideoupdtcomplete.php',
+                                type: 'POST',
+                                data: { jobregister_id: jobId },
+                                
+                                success: function(response) {
+                                    $('.completed-video').html(response);
+                                },
+                                
+                                error: function(xhr, status, error) {
+                                    console.log("An error occurred:", error);
+                                    
+                                    $('.completed-video').html("An error occurred while fetching data.");
+                                }
+                            });
+                        }
+                        
                         let minDate, maxDate;
- 
+                        
                         DataTable.ext.search.push(function (settings, data, dataIndex) {
                             let min = minDate.val();
                             let max = maxDate.val();
                             let date = new Date(data[4]);
-                        
-                            if ((min === null && max === null) ||
-                                (min === null && date <= max) ||
-                                (min <= date && max === null) ||
-                                (min <= date && date <= max)) {
-                                    return true;
+                            
+                            if ((min === null && max === null) || (min === null && date <= max) || (min <= date && max === null) || (min <= date && date <= max)) {
+                                return true;
                             }
                             
                             return false;
                         });
-
+                        
                         minDate = new DateTime('#min', {
                             format: 'DD/MM/YYYY'
                         });
@@ -304,261 +467,98 @@
                     });
                 </script>
 
-                <!-- PopUp Modal -->
-                <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Popup Modal -->
+                <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="tab-buttons d-flex flex-wrap" role="tablist">
-                                        <button class="btn tab-button active flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobInfo" aria-controls="JobInfo" aria-selected="true" id="showjobinfo">Job Info</button>
-                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#JobAssign" aria-controls="JobAssign" aria-selected="false" id="showjobassign">Job Assign</button>
-                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#Update" aria-controls="Update" aria-selected="false" id="showUpdate">Update</button>
-                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#Accessory" aria-controls="Accessory" aria-selected="false" id="showaccessory">Accessory</button>
-                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#Photo" aria-controls="Photo" aria-selected="false" id="showPhoto">Photo</button>
-                                        <button class="btn tab-button flex-grow-1" style="border:none; font-weight: bold;" data-bs-target="#Video" aria-controls="Video" aria-selected="false" id="showVideo">Video</button>
-                                    </div>
+                                <!-- Tab Buttons -->
+                                <div class="d-flex flex-wrap" id="modalTabs">
+                                    <button class="btn tab-switch flex-grow-1 flex-md-grow-0" data-bs-target="#tab1" style="border:none; font-weight: bold; white-space: nowrap;">Job Info</button>
+                                    <button class="btn tab-switch flex-grow-1 flex-md-grow-0" data-bs-target="#tab2" style="border:none; font-weight: bold; white-space: nowrap;">Job Assign</button>
+                                    <button class="btn tab-switch flex-grow-1 flex-md-grow-0" data-bs-target="#tab3" style="border:none; font-weight: bold;">Update</button>
+                                    <button class="btn tab-switch flex-grow-1 flex-md-grow-0" data-bs-target="#tab4" style="border: none; font-weight:bold;">Accessories</button>
+                                    <button class="btn tab-switch flex-grow-1 flex-md-grow-0" data-bs-target="#tab5" style="border: none; font-weight:bold;">Photo</button>
+                                    <button class="btn tab-switch flex-grow-1 flex-md-grow-0" data-bs-target="#tab6" style="border: none; font-weight:bold;">Video</button>
                                 </div>
+
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body">
-                                <div class="tab-content mt-3">
+                                <!-- Tab Content -->
+                                <div class="tab-content">
                                     <!-- Job info -->
-                                    <div class="tab-pane show active" id="JobInfo" role="tabpanel" aria-labelledby="JobInfo" style="color: black;">
-                                        <form id="showjobinfo" action="AdminCompletedJobInfo.php" method="post">
-                                            <div class="completed-details">
+                                    <div class="tab-pane fade show active" id="tab1" style="color: black;">
+                                        <div class="container" id="tab1Content">
+                                            <form id="showjobinfo" action="AdminCompletedJobInfo.php" method="post">
+                                                <div class="completed-details">
 
-                                            </div>
-                                        </form>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
 
-                                    <script type='text/javascript'>
-                                        $(document).ready(function() {
-                                            $('.viewJobBtn').click(function() {
-                                                var jobregister_id = $(this).data('jobregister-id');
-                                                
-                                                $.ajax({
-                                                    url: 'AdminCompletedJobInfo.php',
-                                                    type: 'post',
-                                                    data: { jobregister_id: jobregister_id },
-                                                    success: function(response) {
-                                                        $('.completed-details').html(response);
-
-                                                    },
-                                                    
-                                                    error: function(xhr, status, error) {
-                                                        console.log("An error occurred:", error);
-                                                        $('.completed-details').html("An error occurred while fetching data.");
-                                                    }
-                                                });
-                                            });
-                                        });
-                                    </script>
-                                    
                                     <!-- Job Assign -->
-                                    <div class="tab-pane" id="JobAssign" role="tabpanel" aria-labelledby="JobAssign" style="color: black;">
-                                        <form id="showjobassign" action="jobassignAdminCOMPLETED.php" method="post">
-                                            <div class="completed-JobAssign">
+                                    <div class="tab-pane fade" id="tab2" style="color: black;">
+                                        <div class="container" id="tab1Content">
+                                            <form id="showjobassign" action="jobassignAdminCOMPLETED.php" method="post">
+                                                <div class="completed-JobAssign">
 
-                                            </div>
-                                        </form>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-
-                                    <script type='text/javascript'>
-                                        $(document).ready(function() {
-                                            $('.viewJobBtn').click(function() {
-                                                var jobregister_id = $(this).data('jobregister-id');
-                                                
-                                                $.ajax({
-                                                    url: 'jobassignAdminCOMPLETED.php',
-                                                    type: 'post',
-                                                    data: { jobregister_id: jobregister_id },
-                                                    success: function(response) {
-                                                        $('.completed-JobAssign').html(response);
-
-                                                    },
-                                                    
-                                                    error: function(xhr, status, error) {
-                                                        console.log("An error occurred:", error);
-                                                        $('.completed-JobAssign').html("An error occurred while fetching data.");
-                                                    }
-                                                });
-                                            });
-                                        });
-                                    </script>
 
                                     <!-- Update -->
-                                    <div class="tab-pane" id="Update" role="tabpanel" aria-labelledby="Update" style="color: black;">
-                                        <form id="showUpdate" action="ajaxtechupdatecomplete.php" method="post">
-                                            <div class="completed-update">
+                                    <div class="tab-pane fade" id="tab3" style="color: black;">
+                                        <div class="container" id="tab3Content">
+                                            <form id="showUpdate" action="ajaxtechupdatecomplete.php" method="post">
+                                                <div class="completed-update">
 
-                                            </div>
-                                        </form>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-
-                                    <script type='text/javascript'>
-                                        $(document).ready(function() {
-                                            $('.viewJobBtn').click(function() {
-                                                var jobregister_id = $(this).data('jobregister-id');
-                                                
-                                                $.ajax({
-                                                    url: 'ajaxtechupdatecomplete.php',
-                                                    type: 'post',
-                                                    data: { jobregister_id: jobregister_id },
-                                                    success: function(response) {
-                                                        $('.completed-update').html(response);
-                                                    },
-                                                    
-                                                    error: function(xhr, status, error) {
-                                                        console.log("An error occurred:", error);
-                                                        $('.completed-update').html("An error occurred while fetching data.");
-                                                    }
-                                                });
-                                            });
-                                        });
-                                    </script>
 
                                     <!-- Accessories -->
-                                    <div class="tab-pane" id="Accessory" role="tabpanel" aria-labelledby="Accessory" style="color: black;">
-                                        <form id="showaccessory" action="ajaxtabaccessories.php" method="post">
-                                            <div class="completed-accessories">
+                                    <div class="tab-pane fade" id="tab4" style="color: black;">
+                                        <div class="container" id="tab4Content">
+                                            <form id="showaccessory" action="ajaxtabaccessories.php" method="post">
+                                                <div class="completed-accessories">
 
-                                            </div>
-                                        </form>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-
-                                    <script type='text/javascript'>
-                                        $(document).ready(function() {
-                                            $('.viewJobBtn').click(function() {
-                                                var jobregister_id = $(this).data('jobregister-id');
-                                                
-                                                $.ajax({
-                                                    url: 'ajaxtabaccessories.php',
-                                                    type: 'post',
-                                                    data: { jobregister_id: jobregister_id },
-                                                    success: function(response) {
-                                                        $('.completed-accessories').html(response);
-                                                    },
-                                                    
-                                                    error: function(xhr, status, error) {
-                                                        console.log("An error occurred:", error);
-                                                        $('.completed-accessories').html("An error occurred while fetching data.");
-                                                    }
-                                                });
-                                            });
-                                        });
-                                    </script>
 
                                     <!-- Photo -->
-                                    <div class="tab-pane" id="Photo" role="tabpanel" aria-labelledby="Photo" style="color: black;">
-                                        <form id="showPhoto" action="ajaxtechphtoupdtcomplete.php" method="post">
-                                            <div class="completed-photos">
+                                    <div class="tab-pane fade" id="tab5" style="color: black;">
+                                        <div class="container" id="tab5Content">
+                                            <form id="showPhoto" action="ajaxtechphtoupdtcomplete.php" method="post">
+                                                <div class="completed-photos">
 
-                                            </div>
-                                        </form>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-
-                                    <script type='text/javascript'>
-                                        $(document).ready(function() {
-                                            $('.viewJobBtn').click(function() {
-                                                var jobregister_id = $(this).data('jobregister-id');
-                                                
-                                                $.ajax({
-                                                    url: 'ajaxtechphtoupdtcomplete.php',
-                                                    type: 'post',
-                                                    data: { jobregister_id: jobregister_id },
-                                                    success: function(response) {
-                                                        $('.completed-photos').html(response);
-                                                    },
-                                                    
-                                                    error: function(xhr, status, error) {
-                                                        console.log("An error occurred:", error);
-                                                        $('.completed-photos').html("An error occurred while fetching data.");
-                                                    }
-                                                });
-                                            });
-                                        });
-                                    </script>
 
                                     <!-- Video -->
-                                    <div class="tab-pane" id="Video" role="tabpanel" aria-labelledby="Video" style="color: black;">
-                                        <form id="showVideo"action="ajaxtechvideoupdtcomplete.php" method="post">
-                                            <div class="completed-video">
+                                    <div class="tab-pane fade" id="tab6" style="color: black;">
+                                        <div class="container" id="tab6Content">
+                                            <form id="showVideo"action="ajaxtechvideoupdtcomplete.php" method="post">
+                                                <div class="completed-video">
 
-                                            </div>
-                                        </form>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-
-                                    <script type='text/javascript'>
-                                        $(document).ready(function() {
-                                            $('.viewJobBtn').click(function() {
-                                                var jobregister_id = $(this).data('jobregister-id');
-                                                
-                                                $.ajax({
-                                                    url: 'ajaxtechvideoupdtcomplete.php',
-                                                    type: 'post',
-                                                    data: { jobregister_id: jobregister_id },
-                                                    success: function(response) {
-                                                        $('.completed-video').html(response);
-                                                    },
-                                                    
-                                                    error: function(xhr, status, error) {
-                                                        console.log("An error occurred:", error);
-                                                        $('.completed-video').html("An error occurred while fetching data.");
-                                                    }
-                                                });
-                                            });
-                                        });
-                                    </script>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const tabButtons = document.querySelectorAll('.tab-buttons .tab-button');
-                        const viewJobButtons = document.querySelectorAll('.viewJobBtn');
-                        
-                        tabButtons.forEach((button) => {
-                            button.addEventListener('click', (event) => {
-                                event.preventDefault();
-                                const targetTab = button.getAttribute('data-bs-target');
-                                
-                                document.querySelectorAll('.tab-pane').forEach((pane) => {
-                                    pane.classList.remove('show', 'active');
-                                });
-                                
-                                document.querySelector(targetTab).classList.add('show', 'active');
-                                
-                                tabButtons.forEach((btn) => {
-                                    btn.classList.remove('active');
-                                });
-                                
-                                button.classList.add('active');
-                            });
-                        });
-                        
-                        viewJobButtons.forEach((button) => {
-                            button.addEventListener('click', (event) => {
-                                event.preventDefault();
-                                const jobregisterId = button.getAttribute('data-jobregister-id');
-                                const modal = document.querySelector('#JobModal');
-                                const jobRegisterInput = modal.querySelector('#jobregister_id');
-                                
-                                if (jobRegisterInput) {
-                                    jobRegisterInput.value = jobregisterId;
-                                }
-                                
-                                const bootstrapModal = new bootstrap.Modal(modal);
-                                bootstrapModal.show();
-                            });
-                        });
-                    });
-                </script>
             </section>
         </main>        
     </body>
-    </html>
+</html>
