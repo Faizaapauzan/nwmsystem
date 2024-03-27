@@ -476,14 +476,15 @@
                                     $(document).ready(function() {
                                         $("#myTable2 tbody tr").each(function() {
                                             var $this = $(this);
-                                            var totalWorkingTimeText = $this.find("td:nth-last-child(3)").text();
-                                            var totalTravelTimeText = $this.find("td:nth-last-child(1)").text();
+
+                                            var totalWorkingTimeText = $this.find("td:nth-last-child(2)").text();
+                                            var totalTravelTimeText = $this.find("td:last-child").text();
                                             var restTimeText = $this.find("td:nth-child(5)").text();
                                             
                                             function toMinutes(timeText) {
                                                 var parts = timeText.match(/(\d+)\s*hrs\s*(\d+)\s*mins/);
                                                 
-                                                return parts ? (parseInt(parts[1]) * 60 + parseInt(parts[2])) : 0;
+                                                return parts ? (parseInt(parts[1], 10) * 60 + parseInt(parts[2], 10)) : 0;
                                             }
                                             
                                             var totalWorkingMinutes = toMinutes(totalWorkingTimeText);
