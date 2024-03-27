@@ -409,7 +409,7 @@
                                                 $restMinutes = $restTime ? ($restTime->h * 60 + $restTime->i) : 0;
                                                 $travelMinutes = $travelTime ? ($travelTime->h * 60 + $travelTime->i) : 0;
  
-                                                $technicians[$tech_username]['total_working_time'] += $workingMinutes;
+                                                $technicians[$tech_username]['total_working_time'] += $workingMinutes - $restMinutes;
                                                 $technicians[$tech_username]['total_travel_time'] += $travelMinutes;
                                                 
                                                 $technicians[$tech_username]['details'][] = ['place' => $job['customer_name'],
@@ -479,7 +479,6 @@
 
                                             var totalWorkingTimeText = $this.find("td:nth-last-child(2)").text();
                                             var totalTravelTimeText = $this.find("td:last-child").text();
-                                            var restTimeText = $this.find("td:nth-child(5)").text();
                                             
                                             function toMinutes(timeText) {
                                                 var parts = timeText.match(/(\d+)\s*hrs\s*(\d+)\s*mins/);
@@ -489,9 +488,8 @@
                                             
                                             var totalWorkingMinutes = toMinutes(totalWorkingTimeText);
                                             var totalTravelMinutes = toMinutes(totalTravelTimeText);
-                                            var restMinutes = toMinutes(restTimeText);
                                             
-                                            if (((totalWorkingMinutes + totalTravelMinutes) - restMinutes) < 480) {
+                                            if ((totalWorkingMinutes + totalTravelMinutes) < 480) {
                                                 $this.find("td").css("color", "red");
                                             }
                                         });
