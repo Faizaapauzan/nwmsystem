@@ -224,6 +224,7 @@
                                     <div class="nav__dropdown-content">
                                         <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
                                         <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                        <!-- <a href="technicianJobDaily.php" class="nav__dropdown-item">Daily Job</a> -->
                                     </div>
                                 </div>
                             </div>
@@ -282,19 +283,19 @@
                                                     OR
                                                 (accessories_required IS NULL AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
                                                     OR
-                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                (accessories_required = 'No' AND job_status = '' AND job_assign = '' AND job_cancel = '')
                                                     OR
-                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                (accessories_required = 'No' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
                                                     OR
-                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
+                                                (accessories_required = 'No' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
                                                     OR
-                                                (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
+                                                (accessories_required = 'No' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
                                                     OR
-                                                (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                (accessories_required = 'No' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
                                                     OR
-                                                (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
+                                                (accessories_required = 'No' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
                                                     OR
-                                                (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                (accessories_required = 'No' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
                                                     OR
                                                 (staff_position = 'Storekeeper' AND job_status = 'Ready' AND job_cancel = '')
                                                     OR
@@ -322,21 +323,21 @@
                                 
                                 include 'dbconnect.php';
                                 
-                                $results = $conn->query("SELECT * FROM job_register WHERE (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
+                                $results = $conn->query("SELECT * FROM job_register WHERE (accessories_required = 'No' AND job_status IS NULL AND job_assign IS NULL AND job_cancel = '')
                                                             OR
-                                                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
+                                                        (accessories_required = 'No' AND job_status IS NULL AND job_assign IS NULL AND job_cancel IS NULL)
                                                             OR
-                                                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
+                                                        (accessories_required = 'No' AND job_status IS NULL AND job_assign = '' AND job_cancel IS NULL)
                                                             OR
-                                                        (accessories_required = 'NO' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
+                                                        (accessories_required = 'No' AND job_status IS NULL AND job_assign = '' AND job_cancel = '')
                                                             OR
-                                                        (accessories_required = 'NO' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
+                                                        (accessories_required = 'No' AND job_status = '' AND job_assign IS NULL AND job_cancel = '')
                                                             OR
-                                                        (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel = '')
+                                                        (accessories_required = 'No' AND job_status = '' AND job_assign = '' AND job_cancel = '')
                                                             OR
-                                                        (accessories_required = 'NO' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
+                                                        (accessories_required = 'No' AND job_status = '' AND job_assign = '' AND job_cancel IS NULL)
                                                             OR
-                                                        (accessories_required = 'NO' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
+                                                        (accessories_required = 'No' AND job_assign = '' AND job_status = 'Doing' AND job_cancel IS NULL)
                                                             OR
                                                         (accessories_required = '' AND job_status = '' AND job_assign = '' AND job_cancel = '')
                                                             OR
@@ -1851,7 +1852,7 @@
 
                                                     <div class="col-md-6 mb-3">
                                                         <label for="" class="fw-bold">Job Status</label>
-                                                        <select type="text" id="job_status" name="job_status" class="form-select" onchange="myFunction()">
+                                                        <select id="job_status" name="job_status" class="form-select" onchange="myFunction()">
                                                             <option value=''></option>
                                                             <option value='Doing'>Doing</option>
                                                             <option value='Pending'>Pending</option>
@@ -1923,8 +1924,8 @@
                                                         <label for="" class="fw-bold">Accessory Require</label>
                                                         <select name="accessories_required" id="accessories_required" class="form-select" onchange="accessoryFor()">
                                                             <option value=''></option>
-                                                            <option value='YES'>YES</option>
-                                                            <option value='NO'>NO</option>
+                                                            <option value='Yes'>Yes</option>
+                                                            <option value='No'>No</option>
                                                         </select>
                                                     </div>
 
@@ -1943,7 +1944,7 @@
                                                             var accReq = document.getElementById("accessories_required").value;
                                                             var forDiv = document.getElementById("accFor");
                                                             
-                                                            if (accReq === "YES") {
+                                                            if (accReq === "Yes") {
                                                                 forDiv.style.display = "block";
                                                             }
                                                             
@@ -1953,7 +1954,6 @@
                                                         }
                                                         
                                                         accessoryFor();
-                                                        
                                                     </script>
                                                     <!-- Accessory For -->
                                                     
@@ -2729,13 +2729,14 @@
                                     $('#brand_id').val(res.data.brand_id);
                                     $('#machine_brand').val(res.data.machine_brand);
                                     $('#type_id').val(res.data.type_id);
+                                    $('#job_status').val(res.data.job_status);
                                     $('#assign_JobInfo').val(res.data.job_assign);
                                     $('#techRankInfo').val(res.data.technician_rank);
                                     $('#staffPosInfo').val(res.data.staff_position);
-                                    $('#job_cancel').val(res.data.job_cancel).trigger('change');
+                                    $('#job_cancel').val(res.data.job_cancel);
                                     $('#inputreason').val(res.data.reason);
                                     $('#accessories_required').val(res.data.accessories_required).trigger('change');
-                                    $('#accessories_for').val(res.data.accessories_for).trigger('change');
+                                    $('#accessories_for').val(res.data.accessories_for);
 
                                     initializeSelect2(['#job_name', '#customer_name', '#serialnumber', '#brand_id', '#machine_type', '#assign_JobInfo']);
 
