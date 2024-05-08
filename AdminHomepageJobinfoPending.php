@@ -29,19 +29,36 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="" class="fw-bold">Job Order Number</label>
+                    <label for="" class="form-label fw-bold">Job Order Number</label>
                     <div class="input-group">
                         <input type="text" name="job_order_number" id="job_order_number" class="form-control" value="<?php echo $row['job_order_number']?>">
-                        <button type="button" class="btn" style="color: white; background-color: #081d45; border:none; width: fit-content;" onclick="buttonClick();">Click</button>
+                        <button type="button" class="btn" style="color: white; background-color: #081d45;" id="button-addon2" onclick="buttonClick()">Click</button>
                     </div>
                 </div>
-
+                
                 <script>
-                    var i = 0;
-                    var jobordernumber = document.getElementById('job_order_number').value;
-
+                    var i = 1;
+                    var jobordernumber2;
+                    
                     function buttonClick() {
-                        document.getElementById('job_order_number').value = jobordernumber + '-' + i;
+                        if (i == 1) {
+                            var jobordernumber = document.getElementById('job_order_number').value;
+                                
+                                jobordernumber2 = jobordernumber;
+                        }
+                        
+                        var parts = jobordernumber2.split('-');
+                        var newNumber = parts[parts.length-1] + "-" + i;
+                        var newJobOrderNumber = parts[0];
+                        
+                        for (var j = 1; j < parts.length-1; j++){
+                            newJobOrderNumber = newJobOrderNumber + "-" + parts[j];
+                        }
+                        
+                        newJobOrderNumber = newJobOrderNumber + "-" + newNumber;
+                        
+                        document.getElementById('job_order_number').value = newJobOrderNumber;
+                        
                         i++;
                     }
                 </script>
@@ -466,7 +483,7 @@
                                 $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
                                 
                                 $.each(response, function(index, value) {
-                                    $('#serialnumber').append('<option value="' + value.machine_serialNumber + '">' + value.machine_serialNumber + ' - ' + value.machine_custName + '</option>');
+                                    $('#serialnumber').append('<option value="' + value.machine_serialNumber + '">' + value.machine_serialNumber + '</option>');
                                 });
                                 
                                 getSerialNumber();  
@@ -570,7 +587,7 @@
                             $('#selecteTypeId').val()
                             $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
                             $.each(response, function(index, value) {
-                                $('#serialnumber').append('<option value="' + value.machine_serialNumber + '">' + value.machine_serialNumber + ' - ' + value.machine_custName + '</option>');
+                                $('#serialnumber').append('<option value="' + value.machine_serialNumber + '">' + value.machine_serialNumber + '</option>');
                             });
                         }
                     });
@@ -674,7 +691,7 @@
                 var type_id = $('select[name=type_id]').val();
                 var machine_brand = $('input[name=machine_brand]').val();
                 var brand_id = $('input[name=brand_id]').val();
-                var serialnumber = $('input[name=serialnumber]').val();
+                var serialnumber = $('select[name=serialnumber]').val();
                 var accessories_required = $('select[name=accessories_required]').val();
                 var jobregistercreated_by = $('input[name=jobregistercreated_by]').val();
                 var jobregisterlastmodify_by = $('input[name=jobregisterlastmodify_by]').val();
