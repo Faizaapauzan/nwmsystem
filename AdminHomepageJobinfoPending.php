@@ -29,37 +29,21 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="" class="form-label fw-bold">Job Order Number</label>
+                    <label for="job_order_number" class="form-label fw-bold">Job Order Number</label>
                     <div class="input-group">
                         <input type="text" name="job_order_number" id="job_order_number" class="form-control" value="<?php echo $row['job_order_number']?>">
-                        <button type="button" class="btn" style="color: white; background-color: #081d45;" id="button-addon2" onclick="buttonClick()">Click</button>
+                        <button type="button" class="btn" style="color: white; background-color: #081d45;" id="button-addon2" onclick="incrementJobOrderNumber()">Click</button>
                     </div>
                 </div>
                 
                 <script>
-                    var i = 1;
-                    var jobordernumber2;
-                    
-                    function buttonClick() {
-                        if (i == 1) {
-                            var jobordernumber = document.getElementById('job_order_number').value;
-                                
-                                jobordernumber2 = jobordernumber;
-                        }
+                    let baseJobOrderNumber = document.getElementById('job_order_number').value;
+                    let incrementIndex = 1;
+                
+                    function incrementJobOrderNumber() {
+                        document.getElementById('job_order_number').value = baseJobOrderNumber + "-" + incrementIndex;
                         
-                        var parts = jobordernumber2.split('-');
-                        var newNumber = parts[parts.length-1] + "-" + i;
-                        var newJobOrderNumber = parts[0];
-                        
-                        for (var j = 1; j < parts.length-1; j++){
-                            newJobOrderNumber = newJobOrderNumber + "-" + parts[j];
-                        }
-                        
-                        newJobOrderNumber = newJobOrderNumber + "-" + newNumber;
-                        
-                        document.getElementById('job_order_number').value = newJobOrderNumber;
-                        
-                        i++;
+                        incrementIndex++;
                     }
                 </script>
 
