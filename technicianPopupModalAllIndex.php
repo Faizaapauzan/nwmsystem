@@ -188,9 +188,9 @@
         $machine_code = $_POST['machine_code'];
         $serialnumber = $_POST['serialnumber'];
         
-        $brand_id = $_POST['brand_id'] ?? null;
-        $type_id = $_POST['type_id'] ?? null;
-        $machine_id = $_POST['machine_id'] ?? null;
+        $machine_id = !empty($_POST['machine_id']) ? $_POST['machine_id'] : null;
+        $type_id = !empty($_POST['type_id']) ? $_POST['type_id'] : null;
+        $brand_id = !empty($_POST['brand_id']) ? $_POST['brand_id'] : null;
     
         $query = "UPDATE job_register SET 
                          machine_brand=?, 
@@ -819,11 +819,8 @@
         $cust_phone1 = $_POST['cust_phone1'];
         $cust_phone2 = $_POST['cust_phone2'];
         $machine_brand = $_POST['machine_brand'];
-        $brand_id = $_POST['brand_id'];
         $machine_type = $_POST['machine_type'];
-        $type_id = $_POST['type_id'];
         $machine_name = $_POST['machine_name'];
-        $machine_id = $_POST['machine_id'];
         $machine_code = $_POST['machine_code'];
         $serialnumber = $_POST['serialnumber'];
         $job_assign = $_POST['job_assign'];
@@ -831,6 +828,10 @@
         $staff_position = $_POST['staff_position'];
         $jobregistercreated_by = $_POST['jobregistercreated_by'];
         $jobregisterlastmodify_by = $_POST['jobregisterlastmodify_by'];
+
+        $machine_id = !empty($_POST['machine_id']) ? $_POST['machine_id'] : null;
+        $type_id = !empty($_POST['type_id']) ? $_POST['type_id'] : null;
+        $brand_id = !empty($_POST['brand_id']) ? $_POST['brand_id'] : null;
         
         $query = "INSERT INTO job_register (today_date, accessories_required, accessories_for, support, job_priority,
                                             job_order_number, job_name, job_code, job_description, requested_date,
@@ -903,11 +904,8 @@
         $cust_phone1 = $_POST['cust_phone1'];
         $cust_phone2 = $_POST['cust_phone2'];
         $machine_brand = $_POST['machine_brand'];
-        $brand_id = $_POST['brand_id'];
         $machine_type = $_POST['machine_type'];
-        $type_id = $_POST['type_id'];
         $machine_name = $_POST['machine_name'];
-        $machine_id = $_POST['machine_id'];
         $machine_code = $_POST['machine_code'];
         $serialnumber = $_POST['serialnumber'];
         $job_assign = $_POST['job_assign'];
@@ -915,6 +913,10 @@
         $staff_position = $_POST['staff_position'];
         $jobregistercreated_by = $_POST['jobregistercreated_by'];
         $jobregisterlastmodify_by = $_POST['jobregisterlastmodify_by'];
+
+        $machine_id = !empty($_POST['machine_id']) ? $_POST['machine_id'] : null;
+        $type_id = !empty($_POST['type_id']) ? $_POST['type_id'] : null;
+        $brand_id = !empty($_POST['brand_id']) ? $_POST['brand_id'] : null;
         
         $query = "INSERT INTO job_register (today_date, accessories_required, accessories_for, reason, job_priority,
                                             job_order_number, job_name, job_code, job_description, requested_date,

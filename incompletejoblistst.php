@@ -11,6 +11,8 @@
         
         $row = mysqli_fetch_assoc($query_run);
         $username = $row["username"];
+
+        echo "<script>var usernameValue = '" . $username . "';</script>";
     }
     
 ?>
@@ -106,12 +108,12 @@
 							$updatedate = substr($jobregisterlastmodify_at,0,10);
 							$row['updatedate'] = $updatedate;
                     ?>
-                    <div class="Job card mb-3" data-bs-toggle="modal" data-bs-target="#incompleteJobModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>">
+                    <div class="card mb-3">
                         <div class="card-header">
                             <h6 class="card-title fw-bold m-2"><?php echo $row['customer_name'] ?> [<?php echo $row['customer_grade'] ?>]</h6>
                         </div>
 
-                        <div class="card-body">
+                        <div class="Job card-body" data-bs-toggle="modal" data-bs-target="#incompleteJobModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>">
                             <ul>
                                 <li><?php echo $row['job_priority'] ?></li>
                                 <li><?php echo $row['job_order_number'] ?></li>
@@ -137,6 +139,10 @@
                                 <h6 class="fw-bold text-end" style="font-size: 0.8rem;"><?php echo $row['job_assign'] ?></h6>
                                 <h6 class="fw-bold text-center" style="font-size: 0.8rem;"><?php echo $row['updatedate'] ?></h6>
                             </div>
+                        </div>
+
+                        <div class="JobDuplicate card-footer" style="background-color: #b11226;" data-bs-toggle="modal" data-bs-target="#DuplicatePopupModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>">
+                            <h6 class="fw-bold" style="color: white; text-align: center;">Duplicate</h6>
                         </div>
                     </div>
                     <?php } ?>
@@ -530,6 +536,314 @@
                 });
             });
         </script>
+
+        <!-- Duplicate Popup Modal -->
+        <div class="modal fade" id="DuplicatePopupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Duplicate</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="container">
+                            <form id="jobDuplicateForm">
+                                <input type="hidden" name="today_date" id="todayDate_Duplicate">
+                                <input type="hidden" name="accessories_required" id="accsReq_Duplicate">
+                                <input type="hidden" name="accessories_for" id="accsFor_Duplicate">
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Priority</label>
+                                        <input type="text" name="job_priority" id="jobPriority_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Order Number</label>
+                                        <input type="text" name="job_order_number" id="JON_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Name</label>
+                                        <input type="text" name="job_name" id="jobName_Duplicate" class="form-control">
+                                        <input type="hidden" name="job_code" id="jobCode_Duplicate">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Description</label>
+                                        <input type="text" name="job_description" id="jobDesc_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Requested Date</label>
+                                        <input type="text" name="requested_date" id="reqDate_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Delivery Date</label>
+                                        <input type="text" name="delivery_date" id="delDate_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Name</label>
+                                        <input type="text" name="customer_name" id="custName_Duplicate" class="form-control">
+                                        <input type="hidden" name="customer_code" id="custCode_Duplicate">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Address</label>
+                                        <input type="text" name="cust_address1" id="custAddr1_Duplicate" class="form-control">
+                                        <div class="d-grid d-flex gap-2 mt-2">
+                                            <input type="text" name="cust_address2" id="custAddr2_Duplicate" class="form-control">
+                                            <input type="text" name="cust_address3" id="custAddr3_Duplicate" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Grade</label>
+                                        <input type="text" name="customer_grade" id="custGrade_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Customer PIC</label>
+                                        <input type="text" name="customer_PIC" id="custPIC_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Customer Phone Number</label>
+                                        <div class="d-grid d-flex gap-2 mt-2">
+                                            <input type="text" name="cust_phone1" id="custPhone1_Duplicate" class="form-control">
+                                            <input type="text" name="cust_phone2" id="custPhone2_Duplicate" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Brand</label>
+                                        <input type="text" name="machine_brand" id="machBrand_Duplicate" class="form-control">
+                                        <input type="hidden" name="brand_id" id="brandID_Duplicate">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Type</label>
+                                        <input type="text" name="machine_type" id="machType_Duplicate" class="form-control">
+                                        <input type="hidden" name="type_id" id="typeID_Duplicate">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Machine Name</label>
+                                        <input type="text" name="machine_name" id="machName_Duplicate" class="form-control">
+                                        <input type="hidden" name="machine_id" id="machID_Duplicate">
+                                        <input type="hidden" name="machine_code" id="machCode_Duplicate">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Serial Number</label>
+                                        <input type="text" name="serialnumber" id="serNum_Duplicate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="" class="form-label fw-bold">Job Assign To:</label>
+                                       
+                                        <select name="job_assign" id="jobAss_Duplicate" onchange="GetAssignDuplicateDetails(this.value)" class="form-select">
+                                            <?php
+                                            
+                                                include "dbconnect.php";
+                                            
+                                                $records = mysqli_query($conn, "SELECT * FROM staff_register WHERE staff_position = 'Leader' AND tech_avai = '0' ORDER BY username ASC");
+                                            
+                                                echo "<option value=''>Select Technician</option>";
+                                            
+                                                if (mysqli_num_rows($records) > 0) {
+                                                    while ($data = mysqli_fetch_array($records)) {
+                                                        echo "<option value='" . $data['username'] . "'
+                                                                      data-rankDup='". $data['technician_rank'] ."'
+                                                                      data-positionDup='". $data['staff_position'] ."'>" . $data['username'] . "</option>";
+                                                    }
+                                                } 
+                                            
+                                                else {
+                                                    echo "No Record Found";
+                                                }
+                                            
+                                                mysqli_close($conn);
+                                            ?>
+                                        </select>
+
+                                        <script>
+                                            $(document).ready(function() {
+                                                $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                                                    $("#jobAss_Duplicate").select2({
+                                                        dropdownParent: $('#jobDuplicateForm'),
+                                                        matcher: oldMatcher(matchStart),
+                                                        theme: 'bootstrap-5'
+                                                    })
+                                                });
+                                                
+                                                function matchStart (term, text) {
+                                                    if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                                        return true;
+                                                    }
+                                                    
+                                                    return false;
+                                                }
+                                            });
+                                        </script>
+                                        
+                                        <script>
+                                            function GetAssignDuplicateDetails(value) {
+                                                var selectedOption = document.querySelector('#jobAss_Duplicate option[value="' + value + '"]');
+                                                var rankDup = selectedOption.getAttribute('data-rankDup');
+                                                var positionDup = selectedOption.getAttribute('data-positionDup');
+                            
+                                                document.querySelector('input[name="technician_rank"]').value = rankDup;
+                                                document.querySelector('input[name="staff_position"]').value = positionDup;
+                                            }
+                                        </script>
+
+                                        <input type="hidden" name="technician_rank" id="techRank_Duplicate">
+                                        <input type="hidden" name="staff_position" id="staffPos_Duplicate">
+                                    </div>
+
+                                    <input type="hidden" name="reason" id="reason_Duplicate">
+                                    <input type="hidden" name="jobregistercreated_by" id="jobRegBy_Duplicate">
+                                    <input type="hidden" name="jobregisterlastmodify_by" id="jobLastModBy_Duplicate">
+
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width:100%">Update</button>
+                                    </div>
+
+                                    <div id="duplicateJobMessage"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function fetchUsername() {
+                $('#jobregisterlastmodify_by').val(usernameValue);
+            }
+
+            // Get Duplicate Job Info Value
+            function fetchJobInfoDataDuplicate(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 404) {
+                            console.log(res.message);
+                        } 
+                        
+                        else if (res.status == 200) {
+                            $('#todayDate_Duplicate').val(new Date().toISOString().slice(0, 10));
+                            $('#accsReq_Duplicate').val(res.data.accessories_required);
+                            $('#accsFor_Duplicate').val(res.data.accessories_for);
+                            $('#jobPriority_Duplicate').val(res.data.job_priority);
+                            $('#JON_Duplicate').val(res.data.job_order_number + -1);
+                            $('#jobName_Duplicate').val(res.data.job_name);
+                            $('#jobCode_Duplicate').val(res.data.job_code);
+                            $('#jobDesc_Duplicate').val(res.data.job_description);
+                            $('#reqDate_Duplicate').val(res.data.requested_date);
+                            $('#delDate_Duplicate').val(res.data.delivery_date);
+                            $('#custName_Duplicate').val(res.data.customer_name);
+                            $('#custCode_Duplicate').val(res.data.customer_code);
+                            $('#custAddr1_Duplicate').val(res.data.cust_address1);
+                            $('#custAddr2_Duplicate').val(res.data.cust_address2);
+                            $('#custAddr3_Duplicate').val(res.data.cust_address3);
+                            $('#custGrade_Duplicate').val(res.data.customer_grade);
+                            $('#custPIC_Duplicate').val(res.data.customer_PIC);
+                            $('#custPhone1_Duplicate').val(res.data.cust_phone1);
+                            $('#custPhone2_Duplicate').val(res.data.cust_phone2);
+                            $('#machBrand_Duplicate').val(res.data.machine_brand);
+                            $('#brandID_Duplicate').val(res.data.brand_id);
+                            $('#machType_Duplicate').val(res.data.machine_type);
+                            $('#typeID_Duplicate').val(res.data.type_id);
+                            $('#machName_Duplicate').val(res.data.machine_name);
+                            $('#machID_Duplicate').val(res.data.machine_id);
+                            $('#machCode_Duplicate').val(res.data.machine_code);
+                            $('#serNum_Duplicate').val(res.data.serialnumber);
+                            $('#jobAss_Duplicate').val(res.data.job_assign).trigger('change');
+                            $('#techRank_Duplicate').val(res.data.technician_rank);
+                            $('#staffPos_Duplicate').val(res.data.staff_position);
+                            $('#reason_Duplicate').val(res.data.reason);
+                            $('#jobRegBy_Duplicate').val(usernameValue);
+                            $('#jobLastModBy_Duplicate').val(usernameValue);
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    }
+                });
+            }
+
+            // Fetch Duplicate Job info data
+            $(document).on('click', '.JobDuplicate', function () {
+                var jobregister_id = $(this).data('jobregisterid');
+                
+                fetchJobInfoDataDuplicate(jobregister_id)
+            
+                $('#DuplicatePopupModal').modal('show');
+            });
+
+            // Hide respond message
+            function hideElementById(elementId) {
+                document.getElementById(elementId).style.display = "none";
+            }
+
+            // Submit Duplicate form to database
+            $(document).on('submit', '#jobDuplicateForm', function (e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                formData.append("submit_jobDuplicate", true);
+
+                $.ajax({
+                    type: "POST",
+                    url: "technicianPopupModalAllIndex.php",
+                    data: formData,
+                    processData: false, 
+                    contentType: false,
+                    
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+
+                        if (res.status === 200) {
+                            $('#duplicateJobMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("duplicateJobMessage");
+                            }, 2000);
+                        } 
+                        
+                        else if (res.status === 500) {
+                            $('#duplicateJobMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
+                            
+                            setTimeout(function () {
+                                hideElementById("duplicateJobMessage");
+                            }, 2000);
+                        }
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        $('#duplicateJobMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
+                        
+                        setTimeout(function () {
+                            hideElementById("duplicateJobMessage");
+                        }, 2000);
+                        
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+        </script>
+		<!-- End of Duplicate Popup Modal -->
 
         <!-- Refresh page when close modal -->
         <script>
