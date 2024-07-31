@@ -1,6 +1,7 @@
 <?php
     session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -179,6 +180,7 @@
                                     <div class="nav__dropdown-content">
                                         <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
                                         <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                        <a href="technicianJobDaily.php" class="nav__dropdown-item">Daily Job</a>
                                     </div>
                                 </div>
                             </div>
@@ -242,25 +244,25 @@
                                 <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $job['job_status'] ?></td>
                                 <td style='vertical-align: middle;'><?= $job['customer_name'] ?></td>
                                 <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $job['job_name'] ?></td>
-                                <td style='text-align: center; white-space: nowrap; vertical-align: middle;'><?= $job['machine_name'] ?></td>
+                                <td style='vertical-align: middle;'><?= $job['machine_name'] ?></td>
                                 <td>
                                     <select class="form-select form-select-sm technician" style="width: 100%;" onchange="status_update(this.options[this.selectedIndex].value,'<?= $job['jobregister_id'] ?>')">
                                         <option value=""><?= $job['job_assign'] ?></option>
-                                            <?php
-                                                include "dbconnect.php";  
+                                        <?php
+                                            include "dbconnect.php";  
 
-                                                $records = mysqli_query($conn,
-                                                   "SELECT * FROM staff_register 
-                                                    WHERE technician_rank = '1st Leader' AND tech_avai = '0'
-                                                    OR technician_rank = '2nd Leader' AND tech_avai = '0'
-                                                    OR staff_position='storekeeper' AND tech_avai = '0' 
-                                                    ORDER BY username ASC"
-                                                );
+                                            $records = mysqli_query($conn,
+                                                "SELECT * FROM staff_register 
+                                                 WHERE technician_rank = '1st Leader' AND tech_avai = '0'
+                                                 OR technician_rank = '2nd Leader' AND tech_avai = '0'
+                                                 OR staff_position='storekeeper' AND tech_avai = '0' 
+                                                 ORDER BY username ASC"
+                                            );
 
-                                                while ($data = mysqli_fetch_array($records)) {
-                                                    echo "<option value='" . $data['username'] . "'>" . $data['username'] . "</option>";
-                                                }
-                                            ?>
+                                            while ($data = mysqli_fetch_array($records)) {
+                                                echo "<option value='" . $data['username'] . "'>" . $data['username'] . "</option>";
+                                            }
+                                        ?>
                                     </select>
                                 </td>
                             </tr>

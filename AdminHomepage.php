@@ -2696,7 +2696,7 @@
                     function fetchJobInfoData(jobregister_id) {
                         $.ajax({
                             type: "GET",
-                            url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                            url: "AdminHomepageTechnicianIndex.php?jobregister_id=" + jobregister_id,
                     
                             success: function (response) {
                                 var res = jQuery.parseJSON(response);
@@ -2707,14 +2707,15 @@
                                 
                                 else if (res.status == 200) {
                                     $('#jobregisterID_jobInfo').val(res.data.jobregister_id);
+                                    $('#support').val(res.data.support);
                                     $('#job_priority').val(res.data.job_priority);
                                     $('#job_order_number').val(res.data.job_order_number);
-                                    $('#job_name').val(res.data.job_name);
+                                    $('#job_name').val(res.data.job_name).trigger('change');
                                     $('#job_code').val(res.data.job_code);
                                     $('#job_description').val(res.data.job_description);
                                     $('#requested_date').val(res.data.requested_date);
                                     $('#delivery_date').val(res.data.delivery_date);
-                                    $('#customer_name').val(res.data.customer_name);
+                                    $('#customer_name').val(res.data.customer_name).trigger('change');
                                     $('#customer_code').val(res.data.customer_code);
                                     $('#cust_address1').val(res.data.cust_address1);
                                     $('#cust_address2').val(res.data.cust_address2);
@@ -2729,14 +2730,14 @@
                                     $('#brand_id').val(res.data.brand_id);
                                     $('#machine_brand').val(res.data.machine_brand);
                                     $('#type_id').val(res.data.type_id);
-                                    $('#job_status').val(res.data.job_status);
-                                    $('#assign_JobInfo').val(res.data.job_assign);
+                                    $('#job_status').val(res.data.job_status).trigger('change');
+                                    $('#assign_JobInfo').val(res.data.job_assign).trigger('change');
                                     $('#techRankInfo').val(res.data.technician_rank);
                                     $('#staffPosInfo').val(res.data.staff_position);
-                                    $('#job_cancel').val(res.data.job_cancel);
+                                    $('#job_cancel').val(res.data.job_cancel).trigger('change');
                                     $('#inputreason').val(res.data.reason);
                                     $('#accessories_required').val(res.data.accessories_required).trigger('change');
-                                    $('#accessories_for').val(res.data.accessories_for);
+                                    $('#accessories_for').val(res.data.accessories_for).trigger('change');
 
                                     initializeSelect2(['#job_name', '#customer_name', '#serialnumber', '#brand_id', '#machine_type', '#assign_JobInfo']);
 
@@ -2967,7 +2968,7 @@
                                     
                                     if (assistantData.length > 0) {
                                         assistantData.forEach(function (assistant) {
-                                            var row = "<tr data-id='" + assistant.id + "'>" +
+                                            var row = "<tr data-idAss='" + assistant.id + "'>" +
                                                         "<td style='text-align: center; vertical-align: middle;'>" + assistant.username.replace(/\n/g, "<br>") + "</td>" +
                                                         "<td style='text-align: center; vertical-align: middle;'><button class='delete-button btn fw-bold' style='color:red; border:none;'>Delete</button></td>" +
                                                       "</tr>";
@@ -3505,12 +3506,12 @@
                     // Delete Assistant
                     $('#assistantTable').on('click', '.delete-button', function () {
                         var row = $(this).closest('tr');
-                        var assistantId = row.data('id');
+                        var assistantId = row.data('idAss');
                 
                         $.ajax({
                             type: "POST",
-                            url: "technicianPopupModalAllIndex.php",
-                            data: {id: assistantId},
+                            url: "AdminHomepageTechnicianIndex.php",
+                            data: {idAss: assistantId},
                             
                             success: function (response) {
                                 var res = jQuery.parseJSON(response);
@@ -3638,7 +3639,7 @@
                         
                         $.ajax({
                             type: "POST",
-                            url: "technicianPopupModalAllIndex.php",
+                            url: "AdminHomepageTechnicianIndex.php",
                             data: {'delete_photoBefore': true,
                                                    'id': photoId},
                     
@@ -3722,7 +3723,7 @@
                         
                         $.ajax({
                             type: "POST",
-                            url: "technicianPopupModalAllIndex.php",
+                            url: "AdminHomepageTechnicianIndex.php",
                             data: {'delete_photoAfter': true,
                                                   'id': photoIdAfter},
                     
@@ -3806,7 +3807,7 @@
                 
                         $.ajax({
                             type: "POST",
-                            url: "technicianPopupModalAllIndex.php",
+                            url: "AdminHomepageTechnicianIndex.php",
                             data: {'delete_videoBefore': true,
                                                    'id': videoIdBefore},
                     
@@ -3890,7 +3891,7 @@
                         
                         $.ajax({
                             type: "POST",
-                            url: "technicianPopupModalAllIndex.php",
+                            url: "AdminHomepageTechnicianIndex.php",
                             data: {'delete_videoAfter': true,
                                                   'id': videoIdAfter},
                     

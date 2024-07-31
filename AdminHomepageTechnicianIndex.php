@@ -328,6 +328,91 @@
         }
     }
 
+    // Job Duplicate
+    if (isset($_POST['submit_jobDuplicate'])) {
+        $today_date = $_POST['today_date'];
+        $accessories_required = $_POST['accessories_required'];
+        $accessories_for = $_POST['accessories_for'];
+        $reason = $_POST['reason'];
+        $job_priority = $_POST['job_priority'];
+        $job_order_number = $_POST['job_order_number'];
+        $job_name = $_POST['job_name'];
+        $job_code = $_POST['job_code'];
+        $job_description = $_POST['job_description'];
+        $requested_date = $_POST['requested_date'];
+        $delivery_date = $_POST['delivery_date'];
+        $customer_name = $_POST['customer_name'];
+        $customer_code = $_POST['customer_code'];
+        $cust_address1 = $_POST['cust_address1'];
+        $cust_address2 = $_POST['cust_address2'];
+        $cust_address3 = $_POST['cust_address3'];
+        $customer_grade = $_POST['customer_grade'];
+        $customer_PIC = $_POST['customer_PIC'];
+        $cust_phone1 = $_POST['cust_phone1'];
+        $cust_phone2 = $_POST['cust_phone2'];
+        $machine_brand = $_POST['machine_brand'];
+        $machine_type = $_POST['machine_type'];
+        $machine_name = $_POST['machine_name'];
+        $machine_code = $_POST['machine_code'];
+        $serialnumber = $_POST['serialnumber'];
+        $job_assign = $_POST['job_assign'];
+        $technician_rank = $_POST['technician_rank'];
+        $staff_position = $_POST['staff_position'];
+        $jobregistercreated_by = $_POST['jobregistercreated_by'];
+        $jobregisterlastmodify_by = $_POST['jobregisterlastmodify_by'];
+
+        $machine_id = !empty($_POST['machine_id']) ? $_POST['machine_id'] : null;
+        $type_id = !empty($_POST['type_id']) ? $_POST['type_id'] : null;
+        $brand_id = !empty($_POST['brand_id']) ? $_POST['brand_id'] : null;
+        
+        $query = "INSERT INTO job_register (today_date, accessories_required, accessories_for, reason, job_priority,
+                                            job_order_number, job_name, job_code, job_description, requested_date,
+                                            delivery_date, customer_name, customer_code, cust_address1, cust_address2,
+                                            cust_address3, customer_grade, customer_PIC, cust_phone1, cust_phone2,
+                                            machine_brand, brand_id, machine_type, type_id, machine_name,
+                                            machine_id, machine_code, serialnumber, job_assign, technician_rank,
+                                            staff_position, jobregistercreated_by, jobregisterlastmodify_by) 
+            
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                          
+        $queryResult = mysqli_prepare($conn, $query);
+        
+        if ($queryResult) {
+            mysqli_stmt_bind_param($queryResult, 'sssssssssssssssssssssssssssssssss',
+                                  $today_date, $accessories_required, $accessories_for, $reason, $job_priority,
+                                  $job_order_number, $job_name, $job_code, $job_description, $requested_date,
+                                  $delivery_date, $customer_name, $customer_code, $cust_address1, $cust_address2,
+                                  $cust_address3, $customer_grade, $customer_PIC, $cust_phone1, $cust_phone2,
+                                  $machine_brand, $brand_id, $machine_type, $type_id, $machine_name,
+                                  $machine_id, $machine_code, $serialnumber, $job_assign, $technician_rank,
+                                  $staff_position, $jobregistercreated_by, $jobregisterlastmodify_by);
+                                  
+            if (mysqli_stmt_execute($queryResult)) {
+                $res = ['status' => 200, 
+                        'message' => 'Job is successfully duplicate'];
+                        
+                echo json_encode($res);
+            } 
+            
+            else {
+                $res = ['status' => 500, 
+                        'message' => 'Error: ' . mysqli_error($conn)];
+                
+                echo json_encode($res);
+            }
+            
+            mysqli_stmt_close($queryResult);
+        } 
+        
+        else {
+            $res = ['status' => 500, 
+                    'message' => 'Error: ' . mysqli_error($conn)];
+            echo json_encode($res);
+        }
+    }
+
     // Update Job Assign
     if (isset($_POST['update_jobAssign'])) {
         $jobregister_id = $_POST['jobregister_id'];
@@ -422,8 +507,8 @@
     }
 
     // Delete Assistant
-    if (isset($_POST['id'])) {
-        $id = $_POST['id'];
+    if (isset($_POST['idAss'])) {
+        $id = $_POST['idAss'];
         
         $query = "DELETE FROM assistants WHERE id = ?";
 
@@ -518,15 +603,17 @@
             $target_dir = 'image/';
     
             foreach ($_FILES['file_name']['name'] as $key => $value) {
-                $fileExnt = pathinfo($_FILES['file_name']['name'][$key], PATHINFO_EXTENSION);
+                $fileExt = pathinfo($_FILES['file_name']['name'][$key], PATHINFO_EXTENSION);
     
-                if (in_array($fileExnt, $allowImg) &&
-                    $_FILES['file_name']['size'][$key] > 0 &&
-                    $_FILES['file_name']['error'][$key] == 0) {
-    
+                if (in_array($fileExt, $allowImg) && $_FILES['file_name']['size'][$key] > 0 && $_FILES['file_name']['error'][$key] == 0) {
+                    
                     $originalFileName = $_FILES['file_name']['name'][$key];
-    
-                    if (move_uploaded_file($_FILES['file_name']['tmp_name'][$key], $target_dir . $originalFileName)) {
+                    $tempFilePath = $_FILES['file_name']['tmp_name'][$key];
+                    $destinationFilePath = $target_dir . $originalFileName;
+                    
+                    compressImage($tempFilePath, $destinationFilePath, $fileExt);
+                    
+                    if (file_exists($destinationFilePath)) {
                         $photoInsertQuery = "INSERT INTO technician_photoupdate (jobregister_id, file_name, description) 
                                              VALUES (?, ?, ?)";
     
@@ -540,16 +627,25 @@
                             if ($success) {
                                 $res = ['status' => 200,
                                         'message' => 'Photo uploaded successfully'];
-                            } else {
+                            }
+                            
+                            else {
                                 $res = ['status' => 500,
                                         'message' => 'Error uploading photos: ' . mysqli_error($conn)];
                             }
     
                             mysqli_stmt_close($stmt);
-                        } else {
+                        }
+                        
+                        else {
                             $res = ['status' => 500,
                                     'message' => 'Error: ' . mysqli_error($conn)];
                         }
+                    }
+                    
+                    else {
+                        $res = ['status' => 500,
+                                'message' => 'Error: Compressed file does not exist at ' . $destinationFilePath];
                     }
                 }
             }
@@ -610,15 +706,17 @@
             $target_dir = 'image/';
     
             foreach ($_FILES['file_name']['name'] as $key => $value) {
-                $fileExnt = pathinfo($_FILES['file_name']['name'][$key], PATHINFO_EXTENSION);
+                $fileExt = pathinfo($_FILES['file_name']['name'][$key], PATHINFO_EXTENSION);
     
-                if (in_array($fileExnt, $allowImg) &&
-                    $_FILES['file_name']['size'][$key] > 0 &&
-                    $_FILES['file_name']['error'][$key] == 0) {
-    
+                if (in_array($fileExt, $allowImg) && $_FILES['file_name']['size'][$key] > 0 && $_FILES['file_name']['error'][$key] == 0) {
+                    
                     $originalFileName = $_FILES['file_name']['name'][$key];
-    
-                    if (move_uploaded_file($_FILES['file_name']['tmp_name'][$key], $target_dir . $originalFileName)) {
+                    $tempFilePath = $_FILES['file_name']['tmp_name'][$key];
+                    $destinationFilePath = $target_dir . $originalFileName;
+                    
+                    compressImage($tempFilePath, $destinationFilePath, $fileExt);
+                    
+                    if (file_exists($destinationFilePath)) {
                         $photoInsertQuery = "INSERT INTO technician_photoupdate (jobregister_id, file_name, description) 
                                              VALUES (?, ?, ?)";
     
@@ -632,16 +730,25 @@
                             if ($success) {
                                 $res = ['status' => 200,
                                         'message' => 'Photo uploaded successfully'];
-                            } else {
+                            }
+                            
+                            else {
                                 $res = ['status' => 500,
                                         'message' => 'Error uploading photos: ' . mysqli_error($conn)];
                             }
     
                             mysqli_stmt_close($stmt);
-                        } else {
+                        }
+                        
+                        else {
                             $res = ['status' => 500,
                                     'message' => 'Error: ' . mysqli_error($conn)];
                         }
+                    }
+                    
+                    else {
+                        $res = ['status' => 500,
+                                'message' => 'Error: Compressed file does not exist at ' . $destinationFilePath];
                     }
                 }
             }
@@ -691,6 +798,46 @@
 
             echo json_encode($res);
         }
+    }
+
+    function compressImage($source, $destination, $fileExt) {
+        $quality = 50;
+        
+        if ($fileExt == 'jpeg' || $fileExt == 'jpg') {
+            $image = imagecreatefromjpeg($source);
+            
+            if ($image === false) {
+                error_log('Failed to create image from source: ' . $source);
+                
+                return false;
+            }
+            
+            imagejpeg($image, $destination, $quality);
+        }
+        
+        elseif ($fileExt == 'png') {
+            $image = imagecreatefrompng($source);
+            
+            if ($image === false) {
+                error_log('Failed to create image from source: ' . $source);
+                
+                return false;
+            }
+            
+            $pngQuality = 9;
+            
+            imagepng($image, $destination, $pngQuality);
+        }
+        
+        else {
+            error_log('Unsupported file extension: ' . $fileExt);
+            
+            return false;
+        }
+        
+        imagedestroy($image);
+        
+        return true;
     }
 
     // Upload Video Before
@@ -878,156 +1025,4 @@
             echo json_encode($res);
         }
     }
-
-    // Update Job Status
-    if (isset($_POST['update_jobStatus'])) {
-        $jobregister_id = $_POST['jobregister_id'];
-        $job_status = $_POST['job_status'];
-        $reason = $_POST['reason'];
-
-        // Check if technician_departure, technician_arrival, and technician_leaving are not empty
-        if ($job_status === 'Completed') {
-            $technician_departure = $_POST['technician_departure'];
-            $technician_arrival = $_POST['technician_arrival'];
-            $technician_leaving = $_POST['technician_leaving'];
-            
-            if (empty($technician_departure) || empty($technician_arrival) || empty($technician_leaving)) {
-                $res = ['status' => 400, 
-                        'message' => 'Please fill in all tehnician update time before changing the status to Completed'];
-                
-                echo json_encode($res);
-                
-                exit;
-            }
-        }
-        
-        // Check if the reason is fill for Pending or Incomplete status
-        if (($job_status === 'Pending' || $job_status === 'Incomplete') && empty($reason)) {
-            $res = ['status' => 400, 
-                    'message' => 'Please provide a reason.'];
-            
-            echo json_encode($res);
-            
-            exit;
-        }
-        
-        $query = "UPDATE job_register SET job_status=?, reason=? WHERE jobregister_id=?";
-
-        $queryResult = mysqli_prepare($conn, $query);
-    
-        if ($queryResult) {
-            mysqli_stmt_bind_param($queryResult, 'ssi', $job_status, $reason, $jobregister_id);
-
-            $success = mysqli_stmt_execute($queryResult);
-
-            if ($success) {
-                $res = ['status' => 200,
-                        'message' => 'Job Status successfully updated'];
-
-                echo json_encode($res);
-            }
-
-            else {
-                $res = ['status' => 500,
-                        'message' => 'Error: ' . mysqli_error($conn)];
-
-                echo json_encode($res);
-            }
-
-            mysqli_stmt_close($queryResult);
-        }
-
-        else {
-            $res = ['status' => 500,
-                    'message' => 'Error: ' . mysqli_error($conn)];
-
-            echo json_encode($res);
-        }
-    }
-
-    // Job Duplicate
-    if (isset($_POST['submit_jobDuplicate'])) {
-        $today_date = $_POST['today_date'];
-        $accessories_required = $_POST['accessories_required'];
-        $accessories_for = $_POST['accessories_for'];
-        $reason = $_POST['reason'];
-        $job_priority = $_POST['job_priority'];
-        $job_order_number = $_POST['job_order_number'];
-        $job_name = $_POST['job_name'];
-        $job_code = $_POST['job_code'];
-        $job_description = $_POST['job_description'];
-        $requested_date = $_POST['requested_date'];
-        $delivery_date = $_POST['delivery_date'];
-        $customer_name = $_POST['customer_name'];
-        $customer_code = $_POST['customer_code'];
-        $cust_address1 = $_POST['cust_address1'];
-        $cust_address2 = $_POST['cust_address2'];
-        $cust_address3 = $_POST['cust_address3'];
-        $customer_grade = $_POST['customer_grade'];
-        $customer_PIC = $_POST['customer_PIC'];
-        $cust_phone1 = $_POST['cust_phone1'];
-        $cust_phone2 = $_POST['cust_phone2'];
-        $machine_brand = $_POST['machine_brand'];
-        $machine_type = $_POST['machine_type'];
-        $machine_name = $_POST['machine_name'];
-        $machine_code = $_POST['machine_code'];
-        $serialnumber = $_POST['serialnumber'];
-        $job_assign = $_POST['job_assign'];
-        $technician_rank = $_POST['technician_rank'];
-        $staff_position = $_POST['staff_position'];
-        $jobregistercreated_by = $_POST['jobregistercreated_by'];
-        $jobregisterlastmodify_by = $_POST['jobregisterlastmodify_by'];
-
-        $machine_id = !empty($_POST['machine_id']) ? $_POST['machine_id'] : null;
-        $type_id = !empty($_POST['type_id']) ? $_POST['type_id'] : null;
-        $brand_id = !empty($_POST['brand_id']) ? $_POST['brand_id'] : null;
-        
-        $query = "INSERT INTO job_register (today_date, accessories_required, accessories_for, reason, job_priority,
-                                            job_order_number, job_name, job_code, job_description, requested_date,
-                                            delivery_date, customer_name, customer_code, cust_address1, cust_address2,
-                                            cust_address3, customer_grade, customer_PIC, cust_phone1, cust_phone2,
-                                            machine_brand, brand_id, machine_type, type_id, machine_name,
-                                            machine_id, machine_code, serialnumber, job_assign, technician_rank,
-                                            staff_position, jobregistercreated_by, jobregisterlastmodify_by) 
-            
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                          
-        $queryResult = mysqli_prepare($conn, $query);
-        
-        if ($queryResult) {
-            mysqli_stmt_bind_param($queryResult, 'sssssssssssssssssssssssssssssssss',
-                                  $today_date, $accessories_required, $accessories_for, $reason, $job_priority,
-                                  $job_order_number, $job_name, $job_code, $job_description, $requested_date,
-                                  $delivery_date, $customer_name, $customer_code, $cust_address1, $cust_address2,
-                                  $cust_address3, $customer_grade, $customer_PIC, $cust_phone1, $cust_phone2,
-                                  $machine_brand, $brand_id, $machine_type, $type_id, $machine_name,
-                                  $machine_id, $machine_code, $serialnumber, $job_assign, $technician_rank,
-                                  $staff_position, $jobregistercreated_by, $jobregisterlastmodify_by);
-                                  
-            if (mysqli_stmt_execute($queryResult)) {
-                $res = ['status' => 200, 
-                        'message' => 'Job is successfully duplicate'];
-                        
-                echo json_encode($res);
-            } 
-            
-            else {
-                $res = ['status' => 500, 
-                        'message' => 'Error: ' . mysqli_error($conn)];
-                
-                echo json_encode($res);
-            }
-            
-            mysqli_stmt_close($queryResult);
-        } 
-        
-        else {
-            $res = ['status' => 500, 
-                    'message' => 'Error: ' . mysqli_error($conn)];
-            echo json_encode($res);
-        }
-    }
-
 ?>

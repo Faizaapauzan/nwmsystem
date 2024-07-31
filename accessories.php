@@ -187,6 +187,7 @@
                                     <div class="nav__dropdown-content">
                                         <a href="adminreport.php" class="nav__dropdown-item">Admin Report</a>
                                         <a href="report.php" class="nav__dropdown-item">Service Report</a>
+                                        <a href="technicianJobDaily.php" class="nav__dropdown-item">Daily Job</a>
                                     </div>
                                 </div>
                             </div>

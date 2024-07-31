@@ -1600,7 +1600,7 @@
                     
                             if (assistantData.length > 0) {
                                 assistantData.forEach(function (assistant) {
-                                    var row = "<tr data-id='" + assistant.id + "'>" +
+                                    var row = "<tr data-idAss='" + assistant.id + "'>" +
                                                 "<td style='text-align: center; vertical-align: middle;'>" + assistant.username.replace(/\n/g, "<br>") + "</td>" +
                                                 "<td style='text-align: center; vertical-align: middle;'><button class='delete-button btn fw-bold' style='color:red; border:none;'>Delete</button></td>" +
                                               "</tr>";
@@ -2066,12 +2066,12 @@
             // Delete Assistant
             $('#assistantTable').on('click', '.delete-button', function () {
                 var row = $(this).closest('tr');
-                var assistantId = row.data('id');
+                var assistantId = row.data('idAss');
                 
                 $.ajax({
                     type: "POST",
                     url: "technicianPopupModalAllIndex.php",
-                    data: {id: assistantId},
+                    data: {idAss: assistantId},
                     
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
