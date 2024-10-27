@@ -1756,7 +1756,7 @@
 
                                                     <div class="mb-3">
                                                         <label for="" class="fw-bold mb-2">Customer Name</label>
-                                                        <select name="customer_name" id="customer_name" class="form-select" style="width: 100%;">
+                                                        <select name="customer_name" id="customer_name" class="form-select" style="width: 100%;" onchange="onCustomerNameChange(this.value)">
                                                             <option value="">Select Customer Name</option>
                                                             <?php
                                                                 
@@ -1810,7 +1810,7 @@
 
                                                     <div class="mb-3">
                                                         <label for="" class="form-label fw-bold">Serial Number</label>
-                                                        <select name="serialnumber" id="serialnumber"  style="width: 100%;" class="form-select">
+                                                        <select name="serialnumber" id="serialnumber"  style="width: 100%;" class="form-select" onchange="loadMachineDetails(this.value)">
                                                             <option value="">Select Serial Number</option>
                                                         </select>
                                                     </div>
@@ -1818,13 +1818,14 @@
                                                     <div class="mb-3">
                                                         <label for="" class="form-label fw-bold">Machine Name</label>
                                                         <input type="text" id="machine_name" name="machine_name" class="form-control">
+                                                        
                                                         <input type="hidden" id="machine_id" name="machine_id">
                                                         <input type="hidden" id="machine_code" name="machine_code">
                                                     </div>
                                                     
                                                     <div class="col-md-6 mb-3">
                                                         <label for="" class="form-label fw-bold">Machine Brand</label>
-                                                        <select name="brand_id" id="brand_id" style="width: 100%;" class="form-select">
+                                                        <select name="brand_id" id="brand_id" style="width: 100%;" class="form-select" onchange="onBrandIDChange(this.value)">
                                                             <option value="">Select Machine Brand</option>
                                                             <?php
                                                                 
@@ -1833,17 +1834,18 @@
                                                                 $records = mysqli_query($conn, "SELECT * FROM machine_brand ORDER BY brandname ASC");
                                                         
                                                                 while ($data = mysqli_fetch_array($records)) {
-                                                                    echo "<option value='".$data['brand_id']."' data-machBrand='". $data['brandname'] ."'>".$data['brandname']."</option>";
+                                                                    echo "<option value='".$data['brand_id']."' 
+                                                                                  data-machBrand='". $data['brandname'] ."'>".$data['brandname']."</option>";
                                                                 }
                                                             ?>
                                                         </select>
-                                                
+
                                                         <input type="hidden" name="machine_brand" id="machine_brand">
                                                     </div>
  
                                                     <div class="col-md-6 mb-3">
                                                         <label for="" class="form-label fw-bold">Machine Type</label>
-                                                        <select name="machine_type" id="machine_type" style="width: 100%;" class="form-select">
+                                                        <select name="machine_type" id="machine_type" style="width: 100%;" onchange="loadMachNameTypeID(this.value)" class="form-select">
                                                             <option value="">Select Machine Type</option>
                                                         </select>
                                                 
@@ -2134,63 +2136,65 @@
 
                                                 <script>
                                                     const jobCards = document.querySelectorAll('.Job');
-                                            
+                                                    
                                                     jobCards.forEach(jobCard => {
                                                         jobCard.addEventListener('click', function () {
                                                             const jobRegisterID = jobCard.getAttribute('data-jobRegisterID');
                                                             const jobregister_idInput = document.getElementById("jobregisterID_jobUpdate");
-                                                    
+                                                            
                                                             jobregister_idInput.value = jobRegisterID;
                                                         });
                                                     });
-                                            
+                                                    
                                                     $(document).on('click', '#departureButton', function () {
-                                                        const currentDateTime = new Date();
-                                                        const formattedDateTime = currentDateTime.toLocaleString('en-US', {
-                                                            day: 'numeric',
-                                                            month: 'numeric',
-                                                            year: 'numeric',
-                                                            hour: 'numeric',
-                                                            minute: 'numeric',
-                                                            hour12: true
-                                                        }).replace(',', '');
-                                                
-                                                        document.getElementById('technician_departure').value = formattedDateTime;
-                                                
-                                                        const jobregister_idInput = document.getElementById("jobregisterID_jobUpdate");
-                                                        const currentDate = new Date();
-                                                        const day = String(currentDate.getDate()).padStart(2, '0');
-                                                        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-                                                        const year = currentDate.getFullYear();
-                                                        const hours = String(currentDate.getHours()).padStart(2, '0');
-                                                        const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-                                                        const seconds = String(currentDate.getSeconds()).padStart(2, '0');
-                                                
-                                                        const jobregister_id = jobregister_idInput.value;
-                                                        const job_status = "Doing";
-                                                        const DateAssign = day + '-' + month + '-' + year;
-                                                        const departure_timestamp = hours + ':' + minutes + ':' + seconds;
-                                                
-                                                        const xhr = new XMLHttpRequest();
-                                                        xhr.open("POST", "departureupdate.php", true);
-                                                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                
-                                                        xhr.onreadystatechange = function () {
-                                                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                                                const response = xhr.responseText;
-                                                        
-                                                                if (response === "success") {
-                                                                    console.log("Update successful");
-                                                                } 
-                                                        
-                                                                else {
-                                                                    console.error("Update failed");
+                                                        $.ajax({
+                                                            url: 'departureTimeServer.php',
+                                                            method: 'GET',
+                                                            
+                                                            success: function(response) {
+                                                                const data = JSON.parse(response);
+                                                                
+                                                                if (data.error) {
+                                                                    alert(data.error);
+                                                                    
+                                                                    return;
                                                                 }
+                                                                
+                                                                document.getElementById('technician_departure').value = data.technician_departure;
+                                                                
+                                                                const jobregister_idInput = document.getElementById("jobregisterID_jobUpdate");
+                                                                const jobregister_id = jobregister_idInput.value;
+                                                                const job_status = "Doing";
+                                                                const DateAssign = data.date_assign;
+                                                                const departure_timestamp = data.departure_timestamp;
+                                                                const xhr = new XMLHttpRequest();
+                                                                
+                                                                xhr.open("POST", "departureupdate.php", true);
+                                                                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                                
+                                                                xhr.onreadystatechange = function () {
+                                                                    if (xhr.readyState === 4 && xhr.status === 200) {
+                                                                        const responseText = xhr.responseText;
+                                                                        
+                                                                        if (responseText === "success") {
+                                                                            console.log("Update successful");
+                                                                        }
+                                                                        
+                                                                        else {
+                                                                            console.error("Update failed");
+                                                                        }
+                                                                    }
+                                                                };
+                                                                
+                                                                const dataString = `jobregister_id=${jobregister_id}&DateAssign=${DateAssign}&job_status=${job_status}&departure_timestamp=${departure_timestamp}`;
+                                                                
+                                                                xhr.send(dataString);
+                                                            },
+                                                            
+                                                            error: function() {
+                                                                alert('Error fetching time from server.');
                                                             }
-                                                        };
-                                                
-                                                        const data = `jobregister_id=${jobregister_id}&DateAssign=${DateAssign}&job_status=${job_status}&departure_timestamp=${departure_timestamp}`;
-                                                        xhr.send(data);
+                                                        });
                                                     });
                                                 </script>
 
@@ -2203,17 +2207,18 @@
 
                                                 <script>
                                                     $(document).on('click', '#arrivalButton', function () {
-                                                        const currentDateTime = new Date();
-                                                        const formattedDateTime = currentDateTime.toLocaleString('en-US', {
-                                                            day: 'numeric',
-                                                            month: 'numeric',
-                                                            year: 'numeric',
-                                                            hour: 'numeric',
-                                                            minute: 'numeric',
-                                                            hour12: true
-                                                        }).replace(',', ''); 
-                                                
-                                                        document.getElementById('technician_arrival').value = formattedDateTime;
+                                                        $.ajax({
+                                                            url: 'get_server_time.php',
+                                                            method: 'GET',
+                                                            
+                                                            success: function(response) {
+                                                                document.getElementById('technician_arrival').value = response;
+                                                            },
+                                                            
+                                                            error: function() {
+                                                                alert('Error fetching time from server.');
+                                                            }
+                                                        });
                                                     });
                                                 </script>
 
@@ -2226,17 +2231,18 @@
 
                                                 <script>
                                                     $(document).on('click', '#returnButton', function () {
-                                                        const currentDateTime = new Date();
-                                                        const formattedDateTime = currentDateTime.toLocaleString('en-US', {
-                                                            day: 'numeric',
-                                                            month: 'numeric',
-                                                            year: 'numeric',
-                                                            hour: 'numeric',
-                                                            minute: 'numeric',
-                                                            hour12: true
-                                                        }).replace(',', ''); 
-                                                
-                                                        document.getElementById('technician_leaving').value = formattedDateTime;
+                                                        $.ajax({
+                                                            url: 'get_server_time.php',
+                                                            method: 'GET',
+                                                            
+                                                            success: function(response) {
+                                                                document.getElementById('technician_leaving').value = response;
+                                                            },
+                                                            
+                                                            error: function() {
+                                                                alert('Error fetching time from server.');
+                                                            }
+                                                        });
                                                     });
                                                 </script>
 
@@ -2250,53 +2256,63 @@
                                                     </div>
 
                                                     <script>
-                                                        $(document).on('click', '#outButton', function () {
-                                                            const currentDateTime = new Date();
-                                                    
-                                                            const formattedDateTime = currentDateTime.toLocaleString('en-US', {
-                                                                hour: 'numeric',
-                                                                minute: 'numeric',
-                                                                hour12: true
-                                                            }); 
-                                            
-                                                            document.getElementById('tech_out').value = formattedDateTime;
-                                                
-                                                            const techLeaderInput = document.getElementById("tech_leader");
-                                                
-                                                            const currentDate = new Date();
-                                                            const day = String(currentDate.getDate()).padStart(2, '0');
-                                                            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-                                                            const year = currentDate.getFullYear();
-                                                            const hours = String(currentDate.getHours()).padStart(2, '0');
-                                                            const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-                                                            const seconds = String(currentDate.getSeconds()).padStart(2, '0');
-                                                            const amOrPm = hours >= 12 ? 'PM' : 'AM';
-                                                            const formattedHours = hours % 12 || 12;
-                                                
-                                                            const technician_out = formattedHours + ':' + minutes + ' ' + amOrPm;
-                                                            const tech_leader = techLeaderInput.value;
-                                                            const techupdate_date = day + '-' + month + '-' + year;
-
-                                                            const xhr = new XMLHttpRequest();
-                                                            xhr.open("POST", "techoutupdate.php", true);
-                                                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                
-                                                            xhr.onreadystatechange = function () {
-                                                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                                                    const response = xhr.responseText;
-                                                            
-                                                                    if (response === "success") {
-                                                                        console.log("Update successful");
-                                                                    } 
+                                                        jobCards.forEach(jobCard => {
+                                                            jobCard.addEventListener('click', function () {
+                                                                const jobAssign = jobCard.getAttribute('data-jobAssign');
+                                                                const techLeaderInput = document.getElementById("tech_leader");
+                                                                
+                                                                techLeaderInput.value = jobAssign;
+                                                            });
+                                                        });
                                                         
-                                                                    else {
-                                                                        console.error("Update failed");
+                                                        $(document).on('click', '#outButton', function () {
+                                                            $.ajax({
+                                                                url: 'resttime.php',
+                                                                method: 'GET',
+                                                                
+                                                                success: function(response) {
+                                                                    const data = JSON.parse(response);
+                                                                    
+                                                                    if (data.error) {
+                                                                        alert(data.error);
+                                                                        
+                                                                        return;
                                                                     }
+                                                                    
+                                                                    document.getElementById('tech_out').value = data.tech_out;
+                                                                    
+                                                                    const techLeaderInput = document.getElementById("tech_leader");
+                                                                    const tech_leader = techLeaderInput.value;
+                                                                    const techupdate_date = data.techupdate_date;
+                                                                    const technician_out = data.tech_out;
+                                                                    const xhr = new XMLHttpRequest();
+                                                                    
+                                                                    xhr.open("POST", "techoutupdate.php", true);
+                                                                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                                    
+                                                                    xhr.onreadystatechange = function () {
+                                                                        if (xhr.readyState === 4 && xhr.status === 200) {
+                                                                            const responseText = xhr.responseText;
+                                                                            
+                                                                            if (responseText === "success") {
+                                                                                console.log("Update successful");
+                                                                            }
+                                                                            
+                                                                            else {
+                                                                                console.error("Update failed");
+                                                                            }
+                                                                        }
+                                                                    };
+                                                                    
+                                                                    const dataString = `technician_out=${technician_out}&tech_leader=${tech_leader}&techupdate_date=${techupdate_date}`;
+                                                                    
+                                                                    xhr.send(dataString);
+                                                                },
+                                                                
+                                                                error: function() {
+                                                                    alert('Error fetching time from server.');
                                                                 }
-                                                            };
-                                                
-                                                            const data = `technician_out=${formattedDateTime}&tech_leader=${techLeaderInput.value}&techupdate_date=${techupdate_date}`;
-                                                            xhr.send(data);
+                                                            });
                                                         });
                                                     </script>
 
@@ -2311,59 +2327,61 @@
                                                             jobCard.addEventListener('click', function () {
                                                                 const jobAssign = jobCard.getAttribute('data-jobAssign');
                                                                 const techLeaderInput = document.getElementById("tech_leader");
-                                                        
+                                                                
                                                                 techLeaderInput.value = jobAssign;
                                                             });
                                                         });
-                                            
-                                                        $(document).on('click', '#inButton', function () {
-                                                            const currentDateTime = new Date();
-                                                            const formattedDateTime = currentDateTime.toLocaleString('en-US', {
-                                                                hour: 'numeric',
-                                                                minute: 'numeric',
-                                                                hour12: true
-                                                            }); 
-                                                
-                                                            document.getElementById('tech_in').value = formattedDateTime;
-                                                
-                                                            const techLeaderInput = document.getElementById("tech_leader");
-                                                
-                                                            const currentDate = new Date();
-                                                            const day = String(currentDate.getDate()).padStart(2, '0');
-                                                            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-                                                            const year = currentDate.getFullYear();
-                                                            const hours = String(currentDate.getHours()).padStart(2, '0');
-                                                            const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-                                                            const seconds = String(currentDate.getSeconds()).padStart(2, '0');
-                                                            const amOrPm = hours >= 12 ? 'PM' : 'AM';
-                                                            const formattedHours = hours % 12 || 12;
-                                                
-                                                            const technician_in = formattedHours + ':' + minutes + ' ' + amOrPm;
-                                                            const tech_leader = techLeaderInput.value;
-                                                            const techupdate_date = day + '-' + month + '-' + year;
-
-                                                            const xhr = new XMLHttpRequest();
-                                                            xhr.open("POST", "techinupdate.php", true);
-                                                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                
-                                                            xhr.onreadystatechange = function () {
-                                                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                                                    const response = xhr.responseText;
-                                                            
-                                                                    if (response === "success") {
-                                                                        console.log("Update successful");
-                                                                    } 
                                                         
-                                                                    else {
-                                                                        console.error("Update failed");
+                                                        $(document).on('click', '#inButton', function () {
+                                                            $.ajax({
+                                                                url: 'resttime.php',
+                                                                method: 'GET',
+                                                                
+                                                                success: function(response) {
+                                                                    const data = JSON.parse(response);
+                                                                    
+                                                                    if (data.error) {
+                                                                        alert(data.error);
+                                                                        
+                                                                        return;
                                                                     }
-                                                                }
-                                                            };
-                                                
-                                                            const data = `technician_in=${formattedDateTime}&tech_leader=${techLeaderInput.value}&techupdate_date=${techupdate_date}`;
-                                                            xhr.send(data);
-                                                        });
-                                                    </script>
+                                                                    
+                                                                    document.getElementById('tech_in').value = data.tech_in;
+                                                                    
+                                                                    const techLeaderInput = document.getElementById("tech_leader");
+                                                                    const tech_leader = techLeaderInput.value;
+                                                                    const techupdate_date = data.techupdate_date;
+                                                                    const technician_in = data.tech_in;
+                                                                    const xhr = new XMLHttpRequest();
+                                                                    
+                                                                    xhr.open("POST", "techinupdate.php", true);
+                                                                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                                    
+                                                                    xhr.onreadystatechange = function () {
+                                                                        if (xhr.readyState === 4 && xhr.status === 200) {
+                                                                            const responseText = xhr.responseText;
+                                                                            
+                                                                            if (responseText === "success") {
+                                                                                console.log("Update successful");
+                                                                            }
+                                                                            
+                                                                            else {
+                                                                                console.error("Update failed");
+                                                                            }
+                                                                        }
+                                                                    };
+                                                                    
+                                                                    const dataString = `technician_in=${technician_in}&tech_leader=${tech_leader}&techupdate_date=${techupdate_date}`;
+                                                            
+                                                            xhr.send(dataString);
+                                                        },
+                                                        
+                                                        error: function() {
+                                                            alert('Error fetching time from server.');
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                                 </div>
                                     
                                                 <div id="JobUpdateMessage"></div>
@@ -2675,11 +2693,14 @@
                         $('#jobregisterlastmodify_by').val(usernameValue);
                     }
 
-                    // dropdown with select2
-                    function initializeSelect2(selectors) {
-                        $.fn.select2.amd.require(['select2/compat/matcher'], function(oldMatcher) {
-                            selectors.forEach(function(selector) {
-                                $(selector).select2({
+                    // select2 Library
+                    $(document).ready(function() {
+                        var select2Elements = ['#job_name', '#customer_name', '#serialnumber', 
+                                               '#brand_id', '#machine_type', '#assign_JobInfo'];
+                        
+                        $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+                            select2Elements.forEach(function(elementId) {
+                                $(elementId).select2({
                                     dropdownParent: $('#techJobInfoForm'),
                                     matcher: oldMatcher(matchStart),
                                     theme: 'bootstrap-5'
@@ -2688,16 +2709,182 @@
                         });
                         
                         function matchStart(term, text) {
-                            return text.toUpperCase().indexOf(term.toUpperCase()) === 0;
+                            if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+                                return true;
+                            }
+                            
+                            return false;
+                        }
+
+                        var jobregister_id = $('#jobregisterID_jobInfo').val();
+                        
+                        if (jobregister_id) {
+                            fetchJobInfoData(jobregister_id);
+                        }
+                    });
+
+                    function onCustomerNameChange(customer_name) {
+                        loadSerialNumbers(customer_name);
+                        GetCustDetails(customer_name);
+                    }
+
+                    // Function to load serial numbers based on selected customer_name
+                    function loadSerialNumbers(customer_name) {
+                        $.ajax({
+                            url: "getMachineDetailsBySerial.php",
+                            method: "POST",
+                            data: { customer_name: customer_name },
+                            
+                            success: function (response) {
+                                $('#serialnumber').html(response);
+                                
+                                let existingSerial = $('#serialnumber').data('existing-value');
+                                
+                                if (existingSerial) {
+                                    $('#serialnumber').val(existingSerial).trigger('change');
+                                }
+                            },
+                            
+                            error: function () {
+                                console.error("Failed to load serial numbers.");
+                            }
+                        });
+                    }
+
+                    // Auto-fill customer details based on customer_name selection
+                    function GetCustDetails(customer_name) {
+                        var selectedOption = document.querySelector('#customer_name option[value="' + customer_name + '"]');
+                        
+                        if (selectedOption) {
+                            var custGradeValue = selectedOption.getAttribute('data-custGrade');
+                            var custCodeValue = selectedOption.getAttribute('data-custCode');
+                            var custPicValue = selectedOption.getAttribute('data-custPIC');
+                            var custAddr1Value = selectedOption.getAttribute('data-custAddr1');
+                            var custAddr2Value = selectedOption.getAttribute('data-custAddr2');
+                            var custAddr3Value = selectedOption.getAttribute('data-custAddr3');
+                            var custNum1Value = selectedOption.getAttribute('data-custNum1');
+                            var custNum2Value = selectedOption.getAttribute('data-custNum2');
+                            
+                            document.querySelector('input[name="customer_grade"]').value = custGradeValue || '';
+                            document.querySelector('input[name="customer_code"]').value = custCodeValue || '';
+                            document.querySelector('input[name="customer_PIC"]').value = custPicValue || '';
+                            document.querySelector('input[name="cust_address1"]').value = custAddr1Value || '';
+                            document.querySelector('input[name="cust_address2"]').value = custAddr2Value || '';
+                            document.querySelector('input[name="cust_address3"]').value = custAddr3Value || '';
+                            document.querySelector('input[name="cust_phone1"]').value = custNum1Value || '';
+                            document.querySelector('input[name="cust_phone2"]').value = custNum2Value || '';
+                        }
+                        
+                        else {
+                            console.error('No matching option found for customer name:', customer_name);
                         }
                     }
 
-                    // Fetch Job Info
+                    // Auto-fill machine details based on selected serialnumber
+                    function loadMachineDetails(serialnumber) {
+                        var selectedOption = document.querySelector('#serialnumber option[value="' + serialnumber + '"]');
+                        
+                        if (selectedOption) {
+                            var machNameValue = selectedOption.getAttribute('data-machName');
+                            var machIDValue = selectedOption.getAttribute('data-machID');
+                            var machCodeValue = selectedOption.getAttribute('data-machCode');
+                            var brandIDValue = selectedOption.getAttribute('data-brandID');
+                            var machBrandValue = selectedOption.getAttribute('data-machBrand');
+                            var machTypeValue = selectedOption.getAttribute('data-machType');
+                            var typeIDValue = selectedOption.getAttribute('data-typeID');
+                            
+                            document.querySelector('input[name="machine_name"]').value = machNameValue;
+                            document.querySelector('input[name="machine_id"]').value = machIDValue;
+                            document.querySelector('input[name="machine_code"]').value = machCodeValue;
+                            document.querySelector('select[name="brand_id"]').value = brandIDValue;
+                            document.querySelector('select[name="brand_id"]').dispatchEvent(new Event('change'));
+                            document.querySelector('input[name="machine_brand"]').value = machBrandValue;
+                            document.querySelector('select[name="machine_type"]').value = machTypeValue;
+                            document.querySelector('select[name="machine_type"]').dispatchEvent(new Event('change'));
+                            document.querySelector('input[name="type_id"]').value = typeIDValue;
+                        }
+                        
+                        else {
+                            console.error('No matching option found for serial number:', serialnumber);
+                        }
+                    }
+
+                    function onBrandIDChange(brand_id) {
+                        GetBrandName(brand_id);
+                        loadMachineTypes(brand_id);
+                    }
+
+                    // Auto-fill machine_brand based on brand_id selection
+                    function GetBrandName(brand_id) {
+                        var selectedOption = document.querySelector('#brand_id option[value="' + brand_id + '"]');
+                        
+                        if (selectedOption) {
+                            var brandNameValue = selectedOption.getAttribute('data-machBrand');
+                            
+                            document.querySelector('input[name="machine_brand"]').value = brandNameValue || '';
+                        }
+                        
+                        else {
+                            console.error("No matching option found for brand_id:", brand_id);
+                        }
+                    }
+
+                    // Function to load machine types based on selected brand
+                    function loadMachineTypes(brand_id) {
+                        $.ajax({
+                            url: "getMachineTypes.php",
+                            method: "POST",
+                            data: { brand_id: brand_id },
+                            
+                            success: function (response) {
+                                $('#machine_type').html(response);
+
+                                let existingBrandID = $('#brand_id').data('existing-value');
+                                
+                                if (existingBrandID) {
+                                    $('#brand_id').val(existingBrandID).trigger('change');
+                                }
+                                
+                                let existingType = $('#machine_type').data('existing-value');
+                                
+                                if (existingType) {
+                                    $('#machine_type').val(existingType).trigger('change');
+                                }
+                            },
+                            
+                            error: function () {
+                                console.error("Failed to load machine types.");
+                            }
+                        });
+                    }
+                    
+                    // Auto-fill type_id and machine_name when machine_type changes
+                    function loadMachNameTypeID(type_name) {
+                        var selectedOption = document.querySelector('#machine_type option[value="' + type_name + '"]');
+                        
+                        if (selectedOption) {
+                            var machNamezValue = selectedOption.getAttribute('data-machNamez');
+                            var typeIDValue = selectedOption.getAttribute('data-typeID');
+                            var machIDzValue = selectedOption.getAttribute('data-machIDz');
+                            var machCodezValue = selectedOption.getAttribute('data-machCodez');
+                            
+                            document.querySelector('input[name="machine_name"]').value = machNamezValue;
+                            document.querySelector('input[name="type_id"]').value = typeIDValue;
+                            document.querySelector('input[name="machine_id"]').value = machIDzValue;
+                            document.querySelector('input[name="machine_code"]').value = machCodezValue;
+                        }
+                        
+                        else {
+                            console.error('No matching option found for machine type:', type_name);
+                        }
+                    }
+                    
+                    // Fetch job info data
                     function fetchJobInfoData(jobregister_id) {
                         $.ajax({
                             type: "GET",
                             url: "AdminHomepageTechnicianIndex.php?jobregister_id=" + jobregister_id,
-                    
+                            
                             success: function (response) {
                                 var res = jQuery.parseJSON(response);
                                 
@@ -2706,6 +2893,7 @@
                                 }
                                 
                                 else if (res.status == 200) {
+                                    $('#todayDate_Support').val(new Date().toISOString().slice(0, 10));
                                     $('#jobregisterID_jobInfo').val(res.data.jobregister_id);
                                     $('#support').val(res.data.support);
                                     $('#job_priority').val(res.data.job_priority);
@@ -2724,26 +2912,28 @@
                                     $('#customer_PIC').val(res.data.customer_PIC);
                                     $('#cust_phone1').val(res.data.cust_phone1);
                                     $('#cust_phone2').val(res.data.cust_phone2);
+                                    $('#serialnumber').val(res.data.serialnumber).trigger('change');
+                                    $('#serialnumber').data('existing-value', res.data.serialnumber);
                                     $('#machine_name').val(res.data.machine_name);
                                     $('#machine_id').val(res.data.machine_id);
                                     $('#machine_code').val(res.data.machine_code);
-                                    $('#brand_id').val(res.data.brand_id);
+                                    $('#brand_id').val(res.data.brand_id).trigger('change');
+                                    $('#brand_id').data('existing-value', res.data.brand_id);
                                     $('#machine_brand').val(res.data.machine_brand);
+                                    $('#machine_type').val(res.data.machine_type).trigger('change');
+                                    $('#machine_type').data('existing-value', res.data.machine_type);
                                     $('#type_id').val(res.data.type_id);
                                     $('#job_status').val(res.data.job_status).trigger('change');
+                                    $('#inputreason').val(res.data.reason);
                                     $('#assign_JobInfo').val(res.data.job_assign).trigger('change');
                                     $('#techRankInfo').val(res.data.technician_rank);
                                     $('#staffPosInfo').val(res.data.staff_position);
-                                    $('#job_cancel').val(res.data.job_cancel).trigger('change');
-                                    $('#inputreason').val(res.data.reason);
                                     $('#accessories_required').val(res.data.accessories_required).trigger('change');
                                     $('#accessories_for').val(res.data.accessories_for).trigger('change');
+                                    $('#job_cancel').val(res.data.job_cancel).trigger('change');
 
-                                    initializeSelect2(['#job_name', '#customer_name', '#serialnumber', '#brand_id', '#machine_type', '#assign_JobInfo']);
-
-                                    populateSerialNumberDropdown(res.data.customer_name, res.data.serialnumber, function() {
-                                        populateMachineTypeDropdown(res.data.brand_id, res.data.machine_type);
-                                    });
+                                    loadSerialNumbers(res.data.customer_name);
+                                    loadMachineTypes(res.data.brand_id);
                                 }
                                 
                                 else {
@@ -2752,170 +2942,6 @@
                             }
                         });
                     }
-
-                    // Function to populate serial number dropdown and set its value
-                    function populateSerialNumberDropdown(customerName, currentSerialNumber, callback) {
-                        if (!customerName) return;
-                        
-                        $.ajax({
-                            type: "POST",
-                            url: "getAllMachineDetails.php",
-                            data: { customer_name: customerName },
-                    
-                            success: function(response) {
-                                var machines = JSON.parse(response);
-                                var serialNumberDropdown = $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
-                        
-                                machines.forEach(function(machine) {
-                                    serialNumberDropdown.append($('<option>', {
-                                        value: machine.serialnumber,
-                                        text: machine.serialnumber
-                                    }));
-                                });
-                        
-                                serialNumberDropdown.val(currentSerialNumber).trigger('change');
-                        
-                                if (typeof callback === "function") {
-                                    callback();
-                                }
-                            },
-                    
-                            error: function(xhr, status, error) {
-                                console.error("Error fetching serial numbers:", error);
-                            }
-                        });
-                    }
-                    
-                    // Function to populate machine type dropdown and set its value
-                    function populateMachineTypeDropdown(brandId, selectedMachineType = null) {
-                        if (!brandId) return;
-                        
-                        $.ajax({
-                            type: "POST",
-                            url: "getMachineTypesByBrand.php",
-                            data: { brand_id: brandId },
-                    
-                            success: function(response) {
-                                var types = JSON.parse(response);
-                                var machineTypeDropdown = $('#machine_type').empty().append('<option value="">Select Machine Type</option>');
-                        
-                                types.forEach(function(type) {
-                                    machineTypeDropdown.append($('<option>', {
-                                        value: type.type_name,
-                                        text: type.type_name,
-                                        'data-typeid': type.type_id
-                                    }));
-                                });
-                        
-                                if (selectedMachineType) {
-                                    machineTypeDropdown.val(selectedMachineType).trigger('change');
-                            
-                                    $('#type_id').val($('option:selected', machineTypeDropdown).attr('data-typeid'));
-                                }
-                        
-                                initializeSelect2(['#machine_type']);
-                            },
-                    
-                            error: function(xhr, status, error) {
-                                console.error("Error fetching machine types:", error);
-                            }
-                        });
-                    }
-  
-                    $(document).ready(function() {
-                        initializeSelect2(['#customer_name', '#serialnumber', '#brand_id', '#machine_type']);
-
-                        // Auto-fill customer details
-                        $('#customer_name').change(function() {
-                            var selected = $(this).find('option:selected');
-                            
-                            $('#customer_grade').val(selected.data('custgrade'));
-                            $('#customer_code').val(selected.data('custcode'));
-                            $('#customer_PIC').val(selected.data('custpic'));
-                            $('#cust_address1').val(selected.data('custaddr1'));
-                            $('#cust_address2').val(selected.data('custaddr2'));
-                            $('#cust_address3').val(selected.data('custaddr3'));
-                            $('#cust_phone1').val(selected.data('custnum1'));
-                            $('#cust_phone2').val(selected.data('custnum2'));
-
-                            populateSerialNumberDropdown($(this).val());
-                        });
-                        
-                        // Auto-fill machine details
-                        $('#serialnumber').change(function() {
-                            var serialNumber = $(this).val();
-                            
-                            $.ajax({
-                                type: "POST",
-                                url: "getMachineDetailsBySerial.php",
-                                data: { serial_number: serialNumber },
-                                
-                                success: function(response) {
-                                    var machineDetails = JSON.parse(response);
-                                    
-                                    if (!machineDetails.error) {
-                                        $('#machine_name').val(machineDetails.machine_name);$('#machine_name').val(machineDetails.machine_name);
-                                        $('#machine_id').val(machineDetails.machine_id);
-                                        $('#machine_code').val(machineDetails.machine_code);
-                                        $('#machine_brand').val(machineDetails.machine_brand);
-                                        $('#machine_type').val(machineDetails.machine_type).trigger('change');
-                                        $('#type_id').val(machineDetails.type_id);
-                    
-                                        initializeSelect2(['#brand_id']);
-                    
-                                        $('#brand_id').val(machineDetails.brand_id);
-                                
-                                        populateMachineTypeDropdown(machineDetails.brand_id, machineDetails.machine_type);
-                                    }
-                                },
-                        
-                                error: function(xhr, status, error) {
-                                    console.error("AJAX Error: ", error);
-                                }
-                            });
-                        });
-
-                        // Auto-fill machine_brand
-                        $('#brand_id').change(function() {
-                            var brandId = $(this).val();
-                            
-                            $('#machine_brand').val($(this).find('option:selected').text());
-                    
-                            populateMachineTypeDropdown(brandId);
-                        });
-                        
-                        // Auto-fill type_id
-                        $('#machine_type').change(function() {
-                            var selected = $(this).find('option:selected');
-                            
-                            $('#type_id').val(selected.data('typeid'));
-
-                            var machineType = $(this).val();
-                            
-                            // Auto-fill machine_name
-                            $.ajax({
-                                type: "POST",
-                                url: "getMachineNameAndTypeIdByType.php",
-                                data: { machine_type: machineType },
-                                
-                                success: function(response) {
-                                    var parsedResponse = JSON.parse(response); 
-                                    
-                                    $('#machine_name').val(parsedResponse.machine_name);
-                                },
-                                
-                                error: function(xhr, status, error) {
-                                    console.error("Error fetching machine name:", error);
-                                }
-                            });
-                        });
-    
-                        var jobregister_id = $('#jobregisterID_jobInfo').val();
-                        
-                        if (jobregister_id) {
-                            fetchJobInfoData(jobregister_id);
-                        }
-                    });
 
                     // Fetch Job Assign
                     function fetchJobAssign(jobregister_id) {

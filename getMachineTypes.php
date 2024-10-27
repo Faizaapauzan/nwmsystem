@@ -1,28 +1,41 @@
 <?php
-include "dbconnect.php"; 
-
-// Check if brand_id is provided
-if (isset($_POST['brand_id'])) {
-    $brandId = $_POST['brand_id'];
-
-    // Prepare the SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT type_id as id, type_name as name FROM machine_types WHERE brand_id = ?");
-    $stmt->bind_param("s", $brandId); // "s" specifies the variable type => 'string'
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $types = array();
-    while ($row = $result->fetch_assoc()) {
-        $types[] = $row;
+    
+    include 'dbconnect.php';
+    
+    if (isset($_POST['brand_id'])) {
+        $brand_id = $_POST['brand_id'];
+        $query = "SELECT * FROM machine_type WHERE brand_id = '$brand_id'";
+        $result = mysqli_query($conn, $query);
+        
+        if (mysqli_num_rows($result) > 0) {
+            echo "<option value=''>Select Machine Type</option>";
+            
+            while ($row = mysqli_fetch_assoc($result)) {
+                $type_id = $row['type_id'];
+                $type_name = $row['type_name'];
+                
+                $query_machine_list = "SELECT * FROM machine_list WHERE type_id = '$type_id'";
+                $result_machine_list = mysqli_query($conn, $query_machine_list);
+                $machine_name = 'N/A';
+                
+                if (mysqli_num_rows($result_machine_list) > 0) {
+                    $machine_list_row = mysqli_fetch_assoc($result_machine_list);
+                    $machine_name = $machine_list_row['machine_name'];
+                    $machine_id = $machine_list_row['machine_id'];
+                    $machine_code = $machine_list_row['machine_code'];
+                }
+                
+                echo "<option value='" . $type_name . "' 
+                              data-typeID='" . $type_id . "' 
+                              data-machNamez='" . $machine_name . "'
+                              data-machIDz='" . $machine_id . "'
+                              data-machCodez='" . $machine_code . "'>" . $type_name . "</option>";
+            }
+        }
+        
+        else {
+            echo "<option value=''>No Machine Types Available</option>";
+        }
     }
 
-    echo json_encode($types);
-
-    $stmt->close();
-} else {
-    // Return an empty array if brand_id is not set
-    echo json_encode(array());
-}
-
-$conn->close();
 ?>

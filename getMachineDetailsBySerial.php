@@ -1,38 +1,32 @@
 <?php
     
-    include "dbconnect.php";
+    include 'dbconnect.php';
     
-    if (isset($_POST['serial_number'])) {
-        $serialNumber = $_POST['serial_number'];
+    if (isset($_POST['customer_name'])) {
+        $customer_name = $_POST['customer_name'];
         
-        $query = "SELECT * FROM machine_list WHERE serialnumber = ?";
+        $query = "SELECT * FROM machine_list WHERE customer_name = '$customer_name'";
+        $result = mysqli_query($conn, $query);
         
-        if ($stmt = $conn->prepare($query)) {
-            $stmt->bind_param("s", $serialNumber);
-            $stmt->execute();
-        
-            $result = $stmt->get_result();
+        if (mysqli_num_rows($result) > 0) {
+            echo "<option value=''>Select Serial Number</option>";
             
-            if ($row = $result->fetch_assoc()) {
-                echo json_encode($row);
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<option value='" . $row['serialnumber'] . "'
+                              data-machName ='" . $row['machine_name'] . "'
+                              data-machID ='" . $row['machine_id'] . "'
+                              data-machCode ='" . $row['machine_code'] . "'
+                              data-brandID ='" . $row['brand_id'] . "'
+                              data-machBrand ='" . $row['machine_brand'] . "'
+                              data-machType ='" . $row['machine_type'] . "'
+                              data-typeID ='" . $row['type_id'] . "'>" . $row['serialnumber'] . "</option>";
             }
-            
-            else {
-                echo json_encode(array('error' => 'No details found for the provided serial number'));
-            }
-            
-            $stmt->close();
         }
         
         else {
-            echo json_encode(array('error' => 'SQL preparation error'));
+            echo "<option value=''>No Serial Numbers Available</option>";
         }
     }
     
-    else {
-        echo json_encode(array('error' => 'Serial number not provided'));
-    }
-    
-    $conn->close();
-    
 ?>
+
