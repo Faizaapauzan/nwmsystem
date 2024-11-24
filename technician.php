@@ -513,65 +513,77 @@
                                         </div>
 
                                         <script>
-                                            const jobCards = document.querySelectorAll('.Job');
-                                            
-                                            jobCards.forEach(jobCard => {
-                                                jobCard.addEventListener('click', function () {
-                                                    const jobRegisterID = jobCard.getAttribute('data-jobRegisterID');
-                                                    const jobregister_idInput = document.getElementById("jobregisterID_jobUpdate");
-                                                    
-                                                    jobregister_idInput.value = jobRegisterID;
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const departureButton = document.getElementById('departureButton');
+                                                const technicianDepartureInput = document.getElementById('technician_departure');
+                                                const jobCards = document.querySelectorAll('.Job');
+                                                const jobregister_idInput = document.getElementById("jobregisterID_jobUpdate");
+                                                
+                                                jobCards.forEach(jobCard => {
+                                                    jobCard.addEventListener('click', function () {
+                                                        const jobRegisterID = jobCard.getAttribute('data-jobRegisterID');
+                                                        jobregister_idInput.value = jobRegisterID;
+                                                    });
                                                 });
-                                            });
-                                            
-                                            $(document).on('click', '#departureButton', function () {
-                                                $.ajax({
-                                                    url: 'departureTimeServer.php',
-                                                    method: 'GET',
+                                                
+                                                departureButton.addEventListener('click', function () {
+                                                    fetch('departureTimeServer.php')
                                                     
-                                                    success: function(response) {
-                                                        const data = JSON.parse(response);
+                                                    .then(response => {
+                                                        if (!response.ok) {
+                                                            throw new Error('Network response was not ok');
+                                                        }
                                                         
+                                                        return response.json();
+                                                    })
+                                                    
+                                                    .then(data => {
                                                         if (data.error) {
                                                             alert(data.error);
                                                             
                                                             return;
                                                         }
                                                         
-                                                        document.getElementById('technician_departure').value = data.technician_departure;
+                                                        technicianDepartureInput.value = data.technician_departure;
                                                         
-                                                        const jobregister_idInput = document.getElementById("jobregisterID_jobUpdate");
                                                         const jobregister_id = jobregister_idInput.value;
                                                         const job_status = "Doing";
                                                         const DateAssign = data.date_assign;
                                                         const departure_timestamp = data.departure_timestamp;
-                                                        const xhr = new XMLHttpRequest();
-                                                        
-                                                        xhr.open("POST", "departureupdate.php", true);
-                                                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                        
-                                                        xhr.onreadystatechange = function () {
-                                                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                                                const responseText = xhr.responseText;
-                                                                
-                                                                if (responseText === "success") {
-                                                                    console.log("Update successful");
-                                                                }
-                                                                
-                                                                else {
-                                                                    console.error("Update failed");
-                                                                }
-                                                            }
-                                                        };
-                                                        
                                                         const dataString = `jobregister_id=${jobregister_id}&DateAssign=${DateAssign}&job_status=${job_status}&departure_timestamp=${departure_timestamp}`;
                                                         
-                                                        xhr.send(dataString);
-                                                    },
+                                                        fetch('departureupdate.php', {
+                                                            method: 'POST',
+                                                            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                                                            body: dataString
+                                                        })
+                                                        
+                                                        .then(response => {
+                                                            if (!response.ok) {
+                                                                throw new Error('Network response was not ok');
+                                                            }
+                                                            
+                                                            return response.text();
+                                                        })
+                                                        
+                                                        .then(responseText => {
+                                                            if (responseText === "success") {
+                                                                console.log("Update successful");
+                                                            }
+                                                            
+                                                            else {
+                                                                console.error("Update failed");
+                                                            }
+                                                        })
+                                                        
+                                                        .catch(error => {
+                                                            console.error('Error during update:', error);
+                                                        });
+                                                    })
                                                     
-                                                    error: function() {
+                                                    .catch(error => {
                                                         alert('Error fetching time from server.');
-                                                    }
+                                                    });
                                                 });
                                             });
                                         </script>
@@ -584,18 +596,27 @@
                                         </div>
                                         
                                         <script>
-                                            $(document).on('click', '#arrivalButton', function () {
-                                                $.ajax({
-                                                    url: 'get_server_time.php',
-                                                    method: 'GET',
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const arrivalButton = document.getElementById('arrivalButton');
+                                                const technicianArrivalInput = document.getElementById('technician_arrival');
+                                                
+                                                arrivalButton.addEventListener('click', function () {
+                                                    fetch('get_server_time.php')
+                                                    .then(response => {
+                                                        if (!response.ok) {
+                                                            throw new Error('Network response was not ok');
+                                                        }
+                                                        
+                                                        return response.text();
+                                                    })
                                                     
-                                                    success: function(response) {
-                                                        document.getElementById('technician_arrival').value = response;
-                                                    },
+                                                    .then(serverTime => {
+                                                        technicianArrivalInput.value = serverTime;
+                                                    })
                                                     
-                                                    error: function() {
+                                                    .catch(error => {
                                                         alert('Error fetching time from server.');
-                                                    }
+                                                    });
                                                 });
                                             });
                                         </script>
@@ -608,22 +629,31 @@
                                         </div>
 
                                         <script>
-                                            $(document).on('click', '#returnButton', function () {
-                                                $.ajax({
-                                                    url: 'get_server_time.php',
-                                                    method: 'GET',
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const returnButton = document.getElementById('returnButton');
+                                                const technicianLeavingInput = document.getElementById('technician_leaving');
+                                                
+                                                returnButton.addEventListener('click', function () {
+                                                    fetch('get_server_time.php')
+                                                    .then(response => {
+                                                        if (!response.ok) {
+                                                            throw new Error('Network response was not ok');
+                                                        }
+                                                        
+                                                        return response.text();
+                                                    })
                                                     
-                                                    success: function(response) {
-                                                        document.getElementById('technician_leaving').value = response;
-                                                    },
+                                                    .then(serverTime => {
+                                                        technicianLeavingInput.value = serverTime;
+                                                    })
                                                     
-                                                    error: function() {
+                                                    .catch(error => {
                                                         alert('Error fetching time from server.');
-                                                    }
+                                                    });
                                                 });
                                             });
                                         </script>
-
+                                        
                                         <!-- Rest Time -->
                                         <label for="" class="form-label fw-bold">Rest Hour</label>
                                         <div class="d-grid gap-3 mb-3">
@@ -634,66 +664,81 @@
                                             </div>
 
                                             <script>
-                                                jobCards.forEach(jobCard => {
-                                                    jobCard.addEventListener('click', function () {
-                                                        const jobAssign = jobCard.getAttribute('data-jobAssign');
-                                                        const techLeaderInput = document.getElementById("tech_leader");
-                                                        
-                                                        techLeaderInput.value = jobAssign;
-                                                    });
-                                                });
-                                                
-                                                $(document).on('click', '#outButton', function () { 
-                                                    $.ajax({
-                                                        url: 'resttime.php',
-                                                        method: 'GET',
-                                                        
-                                                        success: function(response) {
-                                                            const data = JSON.parse(response);
+                                                document.addEventListener('DOMContentLoaded', function() {
+                                                    const outButton = document.getElementById('outButton');
+                                                    const techOutInput = document.getElementById('tech_out');
+                                                    const techLeaderInput = document.getElementById('tech_leader');
+                                                    const jobCards = document.querySelectorAll('.Job');
+                                                    
+                                                    jobCards.forEach(jobCard => {
+                                                        jobCard.addEventListener('click', function () {
+                                                            const jobAssign = jobCard.getAttribute('data-jobAssign');
                                                             
+                                                            techLeaderInput.value = jobAssign;
+                                                        });
+                                                    });
+                                                    
+                                                    outButton.addEventListener('click', function () {
+                                                        fetch('resttime.php')
+                                                        
+                                                        .then(response => {
+                                                            if (!response.ok) {
+                                                                throw new Error('Network response was not ok');
+                                                            }
+                                                            
+                                                            return response.json();
+                                                        })
+                                                        
+                                                        .then(data => {
                                                             if (data.error) {
                                                                 alert(data.error);
                                                                 
                                                                 return;
                                                             }
                                                             
-                                                            document.getElementById('tech_out').value = data.tech_out;
+                                                            techOutInput.value = data.tech_out;
                                                             
-                                                            const techLeaderInput = document.getElementById("tech_leader");
                                                             const tech_leader = techLeaderInput.value;
                                                             const techupdate_date = data.techupdate_date;
                                                             const technician_out = data.tech_out;
-                                                            const xhr = new XMLHttpRequest();
-                                                            
-                                                            xhr.open("POST", "techoutupdate.php", true);
-                                                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                            
-                                                            xhr.onreadystatechange = function () {
-                                                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                                                    const responseText = xhr.responseText;
-                                                                    
-                                                                    if (responseText === "success") {
-                                                                        console.log("Update successful");
-                                                                    }
-                                                                    
-                                                                    else {
-                                                                        console.error("Update failed");
-                                                                    }
-                                                                }
-                                                            };
-                                                            
                                                             const dataString = `technician_out=${technician_out}&tech_leader=${tech_leader}&techupdate_date=${techupdate_date}`;
+                    
+                                                            fetch('techoutupdate.php', {
+                                                                method: 'POST',
+                                                                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                                                                body: dataString
+                                                            })
                                                             
-                                                            xhr.send(dataString);
-                                                        },
+                                                            .then(response => {
+                                                                if (!response.ok) {
+                                                                    throw new Error('Network response was not ok');
+                                                                }
+                                                                
+                                                                return response.text();
+                                                            })
+                                                            
+                                                            .then(responseText => {
+                                                                if (responseText === "success") {
+                                                                    console.log("Update successful");
+                                                                }
+                                                                
+                                                                else {
+                                                                    console.error("Update failed");
+                                                                }
+                                                            })
+                                                            
+                                                            .catch(error => {
+                                                                console.error('Error during update:', error);
+                                                            });
+                                                        })
                                                         
-                                                        error: function() {
+                                                        .catch(error => {
                                                             alert('Error fetching time from server.');
-                                                        }
+                                                        });
                                                     });
                                                 });
                                             </script>
-
+                                            
                                             <!-- Rest In -->
                                             <div class="input-group">
                                                 <input type="text" name="tech_in" id="tech_in" class="form-control" readonly>
@@ -701,62 +746,77 @@
                                             </div>
 
                                             <script>
-                                                jobCards.forEach(jobCard => {
-                                                    jobCard.addEventListener('click', function () {
-                                                        const jobAssign = jobCard.getAttribute('data-jobAssign');
-                                                        const techLeaderInput = document.getElementById("tech_leader");
-                                                        
-                                                        techLeaderInput.value = jobAssign;
-                                                    });
-                                                });
-                                                
-                                                $(document).on('click', '#inButton', function () {
-                                                    $.ajax({
-                                                        url: 'resttime.php',
-                                                        method: 'GET',
-                                                        
-                                                        success: function(response) {
-                                                            const data = JSON.parse(response);
+                                                document.addEventListener('DOMContentLoaded', function() {
+                                                    const inButton = document.getElementById('inButton');
+                                                    const techInInput = document.getElementById('tech_in');
+                                                    const techLeaderInput = document.getElementById('tech_leader');
+                                                    const jobCards = document.querySelectorAll('.Job');
+                                                    
+                                                    jobCards.forEach(jobCard => {
+                                                        jobCard.addEventListener('click', function () {
+                                                            const jobAssign = jobCard.getAttribute('data-jobAssign');
                                                             
+                                                            techLeaderInput.value = jobAssign;
+                                                        });
+                                                    });
+                                                    
+                                                    inButton.addEventListener('click', function () {
+                                                        fetch('resttime.php')
+                                                        
+                                                        .then(response => {
+                                                            if (!response.ok) {
+                                                                throw new Error('Network response was not ok');
+                                                            }
+                                                            
+                                                            return response.json();
+                                                        })
+                                                        
+                                                        .then(data => {
                                                             if (data.error) {
                                                                 alert(data.error);
                                                                 
                                                                 return;
                                                             }
                                                             
-                                                            document.getElementById('tech_in').value = data.tech_in;
+                                                            techInInput.value = data.tech_in;
                                                             
-                                                            const techLeaderInput = document.getElementById("tech_leader");
                                                             const tech_leader = techLeaderInput.value;
                                                             const techupdate_date = data.techupdate_date;
                                                             const technician_in = data.tech_in;
-                                                            const xhr = new XMLHttpRequest();
-                                                            
-                                                            xhr.open("POST", "techinupdate.php", true);
-                                                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                                            
-                                                            xhr.onreadystatechange = function () {
-                                                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                                                    const responseText = xhr.responseText;
-                                                                    
-                                                                    if (responseText === "success") {
-                                                                        console.log("Update successful");
-                                                                    }
-                                                                    
-                                                                    else {
-                                                                        console.error("Update failed");
-                                                                    }
-                                                                }
-                                                            };
-                                                            
                                                             const dataString = `technician_in=${technician_in}&tech_leader=${tech_leader}&techupdate_date=${techupdate_date}`;
                                                             
-                                                            xhr.send(dataString);
-                                                        },
+                                                            fetch('techinupdate.php', {
+                                                                method: 'POST',
+                                                                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                                                                body: dataString
+                                                            })
+                                                            
+                                                            .then(response => {
+                                                                if (!response.ok) {
+                                                                    throw new Error('Network response was not ok');
+                                                                }
+                                                                
+                                                                return response.text();
+                                                            })
+                                                            
+                                                            .then(responseText => {
+                                                                if (responseText === "success") {
+                                                                    console.log("Update successful");
+                                                                }
+                                                                
+                                                                else {
+                                                                    console.error("Update failed");
+                                                                }
+                                                            })
+                                                            
+                                                            .catch(error => {
+                                                                console.error('Error during update:', error);
+                                                            });
+                                                        })
                                                         
-                                                        error: function() {
+                                                        .catch(error => {
                                                             alert('Error fetching time from server.');
-                                                        }
+                                                        });
                                                     });
                                                 });
                                             </script>
