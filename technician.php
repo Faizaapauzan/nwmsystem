@@ -1094,7 +1094,7 @@
 
                                                 <div class="input-group mb-3">
                                                     <input type="file" name="file_name[]" id="fileName_before" class="form-control" accept="image/*" multiple>
-                                                    <input type="Hidden" name="description" id="descriptionBefore" value="Machine (Before Service)">
+                                                    <input type="hidden" name="description" id="descriptionBefore" value="Machine (Before Service)">
                                                     <button type="submit" name="upload" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
                                                 </div>
 
@@ -1142,7 +1142,7 @@
                                             
                                                 <div class="input-group mb-3">
                                                 <input type="file" name="file_name[]" id="fileName_after" class="form-control" accept="image/*" multiple>
-                                                    <input type="Hidden" name="description" id="descriptionAfter" value="Machine (After Service)">
+                                                    <input type="hidden" name="description" id="descriptionAfter" value="Machine (After Service)">
                                                     <button type="submit" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: fit-content;">Upload</button>  
                                                 </div>
 
@@ -1364,40 +1364,11 @@
                 $('#jobregisterlastmodify_by').val(usernameValue);
             }
 
-            // Fetch Job Update Tab
-            function fetchJobUpdateData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
-                    
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        
-                        if (res.status == 404) {
-                            console.log(res.message);
-                        } 
-                        
-                        else if (res.status == 200) {
-                            $('#jobregisterID_jobUpdate').val(res.data.jobregister_id);
-                            $('#technician_departure').val(res.data.technician_departure);
-                            $('#technician_arrival').val(res.data.technician_arrival);
-                            $('#technician_leaving').val(res.data.technician_leaving);
-                            $('#tech_out').val(res.data.tech_out);
-                            $('#tech_in').val(res.data.tech_in);
-                        }
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
-            }
-
             // select2 Library
             $(document).ready(function() {
                 var select2Elements = ['#serialnumber', '#brand_id', 
                                        '#machine_type', '#assign_JobInfo'];
-                        
+                                       
                 $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
                     select2Elements.forEach(function(elementId) {
                         $(elementId).select2({
@@ -1422,7 +1393,9 @@
                     fetchJobInfoData(jobregister_id);
                 }
             });
-
+            
+            let isLoadingMachineTypes = false;
+            
             // Function to load serial numbers based on customer name
             function loadSerialNumbers(customer_name) {
                 $.ajax({
@@ -1436,17 +1409,17 @@
                         let existingType = $('#serialnumber').data('existing-value');
                         
                         if (existingType) {
-                            $('#serialnumber').val(existingType).trigger('change');
+                            $('#serialnumber').val(existingType);
                         }
                     },
                     
                     error: function () {
-                        console.error("Failed to load machine types.");
+                        console.error("Failed to load serial numbers.");
                     }
                 });
             }
-
-            // Auto-fill machine details based on selected serialnumber
+            
+            // Auto-fill machine details based on selected serial number
             function loadMachineDetails(serialnumber) {
                 var selectedOption = document.querySelector('#serialnumber option[value="' + serialnumber + '"]');
                 
@@ -1463,10 +1436,8 @@
                     document.querySelector('input[name="machine_id"]').value = machIDValue;
                     document.querySelector('input[name="machine_code"]').value = machCodeValue;
                     document.querySelector('select[name="brand_id"]').value = brandIDValue;
-                    document.querySelector('select[name="brand_id"]').dispatchEvent(new Event('change'));
                     document.querySelector('input[name="machine_brand"]').value = machBrandValue;
                     document.querySelector('select[name="machine_type"]').value = machTypeValue;
-                    document.querySelector('select[name="machine_type"]').dispatchEvent(new Event('change'));
                     document.querySelector('input[name="type_id"]').value = typeIDValue;
                 }
                 
@@ -1497,6 +1468,12 @@
             
             // Function to load machine types based on selected brand
             function loadMachineTypes(brand_id) {
+                if (isLoadingMachineTypes) {
+                    return;
+                }
+                
+                isLoadingMachineTypes = true;
+                
                 $.ajax({
                     url: "getMachineTypes.php",
                     method: "POST",
@@ -1504,490 +1481,303 @@
                     
                     success: function (response) {
                         $('#machine_type').html(response);
-
-                        let existingBrandID = $('#brand_id').data('existing-value');
-                        
-                        if (existingBrandID) {
-                            $('#brand_id').val(existingBrandID).trigger('change');
-                        }
                         
                         let existingType = $('#machine_type').data('existing-value');
                         
                         if (existingType) {
-                            $('#machine_type').val(existingType).trigger('change');
+                            $('#machine_type').val(existingType);
                         }
+                        
+                        isLoadingMachineTypes = false;
                     },
                     
                     error: function () {
                         console.error("Failed to load machine types.");
+                        
+                        isLoadingMachineTypes = false;
                     }
                 });
             }
             
-            // Auto-fill type_id and machine_name when machine_type changes
-            function loadMachNameTypeID(type_name) {
-                var selectedOption = document.querySelector('#machine_type option[value="' + type_name + '"]');
-                
-                if (selectedOption) {
-                    var machNamezValue = selectedOption.getAttribute('data-machNamez');
-                    var typeIDValue = selectedOption.getAttribute('data-typeID');
-                    var machIDzValue = selectedOption.getAttribute('data-machIDz');
-                    var machCodezValue = selectedOption.getAttribute('data-machCodez');
+            // Fetch All Job Data
+            function fetchAllJobData(jobregister_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
                     
-                    document.querySelector('input[name="machine_name"]').value = machNamezValue;
-                    document.querySelector('input[name="type_id"]').value = typeIDValue;
-                    document.querySelector('input[name="machine_id"]').value = machIDzValue;
-                    document.querySelector('input[name="machine_code"]').value = machCodezValue;
+                    success: function (response) {
+                        var res = jQuery.parseJSON(response);
+                        
+                        if (res.status == 200) {
+                            updateJobUpdateTab(res.data);
+                            updateJobInfoTab(res.data);
+                            updateJobAssignTab(res.data);
+                            updateAssistantTab(res.assistant);
+                            updateAccessoryTab(res.jobAccessories);
+                            updatePhotoBeforeTab(res.photosBefore, jobregister_id);
+                            updatePhotoAfterTab(res.photosAfter, jobregister_id);
+                            updateVideoBeforeTab(res.videosBefore, jobregister_id);
+                            updateVideoAfterTab(res.videosAfter, jobregister_id);
+                            updateJobStatusTab(res.data);
+                            updateJobReportTab(res.data);
+                        }
+                        
+                        else {
+                            console.log(res.message);
+                        }
+                    },
+                    
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching job data:', error);
+                    }
+                });
+            }
+            
+            // Update Job Update Tab
+            function updateJobUpdateTab(data) {
+                $('#jobregisterID_jobUpdate').val(data.jobregister_id);
+                $('#technician_departure').val(data.technician_departure);
+                $('#technician_arrival').val(data.technician_arrival);
+                $('#technician_leaving').val(data.technician_leaving);
+                $('#tech_out').val(data.tech_out);
+                $('#tech_in').val(data.tech_in);
+            }
+            
+            // Update Job Info Tab
+            function updateJobInfoTab(data) {
+                $('#jobregisterID_jobInfo').val(data.jobregister_id);
+                $('#job_priority').val(data.job_priority);
+                $('#job_order_number').val(data.job_order_number);
+                $('#job_name').val(data.job_name);
+                $('#job_description').val(data.job_description);
+                $('#requested_date').val(data.requested_date);
+                $('#delivery_date').val(data.delivery_date);
+                $('#customer_name').val(data.customer_name);
+                $('#cust_address1').val(data.cust_address1);
+                $('#cust_address2').val(data.cust_address2);
+                $('#cust_address3').val(data.cust_address3);
+                $('#customer_grade').val(data.customer_grade);
+                $('#customer_PIC').val(data.customer_PIC);
+                $('#cust_phone1').val(data.cust_phone1);
+                $('#cust_phone2').val(data.cust_phone2);
+                $('#serialnumber').val(data.serialnumber);
+                $('#serialnumber').data('existing-value', data.serialnumber);
+                $('#machine_name').val(data.machine_name);
+                $('#machine_id').val(data.machine_id);
+                $('#machine_code').val(data.machine_code);
+                $('#brand_id').val(data.brand_id);
+                $('#brand_id').data('existing-value', data.brand_id);
+                $('#machine_brand').val(data.machine_brand);
+                $('#machine_type').val(data.machine_type);
+                $('#machine_type').data('existing-value', data.machine_type);
+                $('#type_id').val(data.type_id);
+                
+                loadSerialNumbers(data.customer_name);
+                loadMachineTypes(data.brand_id);
+            }
+            
+            // Update Job Assign Tab
+            function updateJobAssignTab(data) {
+                $('#jobAssignData').html('<label for="" class="form-label fw-bold">Job Assign: ' + data.job_assign + '</label>');
+                
+                var currentDate = new Date();
+                var formattedDate = ("0" + currentDate.getDate()).slice(-2) + "-" + ("0" + (currentDate.getMonth() + 1)).slice(-2) + "-" + currentDate.getFullYear();
+                
+                $('#jobregisterID_assistant').val(data.jobregister_id);
+                $('#ass_date').val(data.DateAssign);
+                $('#assistantDate').val(formattedDate);
+                $('#cust_name').val(data.customer_name);
+                $('#requestedDate').val(data.requested_date);
+                $('#machineName').val(data.machine_name);
+                $('#jobAssignAssistant').val(data.job_assign);
+            }
+            
+            // Update Assistant
+            function updateAssistantTab(assistantData) {
+                var tableBody = $('#assistantTable tbody');
+                    tableBody.empty();
+                    
+                if (assistantData && assistantData.length > 0) {
+                    assistantData.forEach(function(assistant) {
+                        var row = "<tr data-idAss='" + assistant.id + "'>" +
+                                        "<td style='text-align: center; vertical-align: middle;'>" + assistant.username.replace(/\n/g, "<br>") + "</td>" +
+                                        "<td style='text-align: center; vertical-align: middle;'><button class='delete-button btn fw-bold' style='color:red; border:none;'>Delete</button></td>" +
+                                  "</tr>";
+                            
+                        tableBody.append(row);
+                    });
                 }
                 
                 else {
-                    console.error('No matching option found for machine type:', type_name);
+                    tableBody.append('<tr><td colspan="2" style="text-align: center;">No Assistant</td></tr>');
+                }
+            }
+
+            // Update Accessory Tab
+            function updateAccessoryTab(accessoriesData) {
+                var tableBody = $('#accessoryTable tbody');
+                    tableBody.empty();
+                    
+                if (accessoriesData && accessoriesData.length > 0) {
+                    var counter = 1;
+                    
+                    accessoriesData.forEach(function (jobAccessories) {
+                        var row = "<tr>" +
+                                        "<td style='text-align: center;'>" + counter + "</td>" +
+                                        "<td>" + jobAccessories.accessories_code + "</td>" +
+                                        "<td>" + jobAccessories.accessories_name + "</td>" +
+                                        "<td style='text-align: center;'>" + jobAccessories.accessories_uom + "</td>" +
+                                        "<td style='text-align: center;'>" + jobAccessories.accessories_quantity + "</td>" +
+                                  "</tr>";
+                
+                        tableBody.append(row);
+                
+                        counter++;
+                    });
+                }
+                
+                else {
+                    tableBody.append('<tr><td style="text-align: center;" colspan="5">No Accessory</td></tr>');
                 }
             }
             
-            // Fetch job info data
-            function fetchJobInfoData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+            // Update Photo Before Tab
+            function updatePhotoBeforeTab(photosBeforeData, jobregister_id) {
+                $('#jobregisterID_photoBefore').val(jobregister_id);
+                
+                var photoCard = $('#photoBeforeService');
+                    photoCard.empty();
                     
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        
-                        if (res.status == 404) {
-                            console.log(res.message);
-                        }
-                        
-                        else if (res.status == 200) {
-                            $('#todayDate_Support').val(new Date().toISOString().slice(0, 10));
-                            $('#jobregisterID_jobInfo').val(res.data.jobregister_id);
-                            $('#support').val(res.data.support);
-                            $('#job_priority').val(res.data.job_priority);
-                            $('#job_order_number').val(res.data.job_order_number);
-                            $('#job_name').val(res.data.job_name).trigger('change');
-                            $('#job_code').val(res.data.job_code);
-                            $('#job_description').val(res.data.job_description);
-                            $('#requested_date').val(res.data.requested_date);
-                            $('#delivery_date').val(res.data.delivery_date);
-                            $('#customer_name').val(res.data.customer_name);
-                            $('#customer_code').val(res.data.customer_code);
-                            $('#cust_address1').val(res.data.cust_address1);
-                            $('#cust_address2').val(res.data.cust_address2);
-                            $('#cust_address3').val(res.data.cust_address3);
-                            $('#customer_grade').val(res.data.customer_grade);
-                            $('#customer_PIC').val(res.data.customer_PIC);
-                            $('#cust_phone1').val(res.data.cust_phone1);
-                            $('#cust_phone2').val(res.data.cust_phone2);
-                            $('#serialnumber').val(res.data.serialnumber).trigger('change');
-                            $('#serialnumber').data('existing-value', res.data.serialnumber);
-                            $('#machine_name').val(res.data.machine_name);
-                            $('#machine_id').val(res.data.machine_id);
-                            $('#machine_code').val(res.data.machine_code);
-                            $('#brand_id').val(res.data.brand_id).trigger('change');
-                            $('#brand_id').data('existing-value', res.data.brand_id);
-                            $('#machine_brand').val(res.data.machine_brand);
-                            $('#machine_type').val(res.data.machine_type).trigger('change');
-                            $('#machine_type').data('existing-value', res.data.machine_type);
-                            $('#type_id').val(res.data.type_id);
-                            $('#job_status').val(res.data.job_status).trigger('change');
-                            $('#inputreason').val(res.data.reason);
-                            $('#assign_JobInfo').val(res.data.job_assign).trigger('change');
-                            $('#techRankInfo').val(res.data.technician_rank);
-                            $('#staffPosInfo').val(res.data.staff_position);
-                            $('#accessories_required').val(res.data.accessories_required).trigger('change');
-                            $('#accessories_for').val(res.data.accessories_for).trigger('change');
-                            $('#job_cancel').val(res.data.job_cancel).trigger('change');
-                            
-                            loadSerialNumbers(res.data.customer_name);
-                            loadMachineTypes(res.data.brand_id);
-                        }
-                        
-                        else {
-                            console.log(res.message);
-                        }
+                    if (photosBeforeData && photosBeforeData.length > 0) {
+                        photosBeforeData.forEach(function (photosBefore) {
+                            var row = "<div class='photoBeforeContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + photosBefore.id + "'>" +
+                                            "<div class='card'>" +
+                                                "<a href='image/" + photosBefore.file_name + "' download>" +
+                                                    "<img src='image/" + photosBefore.file_name + "' class='rounded img-fluid' alt='Photo uploaded by technician'>" +
+                                                "</a>" +
+                                                "<button type='button' class='photoBeforeDelete btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'><i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i></button>" +
+                                            "</div>" +
+                                      "</div>";
+                
+                            photoCard.append(row);
+                        });
                     }
-                });
             }
+            
+            // Update Photo After Tab
+            function updatePhotoAfterTab(photosAfterData, jobregister_id) {
+                $('#jobregisterID_photoAfter').val(jobregister_id);
 
-            // fetch Job Assign Tab
-            function fetchJobAssignData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                var photoCardAfter = $('#photoAfterService');
+                    photoCardAfter.empty();
                     
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        
-                        if (res.status == 404) {
-                            console.log(res.message);
-                        } 
-                        
-                        else if (res.status == 200) {
-                            // Job Assign
-                            $('#jobAssignData').html('<label for="" class="form-label fw-bold">Job Assign: '+ res.data.job_assign +'</label>');
-
-                            var currentDate = new Date();
-                            var formattedDate = ("0" + currentDate.getDate()).slice(-2) + "-" + ("0" + (currentDate.getMonth() + 1)).slice(-2) + "-" + currentDate.getFullYear();
-                            
-                            // Assistant form
-                            $('#ass_date').val(res.data.DateAssign); 
-                            $('#assistantDate').val(formattedDate);
-                            $('#cust_name').val(res.data.customer_name);
-                            $('#requestedDate').val(res.data.requested_date);
-                            $('#machineName').val(res.data.machine_name);
-                            $('#jobAssignAssistant').val(res.data.job_assign);
-                        }
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
+                if (photosAfterData && photosAfterData.length > 0) {
+                    photosAfterData.forEach(function (photosAfter) {
+                        var row = "<div class='photoAfterContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + photosAfter.id + "'>" +
+                                        "<div class='card'>" +
+                                            "<a href='image/" + photosAfter.file_name + "' download>" +
+                                                "<img src='image/" + photosAfter.file_name + "' class='rounded img-fluid' alt='Photo uploaded by technician'>" +
+                                            "</a>" +
+                                            "<button type='button' class='photoAfterDelete btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'>" + "<i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i></button>" +
+                                        "</div>" +
+                                  "</div>";
+                
+                        photoCardAfter.append(row);
+                    });
+                }
             }
+            
+            // Update Video Before Tab
+            function updateVideoBeforeTab(videosBeforeData, jobregister_id) {
+                $('#jobregisterID_videoBefore').val(jobregister_id);
 
-            // Fetch Assistant Data
-            function fetchAssistantData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                var videoCard = $('#videoBeforeService');
+                    videoCard.empty();
                     
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        var jobregister_id = $('#jobregisterID_assistant').val(res.data.jobregister_id);
-                        var tableBody = $('#assistantTable tbody');
-                        
-                        tableBody.empty();
-                        
-                        if (res.status == 200) {
-                            var assistantData = res.assistant;
-                    
-                            if (assistantData.length > 0) {
-                                assistantData.forEach(function (assistant) {
-                                    var row = "<tr data-idAss='" + assistant.id + "'>" +
-                                                "<td style='text-align: center; vertical-align: middle;'>" + assistant.username.replace(/\n/g, "<br>") + "</td>" +
-                                                "<td style='text-align: center; vertical-align: middle;'><button class='delete-button btn fw-bold' style='color:red; border:none;'>Delete</button></td>" +
-                                              "</tr>";
-
-                                    tableBody.append(row);
-                                });
-                            } 
-                            
-                            else {
-                                tableBody.append('<tr><td style="text-align: center;">No Assistant</td></tr>');
-                            }
-                        } 
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
+                if (videosBeforeData && videosBeforeData.length > 0) {
+                    videosBeforeData.forEach(function (videosBefore) {
+                        var row = "<div class='videoBeforeContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + videosBefore.id + "'>" +
+                                        "<div class='card'>" +
+                                            "<video class='rounded card-img-top' controls>" +
+                                                "<source src='image/" + videosBefore.video_url + "' type='video/mp4'>" +
+                                            "</video>" +
+                                            "<button type='button' class='videoBeforeDeletebtn btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'><i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i></button>" +
+                                        "</div>" +
+                                  "</div>";
+                
+                        videoCard.append(row);
+                    });
+                }
             }
+            
+            // Update Video After Tab
+            function updateVideoAfterTab(videosAfterData, jobregister_id) {
+                $('#jobregisterID_videoAfter').val(jobregister_id);
 
-            // Fetch Accessory Data
-            function fetchAccessoryData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
+                var videoCardAfter = $('#videoAfterService');
+                    videoCardAfter.empty();
                     
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        var tableBody = $('#accessoryTable tbody');
-                        
-                        tableBody.empty();
-                        
-                        if (res.status == 200) {
-                            var accessoriesData = res.jobAccessories;
-                            
-                            if (accessoriesData.length > 0) {
-                                var counter = 1;
-                                
-                                accessoriesData.forEach(function (jobAccessories) {
-                                    var row = "<tr>" +
-                                                "<td style='text-align: center;'>" + counter + "</td>" +
-                                                "<td>" + jobAccessories.accessories_code + "</td>" +
-                                                "<td>" + jobAccessories.accessories_name + "</td>" +
-                                                "<td style='text-align: center;'>" + jobAccessories.accessories_uom + "</td>" +
-                                                "<td style='text-align: center;'>" + jobAccessories.accessories_quantity + "</td>" +
-                                              "</tr>";
-                                    
-                                    tableBody.append(row);
-                                    counter++;
-                                });
-                            } 
-                            
-                            else {
-                                tableBody.append('<tr><td style="text-align: center;" colspan="5">No Accessory</td></tr>');
-                            }
-                        } 
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
+                if (videosAfterData && videosAfterData.length > 0) {
+                    videosAfterData.forEach(function (videosAfter) {
+                        var row = "<div class='videoAfterContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + videosAfter.id + "'>" +
+                                        "<div class='card'>" +
+                                            "<video class='rounded card-img-top' controls>" +
+                                                "<source src='image/" + videosAfter.video_url + "' type='video/mp4'>" +
+                                            "</video>" +
+                                            "<button type='button' class='videoAfterDeletebtn btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'><i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i></button>" +
+                                        "</div>" +
+                                  "</div>";
+                          
+                        videoCardAfter.append(row);
+                    });
+                }
             }
-
-            // Fetch Photo Before Service Data
-            function fetchPhotoBeforeData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
-                    
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        var jobregister_id = $('#jobregisterID_photoBefore').val(res.data.jobregister_id);
-                        var photoCard = $('#photoBeforeService');
-                    
-                        photoCard.empty();
-                        
-                        if (res.status == 200) {
-                            var photosBeforeData = res.photosBefore;
-                            
-                            if (photosBeforeData.length > 0) {
-                                
-                                photosBeforeData.forEach(function (photosBefore) {
-                                    var row = "<div class='photoBeforeContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + photosBefore.id + "'>" +
-                                                "<div class='card'>" +
-                                                    "<a href='image/" + photosBefore.file_name + "' download>" +
-                                                        "<img src='image/" + photosBefore.file_name + "' class='rounded img-fluid' alt='Photo uploaded by technician'>" +
-                                                    "</a>" +
-                                                    "<button type='button' class='photoBeforeDelete btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'><i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i></button>" +
-                                                "</div>" +
-                                              "</div>";
-
-                                    photoCard.append(row);
-                                });
-                            } 
-                        } 
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
+            
+            // Update Job Status Tab
+            function updateJobStatusTab(data) {
+                $('#jobregisterID_jobStatus').val(data.jobregister_id);
+                $('#jobStatus_departure').val(data.technician_departure);
+                $('#jobStatus_arrival').val(data.technician_arrival);
+                $('#jobStatus_leaving').val(data.technician_leaving);
+                $('#job_statusChange').val(data.job_status).trigger('change');
+                $('#reason').val(data.reason);
             }
-
-            // Fetch Photo After Service Data
-            function fetchPhotoAfterData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
-                    
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        var jobregister_id = $('#jobregisterID_photoAfter').val(res.data.jobregister_id);
-                        var photoCardAfter = $('#photoAfterService');
-                        
-                        photoCardAfter.empty();
-                        
-                        if (res.status == 200) {
-                            var photosAfterData = res.photosAfter;
-                            
-                            if (photosAfterData.length > 0) {
-                                
-                                photosAfterData.forEach(function (photosAfter) {
-                                    var row = "<div class='photoAfterContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + photosAfter.id + "'>" +
-                                                "<div class='card'>" +
-                                                    "<a href='image/" + photosAfter.file_name + "' download>" +
-                                                        "<img src='image/" + photosAfter.file_name + "' class='rounded img-fluid' alt='Photo uploaded by technician'>" +
-                                                    "</a>" +
-                                                    "<button type='button' class='photoAfterDelete btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'>" +
-                                                        "<i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i>" +
-                                                    "</button>" +
-                                                "</div>" +
-                                              "</div>";
-                                    
-                                    photoCardAfter.append(row);
-                                });
-                            } 
-                        } 
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
+            
+            // Update Job Report Tab
+            function updateJobReportTab(data) {
+                $('#jobregisterID_jobReport').val(data.jobregister_id);
+                $('#serviceReport_Date').val(data.DateAssign);
             }
-
-            // Fetch Video Before Service Data
-            function fetchVideoBeforeData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
-                    
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        var jobregister_id = $('#jobregisterID_videoBefore').val(res.data.jobregister_id);
-                        var videoCard = $('#videoBeforeService');
-                        
-                        videoCard.empty();
-                        
-                        if (res.status == 200) {
-                            var videosBeforeData = res.videosBefore;
-                            
-                            if (videosBeforeData.length > 0) {
-                                
-                                videosBeforeData.forEach(function (videosBefore) {
-                                    var row = "<div class='videoBeforeContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + videosBefore.id + "'>" +
-                                                "<div class='card'>" +
-                                                    "<video class='rounded card-img-top' controls>" +
-                                                        "<source src='image/" + videosBefore.video_url + "' type='video/mp4'>" +
-                                                    "</video>" +
-                                                    "<button type='button' class='videoBeforeDeletebtn btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'>" +
-                                                        "<i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i>" +
-                                                    "</button>" +
-                                                "</div>" +
-                                              "</div>";
-
-                                    videoCard.append(row);
-                                });
-                            } 
-                        } 
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
-            }
-
-            // Fetch  Video After Service Data
-            function fetchVideoAfterData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
-                    
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        var jobregister_id = $('#jobregisterID_videoAfter').val(res.data.jobregister_id);
-                        var videoCardAfter = $('#videoAfterService');
-                        
-                        videoCardAfter.empty();
-                        
-                        if (res.status == 200) {
-                            var videosAfterData = res.videosAfter;
-                            
-                            if (videosAfterData.length > 0) {
-                                
-                                videosAfterData.forEach(function (videosAfter) {
-                                    var row = "<div class='videoAfterContainer col-12 col-sm-6 col-md-4 col-lg-3 mb-3' data-id='" + videosAfter.id + "'>" +
-                                                "<div class='card'>" +
-                                                    "<video class='rounded card-img-top' controls>" +
-                                                        "<source src='image/" + videosAfter.video_url + "' type='video/mp4'>" +
-                                                    "</video>" +
-                                                    "<button type='button' class='videoAfterDeletebtn btn position-absolute top-0 end-0 p-1' style='background-color:#D2042D;'>" +
-                                                        "<i class='iconify' data-icon='fa-regular:window-close' style='font-size:150%; color: white; font-weight:bold'></i>" +
-                                                    "</button>" +
-                                                "</div>" +
-                                              "</div>";
-                                    
-                                    videoCardAfter.append(row);
-                                });
-                            } 
-                        } 
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
-            }
-
-            // fetch Job Status Tab
-            function fetchJobStatusData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
-                    
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        
-                        if (res.status == 404) {
-                            console.log(res.message);
-                        } 
-                        
-                        else if (res.status == 200) {
-                            $('#jobregisterID_jobStatus').val(res.data.jobregister_id);
-                            
-                            $('#jobStatus_departure').val(res.data.technician_departure);
-                            $('#jobStatus_arrival').val(res.data.technician_arrival);
-                            $('#jobStatus_leaving').val(res.data.technician_leaving);
-                            
-                            $('#job_statusChange').val(res.data.job_status).trigger('change');
-                            $('#reason').val(res.data.reason); 
-                        }
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
-            }
-
-            function fetchJobReporData(jobregister_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "technicianPopupModalAllIndex.php?jobregister_id=" + jobregister_id,
-                    
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-                        
-                        if (res.status == 404) {
-                            console.log(res.message);
-                        } 
-                        
-                        else if (res.status == 200) {
-                            $('#jobregisterID_jobReport').val(res.data.jobregister_id);
-                            $('#serviceReport_Date').val(res.data.DateAssign);
-                        }
-                        
-                        else {
-                            console.log(res.message);
-                        }
-                    }
-                });
-            }
-
-            // Fetch All Tab Data
+            
+            // Fetch All Tab Data on Modal Open
             $(document).on('click', '.Job', function () {
                 var jobregister_id = $(this).data('jobregisterid');
                 
-                fetchUsername()
-                fetchJobUpdateData(jobregister_id)
-                fetchJobInfoData(jobregister_id)
-                fetchJobAssignData(jobregister_id)
-                fetchAssistantData(jobregister_id)
-                fetchAccessoryData(jobregister_id)
-                fetchPhotoBeforeData(jobregister_id)
-                fetchPhotoAfterData(jobregister_id)
-                fetchVideoBeforeData(jobregister_id)
-                fetchVideoAfterData(jobregister_id)
-                fetchJobStatusData(jobregister_id)
-                fetchJobReporData(jobregister_id)
-    
+                fetchUsername();
+                fetchAllJobData(jobregister_id);
+                
                 $('#popUpModal').modal('show');
             });
-
+            
             // Hide respond message
             function hideElementById(elementId) {
                 document.getElementById(elementId).style.display = "none";
             }
-
+            
             // Update job update tab
             $(document).on('submit', '#techJobUpdateForm', function (e) {
                 e.preventDefault();
                 
                 var formData = new FormData(this);
-                formData.append("update_jobUpdate", true);
+                    formData.append("update_jobUpdate", true);
 
                 var jobregister_id = $("#jobregisterID_jobUpdate").val();
-
+                
                 $.ajax({
                     type: "POST",
                     url: "technicianPopupModalAllIndex.php",
                     data: formData,
-                    processData: false, 
+                    processData: false,
                     contentType: false,
                     
                     success: function (response) {
@@ -2021,7 +1811,7 @@
                     }
                 });
             });
-
+            
             // Update job info tab
             $(document).on('submit', '#techJobInfoForm', function (e) {
                 e.preventDefault();
@@ -2030,12 +1820,12 @@
                     formData.append("update_jobInfo", true);
 
                 var jobregister_id = $("#jobregisterID_jobInfo").val();
-
+                
                 $.ajax({
                     type: "POST",
                     url: "technicianPopupModalAllIndex.php",
                     data: formData,
-                    processData: false, 
+                    processData: false,
                     contentType: false,
                     
                     success: function (response) {
@@ -2069,7 +1859,7 @@
                     }
                 });
             });
-
+            
             // Add Assistant
             $(document).on('submit', '#techJobAssistantForm', function (e) {
                 e.preventDefault();
@@ -2088,6 +1878,7 @@
                     
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
+                        console.log("Received Data:", res.assistant);
                        
                         if (res.status === 200) {
                             $('#assistantMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
@@ -2098,7 +1889,7 @@
                                 hideElementById("assistantMessage");
                             }, 2000);
 
-                            fetchAssistantData(jobregister_id);                            
+                            updateAssistantTab(res.assistant);                            
                         } 
                         
                         else if (res.status === 500) {
@@ -2127,25 +1918,35 @@
             });
 
             // Delete Assistant
-            $('#assistantTable').on('click', '.delete-button', function () {
+            $('#assistantTable').on('click', '.delete-button', function() {
                 var row = $(this).closest('tr');
-                var assistantId = row.data('idAss');
+                var assistantId = row.data('idass');
                 
                 $.ajax({
                     type: "POST",
                     url: "technicianPopupModalAllIndex.php",
                     data: {idAss: assistantId},
                     
-                    success: function (response) {
-                        var res = jQuery.parseJSON(response);
-
-                        if (res.status == 200) {
-                            row.remove();
+                    success: function(response) {
+                        try {
+                            var res = JSON.parse(response);
+                            
+                            if (res.status === 200) {
+                                row.remove();
+                            }
+                            
+                            else {
+                                console.error("Failed to delete assistant:", res.message);
+                            }
                         }
                         
-                        else {
-                            console.log("Error deleting assistant.");
+                        catch (e) {
+                            console.error("Error parsing JSON:", e);
                         }
+                    },
+                    
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error:", error);
                     }
                 });
             });
@@ -2155,7 +1956,7 @@
                 e.preventDefault();
                 
                 var formData = new FormData(this);
-                formData.append("upload_photoBefore", true);
+                    formData.append("upload_photoBefore", true);
 
                 var jobregister_id = $("#jobregisterID_photoBefore").val();
                 
@@ -2171,12 +1972,12 @@
                         
                         if (res.status === 200) {
                             $('#photoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
-                        } 
+                        }
                         
                         else if (res.status === 500) {
                             $('#photoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                         }
-
+                        
                         $('#previewPhotoBefore').empty();
                         $('#techJobPhotoBeforeForm')[0].reset();
 
@@ -2184,15 +1985,14 @@
                             hideElementById("photoBeforeMessage");
                         }, 2000);
 
-                        fetchPhotoBeforeData(jobregister_id);
+                        updatePhotoBeforeTab(res.photosBefore, jobregister_id);
                     },
                     
                     error: function (xhr, status, error) {
                         $('#photoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
-
                         $('#previewPhotoBefore').empty();
                         $('#techJobPhotoBeforeForm')[0].reset();
-
+                        
                         setTimeout(function () {
                             hideElementById("photoBeforeMessage");
                         }, 2000);
@@ -2212,10 +2012,10 @@
                     url: "technicianPopupModalAllIndex.php",
                     data: {'delete_photoBefore': true,
                            'id': photoId},
-                    
+                           
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
-
+                        
                         if (res.status == 200) {
                             photoBefore.remove();
                         }
@@ -2226,13 +2026,13 @@
                     }
                 });
             });
-
+            
             // Upload Photo After
             $(document).on('submit', '#techJobPhotoAfterForm', function (e) {
                 e.preventDefault();
                 
                 var formData = new FormData(this);
-                formData.append("upload_photoAfter", true);
+                    formData.append("upload_photoAfter", true);
 
                 var jobregister_id = $("#jobregisterID_photoAfter").val();
                 
@@ -2248,28 +2048,27 @@
                         
                         if (res.status === 200) {
                             $('#photoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
-                        } 
+                        }
                         
                         else if (res.status === 500) {
                             $('#photoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                         }
-
-                        $('#previewPhotoAfter').empty();
-                        $('#techJobPhotoAfterForm')[0].reset();
-
-                        setTimeout(function () {
-                            hideElementById("photoAfterMessage");
-                        }, 2000);
                         
-                        fetchPhotoAfterData(jobregister_id)
+                        $('#previewPhotoAfter').empty();
+                        $('#techJobPhotoBeforeForm')[0].reset();
+                        
+                        setTimeout(function () {
+                            $('#photoAfterMessage').hide();
+                        }, 2000);
+
+                        updatePhotoAfterTab(res.photosAfter, jobregister_id);
                     },
                     
                     error: function (xhr, status, error) {
                         $('#photoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
-                        
                         $('#previewPhotoAfter').empty();
                         $('#techJobPhotoAfterForm')[0].reset();
-
+                        
                         setTimeout(function () {
                             hideElementById("photoAfterMessage");
                         }, 2000);
@@ -2292,7 +2091,7 @@
                     
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
-
+                        
                         if (res.status == 200) {
                             photoAfter.remove();
                         }
@@ -2303,14 +2102,14 @@
                     }
                 });
             });
-
+            
             // Upload Video Before
             $(document).on('submit', '#techJobVideoBeforeForm', function (e) {
                 e.preventDefault();
                 
                 var formData = new FormData(this);
-                formData.append("upload_videoBefore", true);
-
+                    formData.append("upload_videoBefore", true);
+            
                 var jobregister_id = $("#jobregisterID_videoBefore").val();
                 
                 $.ajax({
@@ -2325,28 +2124,27 @@
                         
                         if (res.status === 200) {
                             $('#videoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
-                        } 
+                        }
                         
                         else if (res.status === 500) {
                             $('#videoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                         }
-
+                        
                         $('#previewVideoBefore').empty();
                         $('#techJobVideoBeforeForm')[0].reset();
-
+                        
                         setTimeout(function () {
                             hideElementById("videoBeforeMessage");
                         }, 2000);
                         
-                        fetchVideoBeforeData(jobregister_id)
+                        updateVideoBeforeTab(res.videosBefore, jobregister_id)
                     },
                     
                     error: function (xhr, status, error) {
                         $('#videoBeforeMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
-                        
                         $('#previewVideoBefore').empty();
                         $('#techJobVideoBeforeForm')[0].reset();
-
+                        
                         setTimeout(function () {
                             hideElementById("videoBeforeMessage");
                         }, 2000);
@@ -2355,7 +2153,7 @@
                     }
                 });
             });
-
+            
             // Delete Video Before
             $('#videoBeforeService').on('click', '.videoBeforeDeletebtn', function () {
                 var videoBefore = $(this).closest('.videoBeforeContainer');
@@ -2369,7 +2167,7 @@
                     
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
-
+                        
                         if (res.status == 200) {
                             videoBefore.remove();
                         }
@@ -2380,13 +2178,13 @@
                     }
                 });
             });
-
+            
             // Upload Video After
             $(document).on('submit', '#techJobVideoAfterForm', function (e) {
                 e.preventDefault();
                 
                 var formData = new FormData(this);
-                formData.append("upload_videoAfter", true);
+                    formData.append("upload_videoAfter", true);
 
                 var jobregister_id = $("#jobregisterID_videoAfter").val();
                 
@@ -2402,28 +2200,27 @@
                         
                         if (res.status === 200) {
                             $('#videoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p>');
-                        } 
+                        }
                         
                         else if (res.status === 500) {
                             $('#videoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p>');
                         }
-
+                        
                         $('#previewVideoAfter').empty();
                         $('#techJobVideoAfterForm')[0].reset();
-
+                        
                         setTimeout(function () {
                             hideElementById("videoAfterMessage");
                         }, 2000);
-
-                        fetchVideoAfterData(jobregister_id)
+                        
+                        updateVideoAfterTab(res.videosAfter, jobregister_id)
                     },
                     
                     error: function (xhr, status, error) {
                         $('#videoAfterMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
-
                         $('#previewVideoAfter').empty();
                         $('#techJobVideoAfterForm')[0].reset();
-
+                        
                         setTimeout(function () {
                             hideElementById("videoAfterMessage");
                         }, 2000);
@@ -2432,7 +2229,7 @@
                     }
                 });
             });
-
+            
             // Delete Video After
             $('#videoAfterService').on('click', '.videoAfterDeletebtn', function () {
                 var videoAfter = $(this).closest('.videoAfterContainer');
@@ -2446,7 +2243,7 @@
                     
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
-
+                        
                         if (res.status == 200) {
                             videoAfter.remove();
                         }
@@ -2457,37 +2254,36 @@
                     }
                 });
             });
-
+            
             // Update job status tab
             $(document).on('submit', '#techJobStatusForm', function (e) {
                 e.preventDefault();
                 
                 var formData = new FormData(this);
-                formData.append("update_jobStatus", true);
+                    formData.append("update_jobStatus", true);
 
                 var jobregister_id = $("#jobregisterID_jobStatus").val();
                 var technician_departure = $("#jobStatus_departure").val();
                 var technician_arrival = $("#jobStatus_arrival").val();
                 var technician_leaving = $("#jobStatus_leaving").val();
-
+                
                 $.ajax({
                     type: "POST",
                     url: "technicianPopupModalAllIndex.php",
                     data: formData,
-                    processData: false, 
+                    processData: false,
                     contentType: false,
                     
                     success: function (response) {
                         var res = jQuery.parseJSON(response);
- 
+                        
                         if (res.status === 200) {
                             $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: green; display:block;">' + res.message + '</p');
                             
                             setTimeout(function () {
                                 hideElementById("statusUpdateMessage");
                             }, 2000);
-                        
-                        } 
+                        }
                         
                         else if (res.status === 400) {
                             $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: #C41E3A; display:block;">' + res.message + '</p');
@@ -2495,7 +2291,7 @@
                             setTimeout(function () {
                                 hideElementById("statusUpdateMessage");
                             }, 3000);
-                        } 
+                        }
                         
                         else if (res.status === 500) {
                             $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">' + res.message + '</p');
@@ -2505,19 +2301,19 @@
                             }, 2000);
                         }
                     },
-
+                    
                     error: function (xhr, status, error) {
                         $('#statusUpdateMessage').html('<p class="fw-bold" style="text-align: center; color: red; display:block;">An error occurred while processing your request.</p>');
                         
                         setTimeout(function () {
-                                hideElementById("statusUpdateMessage");
+                            hideElementById("statusUpdateMessage");
                         }, 2000);
                         
                         console.error('AJAX Error:', status, error);
                     }
                 });
             });
-
+            
             // New Service Report
             function newServiceReport(jobregister_id) {
                 $.ajax({
@@ -2527,7 +2323,7 @@
                     
                     success: function (data) {
                         var win = window.open('servicereport.php');
-                        win.document.write(data);
+                            win.document.write(data);
                     },
                     
                     error: function (xhr, status, error) {
@@ -2541,7 +2337,7 @@
                 
                 newServiceReport(jobregister_id);
             });
-
+            
             // Edit Service Report
             function editServiceReport(jobregister_id) {
                 $.ajax({
@@ -2551,7 +2347,7 @@
                     
                     success: function (data) {
                         var win = window.open('servicereportEDIT.php');
-                        win.document.write(data);
+                            win.document.write(data);
                     },
                     
                     error: function (xhr, status, error) {

@@ -1,132 +1,56 @@
 <?php
-    
+
     include 'dbconnect.php';
     
     // Fetch data
     if (isset($_GET['jobregister_id'])) {
         $jobregister_id = $_GET['jobregister_id'];
         
-        // Fetch job_register table
-        $jobQuery = "SELECT * FROM job_register WHERE jobregister_id = ?";
-        $jobQueryResult = mysqli_prepare($conn, $jobQuery);
-    
-        mysqli_stmt_bind_param($jobQueryResult, 'i', $jobregister_id);
-        mysqli_stmt_execute($jobQueryResult);
-    
-        $result = mysqli_stmt_get_result($jobQueryResult);
-    
-        if (mysqli_num_rows($result) == 1) {
-            $info = mysqli_fetch_array($result);
-    
-            // Fetch assistants table
-            $assistantsQuery = "SELECT * FROM assistants WHERE jobregister_id = ?";
-            $assistantsQueryResult = mysqli_prepare($conn, $assistantsQuery);
-    
-            mysqli_stmt_bind_param($assistantsQueryResult, 'i', $jobregister_id);
-            mysqli_stmt_execute($assistantsQueryResult);
-    
-            $assistantsResult = mysqli_stmt_get_result($assistantsQueryResult);
-    
-            $assistantData = array();
-    
-            while ($row = mysqli_fetch_assoc($assistantsResult)) {
-                $assistantData[] = $row;
-            }
-    
-            // Fetch job_accessories table
-            $accessoriesQuery = "SELECT * FROM job_accessories WHERE jobregister_id = ?";
-            $accessoriesQueryResult = mysqli_prepare($conn, $accessoriesQuery);
-    
-            mysqli_stmt_bind_param($accessoriesQueryResult, 'i', $jobregister_id);
-            mysqli_stmt_execute($accessoriesQueryResult);
-    
-            $accessoriesResult = mysqli_stmt_get_result($accessoriesQueryResult);
-    
-            $accessoriesData = array();
-    
-            while ($row = mysqli_fetch_assoc($accessoriesResult)) {
-                $accessoriesData[] = $row;
-            }
+        $queries = [
+            'job_register' => "SELECT * FROM job_register WHERE jobregister_id = ?",
+            'assistants' => "SELECT * FROM assistants WHERE jobregister_id = ?",
+            'job_accessories' => "SELECT * FROM job_accessories WHERE jobregister_id = ?",
+            'photos_before' => "SELECT * FROM technician_photoupdate WHERE description = 'Machine (Before Service)' AND jobregister_id = ?",
+            'photos_after' => "SELECT * FROM technician_photoupdate WHERE description = 'Machine (After Service)' AND jobregister_id = ?",
+            'videos_before' => "SELECT * FROM technician_videoupdate WHERE description = 'Machine (Before Service)' AND jobregister_id = ?",
+            'videos_after' => "SELECT * FROM technician_videoupdate WHERE description = 'Machine (After Service)' AND jobregister_id = ?"
+        ];
 
-            // Fetch technician_photoupdate table (Before)
-            $photoBeforeQuery = "SELECT * FROM technician_photoupdate WHERE description= 'Machine (Before Service)' AND jobregister_id = ?";
-            $photoQueryBeforeResult = mysqli_prepare($conn, $photoBeforeQuery);
-    
-            mysqli_stmt_bind_param($photoQueryBeforeResult, 'i', $jobregister_id);
-            mysqli_stmt_execute($photoQueryBeforeResult);
-    
-            $photosBeforeResult = mysqli_stmt_get_result($photoQueryBeforeResult);
-    
-            $photosBeforeData = array();
-    
-            while ($row = mysqli_fetch_assoc($photosBeforeResult)) {
-                $photosBeforeData[] = $row;
-            }
+        $data = [];
 
-            // Fetch technician_photoupdate table (After)
-            $photoAfterQuery = "SELECT * FROM technician_photoupdate WHERE description = 'Machine (After Service)' AND jobregister_id = ?";
-            $photoQueryAfterResult = mysqli_prepare($conn, $photoAfterQuery);
-    
-            mysqli_stmt_bind_param($photoQueryAfterResult, 'i', $jobregister_id);
-            mysqli_stmt_execute($photoQueryAfterResult);
-    
-            $photosAfterResult = mysqli_stmt_get_result($photoQueryAfterResult);
-    
-            $photosAfterData = array();
-    
-            while ($row = mysqli_fetch_assoc($photosAfterResult)) {
-                $photosAfterData[] = $row;
+        foreach ($queries as $key => $query) {
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, 'i', $jobregister_id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            
+            $data[$key] = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $data[$key][] = $row;
             }
+            mysqli_stmt_close($stmt);
+        }
 
-            // Fetch technician_videoupdate table (Before)
-            $videoBeforeQuery = "SELECT * FROM technician_videoupdate WHERE description = 'Machine (Before Service)' AND jobregister_id = ?";
-            $videoQueryBeforeResult = mysqli_prepare($conn, $videoBeforeQuery);
-    
-            mysqli_stmt_bind_param($videoQueryBeforeResult, 'i', $jobregister_id);
-            mysqli_stmt_execute($videoQueryBeforeResult);
-    
-            $videosBeforeResult = mysqli_stmt_get_result($videoQueryBeforeResult);
-    
-            $videosBeforeData = array();
-    
-            while ($row = mysqli_fetch_assoc($videosBeforeResult)) {
-                $videosBeforeData[] = $row;
-            }
-
-            // Fetch technician_videoupdate table (After)
-            $videoAfterQuery = "SELECT * FROM technician_videoupdate WHERE description = 'Machine (After Service)' AND jobregister_id = ?";
-            $videoQueryAfterResult = mysqli_prepare($conn, $videoAfterQuery);
-    
-            mysqli_stmt_bind_param($videoQueryAfterResult, 'i', $jobregister_id);
-            mysqli_stmt_execute($videoQueryAfterResult);
-    
-            $videosAfterResult = mysqli_stmt_get_result($videoQueryAfterResult);
-    
-            $videosAfterData = array();
-    
-            while ($row = mysqli_fetch_assoc($videosAfterResult)) {
-                $videosAfterData[] = $row;
-            }
-    
-            $res = ['status' => 200,
-                    'message' => 'Info Fetch Successfully',
-                    'data' => $info,
-                    'assistant' => $assistantData,
-                    'jobAccessories' => $accessoriesData,
-                    'photosBefore' => $photosBeforeData,
-                    'photosAfter' => $photosAfterData,
-                    'videosBefore' => $videosBeforeData,
-                    'videosAfter' => $videosAfterData,];
-    
-            echo json_encode($res);
-        } 
+        if (count($data['job_register']) == 1) {
+            $res = [
+                'status' => 200,
+                'message' => 'Info Fetch Successfully',
+                'data' => $data['job_register'][0],
+                'assistant' => $data['assistants'],
+                'jobAccessories' => $data['job_accessories'],
+                'photosBefore' => $data['photos_before'],
+                'photosAfter' => $data['photos_after'],
+                'videosBefore' => $data['videos_before'],
+                'videosAfter' => $data['videos_after'],
+            ];
+        }
         
         else {
             $res = ['status' => 404,
                     'message' => 'Data Not Found',];
-    
-            echo json_encode($res);
         }
+
+        echo json_encode($res);
     }
 
     // Update Job Update
@@ -455,8 +379,8 @@
         $usernameString = implode("\n", $usernames);
     
         $query = "INSERT INTO assistants (jobregister_id, username, ass_date, cust_name, 
-                                          requested_date, machine_name) 
-                  
+                                          requested_date, machine_name)
+
                   VALUES (?, ?, ?, ?, ?, ?)";
                   
         $queryResult = mysqli_prepare($conn, $query);
@@ -468,18 +392,33 @@
             $success = mysqli_stmt_execute($queryResult);
 
             if ($success) {
+                $updatedAssistantsQuery = "SELECT * FROM assistants WHERE jobregister_id = ?";
+                
+                $stmt = mysqli_prepare($conn, $updatedAssistantsQuery);
+                        mysqli_stmt_bind_param($stmt, 'i', $jobregister_id);
+                        mysqli_stmt_execute($stmt);
+                
+                $result = mysqli_stmt_get_result($stmt);
+        
+                $assistants = [];
+                
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $assistants[] = $row;
+                }
+                
+                mysqli_stmt_close($stmt);
+
                 $res = ['status' => 200,
-                        'message' => 'Assistant successfully added'];
-
-                echo json_encode($res);
+                        'message' => 'Assistant successfully added',
+                        'assistant' => $assistants];
             }
-
+            
             else {
                 $res = ['status' => 500,
                         'message' => 'Error: ' . mysqli_error($conn)];
-
-                echo json_encode($res);
             }
+            
+            echo json_encode($res);
 
             mysqli_stmt_close($queryResult);
         }
@@ -497,104 +436,162 @@
         $id = $_POST['idAss'];
         
         $query = "DELETE FROM assistants WHERE id = ?";
-
+        
         $queryResult = mysqli_prepare($conn, $query);
-    
+        
         if ($queryResult) {
             mysqli_stmt_bind_param($queryResult, 'i', $id);
-
+            
             $success = mysqli_stmt_execute($queryResult);
-
+            
             if ($success) {
                 $res = ['status' => 200,
                         'message' => 'Assistant deleted successfully'];
 
                 echo json_encode($res);
             }
-
+            
             else {
                 $res = ['status' => 500,
                         'message' => 'Error: ' . mysqli_error($conn)];
 
                 echo json_encode($res);
             }
-
+            
             mysqli_stmt_close($queryResult);
         }
-
+        
         else {
             $res = ['status' => 500,
                     'message' => 'Error: ' . mysqli_error($conn)];
-
+                    
             echo json_encode($res);
         }
     }
 
-    // Upload photo Before
-    if (isset($_POST['upload_photoBefore'])) {
+    function compressImage($source, $destination, $fileExt) {
+        $fileSize = filesize($source) / 1024;
+        
+        if ($fileSize > 5000) {
+            $quality = 30;
+        }
+        
+        elseif ($fileSize > 2000) {
+            $quality = 50;
+        }
+        
+        else {
+            $quality = 70;
+        }
+        
+        if ($fileExt == 'jpeg' || $fileExt == 'jpg') {
+            $image = imagecreatefromjpeg($source);
+            
+            if ($image === false) {
+                error_log('Failed to create image from source: ' . $source);
+                
+                return false;
+            }
+            
+            imagejpeg($image, $destination, $quality);
+        }
+        
+        elseif ($fileExt == 'png') {
+            $image = imagecreatefrompng($source);
+            
+            if ($image === false) {
+                error_log('Failed to create image from source: ' . $source);
+                
+                return false;
+            }
+            
+            $pngQuality = 9 - round(($quality / 100) * 9);
+            
+            imagepng($image, $destination, $pngQuality);
+        }
+        
+        else {
+            error_log('Unsupported file extension: ' . $fileExt);
+            
+            return false;
+        }
+        
+        imagedestroy($image);
+        
+        return true;
+    }
+
+    function uploadFiles($conn, $jobregister_id, $description, $files, $target_dir, $tableName, $field_name) {
+        $responseFiles = [];
+        
         try {
-            $jobregister_id = $_POST['jobregister_id'];
-            $description = $_POST['description'];
-            $allowImg = array('png', 'jpeg', 'jpg', 'jfif');
-            $target_dir = 'image/';
+            $allowExts = ['png', 'jpeg', 'jpg', 'jfif'];
     
-            foreach ($_FILES['file_name']['name'] as $key => $value) {
-                $fileExt = pathinfo($_FILES['file_name']['name'][$key], PATHINFO_EXTENSION);
+            foreach ($files['name'] as $key => $value) {
+                $fileExt = pathinfo($files['name'][$key], PATHINFO_EXTENSION);
     
-                if (in_array($fileExt, $allowImg) && $_FILES['file_name']['size'][$key] > 0 && $_FILES['file_name']['error'][$key] == 0) {
-                    
-                    $originalFileName = $_FILES['file_name']['name'][$key];
-                    $tempFilePath = $_FILES['file_name']['tmp_name'][$key];
+                if (in_array($fileExt, $allowExts) && $files['size'][$key] > 0 && $files['error'][$key] == 0) {
+                    $originalFileName = uniqid() . '-' . basename($files['name'][$key]);
+                    $tempFilePath = $files['tmp_name'][$key];
                     $destinationFilePath = $target_dir . $originalFileName;
-                    
-                    compressImage($tempFilePath, $destinationFilePath, $fileExt);
-                    
-                    if (file_exists($destinationFilePath)) {
-                        $photoInsertQuery = "INSERT INTO technician_photoupdate (jobregister_id, file_name, description) 
-                                             VALUES (?, ?, ?)";
     
-                        $stmt = mysqli_prepare($conn, $photoInsertQuery);
+                    compressImage($tempFilePath, $destinationFilePath, $fileExt);
+    
+                    if (file_exists($destinationFilePath)) {
+                        $insertQuery = "INSERT INTO $tableName (jobregister_id, $field_name, description) VALUES (?, ?, ?)";
+                        $stmt = mysqli_prepare($conn, $insertQuery);
     
                         if ($stmt) {
                             mysqli_stmt_bind_param($stmt, 'iss', $jobregister_id, $originalFileName, $description);
-    
-                            $success = mysqli_stmt_execute($stmt);
-    
-                            if ($success) {
-                                $res = ['status' => 200,
-                                        'message' => 'Photo uploaded successfully'];
-                            }
-                            
-                            else {
-                                $res = ['status' => 500,
-                                        'message' => 'Error uploading photos: ' . mysqli_error($conn)];
-                            }
-    
+                            mysqli_stmt_execute($stmt);
                             mysqli_stmt_close($stmt);
+    
+                            $responseFiles[] = [
+                                'id' => mysqli_insert_id($conn),
+                                'file_name' => $originalFileName,
+                            ];
                         }
-                        
-                        else {
-                            $res = ['status' => 500,
-                                    'message' => 'Error: ' . mysqli_error($conn)];
-                        }
-                    }
-                    
-                    else {
-                        $res = ['status' => 500,
-                                'message' => 'Error: Compressed file does not exist at ' . $destinationFilePath];
                     }
                 }
             }
+            
+            return ['status' => 200, 'message' => 'Files uploaded successfully', 'uploadedFiles' => $responseFiles];
         }
         
         catch (Exception $e) {
-            $res = ['status' => 500,
-                    'message' => 'Submit error: ' . $e->getMessage()];
+            return ['status' => 500, 'message' => 'Error: ' . $e->getMessage()];
+        }
+    }
+
+    // Upload photo before
+    if (isset($_POST['upload_photoBefore'])) {
+        $jobregister_id = $_POST['jobregister_id'];
+        $description = $_POST['description'];
+        
+        $response = uploadFiles($conn, $jobregister_id, $description, $_FILES['file_name'], 'image/', 'technician_photoupdate', 'file_name');
+
+        $query = "SELECT * FROM technician_photoupdate WHERE description = 'Machine (Before Service)' AND jobregister_id = ?";
+        $stmt = mysqli_prepare($conn, $query);
+        
+        mysqli_stmt_bind_param($stmt, 'i', $jobregister_id);
+        mysqli_stmt_execute($stmt);
+        
+        $result = mysqli_stmt_get_result($stmt);
+    
+        $photosBefore = [];
+        
+        while ($row = mysqli_fetch_assoc($result)) {
+            $photosBefore[] = $row;
         }
     
-        echo json_encode($res);
+        mysqli_stmt_close($stmt);
+        
+        $response['photosBefore'] = $photosBefore;
+    
+        echo json_encode($response);
     }
     
+
     // Delete Photo Before 
     if(isset($_POST['delete_photoBefore'])) {
         $id = mysqli_real_escape_string($conn, $_POST['id']);
@@ -635,67 +632,30 @@
 
     // Upload photo After
     if (isset($_POST['upload_photoAfter'])) {
-        try {
-            $jobregister_id = $_POST['jobregister_id'];
-            $description = $_POST['description'];
-            $allowImg = array('png', 'jpeg', 'jpg', 'jfif');
-            $target_dir = 'image/';
-    
-            foreach ($_FILES['file_name']['name'] as $key => $value) {
-                $fileExt = pathinfo($_FILES['file_name']['name'][$key], PATHINFO_EXTENSION);
-    
-                if (in_array($fileExt, $allowImg) && $_FILES['file_name']['size'][$key] > 0 && $_FILES['file_name']['error'][$key] == 0) {
-                    
-                    $originalFileName = $_FILES['file_name']['name'][$key];
-                    $tempFilePath = $_FILES['file_name']['tmp_name'][$key];
-                    $destinationFilePath = $target_dir . $originalFileName;
-                    
-                    compressImage($tempFilePath, $destinationFilePath, $fileExt);
-                    
-                    if (file_exists($destinationFilePath)) {
-                        $photoInsertQuery = "INSERT INTO technician_photoupdate (jobregister_id, file_name, description) 
-                                             VALUES (?, ?, ?)";
-    
-                        $stmt = mysqli_prepare($conn, $photoInsertQuery);
-    
-                        if ($stmt) {
-                            mysqli_stmt_bind_param($stmt, 'iss', $jobregister_id, $originalFileName, $description);
-    
-                            $success = mysqli_stmt_execute($stmt);
-    
-                            if ($success) {
-                                $res = ['status' => 200,
-                                        'message' => 'Photo uploaded successfully'];
-                            }
-                            
-                            else {
-                                $res = ['status' => 500,
-                                        'message' => 'Error uploading photos: ' . mysqli_error($conn)];
-                            }
-    
-                            mysqli_stmt_close($stmt);
-                        }
-                        
-                        else {
-                            $res = ['status' => 500,
-                                    'message' => 'Error: ' . mysqli_error($conn)];
-                        }
-                    }
-                    
-                    else {
-                        $res = ['status' => 500,
-                                'message' => 'Error: Compressed file does not exist at ' . $destinationFilePath];
-                    }
-                }
-            }
-        }
+        $jobregister_id = $_POST['jobregister_id'];
+        $description = $_POST['description'];
         
-        catch (Exception $e) {
-            $res = ['status' => 500,
-                    'message' => 'Submit error: ' . $e->getMessage()];
+        $response = uploadFiles($conn, $jobregister_id, $description, $_FILES['file_name'], 'image/', 'technician_photoupdate', 'file_name');
+
+        $query = "SELECT * FROM technician_photoupdate WHERE description = 'Machine (After Service)' AND jobregister_id = ?";
+        $stmt = mysqli_prepare($conn, $query);
+        
+        mysqli_stmt_bind_param($stmt, 'i', $jobregister_id);
+        mysqli_stmt_execute($stmt);
+        
+        $result = mysqli_stmt_get_result($stmt);
+    
+        $photosAfter = [];
+        
+        while ($row = mysqli_fetch_assoc($result)) {
+            $photosAfter[] = $row;
         }
     
-        echo json_encode($res);
+        mysqli_stmt_close($stmt);
+        
+        $response['photosAfter'] = $photosAfter;
+    
+        echo json_encode($response);
     }
 
     // Delete Photo After
@@ -735,63 +695,23 @@
             echo json_encode($res);
         }
     }
-
-    function compressImage($source, $destination, $fileExt) {
-        $quality = 50;
-        
-        if ($fileExt == 'jpeg' || $fileExt == 'jpg') {
-            $image = imagecreatefromjpeg($source);
-            
-            if ($image === false) {
-                error_log('Failed to create image from source: ' . $source);
-                
-                return false;
-            }
-            
-            imagejpeg($image, $destination, $quality);
-        }
-        
-        elseif ($fileExt == 'png') {
-            $image = imagecreatefrompng($source);
-            
-            if ($image === false) {
-                error_log('Failed to create image from source: ' . $source);
-                
-                return false;
-            }
-            
-            $pngQuality = 9;
-            
-            imagepng($image, $destination, $pngQuality);
-        }
-        
-        else {
-            error_log('Unsupported file extension: ' . $fileExt);
-            
-            return false;
-        }
-        
-        imagedestroy($image);
-        
-        return true;
-    }
-
+    
     // Upload Video Before
     if (isset($_POST['upload_videoBefore'])) {
         try {
             $jobregister_id = $_POST['jobregister_id'];
-            $description = $_POST['description'];
+            $description = 'Machine (Before Service)';
             $allowVideo = array('mp4', '3gp', 'webm', 'mov', 'avi', 'mkv');
             $target_dir = 'image/';
     
             foreach ($_FILES['video_url']['name'] as $key => $value) {
-                $fileExnt = pathinfo($_FILES['video_url']['name'][$key], PATHINFO_EXTENSION);
+                $fileExt = pathinfo($_FILES['video_url']['name'][$key], PATHINFO_EXTENSION);
     
-                if (in_array($fileExnt, $allowVideo) &&
+                if (in_array($fileExt, $allowVideo) &&
                     $_FILES['video_url']['size'][$key] > 0 &&
                     $_FILES['video_url']['error'][$key] == 0) {
     
-                    $originalFileName = $_FILES['video_url']['name'][$key];
+                    $originalFileName = uniqid() . '-' . $_FILES['video_url']['name'][$key];
     
                     if (move_uploaded_file($_FILES['video_url']['tmp_name'][$key], $target_dir . $originalFileName)) {
                         $videoInsertQuery = "INSERT INTO technician_videoupdate (jobregister_id, video_url, description) 
@@ -801,29 +721,32 @@
     
                         if ($stmt) {
                             mysqli_stmt_bind_param($stmt, 'iss', $jobregister_id, $originalFileName, $description);
-    
-                            $success = mysqli_stmt_execute($stmt);
-    
-                            if ($success) {
-                                $res = ['status' => 200,
-                                        'message' => 'Video uploaded successfully'];
-                            }
-                            
-                            else {
-                                $res = ['status' => 500,
-                                        'message' => 'Error: ' . mysqli_error($conn)];
-                            }
-    
+                            mysqli_stmt_execute($stmt);
                             mysqli_stmt_close($stmt);
-                        }
-                        
-                        else {
-                            $res = ['status' => 500,
-                                    'message' => 'Error: ' . mysqli_error($conn)];
                         }
                     }
                 }
             }
+    
+            $query = "SELECT * FROM technician_videoupdate WHERE description = 'Machine (Before Service)' AND jobregister_id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            
+            mysqli_stmt_bind_param($stmt, 'i', $jobregister_id);
+            mysqli_stmt_execute($stmt);
+            
+            $result = mysqli_stmt_get_result($stmt);
+    
+            $videosBefore = [];
+            
+            while ($row = mysqli_fetch_assoc($result)) {
+                $videosBefore[] = $row;
+            }
+    
+            mysqli_stmt_close($stmt);
+    
+            $res = ['status' => 200,
+                    'message' => 'Videos uploaded successfully',
+                    'videosBefore' => $videosBefore];
         }
         
         catch (Exception $e) {
@@ -833,7 +756,7 @@
     
         echo json_encode($res);
     }
-    
+        
     // Delete Video Before 
     if(isset($_POST['delete_videoBefore'])) {
         $id = mysqli_real_escape_string($conn, $_POST['id']);
@@ -876,18 +799,18 @@
     if (isset($_POST['upload_videoAfter'])) {
         try {
             $jobregister_id = $_POST['jobregister_id'];
-            $description = $_POST['description'];
+            $description = 'Machine (After Service)';
             $allowVideo = array('mp4', '3gp', 'webm', 'mov', 'avi', 'mkv');
             $target_dir = 'image/';
     
             foreach ($_FILES['video_url']['name'] as $key => $value) {
-                $fileExnt = pathinfo($_FILES['video_url']['name'][$key], PATHINFO_EXTENSION);
+                $fileExt = pathinfo($_FILES['video_url']['name'][$key], PATHINFO_EXTENSION);
     
-                if (in_array($fileExnt, $allowVideo) &&
+                if (in_array($fileExt, $allowVideo) &&
                     $_FILES['video_url']['size'][$key] > 0 &&
                     $_FILES['video_url']['error'][$key] == 0) {
     
-                    $originalFileName = $_FILES['video_url']['name'][$key];
+                    $originalFileName = uniqid() . '-' . $_FILES['video_url']['name'][$key];
     
                     if (move_uploaded_file($_FILES['video_url']['tmp_name'][$key], $target_dir . $originalFileName)) {
                         $videoInsertQuery = "INSERT INTO technician_videoupdate (jobregister_id, video_url, description) 
@@ -897,33 +820,42 @@
     
                         if ($stmt) {
                             mysqli_stmt_bind_param($stmt, 'iss', $jobregister_id, $originalFileName, $description);
-    
-                            $success = mysqli_stmt_execute($stmt);
-    
-                            if ($success) {
-                                $res = ['status' => 200,
-                                        'message' => 'Video uploaded successfully'];
-                            } else {
-                                $res = ['status' => 500,
-                                        'message' => 'Error uploading videos: ' . mysqli_error($conn)];
-                            }
-    
+                            mysqli_stmt_execute($stmt);
                             mysqli_stmt_close($stmt);
-                        } else {
-                            $res = ['status' => 500,
-                                    'message' => 'Error preparing statement: ' . mysqli_error($conn)];
                         }
                     }
                 }
             }
-        } catch (Exception $e) {
+    
+            $query = "SELECT * FROM technician_videoupdate WHERE description = 'Machine (After Service)' AND jobregister_id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            
+            mysqli_stmt_bind_param($stmt, 'i', $jobregister_id);
+            mysqli_stmt_execute($stmt);
+            
+            $result = mysqli_stmt_get_result($stmt);
+    
+            $videosAfter = [];
+            
+            while ($row = mysqli_fetch_assoc($result)) {
+                $videosAfter[] = $row;
+            }
+    
+            mysqli_stmt_close($stmt);
+    
+            $res = ['status' => 200,
+                    'message' => 'Videos uploaded successfully',
+                    'videosAfter' => $videosAfter];
+        }
+        
+        catch (Exception $e) {
             $res = ['status' => 500,
-                    'message' => 'Submit error: ' . $e->getMessage()];
+                    'message' => 'Error: ' . $e->getMessage()];
         }
     
         echo json_encode($res);
     }
-    
+        
     // Delete Video After 
     if(isset($_POST['delete_videoAfter'])) {
         $id = mysqli_real_escape_string($conn, $_POST['id']);
