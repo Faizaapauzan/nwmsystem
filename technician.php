@@ -1394,111 +1394,6 @@
                 }
             });
             
-            let isLoadingMachineTypes = false;
-            
-            // Function to load serial numbers based on customer name
-            function loadSerialNumbers(customer_name) {
-                $.ajax({
-                    url: "getMachineDetailsBySerial.php",
-                    method: "POST",
-                    data: { customer_name: customer_name },
-                    
-                    success: function (response) {
-                        $('#serialnumber').html(response);
-                        
-                        let existingType = $('#serialnumber').data('existing-value');
-                        
-                        if (existingType) {
-                            $('#serialnumber').val(existingType);
-                        }
-                    },
-                    
-                    error: function () {
-                        console.error("Failed to load serial numbers.");
-                    }
-                });
-            }
-            
-            // Auto-fill machine details based on selected serial number
-            function loadMachineDetails(serialnumber) {
-                var selectedOption = document.querySelector('#serialnumber option[value="' + serialnumber + '"]');
-                
-                if (selectedOption) {
-                    var machNameValue = selectedOption.getAttribute('data-machName');
-                    var machIDValue = selectedOption.getAttribute('data-machID');
-                    var machCodeValue = selectedOption.getAttribute('data-machCode');
-                    var brandIDValue = selectedOption.getAttribute('data-brandID');
-                    var machBrandValue = selectedOption.getAttribute('data-machBrand');
-                    var machTypeValue = selectedOption.getAttribute('data-machType');
-                    var typeIDValue = selectedOption.getAttribute('data-typeID');
-                    
-                    document.querySelector('input[name="machine_name"]').value = machNameValue;
-                    document.querySelector('input[name="machine_id"]').value = machIDValue;
-                    document.querySelector('input[name="machine_code"]').value = machCodeValue;
-                    document.querySelector('select[name="brand_id"]').value = brandIDValue;
-                    document.querySelector('input[name="machine_brand"]').value = machBrandValue;
-                    document.querySelector('select[name="machine_type"]').value = machTypeValue;
-                    document.querySelector('input[name="type_id"]').value = typeIDValue;
-                }
-                
-                else {
-                    console.error('No matching option found for serial number:', serialnumber);
-                }
-            }
-            
-            function onBrandIDChange(brand_id) {
-                GetBrandName(brand_id);
-                loadMachineTypes(brand_id);
-            }
-            
-            // Auto-fill machine_brand based on brand_id selection
-            function GetBrandName(brand_id) {
-                var selectedOption = document.querySelector('#brand_id option[value="' + brand_id + '"]');
-                
-                if (selectedOption) {
-                    var brandNameValue = selectedOption.getAttribute('data-machBrand');
-                    
-                    document.querySelector('input[name="machine_brand"]').value = brandNameValue || '';
-                }
-                
-                else {
-                    console.error("No matching option found for brand_id:", brand_id);
-                }
-            }
-            
-            // Function to load machine types based on selected brand
-            function loadMachineTypes(brand_id) {
-                if (isLoadingMachineTypes) {
-                    return;
-                }
-                
-                isLoadingMachineTypes = true;
-                
-                $.ajax({
-                    url: "getMachineTypes.php",
-                    method: "POST",
-                    data: { brand_id: brand_id },
-                    
-                    success: function (response) {
-                        $('#machine_type').html(response);
-                        
-                        let existingType = $('#machine_type').data('existing-value');
-                        
-                        if (existingType) {
-                            $('#machine_type').val(existingType);
-                        }
-                        
-                        isLoadingMachineTypes = false;
-                    },
-                    
-                    error: function () {
-                        console.error("Failed to load machine types.");
-                        
-                        isLoadingMachineTypes = false;
-                    }
-                });
-            }
-            
             // Fetch All Job Data
             function fetchAllJobData(jobregister_id) {
                 $.ajax({
@@ -1562,18 +1457,136 @@
                 $('#cust_phone2').val(data.cust_phone2);
                 $('#serialnumber').val(data.serialnumber);
                 $('#serialnumber').data('existing-value', data.serialnumber);
+                $('#brand_id').val(data.brand_id).trigger('change');
+                $('#brand_id').data('existing-value', data.brand_id);
+                $('#machine_brand').val(data.machine_brand);
+                $('#machine_type').val(data.machine_type).trigger('change');
+                $('#machine_type').data('existing-value', data.machine_type);
+                $('#type_id').val(data.type_id);
                 $('#machine_name').val(data.machine_name);
                 $('#machine_id').val(data.machine_id);
                 $('#machine_code').val(data.machine_code);
-                $('#brand_id').val(data.brand_id);
-                $('#brand_id').data('existing-value', data.brand_id);
-                $('#machine_brand').val(data.machine_brand);
-                $('#machine_type').val(data.machine_type);
-                $('#machine_type').data('existing-value', data.machine_type);
-                $('#type_id').val(data.type_id);
                 
                 loadSerialNumbers(data.customer_name);
                 loadMachineTypes(data.brand_id);
+            }
+
+            // Function to load serial numbers based on customer name
+            function loadSerialNumbers(customer_name) {
+                $.ajax({
+                    url: "getMachineDetailsBySerial.php",
+                    method: "POST",
+                    data: { customer_name: customer_name },
+                    
+                    success: function (response) {
+                        $('#serialnumber').html(response);
+                        
+                        let existingType = $('#serialnumber').data('existing-value');
+                        
+                        if (existingType) {
+                            $('#serialnumber').val(existingType);
+                        }
+                    },
+                    
+                    error: function () {
+                        console.error("Failed to load serial numbers.");
+                    }
+                });
+            }
+            
+            // Auto-fill machine details based on selected serial number
+            function loadMachineDetails(serialnumber) {
+                var selectedOption = document.querySelector('#serialnumber option[value="' + serialnumber + '"]');
+                
+                if (selectedOption) {
+                    var machNameValue = selectedOption.getAttribute('data-machName');
+                    var machIDValue = selectedOption.getAttribute('data-machID');
+                    var machCodeValue = selectedOption.getAttribute('data-machCode');
+                    var brandIDValue = selectedOption.getAttribute('data-brandID');
+                    var machBrandValue = selectedOption.getAttribute('data-machBrand');
+                    var machTypeValue = selectedOption.getAttribute('data-machType');
+                    var typeIDValue = selectedOption.getAttribute('data-typeID');
+                    var brandSelect = document.querySelector('select[name="brand_id"]');
+                    var typeSelect = document.querySelector('select[name="machine_type"]');
+                    
+                    brandSelect.value = brandIDValue;
+                    typeSelect.value = machTypeValue;
+                    
+                    $(brandSelect).trigger('change');
+                    $(typeSelect).trigger('change');
+                    
+                    document.querySelector('input[name="machine_name"]').value = machNameValue;
+                    document.querySelector('input[name="machine_id"]').value = machIDValue;
+                    document.querySelector('input[name="machine_code"]').value = machCodeValue;
+                    document.querySelector('input[name="machine_brand"]').value = machBrandValue;
+                    document.querySelector('input[name="type_id"]').value = typeIDValue;
+                }
+                
+                else {
+                    console.error('No matching option found for serial number:', serialnumber);
+                }
+            }
+
+            function onBrandIDChange(brand_id) {
+                GetBrandName(brand_id);
+                loadMachineTypes(brand_id);
+            }
+            
+            // Auto-fill machine_brand based on brand_id selection
+            function GetBrandName(brand_id) {
+                var selectedOption = document.querySelector('#brand_id option[value="' + brand_id + '"]');
+                
+                if (selectedOption) {
+                    var brandNameValue = selectedOption.getAttribute('data-machBrand');
+                    
+                    document.querySelector('input[name="machine_brand"]').value = brandNameValue || '';
+                }
+                
+                else {
+                    console.error("No matching option found for brand_id:", brand_id);
+                }
+            }
+            
+            // Function to load machine types based on selected brand
+            function loadMachineTypes(brand_id) {
+                $.ajax({
+                    url: "getMachineTypes.php",
+                    method: "POST",
+                    data: { brand_id: brand_id },
+                    
+                    success: function (response) {
+                        $('#machine_type').html(response);
+                        
+                        let existingType = $('#machine_type').data('existing-value');
+                        
+                        if (existingType) {
+                            $('#machine_type').val(existingType);
+                        }
+                    },
+                    
+                    error: function () {
+                        console.error("Failed to load machine types.");
+                    }
+                });
+            }
+
+            // Auto-fill type_id and machine_name when machine_type changes
+            function loadMachNameTypeID(type_id) {
+                const selectedOption = $("#machine_type option[value='" + type_id + "']");
+                
+                if (selectedOption.length > 0) {
+                    const machineName = selectedOption.data('machname');
+                    const machineID = selectedOption.data('machid');
+                    const machineCode = selectedOption.data('machcode');
+                    
+                    $('#machine_name').val(machineName);
+                    $('#machine_id').val(machineID);
+                    $('#machine_code').val(machineCode);
+                }
+                
+                else {
+                    console.error('No matching machine type found for type_id:', type_id);
+                }
             }
             
             // Update Job Assign Tab
