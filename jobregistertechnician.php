@@ -41,7 +41,7 @@
     <body>
         <!--========== Header ==========-->
         <header>
-            <nav class="navbar navbar-light position-fixed top-0 w-100" style="background-color: #C0C0C0; z-index: 2;">
+            <nav class="navbar navbar-light position-fixed top-0 w-100" style="background-color: #C0C0C0; z-index: 1000;">
                 <ul class="nav start-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="iconify" data-icon="dashicons:welcome-widgets-menus" style="font-size:200%; color: #081d45;"></i></a>
@@ -125,7 +125,7 @@
                         <label for="" class="form-label fw-bold mt-3">Job Order Number</label>
                         <div class="input-group mb-3">
                             <input type="text" name="job_order_number" id="job_order_number" class="form-control">
-                            <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: max-content;" onclick="techJobON();"><i class="iconify" data-icon="clarity:cursor-hand-click-line" style="font-size:20px; color: #FFFFFF;"></i></button>
+                            <button type="button" class="btn" style="border: none; background-color: #081d45; color: #FFFFFF; width: max-content; z-index: 1;" onclick="techJobON();"><i class="iconify" data-icon="clarity:cursor-hand-click-line" style="font-size:20px; color: #FFFFFF;"></i></button>
                         </div>
 
                         <div id="alertmessageJON"></div>
@@ -249,7 +249,8 @@
                     <script>
                         $(document).ready(function() {
                             // Initialize dropdowns with Select2
-                            initializeSelect2(['#customer_name','#job_name','#serialnumber', '#brand_id', '#machine_type']);
+                            initializeSelect2(['#customer_name','#job_name','#serialnumber', 
+                                               '#brand_id', '#machine_type']);
                             
                             // Customer Name change event
                             $('#customer_name').on('change', function() {
@@ -308,7 +309,7 @@
                             
                             $.ajax({
                                 type: "POST",
-                                url: "getAllMachineDetails.php",
+                                url: "getMachineCustNameDetails.php",
                                 data: { customer_name: customerName },
                                 
                                 success: function(response) {
@@ -364,7 +365,7 @@
                             
                             $.ajax({
                                 type: "POST",
-                                url: "getMachineDetailsBySerial.php",
+                                url: "getMachineRegisterBySerial.php",
                                 data: { serial_number: serialNumber },
                                 
                                 success: function(response) {
@@ -375,6 +376,7 @@
                                     $('#machine_code').val(machineDetails.machine_code);
                                     $('#brand_id').val(machineDetails.brand_id).trigger('change.select2');
                                     $('#machine_brand').val(machineDetails.machine_brand);
+                                    $('#machine_type').val(machineDetails.machine_type).trigger('change.select2');
                                     $('#type_id').val(machineDetails.type_id);
 
                                     populateMachineTypes(machineDetails.brand_id, machineDetails.machine_type);
@@ -446,6 +448,8 @@
                         function autoFillMachineNameAndTypeId(machineType) {
                             if (!machineType) {
                                 $('#machine_name').val('');
+                                $('#machine_id').val('');
+                                $('#machine_code').val('');
                                 $('#type_id').val('');
                                 
                                 return;
@@ -464,6 +468,8 @@
                                     var data = JSON.parse(response);
                                     
                                     $('#machine_name').val(data.machine_name);
+                                    $('#machine_id').val(data.machine_name);
+                                    $('#machine_code').val(data.machine_name);
                                     $('#type_id').val(selectedOptionType.data('typeid'));
                                 },
                                 
@@ -471,6 +477,8 @@
                                     console.error("AJAX error: " + textStatus + " - " + errorThrown);
                                     
                                     $('#machine_name').val('');
+                                    $('#machine_id').val('');
+                                    $('#machine_code').val('');
                                     $('#type_id').val('');
                                 }
                             });
@@ -482,7 +490,7 @@
 
         <!--========== Footer ==========-->
         <footer>
-            <nav class="navbar navbar-light position-fixed bottom-0 w-100 justify-content-center" style="background-color: #C0C0C0; z-index: 2">
+            <nav class="navbar navbar-light position-fixed bottom-0 w-100 justify-content-center" style="background-color: #C0C0C0; z-index: 1000;">
                 <ul class="nav">
                     <li class="nav-item dropup">
                         <div class="text-center">
