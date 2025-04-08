@@ -179,6 +179,7 @@
                         <label for="" class="form-label fw-bold">Serial Number</label>
                         <select name="serialnumber" id="serialnumber"  style="width: 100%;" class="form-select">
                             <option value="">Select Serial Number</option>
+                            <option value="Not Available">Not Available</option>
                         </select>
                     
                         <label for="" class="form-label fw-bold mt-3">Machine Name</label>
@@ -327,7 +328,7 @@
                         function populateSerialNumbers(machines) {
                             var $serialNumberDropdown = $('#serialnumber').empty();
                             
-                            $serialNumberDropdown.append('<option value="">Select Serial Number</option>');
+                            $serialNumberDropdown.append('<option value="">Select Serial Number</option>', '<option value="Not Available">Not Available</option>');
                             
                             machines.forEach(function(machine) {
                                 $serialNumberDropdown.append('<option value="' + machine.serialnumber + '">' + machine.serialnumber + '</option>');
@@ -337,7 +338,7 @@
                         }
                         
                         function resetDropdowns() {
-                            $('#serialnumber').empty().append('<option value="">Select Serial Number</option>');
+                            $('#serialnumber').empty().append('<option value="">Select Serial Number</option>', '<option value="Not Available">Not Available</option>');
                         }
                         
                         function autoFillCustomerDetails(customerName) {

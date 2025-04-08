@@ -121,12 +121,12 @@
                                         
                     	while ($row = $results->fetch_assoc()) {
                     ?>
-                    <div class="Job card mb-3" data-bs-toggle="modal" data-bs-target="#popUpModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>" data-jobAssign="<?php echo $row['job_assign']; ?>">
+                    <div class="card mb-3">
                         <div class="card-header">
                             <h6 class="card-title fw-bold m-2"><?php echo $row['customer_name'] ?> [<?php echo $row['customer_grade'] ?>]</h6>
                         </div>
 
-                        <div class="card-body">
+                        <div class="Job card-body" data-bs-toggle="modal" data-bs-target="#popUpModal" data-jobRegisterID="<?php echo $row['jobregister_id']; ?>" data-jobAssign="<?php echo $row['job_assign']; ?>">
                             <ul>
                                 <li><?php echo $row['job_priority'] ?></li>
                                 <li><?php echo $row['job_order_number'] ?></li>
@@ -149,6 +149,69 @@
                             			 </div>';
 								}
                             ?>
+                        </div>
+
+                        <div class="card-footer p-0" data-jobRegisterIDdept="<?php echo $row['jobregister_id']; ?>">
+                            <button type="button" id="depBtn" class="btn w-100 h-100 fw-bold d-flex align-items-center justify-content-center rounded-top-0 rounded-bottom" style="border: none; background-color: #081d45; color: #FFFFFF;">Departure</button>
+                        </div>
+
+                        <div style="display: none;">
+                            <form id="departureForm">
+                                <input type="hidden" name="jobregister_id" id="jobregister_idDptr">
+                                <input type="hidden" name="technician_departure" id="technician_departure">
+                                <input type="hidden" name="departure_timestamp" id="departure_timestamp">
+                                <input type="hidden" name="DateAssign" id="DateAssign">
+                                <input type="hidden" name="job_status" id="job_status" value="Doing">
+                            </form>
+                            
+                            <script>
+                                $(document).on('click', '#depBtn', function () {
+                                    const jobRegisterID = $(this).closest('.card-footer').data('jobregisteriddept');
+                                    
+                                    document.getElementById('jobregister_idDptr').value = jobRegisterID;
+                                    
+                                    $.ajax({
+                                        url: 'departTechBtn.php',
+                                        method: 'GET',
+                                        success: function(response) {
+                                            const data = JSON.parse(response);
+                                            
+                                            if (data.error) {
+                                                alert(data.error);
+                                                
+                                                return;
+                                            }
+                                            
+                                            document.getElementById('technician_departure').value = data.technician_departure;
+                                            document.getElementById('departure_timestamp').value = data.departure_timestamp;
+                                            document.getElementById('DateAssign').value = data.DateAssign;
+                                            
+                                            $.ajax({
+                                                url: 'departFormBtn.php',
+                                                method: 'POST',
+                                                data: $('#departureForm').serialize(),
+                                                success: function(response) {
+                                                    if (response === "success") {
+                                                        location.reload();
+                                                    }
+                                                    
+                                                    else {
+                                                        console.error("Update failed");
+                                                    }
+                                                },
+                                                
+                                                error: function() {
+                                                    console.error('Error submitting departure form.');
+                                                }
+                                            });
+                                        },
+                                        
+                                        error: function() {
+                                            alert('Error fetching time from server.');
+                                        }
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
 					<?php } ?>
@@ -192,7 +255,7 @@
                                         
                     	while ($row = $results->fetch_assoc()) {
                     ?>
-					<div class="card mb-3">
+					<div class="card mb-3" id="doingJobsContainer">
                         <div class="card-header">
                             <h6 class="card-title fw-bold m-2"><?php echo $row['customer_name'] ?> [<?php echo $row['customer_grade'] ?>]</h6>
                         </div>
@@ -216,10 +279,171 @@
 								}
                             ?>
                         </div>
-                        
-                        <div class="JobSupport card-footer" style="background-color: #b11226;" data-bs-toggle="modal" data-bs-target="#supportPopupModal" data-supportID="<?php echo $row['jobregister_id']; ?>">
-                            <h6 class="fw-bold" style="color: white; text-align: center;">Support</h6>
+
+                        <div class="card-footer p-0" data-jobregisteridarv="<?php echo $row['jobregister_id']; ?>" data-jobregisteridrtn="<?php echo $row['jobregister_id']; ?>">
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" id="ArvBtn" class="btn flex-grow-1 fw-bold d-flex align-items-center justify-content-center rounded-top-0 rounded-bottom-end-0" style="border: 1px solid #E5E4E2; background-color: #081d45; color: #FFFFFF;">Arrival</button>
+                                <button type="button" id="RtnBtn" class="btn flex-grow-1 fw-bold d-flex align-items-center justify-content-center rounded-0" style="border: 1px solid #E5E4E2; background-color: #081d45; color: #FFFFFF;">Return</button>
+                                <button type="button" class="JobSupport btn flex-grow-1 fw-bold d-flex align-items-center justify-content-center rounded-top-0 " style="border: 1px solid #E5E4E2; background-color: #880808; color: #FFFFFF;" data-bs-toggle="modal" data-bs-target="#supportPopupModal" data-supportID="<?php echo $row['jobregister_id']; ?>">Support</button>
+                            </div>
                         </div>
+
+                        <!-- Technician Arrival Form -->
+                        <div style="display: none;">
+                            <form id="ArrivalForm">
+                                <input type="hidden" name="jobregister_id" id="jobregister_idArv">
+                                <input type="hidden" name="technician_arrival" id="technician_arrivalForm">
+                            </form>
+                        </div>
+                        
+                        <div id="ArvMsg_<?php echo $row['jobregister_id']; ?>" style="display: none;"></div>
+                        
+                        <script>
+                            $(document).on('click', '#ArvBtn', function () {
+                                const jobRegisterID = $(this).closest('.card-footer').data('jobregisteridarv');
+                                
+                                if (!jobRegisterID) {
+                                    console.error('jobregister_id not found!');
+                                    
+                                    $('#ArvMsg_' + jobRegisterID).html('<div class="alert alert-danger m-2">Job ID not found</div>').show();
+                                    
+                                    return;
+                                }
+                                
+                                $('#jobregister_idArv').val(jobRegisterID);
+                                
+                                $.ajax({
+                                    url: 'departTechBtn.php',
+                                    method: 'GET',
+                                    success: function(response) {
+                                        try {
+                                            const data = JSON.parse(response);
+                                            
+                                            if (data.error) {
+                                                $('#ArvMsg_' + jobRegisterID).html('<div class="alert alert-danger m-2">' + data.error + '</div>').show();
+                                                
+                                                return;
+                                            }
+                                            
+                                            $('#technician_arrivalForm').val(data.technician_arrival);
+                                            
+                                            $.ajax({
+                                                url: 'arriveFormBtn.php',
+                                                method: 'POST',
+                                                data: $('#ArrivalForm').serialize(),
+                                                
+                                                success: function(response) {
+                                                    const msgDiv = $('#ArvMsg_' + jobRegisterID);
+                                                    
+                                                    if (response === "success") {
+                                                        msgDiv.html('<div class="alert alert-success m-2">Arrival Time recorded!</div>').show();
+                                                        
+                                                        setTimeout(function() {
+                                                            msgDiv.html('').hide();
+                                                        }, 2000);
+                                                    }
+                                                    
+                                                    else {
+                                                        console.error("Update failed: " + response);
+                                                        
+                                                        msgDiv.html('<div class="alert alert-danger m-2">Failed to record arrival time: ' + response + '</div>').show();
+                                                    }
+                                                },
+                                                
+                                                error: function(xhr, status, error) {
+                                                    console.error('Error submitting arrival form:', error);
+                                                    
+                                                    $('#ArvMsg_' + jobRegisterID).html('<div class="alert alert-danger">Error submitting arrival form: ' + error + '</div>').show();
+                                                }
+                                            });
+                                        }
+                                        
+                                        catch (e) {
+                                            console.error('Error parsing response:', e);
+                                            
+                                            $('#ArvMsg_' + jobRegisterID).html('<div class="alert alert-danger">Error processing server response</div>').show();
+                                        }
+                                    },
+                                    
+                                    error: function(xhr, status, error) {
+                                        console.error('Error fetching time from server:', error);
+                                        
+                                        $('#ArvMsg_' + jobRegisterID).html('<div class="alert alert-danger">Error fetching time from server: ' + error + '</div>').show();
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- Technician Arrival Form -->
+
+                        <!-- Technician Return Form -->
+                        <div style="display: none;">
+                            <form id="ReturnForm">
+                                <input type="hidden" name="jobregister_id" id="jobregister_idRtn">
+                                <input type="hidden" name="technician_leaving" id="technician_leavingForm">
+                            </form>
+                        </div>
+                        
+                        <div id="RtnMsg_<?php echo $row['jobregister_id']; ?>" style="display: none;"></div>
+                        
+                        <script>
+                            $(document).on('click', '#RtnBtn', function () {
+                                const jobRegisterIDrtn = $(this).closest('.card-footer').data('jobregisteridrtn');
+                                
+                                $('#jobregister_idRtn').val(jobRegisterIDrtn);
+                                
+                                $.ajax({
+                                    url: 'departTechBtn.php',
+                                    method: 'GET',
+                                    success: function(response) {
+                                        const data = JSON.parse(response);
+                                        
+                                        if (data.error) {
+                                            $('#RtnMsg_' + jobRegisterIDrtn).html('<div class="alert alert-danger m-2">' + data.error + '</div>').show();
+                                            
+                                            return;
+                                        }
+                                        
+                                        $('#technician_leavingForm').val(data.technician_leaving);
+                                        
+                                        $.ajax({
+                                            url: 'returnFormBtn.php',
+                                            method: 'POST',
+                                            data: $('#ReturnForm').serialize(),
+                                            success: function(response) {
+                                                const msgDivRtn = $('#RtnMsg_' + jobRegisterIDrtn);
+                                                
+                                                if (response === "success") {
+                                                    msgDivRtn.html('<div class="alert alert-success m-2">Return Time recorded!</div>').show();
+                                                    
+                                                    setTimeout(function() {
+                                                        msgDivRtn.html('').hide();
+                                                    }, 2000);
+                                                }
+                                                
+                                                else {
+                                                    console.error("Update failed: " + response);
+                                                    
+                                                    msgDivRtn.html('<div class="alert alert-danger m-2">Failed to record return time: ' + response + '</div>').show();
+                                                }
+                                            },
+                                            
+                                            error: function(xhr, status, error) {
+                                                console.error('Error submitting return form:', error);
+                                                
+                                                $('#RtnMsg_' + jobRegisterIDrtn).html('<div class="alert alert-danger">Error submitting return form: ' + error + '</div>').show();
+                                            }
+                                        });
+                                    },
+                                    
+                                    error: function(xhr, status, error) {
+                                        console.error('Error fetching time from server:', error);
+                                        
+                                        $('#RtnMsg_' + jobRegisterIDrtn).html('<div class="alert alert-danger">Error fetching time from server: ' + error + '</div>').show();
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- Technician Return Form -->
                     </div>
 					<?php } ?>
                 </div>
@@ -3236,7 +3460,7 @@
             }
 
             // Fetch Support Job info data
-            $(document).on('click', '.JobSupport.card-footer', function () {
+            $(document).on('click', '.JobSupport.btn', function () {
                 var jobregister_id = $(this).data('supportid');
                 
                 fetchJobInfoDataSupport(jobregister_id)
