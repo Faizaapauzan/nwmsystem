@@ -158,7 +158,7 @@
                         <div style="display: none;">
                             <form id="departureForm">
                                 <input type="hidden" name="jobregister_id" id="jobregister_idDptr">
-                                <input type="hidden" name="technician_departure" id="technician_departure">
+                                <input type="hidden" name="technician_departure" id="technician_departureCLK">
                                 <input type="hidden" name="departure_timestamp" id="departure_timestamp">
                                 <input type="hidden" name="DateAssign" id="DateAssign">
                                 <input type="hidden" name="job_status" id="job_status" value="Doing">
@@ -182,7 +182,7 @@
                                                 return;
                                             }
                                             
-                                            document.getElementById('technician_departure').value = data.technician_departure;
+                                            document.getElementById('technician_departureCLK').value = data.technician_departure;
                                             document.getElementById('departure_timestamp').value = data.departure_timestamp;
                                             document.getElementById('DateAssign').value = data.DateAssign;
                                             
