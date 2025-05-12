@@ -62,14 +62,7 @@
         <link rel="stylesheet" href="assets/css/styles.css">
         <link rel="stylesheet" href="css/AdminHomepageStyle.css">
        
-        <!--========== JS ==========-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
-   
         <!--========== ICONS ==========-->
-        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>   
         <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
     </head>
 
@@ -3765,5 +3758,14 @@
                 });
             });
         </script>
+
+        <!--========== JS ==========-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+
+        <!--========== ICONS ==========-->
+        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>   
     </body>
 </html
