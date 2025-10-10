@@ -175,12 +175,13 @@
                             </a>
 
                             <div class="nav__dropdown-collapse">
-                                <div class="nav__dropdown-content">
-                                    <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
-                                    <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
-                                    <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a>
+                                    <div class="nav__dropdown-content">
+                                        <a href="jobcompleted.php" class="nav__dropdown-item">Completed Job</a>
+                                        <a href="jobcanceled.php" class="nav__dropdown-item">Cancelled Job</a>
+                                        <!-- <a href="AccessoryInOut.php" class="nav__dropdown-item" style="white-space: nowrap;">Accessories In/Out</a> -->
+                                        <a href="machineHandover.php" class="nav__dropdown-item" style="white-space: nowrap;">Machine Handover</a>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
 
                         <div class="nav__dropdown">
