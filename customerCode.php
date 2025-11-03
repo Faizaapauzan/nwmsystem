@@ -101,29 +101,18 @@
         $cust_address3 = mysqli_real_escape_string($conn, $_POST['cust_address3']);
         $customerlasmodify_by = mysqli_real_escape_string($conn, $_POST['customerlasmodify_by']);
         
-        if($customer_code == NULL || $customer_name == NULL || $customer_grade == NULL || $customer_PIC == NULL ||
-           $cust_phone1 == NULL || $cust_address1 == NULL || $customerlasmodify_by == NULL) {
-            
-            $res = ['status' => 422, 'message' => 'Some fields cannot be leave empty'];
-            
-            echo json_encode($res);
-            
-            return;
-        }
-        
-        $query ="UPDATE customer_list SET 
-                         customer_code='$customer_code', 
-                         customer_name='$customer_name', 
-                         customer_grade='$customer_grade', 
-                         customer_PIC='$customer_PIC',
-                         cust_phone1='$cust_phone1', 
-                         cust_phone2='$cust_phone2', 
-                         cust_address1='$cust_address1',
-                         cust_address2='$cust_address2', 
-                         cust_address3='$cust_address3', 
-                         customerlasmodify_by='$customerlasmodify_by'  
+        $query ="UPDATE customer_list SET customer_code='$customer_code',
+                                          customer_name='$customer_name',
+                                          customer_grade='$customer_grade',
+                                          customer_PIC='$customer_PIC',
+                                          cust_phone1='$cust_phone1',
+                                          cust_phone2='$cust_phone2',
+                                          cust_address1='$cust_address1',
+                                          cust_address2='$cust_address2',
+                                          cust_address3='$cust_address3',
+                                          customerlasmodify_by='$customerlasmodify_by'
                  WHERE customer_id='$customer_id'";
-    
+                 
         $query_run = mysqli_query($conn, $query);
         
         if($query_run) {
